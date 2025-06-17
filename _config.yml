@@ -1,0 +1,27 @@
+title: NBS System Administrator Guide
+description: National Electronic Disease Surveillance System Base System (NBS) System Administrator Guide
+theme: just-the-docs
+url: https://njaved.github.io/just-the-doc
+aux_links: # remove if you don't want this link to appear on your pages
+  GitHub Repository: https://github.com/njaved/just-the-doc/
+color_scheme: colors
+#footer_content: "Copyright &copy; 2017-2020 CDC. Distributed by an <a href=\"https://github.com/njaved/just-the-doc\">Foundations Team.</a>"
+last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
+last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
+back_to_top: true
+back_to_top_text: "Back to top"
+just_the_docs:
+  toc:
+    min_level: 2
+    max_level: 2
+toc:
+  min_level: 2
+  max_level: 2
+# Footer "Edit this page on GitHub" link text
+#gh_edit_link: true # show or hide edit this page link
+#gh_edit_link_text: "Edit this page on GitHub."
+#gh_edit_repository: "https://github.com/just-the-docs/just-the-docs" # the github URL for your repo
+#gh_edit_branch: "main" # the branch that your docs is served from
+# gh_edit_source: docs # the source that your files originate from
+#gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
+#logo: "/assets/images/just-the-docs.png"

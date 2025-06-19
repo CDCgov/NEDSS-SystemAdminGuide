@@ -3,7 +3,7 @@ title: NBS 7 Architecture and Microservices2
 layout: page
 parent: Introduction
 nav_order: 1
-permalink: /introduction/
+# permalink: /introduction/
 # nav_exclude: true
 ---
 

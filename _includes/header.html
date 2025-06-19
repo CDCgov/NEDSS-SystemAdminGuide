@@ -1,0 +1,5 @@
+{% for page in site.pages %}
+  {% unless page.url contains '/0_guide_preview/' %}
+    <a href="{{ page.url }}">{{ page.title }}</a>
+  {% endunless %}
+{% endfor %}

@@ -17,6 +17,18 @@ just_the_docs:
 toc:
   min_level: 2
   max_level: 2
+
+collections:
+  guide_preview:
+    output: true
+    
+just_the_docs:
+  collections:
+    guide_preview:
+      name: "Guide Preview"
+      nav_exclude: true       # hides entire collection from main nav
+      search_exclude: true 
+
 # Footer "Edit this page on GitHub" link text
 #gh_edit_link: true # show or hide edit this page link
 #gh_edit_link_text: "Edit this page on GitHub."

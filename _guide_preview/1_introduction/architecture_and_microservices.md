@@ -1,13 +1,9 @@
 ---
-title: NBS 7 Architecture and Microservices2
+title: NBS 7 Architecture and Microservices
 layout: page
 parent: Introduction
 nav_order: 1
-# permalink: /introduction/
-# nav_exclude: true
 ---
-
-# THIS IS A GUIDE PREVIEW OF UP COMING RELEASE
 
 # NBS 7 Architecture and Microservices
 {: .no_toc}

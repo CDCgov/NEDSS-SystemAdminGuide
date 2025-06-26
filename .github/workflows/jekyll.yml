@@ -33,6 +33,9 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # required to list all branches :contentReference[oaicite:1]{index=1}
+      
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         uses: ruby/setup-ruby@v1
@@ -40,14 +43,27 @@ jobs:
           ruby-version: '3.3' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
+
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
+        
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
         env:
           JEKYLL_ENV: production
+
+      - name: Build release- branches
+        run: |
+          mkdir -p _site/versions
+          for br in $(git for-each-ref --format='%(refname:short)' refs/heads/release-*); do
+            echo "Building branch $br"
+            git worktree add _tmp/$br $br
+            JEKYLL_ENV=production jekyll build -s _tmp/$br -d _site/versions/$br
+            git worktree remove _tmp/$br
+          done
+
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default
         uses: actions/upload-pages-artifact@v3

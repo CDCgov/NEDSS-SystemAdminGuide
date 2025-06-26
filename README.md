@@ -1,3 +1,8 @@
+# NBS System Admin Guide Update Process
+
+# Preview Pages
+Anything under _guide_preview will not be presented in the navigation menu. It is still public and can be preview by directly going to path
+
 # just-the-docs-template
 
 This is a *bare-minimum* template to create a [Jekyll] site that:
@@ -51,6 +56,7 @@ To add an extra plugin, you need to add it in the `Gemfile` *and* in `_config.ym
   ```
 
 Note: If you are using a Jekyll version less than 3.5.0, use the `gems` key instead of `plugins`.
+
 
 ## Publishing your site on GitHub Pages
 

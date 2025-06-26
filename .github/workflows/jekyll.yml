@@ -59,18 +59,9 @@ jobs:
             name=$(basename "$branch")
             git worktree add "_previous_versions/$name" "$branch"
 
-            # Generate index.md safely with heredoc
-            cat <<'EOF' > "_previous_versions/$name/index.md"
-      ---
-      title: RELEASE_NAME
-      parent: Previous Versions
-      nav_order: 1
-      ---
-
-      # RELEASE_NAME
-
-      Auto-generated documentation for RELEASE_NAME
-      EOF
+            ls
+            pwd
+            cp previous_version_template.md _previous_versions/$name/index.md
 
             # Replace placeholder with actual name
             sed -i "s/RELEASE_NAME/$name/g" "_previous_versions/$name/index.md"

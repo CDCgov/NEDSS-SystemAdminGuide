@@ -35,7 +35,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0   # required to list all branches :contentReference[oaicite:1]{index=1}
-      
+
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0
         uses: ruby/setup-ruby@v1
@@ -43,21 +43,29 @@ jobs:
           ruby-version: '3.3' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
+  
+      - name: Get all release branches
+        id: get-branches
+        run: |
+          echo "RELEASE_BRANCHES<<EOF" >> $GITHUB_ENV
+          git for-each-ref --format='%(refname:short)' refs/remotes/origin/ | grep '^origin/release-' >> $GITHUB_ENV
+          echo "EOF" >> $GITHUB_ENV
+        
+
+
+      - name: Checkout each release branch
+        run: |
+          mkdir -p previous_versions
+          for branch in $RELEASE_BRANCHES; do
+            echo $branch
+            name=$(basename "$branch")
+            git worktree add "previous_versions/$name" "$branch"
+          done
 
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
 
-      - name: Build release- branches
-        run: |
-          mkdir -p _site/versions
-          for br in $(git for-each-ref --format='%(refname:short)' refs/heads/release-*); do
-            echo "Building branch $br"
-            git worktree add _tmp/$br $br
-            JEKYLL_ENV=production jekyll build -s _tmp/$br -d _site/versions/$br
-            git worktree remove _tmp/$br
-          done
-        
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"

@@ -47,12 +47,6 @@ jobs:
       - name: Setup Pages
         id: pages
         uses: actions/configure-pages@v5
-        
-      - name: Build with Jekyll
-        # Outputs to the './_site' directory by default
-        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
-        env:
-          JEKYLL_ENV: production
 
       - name: Build release- branches
         run: |
@@ -63,6 +57,12 @@ jobs:
             JEKYLL_ENV=production jekyll build -s _tmp/$br -d _site/versions/$br
             git worktree remove _tmp/$br
           done
+        
+      - name: Build with Jekyll
+        # Outputs to the './_site' directory by default
+        run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
 
       - name: Upload artifact
         # Automatically uploads an artifact from the './_site' directory by default

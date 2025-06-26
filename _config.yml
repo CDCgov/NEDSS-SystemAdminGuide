@@ -27,7 +27,11 @@ just_the_docs:
     guide_preview:
       name: "Guide Preview"
       nav_exclude: true       # hides entire collection from main nav
-      search_exclude: true 
+      search_exclude: true
+    site:
+      name: "Previous Versions"
+      nav_exclude: false       # hides entire collection from main nav
+      search_exclude: false 
 
 # Footer "Edit this page on GitHub" link text
 #gh_edit_link: true # show or hide edit this page link

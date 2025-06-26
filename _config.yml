@@ -20,6 +20,10 @@ toc:
 
 collections:
   guide_preview:
+    permalink: "/:collection/:path/"
+    output: true
+  previous_versions:
+    permalink: "/:collection/:path/"
     output: true
     
 just_the_docs:

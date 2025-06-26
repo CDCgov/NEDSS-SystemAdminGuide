@@ -51,25 +51,28 @@ jobs:
           git for-each-ref --format='%(refname:short)' refs/remotes/origin/ | grep '^origin/release-' >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      - name: Checkout Each Release Branch
+      - name: Checkout each release branch
         run: |
           mkdir -p _previous_versions
           for branch in $RELEASE_BRANCHES; do
-            echo $branch
+            echo "$branch"
             name=$(basename "$branch")
             git worktree add "_previous_versions/$name" "$branch"
+
+            # Generate index.md safely with heredoc
             cat <<'EOF' > "_previous_versions/$name/index.md"
-            ---
-            title: RELEASE_NAME
-            parent: Previous Versions
-            nav_order: 1
-            ---
+      ---
+      title: RELEASE_NAME
+      parent: Previous Versions
+      nav_order: 1
+      ---
 
-            # RELEASE_NAME
+      # RELEASE_NAME
 
-            Auto-generated documentation for RELEASE_NAME
-            EOF
-            
+      Auto-generated documentation for RELEASE_NAME
+      EOF
+
+            # Replace placeholder with actual name
             sed -i "s/RELEASE_NAME/$name/g" "_previous_versions/$name/index.md"
           done
 

@@ -58,17 +58,19 @@ jobs:
             echo $branch
             name=$(basename "$branch")
             git worktree add "_previous_versions/$name" "$branch"
-            cat > "_previous_versions/$name/index.md" <<EOF
+            cat <<'EOF' > "_previous_versions/$name/index.md"
             ---
-            title: $name
+            title: RELEASE_NAME
             parent: Previous Versions
             nav_order: 1
             ---
 
-            # $name
+            # RELEASE_NAME
 
-            Auto-generated documentation for $name
+            Auto-generated documentation for RELEASE_NAME
             EOF
+            
+            sed -i "s/RELEASE_NAME/$name/g" "_previous_versions/$name/index.md"
           done
 
 

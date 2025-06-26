@@ -1,0 +1,23 @@
+{% assign dirs = "" | split: "" %}
+{% for file in site.static_files %}
+  {% assign parts = file.path | split: '/' %}
+  {% if parts.size > 1 and parts[0] == "versions" %}
+    {% assign ver = parts[1] %}
+    {% unless dirs contains ver %}
+      {% assign dirs = dirs | push: ver %}
+    {% endunless %}
+  {% endif %}
+{% endfor %}
+
+{% if dirs.size > 0 %}
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
+    Previous Versions
+  </a>
+  <ul class="dropdown-menu">
+    {% for ver in dirs %}
+      <li><a class="dropdown-item" href="{{ '/versions/' | append: ver | relative_url }}/">{{ ver }}</a></li>
+    {% endfor %}
+  </ul>
+</li>
+{% endif %}

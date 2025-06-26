@@ -28,7 +28,7 @@ just_the_docs:
       name: "Guide Preview"
       nav_exclude: true       # hides entire collection from main nav
       search_exclude: true
-    site:
+    previous_versions:
       name: "Previous Versions"
       nav_exclude: false       # hides entire collection from main nav
       search_exclude: false 

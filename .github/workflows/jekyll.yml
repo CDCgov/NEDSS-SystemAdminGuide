@@ -50,16 +50,14 @@ jobs:
           echo "RELEASE_BRANCHES<<EOF" >> $GITHUB_ENV
           git for-each-ref --format='%(refname:short)' refs/remotes/origin/ | grep '^origin/release-' >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
-        
-
 
       - name: Checkout each release branch
         run: |
-          mkdir -p previous_versions
+          mkdir -p _previous_versions
           for branch in $RELEASE_BRANCHES; do
             echo $branch
             name=$(basename "$branch")
-            git worktree add "previous_versions/$name" "$branch"
+            git worktree add "_previous_versions/$name" "$branch"
           done
 
       - name: Setup Pages

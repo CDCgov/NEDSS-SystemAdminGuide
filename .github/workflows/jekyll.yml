@@ -44,21 +44,33 @@ jobs:
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
   
-      - name: Get all release branches
+      - name: Get All Release Branches
         id: get-branches
         run: |
           echo "RELEASE_BRANCHES<<EOF" >> $GITHUB_ENV
           git for-each-ref --format='%(refname:short)' refs/remotes/origin/ | grep '^origin/release-' >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      - name: Checkout each release branch
+      - name: Checkout Each Release Branch
         run: |
           mkdir -p _previous_versions
           for branch in $RELEASE_BRANCHES; do
             echo $branch
             name=$(basename "$branch")
             git worktree add "_previous_versions/$name" "$branch"
+            cat > "_previous_versions/$name/index.md" <<EOF
+            ---
+            title: $name
+            parent: Previous Versions
+            nav_order: 1
+            ---
+
+            # $name
+
+            Auto-generated documentation for $name
+            EOF
           done
+
 
       - name: Setup Pages
         id: pages

@@ -1,8 +1,8 @@
 ---
 title: release-7.1.1
-parent: Testing Versions
+# parent: Testing Versions
 has_childern: true
-layout: home
+layout: page
 nav_order: 1
 ---
 

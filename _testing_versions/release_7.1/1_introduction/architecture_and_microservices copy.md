@@ -1,5 +1,5 @@
 ---
-# layout: page
+layout: page
 parent: Prerequisites
 # nav_order: 1
 ---

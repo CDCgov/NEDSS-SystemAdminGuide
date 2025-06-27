@@ -25,6 +25,9 @@ collections:
   previous_versions:
     permalink: "/:collection/:path/"
     output: true
+  testing_versions:
+    permalink: "/:collection/:path/"
+    output: true
     
 just_the_docs:
   collections:
@@ -34,7 +37,11 @@ just_the_docs:
       search_exclude: true
     previous_versions:
       name: "Previous Versions"
-      nav_exclude: false       # hides entire collection from main nav
+      nav_exclude: false
+      search_exclude: false
+    testing_versions:
+      name: "Testing Versions"
+      nav_exclude: false
       search_exclude: false 
 
 # Footer "Edit this page on GitHub" link text

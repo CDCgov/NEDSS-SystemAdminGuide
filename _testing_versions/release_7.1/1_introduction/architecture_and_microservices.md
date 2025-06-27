@@ -1,6 +1,6 @@
 ---
 layout: page
-# parent: Introduction
+parent: Introduction
 # nav_order: 1
 ---
 

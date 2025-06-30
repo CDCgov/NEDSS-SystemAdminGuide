@@ -20,10 +20,9 @@ toc:
 
 collections:
   guide_preview:
-    # permalink: "/:collection/:path/"
     output: true
+    directory: _guide_preview
   previous_versions:
-    # permalink: "/:collection/:path/"
     output: true
     directory: _previous_versions
     

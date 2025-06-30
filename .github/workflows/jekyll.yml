@@ -142,7 +142,7 @@ jobs:
           for folder in _previous_versions/release-*; do
             if [ -d "$folder" ]; then
               echo "Cleaning $folder..."
-              find "$folder" -mindepth 1 ! -name 'index.md' ! -name 'docs' ! -path "$folder/docs/*" -exec rm -rf {} +
+              find "$folder" -mindepth 1 ! -name 'index.md' ! -name 'Introduction.md' ! -name 'docs' ! -path "$folder/docs/*" -exec rm -rf {} +
             fi
           done
 

@@ -107,6 +107,11 @@ jobs:
                 done
               done
 
+      - name: Upload pages directory as artifact before build
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages_upload
+          path: .
 
       - name: Setup Pages
         id: pages

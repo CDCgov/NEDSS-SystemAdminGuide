@@ -35,7 +35,6 @@ collections:
 just_the_docs:
   collections:
     guide_preview:
-      name: "Guide Preview"  # hidden section but available for previewing pages by hitting direct path
       nav_exclude: true       # hides entire collection from main nav
       search_exclude: true
     previous_versions:

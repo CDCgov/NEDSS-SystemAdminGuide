@@ -43,7 +43,27 @@ jobs:
           ruby-version: '3.3' # Not needed with a .ruby-version file
           bundler-cache: true # runs 'bundle install' and caches installed gems automatically
           cache-version: 0 # Increment this number if you need to re-download cached gems
-  
+
+      - name: Cleanup _guide_preview
+        run: |
+          find _guide_preview -name '*.md' | while read file; do
+            awk '
+              BEGIN { in_front=0 }
+              {
+                if ($0 ~ /^---$/) {
+                  in_front = 1 - in_front
+                }
+
+                # If in front matter and line starts with unwanted keys, skip
+                if (in_front && ($0 ~ /^(parent:|grand_parent:|nav_order:|has_children:)/)) {
+                  next
+                }
+
+                print
+              }
+            ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+          done
+
       - name: Get All Release Branches
         id: get-branches
         run: |

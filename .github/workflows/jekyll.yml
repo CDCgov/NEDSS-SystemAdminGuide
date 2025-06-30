@@ -51,21 +51,64 @@ jobs:
           git for-each-ref --format='%(refname:short)' refs/remotes/origin/ | grep '^origin/release-' >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
-      - name: Checkout each release branch
+      # - name: Checkout each release branch
+      #   run: |
+      #     mkdir -p _previous_versions
+      #     for branch in $RELEASE_BRANCHES; do
+      #       echo "$branch"
+      #       name=$(basename "$branch")
+      #       git worktree add "_previous_versions/$name" "$branch"
+
+      #       ls
+      #       pwd
+      #       cp previous_version_template.md _previous_versions/$name/index.md
+
+      #       # Replace placeholder with actual name
+      #       sed -i "s/RELEASE_NAME/$name/g" "_previous_versions/$name/index.md"
+      #     done
+
+      - name: Checkout and prepare release versions
         run: |
           mkdir -p _previous_versions
           for branch in $RELEASE_BRANCHES; do
-            echo "$branch"
             name=$(basename "$branch")
-            git worktree add "_previous_versions/$name" "$branch"
+            folder="_previous_versions/$name"
+            git worktree add "$folder" "$branch"
 
-            ls
-            pwd
-            cp previous_version_template.md _previous_versions/$name/index.md
+            # Create index.md
+            cat <<EOF > "$folder/index.md"
+            ---
+            title: $name
+            parent: Previous Versions
+            has_children: true
+            nav_order: 1
+            ---
+            # $name
+            Auto-generated index for this version
+            EOF
 
-            # Replace placeholder with actual name
-            sed -i "s/RELEASE_NAME/$name/g" "_previous_versions/$name/index.md"
-          done
+                  # Add parent front matter to pages missing it
+                  find "$folder" -name '*.md' ! -name 'index.md' | while read file; do
+                    # Check if it has front matter
+                    if grep -q '^---' "$file"; then
+                      # Check if it has parent: already
+                      if ! grep -q '^parent:' "$file"; then
+                        # Insert parent: after the first ---
+                        awk -v parent="$name" '
+                          BEGIN { inserted=0 }
+                          {
+                            print $0
+                            if ($0 == "---" && inserted == 0) {
+                              getline; print $0
+                              print "parent: " parent
+                              inserted=1
+                            }
+                          }
+                        ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+                      fi
+                    fi
+                  done
+                done
 
 
       - name: Setup Pages

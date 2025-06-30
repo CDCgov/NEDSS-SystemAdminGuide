@@ -1,7 +1,8 @@
 ---
 title: RELEASE_NAME
-parent: Previous Versions
-nav_order: 1
+has_children: true
+layout: page
+nav_order: 99
 ---
 
-# RELEASE_NAME
+# RELEASE_NAME Guide

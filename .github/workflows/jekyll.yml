@@ -138,6 +138,14 @@ jobs:
             done
           done
 
+          # CLEANUP: Remove everything except index.md + docs/
+          for folder in _previous_versions/release-*; do
+            if [ -d "$folder" ]; then
+              echo "Cleaning $folder..."
+              find "$folder" -mindepth 1 ! -name 'index.md' ! -name 'docs' ! -path "$folder/docs/*" -exec rm -rf {} +
+            fi
+          done
+
       - name: Upload pages directory as artifact before build
         uses: actions/upload-artifact@v4
         with:

@@ -26,24 +26,17 @@ collections:
     permalink: "/:collection/:path/"
     output: true
     directory: _previous_versions
-  testing_versions:
-    permalink: "/:collection/:path/"
-    output: true
     
 just_the_docs:
   collections:
     guide_preview:
-      name: "Guide Preview"
+      name: "Guide Preview"  # hidden section but available for previewing pages by hitting direct path
       nav_exclude: true       # hides entire collection from main nav
       search_exclude: true
     previous_versions:
       name: "Previous Versions"
       nav_exclude: false
       search_exclude: false
-    testing_versions:
-      name: "Testing Versions"
-      nav_exclude: false
-      search_exclude: false 
 
 # Footer "Edit this page on GitHub" link text
 #gh_edit_link: true # show or hide edit this page link

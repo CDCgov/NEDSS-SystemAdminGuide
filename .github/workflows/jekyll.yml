@@ -75,42 +75,64 @@ jobs:
             folder="_previous_versions/$name"
             git worktree add "$folder" "$branch"
 
-            # Create index.md
+            # Create index.md for the release parent
             cat <<EOF > "$folder/index.md"
           ---
           title: $name
-          parent: Previous Versions
           has_children: true
+          layout: page
           nav_order: 1
           ---
           # $name
           Auto-generated index for this version
           EOF
 
-                # Add parent front matter to pages missing it
-                find "$folder" -name '*.md' ! -name 'index.md' | while read file; do
-                  if grep -q '^---' "$file"; then
-                    if ! grep -q '^parent:' "$file"; then
-                      awk -v parent="$name" '
-                        BEGIN { inserted=0 }
-                        {
-                          print $0
-                          if ($0 == "---" && inserted == 0) {
-                            getline; print $0
-                            print "parent: " parent
-                            inserted=1
-                          }
+            # Process all .md files
+            find "$folder" -name '*.md' ! -name 'index.md' | while read file; do
+              title=$(basename "$file" .md)
+
+              # Check if front matter exists
+              if grep -q '^---' "$file"; then
+                # Insert parent if missing
+                if ! grep -q '^parent:' "$file"; then
+                  if echo "$title" | grep -q 'child'; then
+                    # child page (parent: page1/page2, grand_parent: release)
+                    parent_page=$(echo "$title" | sed 's/-child//')
+                    awk -v parent="$parent_page" -v grand="$name" '
+                      BEGIN { inserted=0 }
+                      {
+                        print $0
+                        if ($0 == "---" && inserted == 0) {
+                          getline; print $0
+                          print "parent: " parent
+                          print "grand_parent: " grand
+                          inserted=1
                         }
-                      ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
-                    fi
+                      }
+                    ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+                  else
+                    # regular page (parent: release)
+                    awk -v parent="$name" '
+                      BEGIN { inserted=0 }
+                      {
+                        print $0
+                        if ($0 == "---" && inserted == 0) {
+                          getline; print $0
+                          print "parent: " parent
+                          inserted=1
+                        }
+                      }
+                    ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
                   fi
-                done
-              done
+                fi
+              fi
+            done
+          done
 
       - name: Upload pages directory as artifact before build
         uses: actions/upload-artifact@v4
         with:
-          name: pages_upload
+          name: before-build-upload
           path: .
 
       - name: Setup Pages

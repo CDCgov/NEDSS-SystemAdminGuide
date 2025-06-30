@@ -25,6 +25,7 @@ collections:
   previous_versions:
     permalink: "/:collection/:path/"
     output: true
+    directory: _previous_versions
   testing_versions:
     permalink: "/:collection/:path/"
     output: true

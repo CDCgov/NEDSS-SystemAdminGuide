@@ -2,7 +2,7 @@
 title: Prerequisites
 layout: page
 nav_order: 3
-nav_enabled: true
+nav_enabled: false
 ---
 
 ## Table of contents

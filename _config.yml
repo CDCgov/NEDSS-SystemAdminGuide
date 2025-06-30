@@ -23,7 +23,7 @@ collections:
     # permalink: "/:collection/:path/"
     output: true
   previous_versions:
-    permalink: "/:collection/:path/"
+    # permalink: "/:collection/:path/"
     output: true
     directory: _previous_versions
     

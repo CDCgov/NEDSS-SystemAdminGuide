@@ -18,6 +18,12 @@ toc:
   min_level: 2
   max_level: 2
 
+defaults:
+  - scope:
+      path: "_guide_preview"
+    values:
+      nav_exclude: true
+
 collections:
   guide_preview:
     output: true

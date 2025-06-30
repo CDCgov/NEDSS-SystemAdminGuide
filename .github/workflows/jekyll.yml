@@ -77,35 +77,35 @@ jobs:
 
             # Create index.md
             cat <<EOF > "$folder/index.md"
-      ---
-      title: $name
-      parent: Previous Versions
-      has_children: true
-      nav_order: 1
-      ---
-      # $name
-      Auto-generated index for this version
-      EOF
+          ---
+          title: $name
+          parent: Previous Versions
+          has_children: true
+          nav_order: 1
+          ---
+          # $name
+          Auto-generated index for this version
+          EOF
 
-            # Add parent front matter to pages missing it
-            find "$folder" -name '*.md' ! -name 'index.md' | while read file; do
-              if grep -q '^---' "$file"; then
-                if ! grep -q '^parent:' "$file"; then
-                  awk -v parent="$name" '
-                    BEGIN { inserted=0 }
-                    {
-                      print $0
-                      if ($0 == "---" && inserted == 0) {
-                        getline; print $0
-                        print "parent: " parent
-                        inserted=1
-                      }
-                    }
-                  ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
-                fi
-              fi
-            done
-          done
+                # Add parent front matter to pages missing it
+                find "$folder" -name '*.md' ! -name 'index.md' | while read file; do
+                  if grep -q '^---' "$file"; then
+                    if ! grep -q '^parent:' "$file"; then
+                      awk -v parent="$name" '
+                        BEGIN { inserted=0 }
+                        {
+                          print $0
+                          if ($0 == "---" && inserted == 0) {
+                            getline; print $0
+                            print "parent: " parent
+                            inserted=1
+                          }
+                        }
+                      ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+                    fi
+                  fi
+                done
+              done
 
 
       - name: Setup Pages

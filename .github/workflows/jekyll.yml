@@ -100,6 +100,10 @@ jobs:
             find "$folder" -name '*.md' ! -name 'index.md' | while read file; do
               title=$(basename "$file" .md)
 
+              # Append - release <version> to title line
+              sed -i -E "s/^(title:.*)/\1 ${name#release-}/" "$file"
+              sed -i -E "s/^(parent:.*)/\1 ${name#release-}/" "$file"
+              
               # Check if front matter exists
               if grep -q '^---' "$file"; then
                 # Insert parent if missing
@@ -135,9 +139,7 @@ jobs:
                   fi
                 fi
               fi
-              # Append - release <version> to title line
-              sed -i -E "s/^(title:.*)/\1 ${name#release-}/" "$file"
-              sed -i -E "s/^(parent:.*)/\1 ${name#release-}/" "$file"
+
             done
           done
 

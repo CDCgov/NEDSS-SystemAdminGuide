@@ -106,7 +106,7 @@ jobs:
               fi
 
               # Append - release <version> to title line
-              sed -i -E "s/^(parent:.*)/\1 ${name#release-}/" "$file"
+              sed -i -E "s/^(parent:.*)/\1 - ${name#release-}/" "$file"
 
               # Check if front matter exists
               if grep -q '^---' "$file"; then

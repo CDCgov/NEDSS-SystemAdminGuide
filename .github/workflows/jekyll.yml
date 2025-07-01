@@ -100,14 +100,12 @@ jobs:
             find "$folder" -name '*.md' ! -name 'index.md' | while read file; do
               title=$(basename "$file" .md)
 
-              # Insert nav_title (extract from title line)
-              # If nav_title not already present, add it
-              if ! grep -q '^nav_title:' "$file"; then
-                sed -i -E "/^title: (.*)/a nav_title: \1" "$file"
+              # If no parent exists, update title with version
+              if ! grep -q '^parent:' "$file"; then
+                sed -i -E "s/^(title:.*)/\1 - ${name#release-}/" "$file"
               fi
 
               # Append - release <version> to title line
-              sed -i -E "s/^(title:.*)/\1 ${name#release-}/" "$file"
               sed -i -E "s/^(parent:.*)/\1 ${name#release-}/" "$file"
 
               # Check if front matter exists

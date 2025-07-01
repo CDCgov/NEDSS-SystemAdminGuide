@@ -136,7 +136,8 @@ jobs:
                 fi
               fi
               # Append - release <version> to title line
-              sed -i "s/^\(title:.*\)/\1 - ${name}/" "$file"
+              sed -i -E "s/^(title:.*)/\1 ${name#release-}/" "$file"
+              sed -i -E "s/^(parent:.*)/\1 ${name#release-}/" "$file"
             done
           done
 

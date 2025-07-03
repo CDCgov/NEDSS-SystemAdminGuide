@@ -3,7 +3,6 @@ title: NBS 7 Architecture and Microservices
 layout: page
 nav_title: NBS7Arch
 parent: Introduction
-grand_parent: release-72
 nav_order: 1
 ---
 

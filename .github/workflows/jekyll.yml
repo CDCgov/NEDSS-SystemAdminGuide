@@ -100,18 +100,20 @@ jobs:
             find "$folder" -name '*.md' ! -name 'index.md' | while read file; do
               title=$(basename "$file" .md)
 
-              # # If no parent exists, update title with version
-              # if ! grep -q '^parent:' "$file"; then
-              #   sed -i -E "s/^(title:.*)/\1(${name#release-})/" "$file"
-              # fi
+              # If no parent exists, update title with version
+              if ! grep -q '^parent:' "$file"; then
+                sed -i -E "s/^(title:.*)/\1 (${name#release-})/" "$file"
+              fi
 
-              # # Append - release <version> to title line
-              # sed -i -E "s/^(parent:.*)/\1(${name#release-})/" "$file"
+              # Append - release <version> to title line
+              sed -i -E "s/^(parent:.*)/\1 (${name#release-})/" "$file"
 
+              # Check if front matter exists
               if grep -q '^---' "$file"; then
                 # Insert parent if missing
                 if ! grep -q '^parent:' "$file"; then
                   if echo "$title" | grep -q 'child'; then
+                    # child page (parent: page1/page2, grand_parent: release)
                     parent_page=$(echo "$title" | sed 's/-child//')
                     awk -v parent="$parent_page" -v grand="$name" '
                       BEGIN { inserted=0 }
@@ -126,34 +128,19 @@ jobs:
                       }
                     ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
                   else
-                    awk -v parent="$name" -v grand="$name" '
+                    # regular page (parent: release)
+                    awk -v parent="$name" '
                       BEGIN { inserted=0 }
                       {
                         print $0
                         if ($0 == "---" && inserted == 0) {
                           getline; print $0
                           print "parent: " parent
-                          print "grand_parent: " grand
                           inserted=1
                         }
                       }
                     ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
                   fi
-                fi
-
-                # Insert grand_parent if missing (even if parent exists)
-                if ! grep -q '^grand_parent:' "$file"; then
-                  awk -v grand="$name" '
-                    BEGIN { inserted=0 }
-                    {
-                      print $0
-                      if ($0 == "---" && inserted == 0) {
-                        getline; print $0
-                        print "grand_parent: " grand
-                        inserted=1
-                      }
-                    }
-                  ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
                 fi
               fi
 

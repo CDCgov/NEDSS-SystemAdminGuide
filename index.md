@@ -14,7 +14,7 @@ The Modernized NBS 7 system is built to provide a straightforward transition fro
 
 | Date         | Description        | Author |
 |:-------------|:------------------|:-------|
-| December 16th, 2024 | 7.8.0 Minor Release | Anand Logan, Ragul Shanmugam, Upasana Pattnaik, Kashyap Ramakur, Aaron Chapman, Duc Nguyen, Subba Reddy Alla, Chuck Moss  |
+| June 10, 2025 | 7.10.0 Minor Release | Anand Logan, Ragul Shanmugam, Upasana Pattnaik, Kashyap Ramakur, Aaron Chapman, Duc Nguyen, Subba Reddy Alla, Chuck Moss  |
 
 
 

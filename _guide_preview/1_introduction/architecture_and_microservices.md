@@ -1,5 +1,5 @@
 ---
-title: NBS 7 Architecture and Microservices
+title: NBS 7 Architecture and Microservices HIDE
 layout: page
 nav_order: 1
 ---

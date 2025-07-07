@@ -1,9 +1,9 @@
 title: NBS System Administrator Guide
 description: National Electronic Disease Surveillance System Base System (NBS) System Administrator Guide
 theme: just-the-docs
-url: https://njaved.github.io/just-the-doc
+url: https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 aux_links: # remove if you don't want this link to appear on your pages
-  GitHub Repository: https://github.com/njaved/just-the-doc/
+  GitHub Repository: https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 color_scheme: colors
 #footer_content: "Copyright &copy; 2017-2020 CDC. Distributed by an <a href=\"https://github.com/njaved/just-the-doc\">Foundations Team.</a>"
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter

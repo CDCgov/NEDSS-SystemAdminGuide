@@ -18,11 +18,6 @@ toc:
   min_level: 2
   max_level: 2
 
-defaults:
-  - scope:
-      path: "_guide_preview"
-    values:
-      nav_exclude: true
 
 collections:
   guide_preview:
@@ -35,7 +30,7 @@ collections:
 just_the_docs:
   collections:
     guide_preview:
-      nav_exclude: true       # hides entire collection from main nav
+      nav_exclude: true
       search_exclude: true
     previous_versions:
       name: "Previous Versions"

@@ -3,7 +3,7 @@ description: National Electronic Disease Surveillance System Base System (NBS) S
 theme: just-the-docs
 url: https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 aux_links: # remove if you don't want this link to appear on your pages
-  GitHub Repository: https://cdcgov.github.io/NEDSS-SystemAdminGuide/
+  GitHub Repository: https://github.com/CDCgov/NEDSS-SystemAdminGuide
 color_scheme: colors
 #footer_content: "Copyright &copy; 2017-2020 CDC. Distributed by an <a href=\"https://github.com/njaved/just-the-doc\">Foundations Team.</a>"
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
@@ -40,8 +40,8 @@ just_the_docs:
 # Footer "Edit this page on GitHub" link text
 #gh_edit_link: true # show or hide edit this page link
 #gh_edit_link_text: "Edit this page on GitHub."
-#gh_edit_repository: "https://github.com/just-the-docs/just-the-docs" # the github URL for your repo
+gh_edit_repository: "https://github.com/CDCgov/NEDSS-SystemAdminGuide" # the github URL for your repo
 #gh_edit_branch: "main" # the branch that your docs is served from
 # gh_edit_source: docs # the source that your files originate from
 #gh_edit_view_mode: "tree" # "tree" or "edit" if you want the user to jump into the editor immediately
-#logo: "/assets/images/just-the-docs.png"
+logo: "/assets/images/just-the-docs.png"

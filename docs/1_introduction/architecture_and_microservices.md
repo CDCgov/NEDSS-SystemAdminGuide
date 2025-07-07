@@ -3,6 +3,7 @@ title: NBS 7 Architecture and Microservices
 layout: page
 parent: Introduction
 nav_order: 1
+last_modified_date: 2025-25-01
 ---
 
 # NBS 7 Architecture and Microservices

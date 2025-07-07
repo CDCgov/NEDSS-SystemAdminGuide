@@ -5,7 +5,7 @@ parent: Introduction
 nav_order: 1
 ---
 
-# NBS 7 Architecture and Microservices HIDE
+# NBS 7 Architecture and Microservices
 {: .no_toc}
 
 ## Table of contents

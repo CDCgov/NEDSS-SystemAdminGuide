@@ -1,10 +1,10 @@
 ---
-title: NBS 7 Architecture and Microservices HIDE
+title: NBS 7 Architecture and Microservices
 layout: page
 nav_order: 1
 ---
 
-# NBS 7 Architecture and Microservices
+# NBS 7 Architecture and Microservices HIDE
 {: .no_toc}
 
 ## Table of contents

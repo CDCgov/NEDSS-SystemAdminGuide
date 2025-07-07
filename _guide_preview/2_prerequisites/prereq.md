@@ -1,5 +1,5 @@
 ---
-title: Prerequisites HIDE
+title: Prerequisites
 layout: page
 nav_order: 3
 nav_enabled: false
@@ -15,7 +15,7 @@ nav_enabled: false
 
 You must have the following prerequisites in place before proceeding with the installation.
 
-## AWS environment
+## AWS environment HIDE
 Your AWS environment must:
 
 - Contain a pre-existing AWS account that contains a production instance of NBS 6.0.16 (or newer version) and related 3rd party products such as Rhapsody and SAS.

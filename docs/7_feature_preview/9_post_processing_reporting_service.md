@@ -14,7 +14,7 @@ nav_enabled: true
 
 ## Post-processing-reporting-service
 1. The helm chart for post-processing service should be available under charts/post-processing-reporting-service.
-2. In the values.yaml, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app as shown in [Table](/just-the-doc/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
+2. In the values.yaml, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
 3. Validate image repository and tag:
    ```yaml
    image:

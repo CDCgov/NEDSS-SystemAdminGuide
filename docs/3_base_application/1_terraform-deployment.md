@@ -31,7 +31,7 @@ cd terraform/aws/nbs7-mySTLT-test
 5. Update the terraform.tfvars and terraform.tf with your environment-specific values by following the instructions [here](https://github.com/CDCgov/NEDSS-Infrastructure/blob/main/terraform/aws/samples/NBS7_standard/README.md)
 6. Review the inbound rules on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (modern-cidr) is allowed to access the database.
     - a. For e.g if the modern-cidr is 10.20.0.0/16, there should be at least one rule in a security group associated to your database that allows MSSQL inbound access from your modern-cidr block
-    ![mssql-inbound-from-modern-cidr](/just-the-doc/docs/3_base_application/images/myssql-inbound-from-modern-cidr.png)
+    ![mssql-inbound-from-modern-cidr](/NEDSS-SystemAdminGuide/docs/3_base_application/images/myssql-inbound-from-modern-cidr.png)
 7. Make sure you are authenticated to AWS. Confirm access to the intended account using the following command. (More information about authenticating to AWS can be found at the following [link](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).)
 ```
 $ aws sts get-caller-identity
@@ -62,7 +62,7 @@ $ aws sts get-caller-identity
     392:   resolve_conflicts        = try(each.value.resolve_conflicts, "OVERWRITE")
     The "resolve_conflicts" attribute can't be set to "PRESERVE" on initial resource creation. Use "resolve_conflicts_on_create" and/or "resolve_conflicts_on_update" instead
     ```
-    ![terraform-plan](/just-the-doc/docs/3_base_application/images/terraform-plan.png)
+    ![terraform-plan](/NEDSS-SystemAdminGuide/docs/3_base_application/images/terraform-plan.png)
    - d. Review the changes carefully to make sure that they 1) match your intention, and 2) do not unintentionally disturb other configuration on which you depend. Then run “terraform apply”:
     ```
     terraform apply

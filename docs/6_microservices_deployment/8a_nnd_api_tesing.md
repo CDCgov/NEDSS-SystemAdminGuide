@@ -32,11 +32,11 @@ Ex: https://data.dts1.nbspreview.com/data-sync/api/auth/token
 
 **Custom Headers:** Enter 2 new headers called `clientid` and `clientsecret` along with their values.
 
-![nnd-api-endpoint-testing-1](/just-the-doc/docs/6_microservices_deployment/images/nnd-api-testing-1.png)
+![nnd-api-endpoint-testing-1](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/nnd-api-testing-1.png)
 
 Click 'Send,' and the response should be below. Ensure the response code is 200 OK, and the JWT token is generated.
 
-![nnd-api-endpoint-testing-2](/just-the-doc/docs/6_microservices_deployment/images/nnd-api-testing-2.png)
+![nnd-api-endpoint-testing-2](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/nnd-api-testing-2.png)
 
 - Once you receive the Token, you can validate the actual API endpoint for the service using Swagger:
   - [https://<<HOST>>/data-sync/swagger-ui/index.html](https://<<HOST>>/data-sync/swagger-ui/index.html)

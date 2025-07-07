@@ -22,7 +22,7 @@ Test will be exactly similar to Data Ingestion ELR ingestion endpoint test, user
   -  If value is set to 2, then DI will ignore legacy process and trigger the RTI
     - For RTI testing, this is the only change required on the Data Ingestion ELR endpoint
 
-  ![data-processing-api-testing-1](/just-the-doc/docs/6_microservices_deployment/images/data-processing-api-testing-1.jpg)
+  ![data-processing-api-testing-1](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-api-testing-1.jpg)
  
 To validate whether the data ingestion is successful, the user can also use DI status endpoint to verify the status.
 
@@ -36,8 +36,8 @@ To validate whether the data ingestion is successful, the user can also use DI s
     - RTI_SUCESS_STEP_3
       - Triggered once WDS is complete, the service will use the WDS result and assign the appropriate action for the ingested payload
 
-    ![data-processing-flow-diagram](/just-the-doc/docs/6_microservices_deployment/images/data-processing-api-testing-2.jpg)
+    ![data-processing-flow-diagram](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-api-testing-2.jpg)
 
-    ![data-processing-flow-diagram](/just-the-doc/docs/6_microservices_deployment/images/data-processing-api-testing-3.jpg)
+    ![data-processing-flow-diagram](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-api-testing-3.jpg)
 
     

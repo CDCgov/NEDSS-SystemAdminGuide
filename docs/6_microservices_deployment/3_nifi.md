@@ -16,7 +16,7 @@ nav_enabled: true
 
 1. Important Note: The NIFI ingress is intentionally disabled by default to enhance security. Consequently, the NIFI admin UI is not accessible out of the box. To enable access to the NIFI admin interface, it is necessary to activate the ingress feature by setting "ingress:enabled: true" within the values.yaml file before initiating the installation process using the Helm chart. For the sake of heightened security, it is strongly advised to establish a privately accessible domain name instead of a public one, considering the presence of known security vulnerabilities within NIFI.
 2. The helm chart for nifi should be available under charts/nifi-efs.
-3. In the values.yaml file, replace all occurrences of nifi.EXAMPLE_DOMAIN with your domain name as shown in [Table](/just-the-doc/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
+3. In the values.yaml file, replace all occurrences of nifi.EXAMPLE_DOMAIN with your domain name as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
 4. Ensure the image repository and tags are populated with the following:
   ```yaml
   image:

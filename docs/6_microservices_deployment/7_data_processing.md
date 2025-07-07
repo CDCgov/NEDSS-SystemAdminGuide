@@ -17,7 +17,7 @@ This guide is designed to assist clients who are working with RTI. RTI is a serv
 
 ## Flow Diagram
 
-![data-processing-flow-diagram](/just-the-doc/docs/6_microservices_deployment/images/data-processing-flow-diagram.png)
+![data-processing-flow-diagram](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-flow-diagram.png)
 
 ## Deploy RTI ( Real Time Ingestion “data-processing-service”) via helm chart
 This guide outlines the detailed steps to install the NBS 7 RTI service, which will process ELR data after it is ingested by data ingestion. RTI can work side by side with the ELR importer batch job or replace it. RTI provides a seamless way to process ELR in near real-time instead of depending on the system-bounded ELR batch job. This eliminates the need for the STLT to set up a batch job on their system.
@@ -45,7 +45,7 @@ data processing service Application - e.g. dataprocessingservice.example.com
     ```
 5. Update the values file with the jdbc connection values in the following format:
    - The dbserver value is just a database server endpoint. Please don't include the port number
-   ![data-processing-dbendpoint](/just-the-doc/docs/6_microservices_deployment/images/data-processing-dbendpoint.png)
+   ![data-processing-dbendpoint](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-dbendpoint.png)
    - Note: Please ignore all the other values such as ingress, ingressHost, etc.
     ```yaml
     jdbc:

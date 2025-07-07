@@ -45,7 +45,7 @@ Open Postman application and click on import option. A pop up window shows up an
 Click on the Token Generation API in `New-Data-Ingestion` Postman collection.  
 Update the `clientid` and `clientsecret` values and then click **Send** to generate a new token.
 
-![data-ingestion-token-generation](/just-the-doc/docs/6_microservices_deployment/images/data-ingestion-token-generation-api.jpg)
+![data-ingestion-token-generation](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-token-generation-api.jpg)
 
 
 > **Note:** Tokens expire after 1 hour. They must be regenerated using the same token endpoint after 1 hour or when they expire in order to make DI Service API calls.
@@ -58,9 +58,9 @@ Click on the Headers section and enter the values within the clientid and client
 
 A sample HL7 message has already been added to the request body section. Click on Send button. UUID is displayed as a response. Please save this UUID which is useful to determine the status of the HL7 message.
 
-![data-ingestion-data-api](/just-the-doc/docs/6_microservices_deployment/images/data-ingestion-data-api.jpg)
+![data-ingestion-data-api](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-data-api.jpg)
 
-![data-ingestion-data-api-2](/just-the-doc/docs/6_microservices_deployment/images/data-ingestion-data-api-2.jpg)
+![data-ingestion-data-api-2](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-data-api-2.jpg)
 
 > **Note:** Give 10-20 seconds before checking the status of Ingested Data API in Classic NBS as it takes few seconds to generate an XML record into the NBS_Interface table after we post the HL7 message.
 
@@ -74,6 +74,6 @@ The Classic Wildfly scheduler runs the batch job and processes this record. Curr
 
 The below API provides the ELR Ingestion status:
 
-![data-ingestion-status-nbs6](/just-the-doc/docs/6_microservices_deployment/images/data-ingestion-status-nbs6.jpg)
+![data-ingestion-status-nbs6](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-status-nbs6.jpg)
 
 **This concludes the smoke test where the user posted the HL7 message via Data ingestion service which validated the incoming data.**

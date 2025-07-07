@@ -17,7 +17,7 @@ nav_enabled: true
 1. The helm chart for elasticsearch-efs should be available under charts/elasticsearch-efs.
 2. Update the values.yaml to populate efsFileSystemId which is the EFS file system id from the AWS console.  See image below.
 
-   ![elasticsearch](/just-the-doc/docs/6_microservices_deployment/images/elasticsearch.png)
+   ![elasticsearch](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/elasticsearch.png)
 
 3. Make sure the correct image repository and tags are populated before executing the following helm install command. The image repository and tag in the values file should point to the following:
    ```yaml

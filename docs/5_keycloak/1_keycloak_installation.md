@@ -37,7 +37,7 @@ There is a Keycloak helm chart
     END
     ```
     **Validation step: KeyCloak database is created**
-  ![keycloak-database-creation](/just-the-doc/docs/5_keycloak/images/keycloak-database-creation.png)
+  ![keycloak-database-creation](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-database-creation.png)
   
 - e. In {helm extract directory}/charts/keycloak/values.yml, update the following parameters
 
@@ -60,7 +60,7 @@ There is a Keycloak helm chart
     ```bash
     helm install keycloak --namespace default -f keycloak/values.yaml keycloak
     ```
-    ![keycloak-database-tables](/just-the-doc/docs/5_keycloak/images/keycloak-database-tables.png)
+    ![keycloak-database-tables](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-database-tables.png)
   - c. Check to see if the pod is running before proceeding with the next deployment using
     ```bash
     kubectl get pods -n default
@@ -73,17 +73,17 @@ There is a Keycloak helm chart
       kubectl --namespace default port-forward "$POD_NAME" 8080;
       ```
 - h. Connect to KeyCloak interface http://127.0.0.1:8080/auth in the browser and select Administrative console
-  ![keycloak-ui-interface](/just-the-doc/docs/5_keycloak/images/kyecloak-login.png)
+  ![keycloak-ui-interface](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/kyecloak-login.png)
 - i. Sign In using adminUser and adminPassword (Table - 4)
-  ![keycloak-ui-login](/just-the-doc/docs/5_keycloak/images/keycloak-ui.png)
-  ![keycloak-ui-2-login](/just-the-doc/docs/5_keycloak/images/keycloak-ui-2.png)
+  ![keycloak-ui-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-ui.png)
+  ![keycloak-ui-2-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-ui-2.png)
 - j. Create a new Realm (to contain the NBS specific client and user/group configurations)
-  ![nbs-create-new-realm](/just-the-doc/docs/5_keycloak/images/create-new-realm.png)
+  ![nbs-create-new-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-realm.png)
 - k. Upload {helm extract directory}/charts/keycloak/extra/01-NBS-realm-with-DI-client.json which is part of the helm zip file in the keycloak chart and click on Create (this will import the NBS Realm and Clients)
-  ![nbs-realm-di-client](/just-the-doc/docs/5_keycloak/images/nbs-realm-di-client.png)
-  ![nbs-realm-di-client-2](/just-the-doc/docs/5_keycloak/images/nbs-realm-di-client-2.png)
+  ![nbs-realm-di-client](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client.png)
+  ![nbs-realm-di-client-2](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client-2.png)
 - l. Realm and Clients are created successfully
-  ![nbs-realm-di-client-3](/just-the-doc/docs/5_keycloak/images/nbs-realm-di-client-3.png)
+  ![nbs-realm-di-client-3](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client-3.png)
 - m. Retrieving the Client’s secret ( the imported configuration will seed a random client secret, you may regenerate or use secure local client secret )
     - a. Navigate to NBS Realm on the left menu
     - b. Click on Clients
@@ -91,12 +91,12 @@ There is a Keycloak helm chart
     - d. Select Credentials tab
     - e. Click on the “eye” and copy the random secret
     - f. Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/di)
-   ![di-client-id](/just-the-doc/docs/5_keycloak/images/di-client-id.png)
-   ![di-client-secret](/just-the-doc/docs/5_keycloak/images/di-client-secret.png)
+   ![di-client-id](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/di-client-id.png)
+   ![di-client-secret](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/di-client-secret.png)
 - n. Create a new client for nnd service. Make sure NBS realm is selected.
-   ![nnd-realm](/just-the-doc/docs/5_keycloak/images/nnd-realm.png)
+   ![nnd-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-realm.png)
 - o. Under Realm settings, click on “Action” drop down on top right and click on “Partial Import”.
-   ![nnd-realm-partial-import](/just-the-doc/docs/5_keycloak/images/nnd-realm-partial-import.png)
+   ![nnd-realm-partial-import](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-realm-partial-import.png)
 - p. Upload <helm extract directory>/charts/keycloak/extra/05-nbs-users-nnd-client.json which is part of the helm zip file in the keycloak chart and click on Create (this will import the nnd service client, (note this file was named incorrectly it should be loaded into the NBS realm as shown in the steps)
 - q. Retrieving the Client’s secret ( the imported configuration will seed a random client secret )
     - a. Navigate to NBS Realm on the left menu
@@ -105,8 +105,8 @@ There is a Keycloak helm chart
     - d. Select Credentials tab
     - e. Click on the “eye” and copy the secret into buffer
     - f. Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/nnd)
-   ![nnd-client-id](/just-the-doc/docs/5_keycloak/images/nnd-client-id.png)
-   ![nnd-client-secret](/just-the-doc/docs/5_keycloak/images/nnd-client-secret.png)  
+   ![nnd-client-id](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-client-id.png)
+   ![nnd-client-secret](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-client-secret.png)  
 - r. Create new client for SRTE. Repeat steps as shown above to import SRTE client.
     - a. Under Realm settings, click on “Action” drop down on top right and click on “Partial Import”.
     - b. Upload <helm extract directory>/charts/keycloak/extra/05-nbs-users-srte-data-client.json which is part of the helm zip file in the keycloak chart and click on Create.

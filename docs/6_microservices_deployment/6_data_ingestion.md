@@ -77,7 +77,7 @@ Data Ingest DB creation and user permission in the following should be executed 
       enabled: "true"
     ```
 5. Update the values file with the jdbc connection values in the following format. The database 'NBS_DataIngest' is a newly created database that is being used by the data ingestion service application. The databases ‘NBS_MSGOUTE’ and 'NBS_ODSE' are existing databases used for NBS batch processing. The dbserver value is just a database server endpoint. Please don't include the port number.
-   ![data-ingestion-dbendpoint](/just-the-doc/docs/6_microservices_deployment/images/data-ingestion-dbendpoint.png)
+   ![data-ingestion-dbendpoint](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-dbendpoint.png)
    ```yaml
    jdbc:
       dbserver: "cdc-nbs-xxxxxxxxxxxx.us-east-1.rds.amazonaws.com"
@@ -85,13 +85,13 @@ Data Ingest DB creation and user permission in the following should be executed 
       password: "EXAMPLE_DB_USER_PASSWORD"
    ```
 6. Use either one of the two Kafka broker endpoints ( Private endpoints - Plaintext) in the helm values file.
-   ![data-ingestion-kafka-endpoint](/just-the-doc/docs/6_microservices_deployment/images/data-ingestion-kafka-endpoint.png)
+   ![data-ingestion-kafka-endpoint](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-kafka-endpoint.png)
    ```yaml
    kafka:
       cluster: "b-1.xxxxxxxxxxxxxx.amazonaws.com:9092"
    ```
 7. Update the values.yaml to populate efsFileSystemId which is the EFS file system id from the AWS console. See image below.
-   ![data-ingestion-efs](/just-the-doc/docs/6_microservices_deployment/images/data-ingestion-efs.png)
+   ![data-ingestion-efs](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-efs.png)
    ```yaml
    efsFileSystemId: "EXAMPLE_EFS_ID"
    ```

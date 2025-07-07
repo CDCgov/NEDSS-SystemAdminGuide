@@ -16,7 +16,7 @@ nav_enabled: true
 The liquibase job runs once and goes to sleep. The job will update necessary SQL Server scripts for Real Time Reporting.
 
 1. The helm chart for Liquibase should be available under charts/liquibase.
-2. In the values.yaml, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app as shown in [Table](/just-the-doc/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
+2. In the values.yaml, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
    ```yaml
    image:
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/liquibase-service"

@@ -60,7 +60,7 @@ Tools to Install
 
 ## Set Up AWS Infrastructure - Terraform
  <br>
-![NBS7_Infrastructure](/just-the-doc/docs/quick_install_nbs7_architecture.png)
+![NBS7_Infrastructure](/NEDSS-SystemAdminGuide/docs/quick_install_nbs7_architecture.png)
 
 ### Prepare the Directory
 {: .no_toc }

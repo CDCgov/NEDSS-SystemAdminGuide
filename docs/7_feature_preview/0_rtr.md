@@ -115,9 +115,9 @@ If there are problems encountered during Database Setup, please reach out to our
      WHERE is_tracked_by_cdc = 1;
    ```
 
-   ![cdc-enabled-odse-tables](/just-the-doc/docs/7_feature_preview/images/cdc_enabled_odse_tables.png)
+   ![cdc-enabled-odse-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_odse_tables.png)
    
-   ![cdc-enabled-srte-tables](/just-the-doc/docs/7_feature_preview/images/cdc_enabled_srte_tables.png)
+   ![cdc-enabled-srte-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_srte_tables.png)
 
 8. Manual creation of scripts for Real Time Reporting: As an alternative to Liquibase, scripts required for Real Time Reporting can be executed manually. If Liquibase is the preferred methodology, please refer to steps in the Liquibase/liquibase section.
    - a. Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/db/upgrade/rdb_modern#database-upgrade-script)

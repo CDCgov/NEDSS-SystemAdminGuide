@@ -17,7 +17,7 @@ nav_enabled: true
   ```bash
   kubectl annotate namespace default "linkerd.io/inject=enabled"
   ```
-  ![linkerd](/just-the-doc/docs/4_initial_kubernetes_deployment/images/3_linkerd.png)
+  ![linkerd](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/3_linkerd.png)
 - b. Verify annotation is in place:
   ```bash
   kubectl get namespace default -o=jsonpath='{.metadata.annotations}'

@@ -20,7 +20,7 @@ nav_enabled: true
       ```bash
       helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx
       ```
-      ![ingress-nginx](/just-the-doc/docs/4_initial_kubernetes_deployment/images/1_ingress-controller.png)
+      ![ingress-nginx](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/1_ingress-controller.png)
   - b. Monitor the status of the nginx deployment
       ```bash
       kubectl --namespace ingress-nginx get services -o wide -w ingress-nginx-controller

@@ -1,7 +1,52 @@
-# NBS System Admin Guide Update Process
+# 📘NBS System Admin Guide Documentation Overview
 
-# Preview Pages
-Anything under _guide_preview will not be presented in the navigation menu. It is still public and can be preview by directly going to path
+## ✅ Quickstart Cheat Sheet
+
+| Action                       | Location                              |
+|----------------------------|---------------------------------------|
+| Add draft docs             | `_guide_preview/*.md`                |
+| View a draft page          | `/guide_preview/<filename>/`         |
+| Create a versioned release | Push a branch named `release-<version>` |
+| Access versioned docs      | `/versions/release-<version>/`       |
+| Define front matter        | In each `.md`, include `title:`, `permalink:`, etc. |
+
+## 1. 🌐 How It All Comes Together
+GitHub Pages hosts your site by serving static HTML, CSS, and JS directly from your repo (via GitHub Actions) .
+
+Just the Docs is a Jekyll-based theme optimized for documentation sites, fully-compatible with GitHub Pages—providing menus, search, collections, and theming out-of-the-box .
+
+GitHub Actions Workflow builds and deploys your content through these steps:
+
+Build main branch into _site/.
+
+Discover and build any release-* branches into _site/versions/<branch>/.
+
+Upload and deploy everything via GitHub Pages.
+
+Just the Docs renders navigation, hides preview docs, and adds version management.
+
+## 2. 📂 `_guide_preview/` – Draft & Preview Content
+
+You can drop Markdown files into the `_guide_preview/` directory to serve **draft or preview documentation** that is:
+- **Rendered and available**, but **hidden from navigation and search**.
+- Accessible **only** via direct URL (e.g. `/guide_preview/my-file/`).
+- Configured automatically via `_config.yml`:
+
+
+## 3. 🔁 Automatic “Previous Versions”
+Branches starting with release- are automatically built and deployed under `/versions/<branch>/` via GitHub Actions:
+
+A “Previous Versions” dropdown menu is generated dynamically by scanning your site’s versions/ folder—no manual updates needed.
+
+## 4. 🛠️ Markdown & Configuration Sources
+We use GitHub-Flavored Markdown (GFM) for tables, fenced code blocks, lists, etc.
+
+Just the Docs theme renders pages according to _config.yml, supporting navigation, collections, syntax highlighting, and more .
+
+
+
+
+
 
 # just-the-docs-template
 

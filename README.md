@@ -1,6 +1,6 @@
 # 📘NBS System Admin Guide Documentation Overview
 
-GitHub Pages URL https://cdcgov.github.io/NEDSS-SystemAdminGuide/
+**GitHub Pages URL** https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 
 ## Quick Guide
 
@@ -25,7 +25,7 @@ GitHub Actions Workflow builds and deploys content through these steps:
 - Jekyll renders navigation, hides preview docs, and adds version management.
 
 
-## 2. `_guide_preview/` – Draft & Preview Content
+## 2. Draft & Preview Content
 
 You can drop Markdown files into the `_guide_preview/` directory to serve **draft or preview documentation** that is:
 - **Rendered and available**, but **hidden from navigation and search**.

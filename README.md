@@ -1,8 +1,9 @@
-# 📘NBS System Admin Guide Documentation Overview
+# 📘NBS System Admin Guide User Guide
 
-**GitHub Pages URL** https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 
 ## Quick Guide
+
+**GitHub Pages URL** https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 
 | Action                       | Location                              |
 |----------------------------|---------------------------------------|

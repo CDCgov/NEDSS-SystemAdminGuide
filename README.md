@@ -46,7 +46,7 @@ Just the Docs theme renders pages according to _config.yml, supporting navigatio
 
 ## Building and Previewing Site locally
 
-Assuming [Jekyll] and [Bundler] are installed on your computer:
+Assuming Jekyll and Bundler are installed on your computer:
 
 1.  Change your working directory to the root directory of your site.
 2.  Run `bundle install`.
@@ -59,11 +59,10 @@ Assuming [Jekyll] and [Bundler] are installed on your computer:
 - [Starting with GitHub Pages](https://docs.github.com/en/pages/setting-up-a-github-pages-site-with-jekyll/creating-a-github-pages-site-with-jekyll#creating-your-site).
 - [Jekyll](https://jekyllrb.com)
 - [Just the Docs](https://just-the-docs.github.io/just-the-docs/)
-- [Just the Docs Template](https://github.com/just-the-docs/just-the-docs-template/generate)
+- [Just the Docs Template](https://github.com/just-the-docs/just-the-docs-template)
 - [GitHub Pages](https://docs.github.com/en/pages)
 - [GitHub Pages Actions workflow](https://github.blog/changelog/2022-07-27-github-pages-custom-github-actions-workflows-beta/)
 - [Bundler](https://bundler.io)
-- [`jekyll-default-layout`](https://github.com/benbalter/jekyll-default-layout)
-- [`jekyll-seo-tag`](https://jekyll.github.io/jekyll-seo-tag)
+- [jekyll-default-layout](https://github.com/benbalter/jekyll-default-layout)
+- [jekyll-seo-tag](https://jekyll.github.io/jekyll-seo-tag)
 - [Starter Workflows](https://github.com/actions/starter-workflows/blob/main/pages/jekyll.yml)
-- [actions/starter-workflows](https://github.com/actions/starter-workflows/blob/main/LICENSE)

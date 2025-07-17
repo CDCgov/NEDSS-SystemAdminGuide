@@ -37,7 +37,7 @@ nav_enabled: true
      cluster: "EXAMPLE_KAFKA_CLUSTER"
     
    featureFlag:
-     elasticSearchEnable: '''true'''
+     elasticSearchEnable: '''false'''
    ```
 5. Install pod
    ```bash

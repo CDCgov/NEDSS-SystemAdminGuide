@@ -28,9 +28,9 @@ nav_enabled: true
 ## Cluster Autoscaler Installation
 Cluster Autoscaler is a helm chart deployment that horizontally autoscales cluster nodes when deployed on the cluster. The following parameter values need to be modified on the values.yaml file. These values should be fetched from the AWS console.
 ```bash
-clusterName: <EKS_CLUSTER_NAME>
+clusterName: <EXAMPLE_EKS_CLUSTER_NAME>
 autoscalingGroups:
-  - name: <AUTOSCALING_GROUP_NAME>
+  - name: <EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>
     maxSize: 5
     minSize: 3
 awsRegion: us-east-1

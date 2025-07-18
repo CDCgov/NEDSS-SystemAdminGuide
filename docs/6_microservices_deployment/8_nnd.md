@@ -22,7 +22,7 @@ This guide sets out the detailed steps to install NBS 7 Data Sync service that w
 
 2. Confirm that the following DNS entry were created and pointed to the network load balancer in front of your Kubernetes cluster (make sure this is the ACTIVE NLB provisioned via nginx-ingress in the base install steps). This should be done in your authoritative DNS service (e.g., Route 53).  
    Please replace [http://example.com](http://example.com) with the appropriate domain name in the `values.yaml` file.  
-   NND service Application – e.g. `nndservice.example.com`
+   NND service Application – e.g. `data.example.com`
 
 3. Update the image repository and tag with the following:
 

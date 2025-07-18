@@ -34,6 +34,5 @@ Make sure you’re using the latest documentation from NBS Central ( NBS Central
 Installation is divided into two sections:
 
 1. **Terraform Deployment** - installs the core infrastructure
-2. **Deployment to Kubernetes** - bootstrap core kubernetes infrastructure services & install and configure microservices (elasticSearch,
-page-builder, modernization-api, nifi, nbs-gateway, data-ingestion, data-processing, real-time reporting services and nnd)
+2. **Deployment to Kubernetes** - bootstrap core kubernetes infrastructure services & install and configure microservices (elasticSearch, modernization-api, nifi, nbs-gateway, data-ingestion, data-processing, nnd, case-notifcation and optional real-time reporting services)
 

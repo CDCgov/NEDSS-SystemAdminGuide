@@ -28,7 +28,7 @@ This guide sets out the detailed steps to install NBS 7 Data Sync service that w
 
    ```yaml
    image:
-     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-data-exchange-service"
+     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-service"
      pullPolicy: IfNotPresent
      tag: <release-version-tag> e.g v1.0.1
    ```

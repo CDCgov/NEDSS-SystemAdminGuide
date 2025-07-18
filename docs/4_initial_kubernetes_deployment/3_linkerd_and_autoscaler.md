@@ -38,3 +38,7 @@ awsRegion: us-east-1
 helm repo add autoscaler https://kubernetes.github.io/autoscaler
 helm upgrade --install cluster-autoscaler autoscaler/cluster-autoscaler -f ./cluster-autoscaler/values.yaml --namespace kube-system
 ```
+To verify that cluster-autoscaler has started, run
+```bash
+kubectl --namespace=kube-system get pods -l "app.kubernetes.io/name=aws-cluster-autoscaler,app.kubernetes.io/instance=cluster-autoscaler"
+```

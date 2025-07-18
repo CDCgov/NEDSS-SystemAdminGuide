@@ -32,9 +32,9 @@ nav_enabled: true
       kubectl get pods -n=ingress-nginx
       ```
 2. You will need to manually create some DNS entries. Ensure that the following DNS entries (A records) point to the new network load balancer in front of your Kubernetes cluster (make sure this is the ACTIVE NLB just provisioned via nginx-ingress). This should be done in your DNS service (For eg: Route 53). Please replace example.com with the appropriate domain_name from the Table below.
-  - a. Modernized NBS Application - Eg: app.example.com
-  - Data Services -
-  - NIFI application - Eg: nifi.example.com [Note: NIFI has reported vulnerabiltiies. Please expose only if you absolutely need it and want to adminsiter it. Otherwise, dont add NIFI].
+  - a. Modernized NBS Application - Eg: app.site_name.example_domain.com
+  - b. Data Services - data.site_name.example_domain.com
+  - c. NIFI application - Eg: nifi.example.com [Note: NIFI has reported vulnerabiltiies. Please expose only if you absolutely need it and want to adminsiter it. Otherwise, dont add NIFI].
     These are the 5 required URL’s for NBS
     {: .no_toc }
     

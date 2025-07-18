@@ -90,4 +90,5 @@ $ aws sts get-caller-identity
       ```bash
       kubectl get nodes
       ```
+      The above command should list the worker nodes for the cluster.
 13. Congratulations! You have installed your core infrastructure and Kubernetes cluster! Next, we will configure your cluster using helm charts.

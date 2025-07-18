@@ -18,7 +18,7 @@ nav_enabled: true
 1. NGINX will use the values in `charts/nginx-ingress/values.yaml` as a part of `nbs-helm-vX.Y.Z` zip file. These values have been preconfigured to setup Prometheus to scrape metrics and also to instruct NGINX controller to create AWS network load balancer instead of classic load balancer in front of the k8 NGINX ingress.
   - a. The result of the command below should create NGINX controller within Kubernetes.
       ```bash
-      helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx
+      helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx -f ./nginx-ingress/values.yaml --namespace ingress-nginx --create-namespace --version 4.11.5
       ```
       ![ingress-nginx](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/1_ingress-controller.png)
   - b. Monitor the status of the nginx deployment

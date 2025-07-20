@@ -18,6 +18,9 @@ We will use HELM CLI to deploy NBS microservices into Kubernetes cluster. Please
 - nifi-efs
 - nbs-gateway
 - dataingestion
+- data-processing
+- nnd (data-sync)
+- case notifications
 
 Have the jdbc connection details handy for page-builder-api, modernization-api, and nifi-efs
 

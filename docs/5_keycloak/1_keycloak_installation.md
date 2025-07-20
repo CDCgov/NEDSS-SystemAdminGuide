@@ -13,7 +13,7 @@ nav_enabled: true
 
 ## KeyCloak Installation
 There is a Keycloak helm chart 
-- a. This will be needed for `pagebuilder-api`, `modernization-api`, `nbs-gateway`, and `data-ingestion-api`.
+- a. This will be needed for `modernization-api`, `nbs-gateway`, `data-ingestion-api` and `nnd`.
 - b. **NOTE:** SQL Server Management Studio (SSMS) or any other compatible SQL client can be used to connect to the database instance.
 - c. Using SSMS, authenticate into the RDS instance where NBS is running with the following information:
    - **DB Endpoint** – [DB Endpoint](#)

@@ -54,14 +54,6 @@ $ aws sts get-caller-identity
     ```
     terraform plan
     ```
-    Note: One warning is expected (due to a bug in the Hashicorp EKS module):
-    ```
-    Warning: Argument is deprecated
-    with module.eks_nbs.module.eks.aws_eks_addon.this["aws-ebs-csi-driver"],
-    on .terraform/modules/eks_nbs.eks/main.tf line 392, in resource "aws_eks_addon" "this":
-    392:   resolve_conflicts        = try(each.value.resolve_conflicts, "OVERWRITE")
-    The "resolve_conflicts" attribute can't be set to "PRESERVE" on initial resource creation. Use "resolve_conflicts_on_create" and/or "resolve_conflicts_on_update" instead
-    ```
     ![terraform-plan](/NEDSS-SystemAdminGuide/docs/3_base_application/images/terraform-plan-latest.png)
    - d. Review the changes carefully to make sure that they 1) match your intention, and 2) do not unintentionally disturb other configuration on which you depend. Then run “terraform apply”:
     ```

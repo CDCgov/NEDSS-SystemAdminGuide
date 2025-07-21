@@ -62,7 +62,7 @@ $ aws sts get-caller-identity
     392:   resolve_conflicts        = try(each.value.resolve_conflicts, "OVERWRITE")
     The "resolve_conflicts" attribute can't be set to "PRESERVE" on initial resource creation. Use "resolve_conflicts_on_create" and/or "resolve_conflicts_on_update" instead
     ```
-    ![terraform-plan](/NEDSS-SystemAdminGuide/docs/3_base_application/images/terraform-plan.png)
+    ![terraform-plan](/NEDSS-SystemAdminGuide/docs/3_base_application/images/terraform-plan-latest.png)
    - d. Review the changes carefully to make sure that they 1) match your intention, and 2) do not unintentionally disturb other configuration on which you depend. Then run “terraform apply”:
     ```
     terraform apply

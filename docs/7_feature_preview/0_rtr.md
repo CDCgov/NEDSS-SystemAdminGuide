@@ -92,8 +92,8 @@ If there are problems encountered during Database Setup, please reach out to our
    FROM sys.databases;
    ```
 7. Enable Change Data Capture for tables in NBS_ODSE and NBS_SRTE: Insert, updates and deletes to database tables are tracked by Change Data Capture as events. These events are used to rapidly transform and deliver data to target tables in rdb_modern. To enable Change Data Capture, please execute the following scripts. Once completed, the validation query below can be run to validate the tables being tracked.
-- NBS_ODSE script location: [NEDSS-DataReporting/enable-cdc-for-odse-table](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/odse/000-odse-db-general.sql)
-- NBS_SRTE Script location: [NEDSS-DataReporting/enable-cdc-for-srte-table](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/srte/000-srte-db-general.sql)
+- NBS_ODSE script location: [NEDSS-DataReporting/enable-cdc-for-odse-table](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1004-enable_cdc_on_odse_tables-001.sql)
+- NBS_SRTE Script location: [NEDSS-DataReporting/enable-cdc-for-srte-table](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1005-enable_cdc_on_srte_tables-001.sql)
 
   ```sql
    --View ODSE tables with CDC enabled. 

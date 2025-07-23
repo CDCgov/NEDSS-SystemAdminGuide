@@ -34,7 +34,7 @@ nav_enabled: true
   - b. 04-nbs-users-development-clients.json
 - f. Make sure you select the nbs-users realm
   - a. Realm settings → Action → Partial import
-    ![nbs-users-base-users](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-users-base-users.png)
+    ![nbs-users-base-users](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-base-users.png)
   - b. Paste or upload 03-nbs-users-base-users.json and select the 3 users and click on Import
     ![nbs-users-base-users-2](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-users-base-users-2.png)
     ![nbs-users-base-users-3](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-users-base-users-3.png)

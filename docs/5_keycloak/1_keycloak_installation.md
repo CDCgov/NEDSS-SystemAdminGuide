@@ -80,10 +80,10 @@ There is a Keycloak helm chart
 - j. Create a new Realm (to contain the NBS specific client and user/group configurations)
   ![nbs-create-new-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client.png)
 - k. Upload {helm extract directory}/charts/keycloak/extra/01-NBS-realm-with-DI-client.json which is part of the helm zip file in the keycloak chart and click on Create (this will import the NBS Realm and Clients)
-  ![nbs-realm-di-client](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client.png)
-  ![nbs-realm-di-client-2](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client-2.png)
+  ![nbs-create-new-realm-2](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client-2.png)
+  ![nbs-create-new-realm-3](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client-3.png)
 - l. Realm and Clients are created successfully
-  ![nbs-realm-di-client-3](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client-3.png)
+  ![nbs-realm-di-client-creation](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client-3.png)
 - m. Retrieving the Client’s secret ( the imported configuration will seed a random client secret, you may regenerate or use secure local client secret )
     - a. Navigate to NBS Realm on the left menu
     - b. Click on Clients

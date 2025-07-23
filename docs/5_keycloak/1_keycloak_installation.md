@@ -19,7 +19,7 @@ There is a Keycloak helm chart
    - **DB Endpoint** – [DB Endpoint](#)
    - **Username** – `admin`
    - **Password** – `database_admin_password`
-- d. Use the below script (from: `<helm extract directory>/charts/keycloak/nbs_keycloak.sql`) to create a KeyCloak database in the SQL server and a database user for connection. Make sure to update the `‘EXAMPLE_KCDB_PASS8675309’` password. Use a complex password matching organizational standards and store this securely for administrative access to Keycloak. This value will also be used in `values.yaml` file in step 5 below (shown in the table).
+- d. Use the below script (from: `<helm extract directory>/charts/keycloak/nbs_keycloak.sql`) to create a KeyCloak database in the SQL server and a database user for connection. Make sure to update the `‘EXAMPLE_KCDB_PASS8675309’` password. Use a complex password matching organizational standards and store this securely for administrative access to Keycloak. This value will also be used in `values.yaml` file in the step below (shown in the table).
     ```bash
     use master
       IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'keycloak')

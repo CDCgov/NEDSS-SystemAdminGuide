@@ -41,7 +41,7 @@ nav_enabled: true
   - c. Repeat above steps to paste or upload 04-nbs-users-development-clients.json and select the 1 client and click on Import
     ![nbs-users-development](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-users-development.png)
     ![nbs-users-development-2](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-users-development-2.png)
-- g. Make sure oidc is enabled when deploying page-builder-api, modernization-api and nbs-gateway services below. This will be done in the Microservices Deployment section.
+- g. Make sure oidc is enabled when deploying modernization-api and nbs-gateway services below. This will be done in the Microservices Deployment section.
 - h. When deploying nbs-gateway service, also make sure to update the client secret (from Keycloak webui) under oidc in values.yaml. This will be done in the Microservices Deployment section.
   - a. Select nbs-users realm
   - b. Clients → nbs-modernization → Credentials → Client Secret

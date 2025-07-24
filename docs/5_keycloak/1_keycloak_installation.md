@@ -109,7 +109,7 @@ There is a Keycloak helm chart
    ![nnd-client-secret](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-client-secret.png)  
 - r. Create new client for SRTE. Repeat steps as shown above to import SRTE client.
     - a. Under Realm settings, click on “Action” drop down on top right and click on “Partial Import”.
-    - b. Upload <helm extract directory>/charts/keycloak/extra/05-nbs-users-srte-data-client.json which is part of the helm zip file in the keycloak chart and click on Create.
+    - b. Upload <helm extract directory>/charts/keycloak/extra/06-nbs-users-srte-data-client.json which is part of the helm zip file in the keycloak chart and click on Create.
     - c. Retrieving the Client’s secret (the imported configuration will seed a random client secret)
          - Navigate to NBS Realm on the left menu
          - Click on Clients

@@ -22,7 +22,7 @@ We will use HELM CLI to deploy NBS microservices into Kubernetes cluster. Please
 - nnd (data-sync)
 - case notifications
 
-Have the jdbc connection details handy for page-builder-api, modernization-api, and nifi-efs
+Have the jdbc connection details handy for modernization-api, nifi-efs, data-ingestion, data processing and case notifications services
 
 | Parameter     | Example                                                       |
 |---------------|----------------------------------------------------------------|

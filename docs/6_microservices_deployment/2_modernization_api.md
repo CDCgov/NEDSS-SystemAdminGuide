@@ -45,30 +45,15 @@ nav_enabled: true
    Oidc:
      enabled: "true"
    ```
-8. Verify search view and table view are enabled
-   ```yaml
-   search:
-    view:
-      enabled: true
-      table:
-        enabled: true
-   ```
-9. Verify extended patient data is enabled
-   ```yaml
-   patient:
-    add:
-      extended:
-        enabled: true
-   ```
-10. After updating the values file, run the following command to install modernization API.
+8. After updating the values file, run the following command to install modernization API.
    ```bash
    helm install modernization-api -f ./modernization-api/values.yaml modernization-api
    ```
-11. To check ingress for RTR services
+9. To check ingress for RTR services
    ```bash
    kubectl describe ingress main-ingress-resource
    ```
-12. IMPORTANT: Confirm the pod is running before proceeding with the next deployment using the below command. If the pod is still creating (or in any other state other than running), wait and/or troubleshoot.
+10. IMPORTANT: Confirm the pod is running before proceeding with the next deployment using the below command. If the pod is still creating (or in any other state other than running), wait and/or troubleshoot.
    ```bash
    kubectl get pods
    ```

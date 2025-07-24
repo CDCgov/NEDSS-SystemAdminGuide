@@ -27,7 +27,7 @@ nav_enabled: true
    pageBuilder:
      enabled: "false"
    ```
-5. Make sure OIDC is enabled for keycloak login authentication and update the client secret (need the value from keycloak - refer Enable Keycloak Auth step (8))
+5. Make sure OIDC is enabled for keycloak login authentication and update the client secret (need the value from keycloak - refer [Enable Keycloak Auth step h](/NEDSS-SystemAdminGuide/docs/5_keycloak/2_enable_keycloak_auth.html#enable-keycloak-auth))
    ```yaml
    Oidc:
      enabled: "true"

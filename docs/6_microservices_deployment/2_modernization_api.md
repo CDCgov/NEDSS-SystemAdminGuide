@@ -22,7 +22,7 @@ nav_enabled: true
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
      tag: <release-version-tag> e.g v1.0.1
    ```
-4. Populate the jdbc section (refer Table - 5) in the values file in the following format
+4. Populate the jdbc section (refer [Table](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/0_microservices_deployment.html#nbs-microservices-deployment)) in the values file in the following format
    ```yaml
    jdbc:
      connectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=NBS_ODSE;user=DBUsername;password=DBPassword;encrypt=true;trustServerCertificate=true;"

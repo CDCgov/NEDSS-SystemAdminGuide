@@ -26,7 +26,7 @@ nav_enabled: true
 5. Update the efsFileSystemId with the [efs-id](https://us-east-1.console.aws.amazon.com/efs/home?region=us-east-1#/file-systems).
 6. Populate jdbc connection string with the same information (refer [Table](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/0_microservices_deployment.html#nbs-microservices-deployment)) as before which includes the username and password.
   ```yaml
-  jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=NBS_ODSE;user=DBUser;password=DBpassword;encrypt=true;trustServerCertificate=true;"
+  jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
   ```
 7. Populate singleUserCredentialsUsername to change the default of “admin“ username
 8. Populate singleUserCredentialsPassword with the password for the NIFI admin UI. This can be any password of your choice.

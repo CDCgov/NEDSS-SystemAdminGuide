@@ -62,7 +62,7 @@ Data Ingest DB creation and user permission in the following should be executed 
 1. Please use the values file supplied as part of nbs-helm-vX.Y.Z.zip file. Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the **Assets** listed for the latest or previous releases). The `values.yaml` file should be under `charts\dataingestion-service\values.yaml`.  
    Values for **ECR repository**, **ECR image tag**, **db server endpoints**, **MSK(Kafka) bootstrap server**, and **ingress host** should be provided in the `values.yaml` file.
 2. Confirm that the following DNS entry were created and pointed to the network load balancer in front of your Kubernetes cluster (make sure this is the **ACTIVE NLB** provisioned via `nginx-ingress` in the base install steps). This should be done in your authoritative DNS service (e.g., Route 53).  
-   Please replace `http://example.com` with the appropriate domain name in the `values.yaml` file.  
+   Please replace EXAMPLE_DOMAIN with the appropriate domain name in the `values.yaml` file. Refer [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
    DataIngestion service Application – e.g., data.site_name.example_domain.com
 3. Update the image repository and tag with the following:
     ```yaml
@@ -74,21 +74,21 @@ Data Ingest DB creation and user permission in the following should be executed 
 4. To enable RTR ingress, make sure reporting service is true. Update it to false if RTR services are not used.
     ```yaml
     reportingService:
-      enabled: "true"
+      enabled: "false"
     ```
 5. Update the values file with the jdbc connection values in the following format. The database 'NBS_DataIngest' is a newly created database that is being used by the data ingestion service application. The databases ‘NBS_MSGOUTE’ and 'NBS_ODSE' are existing databases used for NBS batch processing. The dbserver value is just a database server endpoint. Please don't include the port number.
    ![data-ingestion-dbendpoint](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-dbendpoint.png)
    ```yaml
    jdbc:
-      dbserver: "cdc-nbs-xxxxxxxxxxxx.us-east-1.rds.amazonaws.com"
-      username: "EXAMPLE_DB_USER"
-      password: "EXAMPLE_DB_USER_PASSWORD"
+      dbserver: "EXAMPLE_DB_ENDPOINT"
+      username: "EXAMPLE_ODSE_DB_USER"
+      password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    ```
 6. Use either one of the two Kafka broker endpoints ( Private endpoints - Plaintext) in the helm values file.
    ![data-ingestion-kafka-endpoint](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-kafka-endpoint.png)
    ```yaml
    kafka:
-      cluster: "b-1.xxxxxxxxxxxxxx.amazonaws.com:9092"
+      cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
    ```
 7. Update the values.yaml to populate efsFileSystemId which is the EFS file system id from the AWS console. See image below.
    ![data-ingestion-efs](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-efs.png)
@@ -102,12 +102,12 @@ Data Ingest DB creation and user permission in the following should be executed 
 9. SFTP Server for the manual file drop-off. It’s an OPTIONAL service. DI can poll ELRs from an external sFTP server. To configure this option, change sftp: enabled to "enabled" and put the appropriate host/username/password. If the SFTP server is unavailable or the manual drop-off option is not needed, the 'sftp: enabled' value should be 'disabled' or empty.
    ```yaml
    sftp:
-     enabled: "enabled"
-     host: "test.sftp-host.com"
-     username: "testuser"
-     password: "testpwd"
+     enabled: "EXAMPLE_SFTP_ENABLED"
+     host: ""EXAMPLE_SFTP_HOST
+     username: "EXAMPLE_SFTP_USER"
+     password: "EXAMPLE_SFTP_PASS"
      elrFileExtns: "txt,hl7"
-     filePaths: "/,/test-sub-folder"
+     filePaths: "/"
    ```
 For more information about sFTP support, please see: [data-ingestion-sftp-support](https://cdc-nbs.atlassian.net/wiki/spaces/NM/pages/1592755309)
 10. Deploy DataIngestion helm chart:

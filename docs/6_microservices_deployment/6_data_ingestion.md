@@ -59,7 +59,7 @@ Data Ingest DB creation and user permission in the following should be executed 
 
 ### Deploy Data Ingestion via Helm chart
 
-1. Please use the values file supplied as part of [nbs-helm-vX.Y.Z.zip] file. Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the **Assets** listed for the latest or previous releases). The `values.yaml` file should be under `charts\dataingestion-service\values.yaml`.  
+1. Please use the values file supplied as part of nbs-helm-vX.Y.Z.zip file. Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the **Assets** listed for the latest or previous releases). The `values.yaml` file should be under `charts\dataingestion-service\values.yaml`.  
    Values for **ECR repository**, **ECR image tag**, **db server endpoints**, **MSK(Kafka) bootstrap server**, and **ingress host** should be provided in the `values.yaml` file.
 2. Confirm that the following DNS entry were created and pointed to the network load balancer in front of your Kubernetes cluster (make sure this is the **ACTIVE NLB** provisioned via `nginx-ingress` in the base install steps). This should be done in your authoritative DNS service (e.g., Route 53).  
    Please replace `http://example.com` with the appropriate domain name in the `values.yaml` file.  

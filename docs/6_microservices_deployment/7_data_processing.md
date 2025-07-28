@@ -35,12 +35,12 @@ data processing service Application - e.g. dataprocessingservice.example.com
     tag: <release-version-tag> e.g v1.0.1
   ```
 4. Update auth user in value files, this variable allow RTI to use the valid NBS user to process the data
-  - List of Auth user can be found in ODSE.Auth_User
+  - a. List of Auth user can be found in ODSE.Auth_User
     ```yaml
     nbs:
       authuser: "superuser"
     ```
-  - ```sql
+  - b. ```sql
       SELECT * FROM [NBS_ODSE].[dbo].[Auth_user]
     ```
 5. Update the values file with the jdbc connection values in the following format:
@@ -49,17 +49,17 @@ data processing service Application - e.g. dataprocessingservice.example.com
    - Note: Please ignore all the other values such as ingress, ingressHost, etc.
     ```yaml
     jdbc:
-      dbserver: "cdc-nbs-xxxxxxxxxxxx.us-east-1.rds.amazonaws.com"
-      username: "DBUsername"
-      password: "DBPassword"
+       dbserver: "EXAMPLE_DB_ENDPOINT"
+       username: "EXAMPLE_ODSE_DB_USER"
+       password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
     nbs:
-      authuser: "EXAMPLE_NBS_AUTHUSER"
+       authuser: "EXAMPLE_NBS_AUTHUSER"
     kafka:
-      cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+       cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
     keycloak:
-      srte:
-        clientId: "EXAMPLE_SRTE_CLIENT_ID"
-        clientSecret: "EXAMPLE_SRTE_CLIENT_SECRET"
+       srte:
+          clientId: "EXAMPLE_SRTE_CLIENT_ID"
+          clientSecret: "EXAMPLE_SRTE_CLIENT_SECRET"
     ```
 
 6. Data processing service helm chart:

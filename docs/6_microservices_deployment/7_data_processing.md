@@ -52,10 +52,16 @@ data processing service Application - e.g. dataprocessingservice.example.com
        dbserver: "EXAMPLE_DB_ENDPOINT"
        username: "EXAMPLE_ODSE_DB_USER"
        password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
+
     nbs:
        authuser: "EXAMPLE_NBS_AUTHUSER"
+
     kafka:
        cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+
+    dataingestion:
+       uri: "data.EXAMPLE.DOMAIN"
+
     keycloak:
        srte:
           clientId: "EXAMPLE_SRTE_CLIENT_ID"

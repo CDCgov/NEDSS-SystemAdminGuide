@@ -17,7 +17,7 @@ This guide sets out the detailed steps to install NBS 7 Data Sync service that w
 
 ### Data Sync Microservice
 
-1. Please use the values file supplied as part of [nbs-helm-<release>.zip](https://github.com/CDCgov/nbs-helm/releases). Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the Assets listed for the latest or previous releases). The `values.yaml` file should be under `charts\nnd-service\values.yaml`.  
+1. Please use the values file supplied as part of [nbs-helm-vX.Y.Z.zip](https://github.com/CDCgov/nbs-helm/releases). Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the Assets listed for the latest or previous releases). The `values.yaml` file should be under `charts\nnd-service\values.yaml`.  
    Values for *ECR repository, ECR image tag, db server endpoints, and ingress host* should be provided in the `values.yaml` file.
 
 2. Confirm that the following DNS entry were created and pointed to the network load balancer in front of your Kubernetes cluster (make sure this is the ACTIVE NLB provisioned via nginx-ingress in the base install steps). This should be done in your authoritative DNS service (e.g., Route 53).  
@@ -38,9 +38,9 @@ This guide sets out the detailed steps to install NBS 7 Data Sync service that w
    
    ```yaml
    jdbc:
-     dbserver: "cdc-nbs-xxxxxxxxxxxx.us-east-1.rds.amazonaws.com"
-     username: "DBUsername"
-     password: "DBPassword"
+     dbserver: "EXAMPLE_DB_ENDPOINT"
+     username: "EXAMPLE_ODSE_DB_USER"
+     password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    ```
 5. Update the values.yaml to populate efsFileSystemId which is the EFS file system id from the AWS console. See image below.
    ![nnd-efs](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/nnd-efsid.png)   

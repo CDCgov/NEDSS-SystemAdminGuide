@@ -29,11 +29,11 @@ Values for ECR repository, ECR image tag, db server endpoints, and ingress host 
 data processing service Application - e.g. dataprocessingservice.example.com
 3. Update the image repository and tag with the following:
    ```yaml
-  image:
-    repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
-    pullPolicy: IfNotPresent
-    tag: <release-version-tag> e.g v1.0.1
-  ```
+   image:
+     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
+     pullPolicy: IfNotPresent
+     tag: <release-version-tag> e.g v1.0.1
+   ```
 4. Update auth user in value files, this variable allow RTI to use the valid NBS user to process the data
   - a. List of Auth user can be found in ODSE.Auth_User
     ```yaml

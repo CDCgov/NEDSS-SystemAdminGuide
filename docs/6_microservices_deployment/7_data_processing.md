@@ -23,7 +23,7 @@ This guide is designed to assist clients who are working with RTI. RTI is a serv
 This guide outlines the detailed steps to install the NBS 7 RTI service, which will process ELR data after it is ingested by data ingestion. RTI can work side by side with the ELR importer batch job or replace it. RTI provides a seamless way to process ELR in near real-time instead of depending on the system-bounded ELR batch job. This eliminates the need for the STLT to set up a batch job on their system.
 
 ### RTI micro service
-1. Please use the values file supplied as part of nbs-helm-<release>.zip file. Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the Assets listed for the latest or previous releases). The values.yaml file should be under charts\data-processing-service\values.yaml .
+1. Please use the values file supplied as part of nbs-helm-vX.Y.Z.zip file. Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the Assets listed for the latest or previous releases). The values.yaml file should be under charts\data-processing-service\values.yaml .
 Values for ECR repository, ECR image tag, db server endpoints, and ingress host should be provided in the values.yaml file.
 2. Confirm that the following DNS entry were created and pointed to the network load balancer in front of your Kubernetes cluster (Make sure this is the ACTIVE NLB provisioned via nginx-ingress in the base install steps ). This should be done in your authoritative DNS service(e.g. Route 53). Please replace http://example.com with the appropriate domain name in the values.yaml file.
 data processing service Application - e.g. dataprocessingservice.example.com

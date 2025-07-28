@@ -30,7 +30,7 @@ data processing service Application - e.g. dataprocessingservice.example.com
 3. Update the image repository and tag with the following:
    ```yaml
   image:
-    repository: quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service
+    repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
     pullPolicy: IfNotPresent
     tag: <release-version-tag> e.g v1.0.1
   ```

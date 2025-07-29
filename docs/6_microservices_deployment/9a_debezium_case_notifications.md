@@ -51,15 +51,15 @@ nav_enabled: true
       bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
    sqlserverconnector: 
       config: 
-         database.hostname: nbs-db.private-EXAMPLE_DOMAIN,
+         database.hostname: "EXAMPLE_DB_ENDPOINT",
          database.port: 1433,
-         database.user: EXAMPLE_DB_USER,
-         database.password: EXAMPLE_DB_USER_PASSWORD,
+         database.user: "EXAMPLE_DB_USER",
+         database.password: "EXAMPLE_DB_USER_PASSWORD",
          database.dbname: nbs_odse,
          database.names: nbs_odse,
          database.server.name: odse,
-         database.history.kafka.bootstrap.servers: EXAMPLE_MSK_KAFKA_ENDPOINT,
-         schema.history.internal.kafka.bootstrap.servers: EXAMPLE_MSK_KAFKA_ENDPOINT
+         database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_MULTI_CLUSTER_ENDPOINTS",
+         schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_MULTI_CLUSTER_ENDPOINTS"
    Env:
          name: BOOTSTRAP_SERVERS
          value: "EXAMPLE_MSK_KAFKA_ENDPOINT"

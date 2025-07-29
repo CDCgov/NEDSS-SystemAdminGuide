@@ -33,7 +33,7 @@ nav_enabled: true
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
    kafka:
-     cluster: "EXAMPLE_MSK_"
+     cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
    ```
 3. Install Pod
    ```bash

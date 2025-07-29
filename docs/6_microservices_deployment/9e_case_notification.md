@@ -23,24 +23,26 @@ nav_enabled: true
    ```
 2. Update the jdbc configurations
    ```yaml
+   ingressHost: "data.EXAMPLE_DOMAIN"
+   
    jdbc:
-     dbserver: ""
-     username: "DBUsername"
-     password: "DBPassword"
+     dbserver: "EXAMPLE_DB_ENDPOINT"
+     username: "EXAMPLE_ODSE_DB_USER"
+     password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
    kafka:
-     cluster: ""
+     cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
 
    api:
-     host: "https://<exampledomain>/hl7-parser"
-     clientId: ""
-     secret: ""
+     host: "https://<data.EXAMPLE_DOMAIN>/hl7-parser"
+     clientId: "EXAMPLE_XML-HL7-Parser_CLIENT_ID"
+     secret: "EXAMPLE_XML-HL7-Parser_CLIENT_SECRET"
    ```
 3. Install Pod
    ```bash
-   helm install -f ./<replce-with-service-name>/values.yaml <replce-with-service-name> ./<replce-with-service-name>/
+   helm install case-notification-service -f ./case-notification-service/values.yaml case-notification-service
    ```
 4. Verify Pod
    ```bash
@@ -48,7 +50,7 @@ nav_enabled: true
    ```
 5. Validate the service
    ```
-   https://<exampledomain>/case-notification/swagger-ui/index.html#/
-   https://<exampledomain>/case-notification/actuator/info
-   https://<exampledomain>/case-notification/actuator/health
+   https://<data.EXAMPLE_DOMAIN>/case-notification/swagger-ui/index.html#/
+   https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/info
+   https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/health
    ```

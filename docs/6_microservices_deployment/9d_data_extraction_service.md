@@ -23,19 +23,21 @@ nav_enabled: true
    ```
 2. Update the jdbc configurations
    ```yaml
+   ingressHost: "data.EXAMPLE_DOMAIN"
+   
    jdbc:
-     dbserver: ""
-     username: "DBUsername"
-     password: "DBPassword"
+     dbserver: "EXAMPLE_DB_ENDPOINT"
+     username: "EXAMPLE_ODSE_DB_USER"
+     password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
    kafka:
-     cluster: ""
+     cluster: "EXAMPLE_MSK_"
    ```
 3. Install Pod
    ```bash
-   helm install -f ./<replce-with-service-name>/values.yaml <replce-with-service-name> ./<replce-with-service-name>/
+   helm install data-extraction-service -f ./data-extraction-service/values.yaml data-extraction-service
    ```
 4. Verify Pod
    ```bash
@@ -43,6 +45,6 @@ nav_enabled: true
    ```
 5. Validate the service
    ```
-   https://<exampledomain>/data-extraction/actuator/health
-   https://<exampledomain>/data-extraction/actuator/info
+   https://<data.EXAMPLE_DOMAIN>/data-extraction/actuator/health
+   https://<data.EXAMPLE_DOMAIN>/data-extraction/actuator/info
    ```

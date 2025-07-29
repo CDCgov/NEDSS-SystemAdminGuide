@@ -54,37 +54,43 @@ nav_enabled: true
    ```
 5. Update the JDBC username and password for each of the services:
     ```yaml
-       investigation:
+       investigation-reporting:
          jdbc:
            username: "EXAMPLE_DB_USER"
            password: "EXAMPLE_DB_USER_PASSWORD"
-       person:
+       person-reporting:
          jdbc:
            username: "EXAMPLE_DB_USER"
            password: "EXAMPLE_DB_USER_PASSWORD"
-       observation:
+       observation-reporting:
          jdbc:
            username: "EXAMPLE_DB_USER"
            password: "EXAMPLE_DB_USER_PASSWORD"
-       organization:
+       organization-reporting:
          jdbc:
            username: "EXAMPLE_DB_USER"
            password: "EXAMPLE_DB_USER_PASSWORD"
-       ldfdata:
+       ldfdata-reporting:
          jdbc:
            username: "EXAMPLE_DB_USER"
            password: "EXAMPLE_DB_USER_PASSWORD"
-       post-processing:
+       post-processing-reporting:
          jdbc:
            username: "EXAMPLE_DB_USER"
            password: "EXAMPLE_DB_USER_PASSWORD"
    ```
+6. Update the feature flag for each of the services:
+   ```yaml
+   featureFlag:
+     investigation-reporting:
+        phcDatamartEnable: '''true'''
+   ```
    
-6.Install helm chart for all the RTR java services
+7.Install helm chart for all the RTR java services
    ```bash
    helm install rtr . -f values.yaml
    ```
-7.Verify if pods are all running
+8.Verify if pods are all running
    ```bash
    kubectl get pods
    ```
@@ -98,7 +104,7 @@ nav_enabled: true
       rtr-java-services-person-reporting-<hash>           1/1     Running            0                  2m6s
       rtr-java-services-post-processing-reporting-<hash>  1/1     Running            0                  2m6s
       
-8.Validate services (on browser)
+9.Validate services (on browser)
    a. investigation-svc
    ```
    https://data.<exampledomain>/reporting/investigation-svc/status

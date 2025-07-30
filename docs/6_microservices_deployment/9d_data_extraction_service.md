@@ -14,14 +14,15 @@ nav_enabled: true
 
 ## Data Extraction Service
 
-1. Validate the image tag
+1. Helm chart can be found under chart/data-extraction-service
+2. Validate the image tag
    ```yaml
    image:
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-case-notification-service/data-extraction-service"
      pullPolicy: IfNotPresent
      tag: <release-version-tag> e.g v1.0.1
    ```
-2. Update the jdbc configurations
+3. Update the jdbc configurations
    ```yaml
    ingressHost: "data.EXAMPLE_DOMAIN"
    
@@ -35,15 +36,15 @@ nav_enabled: true
    kafka:
      cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
    ```
-3. Install Pod
+4. Install Pod
    ```bash
    helm install data-extraction-service -f ./data-extraction-service/values.yaml data-extraction-service
    ```
-4. Verify Pod
+5. Verify Pod
    ```bash
    kubectl get pods
    ```
-5. Validate the service
+6. Validate the service
    ```
    https://<data.EXAMPLE_DOMAIN>/data-extraction/actuator/health
    https://<data.EXAMPLE_DOMAIN>/data-extraction/actuator/info

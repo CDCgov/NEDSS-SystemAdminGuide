@@ -14,14 +14,15 @@ nav_enabled: true
 
 ## Xml Hl7 Parser Service
 
-1. Validate the image tag
+1. Helm chart can be found under chart/xml-hl7-parser-service
+2. Validate the image tag
    ```yaml
    image:
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-case-notification-service/xml-hl7-parser-service"
      pullPolicy: IfNotPresent
      tag: <release-version-tag> e.g v1.0.1
    ```
-2. Update the jdbc configurations
+3. Update the jdbc configurations
    ```yaml
    ingressHost: "data.EXAMPLE_DOMAIN"
    
@@ -32,15 +33,15 @@ nav_enabled: true
    
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
    ```
-3. Install Pod
+4. Install Pod
    ```bash
    helm install xml-hl7-parser-service -f ./xml-hl7-parser-service/values.yaml xml-hl7-parser-service
    ```
-4. Verify Pod
+5. Verify Pod
    ```bash
    kubectl get pods
    ```
-5. Validate the service
+6. Validate the service
    ```
    https://<data.EXAMPLE_DOMAIN>/hl7-parser/actuator/info
    https://<data.EXAMPLE_DOMAIN>/hl7-parser/actuator/health

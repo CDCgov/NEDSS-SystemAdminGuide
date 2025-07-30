@@ -74,8 +74,7 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
     FROM RDB_MODERN.DBO.DATABASECHANGELOG
     ORDER BY DATEEXECUTED DESC;
     ```
-8. Execute data load scripts: For the initial setup of Real Time Reporting, please run scripts  to migrate key-uid mapping into key generation tables.
-9. Troubleshooting for Liquibase: Please note, troubleshooting for Liquibase may vary depending on the database. If the issue persist after the initial troubleshooting, please reach out to our support team.
+8. Troubleshooting for Liquibase: Please note, troubleshooting for Liquibase may vary depending on the database. If the issue persist after the initial troubleshooting, please reach out to our support team.
     - a. If NBS_SRTE or any liquibase execution fails due to user permission issue. Run this script:
         ```sql
         USE [NBS_SRTE]

@@ -15,13 +15,13 @@ nav_enabled: true
 
 >  ℹ️ **Note:** ***This feature is optional and in beta and not production ready. Please follow the steps if you would like to install it in your environment.***
 
-This guide details steps to install NBS 7 Real Time Reporting end to end. Real Time Reporting provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database `rdb_modern`. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (listed below). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into `rdb_modern`.
+This guide details steps to install NBS 7 Real Time Reporting end to end. Real Time Reporting provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database `rdb_modern`. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Onboarding: Service Users and Setup Scripts](#Onboarding-Service-Users-and-Setup-Scripts)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into `rdb_modern`.
 
 ---
 
 ### Database Setup for Onboarding
 
-The database scripts referenced in the guide are maintained in the [DataReporting](https://github.com/CDCgov/DataReporting) repository. The required database objects can be configured either by database change management tool Liquibase or manually executed. Both references will be provided within the same sections.
+The database scripts referenced in the guide are maintained in the [DataReporting](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service) repository. The required database objects can be configured either by database change management tool Liquibase or manually executed. Both references will be provided within the same sections.
 
 If there are problems encountered during Database Setup, please reach out to our support team(email nbs@cdc.gov).
 
@@ -34,7 +34,7 @@ If there are problems encountered during Database Setup, please reach out to our
      - covid19ETL.bat
    - b. Database setup:
      - Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.
-     - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under Onboarding: UAT Database Setup section.
+     - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under [Onboarding: UAT Database Setup](#Onboarding-UAT-Database-Setup) section.
 
 2. Database Release Version: Verify the underlying database release version returned is 6.0.16 or higher. Execute the following query to verify the baseline NBS Release version:
      ```sql
@@ -42,7 +42,7 @@ If there are problems encountered during Database Setup, please reach out to our
        SELECT max(Version) current_version
        FROM NBS_ODSE.dbo.NBS_Release;
        
-       or use the below query to check the config value
+       --or use the below query to check the config value
        
        use [NBS_ODSE];
        select * from NBS_configuration where config_key = 'CODE_BASE'
@@ -105,13 +105,15 @@ One time onboarding steps required for Real Time Reporting setup.
     - b. Create Real Time Reporting microservice user logins: Create dedicated user accounts for each Real Time Reporting microservice. These users are wired in ArgoCD for each Real Time Reporting services.
       - Script location: [NEDSS-DataReporting/service-user-login-script](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/001-service_users_login_creation-001.sql)
       - Script location: [NEDSS-DataReporting/service-database-user-creation](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/002-service_database_user_creation-001.sql)
-2. Manual execution of scripts(Liquibase alternative): Scripts required for Real Time Reporting can be executed manually. **If Liquibase is the preferred approach, please refer to steps in the Liquibase/liquibase section to create all necessary objects before moving to step 3.**
-    - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
+2. Create required database objects: Scripts required for Real Time Reporting can be executed via Liquibase or manually. 
+    - Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.md) section to create all necessary objects before moving to step 3.
+    - Option 2: The required database objects can also be manually created. Documentation on script execution sequence and supplemental `db_upgrade.bat` file is provided to support manual setup. 
+      - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
 3. Load data and enable Change Data Capture: This one time onboarding step is required after all database objects are created via Liquibase or manual script execution.
    - a. Load metadata rows from NBS_ODSE and NBS_SRTE database tables to the reporting database.
      - Script location: [000-nrt_metadata_load.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/000-nrt_metadata_load-001.sql)
    - b. Data load to nrt_<>_key tables
-     - Run all the scripts - except the one that was run in a. [000-nrt_metadata_load.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/000-nrt_metadata_load-001.sql)
+     - Run remaining onboarding scripts starting from `/02_onboarding_script_data_load/001-*`.
      - Script location: [/02_onboarding_script_data_load/001-*.sql](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load)
    - c.Enable Change Data Capture on NBS_ODSE and NBS_SRTE databases and tables:
      - i. These are the final scripts that should be run before go-live.
@@ -159,7 +161,7 @@ One time onboarding steps required for Real Time Reporting setup.
 ### Continuous Integration for Real Time Reporting Database
 After onboarding, future enhancements will be delivered using these two approaches.
 
-- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase/liquibase]() section.
+- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase/liquibase](1_liquibase.md) section.
 - Option 2: Manually executing the scripts located under https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment. Onboarding scripts are excluded.
 
 ---

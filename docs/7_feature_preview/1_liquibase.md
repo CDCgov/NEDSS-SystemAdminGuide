@@ -22,7 +22,7 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/liquibase-service"
      tag: <release-version-tag> e.g v1.0.1
    ```
-4. Validate image repository and tag:
+3. Validate image repository and tag:
    ```yaml
    jdbc:
      master_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
@@ -39,49 +39,43 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
    rdb:
      dbname: "rdb_modern"
    ```
-5. Update the values.yaml files and run the command to run the Liquibase. Configurations for the following should be on hand to update the values.yaml
+4. Update the values.yaml files and run the command to run the Liquibase. Configurations for the following should be on hand to update the values.yaml
    
-6. Install pod
+5. Install pod
    ```bash
    helm install -f ./liquibase/values.yaml liquibase ./liquibase/
    ```
-7. Verify if pod is running
+6. Verify if pod is running
    ```bash
    kubectl get pods
    ```
-8. Validate liquibase update from NBS databases using the DATABASECHANGELOG table:
+   
+7. Validate liquibase update from NBS databases using the DATABASECHANGELOG table:
+   
     ```sql
+    --Last script executed should be 999-<database_name>_database_object_permission_grants-001.sql.
     USE NBS_ODSE;
-    --The query should return 34 rows. If there are fewer rows, please check step 8.
-    SELECT COUNT(*) 
-    FROM NBS_ODSE.DBO.DATABASECHANGELOG;
-    
-    USE RDB;
-    --The query should return 2 rows. If there are fewer rows, please check step 8.
-    SELECT COUNT(*)
-    FROM RDB.DBO.DATABASECHANGELOG;  
+    SELECT TOP 1 *
+    FROM NBS_ODSE.DBO.DATABASECHANGELOG
+    ORDER BY DATEEXECUTED DESC;
     
     USE NBS_SRTE;
-    --The query should return 3 rows. If there are fewer rows, please check step 8.
-    SELECT COUNT(*)
-    FROM NBS_SRTE.DBO.DATABASECHANGELOG;  
+    SELECT TOP 1 *
+    FROM NBS_SRTE.DBO.DATABASECHANGELOG
+    ORDER BY DATEEXECUTED DESC;
+    
+    USE RDB;
+    SELECT TOP 1 *
+    FROM RDB.DBO.DATABASECHANGELOG
+    ORDER BY DATEEXECUTED DESC;
     
     USE RDB_MODERN;
-    --The query should return 330 rows. If there are fewer rows, please check step 8.
-    SELECT COUNT(*)
-    FROM RDB_MODERN.DBO.DATABASECHANGELOG;
+    SELECT TOP 1 *
+    FROM RDB_MODERN.DBO.DATABASECHANGELOG
+    ORDER BY DATEEXECUTED DESC;
     ```
-9. Provide permissions for Real Time Reporting microservice user logins after successful execution of liquibase. Please run the following scripts to provide permissions.
-   - [Organization service user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/master/routines/002-create_organization_service_user.sql)
-   - [Observation service user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/master/routines/003-create_observation_service_user.sql)
-   - [Person service user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/master/routines/004-create_person_service_user.sql)
-   - [Investigation service user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/master/routines/005-create_investigation_service_user.sql)
-   - [LDF service user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/master/routines/006-create_ldf_service_user.sql)
-   - [Postprocessing service user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/master/routines/007-create_post_processing_service_user.sql)
-   - [Kafka sync connector](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/master/routines/008-create_kafka_sync_connector_service_user.sql)
-   - [Debezium service user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/db/upgrade/master/routines/009-create_debezium_service_user.sql)
-10. Execute data load scripts: For the initial setup of Real Time Reporting, please run these integration scripts ([NEDSS-DataReporting/data-load](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/db/rdb_modern/data_load)) to migrate key-uid mapping into key generation tables.
-11. Troubleshooting for Liquibase: Please note, troubleshooting for Liquibase may vary depending on the database. If the issue persist after the initial troubleshooting, please reach out to our support team.
+8. Execute data load scripts: For the initial setup of Real Time Reporting, please run scripts  to migrate key-uid mapping into key generation tables.
+9. Troubleshooting for Liquibase: Please note, troubleshooting for Liquibase may vary depending on the database. If the issue persist after the initial troubleshooting, please reach out to our support team.
     - a. If NBS_SRTE or any liquibase execution fails due to user permission issue. Run this script:
         ```sql
         USE [NBS_SRTE]

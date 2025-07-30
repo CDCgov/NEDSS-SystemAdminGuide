@@ -74,7 +74,7 @@ Data Ingest DB creation and user permission in the following should be executed 
 4. To enable RTR ingress, make sure reporting service is true. Update it to false if RTR services are not used.
     ```yaml
     reportingService:
-      enabled: "false"
+      enabled: "true"
     ```
 5. Update the values file with the jdbc connection values in the following format. The database 'NBS_DataIngest' is a newly created database that is being used by the data ingestion service application. The databases ‘NBS_MSGOUTE’ and 'NBS_ODSE' are existing databases used for NBS batch processing. The dbserver value is just a database server endpoint. Please don't include the port number.
    ![data-ingestion-dbendpoint](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-dbendpoint.png)

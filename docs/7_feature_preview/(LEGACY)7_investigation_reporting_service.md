@@ -24,17 +24,17 @@ nav_enabled: true
 4. Update jdbc, odse, rdb and kafka configurations. The rdb configuration should point to rdb_modern.
    ```yaml
    jdbc:
-     username: "EXAMPLE_DB_USER"
-     password: "EXAMPLE_DB_USER_PASSWORD"
+    username: "EXAMPLE_DB_USER"
+    password: "EXAMPLE_DB_USER_PASSWORD"
 
    odse:
-     dburl: "jdbc:sqlserver://<EXAMPLE_DB_ENDPOINT>:<PORT>;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;"
+    dburl: "jdbc:sqlserver://<EXAMPLE_DB_ENDPOINT>:<PORT>;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;"
     
    rdb:
      dburl: "jdbc:sqlserver://<EXAMPLE_DB_ENDPOINT>:<PORT>;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;"
     
    kafka:
-     cluster: "EXAMPLE_KAFKA_CLUSTER"
+    cluster: "EXAMPLE_KAFKA_CLUSTER"
    ```
 5. Enabling RTR datamarts: Please make sure that phcDatamartEnable feature flag is set to ‘''true’'' with triple single quotes. The featuresFlags can be removed if present. This will start hydration for ODSE’s PUBLICHEALTHCASEFACT_Modern table.
    ```yaml

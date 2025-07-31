@@ -1,5 +1,5 @@
 ---
-title: Observation Reporting
+title: Real Time Reporting (RTR) Java services
 layout: page
 parent: Real Time Reporting (Preview)
 nav_order: 4
@@ -80,11 +80,12 @@ nav_enabled: true
            password: "EXAMPLE_DB_USER_PASSWORD"
    ```
 6. Update the feature flag for each of the services:
-   ```yaml
-   featureFlag:
-     investigation-reporting:
-        phcDatamartEnable: '''true'''
-   ```
+   - a. Please ensure PHCMartETL.bat is turned off before enabling updates to PublicHealthCaseFact datamart via RTR.
+      ```yaml
+      featureFlag:
+        investigation-reporting:
+           phcDatamartEnable: '''true'''
+      ```
    
 7.Install helm chart for all the RTR java services
    ```bash

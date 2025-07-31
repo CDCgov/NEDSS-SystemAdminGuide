@@ -2,7 +2,7 @@
 title: Investigation Reporting
 layout: page
 parent: Real Time Reporting (Preview)
-nav_order: 7
+nav_order: 8
 nav_enabled: true
 ---
 

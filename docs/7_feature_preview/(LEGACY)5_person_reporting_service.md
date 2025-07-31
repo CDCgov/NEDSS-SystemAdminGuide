@@ -2,7 +2,7 @@
 title: Person Reporting
 layout: page
 parent: Real Time Reporting (Preview)
-nav_order: 5
+nav_order: 6
 nav_enabled: true
 ---
 

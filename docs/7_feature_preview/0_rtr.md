@@ -11,7 +11,7 @@ nav_enabled: true
 1. TOC
 {:toc}
 
-## Deploy Real Time Reporting via helm chart
+# Deploy Real Time Reporting via helm chart
 
 >  ℹ️ **Note:** ***This feature is optional and in beta and not production ready. Please follow the steps if you would like to install it in your environment.***
 
@@ -19,13 +19,13 @@ This guide details steps to install NBS 7 Real Time Reporting end to end. Real T
 
 ---
 
-### Database Setup for Onboarding
+## Database Setup for Onboarding
 
 The database scripts referenced in the guide are maintained in the [DataReporting](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service) repository. The required database objects can be configured either by database change management tool Liquibase or manually executed. Both references will be provided within the same sections.
 
 If there are problems encountered during Database Setup, please reach out to our support team(email nbs@cdc.gov).
 
-#### Onboarding: Prerequisites
+### Onboarding: Prerequisites
 
 1. Classic ETL: Please ensure the following ETL batch jobs have run successfully before setting up the reporting database for Real Time Reporting.
    - a. ETL scheduled jobs:
@@ -64,7 +64,7 @@ If there are problems encountered during Database Setup, please reach out to our
        VALUES(N'ENV', N'UAT', N'RTR reporting database', N'Indicates scripts should be run against UAT rdb_modern database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
        ```
      
-#### Onboarding: UAT Database Setup
+### Onboarding: UAT Database Setup
 
 [Optional] Restore RDB as rdb_modern database: If a separate database is required as part of UAT, please create a restored backup of the RDB as rdb_modern. This ensures availability of classic ETL hydrated RDB and to host necessary components for Real Time Reporting. If you have AWS RDS, please run the following steps.
    - i. Backup RDB
@@ -97,7 +97,7 @@ If there are problems encountered during Database Setup, please reach out to our
               ```sql
               exec msdb.dbo.rds_task_status;
               ```
-#### Onboarding: Service Users and Setup Scripts
+### Onboarding: Service Users and Setup Scripts
 One time onboarding steps required for Real Time Reporting setup.
 1. Create database users: Each user will be provided with permissions it needs to do its job and nothing more! **Please review the scripts and update the PASSWORD field for before executing.**
     - a. Create admin user: User provides Liquibase required permissions to maintain necessary database components for Real Time Reporting, and enable Change Data Capture for tables.

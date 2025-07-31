@@ -2,7 +2,7 @@
 title: Organization Reporting
 layout: page
 parent: Real Time Reporting (Preview)
-nav_order: 6
+nav_order: 7
 nav_enabled: true
 ---
 

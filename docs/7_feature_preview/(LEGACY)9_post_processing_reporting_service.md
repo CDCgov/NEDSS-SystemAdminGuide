@@ -1,5 +1,5 @@
 ---
-title: Post Processing Reporting
+title:(Deprecated) Post Processing Reporting
 layout: page
 parent: Real Time Reporting (Preview)
 nav_order: 10

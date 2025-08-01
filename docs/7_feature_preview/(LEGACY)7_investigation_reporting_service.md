@@ -1,5 +1,5 @@
 ---
-title: Investigation Reporting
+title:(Deprecated) Investigation Reporting
 layout: page
 parent: Real Time Reporting (Preview)
 nav_order: 8

@@ -176,4 +176,6 @@ Real Time Reporting services should be deployed in the following order:
 - ldfdata-reporting-service
 - post-processing-reporting-service. 
 
+Real Time Reporting services leverage Kubernetes secrets for accessing database credentials. Please refer to section [Creating Kubernetes Secrets](/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.md) section.) for setting up secrets within the cluster.
+
             

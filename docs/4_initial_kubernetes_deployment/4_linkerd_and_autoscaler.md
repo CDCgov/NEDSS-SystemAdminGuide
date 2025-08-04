@@ -2,7 +2,7 @@
 title: Linkerd and Cluster Autoscaler
 layout: page
 parent: Initial Kubernetes Deployment
-nav_order: 3
+nav_order: 4
 nav_enabled: true
 ---
 

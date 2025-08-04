@@ -13,7 +13,7 @@ nav_enabled: true
 {:toc}
 
 ---
-## Deploy NGINX ingress controller on the Kubernetes cluster
+## Create Kubernetes Secret Within Cluster
 
 1. Obtain the sample Kubernetes manifest to create secrets expected to be available on the cluster from k8-manifests/nbs-secrets.yaml.
 2. Replace string values wherever there is an “EXAMPLE_”

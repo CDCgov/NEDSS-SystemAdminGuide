@@ -2,7 +2,7 @@
 title: Cert Manager
 layout: page
 parent: Initial Kubernetes Deployment
-nav_order: 2
+nav_order: 3
 nav_enabled: true
 ---
 

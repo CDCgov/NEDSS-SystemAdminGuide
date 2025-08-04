@@ -2,7 +2,7 @@
 title: Nginx Ingress Deployment
 layout: page
 parent: Initial Kubernetes Deployment
-nav_order: 1
+nav_order: 2
 nav_enabled: true
 ---
 

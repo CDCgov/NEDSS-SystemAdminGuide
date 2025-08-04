@@ -177,5 +177,3 @@ Real Time Reporting services should be deployed in the following order:
 - post-processing-reporting-service. 
 
 Real Time Reporting services leverage Kubernetes secrets for accessing database credentials. Please refer to section [Creating Kubernetes Secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster) section.) for setting up secrets within the cluster.
-
-            /NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster

@@ -1,5 +1,5 @@
 ---
-title:(Deprecated) Organization Reporting
+title: (Deprecated) Organization Reporting
 layout: page
 parent: Real Time Reporting (Preview)
 nav_order: 7

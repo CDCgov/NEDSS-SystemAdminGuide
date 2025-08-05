@@ -1,5 +1,5 @@
 ---
-title:(Deprecated) Observation Reporting
+title: (Deprecated) Observation Reporting
 layout: page
 parent: Real Time Reporting (Preview)
 nav_order: 5

@@ -1,5 +1,5 @@
 ---
-title:(Deprecated) LDF Data Reporting
+title: (Deprecated) LDF Data Reporting
 layout: page
 parent: Real Time Reporting (Preview)
 nav_order: 9

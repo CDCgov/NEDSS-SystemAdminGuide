@@ -97,6 +97,7 @@ If there are problems encountered during Database Setup, please reach out to our
               ```sql
               exec msdb.dbo.rds_task_status;
               ```
+
 ### Onboarding: Service Users and Setup Scripts
 One time onboarding steps required for Real Time Reporting setup.
 1. Create database users: Each user will be provided with permissions it needs to do its job and nothing more! **Please review the scripts and update the PASSWORD field for before executing.**

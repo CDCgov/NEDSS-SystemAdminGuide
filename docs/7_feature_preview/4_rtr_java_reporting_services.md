@@ -14,72 +14,25 @@ nav_enabled: true
 
 ## Real Time Reporting(RTR) Java services
 1. The helm chart for all RTR java services should be available under charts/rtr.
-2. In the values.yaml, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
-3. Validate image repository and tag:
-   ```yaml
-    investigation-reporting-servic:
-      image:
-         repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/investigation-reporting-service"
-         tag: <release-version-tag> e.g v1.0.1
-    person-reporting-service:
-        image:
-             repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/person-reporting-service"
-             tag: <release-version-tag> e.g v1.0.1
-    observation-reporting-service:
-         image:
-                repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/observation-reporting-service"
-                tag: <release-version-tag> e.g v1.0.1
-    organization-reporting-servic:
-            image:
-                repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/organization-reporting-service"
-                tag: <release-version-tag> e.g v1.0.1
-    ldfdata-reporting-servic:
-            image:
-                repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/ldfdata-reporting-service"
-                tag: <release-version-tag> e.g v1.0.1
-    post-processing-reporting-servic:
-            image:
-                repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/post-processing-reporting-service"
-                tag: <release-version-tag> e.g v1.0.1
+2. Validate the Kubernetes secret for the database credentials:
+   ```bash
+   kubectl get secret/rtr-access -o yaml  -o yaml
    ```
-4. Update odse and kafka configurations
-   ```yaml
+
+   a. Ensure that the secret contains the correct database username and password, kafka cluster, and other necessary configurations. 
+      If the secret does not exist, create it using the following command or by applying the provided YAML file 
+      (Make sure to replace the placeholders with actual values):
+      Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
+      ```bash
+      kubectl apply -f k8-manifests/nbs-secrets.yaml
+      ```
    
-   dburl:
-    odse: "jdbc:sqlserver://<EXAMPLE_DB_ENDPOINT>:<PORT>;databaseName=NBS_ODSE;encrypt=true;trustServerCertificate=true;"
-    rdb: "jdbc:sqlserver://<EXAMPLE_DB_ENDPOINT>:<PORT>;databaseName=rdb;encrypt=true;trustServerCertificate=true;"
+3. Validate image repository:
+   ```yaml
+     global.image.repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/rtr-java-services"
+   ```
    
-   kafka:
-    cluster: "EXAMPLE_KAFKA_CLUSTER"
-   ```
-5. Update the JDBC username and password for each of the services:
-    ```yaml
-       investigation-reporting:
-         jdbc:
-           username: "EXAMPLE_DB_USER"
-           password: "EXAMPLE_DB_USER_PASSWORD"
-       person-reporting:
-         jdbc:
-           username: "EXAMPLE_DB_USER"
-           password: "EXAMPLE_DB_USER_PASSWORD"
-       observation-reporting:
-         jdbc:
-           username: "EXAMPLE_DB_USER"
-           password: "EXAMPLE_DB_USER_PASSWORD"
-       organization-reporting:
-         jdbc:
-           username: "EXAMPLE_DB_USER"
-           password: "EXAMPLE_DB_USER_PASSWORD"
-       ldfdata-reporting:
-         jdbc:
-           username: "EXAMPLE_DB_USER"
-           password: "EXAMPLE_DB_USER_PASSWORD"
-       post-processing-reporting:
-         jdbc:
-           username: "EXAMPLE_DB_USER"
-           password: "EXAMPLE_DB_USER_PASSWORD"
-   ```
-6. Update the feature flag for each of the services:
+4. Update the feature flag for each of the services:
    - a. Please ensure PHCMartETL.bat is turned off before enabling updates to PublicHealthCaseFact datamart via RTR.
       ```yaml
       featureFlag:
@@ -87,11 +40,12 @@ nav_enabled: true
            phcDatamartEnable: '''true'''
       ```
    
-7.Install helm chart for all the RTR java services
+5.Install helm chart for all the RTR java services
    ```bash
    helm install rtr . -f values.yaml
    ```
-8.Verify if pods are all running
+
+6.Verify if pods are all running
    ```bash
    kubectl get pods
    ```
@@ -105,7 +59,10 @@ nav_enabled: true
       rtr-java-services-person-reporting-<hash>           1/1     Running            0                  2m6s
       rtr-java-services-post-processing-reporting-<hash>  1/1     Running            0                  2m6s
       
-9.Validate services (on browser)
+7.Validate services (on browser).
+    The following services should be available at the specified URLs. Replace `<exampledomain>` with your actual domain.
+    Replace app.EXAMPLE_DOMAIN with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster)
+
    a. investigation-svc
    ```
    https://data.<exampledomain>/reporting/investigation-svc/status

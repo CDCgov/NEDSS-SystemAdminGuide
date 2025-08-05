@@ -1,5 +1,5 @@
 ---
-title:(Deprecated) Person Reporting
+title: (Deprecated) Person Reporting
 layout: page
 parent: Real Time Reporting (Preview)
 nav_order: 6

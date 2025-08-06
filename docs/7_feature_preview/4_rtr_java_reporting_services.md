@@ -61,7 +61,7 @@ nav_enabled: true
       
 7.Validate services (on browser).
     The following services should be available at the specified URLs. Replace `<exampledomain>` with your actual domain.
-    Replace app.EXAMPLE_DOMAIN with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster)
+    Replace app.EXAMPLE_DOMAIN with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster)
 
    a. investigation-svc
    ```

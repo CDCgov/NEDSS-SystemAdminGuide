@@ -171,7 +171,7 @@ One time onboarding steps required for Real Time Reporting setup.
 ### Continuous Integration for Real Time Reporting Database
 After onboarding, future enhancements will be delivered using these two approaches.
 
-- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase/liquibase](1_liquibase.md) section.
+- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section.
 - Option 2: Manually executing the scripts located under https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment. Onboarding scripts are excluded.
 
 ---

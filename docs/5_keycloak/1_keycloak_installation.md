@@ -74,7 +74,7 @@ There is a Keycloak helm chart
       ```
 - h. Connect to KeyCloak interface http://127.0.0.1:8080/auth in the browser and select Administrative console
   ![keycloak-ui-interface](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/kyecloak-login.png)
-- i. Sign In using adminUser and adminPassword (Table - 4)
+- i. Sign In using adminUser and adminPassword (as shown in the table above)
   ![keycloak-ui-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-ui.png)
   ![keycloak-ui-2-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-admin-ui-first-time-login.png)
 - j. Create a new Realm (to contain the NBS specific client and user/group configurations)

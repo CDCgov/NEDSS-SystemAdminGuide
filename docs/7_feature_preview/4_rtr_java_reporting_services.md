@@ -16,7 +16,7 @@ nav_enabled: true
 1. The helm chart for all RTR java services should be available under charts/rtr.
 2. Validate the Kubernetes secret for the database credentials:
    ```bash
-   kubectl get secret/rtr-access -o yaml  -o yaml
+   kubectl get secret/rtr-access -o yaml 
    ```
 
    a. Ensure that the secret contains the correct database username and password, kafka cluster, and other necessary configurations. 
@@ -29,10 +29,10 @@ nav_enabled: true
    
 3. Validate image repository:
    ```yaml
-     global.image.repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service/rtr-java-services"
+     global.image.repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
    ```
    
-4. Update the feature flag for each of the services:
+4. Update any feature flag for each of the services:
    - a. Please ensure PHCMartETL.bat is turned off before enabling updates to PublicHealthCaseFact datamart via RTR.
       ```yaml
       featureFlag:

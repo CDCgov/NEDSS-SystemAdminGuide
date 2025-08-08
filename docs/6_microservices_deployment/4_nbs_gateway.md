@@ -15,7 +15,7 @@ nav_enabled: true
 ## Deploy nbs-gateway via helm chart
 
 1. The helm chart for nbs-gateway should be available under charts/nbs-gateway.
-2. In the values.yaml, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app and app-classic.EXAMPLE_DOMAIN with the URL of your existing NBS 6 as shown in the [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster). 
+2. In the values.yaml, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app and app-classic.EXAMPLE_DOMAIN with the URL of your existing NBS 6 as shown in the [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster). 
 3. Ensure the image repository and tags are populated with the following:
    ```yaml
    image:

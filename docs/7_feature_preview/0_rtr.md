@@ -96,6 +96,7 @@ If there are problems encountered during Database Setup, please reach out to our
               ```sql
               exec msdb.dbo.rds_task_status;
               ```
+
 ### Onboarding: Service Users and Setup Scripts
 One time onboarding steps required for Real Time Reporting setup.
 1. Create database users: Each user will be provided with permissions it needs to do its job and nothing more! **Please review the scripts and update the PASSWORD field for before executing.**
@@ -104,51 +105,60 @@ One time onboarding steps required for Real Time Reporting setup.
     - b. Create Real Time Reporting microservice user logins: Create dedicated user accounts for each Real Time Reporting microservice. These users are wired in ArgoCD for each Real Time Reporting services.
       - Script location: [NEDSS-DataReporting/service-user-login-script](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/001-service_users_login_creation-001.sql)
       - Script location: [NEDSS-DataReporting/service-database-user-creation](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/002-service_database_user_creation-001.sql)
-2. Create required database objects: Scripts required for Real Time Reporting can be executed via Liquibase or manually. 
+2. Create kubernetes secrets: Kubernetes secrets are required for Real Time Reporting services to access the database. The secrets should be created for each service user created in step 1.
+   - a. Create secrets for each service user, including the admin user created in step 1a. The secrets should include the database username and password for each service user.:
+     - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
+3. Create required database objects: Scripts required for Real Time Reporting can be executed via Liquibase or manually. 
     - Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.md) section to create all necessary objects before moving to step 3.
     - Option 2: The required database objects can also be manually created. Documentation on script execution sequence and supplemental `db_upgrade.bat` file is provided to support manual setup. 
       - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
-3. Load data and enable Change Data Capture: This one time onboarding step is required after all database objects are created via Liquibase or manual script execution.
-   - a. Load metadata rows from NBS_ODSE and NBS_SRTE database tables to the reporting database.
-     - Script location: [000-nrt_metadata_load.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/000-nrt_metadata_load-001.sql)
-   - b. Data load to nrt_<>_key tables
-     - Run remaining onboarding scripts starting from `/02_onboarding_script_data_load/001-*`.
-     - Script location: [/02_onboarding_script_data_load/001-*.sql](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load)
-   - c.Enable Change Data Capture on NBS_ODSE and NBS_SRTE databases and tables:
-     - i. These are the final scripts that should be run before go-live.
-       - [1002-enable_cdc_on_odse_database.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1002-enable_cdc_on_odse_database-001.sql)
-       - [1003-enable_cdc_on_srte_database.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1003-enable_cdc_on_srte_database-001.sql)
-       - [1004-enable_cdc_on_odse_tables.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1004-enable_cdc_on_odse_tables-001.sql)
-       - [1005-enable_cdc_on_srte_tables.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1005-enable_cdc_on_srte_tables-001.sql)
+      - Please specify the database and proceed: 
+        - `upgrade_db.bat server_name <database> username password`
+3. Load data and enable Change Data Capture: One time onboarding step is required after all database objects are created in Step 2.
+    - a. Option 1: Manual execution of scripts. Please review and execute scripts within the [data_load](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment) folder. 
+      - i. Load metadata rows from NBS_ODSE and NBS_SRTE database tables to the reporting database.
+          - Script location: [000-nrt_metadata_load.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/000-nrt_metadata_load-001.sql)
+      - ii. Data load to nrt_<>_key tables
+      - Run remaining onboarding scripts starting from `/02_onboarding_script_data_load/001-*`. 
+        - Script location: [/02_onboarding_script_data_load/001-*.sql](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load)
+      - iii.Enable Change Data Capture on NBS_ODSE and NBS_SRTE databases and tables:
+         - These are the final scripts that should be run before go-live.
+            - a. [1002-enable_cdc_on_odse_database.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1002-enable_cdc_on_odse_database-001.sql)
+            - b. [1003-enable_cdc_on_srte_database.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1003-enable_cdc_on_srte_database-001.sql)
+            - c. [1004-enable_cdc_on_odse_tables.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1004-enable_cdc_on_odse_tables-001.sql)
+            - d. [1005-enable_cdc_on_srte_tables.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1005-enable_cdc_on_srte_tables-001.sql)
+    - b. Option 2: `db_upgrade.bat` file with `--load-data` flag run against the master database.
+        - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
+        - `upgrade_db.bat --load-data server_name master username password`
+      
+    ```sql
+       --Verify change data capture. is_cdc_enabled=1 indicates successful configuration. 
+       SELECT name,
+       is_cdc_enabled
+       FROM sys.databases;
+        
+       --View ODSE tables with CDC enabled. 
+       USE NBS_ODSE;
+       SELECT
+       name,
+       case when is_tracked_by_cdc  = 1 then 'YES'
+         else 'NO' end as is_tracked_by_cdc
+       FROM sys.tables
+       WHERE is_tracked_by_cdc = 1;
+        
+       -- View SRTE tables with CDC enabled
+       USE NBS_SRTE;
+       SELECT
+       name,
+       case when is_tracked_by_cdc  = 1 then 'YES'
+         else 'NO' end as is_tracked_by_cdc
+       FROM sys.tables
+       WHERE is_tracked_by_cdc = 1;
+    ```
 
-         ```sql
-            --Verify change data capture. is_cdc_enabled=1 indicates successful configuration. 
-          SELECT name,
-            is_cdc_enabled
-          FROM sys.databases;
-   
-         --View ODSE tables with CDC enabled. 
-          USE NBS_ODSE;
-          SELECT
-            name,
-            case when is_tracked_by_cdc  = 1 then 'YES'
-              else 'NO' end as is_tracked_by_cdc
-            FROM sys.tables
-            WHERE is_tracked_by_cdc = 1;
-   
-          -- View SRTE tables with CDC enabled
-          USE NBS_SRTE;
-          SELECT
-            name,
-            case when is_tracked_by_cdc  = 1 then 'YES'
-              else 'NO' end as is_tracked_by_cdc
-            FROM sys.tables
-            WHERE is_tracked_by_cdc = 1;
-          ```
+    ![cdc-enabled-odse-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_odse_tables.png "CDC for NBS_ODSE")
 
-       ![cdc-enabled-odse-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_odse_tables.png "CDC for NBS_ODSE")
-
-       ![cdc-enabled-srte-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_srte_tables.png "CDC for NBS_SRTE")
+    ![cdc-enabled-srte-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_srte_tables.png "CDC for NBS_SRTE")
 
 **_Troubleshooting tip:_** After `rdb_modern` is restored, if the Change Data Capture is not producing data, run the following script:
 
@@ -160,7 +170,7 @@ One time onboarding steps required for Real Time Reporting setup.
 ### Continuous Integration for Real Time Reporting Database
 After onboarding, future enhancements will be delivered using these two approaches.
 
-- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase/liquibase](1_liquibase.md) section.
+- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section.
 - Option 2: Manually executing the scripts located under https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment. Onboarding scripts are excluded.
 
 ---

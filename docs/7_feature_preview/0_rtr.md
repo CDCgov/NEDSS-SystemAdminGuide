@@ -27,7 +27,18 @@ If there are problems encountered during Database Setup, please reach out to our
 
 ### Onboarding: Prerequisites
 
-1. Classic ETL: Please ensure the following ETL batch jobs have run successfully before setting up the reporting database for Real Time Reporting.
+1. Database Release Version: Verify the underlying database release version returned is 6.0.17. Execute the following query to verify the baseline NBS Release version:
+  ```sql
+    USE NBS_ODSE; 
+    SELECT max(Version) current_version
+    FROM NBS_ODSE.dbo.NBS_Release;
+    
+    --or use the below query to check the config value
+    
+    use [NBS_ODSE];
+    select * from NBS_configuration where config_key = 'CODE_BASE'
+  ```
+2. Classic ETL: Please ensure the following ETL batch jobs have run successfully before setting up the reporting database for Real Time Reporting.
    - a. ETL scheduled jobs:
      - MasterEtl.bat
      - PHCMartETL.bat
@@ -35,18 +46,6 @@ If there are problems encountered during Database Setup, please reach out to our
    - b. Database setup:
      - Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.
      - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under [Onboarding: UAT Database Setup](#Onboarding-UAT-Database-Setup) section.
-
-2. Database Release Version: Verify the underlying database release version returned is 6.0.16 or higher. Execute the following query to verify the baseline NBS Release version:
-     ```sql
-       USE NBS_ODSE; 
-       SELECT max(Version) current_version
-       FROM NBS_ODSE.dbo.NBS_Release;
-       
-       --or use the below query to check the config value
-       
-       use [NBS_ODSE];
-       select * from NBS_configuration where config_key = 'CODE_BASE'
-     ```
 
 3. Environment Variable: Set the appropriate environment variable to define the reporting database context. This ensures that scripts execute against the correct reporting database.
    - a. Option 1: RDB as default database. Please insert the following to NBS_configuration to default to RDB.

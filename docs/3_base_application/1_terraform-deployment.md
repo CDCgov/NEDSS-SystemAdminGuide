@@ -16,8 +16,7 @@ nav_enabled: true
 ## Terraform Deployment 
 1. Download the Terraform configuration package from GitHub. Make sure you go through the release page and see what's included in
 the current release on [CDCgov/NEDSS-Infrastructure](https://github.com/CDCgov/NEDSS-Infrastructure/releases)
-2. Open bash/mac/cloudshell/powershell and unzip the current version file downloaded in the previous step named nbs-infrastructure-
-vX.Y.Z zip.
+2. Open bash/mac/cloudshell/powershell and unzip the current version file downloaded in the previous step named nbs-infrastructure-vX.Y.Z zip.
 3. Create a new directory with an easily identifiable name e.g <nbs7-mySTLT-test> in /terraform/aws/ to hold your environment specific
 configuration files
 4. Copy terraform/aws/samples/NBS7_standard to the new directory and change into the new directory (Note: the samples directory

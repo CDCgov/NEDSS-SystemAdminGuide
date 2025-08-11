@@ -22,7 +22,7 @@ configuration files
 4. Copy terraform/aws/samples/NBS7_standard to the new directory and change into the new directory (Note: the samples directory
 contains other options than “standard”, view the README file in that directory to chose most appropriate starting point)
 ```bash
-cp -pr terraform/aws/samples/NBS7_standard terraform/aws/nbs7-mySTLT-test
+cp -pr terraform/aws/samples/NBS7_standard/* terraform/aws/nbs7-mySTLT-test
 cd terraform/aws/nbs7-mySTLT-test
 ```
 **NOTE**: Before editing **terraform.tfvars** and **terraform.tf** files below, you may reference detailed information for each TF module under the

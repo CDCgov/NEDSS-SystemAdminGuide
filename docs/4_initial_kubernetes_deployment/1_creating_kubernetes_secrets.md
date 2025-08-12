@@ -46,3 +46,4 @@ nav_enabled: true
 ```bash
 kubectl apply -f k8-manifests/nbs-secrets.yaml
 ```
+![kubernetes-secretes-within-cluster](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/kubernetes-secrets-within-cluster.png)

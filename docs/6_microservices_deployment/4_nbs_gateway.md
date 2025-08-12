@@ -33,7 +33,7 @@ nav_enabled: true
      enabled: "true"
      client:
       id: "nbs-modernization"
-      secret:"EXAMPLE_OIDC_SECRET"
+      secret: "EXAMPLE_OIDC_SECRET"
    ```
 6. After updating the values file, Run the following command from the charts directory to install nbs-gateway.
    ```bash

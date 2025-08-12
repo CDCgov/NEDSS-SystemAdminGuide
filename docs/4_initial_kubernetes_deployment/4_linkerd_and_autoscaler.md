@@ -26,7 +26,7 @@ nav_enabled: true
 - c. If this is an update of the environment rather than a new install, restart the application pods in the default namespace for the linkerd sidecars to be injected into each pods. Should show 2/2 on the restarted pod.
 
 ## Cluster Autoscaler Installation
-Cluster Autoscaler is a helm chart deployment that horizontally autoscales cluster nodes when deployed on the cluster. The following parameter values need to be modified on the values.yaml file. These values should be fetched from the AWS console.
+Cluster Autoscaler is a helm chart deployment that horizontally autoscales cluster nodes when deployed on the cluster. The following parameter values need to be modified under charts/cluster-autoscaler/values.yaml file. These values should be fetched from the AWS console.
 ```bash
 clusterName: <EXAMPLE_EKS_CLUSTER_NAME>
 autoscalingGroups:

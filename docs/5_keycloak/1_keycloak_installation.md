@@ -116,4 +116,4 @@ There is a Keycloak helm chart
          - Select srte-data-keycloak-client
          - Select Credentials tab
          - Click on the “eye” and copy the secret
-         - Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/nnd) 
+         - Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/srte) 

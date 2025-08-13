@@ -116,4 +116,14 @@ There is a Keycloak helm chart
          - Select srte-data-keycloak-client
          - Select Credentials tab
          - Click on the “eye” and copy the secret
-         - Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/srte) 
+         - Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/srte)
+- s. Create new client for xml-hl7-parser. Repeat steps as shown above to import xml-hl7-parser client.
+    - a. Under Realm settings, click on “Action” drop down on top right and click on “Partial Import”.
+    - b. Upload <helm extract directory>/charts/keycloak/extra/10-nbs-users-xml-hl7-parser-service.json which is part of the helm zip file in the keycloak chart and click on Create.
+    - c. Retrieving the Client’s secret (the imported configuration will seed a random client secret)
+         - Navigate to NBS Realm on the left menu
+         - Click on Clients
+         - Select srte-data-keycloak-client
+         - Select Credentials tab
+         - Click on the “eye” and copy the secret
+         - Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/xml-hl7-parser) 

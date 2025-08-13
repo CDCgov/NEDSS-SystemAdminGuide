@@ -123,7 +123,7 @@ There is a Keycloak helm chart
     - c. Retrieving the Client’s secret (the imported configuration will seed a random client secret)
          - Navigate to NBS Realm on the left menu
          - Click on Clients
-         - Select srte-data-keycloak-client
+         - Select xml-hl7-parser-keycloak-client
          - Select Credentials tab
          - Click on the “eye” and copy the secret
          - Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/xml-hl7-parser) 

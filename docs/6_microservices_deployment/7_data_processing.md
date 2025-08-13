@@ -70,5 +70,5 @@ data processing service Application - e.g. dataprocessingservice.example.com
     helm install data-processing-service -f ./data-processing-service/values.yaml data-processing-service
     ```
     - Note: Check to see if the pod for data-processing-service is running using kubectl get pods
-7. API Testing Guide: [RTI API Testing and Integration](https://cdc-nbs.atlassian.net/wiki/spaces/NM/pages/1592754353/NBS+7.10+Application+Installation+Guide#RTI-API-Testing-and-Integration)
+7. API Testing Guide: [RTI API Testing and Integration](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/7a_data_processing_api_testing.html#data-processing-api-testing-and-integration)
 

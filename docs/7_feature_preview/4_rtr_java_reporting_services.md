@@ -74,7 +74,7 @@ nav_enabled: true
    https://data.<exampledomain>/reporting/person-svc/status
    Expected: Person Service Status OK
    ```
-   c. person-svc
+   c. observation-svc
    ```
    https://data.<exampledomain>/reporting/observation-svc/status
    Expected: Observation Service Status OK

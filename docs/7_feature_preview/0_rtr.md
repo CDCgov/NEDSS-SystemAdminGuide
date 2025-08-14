@@ -109,7 +109,7 @@ One time onboarding steps required for Real Time Reporting setup.
    - a. Create secrets for each service user, including the admin user created in step 1a. The secrets should include the database username and password for each service user.:
      - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
 3. Create required database objects: Scripts required for Real Time Reporting can be executed via Liquibase or manually. 
-    - Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.md) section to create all necessary objects before moving to step 3.
+    - Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section to create all necessary objects before moving to step 3.
     - Option 2: The required database objects can also be manually created. Documentation on script execution sequence and supplemental `db_upgrade.bat` file is provided to support manual setup. 
       - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
       - Please specify the database and proceed: 

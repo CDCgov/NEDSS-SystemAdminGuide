@@ -62,3 +62,7 @@ This guide sets out the detailed steps to install NBS 7 Data Sync service that w
    https://<data.EXAMPLE_DOMAIN>/extraction/actuator/info
    https://<data.EXAMPLE_DOMAIN>/extraction/actuator/health
    ```
+9. Swagger is disabled by default (usually in PROD). To enable swagger for testing, specify or overwrite springBootProfile with ‘dev’ under charts/nnd-service/values.yaml
+    ```
+    https://<data.EXAMPLE_DOMAIN>/extraction/swagger-ui/index.html#/
+    ```

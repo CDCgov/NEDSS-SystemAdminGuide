@@ -38,13 +38,14 @@ If there are problems encountered during Database Setup, please reach out to our
     use [NBS_ODSE];
     select * from NBS_configuration where config_key = 'CODE_BASE'
   ```
-2. Classic ETL: Please ensure the following ETL batch jobs have run successfully before setting up the reporting database for Real Time Reporting.
+2. **Classic ETL: Please ensure the following ETL batch jobs have run successfully before setting up the reporting database for Real Time Reporting.**
    - a. ETL scheduled jobs:
      - MasterEtl.bat
      - PHCMartETL.bat
      - covid19ETL.bat
+       ℹ️ **Note:** ***Ensure to take a backup of rdb database before proceeding with the next steps***
    - b. Database setup:
-     - Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.
+     - **Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.**
      - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under [Onboarding: UAT Database Setup](#Onboarding-UAT-Database-Setup) section.
 
 3. Environment Variable: Set the appropriate environment variable to define the reporting database context. This ensures that scripts execute against the correct reporting database.
@@ -109,12 +110,12 @@ One time onboarding steps required for Real Time Reporting setup.
    - a. Create secrets for each service user, including the admin user created in step 1a. The secrets should include the database username and password for each service user.:
      - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
 3. Create required database objects: Scripts required for Real Time Reporting can be executed via Liquibase or manually. 
-    - Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section to create all necessary objects before moving to step 3.
+    - Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section to create all necessary objects before moving to step 4.
     - Option 2: The required database objects can also be manually created. Documentation on script execution sequence and supplemental `db_upgrade.bat` file is provided to support manual setup. 
       - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
       - Please specify the database and proceed: 
         - `upgrade_db.bat server_name <database> username password`
-3. Load data and enable Change Data Capture: One time onboarding step is required after all database objects are created in Step 2.
+3. Load data and enable Change Data Capture: One time onboarding step is required after all database objects are created in Step 3.
     - a. Option 1: Manual execution of scripts. Please review and execute scripts within the [data_load](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment) folder. 
       - i. Load metadata rows from NBS_ODSE and NBS_SRTE database tables to the reporting database.
           - Script location: [000-nrt_metadata_load.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/000-nrt_metadata_load-001.sql)

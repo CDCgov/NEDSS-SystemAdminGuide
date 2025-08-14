@@ -116,3 +116,8 @@ After updating the values file, Run the following command to install dataingesti
    helm install dataingestion-service -f ./dataingestion-service/values.yaml dataingestion-service
    ```
    - Note: Check to see if the pod for dataingestion-service is running using kubectl get pods
+11. Validate the service
+   ```
+   https://<data.EXAMPLE_DOMAIN>/ingestion/actuator/info
+   https://<data.EXAMPLE_DOMAIN>/ingestion/actuator/health
+   ```

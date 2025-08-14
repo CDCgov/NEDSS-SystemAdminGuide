@@ -51,7 +51,6 @@ nav_enabled: true
    ```
 6. Validate the service
    ```
-   https://<data.EXAMPLE_DOMAIN>/case-notification/swagger-ui/index.html#/
    https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/info
    https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/health
    ```

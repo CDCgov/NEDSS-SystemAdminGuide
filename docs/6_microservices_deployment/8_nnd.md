@@ -57,3 +57,8 @@ This guide sets out the detailed steps to install NBS 7 Data Sync service that w
    helm install nnd-service -f ./nnd-service/values.yaml nnd-service
    ```
    - Note: Check to see if the pod for nnd-service is running using kubectl get pods
+8. Validate the service
+   ```
+   https://<data.EXAMPLE_DOMAIN>/extraction/actuator/info
+   https://<data.EXAMPLE_DOMAIN>/extraction/actuator/health
+   ```

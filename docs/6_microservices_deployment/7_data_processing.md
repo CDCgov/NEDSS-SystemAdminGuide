@@ -71,4 +71,9 @@ data processing service Application - e.g. dataprocessingservice.example.com
     ```
     - Note: Check to see if the pod for data-processing-service is running using kubectl get pods
 7. API Testing Guide: [RTI API Testing and Integration](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/7a_data_processing_api_testing.html#data-processing-api-testing-and-integration)
+8. Validate the service
+   ```
+   https://<data.EXAMPLE_DOMAIN>/rti/actuator/info
+   https://<data.EXAMPLE_DOMAIN>/rti/actuator/health
+   ```
 

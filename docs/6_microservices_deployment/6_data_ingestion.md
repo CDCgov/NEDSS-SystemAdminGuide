@@ -121,3 +121,7 @@ After updating the values file, Run the following command to install dataingesti
    https://<data.EXAMPLE_DOMAIN>/ingestion/actuator/info
    https://<data.EXAMPLE_DOMAIN>/ingestion/actuator/health
    ```
+12. Swagger is disabled by default (usually in PROD). To enable swagger for testing, specify or overwrite springBootProfile with ‘dev’ under charts/dataingestion-service/values.yaml
+    ```
+    https://<data.EXAMPLE_DOMAIN>/ingestion/swagger-ui/index.html#/
+    ```

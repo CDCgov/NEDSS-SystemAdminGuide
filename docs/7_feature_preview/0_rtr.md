@@ -43,8 +43,8 @@ If there are problems encountered during Database Setup, please reach out to our
      - MasterEtl.bat
      - PHCMartETL.bat
      - covid19ETL.bat
-       ℹ️ **Note:** ***Ensure to take a backup of rdb database before proceeding with the next steps***
-   - b. Database setup:
+   - b. **Note: Ensure to take a backup of rdb database before proceeding with the next steps**
+   - c. Database setup:
      - **Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.**
      - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under [Onboarding: UAT Database Setup](#Onboarding-UAT-Database-Setup) section.
 

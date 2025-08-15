@@ -36,6 +36,7 @@ nav_enabled: true
        database.server.name: "odse",
        database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT",
        schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+   
    sqlserverconnector_odse_meta: 
      config: 
        database.hostname: "nbs-db.private-EXAMPLE_DOMAIN",
@@ -47,6 +48,7 @@ nav_enabled: true
        database.server.name: "odse",
        database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT",
        schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+   
    sqlserverconnector_srte: 
      config: 
        database.hostname: "nbs-db.private-EXAMPLE_DOMAIN",

@@ -25,17 +25,39 @@ nav_enabled: true
    properties:
      bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
     
-   sqlserverconnector: 
+   sqlserverconnector_odse: 
      config: 
        database.hostname: "nbs-db.private-EXAMPLE_DOMAIN",
        database.port: "1433",
-       database.user: "EXAMPLE_DB_USER",
-       database.password: "EXAMPLE_DB_USER_PASSWORD",
+       database.user: "EXAMPLE_ODSE_DB_USER",
+       database.password: "EXAMPLE_ODSE_DB_USER_PASSWORD",
        database.dbname: "nbs_odse",
        database.names: "nbs_odse",
        database.server.name: "odse",
        database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT",
-       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"   
+       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+   sqlserverconnector_odse_meta: 
+     config: 
+       database.hostname: "nbs-db.private-EXAMPLE_DOMAIN",
+       database.port: "1433",
+       database.user: "EXAMPLE_ODSE_DB_USER",
+       database.password: "EXAMPLE_ODSE_DB_USER_PASSWORD",
+       database.dbname: "nbs_odse",
+       database.names: "nbs_odse",
+       database.server.name: "odse",
+       database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT",
+       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+   sqlserverconnector_srte: 
+     config: 
+       database.hostname: "nbs-db.private-EXAMPLE_DOMAIN",
+       database.port: "1433",
+       database.user: "EXAMPLE_SRTE_DB_USER",
+       database.password: "EXAMPLE_SRTE_DB_USER_PASSWORD",
+       database.dbname: "nbs_odse",
+       database.names: "nbs_odse",
+       database.server.name: "odse",
+       database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT",
+       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
    env:
      - name: BOOTSTRAP_SERVERS
        value: "EXAMPLE_MSK_KAFKA_ENDPOINT"

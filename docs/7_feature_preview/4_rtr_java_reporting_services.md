@@ -16,7 +16,7 @@ nav_enabled: true
 1. The helm chart for all RTR java services should be available under charts/rtr.
 2. Validate the Kubernetes secret for the database credentials:
    ```bash
-   kubectl get secret/rtr-access -o yaml 
+   kubectl get secret/database-access -o yaml 
    ```
 
    a. Ensure that the secret contains the correct database username and password, kafka cluster, and other necessary configurations. 

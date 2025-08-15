@@ -49,7 +49,7 @@ nav_enabled: true
    kubectl get pods
    ```
 7. Validate service
-  - a. This is an internal service with no ingress. Validation should be part of [NBS 7.6 Application Installation Guide  RTR Pipeline Validation](https://cdc-nbs.atlassian.net/wiki/spaces/NM/pages/edit-v2/951255219#RTR-Pipeline-Validation)
+  - a. This is an internal service with no ingress. Validation should be part of [RTR Pipeline Validation](/NEDSS-SystemAdminGuide/docs/7_feature_preview/5_rtr_pipeline_validation.html#rtr-pipeline-validation)
   - b. If the service has any trouble connecting with the database, run this command to reset the ConfigMap.
 ```bash
 kubectl delete configmap cp-kafka-connect-sqlserver-connect

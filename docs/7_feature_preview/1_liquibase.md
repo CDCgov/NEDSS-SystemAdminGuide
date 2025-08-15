@@ -34,10 +34,6 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
      password: ""
      srte_username: ""
      srte_password: ""
-   odse:
-      bname: "NBS_ODSE"
-   rdb:
-     dbname: "rdb_modern"
    ```
 4. Update the values.yaml files and run the command to run the Liquibase. Configurations for the following should be on hand to update the values.yaml
    

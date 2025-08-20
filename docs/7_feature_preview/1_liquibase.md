@@ -24,16 +24,18 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
    ```
 3. Validate image repository and tag:
    ```yaml
-   jdbc:
-     master_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-     srte_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_srte;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-     odse_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-     rdb_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-     rdb_modern_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-     username: ""
-     password: ""
-     srte_username: ""
-     srte_password: ""
+    jdbc:
+      master_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+      odse_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+      rdb_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=rdb_modern;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
+      username: "EXAMPLE_DB_USER"
+      password: "EXAMPLE_DB_USER_PASSWORD"
+      srte_username: "EXAMPLE_SRTE_DB_USER"
+      srte_password: "EXAMPLE_SRTE_DB_USER_PASSWORD"
+    odse:
+      dbname: "NBS_ODSE"
+    rdb:
+      dbname: "rdb_modern"
    ```
 4. Update the values.yaml files and run the command to run the Liquibase. Configurations for the following should be on hand to update the values.yaml
    

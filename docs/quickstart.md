@@ -17,7 +17,7 @@ nav_enabled: true
 
 This quick guide provides a simple step-by-step approach for deploying the NBS 7 infrastructure and microservices in an AWS environment. It is intended for experienced administrators who are familiar with AWS, Kubernetes, Helm, and Terraform. 
 
-This guide is NOT meant for a production deployment. Please review [AWS Infrastructure Deployment](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster) for a full production deployment and guidelines.
+This guide is NOT meant for a production deployment. Please review [AWS Infrastructure Deployment](NEDSS-SystemAdminGuide/docs/3_base_application/0_base_application.html#aws-infrastructure) for a full production deployment and guidelines.
 
 ### Following resources will be installed and configured with this guide
 

@@ -109,7 +109,7 @@ Data Ingest DB creation and user permission in the following should be executed 
      elrFileExtns: "txt,hl7"
      filePaths: "/"
    ```
-For more information about sFTP support, please see: [data-ingestion-sftp-support](https://cdc-nbs.atlassian.net/wiki/spaces/NM/pages/1592755309)
+For more information about SFTP support, please see: [data-ingestion-sftp-support](docs/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)
 10. Deploy DataIngestion helm chart:
 After updating the values file, Run the following command to install dataingestion-service.
    ```bash

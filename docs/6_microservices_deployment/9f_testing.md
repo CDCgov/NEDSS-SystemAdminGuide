@@ -107,4 +107,4 @@ nav_enabled: true
 
 #### Additional Case Notification Technical Documentations
 
-[Technical Document ](https://cdc-nbs.atlassian.net/wiki/spaces/~636279befe5ff375235bc637/pages/1599045634/Technical+Document)
+[Technical Document ](docs/Technical%20Document.pdf)

@@ -17,7 +17,7 @@ nav_enabled: true
 
 This quick guide provides a simple step-by-step approach for deploying the NBS 7 infrastructure and microservices in an AWS environment. It is intended for experienced administrators who are familiar with AWS, Kubernetes, Helm, and Terraform. 
 
-This guide is NOT meant for a production deployment. Please review [System Administrator Guide](https://cdc-nbs.atlassian.net/wiki/spaces/NM/pages/1592754177/NBS+7.10+System+Administrator+Guide) for a full production deployment and guidelines.
+This guide is NOT meant for a production deployment. Please review [System Administrator Guide](https://NEDSS-SystemAdminGuide/docs/3_base_application/0_base_application.html) for a full production deployment and guidelines.
 
 ### Following resources will be installed and configured with this guide
 

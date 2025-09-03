@@ -23,7 +23,7 @@ nav_enabled: true
    ```yaml
    sqlServerConnector: 
       config: 
-         connection.url: jdbc:sqlserver://nbs-db.EXAMPLE_FIXME.nbspreview.com:1433;databaseName=rdb_modern;encrypt=true;trustServerCertificate=true;,
+         connection.url: jdbc:sqlserver://nbs-db.EXAMPLE_FIXME.nbspreview.com:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;,
          connection.user: EXAMPLE_FIXME,
          connection.password: EXAMPLE_FIXME,
    kafka:

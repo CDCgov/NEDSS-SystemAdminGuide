@@ -15,7 +15,7 @@ nav_enabled: true
 {:toc}
 
 
-This quick guide provides a simple step-by-step approach for deploying the NBS 7 infrastructure and microservices in an AWS environment. It is intended for experienced administrators who are familiar with AWS, Kubernetes, Helm, and Terraform. 
+This quick guide provides a simple step-by-step approach for deploying the NBS 7 infrastructure and microservices in an AWS environment. It is intended for experienced administrators who are familiar with AWS, [Kubernetes](https://kubernetes.io/), [Helm](https://helm.sh/), and [Terraform](https://www.terraform.io/).
 
 This guide is NOT meant for a production deployment. Please review AWS Infrastructure for a full production deployment and guidelines.
 
@@ -41,7 +41,7 @@ This guide is NOT meant for a production deployment. Please review AWS Infrastru
 3. **Nifi** - Populates Elasticsearch indices from the NBS database.
 4. **NBS Gateway** - Efficiently manages intricate strangler routing logic between modern and legacy NBS.
 5. **Data Ingestion** - Enables NBS to seamlessly ingest HL7 data from labs and other entities into the NBS system.
-6. **Keycloak** - Primary Identity Provider (IDP). Also used for token management and SSO integration, for example, OAuth, SAML integration with Okta, etc.
+6. **Keycloak** - Primary Identity Provider (IdP). Also used for token management and SSO integration, for example, OAuth, SAML integration with Okta, etc.
 
 ## Prerequisites
 Tools to Install
@@ -82,7 +82,7 @@ cp -pr terraform/aws/samples/NBS7_standard terraform/aws/nbs7-mySTLT-test
 
 ### Customize Variables
 {: .no_toc }
-- Update the terraform.tfvars and terraform.tf with your environment-specific values by following the instructions [here](https://github.com/CDCgov/NEDSS-Infrastructure/blob/main/terraform/aws/samples/NBS7_standard/README.md).
+- Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the instructions [here](https://github.com/CDCgov/NEDSS-Infrastructure/blob/main/terraform/aws/samples/NBS7_standard/README.md).
 
 > ℹ️ **Review the inbound rules** on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
 
@@ -283,7 +283,7 @@ kubectl get pods -A
 
 ### Automated Tests
 {: .no_toc }
-- Use nbs-test-api.sh and nbs-test-webui.sh for basic API and UI smoke tests.
+- Use `nbs-test-api.sh` and `nbs-test-webui.sh` for basic API and UI smoke tests.
 
 
 ## Cleanup
@@ -302,9 +302,6 @@ helm uninstall --namespace ingress-nginx ingress-nginx
 
 terraform destroy
 ```
-
-## Go Live
-We recommend before going live, review the [System Administrator Guide](https://cdc-nbs.atlassian.net/wiki/spaces/NM/pages/1592754177/NBS+7.10+System+Administrator+Guide).
 
 ## Support
 - For support, contact NBSSupport@cdc.gov.

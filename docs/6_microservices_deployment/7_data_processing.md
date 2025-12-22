@@ -13,7 +13,7 @@ nav_enabled: true
 {:toc}
 
 ## Data Processing Service Introduction
-This guide is designed to assist clients who are working with RTI. RTI is a service that is highly dependent on Data Ingestion. It is designed to pick up ELR data once it has been ingested and queued in the NBS Interface table. RTI will process the data and either mark it as successful or deliver it into the NBS queue. RTI is a microservice where events are handled by Kafka events. There will be no direct interaction between the end user and RTI. RTI can only be triggered via the data ingestion ELR endpoint. This guide will highlight the steps on how to make that happen.
+This guide is designed to assist clients who are working with Real Time Ingestion (RTI). RTI is a service that is highly dependent on Data Ingestion. It is designed to pick up ELR data once it has been ingested and queued in the NBS Interface table. RTI will process the data and either mark it as successful or deliver it into the NBS queue. RTI is a microservice where events are handled by Kafka events. There will be no direct interaction between the end user and RTI. RTI can only be triggered via the data ingestion ELR endpoint. This guide will highlight the steps on how to make that happen.
 
 ## Flow Diagram
 
@@ -23,10 +23,11 @@ This guide is designed to assist clients who are working with RTI. RTI is a serv
 This guide outlines the detailed steps to install the NBS 7 RTI service, which will process ELR data after it is ingested by data ingestion. RTI can work side by side with the ELR importer batch job or replace it. RTI provides a seamless way to process ELR in near real-time instead of depending on the system-bounded ELR batch job. This eliminates the need for the STLT to set up a batch job on their system.
 
 ### RTI micro service
-1. Please use the values file supplied as part of nbs-helm-vX.Y.Z.zip file. Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the Assets listed for the latest or previous releases). The values.yaml file should be under charts\data-processing-service\values.yaml .
-Values for ECR repository, ECR image tag, db server endpoints, and ingress host should be provided in the values.yaml file.
-2. Confirm that the following DNS entry were created and pointed to the network load balancer in front of your Kubernetes cluster (Make sure this is the ACTIVE NLB provisioned via nginx-ingress in the base install steps ). This should be done in your authoritative DNS service(e.g. Route 53). Please replace http://example.com with the appropriate domain name in the values.yaml file.
-data processing service Application - e.g. dataprocessingservice.example.com
+1. Please use the values file supplied as part of `nbs-helm-vX.Y.Z.zip` file. Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the Assets listed for the latest or previous releases). The `values.yaml` file should be under `charts\data-processing-service\values.yaml`.
+Values for ECR repository, ECR image tag, db server endpoints, and ingress host should be provided in the `values.yaml` file.
+2. Confirm that the following DNS entry were created and pointed to the network load balancer in front of your Kubernetes cluster (Make sure this is the ACTIVE NLB provisioned via `nginx-ingress` in the base install steps). This should be done in your authoritative DNS service (e.g., Route 53). Please replace `example.com` with the appropriate domain name in the `values.yaml` file.
+
+   Data processing service Application - e.g., `dataprocessingservice.example.com`
 3. Update the image repository and tag with the following:
    ```yaml
    image:
@@ -76,4 +77,3 @@ data processing service Application - e.g. dataprocessingservice.example.com
    https://<data.EXAMPLE_DOMAIN>/rti/actuator/info
    https://<data.EXAMPLE_DOMAIN>/rti/actuator/health
    ```
-

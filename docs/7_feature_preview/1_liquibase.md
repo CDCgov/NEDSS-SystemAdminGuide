@@ -16,7 +16,7 @@ nav_enabled: true
 The liquibase job runs once and goes to sleep. The job will update necessary SQL Server scripts for Real Time Reporting.
 
 1. The helm chart for Liquibase should be available under charts/liquibase.
-   2. In the values.yaml, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
+   2. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
       ```yaml
       image:
         repository: "quay.io/us-cdcgov/cdc-nbs-modernization/liquibase-service"
@@ -29,14 +29,14 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
          odse_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_odse;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
          srte_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=nbs_srte;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
          rdb_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
-         rdb_modern_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"     
+         rdb_modern_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT.nbspreview.com:1433;databaseName=rdb;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
          username: "EXAMPLE_DB_USER"
          password: "EXAMPLE_DB_USER_PASSWORD"
          srte_username: "EXAMPLE_SRTE_DB_USER"
          srte_password: "EXAMPLE_SRTE_DB_USER_PASSWORD"
       ```
-4. Update the values.yaml files and run the command to run the Liquibase. Configurations for the following should be on hand to update the values.yaml
-   
+4. Update the `values.yaml` files and run the command to run the Liquibase. Configurations for the following should be on hand to update the `values.yaml`
+
 5. Install pod
    ```bash
    helm install -f ./liquibase/values.yaml liquibase ./liquibase/
@@ -45,26 +45,26 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
    ```bash
    kubectl get pods
    ```
-   
+
 7. Validate liquibase update from NBS databases using the DATABASECHANGELOG table:
-   
+
     ```sql
     --Last script executed should be 999-<database_name>_database_object_permission_grants-001.sql.
     USE NBS_ODSE;
     SELECT TOP 1 *
     FROM NBS_ODSE.DBO.DATABASECHANGELOG
     ORDER BY DATEEXECUTED DESC;
-    
+
     USE NBS_SRTE;
     SELECT TOP 1 *
     FROM NBS_SRTE.DBO.DATABASECHANGELOG
     ORDER BY DATEEXECUTED DESC;
-    
+
     USE RDB;
     SELECT TOP 1 *
     FROM RDB.DBO.DATABASECHANGELOG
     ORDER BY DATEEXECUTED DESC;
-    
+
     USE RDB_MODERN;
     SELECT TOP 1 *
     FROM RDB_MODERN.DBO.DATABASECHANGELOG
@@ -173,19 +173,19 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
                 ON [PRIMARY];
 
            END;
-        
+
         ```
     - c. NBS_ODSE, RDB, NBS_SRTE  and rdb_modern: If the expected values are not returned and the update is incomplete, the DATABASECHANGELOG should be cleared out (query below) and Liquibase should be rerun.
         ```sql
         USE NBS_ODSE;
         DELETE FROM NBS_ODSE.dbo.DATABASECHANGELOG;
-        
+
         USE NBS_SRTE;
         DELETE FROM NBS_ODSE.dbo.DATABASECHANGELOG;
-        
+
         USE RDB;
         DELETE FROM RDB.dbo.DATABASECHANGELOG;
-        	
+
         USE rdb_modern;
         DELETE FROM rdb_modern.dbo.DATABASECHANGELOG;
         ```

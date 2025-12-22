@@ -66,23 +66,23 @@ nav_enabled: true
 #### Case Notification Environment Variable
 
 1. **Case-Notification-Service**
-   - a. [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)  
-   - b. [NEDSS-Helm/charts/case-notification-service/templates/deployment.yaml at 521ac8cff59c4f693f5e1af74bed20bd7f3c698 · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/521ac8cff59c4f693f5e1af74bed20bd7f3c698/charts/case-notification-service/templates/deployment.yaml)
+   - a. [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)
+   - b. [NEDSS-Helm/charts/case-notification-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/case-notification-service/templates/deployment.yaml)
 
 2. **Data-Extraction-Service**
-   - a. [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)  
-   - b. [NEDSS-Helm/charts/data-extraction-service/templates/deployment.yaml at 521ac8cff59c4f693f5e1af74bed20bd7f3c698 · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/521ac8cff59c4f693f5e1af74bed20bd7f3c698/charts/data-extraction-service/templates/deployment.yaml)
+   - a. [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)
+   - b. [NEDSS-Helm/charts/data-extraction-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/data-extraction-service/templates/deployment.yaml)
 
 3. **Xml-Hl7-Parser-Service**
-   - a. [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)  
-   - b. [NEDSS-Helm/charts/xml-hl7-parser-service/templates/deployment.yaml at 521ac8cff59c4f693f5e1af74bed20bd7f3c698 · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/521ac8cff59c4f693f5e1af74bed20bd7f3c698/charts/xml-hl7-parser-service/templates/deployment.yaml)
+   - a. [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)
+   - b. [NEDSS-Helm/charts/xml-hl7-parser-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/xml-hl7-parser-service/templates/deployment.yaml)
 
 ---
 
 #### Case Notification Liquibase
 
 - Case Notification comes with a built-in Liquibase that automatically handles any DB changes upon deployment.
-  - DB changes detail can be reviewed here:  
+  - DB changes detail can be reviewed here:
     - [NEDSS-NNDSS-Case-Notifications/case-notification-service/src/main/resources/db at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/tree/main/case-notification-service/src/main/resources/db)
   - Please refer to Deploy Data Ingestion via Helm chart for how to deploy DI.
 
@@ -99,8 +99,8 @@ nav_enabled: true
 
 1. Use either one of the two Kafka broker endpoints (`Private endpoints - Plaintext`) in the Helm values file.
 
-2. Required Debezium Source Connector on `NBS_ODSE..CN_TranportQ_Out` deployed first prior to the services deployment  
-   - a. Detail link  
+2. Required Debezium Source Connector on `NBS_ODSE..CN_TranportQ_Out` deployed first prior to the services deployment
+   - a. Detail link
       - i. [NEDSS-Helm/charts/debezium/values.yaml at main · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/debezium/values.yaml)
 
 ---

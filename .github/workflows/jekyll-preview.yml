@@ -1,0 +1,66 @@
+# Builds and deploys the Jekyll site to a separate preview GitHub Pages repo
+# when changes are pushed to the `preview` branch.
+#
+# Prerequisites (one-time setup):
+#   1. Create repo jburgh/CDCgov-NEDSS-SystemAdminGuide-preview (done)
+#   2. Enable GitHub Pages on that repo (Settings > Pages > source: gh-pages branch)
+#   3. Generate a PAT with `repo` scope and add it as secret PREVIEW_DEPLOY_TOKEN
+#      in this repo's Settings > Secrets and variables > Actions
+#
+# Preview site URL: https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/
+
+name: Deploy Jekyll site to Preview
+
+on:
+  push:
+    branches: ["preview"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+          cache-version: 0
+
+      - name: Cleanup _guide_preview
+        run: |
+          find _guide_preview -name '*.md' | while read file; do
+            awk '
+              BEGIN { in_front=0 }
+              {
+                if ($0 ~ /^---$/) {
+                  in_front = 1 - in_front
+                }
+                if (in_front && ($0 ~ /^(parent:|grand_parent:|nav_order:|has_children:)/)) {
+                  next
+                }
+                print
+              }
+            ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
+          done
+
+      - name: Build with Jekyll
+        run: bundle exec jekyll build --baseurl "/CDCgov-NEDSS-SystemAdminGuide-preview"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Deploy to preview repo
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          personal_token: ${{ secrets.PREVIEW_DEPLOY_TOKEN }}
+          external_repository: jburgh/CDCgov-NEDSS-SystemAdminGuide-preview
+          publish_branch: gh-pages
+          publish_dir: ./_site

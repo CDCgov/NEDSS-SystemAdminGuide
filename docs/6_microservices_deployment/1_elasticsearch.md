@@ -1,5 +1,5 @@
 ---
-title: Elastisearch
+title: Elasticsearch
 layout: page
 parent: Microservices Deployment
 nav_order: 1

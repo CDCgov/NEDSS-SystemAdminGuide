@@ -3,6 +3,13 @@ title: Real Time Reporting (Preview)
 layout: page
 nav_order: 8
 nav_enabled: true
+redirect_from:
+  - /docs/7_feature_preview/(DEPRECATED)4_observation_reporting_service/
+  - /docs/7_feature_preview/(DEPRECATED)5_person_reporting_service/
+  - /docs/7_feature_preview/(DEPRECATED)6_organization_reporting_service/
+  - /docs/7_feature_preview/(DEPRECATED)7_investigation_reporting_service/
+  - /docs/7_feature_preview/(DEPRECATED)8_ldfdata_reporting_service/
+  - /docs/7_feature_preview/(DEPRECATED)9_post_processing_reporting_service/
 ---
 
 ## Table of contents

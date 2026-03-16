@@ -1,4 +1,6 @@
 title: NBS System Administrator Guide
+plugins:
+  - jekyll-redirect-from
 description: National Electronic Disease Surveillance System Base System (NBS) System Administrator Guide
 theme: just-the-docs
 url: https://cdcgov.github.io/NEDSS-SystemAdminGuide/

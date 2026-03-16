@@ -1,29 +1,8 @@
 ---
-# _config.yml additions required for callouts used in this file:
-#
-# callouts:
-#   note:
-#     title: Note
-#     color: blue
-#   highlight:
-#     title: What leadership needs to know
-#     color: yellow
-#   best-for:
-#     title: Best for
-#     color: green
-#   caution:
-#     title: Caution
-#     color: red
-#
-# Remove this comment block before publishing.
----
-
----
-layout: default
 title: NBS 7 Deployment Decision Guide
-nav_order: 1
-has_children: true
-has_toc: false
+layout: page
+parent: Introduction
+nav_order: 2
 ---
 
 # NBS 7 Deployment Decision Guide

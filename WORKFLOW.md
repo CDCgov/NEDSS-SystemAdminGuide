@@ -14,6 +14,35 @@ Your prompt should look something like:
 admin@your-MacBook-Pro NEDSS-SystemAdminGuide %
 ```
 
+### One-time git configuration
+
+Run these once on your machine after setup:
+
+**Auto-track remote branches** — lets you run `git push` on a new branch without needing `-u origin branchname`:
+```bash
+git config --global push.autoSetupRemote true
+```
+
+**Tab completion for branch names** — press Tab after `git checkout ` or `git merge ` to autocomplete branch names.
+
+- **macOS (zsh, the default shell):** zsh includes git completion but it must be initialized. Add these lines to your `~/.zshrc` if they aren't already there:
+  ```bash
+  autoload -Uz compinit && compinit
+  ```
+  Then reload your shell or open a new terminal:
+  ```bash
+  source ~/.zshrc
+  ```
+- **macOS (bash):**
+  ```bash
+  brew install bash-completion
+  ```
+  Then add this line to your `~/.bash_profile`:
+  ```bash
+  [[ -r "$(brew --prefix)/etc/profile.d/bash_completion.sh" ]] && . "$(brew --prefix)/etc/profile.d/bash_completion.sh"
+  ```
+- **Windows (Git Bash):** included with [Git for Windows](https://git-scm.com/download/win) — no action needed.
+
 
 ## Branch Naming
 

@@ -33,7 +33,7 @@ jobs:
         with:
           ruby-version: '3.3'
           bundler-cache: true
-          cache-version: 1
+          cache-version: 0
 
       - name: Cleanup _guide_preview
         run: |

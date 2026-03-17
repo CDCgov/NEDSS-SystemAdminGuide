@@ -1,19 +1,17 @@
 title: NBS System Administrator Guide
+plugins:
+  - jekyll-redirect-from
 description: National Electronic Disease Surveillance System Base System (NBS) System Administrator Guide
 theme: just-the-docs
 url: https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 aux_links: # remove if you don't want this link to appear on your pages
   GitHub Repository: https://github.com/CDCgov/NEDSS-SystemAdminGuide
 color_scheme: colors
-footer_content: "<p>Copyright &copy; <script>document.write(new Date().getFullYear())</script> CDC. All Rights Reserved</p>"
+#footer_content: "Copyright &copy; 2017-2020 CDC. Distributed by an <a href=\"https://github.com/njaved/just-the-doc\">Foundations Team.</a>"
 last_edit_timestamp: true # show or hide edit time - page must have `last_modified_date` defined in the frontmatter
 last_edit_time_format: "%b %e %Y at %I:%M %p" # uses ruby's time format: https://ruby-doc.org/stdlib-2.7.0/libdoc/time/rdoc/Time.html
 back_to_top: true
 back_to_top_text: "Back to top"
-
-# Enable or disable heading anchors
-heading_anchors: true
-
 just_the_docs:
   toc:
     min_level: 2
@@ -22,26 +20,6 @@ toc:
   min_level: 2
   max_level: 2
 
-# Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
-color_scheme: nil
-
-# When commented out, callouts_level defaults to quiet for the light scheme, and loud for dark
-# callouts_level: quiet # or loud
-callouts:
-  highlight:
-    color: yellow
-  important:
-    title: Important
-    color: blue
-  new:
-    title: New
-    color: green
-  note:
-    title: Note
-    color: yellow
-  warning:
-    title: Warning
-    color: red
 
 collections:
   guide_preview:

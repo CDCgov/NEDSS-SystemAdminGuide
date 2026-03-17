@@ -6,16 +6,17 @@ grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 3
 ---
 
-## Table of contents
-{: .no_toc .text-delta }
+## Vendor-managed deployment
+
+
+Use this decision tree to identify your recommended starting configuration. Answer each question in order, then validate your recommendation with the CDC NBS team before you begin deployment.
 
 1. TOC
 {:toc}
 
-Use this decision tree to identify your recommended starting configuration. Answer each question in order, then validate your recommendation with the CDC NBS team before you begin deployment.
-
-> The decision tree identifies a recommended starting point, not a final answer. CDC provides free pre-deployment consultation to help jurisdictions validate their configuration choice. Do not begin deployment without first connecting with the CDC NBS team at [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .highlight }
+The decision tree identifies a recommended starting point, not a final answer. CDC provides free pre-deployment consultation to help jurisdictions validate their configuration choice. Do not begin deployment without first connecting with the CDC NBS team at [nbs@cdc.gov](mailto:nbs@cdc.gov).
+
 
 ### Step 1: Hosting model
 
@@ -60,8 +61,8 @@ What is the approximate annual reportable disease case volume in your jurisdicti
 - **Lower volume** (fewer than approximately 50,000 cases per year) — Go to [Step 6](#step-6-data-intake-needs-lower-volume-jurisdictions).
 - **Higher volume** (50,000+ cases per year), or significant growth expected — Go to [Step 7](#step-7-reporting-needs-higher-volume-jurisdictions).
 
-> The 50,000 case threshold is a planning guideline, not a hard rule. Validate your volume assessment with CDC before making a final configuration decision.
 {: .note }
+The 50,000 case threshold is a planning guideline, not a hard rule. Validate your volume assessment with CDC before making a final configuration decision.
 
 ### Step 6: Data intake needs (lower-volume jurisdictions)
 

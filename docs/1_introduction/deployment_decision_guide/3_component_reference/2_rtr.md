@@ -1,21 +1,27 @@
 ---
-title: Add-on: Real-Time Reporting (RTR)
+title: "Add-on: Real-Time Reporting (RTR)"
 layout: page
 parent: Component reference
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 2
 ---
 
-## Table of contents
-{: .no_toc .text-delta }
+
+<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
+## Component reference: Real-Time Reporting (RTR) add-on
+{: .no_toc }
+
+RTR works alongside the legacy MasterETL batch process during transition, with the goal of eventually replacing it. The following components are added to your NBS Core deployment when you choose NBS Core + RTR or NBS Complete.
 
 1. TOC
 {:toc}
 
-RTR works alongside the legacy MasterETL batch process during transition, with the goal of eventually replacing it. The following components are added to your NBS Core deployment when you choose NBS Core + RTR or NBS Complete.
+--- 
 
+{: .important-title }
+> What leadership needs to know
+> 
 > The primary benefit of RTR is speed. Data that previously took up to 24 hours to appear in reports is available within 5 minutes to 1 hour. For jurisdictions managing active outbreaks or time-sensitive disease investigations, this can meaningfully affect response time. But RTR adds infrastructure complexity and requires additional cloud resources, which will impact your operating costs.
-{: .highlight }
 
 ---
 

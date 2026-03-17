@@ -6,13 +6,18 @@ grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
 ---
 
-## Table of contents
-{: .no_toc .text-delta }
+
+<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
+## Component reference: NBS Core
+{: .no_toc }
+
+NBS Core includes three layers of components: the application layer, the infrastructure layer, and the networking layer. The application layer components are documented individually below. [Infrastructure and networking layer components](#infrastructure-and-networking-layer-components) are summarized as a group.
 
 1. TOC
 {:toc}
 
-NBS Core includes three layers of components: the application layer, the infrastructure layer, and the networking layer. The application layer components are documented individually below. [Infrastructure and networking layer components](#infrastructure-and-networking-layer-components) are summarized as a group.
+--- 
+
 
 \[architecture diagram\]
 
@@ -132,8 +137,10 @@ An open source identity and access management platform.
 | When you need it | Always. Keycloak is a core component of NBS Core and is required for all NBS 7 configurations. |
 | Dependencies | Requires network access to your identity provider if you are integrating with an existing SSO system. All NBS 7 services that require authentication depend on Keycloak. |
 
+{: .important-title }
+> What leadership needs to know
+> 
 > If your jurisdiction uses a centralized identity provider (such as Okta or Active Directory), Keycloak can integrate with it. This means NBS 7 users can log in with their existing jurisdiction credentials rather than managing a separate NBS login. Coordinate with your identity management team early. SSO integration configuration requires input from both the NBS deployment team and your identity provider administrators.
-{: .highlight }
 
 ---
 

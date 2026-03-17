@@ -6,9 +6,12 @@ nav_order: 2
 has_children: true
 ---
 
-This guide helps your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment configuration. Use it before you begin migration planning.
+<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
+# NBS 7 Deployment Decision Guide
+{: .no_toc }
 
-This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7.
+<!-- INTRO OR OVERVIEW -->
+This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7. It aims to help your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment configuration. Review the decision guide before you begin migration planning.
 
 Use this guide to:
 
@@ -18,10 +21,12 @@ Use this guide to:
 - Prepare a recommendation for your leadership
 
 
-If you are a **health department leader** trying to understand whether migrating to NBS 7 is the right decision for your jurisdiction, look for the **What leadership needs to know** callout boxes throughout this guide. These summarize the key points you need to make an informed go/no-go decision.
+{: .important-title }
+> What leadership needs to know
+> 
+> If you are a health department leader trying to understand whether migrating to NBS 7 is the right decision for your jurisdiction, look for these **What leadership needs to know** callout boxes throughout the decision guide for key points that help you make an informed go/no-go decision.
 
 ## How this guide fits into the NBS 7 process
-{: .no_toc }
 
 Three documents support the NBS 6 to NBS 7 transition. Each serves a different purpose:
 

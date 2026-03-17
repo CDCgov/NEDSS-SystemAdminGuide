@@ -6,14 +6,21 @@ grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
 ---
 
-This section describes the four ways to deploy NBS 7.
+<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
+## NBS 7 configuration tiers
+{: .no_toc }
+
+<!-- INTRO OR OVERVIEW -->
+This section describes the four ways to deploy NBS 7. You do not have to deploy everything at once. Most jurisdictions will start with NBS Core, then add RTR or the DI API as their team builds confidence with the platform. Starting smaller reduces deployment risk and gives your team time to learn the system before taking on additional complexity.
 
 1. TOC
 {:toc}
 
-{: .note }
-You do not have to deploy everything at once. Most jurisdictions will start with NBS Core, then add RTR or the DI API as their team builds confidence with the platform. Starting smaller reduces deployment risk and gives your team time to learn the system before taking on additional complexity.
+After you review the configuration tiers, use the [decision tree](../3_decision_tree/) to identify your recommended starting configuration. If your jurisdiction plans to use a vendor, see the [Vendor-managed deployment](../2_vendor_managed_deployment/) page.
 
+---
+
+<!-- FIRST PAGE SECTION -->
 ### NBS Core
 
 The minimum viable deployment. NBS Core gives your jurisdiction NBS 6 feature parity on modern, cloud-based infrastructure, plus foundational NBS 7 improvements such as real-time patient search.
@@ -102,6 +109,3 @@ The full NBS 7 deployment. NBS Complete includes NBS Core, RTR, and the DI API.
 >
 > Jurisdictions with larger IT teams, high case volumes, and advanced reporting or analytics needs.
 
----
-
-See the [Vendor-managed deployment](../2_vendor_managed_deployment/) page if your jurisdiction plans to use a vendor, or the [decision tree](../3_decision_tree/) to identify your recommended starting configuration.

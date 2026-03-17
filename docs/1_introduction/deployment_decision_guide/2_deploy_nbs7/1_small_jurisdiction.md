@@ -6,13 +6,23 @@ grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
 ---
 
+<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
+## Case study: Small jurisdiction, self-managed, AWS
+{: .no_toc }
+
 *Based on Montana's deployment.*
 
-**Profile**
+1. TOC
+{:toc}
+
+--- 
+
+<!-- FIRST PAGE SECTION -->
+### Profile
 
 Small STLT with limited IT staff and a cloud-first infrastructure strategy. The jurisdiction prioritized simplicity and maintainability over advanced features.
 
-**Configuration**
+### Configuration
 
 | Setting | Value |
 |:---|:---|
@@ -20,7 +30,7 @@ Small STLT with limited IT staff and a cloud-first infrastructure strategy. The 
 | Hosting | AWS, STLT-managed |
 | Middleware | No third-party middleware |
 
-**What was deployed**
+### What was deployed
 
 | Component | Included | Notes |
 |:---|:---|:---|
@@ -28,13 +38,13 @@ Small STLT with limited IT staff and a cloud-first infrastructure strategy. The 
 | Real-Time Reporting (RTR) | No | Not required at this case volume |
 | DI API | No | No existing high-volume ELR or eCR intake |
 
-**Key configuration decisions**
+### Key configuration decisions
 
 - \[Placeholder: specific AWS configuration choices, e.g. EKS node sizing, VPC setup\]
 - \[Placeholder: any components skipped within NBS Core and rationale\]
 - \[Placeholder: identity provider integration approach\]
 
-**Lessons learned**
+### Lessons learned
 
 - \[Placeholder: what worked well\]
 - \[Placeholder: challenges encountered\]

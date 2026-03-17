@@ -6,16 +6,19 @@ grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 2
 ---
 
-If you plan to use a vendor to host or maintain NBS 7, the guidance in this section applies to you.
+<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
+## Vendor-managed deployment
+{: .no_toc }
 
-Before you engage a vendor, confirm that they can:
+<!-- INTRO OR OVERVIEW -->
+If you plan to use a vendor to host or maintain NBS 7, confirm that they can:
 
 - Deploy Kubernetes-based applications on AWS or Azure
 - Manage Terraform-based infrastructure provisioning
 - Support ongoing cloud infrastructure operations, including monitoring and incident response
 
 > NBS 7 is a recent system with limited deployment history. Do not expect vendors to have direct NBS 7 experience. Evaluate vendors on their Kubernetes and cloud infrastructure expertise instead. You can share the [component reference](../../3_component_reference/) section of this guide with vendors to help them scope the work accurately.
-{: .note }
+{: .highlight }
 
 Share the following with your vendor before scoping work:
 

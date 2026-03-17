@@ -2,7 +2,7 @@
 title: Configuration tiers
 layout: page
 parent: Choose your configuration
-grand_parent: About this guide
+grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
 ---
 

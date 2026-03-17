@@ -2,7 +2,7 @@
 title: Large jurisdiction, high volume, vendor-managed
 layout: page
 parent: Deploy NBS 7
-grand_parent: About this guide
+grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 3
 ---
 

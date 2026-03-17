@@ -2,7 +2,7 @@
 title: NBS Core components
 layout: page
 parent: Component reference
-grand_parent: About this guide
+grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
 ---
 

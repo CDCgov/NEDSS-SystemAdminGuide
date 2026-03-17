@@ -1,7 +1,8 @@
 ---
 title: Deploy NBS 7
 layout: page
-parent: About this guide
+parent: NBS 7 Deployment Decision Guide
+grand_parent: Introduction
 nav_order: 3
 has_children: true
 ---

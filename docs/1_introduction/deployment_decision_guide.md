@@ -1,13 +1,14 @@
 ---
-title: About this guide
+title: NBS 7 Deployment Decision Guide
 layout: page
+parent: Introduction
 nav_order: 2
 has_children: true
 ---
 
 This guide helps your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment configuration. Use it before you begin migration planning.
 
-This guide is written for **STLT IT administrators** who currently operate NBS 6 and are evaluating whether to migrate to NBS 7.
+This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7.
 
 Use this guide to:
 

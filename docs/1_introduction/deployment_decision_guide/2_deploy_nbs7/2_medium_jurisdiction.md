@@ -2,7 +2,7 @@
 title: Medium jurisdiction, existing middleware, RTR
 layout: page
 parent: Deploy NBS 7
-grand_parent: About this guide
+grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 2
 ---
 

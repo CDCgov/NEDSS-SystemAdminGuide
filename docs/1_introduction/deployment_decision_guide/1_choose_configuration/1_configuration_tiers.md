@@ -16,7 +16,7 @@ This section describes the four ways to deploy NBS 7. You do not have to deploy 
 1. TOC
 {:toc}
 
-After you review the configuration tiers, use the [decision tree](../3_decision_tree/) to identify your recommended starting configuration. If your jurisdiction plans to use a vendor, see the [Vendor-managed deployment](../2_vendor_managed_deployment/) page.
+After you review the configuration tiers, use the [decision tree](2_decision_tree.html) to identify your recommended starting configuration. If your jurisdiction plans to use a vendor, see the [Vendor-managed deployment](3_vendor_managed_deployment.html) page.
 
 ---
 
@@ -25,7 +25,7 @@ After you review the configuration tiers, use the [decision tree](../3_decision_
 
 The minimum viable deployment. NBS Core gives your jurisdiction NBS 6 feature parity on modern, cloud-based infrastructure, plus foundational NBS 7 improvements such as real-time patient search.
 
-NBS Core components are organized into three layers. For details on what each component does and when you need it, see [NBS Core components](../../3_component_reference/1_nbs_core_components/).
+NBS Core components are organized into three layers. For details on what each component does and when you need it, see [NBS Core components](../3_component_reference/1_nbs_core_components.html).
 
 **Networking layer**
 
@@ -49,15 +49,15 @@ The infrastructure layer provides the container orchestration platform and cloud
 
 The application layer contains the NBS 7 services and legacy NBS 6 components that users and administrators directly interact with.
 
-- [Legacy NBS 6](#legacy-nbs-6)
-- [NBS Modernization API](#nbs-modernization-api)
-- [NBS Web UI](#nbs-web-ui)
-- [NBS Gateway](#nbs-gateway)
-- [Page Builder](#page-builder)
-- [Elasticsearch](#elasticsearch)
-- [Nifi](#nifi)
-- [Keycloak](#keycloak)
-- [ArgoCD, Cert Manager, FluentBit](#infrastructure-and-networking-layer-components)
+- [Legacy NBS 6](../3_component_reference/1_nbs_core_components.html#legacy-nbs-6)
+- [NBS Modernization API](../3_component_reference/1_nbs_core_components.html#nbs-modernization-api)
+- [NBS Web UI](../3_component_reference/1_nbs_core_components.html#nbs-web-ui)
+- [NBS Gateway](../3_component_reference/1_nbs_core_components.html#nbs-gateway)
+- [Page Builder](../3_component_reference/1_nbs_core_components.html#page-builder)
+- [Elasticsearch](../3_component_reference/1_nbs_core_components.html#elasticsearch)
+- [Nifi](../3_component_reference/1_nbs_core_components.html#nifi)
+- [Keycloak](../3_component_reference/1_nbs_core_components.html#keycloak)
+- [ArgoCD, Cert Manager, FluentBit](../3_component_reference/1_nbs_core_components.html#infrastructure-and-networking-layer-components)
 - Database (NBS\_ODSE and NBS\_SRTE)
 
 {: .note-title }
@@ -73,12 +73,12 @@ Core plus modern analytics. This configuration adds the Real-Time Reporting (RTR
 
 **With RTR, data is available within 5 minutes to 1 hour instead of 24 hours.**
 
-RTR adds the following components. For details, see [Add-on: Real-Time Reporting (RTR)](../../3_component_reference/2_rtr/).
+RTR adds the following components. For details, see [Add-on: Real-Time Reporting (RTR)](../3_component_reference/2_rtr.html).
 
-- [Debezium](#debezium)
-- [Kafka and Kafka Connect](#kafka-and-kafka-connect)
-- [RTR domain services](#rtr-domain-services)
-- [RDB\_Modern](#rdb_modern)
+- [Debezium](../3_component_reference/2_rtr.html#debezium)
+- [Kafka and Kafka Connect](../3_component_reference/2_rtr.html#kafka-and-kafka-connect)
+- [RTR domain services](../3_component_reference/2_rtr.html#rtr-domain-services)
+- [RDB\_Modern](../3_component_reference/2_rtr.html#rdb_modern)
 
 {: .note-title }
 > Best for
@@ -91,7 +91,7 @@ RTR adds the following components. For details, see [Add-on: Real-Time Reporting
 
 Core plus a built-in data transit layer. This configuration adds the Data Ingestion (DI) API, which accepts incoming public health data in multiple formats and routes it into NBS without requiring third-party middleware.
 
-For details, see [Add-on: Data Ingestion (DI) API](../../3_component_reference/3_di_api/).
+For details, see [Add-on: Data Ingestion (DI) API](../3_component_reference/3_di_api.html).
 
 {: .note-title }
 > Best for

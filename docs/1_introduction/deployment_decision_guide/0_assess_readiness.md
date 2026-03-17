@@ -65,7 +65,7 @@ NBS 7 uses Kubernetes, a container orchestration platform. To deploy and maintai
 If your IT team does not have these skills, you have two options:
 
 - **Build capacity** — Train existing staff or hire staff with these skills before you begin deployment.
-- **Use a vendor** — Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../1_choose_configuration/2_vendor_managed_deployment/) for guidance on what to look for in a vendor.
+- **Use a vendor** — Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](1_choose_configuration/3_vendor_managed_deployment.html) for guidance on what to look for in a vendor.
 
 {: .important-title }
 > What leadership needs to know

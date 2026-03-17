@@ -25,7 +25,7 @@ After you review the configuration tiers, use the [decision tree](../3_decision_
 
 The minimum viable deployment. NBS Core gives your jurisdiction NBS 6 feature parity on modern, cloud-based infrastructure, plus foundational NBS 7 improvements such as real-time patient search.
 
-NBS Core components are organized into three layers. For details on what each component does and when you need it, see [NBS Core components](../3_component_reference/1_nbs_core_components.md).
+NBS Core components are organized into three layers. For details on what each component does and when you need it, see [NBS Core components](../../3_component_reference/1_nbs_core_components/).
 
 **Networking layer**
 
@@ -73,7 +73,7 @@ Core plus modern analytics. This configuration adds the Real-Time Reporting (RTR
 
 **With RTR, data is available within 5 minutes to 1 hour instead of 24 hours.**
 
-RTR adds the following components. For details, see [Add-on: Real-Time Reporting (RTR)](../3_component_reference/2_rtr/).
+RTR adds the following components. For details, see [Add-on: Real-Time Reporting (RTR)](../../3_component_reference/2_rtr/).
 
 - [Debezium](#debezium)
 - [Kafka and Kafka Connect](#kafka-and-kafka-connect)
@@ -91,7 +91,7 @@ RTR adds the following components. For details, see [Add-on: Real-Time Reporting
 
 Core plus a built-in data transit layer. This configuration adds the Data Ingestion (DI) API, which accepts incoming public health data in multiple formats and routes it into NBS without requiring third-party middleware.
 
-For details, see [Add-on: Data Ingestion (DI) API](../3_component_reference/3_di_api/).
+For details, see [Add-on: Data Ingestion (DI) API](../../3_component_reference/3_di_api/).
 
 {: .note-title }
 > Best for

@@ -1,7 +1,8 @@
 ---
 title: Component reference
 layout: page
-parent: About this guide
+parent: NBS 7 Deployment Decision Guide
+grand_parent: Introduction
 nav_order: 4
 has_children: true
 ---

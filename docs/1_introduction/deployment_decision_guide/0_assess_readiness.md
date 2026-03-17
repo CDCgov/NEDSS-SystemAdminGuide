@@ -1,7 +1,8 @@
 ---
 title: Assess your readiness
 layout: page
-parent: About this guide
+parent: NBS 7 Deployment Decision Guide
+grand_parent: Introduction
 nav_order: 1
 ---
 

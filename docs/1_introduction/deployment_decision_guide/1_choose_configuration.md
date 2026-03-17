@@ -1,7 +1,8 @@
 ---
 title: Choose your configuration
 layout: page
-parent: About this guide
+parent: NBS 7 Deployment Decision Guide
+grand_parent: Introduction
 nav_order: 2
 has_children: true
 ---

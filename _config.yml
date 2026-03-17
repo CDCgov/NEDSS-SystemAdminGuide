@@ -32,7 +32,7 @@ callouts:
     color: yellow
   important:
     title: Important
-    color: b#1c96c5e
+    color: blue
   new:
     title: New
     color: green

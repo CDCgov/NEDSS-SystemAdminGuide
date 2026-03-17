@@ -6,13 +6,18 @@ grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 3
 ---
 
-## Vendor-managed deployment
+<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
+## NBS 7 configuration decision tree
+{: .no_toc }
 
+<!-- INTRO OR OVERVIEW -->
+Use the decision tree to identify your recommended starting configuration. Answer each question in order, then validate your recommendation with the CDC NBS team before you begin deployment.
 
-Use this decision tree to identify your recommended starting configuration. Answer each question in order, then validate your recommendation with the CDC NBS team before you begin deployment.
+<!-- TOC - DON'T INCLUDE HEADER IN TOC -->
 
 1. TOC
 {:toc}
+
 
 {: .highlight }
 The decision tree identifies a recommended starting point, not a final answer. CDC provides free pre-deployment consultation to help jurisdictions validate their configuration choice. Do not begin deployment without first connecting with the CDC NBS team at [nbs@cdc.gov](mailto:nbs@cdc.gov).

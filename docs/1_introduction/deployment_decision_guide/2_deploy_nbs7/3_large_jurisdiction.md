@@ -6,13 +6,25 @@ grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 3
 ---
 
+<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
+## Case study: Large jurisdiction, high volume, vendor-managed
+{: .no_toc }
+
+<!-- INTRO OR OVERVIEW -->
+
 *Based on an enterprise-scale deployment.*
 
-**Profile**
+1. TOC
+{:toc}
+
+--- 
+
+
+### Profile
 
 Large STLT with high case volumes, sophisticated analytics needs, and a vendor-managed infrastructure model. This jurisdiction required high-availability configuration and advanced security hardening.
 
-**Configuration**
+### Configuration
 
 | Setting | Value |
 |:---|:---|
@@ -20,7 +32,7 @@ Large STLT with high case volumes, sophisticated analytics needs, and a vendor-m
 | Hosting | Cloud vendor-managed, or hybrid with significant cloud presence |
 | Middleware | DI API (primary ingestion path) |
 
-**What was deployed**
+### What was deployed
 
 | Component | Included | Notes |
 |:---|:---|:---|
@@ -32,14 +44,14 @@ Large STLT with high case volumes, sophisticated analytics needs, and a vendor-m
 > DataSync is not currently documented in this guide because it is only used by one jurisdiction and is not expected to be used long-term. Confirm with your CDC NBS point of contact before planning any DataSync integration.
 {: .note }
 
-**Key configuration decisions**
+### Key configuration decisions
 
 - \[Placeholder: high-availability configuration specifics\]
 - \[Placeholder: performance optimization decisions\]
 - \[Placeholder: advanced security hardening approach\]
 - \[Placeholder: vendor coordination model and responsibilities\]
 
-**Lessons learned**
+### Lessons learned
 
 - \[Placeholder: scaling considerations\]
 - \[Placeholder: cost management approach\]

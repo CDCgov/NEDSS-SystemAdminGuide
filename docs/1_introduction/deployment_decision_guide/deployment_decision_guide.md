@@ -1,5 +1,5 @@
 ---
-title: Getting started
+title: NBS 7 Deployment Decision Guide
 layout: page
 parent: Introduction
 nav_order: 2

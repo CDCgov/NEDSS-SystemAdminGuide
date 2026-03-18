@@ -1,11 +1,55 @@
-// Optional: Import the default light color scheme as a base
-// @import "./color_schemes/light";
+// =============================================================================
+// CDC Brand Color Palette
+// https://www.cdc.gov/brand/index.html
+// =============================================================================
 
-// Override color variables
-$link-color: #000000;
-$btn-primary-color: #000000;
-$btn-primary-border-color: #000000;
-$btn-primary-hover-color: #222222;
-$btn-primary-hover-border-color: #222222;
-$body-heading-color: #000000;
-$nav-list-link-active-color: #000000;
+$cdc-blue:   #005DAA;  // Primary blue   — CMYK 100/66/0/2,  RGB 0/93/170
+$cdc-teal:   #004DC2;  // Teal           — CMYK 82/0/24/2,   RGB 0/77/194
+$cdc-yellow: #EAA731;  // Yellow         — CMYK 7/37/93/0,   RGB 234/167/49
+$cdc-purple: #8E3074;  // Purple         — CMYK 48/95/24/6,  RGB 142/48/116
+$cdc-green:  #8DC63F;  // Green          — CMYK 50/0/100/0,  RGB 141/198/63
+$cdc-red:    #C21E56;  // Crimson        — used for warning callouts
+
+// =============================================================================
+// Callout color scales
+// JTD generates callout styles from $color-000 (lightest bg) → $color-300 (darkest accent).
+// Each callout type in _config.yml maps to one of these named scales.
+// =============================================================================
+
+$blue-000: mix(white, $cdc-blue, 90%);
+$blue-100: mix(white, $cdc-blue, 68%);
+$blue-200: mix(white, $cdc-blue, 44%);
+$blue-300: mix(white, $cdc-blue, 14%);
+
+$yellow-000: mix(white, $cdc-yellow, 80%);
+$yellow-100: mix(white, $cdc-yellow, 56%);
+$yellow-200: mix(white, $cdc-yellow, 34%);
+$yellow-300: mix(white, $cdc-yellow, 10%);
+
+$purple-000: mix(white, $cdc-purple, 88%);
+$purple-100: mix(white, $cdc-purple, 65%);
+$purple-200: mix(white, $cdc-purple, 42%);
+$purple-300: mix(white, $cdc-purple, 14%);
+
+$green-000: mix(white, $cdc-green, 82%);
+$green-100: mix(white, $cdc-green, 60%);
+$green-200: mix(white, $cdc-green, 37%);
+$green-300: mix(white, $cdc-green, 11%);
+
+$red-000: mix(white, $cdc-red, 88%);
+$red-100: mix(white, $cdc-red, 65%);
+$red-200: mix(white, $cdc-red, 42%);
+$red-300: mix(white, $cdc-red, 14%);
+
+// =============================================================================
+// JTD UI overrides
+// =============================================================================
+
+$link-color:                     $cdc-blue;
+$btn-primary-color:              $cdc-blue;
+$btn-primary-border-color:       $cdc-blue;
+$btn-primary-hover-color:        mix(black, $cdc-blue, 20%);
+$btn-primary-hover-border-color: mix(black, $cdc-blue, 20%);
+$body-heading-color:             #1a1a1a;
+$nav-child-link-color:           $grey-dk-100;
+$nav-list-link-active-color:     $cdc-blue;

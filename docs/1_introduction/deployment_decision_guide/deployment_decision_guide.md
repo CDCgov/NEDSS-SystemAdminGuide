@@ -1,5 +1,5 @@
 ---
-title: NBS 7 Deployment Decision Guide
+title: Getting started
 layout: page
 parent: Introduction
 nav_order: 2
@@ -7,7 +7,7 @@ has_children: true
 ---
 
 <!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
-# NBS 7 Deployment Decision Guide
+# NBS 7 preparation and decision guide
 {: .no_toc }
 
 <!-- INTRO OR OVERVIEW -->

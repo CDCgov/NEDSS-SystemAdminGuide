@@ -15,10 +15,8 @@ The DI API is a data transit layer built into NBS 7 that accepts incoming public
 
 --- 
 
-{: .important-title }
-> What leadership needs to know
-> 
-> The DI API is relevant if your jurisdiction uses middleware like Rhapsody to route incoming lab reports and case reports into NBS. While the DI API has the potential to reduce middleware licensing costs and simplify your data intake architecture, it is not yet a full replacement for existing middleware solutions. Jurisdictions with Rhapsody or Mirth Connect in place should continue using them for now. If your jurisdiction does not have existing middleware, the DI API is worth evaluating. Consider revisiting its viability as the product matures and new features are released.
+{: .note }
+**Health department leaders:** See [Leadership considerations](../leadership_considerations.html) for guidance on evaluating the DI API for your jurisdiction.
 
 
 ### DI API

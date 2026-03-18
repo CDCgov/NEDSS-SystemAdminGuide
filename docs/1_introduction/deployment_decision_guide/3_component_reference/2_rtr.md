@@ -18,10 +18,8 @@ RTR works alongside the legacy MasterETL batch process during transition, with t
 
 --- 
 
-{: .important-title }
-> What leadership needs to know
-> 
-> The primary benefit of RTR is speed. Data that previously took up to 24 hours to appear in reports is available within 5 minutes to 1 hour. For jurisdictions managing active outbreaks or time-sensitive disease investigations, this can meaningfully affect response time. But RTR adds infrastructure complexity and requires additional cloud resources, which will impact your operating costs.
+{: .note }
+**Health department leaders:** See [Leadership considerations](../leadership_considerations.html) for guidance on evaluating RTR for your jurisdiction.
 
 ---
 

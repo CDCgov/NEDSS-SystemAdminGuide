@@ -137,10 +137,8 @@ An open source identity and access management platform.
 | When you need it | Always. Keycloak is a core component of NBS Core and is required for all NBS 7 configurations. |
 | Dependencies | Requires network access to your identity provider if you are integrating with an existing SSO system. All NBS 7 services that require authentication depend on Keycloak. |
 
-{: .important-title }
-> What leadership needs to know
-> 
-> If your jurisdiction uses a centralized identity provider (such as Okta or Active Directory), Keycloak can integrate with it. This means NBS 7 users can log in with their existing jurisdiction credentials rather than managing a separate NBS login. Coordinate with your identity management team early. SSO integration configuration requires input from both the NBS deployment team and your identity provider administrators.
+{: .note }
+**Health department leaders:** See [Leadership considerations](../leadership_considerations.html) for guidance on Single Sign-On planning and early coordination requirements.
 
 ---
 

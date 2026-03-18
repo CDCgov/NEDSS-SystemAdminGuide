@@ -21,10 +21,8 @@ Use this guide to:
 - Prepare a recommendation for your leadership
 
 
-{: .important-title }
-> What leadership needs to know
-> 
-> If you are a health department leader trying to understand whether migrating to NBS 7 is the right decision for your jurisdiction, look for these **What leadership needs to know** callout boxes throughout the decision guide for key points that help you make an informed go/no-go decision.
+{: .highlight }
+**Health department leaders:** This guide is written for IT administrators. For a summary of the key organizational, financial, and operational considerations relevant to your go/no-go decision, see [Leadership considerations](leadership_considerations.html).
 
 ## How this guide fits into the NBS 7 process
 

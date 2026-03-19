@@ -2,6 +2,7 @@
 title: Keycloak Configuration
 layout: page
 parent: Case Notification
+grand_parent: Microservices Deployment
 nav_order: 2
 nav_enabled: true
 ---

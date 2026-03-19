@@ -2,6 +2,7 @@
 title: Debezium Case Notification
 layout: page
 parent: Case Notification
+grand_parent: Microservices Deployment
 nav_order: 1
 nav_enabled: true
 ---

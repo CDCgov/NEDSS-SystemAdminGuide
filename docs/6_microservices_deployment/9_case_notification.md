@@ -3,6 +3,7 @@ title: Case Notification
 layout: page
 parent: Microservices Deployment
 nav_order: 9
+has_children: true
 nav_enabled: true
 ---
 

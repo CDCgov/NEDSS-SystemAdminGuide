@@ -2,6 +2,7 @@
 title: Data Ingestion Smoke Test
 layout: page
 parent: Data Ingestion
+grand_parent: Microservices Deployment
 nav_order: 2
 nav_enabled: true
 ---

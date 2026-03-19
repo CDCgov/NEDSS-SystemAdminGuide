@@ -2,6 +2,7 @@
 title: Case Notification Service
 layout: page
 parent: Case Notification
+grand_parent: Microservices Deployment
 nav_order: 5
 nav_enabled: true
 ---

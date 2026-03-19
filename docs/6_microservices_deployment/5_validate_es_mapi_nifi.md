@@ -3,6 +3,7 @@ title: Validate ES, Mapi and Nifi
 layout: page
 parent: Microservices Deployment
 nav_order: 5
+has_children: true
 nav_enabled: true
 ---
 

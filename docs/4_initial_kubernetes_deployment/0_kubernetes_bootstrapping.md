@@ -2,6 +2,7 @@
 title: Initial Kubernetes Deployment
 layout: page
 nav_order: 5
+has_children: true
 nav_enabled: true
 ---
 

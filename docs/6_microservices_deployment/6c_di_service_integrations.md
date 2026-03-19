@@ -2,6 +2,7 @@
 title: Data Ingestion Service Integrations
 layout: page
 parent: Data Ingestion
+grand_parent: Microservices Deployment
 nav_order: 3
 nav_enabled: true
 ---
@@ -10,7 +11,7 @@ nav_enabled: true
 {: .no_toc .text-delta }
 
 1. TOC
-   {:toc}
+{:toc}
 
 ### Data Ingestion Rhapsody Route Integration
 

@@ -72,6 +72,55 @@ The `/templates` directory at the repo root contains starter files for the four 
 For front matter field reference, see [FRONT-MATTER.md](FRONT-MATTER.md).
 For formatting standards (headings, callouts, code blocks, links, images, tables), see [STYLES.md](STYLES.md).
 
+## Scripts and commands
+
+### Running locally
+
+| Command | What it does | Prerequisites |
+|---------|-------------|--------------|
+| `bundle exec jekyll serve --livereload` | Starts a local Jekyll server with live reload at `http://localhost:4000`. The browser refreshes automatically when you save a file. | Ruby + Bundler (see README Option 2) |
+| `docker compose up` | Same as above, using Docker instead of a local Ruby install. | Docker Desktop (see README Option 3) |
+| `npm run lint` | Runs markdownlint against all `docs/**/*.md` and root `*.md` files. Reports formatting violations. | `npm install` from repo root |
+| `npm run link-check` | Checks all links in Markdown files for broken URLs. Note: this is slow on first run (one request per link). | `npm install` from repo root |
+
+Run `npm install` once from the repo root to install the lint and link-check tools before using those commands.
+
+### What runs automatically
+
+**On push to `main`:** `bundle exec jekyll build` runs via `jekyll.yml`, then deploys to GitHub Pages. Two additional steps run before the build:
+
+- **Cleanup `_guide_preview`:** Strips nav-related front matter keys (`parent`, `grand_parent`, `nav_order`, `has_children`) from `_guide_preview/` files before Jekyll builds. These keys have no effect on the nav-excluded collection, but stripping them prevents JTD from misinterpreting them during the build.
+- **Release versioning:** Discovers all branches matching `release-*`, checks them out into `_previous_versions/`, and generates a nav-accessible index page for each. This is how the **Previous Versions** section of the site is populated automatically.
+
+**On push to `preview`:** `bundle exec jekyll build` runs via `jekyll-preview.yml` and deploys to the staging site.
+
+**On PRs to `main`:** The PR check pipeline runs (see [CI checks](#ci-checks) below).
+
+**Daily:** Dependabot opens PRs to update Bundler gems and GitHub Actions versions. These are routine maintenance PRs — review and merge them as they arrive.
+
+## CI checks
+
+Three checks run automatically on every pull request to `main`. You do not need to run them manually — push your branch and GitHub runs them.
+
+| Check | Blocking? | What it checks |
+|-------|-----------|---------------|
+| **Jekyll build** | Yes — PR cannot merge if build fails | Confirms the full site builds without errors |
+| **Markdown lint** | Yes — PR cannot merge if violations are found | Checks formatting against rules in `.markdownlint-cli2.yaml` |
+| **Link check** | No — failure shows as a warning, not a blocker | Checks links for broken URLs; external URLs may return false positives |
+
+**If a check fails:** Fix the issue and push to the same branch. GitHub reruns all checks automatically — you don't need to close and reopen the PR.
+
+**Lint failures:** Either fix the violation or add an inline disable comment with a reason:
+```markdown
+<!-- markdownlint-disable MD033 -->
+Content with inline HTML that is intentionally used here.
+<!-- markdownlint-enable MD033 -->
+```
+
+**Link check failures:** Investigate whether the link is genuinely broken. If it's a false positive (e.g., a GitHub URL that returns 429 due to rate limiting), add the URL pattern to `.markdown-link-check.json` with a comment explaining why it's ignored.
+
+The production deploy runs only after merge to `main`, not on PRs.
+
 ---
 
 # Welcome!

@@ -2,6 +2,7 @@
 title: Web UI Smoke Test (Scripted)
 layout: page
 parent: Validate ES, Mapi and Nifi
+grand_parent: Microservices Deployment
 nav_order: 3
 nav_enabled: true
 ---

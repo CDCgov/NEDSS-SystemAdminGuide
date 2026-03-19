@@ -2,6 +2,7 @@
 title: DI Wildfly Server Config
 layout: page
 parent: Data Ingestion
+grand_parent: Microservices Deployment
 nav_order: 1
 nav_enabled: true
 ---

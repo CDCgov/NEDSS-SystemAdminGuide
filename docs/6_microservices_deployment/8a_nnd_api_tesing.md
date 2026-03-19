@@ -2,6 +2,7 @@
 title: Validating API endpoints
 layout: page
 parent: NND Service (Data Sync)
+grand_parent: Microservices Deployment
 nav_order: 1
 nav_enabled: true
 ---

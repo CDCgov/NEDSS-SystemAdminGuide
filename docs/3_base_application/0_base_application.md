@@ -2,6 +2,7 @@
 title: AWS Infrastructure
 layout: page
 nav_order: 4
+has_children: true
 nav_enabled: true
 ---
 

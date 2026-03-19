@@ -2,6 +2,7 @@
 title: On-Prem Deployment for Data Sync
 layout: page
 parent: NND Service (Data Sync)
+grand_parent: Microservices Deployment
 nav_order: 3
 nav_enabled: true
 ---

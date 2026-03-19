@@ -40,7 +40,7 @@ Reviewers should check:
 
 - **Content accuracy** — reviewers are subject matter owners, not just proofreaders
 - **Style compliance** — verify formatting follows [STYLES.md](STYLES.md)
-- **Front matter** — confirm it's present and complete (standards to be documented in a future ticket)
+- **Front matter** — confirm it's present and complete per [FRONT-MATTER.md](FRONT-MATTER.md)
 - **No broken links or missing images**
 
 ## Merging
@@ -48,6 +48,29 @@ Reviewers should check:
 Use **squash merge** to keep history clean. The PR author merges after approval.
 
 Never merge `preview` directly to `main` — `preview` accumulates work from multiple authors and is not a clean source for production.
+
+## Using templates
+
+The `/templates` directory at the repo root contains starter files for the four content types used in this guide. Use them when creating a new page.
+
+| Template | Content type | Use when... |
+|----------|-------------|-------------|
+| `templates/concept.md` | Concept | The page explains what something is, how it works, or why it exists — not how to do it |
+| `templates/task.md` | Task / Procedure | The page walks the reader through a sequence of steps to accomplish something |
+| `templates/reference.md` | Reference | The page is a lookup resource: parameter tables, version requirements, command flags, specs |
+| `templates/landing.md` | Landing / Section index | The page is a section parent that orients the reader and links to child pages |
+
+**How to use a template:**
+
+1. Copy the template file to the appropriate `docs/` subdirectory.
+2. Rename it using lowercase-hyphenated convention: `deploy-nbs-gateway.md`, not `DeployNBSGateway.md`.
+3. Fill in all front matter fields. Replace every all-caps placeholder (`TITLE`, `NAV_ORDER`, `PARENT_TITLE`) with real values. See [FRONT-MATTER.md](FRONT-MATTER.md) for field definitions and requirements.
+4. Write a `description:` for every new page — even if it is optional, it improves search results for every reader.
+5. Write the page content, using the HTML guidance comments as your brief.
+6. Remove all HTML guidance comments (`<!-- ... -->`) before committing. Guidance comments are not rendered by Jekyll but they should not be left in as dead weight.
+
+For front matter field reference, see [FRONT-MATTER.md](FRONT-MATTER.md).
+For formatting standards (headings, callouts, code blocks, links, images, tables), see [STYLES.md](STYLES.md).
 
 ---
 

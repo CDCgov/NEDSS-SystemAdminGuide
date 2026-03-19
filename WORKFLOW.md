@@ -3,6 +3,7 @@
 ## Setup
 
 1. Install [VS Code](https://code.visualstudio.com/download)
+   - **Windows only:** also install [Git for Windows](https://git-scm.com/download/win). This gives you the `git` command and the Git Bash terminal you'll use for all commands in this guide.
 2. Install the [GitHub Repositories extension](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub), if you don't have it already.
 3. Open VS Code and select **Clone Git Repository** on the splash page
 4. Paste `https://github.com/CDCgov/NEDSS-SystemAdminGuide` and press Enter
@@ -11,9 +12,19 @@
 7. Open a terminal: **Terminal > New Terminal**
 
 Your prompt should look something like:
+
+**macOS (zsh):**
 ```
 admin@your-MacBook-Pro NEDSS-SystemAdminGuide %
 ```
+
+**Windows (Git Bash):**
+```
+admin@MACHINE-NAME MINGW64 ~/NEDSS-SystemAdminGuide (main)
+$
+```
+
+The `%` vs `$` difference and the extra path info on Windows are normal.
 
 ### One-time git configuration
 

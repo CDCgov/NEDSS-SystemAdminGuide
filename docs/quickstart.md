@@ -8,7 +8,7 @@ nav_enabled: true
 # Quickstart
 {: .no_toc }
 
-## Table of contents
+## On this page
 {: .no_toc .text-delta }
 
 1. TOC

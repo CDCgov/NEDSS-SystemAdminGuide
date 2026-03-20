@@ -7,7 +7,7 @@ nav_order: 6
 nav_enabled: true
 ---
 
-## Table of contents
+## On this page
 {: .no_toc .text-delta }
 
 1. TOC

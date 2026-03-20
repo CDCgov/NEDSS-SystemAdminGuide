@@ -6,7 +6,7 @@ has_children: true
 nav_enabled: true
 ---
 
-## Table of contents
+## On this page
 {: .no_toc .text-delta }
 
 1. TOC

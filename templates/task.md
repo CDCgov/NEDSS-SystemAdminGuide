@@ -115,6 +115,18 @@ STEM_SENTENCE
   ACCESSIBILITY — headings (remove this comment before committing)
   - Do not skip heading levels.
   - Do not use bold text as a structural substitute for a heading.
+
+  ACCESSIBILITY — images (remove this comment before committing)
+  If this procedure includes screenshots or diagrams of expected output:
+  - Alt text is required on every image. Empty alt="" is only
+    appropriate for purely decorative images with no informational
+    content.
+  - Describe what the image shows AND what the reader should take
+    away from it — not just the file name or element label.
+  - BAD:  ![screenshot](images/output.png)
+  - GOOD: ![Terminal output showing all three pods in Running status
+           with READY 1/1 after running kubectl get pods -n nbs
+           ](images/pod-status.png)
   ================================================================
 -->
 

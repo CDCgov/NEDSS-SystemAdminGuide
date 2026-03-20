@@ -42,6 +42,7 @@ Reviewers should check:
 - **Style compliance** — verify formatting follows [STYLES.md](STYLES.md)
 - **Front matter** — confirm it's present and complete per [FRONT-MATTER.md](FRONT-MATTER.md)
 - **No broken links or missing images**
+- **Accessibility** — confirm all images have descriptive alt text and no heading levels are skipped; see [ACCESSIBILITY.md](ACCESSIBILITY.md) for standards
 
 ## Merging
 

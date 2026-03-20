@@ -18,23 +18,30 @@ nav_enabled: true
 2. The helm chart for nifi should be available under charts/nifi-efs.
 3. In the values.yaml file, replace all occurrences of nifi.EXAMPLE_DOMAIN with your domain name as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
 4. Ensure the image repository and tags are populated with the following:
+
   ```yaml
   image:
     repository: quay.io/us-cdcgov/cdc-nbs-modernization/nifi
     tag: <release-version-tag> e.g v1.0.1
   ```
+
 5. Update the efsFileSystemId with the [efs-id](https://us-east-1.console.aws.amazon.com/efs/home?region=us-east-1#/file-systems).
 6. Populate jdbc connection string with the same information (refer [Table](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/0_microservices_deployment.html#nbs-microservices-deployment)) as before which includes the username and password.
+
   ```yaml
   jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
   ```
-7. Populate singleUserCredentialsUsername to change the default of “admin“ username
+
+7. Populate singleUserCredentialsUsername to change the default of "admin" username
 8. Populate singleUserCredentialsPassword with the password for the NIFI admin UI. This can be any password of your choice.
 9. After updating the values file, run the following command to install nifi.
+
   ```bash
   helm install nifi -f ./nifi-efs/values.yaml nifi-efs
   ```
+
 10. IMPORTANT: Confirm the pod is running before proceeding with the next deployment using the below command. If the pod is still creating (or in any other state other than running), wait and/or troubleshoot.
+
   ```bash
   kubectl get pods
   ```

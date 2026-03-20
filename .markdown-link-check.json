@@ -9,8 +9,28 @@
       "comment": "Skip localhost URLs — used in docs as examples only, never resolvable in CI."
     },
     {
+      "pattern": "^http://127\\.0\\.0\\.1",
+      "comment": "Skip loopback URLs — used as examples in Keycloak installation docs. Not a real link."
+    },
+    {
       "pattern": "^https?://github\\.com",
       "comment": "Skip github.com URLs — GitHub rate-limits automated crawlers and returns 429 on CI runs, producing false positives. Verify GitHub links manually when updating them."
+    },
+    {
+      "pattern": "/NEDSS-SystemAdminGuide/",
+      "comment": "Skip internal site path URLs — these are valid deployed GitHub Pages URLs but return 400 in CI because the site is not built and served during link checking. The Jekyll build job validates that these files exist; this check is redundant and noisy."
+    },
+    {
+      "pattern": "^https://app\\.example\\.com",
+      "comment": "Skip placeholder example URL — used in Quickstart page as an illustration. Not a real link."
+    },
+    {
+      "pattern": "^https://nbscentral\\.cdc\\.gov",
+      "comment": "Skip NBS Central — requires authentication. Readers will have valid logins; the link is correct but returns a non-200 status to the link checker."
+    },
+    {
+      "pattern": "^https://cdcnbscentral\\.com",
+      "comment": "Skip legacy NBS Central domain — has moved to nbscentral.cdc.gov. Links to this domain are being updated in content; this pattern prevents false positives during the transition."
     }
   ],
   "timeout": "10s",

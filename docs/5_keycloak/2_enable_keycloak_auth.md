@@ -13,14 +13,19 @@ nav_enabled: true
 {:toc}
 
 ## Enable Keycloak Auth
+
 - a. Confirm the keycloak is running
+
   ```bash
   kubectl get pods
   ```
+
 - b. Make sure you are authenticated to Keycloak
+
   ```bash
   kubectl --namespace default port-forward "<pod_name>" 8080
   ```
+
 - c. Make sure you are logged in Keycloak webui as an admin
 - d. Run json for nbs-users realm from charts/keycloak/extra/02-nbs-users-realm.json
   - a. Create realm menu top left option
@@ -29,7 +34,7 @@ nav_enabled: true
     ![nbs-users-2-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-users-realm-2.png)
   - c. Verify new realm exists
     ![nbs-users-3-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-users-realm-3.png)
-- e. Run partial import for following files from charts/keycloak/extra/ 
+- e. Run partial import for following files from charts/keycloak/extra/
   - a. 03-nbs-users-base-users.json
   - b. 04-nbs-users-development-clients.json
 - f. Make sure you select the nbs-users realm

@@ -14,7 +14,8 @@ nav_enabled: true
 {:toc}
 
 ## Validating API endpoints
-STLT must ensure they have a proper connection to the Data APIs, and that the API endpoint is correctly provided and detailed in the accompanying Swagger documentation. Typically, these API endpoints are not accessed directly by human users; instead, they are invoked by the Data Sync service. 
+
+STLT must ensure they have a proper connection to the Data APIs, and that the API endpoint is correctly provided and detailed in the accompanying Swagger documentation. Typically, these API endpoints are not accessed directly by human users; instead, they are invoked by the Data Sync service.
 
 But, users should verify that the connection is successfully established before proceeding with any operations. Please follow the below steps to validate the provided endpoints availability.
 
@@ -22,8 +23,8 @@ Call the token generation endpoint through the Postman API client to ensure the 
 
 The Token Generation endpoint is designed to provide a token for authorized access to secured endpoints.
 
-**Endpoint:** https://<<host>>/data-sync/api/auth/token
-Ex: https://data.dts1.nbspreview.com/data-sync/api/auth/token
+**Endpoint:** `https://data.<your-site>.<your-domain>.com/data-sync/api/auth/token`
+Ex: `https://data.<your-site>.<your-domain>.com/data-sync/api/auth/token`
 
 **Pre-Requisite:** The clientid and clientsecret has been created by the STLT Administrator
 

@@ -108,4 +108,4 @@ nav_enabled: true
 
 #### Additional Case Notification Technical Documentations
 
-[Technical Document ](docs/Technical%20Document.pdf)
+[Technical Document](docs/Technical%20Document.pdf)

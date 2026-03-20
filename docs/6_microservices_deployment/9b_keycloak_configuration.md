@@ -2,11 +2,12 @@
 title: Keycloak Configuration
 layout: page
 parent: Case Notification
+grand_parent: Microservices Deployment
 nav_order: 2
 nav_enabled: true
 ---
 
-## Table of contents
+## On this page
 {: .no_toc .text-delta }
 
 1. TOC

@@ -1,0 +1,26 @@
+{
+  "ignorePatterns": [
+    {
+      "pattern": "^#",
+      "comment": "Skip anchor-only links — JTD generates heading anchors at build time; they cannot be validated statically before the site is built."
+    },
+    {
+      "pattern": "^http://localhost",
+      "comment": "Skip localhost URLs — used in docs as examples only, never resolvable in CI."
+    },
+    {
+      "pattern": "^https?://github\\.com",
+      "comment": "Skip github.com URLs — GitHub rate-limits automated crawlers and returns 429 on CI runs, producing false positives. Verify GitHub links manually when updating them."
+    }
+  ],
+  "timeout": "10s",
+  "retryOn429": true,
+  "retryCount": 1,
+  "aliveStatusCodes": [200, 206],
+  "httpHeaders": [
+    {
+      "urls": ["https://docs.github.com"],
+      "headers": { "Accept": "text/html" }
+    }
+  ]
+}

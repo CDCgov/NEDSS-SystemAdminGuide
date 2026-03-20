@@ -8,7 +8,7 @@ nav_order: 1
 # NBS 7 Architecture and Microservices
 {: .no_toc}
 
-## Table of contents
+## On this page
 {: .no_toc .text-delta }
 
 1. TOC

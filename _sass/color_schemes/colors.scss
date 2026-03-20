@@ -2,6 +2,32 @@
 // CDC Brand Color Palette
 // https://www.cdc.gov/brand/index.html
 // =============================================================================
+//
+// HOW THE CALLOUT SCALE SYSTEM WORKS
+// ---------------------------------------------------------------------------
+// JTD generates callout styles from four tint levels per named color:
+//   $color-000  lightest background tint   (used for callout background)
+//   $color-100  light mid tint
+//   $color-200  dark mid tint
+//   $color-300  darkest accent             (used for callout border/icon)
+//
+// Each callout type declared in _config.yml maps to one of these named scales:
+//   highlight  → yellow   (title-less; both highlight and note share this scale)
+//   important  → blue
+//   new        → green
+//   note       → yellow
+//   warning    → red
+//
+// The purple scale is defined below but is not currently mapped to a callout.
+// To add a callout that uses purple, add an entry to the callouts: block in
+// _config.yml and set color: purple.
+//
+// WCAG AA CONTRAST — primary link/heading color
+// $cdc-blue (#005DAA) on white: relative luminance ≈ 0.107
+//   Contrast ratio = (1.0 + 0.05) / (0.107 + 0.05) ≈ 6.68:1
+//   Passes WCAG AA (requires 4.5:1 for normal text, 3:1 for large text).
+//   Does not reach WCAG AAA (7:1). Acceptable for this use case.
+// =============================================================================
 
 $cdc-blue:   #005DAA;  // Primary blue   — CMYK 100/66/0/2,  RGB 0/93/170
 $cdc-teal:   #004DC2;  // Teal           — CMYK 82/0/24/2,   RGB 0/77/194

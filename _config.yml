@@ -128,6 +128,16 @@ just_the_docs:
       search_exclude: false  # Include in search so older release docs are findable
 
 # -----------------------------------------------------------------------------
+# Exclude from Jekyll processing
+# templates/ contains contributor starter files with unfilled placeholders.
+# Excluding it prevents Jekyll from building them as site pages and adding
+# placeholder titles (e.g. "TITLE") to the left nav.
+# -----------------------------------------------------------------------------
+
+exclude:
+  - templates/
+
+# -----------------------------------------------------------------------------
 # GitHub "Edit this page" link (currently disabled)
 # Activate to show an "Edit this page on GitHub" link on each page.
 # Uncomment all five settings together — partial activation produces broken links.

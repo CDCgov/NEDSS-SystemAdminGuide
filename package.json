@@ -1,0 +1,12 @@
+{
+  "name": "nedss-systemadminGuide",
+  "private": true,
+  "scripts": {
+    "lint": "markdownlint-cli2 \"docs/**/*.md\" \"*.md\"",
+    "link-check": "find docs -name '*.md' | xargs -n1 markdown-link-check --config .markdown-link-check.json && find . -maxdepth 1 -name '*.md' | xargs -n1 markdown-link-check --config .markdown-link-check.json"
+  },
+  "devDependencies": {
+    "markdownlint-cli2": "^0.17.0",
+    "markdown-link-check": "^3.12.0"
+  }
+}

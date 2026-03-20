@@ -1,0 +1,93 @@
+# PR Checks — runs on every pull request targeting main.
+#
+# Jobs:
+#   build       — Jekyll build. Blocking: a build failure must be fixed before merge.
+#   lint        — Markdown lint (markdownlint-cli2). Blocking: lint violations must be
+#                 fixed or explicitly suppressed before merge.
+#   link-check  — Link validation (markdown-link-check). Non-blocking: external URLs
+#                 produce false positives on rate-limited hosts (GitHub, CDCgov). This
+#                 check is informational — it shows a warning in the PR checks UI but
+#                 does not prevent merging. Fix genuine broken links; add persistent
+#                 false positives to .markdown-link-check.json ignorePatterns.
+#
+# The production deploy (jekyll.yml) only runs after merge to main, not on PRs.
+
+name: PR Checks
+
+on:
+  pull_request:
+    branches: ["main"]
+
+# Read-only — consistent with existing jekyll.yml and jekyll-preview.yml.
+permissions:
+  contents: read
+
+# Cancel any in-progress run for this PR when a new commit is pushed.
+# Prevents queue buildup on fast-moving branches.
+concurrency:
+  group: pr-checks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  build:
+    name: Jekyll build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'   # Must match jekyll.yml and jekyll-preview.yml
+          bundler-cache: true   # Runs bundle install and caches gems automatically
+
+      - name: Build site
+        run: bundle exec jekyll build
+        env:
+          JEKYLL_ENV: production
+
+  lint:
+    name: Markdown lint
+    runs-on: ubuntu-latest
+    needs: build   # Run after build confirms the site is structurally valid
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run markdownlint
+        run: npm run lint
+
+  link-check:
+    name: Link check
+    runs-on: ubuntu-latest
+    needs: build   # Run after build; no need to block on lint result
+    # Non-blocking: link checkers produce false positives on rate-limited external
+    # URLs (e.g., GitHub returns 429 for automated requests in CI). This job will
+    # show as a warning (yellow) rather than a failure (red) in the PR checks UI.
+    # Investigate failures and fix genuine broken links. For persistent false
+    # positives, add the URL pattern to .markdown-link-check.json ignorePatterns.
+    continue-on-error: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run link check
+        run: npm run link-check

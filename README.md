@@ -71,33 +71,55 @@ Just the Docs theme renders pages according to `_config.yml`, supporting navigat
 
 ## Building and Previewing Site Locally
 
+**Which option should I use?**
+- **Content authors** (text edits, new pages): Option 1 is sufficient for most work.
+- **Anyone changing `_config.yml`, `_sass/`, templates, or site structure**: use Option 2 or Option 3. VS Code preview does not render theme or config changes.
+- **Option 2 vs Option 3**: same result, different tooling. Use Option 3 (Docker) if you don't want to install Ruby locally.
+
 ### Option 1 — VS Code markdown preview (recommended for content authors)
 
 VS Code has a built-in markdown preview. Open any `.md` file and press `Cmd+Shift+V` (Mac) or `Ctrl+Shift+V` (Windows) to open a rendered preview alongside your editor. This is sufficient for most content work.
 
 For a full rendered view of the site with navigation and theme intact, push to the `preview` branch instead — see [Stakeholder Review Workflow](#stakeholder-review-workflow).
 
-### Option 2 — Jekyll local build (for theme or config changes only)
+### Option 2 — Jekyll local build (requires Ruby)
 
 Use this if you are modifying `_config.yml`, `_sass/`, or anything that affects site structure or appearance rather than content.
 
-**Install Ruby** (required for Jekyll):
+**Install Ruby** (required):
 - Mac: `brew install ruby` (requires [Homebrew](https://brew.sh))
 - Windows: use [RubyInstaller](https://rubyinstaller.org/)
 
-**Install Jekyll and Bundler:**
+**Install Bundler:**
 ```bash
-gem install bundler jekyll
+gem install bundler
 ```
 
 **Run the local server:**
 ```bash
 bundle install
-bundle exec jekyll serve
+bundle exec jekyll serve --livereload
 ```
 
-Preview at `http://localhost:4000`. The built site is stored in `_site/`.
+Preview at `http://localhost:4000`. The browser reloads automatically when you save a file. The built site is stored in `_site/`.
 
+### Option 3 — Docker (no Ruby required)
+
+Use this for the same purpose as Option 2, but without installing Ruby locally. Requires [Docker Desktop](https://www.docker.com/products/docker-desktop/).
+
+**Run the local server:**
+```bash
+docker compose up
+```
+
+Preview at `http://localhost:4000`. Live reload is enabled — the browser refreshes automatically when you save a file.
+
+**First run:** Docker pulls the Ruby image and installs gems, which takes a few minutes. Subsequent runs are fast because gems are cached in a Docker volume.
+
+**Stop the server:** Press `Ctrl+C` in the terminal, then run:
+```bash
+docker compose down
+```
 
 
 ## Supporting Links

@@ -2,11 +2,12 @@
 title: Manual Validation
 layout: page
 parent: Validate ES, Mapi and Nifi
+grand_parent: Microservices Deployment
 nav_order: 1
 nav_enabled: true
 ---
 
-## Table of contents
+## On this page
 {: .no_toc .text-delta }
 
 1. TOC

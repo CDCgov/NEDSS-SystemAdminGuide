@@ -2,6 +2,7 @@
 title: Real Time Reporting (Preview)
 layout: page
 nav_order: 8
+has_children: true
 nav_enabled: true
 redirect_from:
   - /docs/7_feature_preview/(DEPRECATED)4_observation_reporting_service/
@@ -12,7 +13,7 @@ redirect_from:
   - /docs/7_feature_preview/(DEPRECATED)9_post_processing_reporting_service/
 ---
 
-## Table of contents
+## On this page
 {: .no_toc .text-delta }
 
 1. TOC

@@ -1,0 +1,36 @@
+# markdownlint-cli2 configuration
+# https://github.com/DavidAnson/markdownlint-cli2#configuration
+#
+# Rule reference: https://github.com/DavidAnson/markdownlint/blob/main/doc/Rules.md
+# All rules are enabled by default. Rules below are explicitly disabled or
+# reconfigured for this repo's content and Just the Docs conventions.
+
+config:
+  # MD013 — Line length
+  # Disabled: long lines are common in tables, code blocks, and front matter.
+  MD013: false
+
+  # MD033 — Inline HTML
+  # Disabled: JTD callout syntax ({: .note }, {: .no_toc }) and some layout
+  # features require inline HTML and Kramdown attribute syntax.
+  MD033: false
+
+  # MD041 — First line should be a top-level heading
+  # Disabled: JTD pages use the title: front matter key as the H1 heading.
+  # The first line of body content is typically the TOC block or a paragraph.
+  MD041: false
+
+  # MD024 — Multiple headings with the same content
+  # Disabled: reference pages legitimately repeat heading names across sections
+  # (e.g., "Parameters" appears under multiple service sections).
+  MD024: false
+
+# Glob patterns for files and directories to exclude from linting.
+# markdownlint-cli2 uses the same glob syntax as .gitignore.
+ignores:
+  - "_guide_preview/**"
+  - "_previous_versions/**"
+  - "templates/**"
+  - "vendor/**"
+  - "_site/**"
+  - "node_modules/**"

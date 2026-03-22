@@ -41,6 +41,6 @@ Click 'Send,' and the response should be below. Ensure the response code is 200 
 ![nnd-api-endpoint-testing-2](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/nnd-api-testing-2.png)
 
 - Once you receive the Token, you can validate the actual API endpoint for the service using Swagger:
-  - [https://<<HOST>>/data-sync/swagger-ui/index.html](https://<<HOST>>/data-sync/swagger-ui/index.html)
+  - `https://<<HOST>>/data-sync/swagger-ui/index.html`
 
 > ℹ️ **We recommend Postman for endpoint validation although you can use Swagger**

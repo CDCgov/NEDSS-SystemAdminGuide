@@ -21,6 +21,10 @@
       "comment": "Skip internal site path URLs — these are valid deployed GitHub Pages URLs but return 400 in CI because the site is not built and served during link checking. The Jekyll build job validates that these files exist; this check is redundant and noisy."
     },
     {
+      "pattern": "^[a-zA-Z0-9_-]+\\.html",
+      "comment": "Skip relative HTML page links (e.g., 1_liquibase.html) — these are valid same-directory internal links that cannot be resolved without a running server. The Jekyll build validates that the target files exist."
+    },
+    {
       "pattern": "^https://app\\.example\\.com",
       "comment": "Skip placeholder example URL — used in Quickstart page as an illustration. Not a real link."
     },

@@ -14,17 +14,18 @@ nav_enabled: true
 {:toc}
 
 ## Data Processing API Testing and Integration
+
 Test will be exactly similar to Data Ingestion ELR ingestion endpoint test, user will have to utilize DI ELR Ingestion to trigger RTI service. Please follow the DI ingestion API testing guide
 
 - The only change a user will have to specify on ELR Ingestion API is the on specific header
 - Request Header (Additional)
-  -  version: value is either 1 or 2, 1 is default
-  -  If value is set to 1 the DI process will use the legacy batch importer process
-  -  If value is set to 2, then DI will ignore legacy process and trigger the RTI
+  - version: value is either 1 or 2, 1 is default
+  - If value is set to 1 the DI process will use the legacy batch importer process
+  - If value is set to 2, then DI will ignore legacy process and trigger the RTI
     - For RTI testing, this is the only change required on the Data Ingestion ELR endpoint
 
   ![data-processing-api-testing-1](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-api-testing-1.jpg)
- 
+
 To validate whether the data ingestion is successful, the user can also use DI status endpoint to verify the status.
 
 - With the legacy flow, data status in NBS_Interface can be one of these three statuses: QUEUED, FAILED, and SUCESS
@@ -40,5 +41,3 @@ To validate whether the data ingestion is successful, the user can also use DI s
     ![data-processing-flow-diagram](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-api-testing-2.jpg)
 
     ![data-processing-flow-diagram](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-api-testing-3.jpg)
-
-    

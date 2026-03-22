@@ -14,5 +14,5 @@ nav_enabled: true
 {:toc}
 
 ### Data Ingestion API Testing
-[Data Ingestion API Testing.pdf](docs/NM-NBS%207.11%20Data%20Ingestion%20API%20Testing.pdf) 
 
+[Data Ingestion API Testing.pdf](docs/NM-NBS%207.11%20Data%20Ingestion%20API%20Testing.pdf)

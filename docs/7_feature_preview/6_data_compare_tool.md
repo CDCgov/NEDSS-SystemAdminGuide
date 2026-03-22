@@ -12,7 +12,6 @@ nav_enabled: true
 1. TOC
 {:toc}
 
-
 ## Deploy Data Compare (Optional Validation Tool for RTR)
 
 ### Overview
@@ -54,7 +53,6 @@ The validation tool for **RTR (Real-Time Reporting)** allows **STLT** users to c
 - The database objects listed in the following directory are for reference only:
 
 [https://github.com/CDCgov/NEDSS-DataCompare/tree/main/DataCompareAPIs/src/main/resources/db/data\_internal](https://github.com/CDCgov/NEDSS-DataCompare/tree/main/DataCompareAPIs/src/main/resources/db/data_internal)
-
 
 ---
 
@@ -119,7 +117,7 @@ kubectl get pods
 
 Open:
 
-```
+```text
 https://<data.EXAMPLE_DOMAIN>/comparison/swagger-ui/index.html
 ```
 
@@ -199,11 +197,11 @@ kubectl logs <pod-name>
 
 Users must call the following endpoint to start the comparison process:
 
-```
+```text
 POST /comparison/api/data-compare
 ```
 
-#### Required Headers:
+#### Required Headers
 
 - `runNowMode`: `true` or `false`
   - If `true`: The comparison will run **only on records** in the config table where `runNow = true`. Once completed, `runNow` will automatically be reset to `false`.
@@ -213,6 +211,6 @@ POST /comparison/api/data-compare
 
 ### Data Flow
 
-```
+```text
 API → Pull data from SQL table → Upload to S3 → Kafka → Processor → Pull from S3 → Perform comparison → Upload results to S3
 ```

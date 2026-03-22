@@ -13,10 +13,11 @@ nav_enabled: true
 {:toc}
 
 ---
+
 ## Create Kubernetes Secret Within Cluster
 
 1. Obtain the sample Kubernetes manifest to create secrets expected to be available on the cluster from k8-manifests/nbs-secrets.yaml.
-2. Replace string values wherever there is an “EXAMPLE_”
+2. Replace string values wherever there is an "EXAMPLE_"
   {: .no_toc }
 
   | **Parameter**                           | **Template Value**                         | **Example/Description**                      |
@@ -43,7 +44,9 @@ nav_enabled: true
   | post_processing_reporting_pass | "EXAMPLE_POST_PROCESSING_REPORTING_DB_PASSWORD" | RTR post processing database password |
 
 3. Deploy the secrets to the cluster.
+
 ```bash
 kubectl apply -f k8-manifests/nbs-secrets.yaml
 ```
+
 ![kubernetes-secretes-within-cluster](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/kubernetes-secrets-within-cluster.png)

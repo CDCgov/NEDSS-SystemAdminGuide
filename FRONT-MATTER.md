@@ -99,6 +99,7 @@ JTD uses `description:` in two places:
 2. **HTML meta description** — read by search engines and accessibility tools
 
 **Guidelines:**
+
 - Write 1–2 sentences, under 160 characters total
 - Describe what the reader will find or be able to do — the page's *purpose*
 - Do not restate the title word-for-word; add information the title doesn't already convey

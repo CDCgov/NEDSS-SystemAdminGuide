@@ -14,13 +14,14 @@ nav_enabled: true
 {:toc}
 
 ## Manual Steps
+
 Test end-to-end functionality using the following steps:
 
-1. Login to the new NBS system using the URL you set up above: https://app.<exampledomain>/nbs/login (e.g. https://app.int1.nbspreview.com/nbs/login ).
+1. Login to the new NBS system using the URL you set up above: `https://app.<your-site>.<your-domain>.com/nbs/login` (e.g. `https://app.<your-site>.<your-domain>.com/nbs/login` ).
 2. Select advanced search:
 
    ![advanced-search-manual-validation](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/manual-validation-1.png)
-3. View some patient records. One way to do this is to select “Male” from the the “Sex” pull down and click search:
+3. View some patient records. One way to do this is to select "Male" from the the "Sex" pull down and click search:
 
    ![patient-search-manual-validation](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/manual-validation-2.png)
 4. Results should appear in the pane on the right:

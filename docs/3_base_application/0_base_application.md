@@ -15,7 +15,7 @@ nav_enabled: true
 ---
 
 # AWS Infrastructure
-### Installation Guide & Smoke Tests
+## Installation Guide & Smoke Tests
 {: .no_toc }
 
 Installation of NBS 7 consists of multiple phases:
@@ -27,13 +27,13 @@ Installation of NBS 7 consists of multiple phases:
 
 This section covers the first phase: setting up the AWS infrastructure using Terraform.
 
-
-### NBS 7 Deployment
+## NBS 7 Deployment
 This guide provides detailed steps for installing NBS 7 end to end.
-Make sure you're using the latest documentation from [NBS Central](https://cdcnbscentral.com/):
+Make sure you're using the latest documentation from [NBS Central](https://nbscentral.cdc.gov/):
 
 1. System Administrator Guide (this document)
-2. [User Guide](https://cdcnbscentral.com/)
+<!-- TODO: verify this URL on nbscentral.cdc.gov -->
+2. [User Guide](https://nbscentral.cdc.gov/)
 3. [Release Notes](https://github.com/CDCgov/NEDSS-Helm/releases)
 
 **Installation Steps:**

@@ -1,0 +1,18 @@
+# Cursor — Repo Rules
+
+Before helping with any content for this repo, read the following files:
+
+- **CONTRIBUTING.md** — branch naming, commit messages, PR expectations, review checklist
+- **WORKFLOW.md** — step-by-step git commands for daily workflow
+- **STYLES.md** — heading hierarchy, callouts, code blocks, links, images, tables
+- **FRONT-MATTER.md** — required fields for every page and how to fill them in
+- **ACCESSIBILITY.md** — alt text, heading, link, and table requirements
+
+For any new page, start from the appropriate template in `/templates`:
+
+- `templates/concept.md` — explains what something is, how it works, or why it exists
+- `templates/task.md` — walks the reader through a sequence of steps
+- `templates/reference.md` — lookup resource: parameter tables, command flags, specs
+- `templates/landing.md` — section parent that orients the reader and links to child pages
+
+Follow these standards for all content you generate. If asked to write or edit a page, apply the correct template structure, front matter, and style conventions automatically without being asked.

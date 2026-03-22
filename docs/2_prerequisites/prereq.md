@@ -24,7 +24,6 @@ Your AWS environment must:
 - Provide access to NBS 6 databases that are located on an MS SQL Server instance (RDS or EC2).
 - Have access to an S3 bucket to store Terraform (TF) state.
 
-
 ## Hardware Requirements (AWS)
 
 <h4 align="center"><b> High Volume STLTs </b></h4>
@@ -36,10 +35,8 @@ Your AWS environment must:
 | Relational Database | SQL Server 2017+ Standard or Enterprise | New NBS 6.X.X Deployment Recommendations: [📝 Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html?CDC_AAref_Val=https://www.cdc.gov/nbs/resources/implementation-and-support.html) |
 | Persistent Store | EFS | 1 TB |
 
-
 <h4 align="center"><b> Low Volume STLTs </b></h4>
 {: .no_toc }
-
 
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
@@ -47,7 +44,7 @@ Your AWS environment must:
 | Relational Database | Cloud Managed MS SQL Server Standard or Enterprise | New NBS 6.X.X Deployment Recommendations: [📝 Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html?CDC_AAref_Val=https://www.cdc.gov/nbs/resources/implementation-and-support.html) |
 | Persistent Store | EFS | 500 GB |
 
-#### Software Requirements
+### Software Requirements
 {: .no_toc }
 
 | **Software**        | **Version**                   | **Comments**                                                    |
@@ -65,18 +62,17 @@ Your AWS environment must:
 | Kafka               | 2.8.1                         | Deployed as MSK. Needed only if running Data Ingestion Service. |
 | Keycloak            | 22.0.5+                       | Deployed in Kubernetes                                          |
 
-
-#### SQL Server Configuration
+### SQL Server Configuration
 {: .no_toc }
 
-##### Enabling Verbose Truncation Warnings
+#### Enabling Verbose Truncation Warnings
 {: .no_toc }
 
 SQL Server Trace Flag 460 provides detailed error messages when string or binary data truncation occurs. This is particularly useful for diagnosing data truncation errors when saving investigations in NBS, as it includes column names and data types in error messages rather than generic truncation warnings.
 
 For more information, see the [Microsoft SQL Server documentation on VERBOSE_TRUNCATION_WARNINGS](https://learn.microsoft.com/en-us/sql/t-sql/statements/alter-database-scoped-configuration-transact-sql?view=sql-server-ver15#verbose_truncation_warnings---on--off-).
 
-**Method 1: Enable at SQL Server Startup (Persistent)**
+### Method 1: Enable at SQL Server Startup (Persistent)
 
 To enable Trace Flag 460 permanently across SQL Server restarts:
 
@@ -88,7 +84,7 @@ To enable Trace Flag 460 permanently across SQL Server restarts:
 6. Click **Add** then **Apply**
 7. **Restart the SQL Server service** for the change to take effect
 
-**Method 2: Enable on Running Instance (No Restart Required)**
+### Method 2: Enable on Running Instance (No Restart Required)
 
 To enable Trace Flag 460 on a live SQL Server instance without restarting:
 
@@ -99,7 +95,7 @@ DBCC TRACEON(460, -1);
 
 **Note:** This method enables the trace flag immediately but it will be disabled when SQL Server restarts. For persistent configuration across restarts, use Method 1.
 
-**Verifying Trace Flag Status**
+### Verifying Trace Flag Status
 
 To verify that Trace Flag 460 is enabled:
 
@@ -109,14 +105,16 @@ DBCC TRACESTATUS(460);
 ```
 
 Expected output when enabled:
-```
+
+```text
 TraceFlag  Status  Global  Session
 460        1       1       0
 ```
 
-**Benefits for NBS Operations**
+### Benefits for NBS Operations
 
 When Trace Flag 460 is enabled, truncation errors will provide detailed information such as:
+
 - The specific column name where truncation occurred
 - The data type and size of the column
 - The actual length of the data being inserted
@@ -134,7 +132,8 @@ The NBS 7 system will support end user authentication by integrating with a stan
 as a protected endpoint within your preexisting SSO ecosystem, and can be configured to work with a wide variety of standards compliant
 Identity Providers (e.g. Okta, AD).
 
-This is similar to NBS 6. As documented in ["NEDSS Base System Release 4.4.1 Hardening NBS Perimeter Security"](https://cdcnbscentral.com/attachments/1995) (September 20, 2012 Requires access on NBS central), NBS 6 does not authenticate users. Instead, it delegates authentication to a security proxy, which each
+<!-- TODO: verify this URL on nbscentral.cdc.gov -->
+This is similar to NBS 6. As documented in ["NEDSS Base System Release 4.4.1 Hardening NBS Perimeter Security"](https://nbscentral.cdc.gov/attachments/1995) (September 20, 2012 Requires access on NBS central), NBS 6 does not authenticate users. Instead, it delegates authentication to a security proxy, which each
 State, Tribal, Local, and Territorial (STLT) must provide in order to deploy NBS.
 
 The NBS 7 release requires that prospective users already have a working NBS 6 instance, and therefore assumes that a user
@@ -144,7 +143,9 @@ NBS 7 extends functionality that is available to the authenticated user. NBS 7 t
 mechanism. No additional steps are needed to authenticate users for NBS 7.
 
 To assist those who are integrating NBS into their SSO ecosystem, a proof of concept in which authentication is performed using an
-Identity Provider (IdP) and a proxy is available on request. To request it, [please create a ticket here](https://cdcnbscentral.com/projects/nbs700/issues/new)
+Identity Provider (IdP) and a proxy is available on request. To request it,
+<!-- TODO: verify this URL on nbscentral.cdc.gov -->
+[please create a ticket here](https://nbscentral.cdc.gov/projects/nbs700/issues/new)
 
 ## Management Machine Setup
 {: .no_toc }
@@ -155,7 +156,7 @@ NBS 7 system. The following tools should be installed on a local or cloud-based 
   - Instructions for getting and using AWS credentials for use with the CLI can be found [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 
 - **GitHub CLI**: Download and installation instructions are here:
-  [https://cli.github.com/](https://cli.github.com/)
+  <https://cli.github.com/>
 
 - **Terraform CLI**: Download and installation instructions are [here](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
   *(Tested through 1.5.5 Terraform, suggest install that specific version rather than the latest non-open source version)*

@@ -13,6 +13,7 @@ nav_enabled: true
 {:toc}
 
 ---
+
 ## Initial Kubernetes Bootstrapping
 
 1. Download the Helm configuration package from GitHub. Make sure you go through the release page and see what's included [Latest release of CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/releases).
@@ -20,4 +21,3 @@ nav_enabled: true
 3. **All helm commands should be executed from the charts directory.** Change directory to where you unzipped the helm **charts** folder `<Helm_Dir>/charts`.
 
 ---
-

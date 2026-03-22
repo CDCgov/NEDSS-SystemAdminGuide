@@ -10,6 +10,30 @@ config:
   # Disabled: long lines are common in tables, code blocks, and front matter.
   MD013: false
 
+  # MD022 — Blanks around headings
+  # Disabled: JTD/Kramdown attribute syntax ({: .no_toc}, {: .no_toc .text-delta})
+  # appears directly beneath headings with no blank line. This is correct JTD
+  # syntax; markdownlint cannot distinguish it from a real violation.
+  MD022: false
+
+  # MD024 — Multiple headings with the same content
+  # Disabled: reference pages legitimately repeat heading names across sections
+  # (e.g., "Parameters" appears under multiple service sections).
+  MD024: false
+
+  # MD025 — Single title / single H1
+  # Disabled: JTD renders the title: front matter key as the page H1. Pages that
+  # also include an H1 in the body (e.g., for the {: .no_toc} styling pattern)
+  # correctly have two H1s in the raw Markdown source. This is the expected JTD
+  # pattern and not an error.
+  MD025: false
+
+  # MD029 — Ordered list item prefix
+  # Disabled: legacy docs use continuation numbering across code blocks (e.g.,
+  # steps 1–7, then a code block, then steps 8–13). This is intentional
+  # sequential numbering and not an error.
+  MD029: false
+
   # MD033 — Inline HTML
   # Disabled: JTD callout syntax ({: .note }, {: .no_toc }) and some layout
   # features require inline HTML and Kramdown attribute syntax.
@@ -20,17 +44,28 @@ config:
   # The first line of body content is typically the TOC block or a paragraph.
   MD041: false
 
-  # MD024 — Multiple headings with the same content
-  # Disabled: reference pages legitimately repeat heading names across sections
-  # (e.g., "Parameters" appears under multiple service sections).
-  MD024: false
-
 # Glob patterns for files and directories to exclude from linting.
 # markdownlint-cli2 uses the same glob syntax as .gitignore.
 ignores:
+  # Build output and dependencies — never lint generated or vendored files.
   - "_guide_preview/**"
   - "_previous_versions/**"
   - "templates/**"
   - "vendor/**"
   - "_site/**"
   - "node_modules/**"
+
+  # CDC boilerplate — these files are mandated by the CDC org and must not be
+  # modified. Linting them would produce violations we are not permitted to fix.
+  - "CDCgov_README.md"
+  - "code-of-conduct.md"
+  - "DISCLAIMER.md"
+  - "open_practices.md"
+  - "rules_of_behavior.md"
+
+  # Contributor docs — these files follow different formatting conventions
+  # (e.g., tables, code examples, mixed prose) and are reviewed manually through
+  # the code review process rather than automated lint.
+  - "CONTRIBUTING.md"
+  - "WORKFLOW.md"
+  - "README.md"

@@ -2,16 +2,6 @@
 
 This document is the authoritative accessibility reference for the NEDSS System Administration Guide. It records Section 508 / WCAG 2.1 AA findings, authoring standards, and known limitations. Future contributors and reviewers should consult it alongside [STYLES.md](STYLES.md).
 
----
-
-## On this page
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
----
-
 ## Overview
 
 The NEDSS System Administration Guide is a federally published resource and must meet **Section 508** and **WCAG 2.1 Level AA** requirements. The site is built with Jekyll and the Just the Docs (JTD) theme; most structural accessibility (landmark regions, skip-navigation, focus management) is provided by the theme. Authoring-time obligations — color contrast, alt text, heading hierarchy, link text, and table markup — fall to contributors.
@@ -23,8 +13,6 @@ WCAG 2.1 AA thresholds used in this document:
 | Normal text (< 18 pt regular or < 14 pt bold) | 4.5 : 1 |
 | Large text (≥ 18 pt regular or ≥ 14 pt bold) | 3.0 : 1 |
 | UI components and graphical objects | 3.0 : 1 |
-
----
 
 ## Color contrast
 
@@ -51,8 +39,6 @@ JTD callouts use a `-000` background tint and `-300` foreground accent from a sh
 | Highlight (purple) | (see [Callouts](#callouts) section) | — | — | See below | |
 
 **Important caveat:** The failing ratios above apply to the `-300` accent color against the `-000` tint — most visibly in the left border stripe and any title text rendered in that color. Paragraph body text inside all callouts inherits the standard dark body color and maintains high contrast. Before treating any callout as non-compliant, verify in a built-site browser using DevTools color picker to confirm which elements actually render in the accent color.
-
----
 
 ## Callouts
 
@@ -85,8 +71,6 @@ Using color as the only means of conveying information fails WCAG 2.1 Success Cr
 
 **Recommendation:** Remove the `highlight` entry from `_config.yml` and the corresponding purple color scale from `colors.scss`. If a purple callout is needed in the future, add a `title:` field to the `_config.yml` entry before use.
 
----
-
 ## Images
 
 ### Alt text is required
@@ -115,8 +99,6 @@ Use lowercase-hyphenated filenames: `pod-status.png`, not `PodStatus.PNG` or `po
 - Alt text describes the image content and what the reader should conclude
 - Images are not the sole carrier of critical information (also provide the information as text)
 
----
-
 ## Headings
 
 ### Hierarchy rules
@@ -136,8 +118,6 @@ Do not skip heading levels. The page `title:` front matter key renders as the H1
 
 Heading text must be unique and descriptive within the page. Avoid generic headings like "Details" or "More information."
 
----
-
 ## Links
 
 ### Descriptive link text
@@ -155,8 +135,6 @@ See [Keycloak installation](../path.md) for installation steps.
 ### Anchor links
 
 Anchor-only links (`#section-name`) are valid and excluded from the automated link checker by default. Verify that the target heading exists in the destination file.
-
----
 
 ## Tables
 
@@ -176,8 +154,6 @@ Use tables for structured reference data with clear row/column relationships. Do
 |-----------|------|----------|-------------|
 | `name`    | string | Yes   | Display name of the resource |
 ```
-
----
 
 ## Known limitations
 

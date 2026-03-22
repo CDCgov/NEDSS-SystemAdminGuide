@@ -13,16 +13,20 @@ nav_enabled: true
 {:toc}
 
 ## Liquibase Deployment
+
 The liquibase job runs once and goes to sleep. The job will update necessary SQL Server scripts for Real Time Reporting.
 
 1. The helm chart for Liquibase should be available under charts/liquibase.
    2. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
+
       ```yaml
       image:
         repository: "quay.io/us-cdcgov/cdc-nbs-modernization/liquibase-service"
         tag: <release-version-tag> e.g v1.0.1
       ```
+
    3. Validate image repository and tag:
+
       ```yaml
        jdbc:
          master_db_url: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=master;integratedSecurity=false;encrypt=true;trustServerCertificate=true"
@@ -35,13 +39,17 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
          srte_username: "EXAMPLE_SRTE_DB_USER"
          srte_password: "EXAMPLE_SRTE_DB_USER_PASSWORD"
       ```
+
 4. Update the `values.yaml` files and run the command to run the Liquibase. Configurations for the following should be on hand to update the `values.yaml`
 
 5. Install pod
+
    ```bash
    helm install -f ./liquibase/values.yaml liquibase ./liquibase/
    ```
+
 6. Verify if pod is running
+
    ```bash
    kubectl get pods
    ```
@@ -70,8 +78,10 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
     FROM RDB_MODERN.DBO.DATABASECHANGELOG
     ORDER BY DATEEXECUTED DESC;
     ```
+
 8. Troubleshooting for Liquibase: Please note, troubleshooting for Liquibase may vary depending on the database. If the issue persist after the initial troubleshooting, please reach out to our support team.
     - a. If NBS_SRTE or any liquibase execution fails due to user permission issue. Run this script:
+
         ```sql
         USE [NBS_SRTE]
         GO
@@ -82,7 +92,9 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
         ALTER ROLE [db_owner] ADD MEMBER [nbs_ods]
         GO
         ```
-    - b. If you see “Migration failed” or “Invalid object name” errors while running liquibase. please run the following script:
+
+    - b. If you see "Migration failed" or "Invalid object name" errors while running liquibase. please run the following script:
+
         ```sql
         Use rdb_modern;
         IF NOT EXISTS (SELECT 1 FROM sysobjects WHERE name = 'nrt_odse_Page_cond_mapping' and xtype = 'U')
@@ -175,7 +187,9 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
            END;
 
         ```
+
     - c. NBS_ODSE, RDB, NBS_SRTE  and rdb_modern: If the expected values are not returned and the update is incomplete, the DATABASECHANGELOG should be cleared out (query below) and Liquibase should be rerun.
+
         ```sql
         USE NBS_ODSE;
         DELETE FROM NBS_ODSE.dbo.DATABASECHANGELOG;

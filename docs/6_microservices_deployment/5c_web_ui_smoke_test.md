@@ -18,10 +18,11 @@ nav_enabled: true
 `nbs-test-webui.sh` script is included in the infrastructure zip file (`scripts/observability/nbs-test-webui`)
 
 It will:
-- login  
-- save all needed tokens  
-- navigate to advanced search  
-- search for all female patients and check count  
+
+- login
+- save all needed tokens
+- navigate to advanced search
+- search for all female patients and check count
 - if count is 0, note error; if greater than zero, good!
 
 It is a bash script that can be run via CloudShell if NBS is hosted in AWS or by any system with bash installed. **Curl** is the only other dependency.
@@ -32,7 +33,7 @@ It is a bash script that can be run via CloudShell if NBS is hosted in AWS or by
 
 nbs-test-webui.sh [-h] [-?] [-d] [-D] [-P] [-H BASE_HOST] [-U USER ] [-c count ]
 
-e.g. ./nbs-test-webui.sh -d -H http://app.demo.nbspreview.com  -U exampleuser
+e.g. ./nbs-test-webui.sh -d -H `http://app.<your-site>.<your-domain>.com`  -U exampleuser
 
 | **Flag** | **Description** |
 |----------|------------------|

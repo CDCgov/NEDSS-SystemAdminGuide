@@ -105,6 +105,7 @@ Use for inline callouts where you want visual emphasis without a title label. Us
 ### Inline code
 
 Use backticks for:
+
 - File names and paths: `_config.yml`, `/etc/nginx/nginx.conf`
 - Command names: `kubectl`, `helm`, `terraform`
 - Parameter names and flags: `--namespace`, `max_level`
@@ -187,6 +188,7 @@ External links do not need special treatment in JTD — they render as standard 
 ```
 
 **File naming:**
+
 - Lowercase only
 - Words separated by hyphens (no underscores, no spaces)
 - Descriptive — the name should hint at the content
@@ -200,7 +202,7 @@ External links do not need special treatment in JTD — they render as standard 
 
 **Storage:** Place images in an `images/` subfolder within the relevant `docs/` section. For example, images for Keycloak docs go in `docs/5_keycloak/images/`.
 
-```
+```text
 docs/
   5_keycloak/
     images/
@@ -223,6 +225,7 @@ Use tables for **reference data and comparisons** where the reader will scan acr
 ```
 
 **Do not use tables for:**
+
 - Sequential steps — use a numbered list instead
 - Prose that reads naturally as paragraphs or bullets
 - Content with cells that require lengthy explanation (the table becomes unreadable)

@@ -14,6 +14,7 @@ nav_enabled: true
 {:toc}
 
 ## Deploy Data Sync Service API via helm chart
+
 This guide sets out the detailed steps to install NBS 7 Data Sync service that will be used to extract the data for NNDSS and STLT Reporting needs. The Data Sync service provides a secure API to connect to the databases in the NBS cloud, with an API endpoint service and without interrupting any operations On-Prem at Jurisdictions.
 
 ### Data Sync Microservice
@@ -43,27 +44,36 @@ This guide sets out the detailed steps to install NBS 7 Data Sync service that w
      username: "EXAMPLE_ODSE_DB_USER"
      password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    ```
+
 5. Update the `values.yaml` to populate `efsFileSystemId` which is the EFS file system id from the AWS console. See image below.
    ![nnd-efs](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/nnd-efsid.png)
 
    ```yaml
    efsFileSystemId: "EXAMPLE_EFS_ID"
    ```
+
 6. Keycloak Auth URI. Provide keycloak auth uri in the values.yaml file as shown below. In the default configuration this value should not need to change unless the name or namespace of the keycloak pod is modified.
+
    ```yaml
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
    ```
+
 7. Run the following command to install nnd-service.
+
    ```bash
    helm install nnd-service -f ./nnd-service/values.yaml nnd-service
    ```
+
    - Note: Check to see if the pod for nnd-service is running using kubectl get pods
 8. Validate the service
-   ```
+
+   ```text
    https://<data.EXAMPLE_DOMAIN>/extraction/actuator/info
    https://<data.EXAMPLE_DOMAIN>/extraction/actuator/health
    ```
+
 9. Swagger is disabled by default (usually in PROD). To enable swagger for testing, specify or overwrite `springBootProfile` with `'dev'` under `charts/nnd-service/values.yaml`
-    ```
+
+    ```text
     https://<data.EXAMPLE_DOMAIN>/extraction/swagger-ui/index.html#/
     ```

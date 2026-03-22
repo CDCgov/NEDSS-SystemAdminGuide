@@ -17,7 +17,7 @@ nav_enabled: true
 
 ### Overview
 
-The Data Ingestion service is integrated with the Keycloak server to authenticate the DI service's public API endpoints.  
+The Data Ingestion service is integrated with the Keycloak server to authenticate the DI service's public API endpoints.
 As the **Client Credentials Grant type flow** is used for authentication in the DI Service, we require the **Client Id** and **Client Secret** values to create the JWT token and make API calls.
 
 ### Prerequisite
@@ -25,8 +25,8 @@ As the **Client Credentials Grant type flow** is used for authentication in the 
 1. Keycloak server and the necessary configurations are setup.
 2. Installation of Postman application to test the end to end flow.
    - If you already have postman application in your system, skip this step.
-   - Visit the official Postman website at [www.postman.com](https://www.postman.com) and navigate to the **Downloads** section  
-     [[Download Postman](https://www.postman.com/downloads/)](https://www.postman.com/downloads/) [Get Started for Free](https://www.postman.com/downloads/)
+   - Visit the official Postman website at [www.postman.com](https://www.postman.com) and navigate to the **Downloads** section
+     [Download Postman](https://www.postman.com/downloads/)
    - Click on the link to download the version appropriate for your OS. Once the download is complete open and install it accordingly.
 
 ### Scope
@@ -43,17 +43,16 @@ Open Postman application and click on import option. A pop up window shows up an
 
 ### 1. **Token Generation API:**
 
-Click on the Token Generation API in `New-Data-Ingestion` Postman collection.  
+Click on the Token Generation API in `New-Data-Ingestion` Postman collection.
 Update the `clientid` and `clientsecret` values and then click **Send** to generate a new token.
 
 ![data-ingestion-token-generation](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-ingestion-token-generation-api.jpg)
-
 
 > **Note:** Tokens expire after 1 hour. They must be regenerated using the same token endpoint after 1 hour or when they expire in order to make DI Service API calls.
 
 ### 2. **Ingesting Data API:**
 
-Click on Ingesting Data API in New-Data-Ingestionpostman collection and then click on Authorization tab and select ‘Bearer Token’ as Type. Paste the token that was generated via Token Generation API in previous step into the token text box.
+Click on Ingesting Data API in New-Data-Ingestionpostman collection and then click on Authorization tab and select 'Bearer Token' as Type. Paste the token that was generated via Token Generation API in previous step into the token text box.
 
 Click on the Headers section and enter the values within the clientid and clientsecret headers.
 

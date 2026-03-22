@@ -18,11 +18,12 @@ nav_enabled: true
 `nbs-test-api.sh` script is included in the infrastructure zip file (`scripts/observability/nbs-test-api`)
 
 It will:
-- create a patient  
-- search for the patient  
-- delete that patient (note: record still exists but is inactive)  
 
-It is a bash script that can be run via CloudShell if NBS is hosted in AWS or by any system with bash installed. It requires a user in the database that can run API calls.  
+- create a patient
+- search for the patient
+- delete that patient (note: record still exists but is inactive)
+
+It is a bash script that can be run via CloudShell if NBS is hosted in AWS or by any system with bash installed. It requires a user in the database that can run API calls.
 
 **Curl** is the only other dependency.
 
@@ -34,7 +35,6 @@ nbs-test-api.sh [-h] [-?] [-d] [-D] [-P] [-B BASE_URL] [-U USER ] [-c count ]
 
 For the initial smoke test run
 
-nbs-test-api.sh -B https://app.<site>.example.com -U <apiuser> -c 10
+nbs-test-api.sh -B `https://app.<your-site>.<your-domain>.com` -U <apiuser> -c 10
 
 This will verify api functionality AND populate the observability dashboards with some initial traffic
-

@@ -13,13 +13,11 @@ nav_enabled: true
 ## On this page
 {: .no_toc .text-delta }
 
-
 1. TOC
 {:toc}
 -->
 
 This page explains how to deploy the NBS 7 infrastructure on AWS using Terraform. Download and configure a Terraform package, initialize and apply your infrastructure, and verify that the key AWS resources are created correctly, including your VPC, subnets, and EKS cluster. Then connect to your Kubernetes cluster and prepare it for Helm chart configuration.
-
 
 1. Download the Terraform configuration package from GitHub. Make sure you go through the release page and see what's included in
 the current release on [CDCgov/NEDSS-Infrastructure](https://github.com/CDCgov/NEDSS-Infrastructure/releases)

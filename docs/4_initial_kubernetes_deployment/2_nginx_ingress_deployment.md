@@ -1,5 +1,5 @@
 ---
-title: Deploy NGINX ingress controller 
+title: Deploy NGINX ingress controller
 layout: page
 parent: Initial Kubernetes Deployment
 nav_order: 2
@@ -13,49 +13,52 @@ nav_enabled: true
 ## On this page
 {: .no_toc .text-delta }
 
-
 1. TOC
 {:toc}
 -->
 
 After you create and deploy your Kubernetes secrets, set up the NGINX ingress controller. This page explains how to use the preconfigured Helm values to install the controller, verify that the AWS network load balancer is active, and create the DNS records your cluster needs to route traffic. After you complete these steps, configure Cert Manager to manage TLS certificates for your cluster.
 
+## Install the NGINX ingress controller
 
-1. NGINX will use the values in `charts/nginx-ingress/values.yaml` as a part of `nbs-helm-vX.Y.Z` zip file. These values have been preconfigured to setup Prometheus to scrape metrics and also to instruct NGINX controller to create AWS network load balancer instead of classic load balancer in front of the k8 NGINX ingress.
+The values in `charts/nginx-ingress/values.yaml` (part of the `nbs-helm-vX.Y.Z` zip file) are preconfigured to set up Prometheus metrics scraping and to instruct the NGINX controller to create an AWS network load balancer instead of a classic load balancer.
 
-- a. The result of the command below should create NGINX controller within Kubernetes.
+1. Install the NGINX ingress controller:
 
-      ```bash
-      helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx -f ./nginx-ingress/values.yaml --namespace ingress-nginx --create-namespace --version 4.11.5
-      ```
+   ```bash
+   helm upgrade --install ingress-nginx ingress-nginx --repo https://kubernetes.github.io/ingress-nginx -f ./nginx-ingress/values.yaml --namespace ingress-nginx --create-namespace --version 4.11.5
+   ```
 
-      ![ingress-nginx](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/1_ingress-controller.png)
-- b. Monitor the status of the nginx deployment
+   ![ingress-nginx](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/1_ingress-controller.png)
 
-      ```bash
-      kubectl --namespace ingress-nginx get services -o wide -w ingress-nginx-controller
-      ```
+1. Monitor the deployment status:
 
-      NOTE: Use Ctrl+c to exit if the command is still running.
-- c. You may also check that a network load balancer was created in the AWS web console and the target groups are pointing to the EKS cluster [List of load balancers](https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#LoadBalancers:)
-- d. Run the following command to confirm at least one NGINX controller pod is running
+   ```bash
+   kubectl --namespace ingress-nginx get services -o wide -w ingress-nginx-controller
+   ```
 
-      ```bash
-      kubectl get pods -n=ingress-nginx
-      ```
+   > Use `Ctrl+C` to exit if the command is still running.
+   {: .note }
 
-2. You will need to manually create some DNS entries. Ensure that the following DNS entries (A records) point to the new network load balancer in front of your Kubernetes cluster (make sure this is the ACTIVE NLB just provisioned via nginx-ingress). This should be done in your DNS service (For eg: Route 53). Please replace example.com with the appropriate domain_name from the Table below.
+1. In the [AWS load balancers console](https://us-east-1.console.aws.amazon.com/ec2/home?region=us-east-1#LoadBalancers:), confirm a network load balancer was created and its target groups point to the EKS cluster.
 
-- a. Modernized NBS Application - Eg: app.site_name.example_domain.com
-- b. Data Services - data.site_name.example_domain.com
-- c. NIFI application - Eg: nifi.example.com [Note: NIFI has reported vulnerabiltiies. Please expose only if you absolutely need it and want to adminsiter it. Otherwise, dont add NIFI].
-    These are the 5 required URL's for NBS
-    {: .no_toc }
+1. Confirm at least one NGINX controller pod is running:
 
-    | **Parameter**                           | **Template Value**                                  | **Example**                          |
-    |----------------------------------------|-----------------------------------------------------|--------------------------------------|
-    | nbs domain                             | site_name.example_domain.com                        | fts3.nbspreview.com                  |
-    | classic sub_domain (NBS 6)             | app-classic.site_name.example_domain.com            | app-classic.fts3.nbspreview.com      |
-    | app sub_domain (Modern NBS 7)          | app.site_name.example_domain.com                    | app.fts3.nbspreview.com              |
-    | nifi sub_domain (Nifi) [Optional, only if you want to administer NIFI] | nifi.site_name.example_domain.com                   | nifi.fts3.nbspreview.com             |
-    | data ingestion sub_domain (DI)         | data.site_name.example_domain.com                   | data.fts3.nbspreview.com             |
+   ```bash
+   kubectl get pods -n=ingress-nginx
+   ```
+
+## Create DNS records
+
+Create A records in your DNS service (for example, Route 53) pointing the following subdomains to the active network load balancer provisioned above. Replace `example_domain.com` with your domain name.
+
+> NiFi has known security vulnerabilities. Only add a NiFi DNS entry if you need to administer it directly. Omit it otherwise.
+{: .warning }
+
+| Subdomain | Template | Example |
+|---|---|---|
+| NBS (main domain) | `site_name.example_domain.com` | `fts3.nbspreview.com` |
+| NBS 6 (classic) | `app-classic.site_name.example_domain.com` | `app-classic.fts3.nbspreview.com` |
+| NBS 7 (modern) | `app.site_name.example_domain.com` | `app.fts3.nbspreview.com` |
+| NiFi (optional) | `nifi.site_name.example_domain.com` | `nifi.fts3.nbspreview.com` |
+| Data Ingestion | `data.site_name.example_domain.com` | `data.fts3.nbspreview.com` |

@@ -17,7 +17,6 @@ nav_enabled: true
 {:toc}
 -->
 
-
 1. The helm chart for all RTR java services should be available under charts/rtr.
 2. Validate the Kubernetes secret for the database credentials:
 

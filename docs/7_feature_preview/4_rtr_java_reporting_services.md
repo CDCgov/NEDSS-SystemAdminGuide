@@ -1,18 +1,22 @@
 ---
-title: Real Time Reporting (RTR) Java services
+title: RTR Java services
 layout: page
-parent: Real Time Reporting (Preview)
+parent: Real-Time Reporting (Preview)
 nav_order: 4
 nav_enabled: true
 ---
 
+# Real-Time Reporting (RTR) Java services
+{: .no_toc }
+
+<!--
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
+-->
 
-## Real Time Reporting(RTR) Java services
 
 1. The helm chart for all RTR java services should be available under charts/rtr.
 2. Validate the Kubernetes secret for the database credentials:

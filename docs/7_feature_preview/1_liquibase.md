@@ -1,10 +1,13 @@
 ---
 title: Liquibase
 layout: page
-parent: Real Time Reporting (Preview)
+parent: Real-Time Reporting (Preview)
 nav_order: 1
 nav_enabled: true
 ---
+
+# Liquibase
+{: .no_toc }
 
 ## On this page
 {: .no_toc .text-delta }
@@ -14,9 +17,9 @@ nav_enabled: true
 
 ## Liquibase Deployment
 
-The liquibase job runs once and goes to sleep. The job will update necessary SQL Server scripts for Real Time Reporting.
+The liquibase job runs once and goes to sleep. The job will update necessary SQL Server scripts for Real-Time Reporting.
 
-1. The helm chart for Liquibase should be available under charts/liquibase.
+1. The Helm chart for Liquibase should be available under charts/liquibase.
    2. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
 
       ```yaml
@@ -45,7 +48,7 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
 5. Install pod
 
    ```bash
-   helm install -f ./liquibase/values.yaml liquibase ./liquibase/
+   Helm install -f ./liquibase/values.yaml liquibase ./liquibase/
    ```
 
 6. Verify if pod is running

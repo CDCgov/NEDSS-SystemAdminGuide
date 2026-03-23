@@ -7,13 +7,14 @@ nav_order: 2
 nav_enabled: true
 ---
 
+# API Smoke Test (Scripted)
+{: .no_toc }
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
-
-## API Smoke Test (Scripted)
 
 `nbs-test-api.sh` script is included in the infrastructure zip file (`scripts/observability/nbs-test-api`)
 

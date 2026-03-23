@@ -5,14 +5,12 @@ parent: NBS 7 Deployment Decision Guide
 grand_parent: Introduction
 nav_order: 4
 has_children: true
+description: Describes each component in NBS 7 — what it does, when it is needed, and how it relates to other components — organized by configuration tier.
 ---
 
-
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## NBS 7 component reference
 {: .no_toc }
 
-<!-- INTRO OR OVERVIEW -->
 The pages in this section describes each component in NBS 7. Use it to understand what each component does, why it is included in your configuration, and how it relates to other components.
 
 Components in this reference are organized by configuration tier:

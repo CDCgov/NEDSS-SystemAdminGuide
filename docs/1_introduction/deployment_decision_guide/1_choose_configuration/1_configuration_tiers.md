@@ -4,13 +4,12 @@ layout: page
 parent: Choose your configuration
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
+description: Describes the four NBS 7 configuration tiers — NBS Core, Core + RTR, Core + DI API, and NBS Complete — and when each is appropriate.
 ---
 
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## NBS 7 configuration tiers
 {: .no_toc }
 
-<!-- INTRO OR OVERVIEW -->
 This section describes the four ways to deploy NBS 7. You do not have to deploy everything at once. Most jurisdictions will start with NBS Core, then add RTR or the DI API as their team builds confidence with the platform. Starting smaller reduces deployment risk and gives your team time to learn the system before taking on additional complexity.
 
 1. TOC
@@ -20,7 +19,6 @@ After you review the configuration tiers, use the [decision tree](2_decision_tre
 
 ---
 
-<!-- FIRST PAGE SECTION -->
 ### NBS Core
 
 The minimum viable deployment. NBS Core gives your jurisdiction NBS 6 feature parity on modern, cloud-based infrastructure, plus foundational NBS 7 improvements such as real-time patient search.

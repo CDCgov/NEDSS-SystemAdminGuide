@@ -4,10 +4,9 @@ layout: page
 parent: Component reference
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 2
+description: Details the four components added by the Real-Time Reporting (RTR) add-on: Debezium, Kafka, RTR domain services, and RDB_Modern.
 ---
 
-
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## Component reference: Real-Time Reporting (RTR) add-on
 {: .no_toc }
 

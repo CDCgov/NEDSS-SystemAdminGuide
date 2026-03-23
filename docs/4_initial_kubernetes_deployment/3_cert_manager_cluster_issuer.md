@@ -1,38 +1,36 @@
 ---
-title: Cert Manager
+title: Configure cert-manager
 layout: page
 parent: Initial Kubernetes Deployment
 nav_order: 3
 nav_enabled: true
 ---
 
-## On this page
-{: .no_toc .text-delta }
+# Configure cert-manager (optional)
+{: .no_toc }
 
-1. TOC
-{:toc}
+cert-manager manages TLS certificates within the Kubernetes cluster. By default, cert-manager uses [Let's Encrypt](https://letsencrypt.org/) as the certificate authority for NiFi and modernization-api services.
 
-## Configure Cert manager Cluster Issuer (Optional automatic certificates)
+> If you have manual certificates, skip steps 1–4 and store your certificates in Kubernetes secrets instead. See the [Kubernetes Secrets documentation](https://kubernetes.io/docs/concepts/configuration/secret/) for instructions.
+{: .note }
 
-Cert-manager is a tool to manage certificates within the Kubernetes cluster. By default, [LetsEncrypt](https://letsencrypt.org/) will used as a certificate authority/issuer for certificates for NIFI and modernization-api services.
-Note: If you have manual certificates, please skip below steps 1-4 and store your certificates manually in Kubernetes secrets and reference them in your configuration by following this [link](https://kubernetes.io/docs/concepts/configuration/secret/).
-Set up cluster issuer for LetsEncrypt production certificate issuer:
+1. Locate the cluster issuer manifest in the `nbs-helm-v7.X.0` zip file at `k8-manifests/cluster-issuer-prod.yaml`.
 
-1. Use the manifests provided as part of `nbs-helm-v7.X.0` zip file. The YAML manifests should be under `k8-manifests/cluster-issuer-prod.yaml`.
-2. Update the email address in **cluster-issuer-prod.yaml** to be your valid operations email address. This email address will be used to notify any certificate expirations that are due for renewal. This will only occur if the automatic renewal stops working (as in the case of a decommissioned test system).
-3. In your terminal, change your directory to `k8-manifests/` and run the following command to install the cluster issuer:
+1. In `cluster-issuer-prod.yaml`, update the email address to a valid operations address. Let's Encrypt uses this address to notify you of upcoming certificate expirations if automatic renewal stops working.
+
+1. From your terminal, apply the manifest:
 
    ```bash
    cd <HELM_DIR>/k8-manifests
    kubectl apply -f cluster-issuer-prod.yaml
    ```
 
-   You should see a cluster issuer created as shown below
-4. Run the following command to make sure the cluster issuer is deployed properly and is in ready state:
+1. Verify the cluster issuer is deployed and in a ready state:
 
    ```bash
    kubectl get clusterissuer
    ```
 
-   You should see a letsencrypt-production true message as shown below
+   You should see `letsencrypt-production` with a `READY` status of `True`.
+
    ![lets-encrypt](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/2_lets-encrypt.png)

@@ -1,10 +1,13 @@
 ---
-title: Linkerd and Cluster Autoscaler
+title: Configure Linkerd and Cluster Autoscaler
 layout: page
 parent: Initial Kubernetes Deployment
 nav_order: 4
 nav_enabled: true
 ---
+
+# Configure Linkerd and Cluster Autoscaler
+{: .no_toc }
 
 ## On this page
 {: .no_toc .text-delta }
@@ -12,42 +15,53 @@ nav_enabled: true
 1. TOC
 {:toc}
 
-## Linkerd - Annotate default namespace
+## Annotate the default namespace for Linkerd
 
-- a. Verify that linkerd is installed as part of the terraform infrastructure deployment by checking the pods status under the "linkderd" namespace. This will enable linkerd/MTLS on all the microservices installed in the follow steps
+Linkerd must be installed as part of the Terraform infrastructure deployment before completing these steps. Annotating the default namespace enables Linkerd mTLS on all microservices deployed in the following steps.
 
-  ```bash
-  kubectl annotate namespace default "linkerd.io/inject=enabled"
-  ```
+1. Annotate the default namespace:
 
-  ![linkerd](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/3_linkerd.png)
-- b. Verify annotation is in place:
+   ```bash
+   kubectl annotate namespace default "linkerd.io/inject=enabled"
+   ```
 
-  ```bash
-  kubectl get namespace default -o=jsonpath='{.metadata.annotations}'
-  ```
+   ![linkerd](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/images/3_linkerd.png)
 
-  Should show "{"linkerd.io/inject":"enabled"}"
-- c. If this is an update of the environment rather than a new install, restart the application pods in the default namespace for the linkerd sidecars to be injected into each pods. Should show 2/2 on the restarted pod.
+1. Verify the annotation is in place:
 
-## Cluster Autoscaler Installation
+   ```bash
+   kubectl get namespace default -o=jsonpath='{.metadata.annotations}'
+   ```
 
-Cluster Autoscaler is a helm chart deployment that horizontally autoscales cluster nodes when deployed on the cluster. The following parameter values need to be modified under charts/cluster-autoscaler/values.yaml file. These values should be fetched from the AWS console.
+   The output should include `{"linkerd.io/inject":"enabled"}`.
 
-```bash
+1. If this is an update rather than a new install, restart the application pods in the default namespace so that Linkerd sidecars are injected. Restarted pods should show `2/2` in the ready column.
+
+## Install the Cluster Autoscaler
+
+The Cluster Autoscaler is a Helm chart that horizontally scales cluster nodes as needed. Update the following values in `charts/cluster-autoscaler/values.yaml` with values from the AWS console:
+
+```yaml
 clusterName: <EXAMPLE_EKS_CLUSTER_NAME>
 autoscalingGroups:
   - name: <EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>
     maxSize: 5
     minSize: 3
 awsRegion: us-east-1
-
-helm repo add autoscaler https://kubernetes.github.io/autoscaler
-helm upgrade --install cluster-autoscaler autoscaler/cluster-autoscaler -f ./cluster-autoscaler/values.yaml --namespace kube-system
 ```
 
-To verify that cluster-autoscaler has started, run
+Install the chart:
 
 ```bash
-kubectl --namespace=kube-system get pods -l "app.kubernetes.io/name=aws-cluster-autoscaler,app.kubernetes.io/instance=cluster-autoscaler"
+helm repo add autoscaler https://kubernetes.github.io/autoscaler
+helm upgrade --install cluster-autoscaler autoscaler/cluster-autoscaler \
+  -f ./cluster-autoscaler/values.yaml \
+  --namespace kube-system
+```
+
+Verify the pod is running:
+
+```bash
+kubectl --namespace=kube-system get pods \
+  -l "app.kubernetes.io/name=aws-cluster-autoscaler,app.kubernetes.io/instance=cluster-autoscaler"
 ```

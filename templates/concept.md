@@ -1,5 +1,5 @@
 ---
-title: TITLE              # Required. The concept name. Becomes the page's H1 and left-nav label.
+title: TITLE              # Required. The concept name. Used as left-nav label and breadcrumb. Must also be written as # H1 in the body.
                           # Child pages that reference this page must use this exact string as parent:.
 layout: page              # Required. Always "page" — do not change.
 nav_order: NAV_ORDER      # Required. Integer. Controls position among siblings in the nav.
@@ -26,6 +26,9 @@ description: DESCRIPTION  # Optional but recommended. 1–2 sentences, under 160
     (VPC)."
   ================================================================
 -->
+
+# TITLE
+{: .no_toc }
 
 ## On this page
 {: .no_toc .text-delta }

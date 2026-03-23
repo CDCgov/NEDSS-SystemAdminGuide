@@ -4,13 +4,12 @@ layout: page
 parent: NBS 7 Deployment Decision Guide
 grand_parent: Introduction
 nav_order: 1
+description: Covers the technical prerequisites an STLT must meet before beginning NBS 7 migration, including cloud, staffing, and network requirements.
 ---
 
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## Assess your readiness for NBS 7
 {: .no_toc }
 
-<!-- INTRO OR OVERVIEW -->
 This section helps you assess whether NBS 7 is a viable option for your jurisdiction before you commit to a migration. Some prerequisites in this section are also covered in the **NBS 7 Migration Info Sheet**. If your jurisdiction has already begun the migration process, use that document alongside this one.
 
 {: .note }

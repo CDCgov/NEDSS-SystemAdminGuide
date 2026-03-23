@@ -47,6 +47,9 @@ description: DESCRIPTION  # Optional but recommended. 1–2 sentences, under 160
     They are deployed using Helm." [Too short, adds no guidance]
 -->
 
+# TITLE
+{: .no_toc }
+
 OPENING_PARAGRAPH
 
 ## In this section

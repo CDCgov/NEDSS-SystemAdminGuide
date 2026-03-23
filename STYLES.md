@@ -10,23 +10,28 @@ This guide documents conventions that are actually in use in the repo. It does n
 
 | Level | Tag | When to use |
 |-------|-----|-------------|
-| H1 | `# Heading` | **Never write this in body content.** JTD renders the page `title:` from front matter as the H1 automatically. Writing a second `# Heading` creates two H1s on the page. |
+| H1 | `# Heading` | **Write this as the first line of body content, matching the front matter `title:`.** JTD does not inject the title automatically — omitting it leaves the page with no H1. Never write more than one H1. |
 | H2 | `## Heading` | Major sections. These appear in the in-page table of contents. |
 | H3 | `### Heading` | Subsections within an H2. These do **not** appear in the TOC (configured in `_config.yml` — `toc.max_level: 2`). |
 | H4+ | `#### Heading` | Use sparingly. If you need H4, the section is probably too deep — consider restructuring. |
 
 **Example front matter + first heading:**
 
-```yaml
+```markdown
 ---
 title: Kubernetes Bootstrapping
 layout: page
 nav_order: 2
 parent: Initial Kubernetes Deployment
 ---
+
+# Kubernetes Bootstrapping
+{: .no_toc }
+
+## Before you begin
 ```
 
-The page renders "Kubernetes Bootstrapping" as the H1 automatically. The first heading you write in the body should be `##`.
+The `# Heading` matches the front matter `title:` exactly. Every page needs it — JTD shows the title in the nav and breadcrumbs, but only your H1 creates the visible page heading. The first section heading after the H1 should be `##`.
 
 ---
 
@@ -87,6 +92,23 @@ Use for inline callouts where you want visual emphasis without a title label. Us
 > Use `--dry-run` to preview Terraform changes before applying them.
 {: .highlight }
 ```
+
+### Custom titles (`-title` variants)
+
+Each type except `highlight` supports a `-title` variant that lets you replace the default label ("Note", "Important", etc.) with your own title. Use this when the default label is too generic for the context.
+
+**Syntax:** append `-title` to the class name. The first line of the blockquote becomes the title; leave a blank line before the body.
+
+```markdown
+> Best for
+>
+> Jurisdictions with smaller IT teams or limited cloud experience.
+{: .note-title }
+```
+
+The `-title` variants follow the same usage rules as their base types — the variant only changes the label, not when to use the callout.
+
+`highlight` has no default label and does not have a `-title` variant.
 
 ### When to use which type
 
@@ -164,14 +186,14 @@ Use descriptive link text. The link text should tell the reader where they are g
 **Do this:**
 
 ```markdown
-See the [Keycloak installation guide](../5_keycloak/1_keycloak_installation.md) for prerequisites.
+See the [Keycloak installation guide](../5_keycloak/1_keycloak_installation.html) for prerequisites.
 Refer to the [Just the Docs configuration reference](https://just-the-docs.com/docs/configuration/).
 ```
 
 **Not this:**
 
 ```markdown
-Click [here](../5_keycloak/1_keycloak_installation.md) for more information.
+Click [here](../5_keycloak/1_keycloak_installation.html) for more information.
 See [this page](https://just-the-docs.com/docs/configuration/) for details.
 ```
 
@@ -231,3 +253,60 @@ Use tables for **reference data and comparisons** where the reader will scan acr
 - Content with cells that require lengthy explanation (the table becomes unreadable)
 
 **Column alignment:** Use the default (left-aligned). Only use `:---:` center alignment for columns that contain short codes or symbols where centering aids scanning.
+
+---
+
+## 7. Numbered Lists
+
+**Use `1.` for every item.** Markdown renderers increment the numbers automatically, so writing `1.` throughout makes it easy to insert or reorder steps without renumbering.
+
+```markdown
+1. First step.
+1. Second step.
+1. Third step.
+```
+
+---
+
+### Numbered lists with code blocks
+
+Kramdown ends a numbered list whenever it encounters an unindented block — a code block, callout, image, or paragraph sitting at the left margin. The list then restarts at 1.
+
+**To keep a numbered list unbroken**, indent all continuation content 3 spaces so kramdown treats it as part of the current list item:
+
+````markdown
+1. First step — intro text.
+
+   ```bash
+   some command
+   ```
+
+1. Second step — the list continues correctly.
+````
+
+This applies to everything that belongs inside a list item: code blocks, callouts, images, and paragraphs.
+
+**Do not do this** — the unindented code block ends the list, and step 2 restarts at 1:
+
+````markdown
+1. First step.
+
+```bash
+some command
+```
+
+1. Second step.
+````
+
+**Callouts and notes inside list items** follow the same rule — indent 3 spaces:
+
+```markdown
+1. First step.
+
+   > Run this only after verifying your credentials.
+   {: .warning }
+
+2. Second step.
+```
+
+**Paragraphs between steps** also break the list if unindented. If a note applies to the next step, put it inside that step as a callout rather than between steps as a bare paragraph.

@@ -4,9 +4,9 @@ layout: page
 parent: Deploy NBS 7
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
+description: Case study for a small, self-managed AWS deployment based on Montana's experience, covering configuration choices and lessons learned.
 ---
 
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## Case study: Small jurisdiction, self-managed, AWS
 {: .no_toc }
 
@@ -15,9 +15,8 @@ nav_order: 1
 1. TOC
 {:toc}
 
---- 
+---
 
-<!-- FIRST PAGE SECTION -->
 ### Profile
 
 Small STLT with limited IT staff and a cloud-first infrastructure strategy. The jurisdiction prioritized simplicity and maintainability over advanced features.

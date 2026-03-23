@@ -4,13 +4,21 @@ layout: page
 parent: Introduction
 nav_order: 2
 has_children: true
+description: Helps STLT IT administrators evaluate NBS 7 adoption, choose a deployment configuration, and prepare a leadership recommendation.
 ---
 
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
-# NBS 7 preparation and decision guide
+
+# NBS 7 Deployment Decision Guide
 {: .no_toc }
 
-<!-- INTRO OR OVERVIEW -->
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Overview 
+
 This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7. It aims to help your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment configuration. Review the decision guide before you begin migration planning.
 
 Use this guide to:
@@ -21,7 +29,7 @@ Use this guide to:
 - Prepare a recommendation for your leadership
 
 
-{: .highlight }
+{: .note }
 **Health department leaders:** This guide is written for IT administrators. For a summary of the key organizational, financial, and operational considerations relevant to your go/no-go decision, see [Leadership considerations](leadership_considerations.html).
 
 ## How this guide fits into the NBS 7 process

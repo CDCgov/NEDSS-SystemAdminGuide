@@ -4,10 +4,9 @@ layout: page
 parent: Component reference
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
+description: Details each component in NBS Core — the application, infrastructure, and networking layers required for all NBS 7 deployments.
 ---
 
-
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## Component reference: NBS Core
 {: .no_toc }
 

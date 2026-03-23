@@ -88,6 +88,23 @@ Use for inline callouts where you want visual emphasis without a title label. Us
 {: .highlight }
 ```
 
+### Custom titles (`-title` variants)
+
+Each type except `highlight` supports a `-title` variant that lets you replace the default label ("Note", "Important", etc.) with your own title. Use this when the default label is too generic for the context.
+
+**Syntax:** append `-title` to the class name. The first line of the blockquote becomes the title; leave a blank line before the body.
+
+```markdown
+> Best for
+>
+> Jurisdictions with smaller IT teams or limited cloud experience.
+{: .note-title }
+```
+
+The `-title` variants follow the same usage rules as their base types — the variant only changes the label, not when to use the callout.
+
+`highlight` has no default label and does not have a `-title` variant.
+
 ### When to use which type
 
 | Type | Use when... |

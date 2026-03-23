@@ -4,9 +4,9 @@ layout: page
 parent: Component reference
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 3
+description: Details the Data Ingestion (DI) API add-on component, which accepts ELRs, eCRs, and PHDC files without requiring third-party middleware.
 ---
 
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## Component reference: Data Ingestion (DI) API add-on
 {: .no_toc }
 

@@ -4,13 +4,12 @@ layout: page
 parent: NBS 7 Deployment Decision Guide
 grand_parent: Introduction
 nav_order: 0
+description: Summarizes the organizational, financial, and operational factors that health department leaders should address before committing to NBS 7 migration.
 ---
 
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## NBS 7 leadership considerations
 {: .no_toc }
 
-<!-- INTRO OR OVERVIEW -->
 This page is for **health department leaders and decision-makers** who need to understand the organizational, financial, and operational implications of migrating to NBS 7. Each consideration below represents a decision point or planning requirement that leadership should address before your jurisdiction commits to migration.
 
 For technical deployment guidance, refer to the [Assess your readiness](0_assess_readiness.html) section and the rest of this guide.

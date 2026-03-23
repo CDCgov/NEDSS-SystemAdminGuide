@@ -4,13 +4,11 @@ layout: page
 parent: Deploy NBS 7
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 3
+description: Case study for a large, vendor-managed NBS Complete deployment at enterprise scale, covering high-availability and advanced configuration decisions.
 ---
 
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## Case study: Large jurisdiction, high volume, vendor-managed
 {: .no_toc }
-
-<!-- INTRO OR OVERVIEW -->
 
 *Based on an enterprise-scale deployment.*
 

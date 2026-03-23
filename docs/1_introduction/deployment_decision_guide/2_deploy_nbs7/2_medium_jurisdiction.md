@@ -4,13 +4,11 @@ layout: page
 parent: Deploy NBS 7
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 2
+description: Case study for a medium jurisdiction with existing Rhapsody middleware deploying NBS Core + RTR, based on Kentucky's experience.
 ---
 
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## Case study: Medium jurisdiction, existing middleware, RTR
 {: .no_toc }
-
-<!-- INTRO OR OVERVIEW -->
 
 *Based on Kentucky's deployment.*
 

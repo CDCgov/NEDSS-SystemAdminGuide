@@ -4,13 +4,12 @@ layout: page
 parent: Choose your configuration
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 3
+description: Guidance for jurisdictions using a vendor to host or maintain NBS 7, including what to evaluate in a vendor and how to coordinate with CDC.
 ---
 
-<!-- PAGE TITLE - DON'T INCLUDE HEADER IN TOC -->
 ## Vendor-managed deployment
 {: .no_toc }
 
-<!-- INTRO OR OVERVIEW -->
 If you plan to use a vendor to host or maintain NBS 7, confirm that they can:
 
 - Deploy Kubernetes-based applications on AWS or Azure
@@ -18,7 +17,7 @@ If you plan to use a vendor to host or maintain NBS 7, confirm that they can:
 - Support ongoing cloud infrastructure operations, including monitoring and incident response
 
 > NBS 7 is a recent system with limited deployment history. Do not expect vendors to have direct NBS 7 experience. Evaluate vendors on their Kubernetes and cloud infrastructure expertise instead. You can share the [component reference](../3_component_reference.html) section of this guide with vendors to help them scope the work accurately.
-{: .highlight }
+{: .important }
 
 Share the following with your vendor before scoping work:
 
@@ -33,4 +32,4 @@ Then:
 3. Return to the [component reference](../3_component_reference.html) for the configuration parameters your vendor will need.
 
 > Vendors with Kubernetes and cloud infrastructure expertise can deploy NBS 7, but they will need detailed technical guidance from CDC and from this guide to do it accurately. Plan for a close working relationship between your vendor and the CDC NBS team, especially during initial deployment. Also plan for the funding needed to sustain vendor support beyond initial deployment. Ongoing maintenance costs are a common planning gap.
-{: .highlight }
+{: .note }

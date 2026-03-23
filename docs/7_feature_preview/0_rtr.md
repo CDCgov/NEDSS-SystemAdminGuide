@@ -1,5 +1,5 @@
 ---
-title: Real Time Reporting (Preview)
+title: Real-Time Reporting (Preview)
 layout: page
 nav_order: 8
 has_children: true
@@ -13,15 +13,17 @@ redirect_from:
   - /docs/7_feature_preview/(DEPRECATED)9_post_processing_reporting_service/
 ---
 
+# Deploy Real Time Reporting via Helm chart
+{: .no_toc }
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
-# Deploy Real Time Reporting via helm chart
-
-> ℹ️ **Note:** ***This feature is optional and in beta and not production ready. Please follow the steps if you would like to install it in your environment.***
+> This feature is in Beta preview and not production ready.
+{: .important }
 
 This guide details steps to install NBS 7 Real Time Reporting end to end. Real Time Reporting provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database RDB. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Onboarding: Service Users and Setup Scripts](#onboarding-service-users-and-setup-scripts)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into RDB.
 
@@ -126,7 +128,7 @@ One time onboarding steps required for Real Time Reporting setup.
 1. Create database users: Each user will be provided with permissions it needs to do its job and nothing more! **Please review the scripts and update the PASSWORD field for before executing.**
     - a. Create admin user: User provides Liquibase required permissions to maintain necessary database components for Real Time Reporting, and enable Change Data Capture for tables.
       - Script location: [NEDSS-DataReporting/create-rtr-admin-user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/000-create_rtr_admin_user-001.sql)
-    - b. Create Real Time Reporting microservice user logins: Create dedicated user accounts for each Real Time Reporting microservice. These users are wired in helm for each Real Time Reporting services.
+    - b. Create Real Time Reporting microservice user logins: Create dedicated user accounts for each Real Time Reporting microservice. These users are wired in Helm for each Real Time Reporting services.
       - Script location: [NEDSS-DataReporting/service-user-login-script](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/001-service_users_login_creation-001.sql)
       - Script location: [NEDSS-DataReporting/service-database-user-creation](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/002-service_database_user_creation-001.sql)
 2. Create kubernetes secrets: Kubernetes secrets are required for Real Time Reporting services to access the database. The secrets should be created for each service user created in step 1. (**Ignore this if kubernetes secrets are created in step** [kuberetes secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster))

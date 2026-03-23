@@ -88,6 +88,8 @@ Repeat as needed. Push your feature branch to keep it backed up on remote:
 git push -u origin your-initials/short-description
 ```
 
+Or if you set up automatic remote tracking, just `git push`.
+
 ### 3. Stage for stakeholder review
 
 Sync `preview` with `main` first to avoid conflicts, then merge your feature branch in:

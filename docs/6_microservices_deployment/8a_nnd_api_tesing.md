@@ -7,13 +7,14 @@ nav_order: 1
 nav_enabled: true
 ---
 
+# Validating API endpoints
+{: .no_toc }
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
-
-## Validating API endpoints
 
 STLT must ensure they have a proper connection to the Data APIs, and that the API endpoint is correctly provided and detailed in the accompanying Swagger documentation. Typically, these API endpoints are not accessed directly by human users; instead, they are invoked by the Data Sync service.
 

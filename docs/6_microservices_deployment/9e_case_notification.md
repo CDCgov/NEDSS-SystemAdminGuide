@@ -7,13 +7,14 @@ nav_order: 5
 nav_enabled: true
 ---
 
+# Case Notification Service
+{: .no_toc }
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
-
-## Case Notification Service
 
 1. Helm chart can be found under chart/case-notification-service
 2. Validate the image tag

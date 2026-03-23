@@ -1,10 +1,13 @@
 ---
 title: Debezium
 layout: page
-parent: Real Time Reporting (Preview)
+parent: Real-Time Reporting (Preview)
 nav_order: 2
 nav_enabled: true
 ---
+
+# Debezium
+{: .no_toc }
 
 ## On this page
 {: .no_toc .text-delta }
@@ -12,9 +15,9 @@ nav_enabled: true
 1. TOC
 {:toc}
 
-## Debezium Source Connector/debezium-connect
+## Debezium source Connector/debezium-connect
 
-1. The helm chart for debezium-connect should be available under charts/debezium.
+1. The Helm chart for debezium-connect should be available under charts/debezium.
 2. Validate image repository and tag:
 
    ```yaml
@@ -72,7 +75,7 @@ nav_enabled: true
 5. Install pod
 
    ```bash
-   helm install -f ./debezium/values.yaml debezium-connect ./debezium/
+   Helm install -f ./debezium/values.yaml debezium-connect ./debezium/
    ```
 
 6. Verify if pod is running

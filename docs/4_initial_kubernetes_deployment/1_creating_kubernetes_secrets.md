@@ -13,13 +13,11 @@ nav_enabled: true
 ## On this page
 {: .no_toc .text-delta }
 
-
 1. TOC
 {:toc}
 -->
 
 After you download and unzip the Helm configuration package, you need to create the Kubernetes secrets that your cluster will use to connect to its databases. This page explains how to populate the `nbs-secrets.yaml` manifest with your environment-specific database credentials and deploy it to the cluster. After you complete this step, move on to deploy the NGINX ingress controller.
-
 
 1. Obtain the sample Kubernetes manifest to create secrets expected to be available on the cluster from k8-manifests/nbs-secrets.yaml.
 2. Replace string values wherever there is an "EXAMPLE_"

@@ -13,13 +13,11 @@ nav_enabled: true
 ## On this page
 {: .no_toc .text-delta }
 
-
 1. TOC
 {:toc}
 -->
 
 After you create and deploy your Kubernetes secrets, set up the NGINX ingress controller. This page explains how to use the preconfigured Helm values to install the controller, verify that the AWS network load balancer is active, and create the DNS records your cluster needs to route traffic. After you complete these steps, configure Cert Manager to manage TLS certificates for your cluster.
-
 
 1. NGINX will use the values in `charts/nginx-ingress/values.yaml` as a part of `nbs-helm-vX.Y.Z` zip file. These values have been preconfigured to setup Prometheus to scrape metrics and also to instruct NGINX controller to create AWS network load balancer instead of classic load balancer in front of the k8 NGINX ingress.
 

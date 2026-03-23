@@ -17,7 +17,6 @@ nav_enabled: true
 
 ## Installation Guide & Smoke Tests
 
-
 Installation of NBS 7 consists of multiple phases:
 
 1. **Set up the AWS infrastructure** - Deploy the cloud environment including Kubernetes, using [Terraform](https://www.terraform.io/)

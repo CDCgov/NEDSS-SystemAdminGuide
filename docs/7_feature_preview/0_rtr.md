@@ -1,5 +1,5 @@
 ---
-title: Real Time Reporting (Preview)
+title: Real-Time Reporting (Preview)
 layout: page
 nav_order: 8
 has_children: true
@@ -13,17 +13,20 @@ redirect_from:
   - /docs/7_feature_preview/(DEPRECATED)9_post_processing_reporting_service/
 ---
 
+# Deploy Real-Time Reporting via Helm chart
+{: .no_toc }
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
-# Deploy Real Time Reporting via helm chart
 
-> ℹ️ **Note:** ***This feature is optional and in beta and not production ready. Please follow the steps if you would like to install it in your environment.***
+> This feature is in Beta preview and not production ready. 
+{: .important }
 
-This guide details steps to install NBS 7 Real Time Reporting end to end. Real Time Reporting provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database RDB. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Onboarding: Service Users and Setup Scripts](#onboarding-service-users-and-setup-scripts)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into RDB.
+This guide details steps to install NBS 7 Real-Time Reporting end to end. Real-Time Reporting provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database RDB. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Onboarding: Service Users and Setup Scripts](#onboarding-service-users-and-setup-scripts)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into RDB.
 
 ---
 
@@ -48,15 +51,15 @@ If there are problems encountered during Database Setup, please reach out to our
     select * from NBS_configuration where config_key = 'CODE_BASE'
   ```
 
-2. **Classic ETL: Please ensure the following ETL batch jobs have run successfully before setting up the reporting database for Real Time Reporting.**
+2. **Classic ETL: Please ensure the following ETL batch jobs have run successfully before setting up the reporting database for Real-Time Reporting.**
    - a. ETL scheduled jobs:
      - `MasterEtl.bat`
      - `PHCMartETL.bat`
      - `covid19ETL.bat`
    - b. **Note: Ensure to take a backup of rdb database before proceeding with the next steps**
    - c. Database setup:
-     - **Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.**
-     - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under [Onboarding: UAT Database Setup](#onboarding-uat-database-setup) section.
+     - **Option 1: Using RDB is the default database for Real-Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.**
+     - Option 2: Creating a separate database (rdb_modern) for Real-Time Reporting. Steps are listed under [Onboarding: UAT Database Setup](#onboarding-uat-database-setup) section.
 
 3. Environment Variable: Set the appropriate environment variable to define the reporting database context. This ensures that scripts execute against the correct reporting database.
    - a. Option 1: RDB as default database. Please insert the following to NBS_configuration to default to RDB.
@@ -79,7 +82,7 @@ If there are problems encountered during Database Setup, please reach out to our
 
 ### Onboarding: UAT Database Setup
 
-[Optional] Restore RDB as rdb_modern database: If a separate database is required as part of UAT, please create a restored backup of the RDB as rdb_modern. This ensures availability of classic ETL hydrated RDB and to host necessary components for Real Time Reporting. If you have AWS RDS, please run the following steps.
+[Optional] Restore RDB as rdb_modern database: If a separate database is required as part of UAT, please create a restored backup of the RDB as rdb_modern. This ensures availability of classic ETL hydrated RDB and to host necessary components for Real-Time Reporting. If you have AWS RDS, please run the following steps.
 
 - i. Backup RDB
   - a. Login into AWS Account.
@@ -121,18 +124,18 @@ If there are problems encountered during Database Setup, please reach out to our
 
 ### Onboarding: Service Users and Setup Scripts
 
-One time onboarding steps required for Real Time Reporting setup.
+One time onboarding steps required for Real-Time Reporting setup.
 
 1. Create database users: Each user will be provided with permissions it needs to do its job and nothing more! **Please review the scripts and update the PASSWORD field for before executing.**
-    - a. Create admin user: User provides Liquibase required permissions to maintain necessary database components for Real Time Reporting, and enable Change Data Capture for tables.
+    - a. Create admin user: User provides Liquibase required permissions to maintain necessary database components for Real-Time Reporting, and enable Change Data Capture for tables.
       - Script location: [NEDSS-DataReporting/create-rtr-admin-user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/000-create_rtr_admin_user-001.sql)
-    - b. Create Real Time Reporting microservice user logins: Create dedicated user accounts for each Real Time Reporting microservice. These users are wired in helm for each Real Time Reporting services.
+    - b. Create Real-Time Reporting microservice user logins: Create dedicated user accounts for each Real-Time Reporting microservice. These users are wired in Helm for each Real-Time Reporting services.
       - Script location: [NEDSS-DataReporting/service-user-login-script](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/001-service_users_login_creation-001.sql)
       - Script location: [NEDSS-DataReporting/service-database-user-creation](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/002-service_database_user_creation-001.sql)
-2. Create kubernetes secrets: Kubernetes secrets are required for Real Time Reporting services to access the database. The secrets should be created for each service user created in step 1. (**Ignore this if kubernetes secrets are created in step** [kuberetes secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster))
+2. Create kubernetes secrets: Kubernetes secrets are required for Real-Time Reporting services to access the database. The secrets should be created for each service user created in step 1. (**Ignore this if kubernetes secrets are created in step** [kuberetes secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster))
     - a. Create secrets for each service user, including the admin user created in step 1a. The secrets should include the database username and password for each service user.:
       - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
-3. Create required database objects: Scripts required for Real Time Reporting can be executed via Liquibase or manually.
+3. Create required database objects: Scripts required for Real-Time Reporting can be executed via Liquibase or manually.
     - Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section to create all necessary objects before moving to step 4.
     - Option 2: The required database objects can also be manually created. Documentation on script execution sequence and supplemental `db_upgrade.bat` file is provided to support manual setup.
       - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
@@ -192,7 +195,7 @@ One time onboarding steps required for Real Time Reporting setup.
    EXEC sp_changedbowner 'sa';
    ```
 
-### Continuous Integration for Real Time Reporting Database
+### Continuous Integration for Real-Time Reporting Database
 
 After onboarding, future enhancements will be delivered using these two approaches.
 
@@ -201,7 +204,7 @@ After onboarding, future enhancements will be delivered using these two approach
 
 ---
 
-Real Time Reporting services should be deployed in the following order:
+Real-Time Reporting services should be deployed in the following order:
 
 - liquibase
 - debezium-connect
@@ -213,4 +216,4 @@ Real Time Reporting services should be deployed in the following order:
 - ldfdata-reporting-service
 - post-processing-reporting-service.
 
-Real Time Reporting services leverage Kubernetes secrets for accessing database credentials. Please refer to section [Creating Kubernetes Secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster) section.) for setting up secrets within the cluster.
+Real-Time Reporting services leverage Kubernetes secrets for accessing database credentials. Please refer to section [Creating Kubernetes Secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster) section.) for setting up secrets within the cluster.

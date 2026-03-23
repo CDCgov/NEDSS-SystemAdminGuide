@@ -1,10 +1,13 @@
 ---
-title: RTR Pipeline Validation
+title: RTR pipeline validation
 layout: page
-parent: Real Time Reporting (Preview)
+parent: Real-Time Reporting (Preview)
 nav_order: 11
 nav_enabled: true
 ---
+
+# RTR pipeline validation
+{: .no_toc }
 
 ## On this page
 {: .no_toc .text-delta }
@@ -12,63 +15,82 @@ nav_enabled: true
 1. TOC
 {:toc}
 
-## RTR Pipeline Validation
+## Validate via the NBS UI
 
-1. **Via the UI:** Testing the RTR pipeline through the NBS UI. This example covers the steps required to create a Hepatitis Investigation from the UI and view the investigation details in the datamart tables. The data input for this example is synthetic and randomly generated.
-   - a. Access the NBS UI with the username and password provided for the demo and click Data Entry in the top banner.
-         ![rtr-validation-via-ui](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-via-ui.png)
-   - b. Select "Lab Report" under the Data Entry section to start a report.
-         ![rtr-validation-lab-report](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report.png)
-   - c. Add patient information to the lab report. Entity Id is required to complete the Patient tab for the report. If SSN is selected, the authority should be 'Social Security Administration'.
-         ![rtr-validation-lab-report-2](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-2.png)
-   - d. Select the Lab Report tab and add necessary details to the report. The Program Area selected for this example is HEP. Required section Resulted Test must be filled in before submitting. Click "Submit" when done. If there are any errors in the submission, they will show up in red. Once they are corrected, the report can be submitted again.
-         ![rtr-validation-lab-report-3](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-3.png)
-   - e. Navigate to the patient record via Patient Search or find the lab report in the Documents Requiring Review queue. From the patient record, navigate to the Events tab to view the lab created.
-         ![rtr-validation-lab-report-4](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-4.png)
-   - f. Click on the "Create Investigation" button in the upper right corner to create an investigation for the lab report.
-         ![rtr-validation-lab-report-create-investigation](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation.png)
-   - g. For this test, select a Hepatitis condition.
-         ![rtr-validation-lab-report-create-investigation-2](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation-2.png)
-   - h. Add information to complete the Investigation form and click Submit when done.
-         ![rtr-validation-lab-report-create-investigation-3](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation-3.png)
-   - i. The data should be available in the PUBLICHEALTHCASEFACT_Modern and Hepatitis datamarts in 1-2 minutes. The form's Investigation ID can be used in the query below to review the information from the tables.
-         ![rtr-validation-lab-report-create-investigation-4](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation-4.png)
+This example covers creating a Hepatitis Investigation from the NBS UI and verifying the results in the datamart tables. The data used is synthetic and randomly generated.
 
-        ```sql
-        DECLARE @local_id VARCHAR(20) = 'CAS10001017GA01'
+1. Access the NBS UI with the username and password provided for the demo and click **Data Entry** in the top banner.
 
-        SELECT LASTUPDATE, PHCF.*
-        FROM NBS_ODSE.DBO.PUBLICHEALTHCASEFACT_Modern PHCF
-        WHERE LOCAL_ID IN (@local_id);
+   ![rtr-validation-via-ui](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-via-ui.png)
 
-        SELECT REFRESH_DATETIME, hd.*
-        FROM RDB_MODERN.DBO.HEPATITIS_DATAMART hd
-        WHERE INV_LOCAL_ID IN (@local_id);
+1. Under **Data Entry**, select **Lab Report** to start a report.
 
-        SELECT cl.*
-        FROM RDB_MODERN.DBO.CASE_LAB_DATAMART cl
-        WHERE INVESTIGATION_LOCAL_ID IN (@local_id);
+   ![rtr-validation-lab-report](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report.png)
 
-        SELECT isd.*
-        FROM RDB_MODERN.DBO.INV_SUMM_DATAMART isd
-        WHERE INVESTIGATION_LOCAL_ID IN (@local_id);
-        ```
+1. Add patient information to the lab report. Entity ID is required to complete the Patient tab. If SSN is selected, the authority should be `Social Security Administration`.
 
-   - j. If there are any errors, please run the query below to see if there are any SQL script errors. If the data fails to make it into the target datamart tables, please reach out to our support team.
+   ![rtr-validation-lab-report-2](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-2.png)
 
-        ```sql
-        SELECT *
-        FROM RDB_MODERN.DBO.JOB_FLOW_LOG
-        WHERE Status_Type = 'ERROR'
-        ORDER BY batch_id desc;
-        ```
+1. Select the **Lab Report** tab and fill in the required details. The Program Area for this example is HEP. The **Resulted Test** section is required before submitting. Click **Submit** when done. Any errors will appear in red — correct them and resubmit.
 
-2. **Via the ELR ingestion:**
-To test the pipeline, you can perform ELR (Electronic Lab Report) ingestion through the Data Ingestion service instead of creating entries via the NBS UI. Please refer to the Data Ingestion related smoke test section in the release documentation for detailed steps and guidance of the ELR ingestion.
+   ![rtr-validation-lab-report-3](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-3.png)
 
-If the Workflow Decision Support (WDS) is configured, and a matching algorithm is detected during a HEP ELR ingestion, an investigation will be automatically created and added to the investigation queue. However, configuring the WSD algorithm is not mandatory. If the WSD algorithm is not in place, the ELR will still be successfully ingested and will appear in the Document Requiring Review queue instead. You can then locate and open the HEP lab report from this queue and follow the steps outlined in step 1.e of the NBS UI validation process as listed above.
+1. Navigate to the patient record via **Patient Search** or find the lab report in the **Documents Requiring Review** queue. From the patient record, open the **Events** tab to view the lab report.
 
-The data used for this testing example is synthetic and randomly generated. Any HEP-related ELR, such as Hepatitis A, B, or C etc. can be used for the test.
+   ![rtr-validation-lab-report-4](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-4.png)
+
+1. Click **Create Investigation** in the upper right corner.
+
+   ![rtr-validation-lab-report-create-investigation](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation.png)
+
+1. Select a Hepatitis condition.
+
+   ![rtr-validation-lab-report-create-investigation-2](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation-2.png)
+
+1. Complete the Investigation form and click **Submit**.
+
+   ![rtr-validation-lab-report-create-investigation-3](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation-3.png)
+
+1. After 1–2 minutes, verify the data is available in the `PUBLICHEALTHCASEFACT_Modern` and Hepatitis datamarts. Use the Investigation ID from the form in the query below.
+
+   ![rtr-validation-lab-report-create-investigation-4](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation-4.png)
+
+   ```sql
+   DECLARE @local_id VARCHAR(20) = 'CAS10001017GA01'
+
+   SELECT LASTUPDATE, PHCF.*
+   FROM NBS_ODSE.DBO.PUBLICHEALTHCASEFACT_Modern PHCF
+   WHERE LOCAL_ID IN (@local_id);
+
+   SELECT REFRESH_DATETIME, hd.*
+   FROM RDB_MODERN.DBO.HEPATITIS_DATAMART hd
+   WHERE INV_LOCAL_ID IN (@local_id);
+
+   SELECT cl.*
+   FROM RDB_MODERN.DBO.CASE_LAB_DATAMART cl
+   WHERE INVESTIGATION_LOCAL_ID IN (@local_id);
+
+   SELECT isd.*
+   FROM RDB_MODERN.DBO.INV_SUMM_DATAMART isd
+   WHERE INVESTIGATION_LOCAL_ID IN (@local_id);
+   ```
+
+1. If data is missing from the datamart tables, run the query below to check for SQL script errors. If errors persist, contact the support team.
+
+    ```sql
+    SELECT *
+    FROM RDB_MODERN.DBO.JOB_FLOW_LOG
+    WHERE Status_Type = 'ERROR'
+    ORDER BY batch_id desc;
+    ```
+
+## Validate via ELR ingestion
+
+Instead of creating entries through the NBS UI, you can test the pipeline using ELR (Electronic Lab Report) ingestion through the Data Ingestion service. See the Data Ingestion smoke test section in the release documentation for detailed steps.
+
+If Workflow Decision Support (WDS) is configured and a matching algorithm is detected during a HEP ELR ingestion, an investigation is automatically created and added to the investigation queue. If WDS is not configured, the ELR is still ingested successfully and appears in the **Documents Requiring Review** queue. From there, open the HEP lab report and continue from step 5 of the UI validation process above.
+
+The data used for this example is synthetic and randomly generated. Any HEP-related ELR (Hepatitis A, B, C, etc.) can be used.
 
 **Sample Hepatitis A ELR:**
 

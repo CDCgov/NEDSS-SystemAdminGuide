@@ -6,17 +6,17 @@ has_children: true
 nav_enabled: true
 ---
 
+# AWS Infrastructure
+{: .no_toc }
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
----
-
-# AWS Infrastructure
 ## Installation Guide & Smoke Tests
-{: .no_toc }
+
 
 Installation of NBS 7 consists of multiple phases:
 

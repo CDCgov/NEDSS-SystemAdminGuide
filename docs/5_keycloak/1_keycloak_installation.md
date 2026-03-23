@@ -6,137 +6,167 @@ has_children: true
 nav_enabled: true
 ---
 
+# Keycloak Installation
+{: .no_toc }
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
-## KeyCloak Installation
+The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-gateway`, `data-ingestion-api`, and `nnd`.
 
-There is a Keycloak helm chart
+## Create the Keycloak database
 
-- a. This will be needed for `modernization-api`, `nbs-gateway`, `data-ingestion-api` and `nnd`.
-- b. **NOTE:** SQL Server Management Studio (SSMS) or any other compatible SQL client can be used to connect to the database instance.
-- c. Using SSMS, authenticate into the RDS instance where NBS is running with the following information:
-  - **DB Endpoint** – DB Endpoint
-  - **Username** – `admin`
-  - **Password** – `database_admin_password`
-- d. Use the below script (from: `<helm extract directory>/charts/keycloak/nbs_keycloak.sql`) to create a KeyCloak database in the SQL server and a database user for connection. Make sure to update the `'EXAMPLE_KCDB_PASS8675309'` password. Use a complex password matching organizational standards and store this securely for administrative access to Keycloak. This value will also be used in `values.yaml` file in the step below (shown in the table).
+> Any compatible SQL client can be used, including SQL Server Management Studio (SSMS).
+{: .note }
 
-    ```bash
-    use master
-      IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'keycloak')
-      BEGIN
-        CREATE DATABASE keycloak
-     END
-    GO
-      USE keycloak
-    GO
+1. Using your SQL client, authenticate into the RDS instance where NBS is running:
+   - **DB Endpoint** – DB Endpoint
+   - **Username** – `admin`
+   - **Password** – `database_admin_password`
 
-    BEGIN
-    CREATE LOGIN NBS_keycloak WITH PASSWORD = 'EXAMPLE_KCDB_PASS8675309';
-    CREATE USER NBS_keycloak FOR LOGIN NBS_keycloak;
-    EXEC sp_addrolemember N'db_owner', N'NBS_keycloak'
+1. Run the script below (from `<Helm extract directory>/charts/keycloak/nbs_keycloak.sql`) to create the Keycloak database and database user. Replace `'EXAMPLE_KCDB_PASS8675309'` with a complex password that meets your organization's standards. Store this password securely — you will need it in the `values.yaml` file in the next section.
+
+   ```bash
+   use master
+     IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'keycloak')
+     BEGIN
+       CREATE DATABASE keycloak
     END
-    ```
+   GO
+     USE keycloak
+   GO
 
-    **Validation step: KeyCloak database is created**
-  ![keycloak-database-creation](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-database-creation.png)
+   BEGIN
+   CREATE LOGIN NBS_keycloak WITH PASSWORD = 'EXAMPLE_KCDB_PASS8675309';
+   CREATE USER NBS_keycloak FOR LOGIN NBS_keycloak;
+   EXEC sp_addrolemember N'db_owner', N'NBS_keycloak'
+   END
+   ```
 
-- e. In {helm extract directory}/charts/keycloak/values.yml, update the following parameters
+   **Validation: Keycloak database is created**
 
-| **Parameter**        | **Template Value**            | **Example/Description**                        |
-|----------------------|-------------------------------|------------------------------------------------|
-| adminUser            | admin                         | This is the Keycloak Admin account for use in the Web UI, keep template value or change to match organizational naming conventions |
-| adminPassword        | EXAMPLE_KC_PASS8675309        | password123 - This is the password for the Keycloak admin user, use a complex password matching organizational standards. |
-| KC_DB                | mssql                         | mssql |
-| KC_DB_URL            | jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true; | jdbc:sqlserver://mydbendpoint:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true; |
-| KC_DB_USERNAME       | NBS_keycloak                  | This is the Keycloak database account that the applications use to access the database, keep template value or change to match organizational naming conventions |
-| KC_DB_PASSWORD       | EXAMPLE_KCDB_PASS8675309      | Make sure it matches sql db from Step 4 |
-| efsFileSystemId      | EXAMPLE_EFS_ID                | EFS ID - This filesystem provides persistent storage to the container for themes etc, EFS file system id is available from the AWS console or the aws cli |
+   ![keycloak-database-creation](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-database-creation.png)
 
-- f. Deploy KeyCloak helm chart
-  - a. Make sure you are authenticated to the EKS Cluster, if not use the below command
+## Configure the Helm chart
 
-    ```bash
-    aws eks --region us-east-1 update-kubeconfig --name <clustername> # e.g. cdc-nbs-sandbox
-    ```
+1. In `{Helm extract directory}/charts/keycloak/values.yml`, update the following parameters:
 
-  - b. From the charts directory, run the below command to install KeyCloak (this step will take at least 5 minutes while the init container is available for uploading or modifying themes, see the README in the helm/charts/keycloak directory for details)
+   | **Parameter** | **Template Value** | **Example / Description** |
+   |---|---|---|
+   | adminUser | admin | Keycloak admin account for the Web UI. Keep the template value or change to match organizational naming conventions. |
+   | adminPassword | EXAMPLE_KC_PASS8675309 | Password for the Keycloak admin user. Use a complex password matching organizational standards. |
+   | KC_DB | mssql | mssql |
+   | KC_DB_URL | jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true; | jdbc:sqlserver://mydbendpoint:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true; |
+   | KC_DB_USERNAME | NBS_keycloak | Keycloak database account. Keep the template value or change to match organizational naming conventions. |
+   | KC_DB_PASSWORD | EXAMPLE_KCDB_PASS8675309 | Must match the password set in step 2 of the previous section. |
+   | efsFileSystemId | EXAMPLE_EFS_ID | EFS file system ID from the AWS console or CLI. Provides persistent storage for themes. |
 
-    ```bash
-    helm install keycloak --namespace default -f keycloak/values.yaml keycloak
-    ```
+## Deploy Keycloak
 
-    ![keycloak-database-tables](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-database-tables.png)
-  - c. Check to see if the pod is running before proceeding with the next deployment using
+1. Authenticate to the EKS cluster:
 
-    ```bash
-    kubectl get pods -n default
-    ```
+   ```bash
+   aws eks --region us-east-1 update-kubeconfig --name <clustername> # e.g. cdc-nbs-sandbox
+   ```
 
-- g. Setup port forwarding to allow access  to the keycloak admin interface(this must be done from a system that has access to the EKS endpoint AND a browser interface, if you did the install from cloudshell up to this point you now need a jumpbox or desktop with network connectivity to the EKS endpoint)
-  - **Note: Portforwarding is not supported by cloudshell by default.**
+1. From the charts directory, install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available. See the README in `Helm/charts/keycloak` for details.
 
-      ```bash
-      export POD_NAME=$(kubectl get pods --namespace default -o name);
-      echo "Visit http://127.0.0.1:8080/auth to use your application";
-      kubectl --namespace default port-forward "$POD_NAME" 8080;
-      ```
+   ```bash
+   Helm install keycloak --namespace default -f keycloak/values.yaml keycloak
+   ```
 
-- h. Connect to KeyCloak interface <http://127.0.0.1:8080/auth> in the browser and select Administrative console
-  ![keycloak-ui-interface](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/kyecloak-login.png)
-- i. Sign In using adminUser and adminPassword (as shown in the table above)
-  ![keycloak-ui-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-ui.png)
-  ![keycloak-ui-2-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-admin-ui-first-time-login.png)
-- j. Create a new Realm (to contain the NBS specific client and user/group configurations)
-  ![nbs-create-new-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client.png)
-- k. Upload {helm extract directory}/charts/keycloak/extra/01-NBS-realm-with-DI-client.json which is part of the helm zip file in the keycloak chart and click on Create (this will import the NBS Realm and Clients)
-  ![nbs-create-new-realm-2](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client-2.png)
-  ![nbs-create-new-realm-3](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client-3.png)
-- l. Realm and Clients are created successfully
-  ![nbs-realm-di-client-creation](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client-3.png)
-- m. Retrieving the Client's secret ( the imported configuration will seed a random client secret, you may regenerate or use secure local client secret )
-  - a. Navigate to NBS Realm on the left menu
-  - b. Click on Clients
-  - c. Select di-keycloak-client\
-  - d. Select Credentials tab
-  - e. Click on the "eye" and copy the random secret
-  - f. Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/di)
+   ![keycloak-database-tables](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-database-tables.png)
+
+1. Verify the pod is running before proceeding:
+
+   ```bash
+   kubectl get pods -n default
+   ```
+
+## Access the Keycloak admin interface
+
+> Port forwarding is not supported by CloudShell by default. Run these commands from a system that has both network access to the EKS endpoint and a browser. If you completed the installation from CloudShell, switch to a jumpbox or desktop with network connectivity to the EKS endpoint.
+{: .note }
+
+1. Set up port forwarding:
+
+   ```bash
+   export POD_NAME=$(kubectl get pods --namespace default -o name);
+   echo "Visit http://127.0.0.1:8080/auth to use your application";
+   kubectl --namespace default port-forward "$POD_NAME" 8080;
+   ```
+
+1. In a browser, navigate to <http://127.0.0.1:8080/auth> and select **Administrative console**.
+
+   ![keycloak-ui-interface](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/kyecloak-login.png)
+
+1. Sign in using the `adminUser` and `adminPassword` values configured in the Helm chart.
+
+   ![keycloak-ui-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-ui.png)
+   ![keycloak-ui-2-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-admin-ui-first-time-login.png)
+
+## Create the NBS realm
+
+1. Create a new realm to contain the NBS-specific client and user/group configurations.
+
+   ![nbs-create-new-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client.png)
+
+1. Upload `{Helm extract directory}/charts/keycloak/extra/01-NBS-realm-with-DI-client.json` and click **Create**. This imports the NBS realm and clients.
+
+   ![nbs-create-new-realm-2](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client-2.png)
+   ![nbs-create-new-realm-3](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client-3.png)
+
+1. Verify the realm and clients are created successfully.
+
+   ![nbs-realm-di-client-creation](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client-3.png)
+
+## Configure service clients
+
+The imported configuration seeds a random client secret for each service client. You may regenerate or use a secure local client secret. Repeat the import and retrieval steps below for each client.
+
+### DI client
+
+1. Navigate to the **NBS Realm** in the left menu and click **Clients**.
+1. Select `di-keycloak-client` and open the **Credentials** tab.
+1. Click the eye icon to reveal the secret and copy it.
+1. Store the secret for use by the applications (for example, in AWS Secrets Manager at `keycloak/client/secret/di`).
+
    ![di-client-id](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/di-client-id.png)
    ![di-client-secret](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/di-client-secret.png)
-- n. Create a new client for nnd service. Make sure NBS realm is selected.
+
+### NND client
+
+1. In the **NBS Realm**, open **Realm settings**, click the **Action** dropdown, and select **Partial Import**.
+
    ![nnd-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-realm.png)
-- o. Under Realm settings, click on "Action" drop down on top right and click on "Partial Import".
    ![nnd-realm-partial-import](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-realm-partial-import.png)
-- p. Upload <helm extract directory>/charts/keycloak/extra/05-nbs-users-nnd-client.json which is part of the helm zip file in the keycloak chart and click on Create (this will import the nnd service client, note this file was named incorrectly it should be loaded into the NBS realm as shown in the steps)
-- q. Retrieving the Client's secret ( the imported configuration will seed a random client secret )
-  - a. Navigate to NBS Realm on the left menu
-  - b. Click on Clients
-  - c. Select nnd-keycloak-client
-  - d. Select Credentials tab
-  - e. Click on the "eye" and copy the secret into buffer
-  - f. Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/nnd)
+
+1. Upload `<Helm extract directory>/charts/keycloak/extra/05-nbs-users-nnd-client.json` and click **Create**.
+1. Navigate to the **NBS Realm** in the left menu and click **Clients**.
+1. Select `nnd-keycloak-client` and open the **Credentials** tab.
+1. Click the eye icon to reveal the secret and copy it.
+1. Store the secret (for example, in AWS Secrets Manager at `keycloak/client/secret/nnd`).
+
    ![nnd-client-id](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-client-id.png)
    ![nnd-client-secret](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-client-secret.png)
-- r. Create new client for SRTE. Repeat steps as shown above to import SRTE client.
-  - a. Under Realm settings, click on "Action" drop down on top right and click on "Partial Import".
-  - b. Upload <helm extract directory>/charts/keycloak/extra/06-nbs-users-srte-data-client.json which is part of the helm zip file in the keycloak chart and click on Create.
-  - c. Retrieving the Client's secret (the imported configuration will seed a random client secret)
-    - Navigate to NBS Realm on the left menu
-    - Click on Clients
-    - Select srte-data-keycloak-client
-    - Select Credentials tab
-    - Click on the "eye" and copy the secret
-    - Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/srte)
-- s. Create new client for xml-hl7-parser. Repeat steps as shown above to import xml-hl7-parser client.
-  - a. Under Realm settings, click on "Action" drop down on top right and click on "Partial Import".
-  - b. Upload <helm extract directory>/charts/keycloak/extra/10-nbs-users-xml-hl7-parser-service.json which is part of the helm zip file in the keycloak chart and click on Create.
-  - c. Retrieving the Client's secret (the imported configuration will seed a random client secret)
-    - Navigate to NBS Realm on the left menu
-    - Click on Clients
-    - Select xml-hl7-parser-keycloak-client
-    - Select Credentials tab
-    - Click on the "eye" and copy the secret
-    - Store the Client secret for use by the applications. (e.g. in AWS store in Secrets Manager keycloak/client/secret/xml-hl7-parser)
+
+### SRTE client
+
+1. In the **NBS Realm**, open **Realm settings**, click the **Action** dropdown, and select **Partial Import**.
+1. Upload `<Helm extract directory>/charts/keycloak/extra/06-nbs-users-srte-data-client.json` and click **Create**.
+1. Navigate to the **NBS Realm** in the left menu and click **Clients**.
+1. Select `srte-data-keycloak-client` and open the **Credentials** tab.
+1. Click the eye icon to reveal the secret and copy it.
+1. Store the secret (for example, in AWS Secrets Manager at `keycloak/client/secret/srte`).
+
+### XML-HL7 parser client
+
+1. In the **NBS Realm**, open **Realm settings**, click the **Action** dropdown, and select **Partial Import**.
+1. Upload `<Helm extract directory>/charts/keycloak/extra/10-nbs-users-xml-hl7-parser-service.json` and click **Create**.
+1. Navigate to the **NBS Realm** in the left menu and click **Clients**.
+1. Select `xml-hl7-parser-keycloak-client` and open the **Credentials** tab.
+1. Click the eye icon to reveal the secret and copy it.
+1. Store the secret (for example, in AWS Secrets Manager at `keycloak/client/secret/xml-hl7-parser`).

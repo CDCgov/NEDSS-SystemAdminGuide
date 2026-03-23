@@ -7,7 +7,7 @@ nav_order: 3
 description: Guidance for jurisdictions using a vendor to host or maintain NBS 7, including what to evaluate in a vendor and how to coordinate with CDC.
 ---
 
-## Vendor-managed deployment
+# Vendor-managed deployment
 {: .no_toc }
 
 If you plan to use a vendor to host or maintain NBS 7, confirm that they can:

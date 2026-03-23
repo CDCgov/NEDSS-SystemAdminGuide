@@ -7,13 +7,14 @@ nav_order: 2
 nav_enabled: true
 ---
 
+# Data Ingestion Smoke Test
+{: .no_toc }
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
-
-## Data Ingestion Smoke Test
 
 ### Overview
 

@@ -7,13 +7,14 @@ nav_order: 3
 nav_enabled: true
 ---
 
+# Web UI Smoke Test (Scripted)
+{: .no_toc }
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
-
-## Web UI Smoke Test (Scripted)
 
 `nbs-test-webui.sh` script is included in the infrastructure zip file (`scripts/observability/nbs-test-webui`)
 

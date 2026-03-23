@@ -7,8 +7,17 @@ has_children: true
 description: Helps STLT IT administrators evaluate NBS 7 adoption, choose a deployment configuration, and prepare a leadership recommendation.
 ---
 
-## NBS 7 preparation and decision guide
+
+# NBS 7 Deployment Decision Guide
 {: .no_toc }
+
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Overview 
 
 This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7. It aims to help your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment configuration. Review the decision guide before you begin migration planning.
 

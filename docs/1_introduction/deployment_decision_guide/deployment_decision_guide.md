@@ -18,7 +18,9 @@ description: Helps STLT IT administrators evaluate NBS 7 adoption and choose a d
 
 ## Overview
 
-This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7. It aims to help your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment. Review the decision guide before you begin migration planning.
+This guide is for STLT IT administrators who operate NBS 6 and are evaluating whether to 
+migrate to NBS 7. It covers whether NBS 7 is the right fit for your jurisdiction and, if 
+so, how to plan your deployment. The guide surfaces decisions that might affect your timeline and configuration choices, so start here before you begin migration planning.
 
 Use this guide to:
 

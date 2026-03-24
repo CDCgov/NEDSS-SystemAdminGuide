@@ -3,6 +3,7 @@ title: Prerequisites
 layout: page
 nav_order: 3
 nav_enabled: true
+has_children: true
 ---
 
 # Installation prerequisites

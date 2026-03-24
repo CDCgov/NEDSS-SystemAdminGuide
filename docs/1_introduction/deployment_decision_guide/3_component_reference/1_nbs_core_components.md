@@ -33,7 +33,7 @@ The existing NBS 6 application. A WildFly-based UI and backend that most STLTs c
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | NBS Core does not replace NBS 6 immediately. Instead, it runs alongside it. During migration, the NBS Gateway routes requests between the legacy NBS 6 application and new NBS 7 services. NBS 6 continues to handle all functionality that has not yet been replaced by a modern NBS 7 equivalent. |
-| When you need it | Always. An operational NBS 6 instance is a prerequisite for any NBS 7 deployment. You must be running NBS 6.0.16.1 or newer before installing NBS 7. |
+| When you need it | Always. An operational NBS 6 instance is a prerequisite for any NBS 7 deployment. You must be running a [compatible NBS 6 version](../../../2_prerequisites/compatibility.html) before installing NBS 7. |
 | Dependencies | Required by NBS Gateway, Elasticsearch (via Nifi), and the NBS Modernization API. Must maintain network connectivity to your NBS 7 environment throughout the migration period. |
 
 ## NBS Modernization API
@@ -147,7 +147,6 @@ Full configuration guidance is in the [NBS 7 System Administrator Guide](https:/
 | Kubernetes (EKS/AKS) | Container orchestration platform that hosts and manages all NBS 7 services. EKS is used on AWS; AKS is used on Azure. |
 | NGINX Ingress Controller | Manages inbound traffic routing into the Kubernetes cluster. Currently being replaced by Traefik in future releases — confirm current status with your CDC NBS point of contact. |
 | Terraform modules | Infrastructure-as-code tooling that provisions your cloud environment, including VPC, Kubernetes cluster, storage, and managed services. Four modules cover network/VPC, NBS 6 database layer, NBS 7 cluster, and application services. |
-| ArgoCD | Continuous deployment tool that manages application delivery to the Kubernetes cluster. Keeps deployed services in sync with their defined configurations. |
 | Cert Manager | Automates provisioning and renewal of TLS/SSL certificates for encrypted traffic within and into the NBS 7 environment. |
 | FluentBit | Lightweight log forwarding agent that collects and routes logs from NBS 7 services for monitoring and troubleshooting. |
 | Linkerd | Service mesh (provisioned via Terraform) that manages encrypted communication between NBS 7 services inside the Kubernetes cluster. |

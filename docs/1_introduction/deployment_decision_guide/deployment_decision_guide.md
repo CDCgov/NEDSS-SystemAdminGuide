@@ -18,7 +18,7 @@ description: Helps STLT IT administrators evaluate NBS 7 adoption and choose a d
 
 ## Overview
 
-This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7. It aims to help your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment. Review the decision guide before you begin migration planning.
+This guide is for STLT IT administrators who operate NBS 6 and are evaluating whether to migrate to NBS 7. It covers whether NBS 7 is the right fit for your jurisdiction and, if so, how to plan your deployment. The guide surfaces decisions that might affect your timeline and configuration choices, so start here before you begin migration planning.
 
 Use this guide to:
 
@@ -40,7 +40,7 @@ Three documents support the NBS 6 to NBS 7 transition. Each serves a different p
 | **NBS 7 Migration Info Sheet** | Guides your jurisdiction through the migration process, including timelines, roles, a compatibility checklist, and cutover planning | Use after confirming NBS 7 is the right fit |
 | **NBS 7 System Administrator Guide** | Provides step-by-step deployment instructions for your chosen configuration | Use when ready to deploy |
 
-Some prerequisites covered in this guide are also covered in the Migration Info Sheet. This guide reinforces the prerequisites so that your IT team can use it independently, before beginning the migration process.
+Some prerequisites covered in this guide are also covered in the Migration Info Sheet. This guide reinforces the prerequisites so that your IT team can use it independently, before they begin the migration process.
 
 {: .note }
 NBS 7 is under active development. Component availability and configuration options will change as development continues. Make sure you are reading the latest version of this guide before you begin to plan.

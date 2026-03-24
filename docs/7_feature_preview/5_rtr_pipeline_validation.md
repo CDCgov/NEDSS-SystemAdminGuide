@@ -2,6 +2,7 @@
 title: RTR pipeline validation
 layout: page
 parent: Real-Time Reporting (Preview)
+grand_parent: Deploy NBS 7
 nav_order: 11
 nav_enabled: true
 ---

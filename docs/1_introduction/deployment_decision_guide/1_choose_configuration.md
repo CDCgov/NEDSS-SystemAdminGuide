@@ -2,7 +2,7 @@
 title: Choose your configuration
 layout: page
 parent: NBS 7 Deployment Decision Guide
-grand_parent: Introduction
+grand_parent: Before you deploy
 nav_order: 2
 has_children: true
 description: Guides STLT administrators through the NBS 7 configuration options and helps identify the right starting configuration for their jurisdiction.

@@ -1,8 +1,8 @@
 ---
 title: NBS 7 Architecture and Microservices
 layout: page
-parent: Introduction
-nav_order: 1
+parent: Deploy NBS 7
+nav_order: 2
 ---
 
 # NBS 7 Architecture and Microservices

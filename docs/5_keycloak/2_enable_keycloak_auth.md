@@ -2,6 +2,7 @@
 title: Enable Keycloak Auth
 layout: page
 parent: Keycloak Installation
+grand_parent: Deploy NBS 7
 nav_order: 1
 nav_enabled: true
 ---

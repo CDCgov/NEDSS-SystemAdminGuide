@@ -2,6 +2,7 @@
 title: NBS Gateway
 layout: page
 parent: Microservices Deployment
+grand_parent: Deploy NBS 7
 nav_order: 4
 nav_enabled: true
 ---

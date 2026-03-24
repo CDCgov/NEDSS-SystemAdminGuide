@@ -1,7 +1,8 @@
 ---
 title: Microservices Deployment
 layout: page
-nav_order: 7
+parent: Deploy NBS 7
+nav_order: 6
 has_children: true
 nav_enabled: true
 ---

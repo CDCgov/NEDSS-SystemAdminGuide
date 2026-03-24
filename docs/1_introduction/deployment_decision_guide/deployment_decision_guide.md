@@ -1,8 +1,8 @@
 ---
 title: NBS 7 Deployment Decision Guide
 layout: page
-parent: Introduction
-nav_order: 2
+parent: Before you deploy
+nav_order: 1
 has_children: true
 description: Helps STLT IT administrators evaluate NBS 7 adoption and choose a deployment configuration.
 ---

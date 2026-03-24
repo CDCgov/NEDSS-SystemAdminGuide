@@ -1,6 +1,7 @@
 ---
 title: Quickstart
 layout: page
+parent: Deploy NBS 7
 nav_order: 1
 nav_enabled: true
 ---

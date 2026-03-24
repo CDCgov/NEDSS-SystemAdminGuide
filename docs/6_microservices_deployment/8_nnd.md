@@ -2,6 +2,7 @@
 title: NND Service (Data Sync)
 layout: page
 parent: Microservices Deployment
+grand_parent: Deploy NBS 7
 nav_order: 8
 has_children: true
 nav_enabled: true

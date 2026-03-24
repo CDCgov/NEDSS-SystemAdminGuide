@@ -2,6 +2,7 @@
 title: Create Kubernetes secrets
 layout: page
 parent: Initial Kubernetes Deployment
+grand_parent: Deploy NBS 7
 nav_order: 1
 nav_enabled: true
 ---

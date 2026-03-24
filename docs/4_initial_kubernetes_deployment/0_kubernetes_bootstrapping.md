@@ -1,7 +1,8 @@
 ---
 title: Initial Kubernetes Deployment
 layout: page
-nav_order: 5
+parent: Deploy NBS 7
+nav_order: 4
 has_children: true
 nav_enabled: true
 ---

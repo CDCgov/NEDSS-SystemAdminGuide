@@ -2,6 +2,7 @@
 title: Configure Linkerd and Cluster Autoscaler
 layout: page
 parent: Initial Kubernetes Deployment
+grand_parent: Deploy NBS 7
 nav_order: 4
 nav_enabled: true
 ---

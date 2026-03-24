@@ -2,6 +2,7 @@
 title: Case Notification
 layout: page
 parent: Microservices Deployment
+grand_parent: Deploy NBS 7
 nav_order: 9
 has_children: true
 nav_enabled: true

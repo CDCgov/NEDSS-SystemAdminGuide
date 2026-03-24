@@ -1,14 +1,14 @@
 ---
-title: Deploy NBS 7
+title: Deployment scenarios
 layout: page
 parent: NBS 7 Deployment Decision Guide
-grand_parent: Introduction
+grand_parent: Before you deploy
 nav_order: 3
 has_children: true
 description: Presents example NBS 7 deployment scenarios for small, medium, and large jurisdictions to illustrate configuration tradeoffs and real-world decisions.
 ---
 
-# Deploy NBS 7
+# Deployment scenarios
 {: .no_toc }
 
 The pages in this section cover actual NBS 7 deployment scenarios as example use cases. No two jurisdictions have identical infrastructure, staffing, or data needs, so your configuration will not match any of these exactly. Use the examples to identify which profile is closest to your situation and to understand the tradeoffs that other jurisdictions encountered.

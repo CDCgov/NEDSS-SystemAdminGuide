@@ -2,6 +2,7 @@
 title: Validate ES, Mapi and Nifi
 layout: page
 parent: Microservices Deployment
+grand_parent: Deploy NBS 7
 nav_order: 5
 has_children: true
 nav_enabled: true

@@ -2,6 +2,7 @@
 title: Liquibase
 layout: page
 parent: Real-Time Reporting (Preview)
+grand_parent: Deploy NBS 7
 nav_order: 1
 nav_enabled: true
 ---

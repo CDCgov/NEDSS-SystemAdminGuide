@@ -2,7 +2,7 @@
 title: Component reference
 layout: page
 parent: NBS 7 Deployment Decision Guide
-grand_parent: Introduction
+grand_parent: Before you deploy
 nav_order: 4
 has_children: true
 description: Describes each NBS 7 component — what it does, when it is needed, and how it relates to other components — organized by NBS 7 core components and available add-ons.

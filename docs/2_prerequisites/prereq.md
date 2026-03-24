@@ -1,7 +1,8 @@
 ---
 title: Prerequisites
 layout: page
-nav_order: 3
+parent: Deploy NBS 7
+nav_order: 2
 nav_enabled: true
 has_children: true
 ---

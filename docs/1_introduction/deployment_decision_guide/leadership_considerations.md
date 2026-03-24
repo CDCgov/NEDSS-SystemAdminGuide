@@ -2,7 +2,7 @@
 title: Operational considerations
 layout: page
 parent: NBS 7 Deployment Decision Guide
-grand_parent: Introduction
+grand_parent: Before you deploy
 nav_order: 0
 description: Summarizes organizational, financial, and operational factors that affect NBS 7 migration planning.
 ---

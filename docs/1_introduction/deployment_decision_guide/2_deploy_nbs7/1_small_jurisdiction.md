@@ -1,7 +1,7 @@
 ---
 title: Small jurisdiction, self-managed, AWS
 layout: page
-parent: Deploy NBS 7
+parent: Deployment scenarios
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
 description: Case study for a small, self-managed AWS deployment based on Montana's experience, covering configuration choices and lessons learned.

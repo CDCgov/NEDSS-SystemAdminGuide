@@ -2,6 +2,7 @@
 title: RTR Java services
 layout: page
 parent: Real-Time Reporting (Preview)
+grand_parent: Deploy NBS 7
 nav_order: 4
 nav_enabled: true
 ---

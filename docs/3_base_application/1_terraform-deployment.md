@@ -2,6 +2,7 @@
 title: Terraform Deployment
 layout: page
 parent: AWS Infrastructure
+grand_parent: Deploy NBS 7
 nav_order: 1
 nav_enabled: true
 ---

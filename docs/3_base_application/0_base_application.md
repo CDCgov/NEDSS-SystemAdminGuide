@@ -1,7 +1,8 @@
 ---
 title: AWS Infrastructure
 layout: page
-nav_order: 4
+parent: Deploy NBS 7
+nav_order: 3
 has_children: true
 nav_enabled: true
 ---

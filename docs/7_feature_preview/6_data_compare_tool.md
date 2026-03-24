@@ -2,6 +2,7 @@
 title: RTR Data Compare
 layout: page
 parent: Real-Time Reporting (Preview)
+grand_parent: Deploy NBS 7
 nav_order: 12
 nav_enabled: true
 ---

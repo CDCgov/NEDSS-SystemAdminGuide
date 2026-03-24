@@ -4,25 +4,25 @@ layout: page
 parent: Component reference
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 2
-description: Details the four components added by the Real-Time Reporting (RTR) add-on: Debezium, Kafka, RTR domain services, and RDB_Modern.
+description: "Details the four components added by the Real-Time Reporting (RTR) add-on: Debezium, Kafka, RTR domain services, and RDB_Modern."
+nav_enabled: true
 ---
 
-## Component reference: Real-Time Reporting (RTR) add-on
+# Component reference: Real-Time Reporting (RTR) add-on
 {: .no_toc }
 
-RTR works alongside the legacy MasterETL batch process during transition, with the goal of eventually replacing it. The following components are added to your NBS Core deployment when you choose NBS Core + RTR or NBS Complete.
+For information on migration planning, staffing, and budget, see [Operational considerations](leadership_considerations.html).
+{: .note }
+
+RTR works alongside the legacy MasterETL batch process during transition, with the goal of eventually replacing it. The following components are added to your NBS 7 deployment when you choose to deploy the RTR add-on.
+
+## On this page
+{: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
---- 
-
-{: .note }
-**Health department leaders:** See [Leadership considerations](../leadership_considerations.html) for guidance on evaluating RTR for your jurisdiction.
-
----
-
-### Debezium
+## Debezium
 
 An open-source Change Data Capture (CDC) platform.
 
@@ -32,9 +32,7 @@ An open-source Change Data Capture (CDC) platform.
 | When you need it | When your jurisdiction chooses NBS Core + RTR or NBS Complete. |
 | Dependencies | Requires the NBS database (NBS\_ODSE) as its source. Streams data to the Kafka cluster. |
 
----
-
-### Kafka and Kafka Connect
+## Kafka and Kafka Connect
 
 Apache Kafka is an open source event-streaming platform. Kafka Connect is the framework that moves data between Kafka and other systems.
 
@@ -44,11 +42,9 @@ Apache Kafka is an open source event-streaming platform. Kafka Connect is the fr
 | When you need it | When your jurisdiction chooses NBS Core + RTR or NBS Complete. |
 | Dependencies | Receives events from Debezium. Delivers messages to RTR domain services. Kafka Connect writes processed data to RDB\_Modern. Requires sufficient cluster resources — Kafka is one of the more operationally demanding components in the RTR stack. |
 
----
+## RTR domain services
 
-### RTR domain services
-
-A unified Spring Boot service that transforms streaming data from Kafka into reportable public health records. Previously implemented as five separate entity-specific services (investigation, person, observation, organization, and LDF data), these are being consolidated into a single `reporting-service` application to reduce deployment complexity and operational overhead.
+A unified Spring Boot service that transforms streaming data from Kafka into reportable public health records. Previously implemented as five separate entity-specific services (investigation, person, observation, organization, and LDF data), these are being consolidated into a single `reporting-pipeline-service` application to reduce deployment complexity and operational overhead.
 
 | Attribute | Description |
 |:---|:---|
@@ -56,12 +52,10 @@ A unified Spring Boot service that transforms streaming data from Kafka into rep
 | When you need it | When your jurisdiction chooses NBS Core + RTR or NBS Complete. |
 | Dependencies | Requires Kafka (message source) and NBS\_ODSE (operational data store). Populates RDB\_Modern staging tables, which are then consumed by the post-processing service. |
 
-> The five entity-specific RTR services (investigation-service, person-service, observation-service, organization-service, ldfdata-service) are being consolidated into a single `reporting-service` as of early 2026. Check with your CDC NBS point of contact for the current deployment state.
+> The five entity-specific RTR services (investigation-service, person-service, observation-service, organization-service, ldfdata-service) are being consolidated into a single `reporting-pipeline-service` as of early 2026. Check with your CDC NBS point of contact for the current deployment state.
 {: .note }
 
----
-
-### RDB\_Modern
+## RDB\_Modern
 
 The modern reporting database introduced by RTR.
 

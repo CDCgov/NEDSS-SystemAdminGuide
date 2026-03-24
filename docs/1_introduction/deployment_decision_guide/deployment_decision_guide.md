@@ -4,9 +4,8 @@ layout: page
 parent: Introduction
 nav_order: 2
 has_children: true
-description: Helps STLT IT administrators evaluate NBS 7 adoption, choose a deployment configuration, and prepare a leadership recommendation.
+description: Helps STLT IT administrators evaluate NBS 7 adoption and choose a deployment configuration.
 ---
-
 
 # NBS 7 Deployment Decision Guide
 {: .no_toc }
@@ -17,20 +16,19 @@ description: Helps STLT IT administrators evaluate NBS 7 adoption, choose a depl
 1. TOC
 {:toc}
 
-## Overview 
+## Overview
 
-This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7. It aims to help your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment configuration. Review the decision guide before you begin migration planning.
+This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7. It aims to help your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment. Review the decision guide before you begin migration planning.
 
 Use this guide to:
 
 - Assess whether NBS 7 is the right fit for your jurisdiction
-- Identify which configuration would be right for your jurisdiction if you move forward
-- Understand what components make up NBS 7 and what each one does
-- Prepare a recommendation for your leadership
+- Identify the right starting configuration for your jurisdiction: NBS 7 alone, or NBS 7 with one or both optional add-ons
+- Understand the components that make up NBS 7 and what each one does
+- Prepare a recommendation for your deployment
 
-
+> Some factors that affect NBS 7 migration extend beyond infrastructure and configuration. For a summary of organizational, financial, and operational considerations, see [Operational considerations](leadership_considerations.html).
 {: .note }
-**Health department leaders:** This guide is written for IT administrators. For a summary of the key organizational, financial, and operational considerations relevant to your go/no-go decision, see [Leadership considerations](leadership_considerations.html).
 
 ## How this guide fits into the NBS 7 process
 
@@ -46,4 +44,3 @@ Some prerequisites covered in this guide are also covered in the Migration Info 
 
 {: .note }
 NBS 7 is under active development. Component availability and configuration options will change as development continues. Make sure you are reading the latest version of this guide before you begin to plan.
-

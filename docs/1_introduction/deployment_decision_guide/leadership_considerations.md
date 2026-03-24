@@ -1,48 +1,51 @@
 ---
-title: Leadership considerations
+title: Operational considerations
 layout: page
 parent: NBS 7 Deployment Decision Guide
 grand_parent: Introduction
 nav_order: 0
-description: Summarizes the organizational, financial, and operational factors that health department leaders should address before committing to NBS 7 migration.
+description: Summarizes organizational, financial, and operational factors that affect NBS 7 migration planning.
 ---
 
-## NBS 7 leadership considerations
+# Operational considerations
 {: .no_toc }
 
-This page is for **health department leaders and decision-makers** who need to understand the organizational, financial, and operational implications of migrating to NBS 7. Each consideration below represents a decision point or planning requirement that leadership should address before your jurisdiction commits to migration.
+This page covers organizational, financial, and operational factors that affect NBS 7 migration planning. Some of these factors involve decisions or timelines that extend beyond the technical team and might be worth raising with others in your organization early in your planning process.
 
-For technical deployment guidance, refer to the [Assess your readiness](0_assess_readiness.html) section and the rest of this guide.
+## On this page
+{: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
 ---
 
-### Migration is gradual, not a cutover
+For technical deployment guidance, refer to the [Assess your readiness](0_assess_readiness.html) section and the rest of this guide.
 
-NBS 7 does not replace NBS 6 in a single switch. Your jurisdiction will run both systems in parallel during the transition. NBS 7 components gradually take over functionality while NBS 6 continues to operate. Plan for the operational complexity and cost of maintaining two systems simultaneously. The length of this parallel period depends on your jurisdiction's pace of deployment and configuration choices.
+## Migration is gradual, not a cutover
 
-### State IT security approval takes time
+NBS 7 does not replace NBS 6 in a single switch. Both systems run in parallel during the transition. NBS 7 components gradually take over functionality while NBS 6 continues to operate. The length of this parallel period depends on your jurisdiction's pace of deployment and configuration choices. Planning for the operational complexity and cost of maintaining two systems simultaneously is a common part of migration preparation.
 
-State IT security approval is often the longest-lead item in an NBS 7 migration. NBS 7 requires approval for cloud hosting and specific technologies including Kubernetes, Terraform, and Docker. If your jurisdiction has not started this process, start it now, even if deployment is months away. Waiting until you are technically ready to deploy before seeking approval is one of the most common causes of migration delays.
+## State IT security approval takes time
 
-### Cloud infrastructure requires new ongoing budget
+State IT security approval is often the longest-lead item in an NBS 7 migration. NBS 7 requires approval for cloud hosting and specific technologies including Kubernetes, Terraform, and Docker. Jurisdictions that start this process early, even when deployment is still months away, might avoid one of the most common causes of migration delays.
 
-NBS 6 could run on-premises, but NBS 7 cannot. NBS 7 is a cloud-only system. Your jurisdiction needs an active cloud account (AWS or Azure) and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning should account for both normal operations and surge scenarios such as outbreak response.
+## Cloud infrastructure requires ongoing budget
 
-### Technical staffing requirements are different from NBS 6
+NBS 6 could run on-premises, but NBS 7 is a cloud-only system. Your jurisdiction needs an active cloud account (AWS or Azure) and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response.
 
-Migrating to NBS 7 requires skills your current NBS 6 team may not have, including Kubernetes, Terraform, and cloud infrastructure management. Assess your team's current capacity before committing to a migration timeline. If you underestimate the staffing gap, your migration will take longer than planned. Jurisdictions without the necessary in-house expertise will need to build capacity or engage a vendor.
+## Technical staffing requirements differ from NBS 6
 
-### Real-Time Reporting adds capability and cost
+Migrating to NBS 7 involves skills that might differ from what your current NBS 6 team uses, including Kubernetes, Terraform, and cloud infrastructure management. Jurisdictions that assess their team's capacity early are poised to set more accurate migration timelines. Those without the necessary in-house expertise have typically built capacity or engaged a vendor before deployment.
 
-The Real-Time Reporting (RTR) add-on reduces the time for data to appear in reports from up to 24 hours to between 5 minutes and 1 hour. For jurisdictions managing active outbreaks or time-sensitive disease investigations, this improvement can meaningfully affect response time. However, RTR adds infrastructure complexity and requires additional cloud resources. Weigh the reporting speed benefit against the additional operating cost for your jurisdiction's case volume and reporting needs.
+## Real-Time Reporting adds capability and cost
 
-### The Data Ingestion API is not yet a full middleware replacement
+The Real-Time Reporting (RTR) add-on reduces the time for data to appear in reports from up to 24 hours to between 5 minutes and 1 hour. For jurisdictions managing active outbreaks or time-sensitive disease investigations, this improvement can meaningfully affect response time. RTR also adds infrastructure complexity and requires additional cloud resources. The reporting speed benefit and the additional operating cost are both worth weighing against your jurisdiction's case volume and reporting needs.
 
-The Data Ingestion (DI) API is a built-in data transit layer that can receive lab reports and case reports without third-party middleware. If your jurisdiction currently uses Rhapsody or Mirth Connect, the DI API is not yet a full replacement. Continue to use your existing middleware for now. If your jurisdiction does not have existing middleware, the DI API is worth evaluating. Revisit its capabilities as the product matures.
+## The Data Ingestion API is not yet a full middleware replacement
 
-### Single Sign-On requires early coordination
+The Data Ingestion (DI) API is a built-in data transit layer that can receive lab reports and case reports without third-party middleware. If your jurisdiction currently uses Rhapsody or Mirth Connect, the DI API is not yet a full replacement. Continuing to use your existing middleware for now is the current guidance. If your jurisdiction does not have existing middleware, the DI API is worth evaluating. Its capabilities are expected to expand as the product matures.
 
-NBS 7 uses Keycloak for identity management. If your jurisdiction uses a centralized identity provider such as Okta or Active Directory, Keycloak can integrate with it, allowing NBS 7 users to log in with their existing jurisdiction credentials. This integration requires early coordination between your NBS deployment team and your identity provider administrators. Do not leave SSO configuration to the end of the deployment process.
+## Single Sign-On requires early coordination
+
+NBS 7 uses Keycloak for identity management. If your jurisdiction uses a centralized identity provider such as Okta or Active Directory, Keycloak can integrate with it, allowing NBS 7 users to log in with their existing jurisdiction credentials. This integration requires coordination between your NBS deployment team and your identity provider administrators. We recommend that you start that coordination early rather than addressing it later in the deployment process.

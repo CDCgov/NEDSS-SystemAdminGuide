@@ -5,17 +5,17 @@ parent: NBS 7 Deployment Decision Guide
 grand_parent: Introduction
 nav_order: 4
 has_children: true
-description: Describes each component in NBS 7 — what it does, when it is needed, and how it relates to other components — organized by configuration tier.
+description: Describes each NBS 7 component — what it does, when it is needed, and how it relates to other components — organized by NBS 7 core components and available add-ons.
 ---
 
-## NBS 7 component reference
+# NBS 7 component reference
 {: .no_toc }
 
-The pages in this section describes each component in NBS 7. Use it to understand what each component does, why it is included in your configuration, and how it relates to other components.
+The pages in this section describe each component in NBS 7. Use it to understand what each component does, why it is included in your deployment, and how it relates to other components.
 
-Components in this reference are organized by configuration tier:
+Components in this reference are organized by deployment scope:
 
-- [NBS Core components](3_component_reference/1_nbs_core_components/)
+- [NBS 7 core components](3_component_reference/1_nbs_core_components/)
 - [Add-on: Real-Time Reporting (RTR)](3_component_reference/2_rtr/)
 - [Add-on: Data Ingestion (DI) API](3_component_reference/3_di_api/)
 
@@ -25,25 +25,25 @@ For deployment configuration details including configuration parameters, Helm ch
 
 ## Quick reference
 
-The following table shows which components are included in each configuration tier.
+The following table shows which components are included in NBS 7 and its available add-ons.
 
-| Component | NBS Core | Core + RTR | Core + DI API | NBS Complete |
-|:---|:---:|:---:|:---:|:---:|
-| Legacy NBS 6 | ✓ | ✓ | ✓ | ✓ |
-| NBS Modernization API | ✓ | ✓ | ✓ | ✓ |
-| NBS Web UI | ✓ | ✓ | ✓ | ✓ |
-| NBS Gateway | ✓ | ✓ | ✓ | ✓ |
-| Page Builder | ✓ | ✓ | ✓ | ✓ |
-| Elasticsearch | ✓ | ✓ | ✓ | ✓ |
-| Nifi | ✓ | ✓ | ✓ | ✓ |
-| Keycloak | ✓ | ✓ | ✓ | ✓ |
-| Database (NBS\_ODSE, NBS\_SRTE) | ✓ | ✓ | ✓ | ✓ |
-| Infrastructure and networking layer | ✓ | ✓ | ✓ | ✓ |
-| Debezium | | ✓ | | ✓ |
-| Kafka and Kafka Connect | | ✓ | | ✓ |
-| RTR domain services | | ✓ | | ✓ |
-| RDB\_Modern | | ✓ | | ✓ |
-| DI API | | | ✓ | ✓ |
+| Component | NBS 7 | + RTR add-on | + DI API add-on |
+|:---|:---:|:---:|:---:|
+| Legacy NBS 6 | ✓ | ✓ | ✓ |
+| NBS Modernization API | ✓ | ✓ | ✓ |
+| NBS Web UI | ✓ | ✓ | ✓ |
+| NBS Gateway | ✓ | ✓ | ✓ |
+| Page Builder | ✓ | ✓ | ✓ |
+| Elasticsearch | ✓ | ✓ | ✓ |
+| Nifi | ✓ | ✓ | ✓ |
+| Keycloak | ✓ | ✓ | ✓ |
+| Database (NBS\_ODSE, NBS\_SRTE) | ✓ | ✓ | ✓ |
+| Infrastructure and networking layer | ✓ | ✓ | ✓ |
+| Debezium | | ✓ | |
+| Kafka and Kafka Connect | | ✓ | |
+| RTR domain services | | ✓ | |
+| RDB\_Modern | | ✓ | |
+| DI API | | | ✓ |
 
-> NBS Core components are required for all NBS 7 deployments. RTR and DI API are optional add-ons, so their components are only required if your jurisdiction chooses a configuration tier that includes them.
+> NBS 7 core components are required for all deployments. RTR and DI API are optional add-ons. Components for the add-ons are only required if your jurisdiction chooses to include them.
 {: .note }

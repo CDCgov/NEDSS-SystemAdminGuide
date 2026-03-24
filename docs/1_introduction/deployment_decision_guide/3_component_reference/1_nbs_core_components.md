@@ -1,31 +1,32 @@
 ---
-title: NBS Core components
+title: NBS 7 core components
 layout: page
 parent: Component reference
 grand_parent: NBS 7 Deployment Decision Guide
 nav_order: 1
-description: Details each component in NBS Core — the application, infrastructure, and networking layers required for all NBS 7 deployments.
+description: Details each component in NBS 7 — the application, infrastructure, and networking layers required for all NBS 7 deployments.
 ---
 
-## Component reference: NBS Core
+# Component reference: NBS 7 core components
 {: .no_toc }
 
-NBS Core includes three layers of components: the application layer, the infrastructure layer, and the networking layer. The application layer components are documented individually below. [Infrastructure and networking layer components](#infrastructure-and-networking-layer-components) are summarized as a group.
+For information on migration planning, staffing, and budget, see [Operational considerations](leadership_considerations.html).
+{: .note }
+
+NBS 7 core components are organized into three layers: the application layer, the infrastructure layer, and the networking layer. The application layer components are documented individually below. [Infrastructure and networking layer components](#infrastructure-and-networking-layer-components) are summarized as a group.
+
+\[architecture diagram\]
+
+## On this page
+{: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
---- 
-
-
-\[architecture diagram\]
-
 > The NBS Modernization API, NBS Web UI, NBS Gateway, and Page Builder are deployed together from the NEDSS-Modernization repository. Each serves a distinct function, but vendors and admins scoping deployment work should be aware that they share a single deployment unit.
-{: .note }
+{: .important }
 
----
-
-### Legacy NBS 6
+## Legacy NBS 6
 
 The existing NBS 6 application. A WildFly-based UI and backend that most STLTs currently run.
 
@@ -35,9 +36,7 @@ The existing NBS 6 application. A WildFly-based UI and backend that most STLTs c
 | When you need it | Always. An operational NBS 6 instance is a prerequisite for any NBS 7 deployment. You must be running NBS 6.0.16.1 or newer before installing NBS 7. |
 | Dependencies | Required by NBS Gateway, Elasticsearch (via Nifi), and the NBS Modernization API. Must maintain network connectivity to your NBS 7 environment throughout the migration period. |
 
----
-
-### NBS Modernization API
+## NBS Modernization API
 
 The modern backend API layer for NBS 7, built to replace NBS 6 functionality incrementally.
 
@@ -47,9 +46,7 @@ The modern backend API layer for NBS 7, built to replace NBS 6 functionality inc
 | When you need it | Always. The Modernization API is a core component of NBS Core and is required for all NBS 7 configurations. |
 | Dependencies | Requires Legacy NBS 6 and NBS Gateway. Exposes functionality to the NBS Web UI. |
 
----
-
-### NBS Web UI
+## NBS Web UI
 
 The modern React/TypeScript frontend for NBS 7 features.
 
@@ -59,9 +56,7 @@ The modern React/TypeScript frontend for NBS 7 features.
 | When you need it | Always. The NBS Web UI is a core component of NBS Core and is required for all NBS 7 configurations. |
 | Dependencies | Requires NBS Gateway and the NBS Modernization API. |
 
----
-
-### NBS Gateway
+## NBS Gateway
 
 A routing service (built on Spring Cloud Gateway) that manages traffic between the legacy NBS 6 application and modern NBS 7 services.
 
@@ -71,9 +66,7 @@ A routing service (built on Spring Cloud Gateway) that manages traffic between t
 | When you need it | Always. NBS Gateway is a core component of NBS Core and is required for all NBS 7 configurations. |
 | Dependencies | Requires Legacy NBS 6, the NBS Modernization API, and the NBS Web UI. Sits behind the infrastructure layer ingress controller. |
 
----
-
-### Page Builder
+## Page Builder
 
 A tool for creating and editing the investigation forms used by STLT epidemiologists and disease investigators.
 
@@ -86,9 +79,7 @@ A tool for creating and editing the investigation forms used by STLT epidemiolog
 | When you need it | Always, if your jurisdiction uses NBS to manage investigation forms. Page Builder is included in NBS Core. |
 | Dependencies | Requires the NBS Modernization API. |
 
----
-
-### Report Execution API
+## Report Execution API
 
 A Python FastAPI service intended to replace SAS-based report execution in NBS 7. SAS 9.4 is currently required for report execution and must be carried forward into NBS 7 deployments until this component is production-ready. Jurisdictions with significant SAS infrastructure or licensing costs should monitor this component as NBS 7 matures.
 
@@ -100,9 +91,7 @@ A Python FastAPI service intended to replace SAS-based report execution in NBS 7
 | What it does in NBS 7 | \[Pending SME verification\] |
 | Dependencies | \[Pending SME verification\] |
 
----
-
-### Elasticsearch
+## Elasticsearch
 
 An open source search and analytics engine optimized for speed and scalability.
 
@@ -112,9 +101,7 @@ An open source search and analytics engine optimized for speed and scalability.
 | When you need it | Always. Elasticsearch is a core component of NBS Core and is required for all NBS 7 configurations. |
 | Dependencies | Requires Nifi to populate its indices from the NBS database. Search functionality in the NBS Web UI and Modernization API depends on Elasticsearch. |
 
----
-
-### Nifi
+## Nifi
 
 An open source data flow automation tool for moving and transforming data between systems.
 
@@ -124,9 +111,7 @@ An open source data flow automation tool for moving and transforming data betwee
 | When you need it | Always. Nifi is a core component of NBS Core and is required for all NBS 7 configurations. |
 | Dependencies | Requires the NBS database (NBS\_ODSE) as its data source and Elasticsearch as its destination. |
 
----
-
-### Keycloak
+## Keycloak
 
 An open source identity and access management platform.
 
@@ -136,12 +121,12 @@ An open source identity and access management platform.
 | When you need it | Always. Keycloak is a core component of NBS Core and is required for all NBS 7 configurations. |
 | Dependencies | Requires network access to your identity provider if you are integrating with an existing SSO system. All NBS 7 services that require authentication depend on Keycloak. |
 
-{: .note }
-**Health department leaders:** See [Leadership considerations](../leadership_considerations.html) for guidance on Single Sign-On planning and early coordination requirements.
+> Health department leaders
+>
+> For guidance on Single Sign-On planning and early coordination requirements, see [Operational considerations](../leadership_considerations.html).
+{: .note-title }
 
----
-
-### Database (NBS\_ODSE, NBS\_SRTE)
+## Database (NBS\_ODSE, NBS\_SRTE)
 
 The core SQL Server databases that store operational and reference data for NBS.
 
@@ -151,9 +136,7 @@ The core SQL Server databases that store operational and reference data for NBS.
 | When you need it | Always. Both databases are required for all NBS 7 configurations. |
 | Dependencies | Required by Legacy NBS 6, the Modernization API, Nifi, Debezium (if using RTR), and the DI API (if using the DI API add-on). |
 
----
-
-### Infrastructure and networking layer components
+## Infrastructure and networking layer components
 
 The following components make up the infrastructure and networking layers of NBS Core. They are provisioned and managed primarily through Terraform and Helm, and most do not require configuration decisions from IT admins during the planning phase. They are documented here for awareness.
 

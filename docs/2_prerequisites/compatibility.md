@@ -10,12 +10,12 @@ description: Lists the NBS 6 and NBS 7 version combinations that have been teste
 # NBS 6 and NBS 7 compatibility
 {: .no_toc }
 
-NBS 7 integrates with and is tested against supported versions of NBS 6. Use this table to verify that your NBS 6 version is compatible with your target NBS 7 version before you begin deployment.
+NBS 7 integrates with and is tested against supported versions of NBS 6. Use this table to verify that your NBS 6 version is compatible with your target NBS 7 version before you begin deployment. Running the latest supported version of NBS 6 is recommended for migration. As of the most recent release, that version is **NBS 6.0.19.1**.
 
-Running the latest supported version of NBS 6 is recommended. As of the most recent release, that version is **NBS 6.0.19.1**.
+The following table shows which NBS 6 versions have been tested and verified as compatible with each supported NBS 7 version.
 
-✓ Compatible - this version combination has been tested and verified to function correctly.
-✗ Not tested - compatibility for this version combination has not been established or verified.
+- **✓ Compatible** - this version combination has been tested and verified to function correctly.
+- **✗ Not tested** - compatibility for this version combination has not been established or verified.
 
 | NBS 7 version | 6.0.18 | 6.0.17 | 6.0.16.2 | 6.0.16.1 | 6.0.16 |
 |:---|:---:|:---:|:---:|:---:|:---:|

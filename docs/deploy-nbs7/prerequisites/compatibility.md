@@ -3,7 +3,7 @@ title: NBS 6 and NBS 7 compatibility
 layout: page
 parent: Prerequisites
 grand_parent: Deploy NBS 7
-nav_order: 1
+nav_order: 6
 nav_enabled: true
 description: Lists the NBS 6 and NBS 7 version combinations that have been tested and verified to function correctly.
 ---

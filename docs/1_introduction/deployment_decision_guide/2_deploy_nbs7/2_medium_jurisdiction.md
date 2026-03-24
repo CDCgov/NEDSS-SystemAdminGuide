@@ -15,8 +15,7 @@ description: Case study for a medium jurisdiction with existing Rhapsody middlew
 1. TOC
 {:toc}
 
---- 
-
+---
 
 ### Profile
 

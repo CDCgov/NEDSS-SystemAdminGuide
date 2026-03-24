@@ -21,7 +21,6 @@ Use the decision tree to identify your recommended starting configuration. Answe
 {: .important }
 The decision tree identifies a recommended starting point, not a final answer. CDC provides free pre-deployment consultation to help jurisdictions validate their configuration choice. Connect with the CDC NBS team at [nbs@cdc.gov](mailto:nbs@cdc.gov) before you begin deployment.
 
-
 ## Step 1: Hosting model
 
 Is your jurisdiction planning to self-host and self-maintain NBS 7, or will you use a vendor to host or maintain it?

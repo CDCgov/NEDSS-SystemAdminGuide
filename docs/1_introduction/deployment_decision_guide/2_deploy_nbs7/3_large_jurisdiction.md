@@ -15,8 +15,7 @@ description: Case study for a large, vendor-managed NBS Complete deployment at e
 1. TOC
 {:toc}
 
---- 
-
+---
 
 ### Profile
 

@@ -28,7 +28,7 @@ The base deployment. NBS 7 gives your jurisdiction NBS 6 feature parity on moder
 
 NBS 7 core components are organized into three layers. For details on what each component does and when you need it, see [NBS 7 core components](../3_component_reference/1_nbs_core_components.html).
 
-**Networking layer**
+### Networking layer
 
 The networking layer manages traffic routing and secure communication between your NBS 6 and NBS 7 environments.
 
@@ -36,7 +36,7 @@ The networking layer manages traffic routing and secure communication between yo
 - Virtual Private Cloud (VPC) and routing groups
 - VPN connectivity between NBS 6 and NBS 7 instances
 
-**Infrastructure layer**
+### Infrastructure layer
 
 The infrastructure layer provides the container orchestration platform and cloud services that host and run NBS 7 components.
 
@@ -46,7 +46,7 @@ The infrastructure layer provides the container orchestration platform and cloud
 - Terraform infrastructure automation modules
 - Load balancer
 
-**Application layer**
+### Application layer
 
 The application layer contains the NBS 7 services and legacy NBS 6 components that users and administrators directly interact with.
 
@@ -98,4 +98,3 @@ For details, see [Add-on: Data Ingestion (DI) API](../3_component_reference/3_di
 > Best for
 >
 > Jurisdictions that do not currently use Rhapsody or Mirth Connect for data ingestion, and want a built-in path for getting data into NBS 7.
-

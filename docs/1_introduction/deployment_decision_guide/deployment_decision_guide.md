@@ -16,7 +16,7 @@ description: Helps STLT IT administrators evaluate NBS 7 adoption and choose a d
 1. TOC
 {:toc}
 
-## Overview 
+## Overview
 
 This guide is for **STLT IT administrators** who operate NBS 6 and are evaluating whether to migrate to NBS 7. It aims to help your jurisdiction decide whether to adopt NBS 7 and, if so, plan your deployment. Review the decision guide before you begin migration planning.
 
@@ -44,4 +44,3 @@ Some prerequisites covered in this guide are also covered in the Migration Info 
 
 {: .note }
 NBS 7 is under active development. Component availability and configuration options will change as development continues. Make sure you are reading the latest version of this guide before you begin to plan.
-

@@ -5,7 +5,6 @@ nav_order: 3
 nav_enabled: true
 ---
 
-
 # Installation prerequisites
 
 ## On this page
@@ -13,7 +12,6 @@ nav_enabled: true
 
 1. TOC
 {:toc}
-
 
 You must have the following prerequisites in place before proceeding with the installation.
 

@@ -10,16 +10,20 @@ description: Details the Data Ingestion (DI) API add-on component, which accepts
 ## Component reference: Data Ingestion (DI) API add-on
 {: .no_toc }
 
-The DI API is a data transit layer built into NBS 7 that accepts incoming public health data and routes it into NBS without requiring third-party middleware. The DI API is added to your NBS Core deployment when you choose NBS Core + DI API or NBS Complete.
-
-
---- 
-
+For information on migration planning, staffing, and budget, see [Operational considerations](leadership_considerations.html).
 {: .note }
-**Health department leaders:** See [Leadership considerations](../leadership_considerations.html) for guidance on evaluating the DI API for your jurisdiction.
 
+<!--
+## On this page
+{: .no_toc .text-delta }
 
-### DI API
+1. TOC
+{:toc}
+-->
+
+The DI API is a data transit layer built into NBS 7 that accepts incoming public health data and routes it into NBS without requiring third-party middleware. The DI API is added to your NBS 7 deployment when you choose to deploy the DI API add-on.
+
+## DI API
 
 A modern data ingestion layer that accepts incoming public health data in multiple formats and routes it into NBS.
 

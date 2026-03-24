@@ -14,7 +14,6 @@ nav_enabled: true
 1. TOC
 {:toc}
 
----
 
 You must have the following prerequisites in place before proceeding with the installation.
 

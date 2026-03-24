@@ -2,7 +2,7 @@
 title: NBS 7 core components
 layout: page
 parent: Component reference
-grand_parent: NBS 7 Deployment Decision Guide
+grand_parent: Before you deploy
 nav_order: 1
 description: Details each component in NBS 7 — the application, infrastructure, and networking layers required for all NBS 7 deployments.
 ---

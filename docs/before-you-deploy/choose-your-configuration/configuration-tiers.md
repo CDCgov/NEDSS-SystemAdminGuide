@@ -2,7 +2,7 @@
 title: NBS 7 and available add-ons
 layout: page
 parent: Choose your configuration
-grand_parent: NBS 7 Deployment Decision Guide
+grand_parent: Before you deploy
 nav_order: 1
 description: Describes NBS 7 and its two optional add-ons — Real-Time Reporting (RTR) and the Data Ingestion (DI) API — and when each is appropriate.
 ---

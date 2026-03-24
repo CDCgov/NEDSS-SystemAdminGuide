@@ -2,7 +2,7 @@
 title: Decision tree
 layout: page
 parent: Choose your configuration
-grand_parent: NBS 7 Deployment Decision Guide
+grand_parent: Before you deploy
 nav_order: 2
 description: A step-by-step decision tree that guides jurisdictions to a recommended NBS 7 starting configuration based on hosting model, capacity, and case volume.
 ---

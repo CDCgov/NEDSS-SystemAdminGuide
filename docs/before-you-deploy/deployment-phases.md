@@ -3,8 +3,7 @@ title: Deployment phases
 layout: page
 parent: Before you deploy
 nav_order: 1
-description: An overview of the five phases involved in an NBS 7 deployment,
-from planning through steady state operations.
+description: An overview of the five phases involved in an NBS 7 deployment, from planning through steady state operations.
 ---
 
 # Deployment phases

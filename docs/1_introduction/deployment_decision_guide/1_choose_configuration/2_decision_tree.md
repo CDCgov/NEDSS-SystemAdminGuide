@@ -53,8 +53,7 @@ Will your jurisdiction obtain external assistance from a contractor, vendor, or 
 
 Where does your NBS 6 currently run?
 
-- **Already on AWS** → Lowest migration complexity. Go to [Step 5](#step-5-case-volume).
-- **Already on Azure** → Low migration complexity; you will follow the Azure-specific deployment path. Go to [Step 5](#step-5-case-volume).
+- **Already on AWS or Azure** → Go to [Step 5](#step-5-case-volume).
 - **On-premises** → Your migration includes a cloud migration as well as an NBS 7 deployment. Plan for additional time and resources. Go to [Step 5](#step-5-case-volume).
 
 ## Step 5: Case volume

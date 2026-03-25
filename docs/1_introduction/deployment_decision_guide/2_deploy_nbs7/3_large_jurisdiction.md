@@ -36,10 +36,6 @@ Large STLT with high case volumes, sophisticated analytics needs, and a vendor-m
 | NBS Core | Yes | Full core deployment |
 | Real-Time Reporting (RTR) | Yes | Required for high case volume and analytics needs |
 | DI API | Yes | Primary path for ELR and eCR ingestion |
-| DataSync | — | Verify with CDC NBS point of contact |
-
-> DataSync is not currently documented in this guide because it is only used by one jurisdiction and is not expected to be used long-term. Confirm with your CDC NBS point of contact before planning any DataSync integration.
-{: .note }
 
 ### Key configuration decisions
 

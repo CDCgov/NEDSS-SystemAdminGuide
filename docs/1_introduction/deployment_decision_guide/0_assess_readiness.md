@@ -10,7 +10,7 @@ description: Covers the technical prerequisites an STLT must meet before beginni
 # Assess your readiness for NBS 7
 {: .no_toc }
 
-This section helps you assess whether NBS 7 is a viable option for your jurisdiction before you commit to a migration.
+This section helps you assess whether NBS 7 is a viable option for your jurisdiction before you commit to a migration. 
 
 ## On this page
 {: .no_toc .text-delta }
@@ -20,7 +20,7 @@ This section helps you assess whether NBS 7 is a viable option for your jurisdic
 
 If you work through this section and find that your jurisdiction does not meet one or more prerequisites, you might still be able to move forward. You can address some gaps with planning and lead time, but other gaps might indicate that NBS 7 is not the right fit for your jurisdiction right now.
 
-For more information on migration planning, staffing, and budget, see [Operational considerations](leadership_considerations.html).
+For more information on migration planning, staffing, and budget, see [Operational considerations](leadership_considerations.html). For even more information on staffing models, shared responsibilities, and technical compatibility, see the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) on NBS Central.
 {: .note }
 
 ## State IT security approval

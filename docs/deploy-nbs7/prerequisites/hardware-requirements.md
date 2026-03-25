@@ -1,5 +1,5 @@
 ---
-title: Hardware requirements
+title: Hardware and software requirements
 layout: page
 parent: Prerequisites
 grand_parent: Deploy NBS 7

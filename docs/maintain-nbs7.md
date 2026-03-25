@@ -8,4 +8,4 @@ description: Operational guidance for maintaining your NBS 7 deployment after go
 
 # Maintain NBS 7
 
-This section covers operational tasks for managing and updating your NBS 7 deployment.
+Operational guidance for maintaining a running NBS 7 environment. Articles in this section are added as new maintenance procedures are documented.

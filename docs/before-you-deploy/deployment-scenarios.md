@@ -2,7 +2,7 @@
 title: Deployment scenarios
 layout: page
 parent: Before you deploy
-nav_order: 3
+nav_order: 4
 has_children: true
 description: Presents example NBS 7 deployment scenarios for small, medium, and large jurisdictions to illustrate configuration tradeoffs and real-world decisions.
 ---

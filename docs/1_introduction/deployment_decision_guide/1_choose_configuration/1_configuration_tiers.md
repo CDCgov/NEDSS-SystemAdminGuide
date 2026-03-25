@@ -58,7 +58,7 @@ The application layer contains the NBS 7 services and legacy NBS 6 components th
 - [Elasticsearch](../3_component_reference/1_nbs_core_components.html#elasticsearch)
 - [Nifi](../3_component_reference/1_nbs_core_components.html#nifi)
 - [Keycloak](../3_component_reference/1_nbs_core_components.html#keycloak)
-- [ArgoCD, Cert Manager, FluentBit](../3_component_reference/1_nbs_core_components.html#infrastructure-and-networking-layer-components)
+- [Cert Manager, FluentBit](../3_component_reference/1_nbs_core_components.html#infrastructure-and-networking-layer-components)
 - Database (NBS\_ODSE and NBS\_SRTE)
 
 {: .note-title }

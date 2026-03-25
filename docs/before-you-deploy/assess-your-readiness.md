@@ -1,7 +1,8 @@
 ---
 title: Assess your readiness
 layout: page
-parent: Before you deploy
+parent: NBS 7 Deployment Decision Guide
+grand_parent: Introduction
 nav_order: 2
 description: Covers the technical prerequisites an STLT must meet before beginning NBS 7 migration, including cloud, staffing, and network requirements.
 ---

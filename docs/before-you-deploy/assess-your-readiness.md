@@ -9,7 +9,7 @@ description: Covers the technical prerequisites an STLT must meet before beginni
 # Assess your readiness for NBS 7
 {: .no_toc }
 
-This section helps you assess whether NBS 7 is a viable option for your jurisdiction before you commit to a migration.
+This section helps you assess whether NBS 7 is a viable option for your jurisdiction before you commit to a migration. 
 
 ## On this page
 {: .no_toc .text-delta }
@@ -21,6 +21,10 @@ If you work through this section and find that your jurisdiction does not meet o
 
 For more information on migration planning, staffing, and budget, see [Operational considerations](leadership_considerations.html).
 {: .note }
+
+## Not sure where to start?
+
+If you are new to NBS 7 deployment, the [Deployment phases](deployment-phases.html) page provides an overview of an example rollout and where this readiness assessment fits within it.
 
 ## State IT security approval
 

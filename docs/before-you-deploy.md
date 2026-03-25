@@ -26,7 +26,7 @@ Use this guide to:
 - Understand the components that make up NBS 7 and what each one does
 - Prepare a recommendation for your deployment
 
-> Some factors that affect NBS 7 migration extend beyond infrastructure and configuration. For a summary of organizational, financial, and operational considerations, see [Operational considerations](leadership_considerations.html).
+> Some factors that affect NBS 7 migration extend beyond infrastructure and configuration. For a summary of organizational, financial, and operational considerations, see [Operational considerations](../docs/before-you-deploy/operational_considerations.html).
 {: .note }
 
 ## How this guide fits into the NBS 7 process

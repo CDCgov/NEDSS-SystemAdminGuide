@@ -1,7 +1,7 @@
 ---
 title: Deploy on AWS
 layout: page
-parent: Set up cloud infrastructure
+parent: Deploy cloud infrastructure
 nav_order: 1
 has_children: true
 description: Provision the AWS cloud environment and deploy base infrastructure using Terraform before installing Kubernetes services.

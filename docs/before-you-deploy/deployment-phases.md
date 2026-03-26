@@ -25,10 +25,10 @@ The phases in this table represent an example rollout scenario based on deployme
 
 | Phase | Goal | Minimum duration |
 |:---|:---|:---|
-| [Planning](#planning) | Establish your project team, [assess your readiness](assess-your-readiness.html), and create a customized migration plan | 7-10 weeks |
-| [Install](#install) | Provision cloud environments and deploy NBS 7 based on your [chosen configuration](choose-your-configuration.html) | 8-12 weeks |
-| [Test](#test) | Validate ingestion, egress, and system readiness before go-live | 8-12 weeks |
-| [Go-live](#go-live) | Complete cutover and launch NBS 7 in production | 2-5 weeks |
+| [Planning](#planning) | Establish your project team, [assess your readiness](assess-your-readiness.html), and create a customized migration plan | 2-3 months |
+| [Install](#install) | Provision cloud environments and deploy NBS 7 based on your [chosen configuration](choose-your-configuration.html) |  3-4 months |
+| [Test](#test) | Validate ingestion, egress, and system readiness before go-live | 3-4 months |
+| [Go-live](#go-live) | Complete cutover and launch NBS 7 in production | 1-2 months |
 | [Steady state](#steady-state) | Monitor live operations and maintain the system ongoing | Ongoing |
 
 {: .note }

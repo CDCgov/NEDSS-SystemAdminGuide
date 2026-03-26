@@ -1,7 +1,7 @@
 ---
 title: Deploy on Azure
 layout: page
-parent: Set up cloud infrastructure
+parent: Deploy cloud infrastructure
 nav_order: 2
 description: Provision the Azure cloud environment for NBS 7. Deployment guide coming soon.
 ---

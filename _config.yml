@@ -44,9 +44,8 @@ aux_links:
 # To also surface H3 subsections, change max_level to 3.
 # -----------------------------------------------------------------------------
 
-toc:
-  min_level: 2   # Start TOC at H2 (H1 is reserved for the page title)
-  max_level: 2   # Stop at H2 — only top-level sections appear in TOC
+kramdown:
+  toc_levels: 2..2   # {:toc} includes H2 only — H1 is the page title, H3+ are too granular
 
 # -----------------------------------------------------------------------------
 # Page-level features

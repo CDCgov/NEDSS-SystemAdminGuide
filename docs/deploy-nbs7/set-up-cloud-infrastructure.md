@@ -1,5 +1,5 @@
 ---
-title: Set up cloud infrastructure
+title: Deploy cloud infrastructure
 layout: page
 parent: Deploy NBS 7
 nav_order: 3

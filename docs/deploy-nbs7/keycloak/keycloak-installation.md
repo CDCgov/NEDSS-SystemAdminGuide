@@ -1,7 +1,7 @@
 ---
-title: Keycloak Installation
+title: Install Keycloak
 layout: page
-parent: Bootstrap Kubernetes services
+parent: Deploy cluster infrastructure
 nav_order: 2
 has_children: true
 nav_enabled: true
@@ -49,7 +49,7 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
 
    **Validation: Keycloak database is created**
 
-   ![keycloak-database-creation](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-database-creation.png)
+   ![keycloak-database-creation](images/keycloak-database-creation.png)
 
 ## Configure the Helm chart
 
@@ -79,7 +79,7 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
    Helm install keycloak --namespace default -f keycloak/values.yaml keycloak
    ```
 
-   ![keycloak-database-tables](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-database-tables.png)
+   ![keycloak-database-tables](images/keycloak-database-tables.png)
 
 1. Verify the pod is running before proceeding:
 
@@ -102,27 +102,27 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
 
 1. In a browser, navigate to <http://127.0.0.1:8080/auth> and select **Administrative console**.
 
-   ![keycloak-ui-interface](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/kyecloak-login.png)
+   ![keycloak-ui-interface](images/kyecloak-login.png)
 
 1. Sign in using the `adminUser` and `adminPassword` values configured in the Helm chart.
 
-   ![keycloak-ui-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-ui.png)
-   ![keycloak-ui-2-login](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/keycloak-admin-ui-first-time-login.png)
+   ![keycloak-ui-login](images/keycloak-ui.png)
+   ![keycloak-ui-2-login](images/keycloak-admin-ui-first-time-login.png)
 
 ## Create the NBS realm
 
 1. Create a new realm to contain the NBS-specific client and user/group configurations.
 
-   ![nbs-create-new-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client.png)
+   ![nbs-create-new-realm](images/create-new-nbs-realm-with-di-client.png)
 
 1. Upload `{Helm extract directory}/charts/keycloak/extra/01-NBS-realm-with-DI-client.json` and click **Create**. This imports the NBS realm and clients.
 
-   ![nbs-create-new-realm-2](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client-2.png)
-   ![nbs-create-new-realm-3](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/create-new-nbs-realm-with-di-client-3.png)
+   ![nbs-create-new-realm-2](images/create-new-nbs-realm-with-di-client-2.png)
+   ![nbs-create-new-realm-3](images/create-new-nbs-realm-with-di-client-3.png)
 
 1. Verify the realm and clients are created successfully.
 
-   ![nbs-realm-di-client-creation](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nbs-realm-di-client-3.png)
+   ![nbs-realm-di-client-creation](images/nbs-realm-di-client-3.png)
 
 ## Configure service clients
 
@@ -135,15 +135,15 @@ The imported configuration seeds a random client secret for each service client.
 1. Click the eye icon to reveal the secret and copy it.
 1. Store the secret for use by the applications (for example, in AWS Secrets Manager at `keycloak/client/secret/di`).
 
-   ![di-client-id](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/di-client-id.png)
-   ![di-client-secret](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/di-client-secret.png)
+   ![di-client-id](images/di-client-id.png)
+   ![di-client-secret](images/di-client-secret.png)
 
 ### NND client
 
 1. In the **NBS Realm**, open **Realm settings**, click the **Action** dropdown, and select **Partial Import**.
 
-   ![nnd-realm](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-realm.png)
-   ![nnd-realm-partial-import](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-realm-partial-import.png)
+   ![nnd-realm](images/nnd-realm.png)
+   ![nnd-realm-partial-import](images/nnd-realm-partial-import.png)
 
 1. Upload `<Helm extract directory>/charts/keycloak/extra/05-nbs-users-nnd-client.json` and click **Create**.
 1. Navigate to the **NBS Realm** in the left menu and click **Clients**.
@@ -151,8 +151,8 @@ The imported configuration seeds a random client secret for each service client.
 1. Click the eye icon to reveal the secret and copy it.
 1. Store the secret (for example, in AWS Secrets Manager at `keycloak/client/secret/nnd`).
 
-   ![nnd-client-id](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-client-id.png)
-   ![nnd-client-secret](/NEDSS-SystemAdminGuide/docs/5_keycloak/images/nnd-client-secret.png)
+   ![nnd-client-id](images/nnd-client-id.png)
+   ![nnd-client-secret](images/nnd-client-secret.png)
 
 ### SRTE client
 

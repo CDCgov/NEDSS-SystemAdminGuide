@@ -17,16 +17,16 @@ The following table shows which NBS 6 versions have been tested and verified as 
 - **<span class="text-green">✓ Yes</span>** - this version combination has been tested and verified to function correctly.
 - **No** - compatibility for this version combination has not been established or verified.
 
-| NBS 7 version | 6.0.19 | 6.0.18 | 6.0.17 | 6.0.16.2 | 6.0.16.1 | 6.0.16 |
+| NBS 7 version | 6.0.18 | 6.0.17 | 6.0.16.2 | 6.0.16.1 | 6.0.16 |
 |:---|:---:|:---:|:---:|:---:|:---:|
-| 7.11.1 | No | <span class="text-green">✓ Yes</span> | <span class="text-green">✓ Yes</span> | No | No | No |
-| 7.10   | No | No | <span class="text-green">✓ Yes</span> | <span class="text-green">✓ Yes</span> | No | No |
-| 7.9    | No | No | <span class="text-green">✓ Yes</span> | <span class="text-green">✓ Yes</span> | No | No |
-| 7.8.1  | No | No | No | <span class="text-green">✓ Yes</span> | No | No |
-| 7.8.0  | No | No | No | <span class="text-green">✓ Yes</span> | <span class="text-green">✓ Yes</span> | No |
-| 7.7    | No | No | No | No | <span class="text-green">✓ Yes</span> | No |
-| 7.6    | No | No | No | No | <span class="text-green">✓ Yes</span> | No |
-| 7.5    | No | No | No | No | No | <span class="text-green">✓ Yes</span> |
+| 7.11.1 | <span class="text-green">✓ Yes</span> | <span class="text-green">✓ Yes</span> | No | No | No |
+| 7.10   | No | <span class="text-green">✓ Yes</span> | <span class="text-green">✓ Yes</span> | No | No |
+| 7.9    | No | <span class="text-green">✓ Yes</span> | <span class="text-green">✓ Yes</span> | No | No |
+| 7.8.1  | No | No | <span class="text-green">✓ Yes</span> | No | No |
+| 7.8.0  | No | No | <span class="text-green">✓ Yes</span> | <span class="text-green">✓ Yes</span> | No |
+| 7.7    | No | No | No | <span class="text-green">✓ Yes</span> | No |
+| 7.6    | No | No | No | <span class="text-green">✓ Yes</span> | No |
+| 7.5    | No | No | No | No | <span class="text-green">✓ Yes</span> |
 
 > This table reflects verified compatibility data as of NBS 7.11.1. Compatibility data for versions not listed has not been established.
 {: .note }

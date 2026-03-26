@@ -5,11 +5,16 @@ parent: Maintain NBS 7
 nav_order: 2
 ---
 
-## SQL Server configuration
+# SQL Server configuration
 {: .no_toc }
 
-#### Enabling Verbose Truncation Warnings
-{: .no_toc }
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Enabling Verbose Truncation Warnings
 
 SQL Server Trace Flag 460 provides detailed error messages when string or binary data truncation occurs. This is particularly useful for diagnosing data truncation errors when saving investigations in NBS, as it includes column names and data types in error messages rather than generic truncation warnings.
 
@@ -38,7 +43,7 @@ DBCC TRACEON(460, -1);
 
 **Note:** This method enables the trace flag immediately but it will be disabled when SQL Server restarts. For persistent configuration across restarts, use Method 1.
 
-### Verifying Trace Flag Status
+## Verifying Trace Flag Status
 
 To verify that Trace Flag 460 is enabled:
 
@@ -54,7 +59,7 @@ TraceFlag  Status  Global  Session
 460        1       1       0
 ```
 
-### Benefits for NBS Operations
+## Benefits for NBS Operations
 
 When Trace Flag 460 is enabled, truncation errors will provide detailed information such as:
 

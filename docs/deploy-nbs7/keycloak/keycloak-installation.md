@@ -1,8 +1,8 @@
 ---
 title: Keycloak Installation
 layout: page
-parent: Deploy NBS 7
-nav_order: 5
+parent: Bootstrap Kubernetes services
+nav_order: 2
 has_children: true
 nav_enabled: true
 ---

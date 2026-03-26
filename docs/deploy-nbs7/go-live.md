@@ -1,7 +1,7 @@
 ---
 title: Go live
 layout: page
-parent: Deploy NBS 7
-nav_order: 8
+parent: Validate the deployment
+nav_order: 1
 nav_enabled: true
 ---

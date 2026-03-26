@@ -1,15 +1,14 @@
 ---
-title: Management machine setup
+title: Management machine
 layout: page
-parent: Prerequisites
-grand_parent: Deploy NBS 7
+parent: AWS prerequisites
 nav_order: 3
 ---
 
-## Management Machine Setup
+# Management machine setup for AWS deployments
 {: .no_toc }
-You will also need a local or cloud hosted workstation (e.g. CloudShell) with the set of tools required to configure, deploy and maintain the
-NBS 7 system. The following tools should be installed on a local or cloud-based management machine to support this work:
+
+You will need a local or cloud hosted workstation (e.g. CloudShell) with the set of tools required to configure, deploy and maintain the NBS 7 system. The following tools should be installed on a local or cloud-based management machine to support this work:
 
 - **AWS CLI**: Download and installation instructions can be found [here](https://aws.amazon.com/cli/)
   - Instructions for getting and using AWS credentials for use with the CLI can be found [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)

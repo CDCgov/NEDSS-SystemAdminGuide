@@ -3,7 +3,7 @@ title: Decision tree
 layout: page
 parent: Choose your configuration
 grand_parent: Before you deploy
-nav_order: 2
+nav_order: 1
 description: A step-by-step decision tree that guides jurisdictions to a recommended NBS 7 starting configuration based on hosting model, capacity, and case volume.
 ---
 

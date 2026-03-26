@@ -1,10 +1,10 @@
 ---
-title: Terraform Deployment
+title: Terraform deployment
 layout: page
-parent: AWS Infrastructure
-grand_parent: Deploy NBS 7
+parent: AWS infrastructure
 nav_order: 1
 nav_enabled: true
+description: How to use Terraform to deploy the NBS 7 infrastructure on AWS.
 ---
 
 # Terraform Deployment

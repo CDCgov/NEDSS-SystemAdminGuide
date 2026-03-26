@@ -3,7 +3,7 @@ title: Vendor-managed deployment
 layout: page
 parent: Choose your configuration
 grand_parent: Before you deploy
-nav_order: 3
+nav_order: 2
 description: Guidance for jurisdictions using a vendor to host or maintain NBS 7, including what to evaluate in a vendor and how to coordinate with CDC.
 ---
 

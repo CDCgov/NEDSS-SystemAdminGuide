@@ -1,8 +1,8 @@
 ---
 title: Real-Time Reporting (Preview)
 layout: page
-parent: Deploy NBS 7
-nav_order: 7
+parent: Deploy NBS 7 microservices
+nav_order: 2
 has_children: true
 nav_enabled: true
 redirect_from:
@@ -14,7 +14,7 @@ redirect_from:
   - /docs/7_feature_preview/(DEPRECATED)9_post_processing_reporting_service/
 ---
 
-# Deploy Real Time Reporting via Helm chart
+# Deploy real-time reporting
 {: .no_toc }
 
 ## On this page
@@ -26,7 +26,7 @@ redirect_from:
 > This feature is in Beta preview and not production ready.
 {: .important }
 
-This guide details steps to install NBS 7 Real Time Reporting end to end. Real Time Reporting provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database RDB. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Onboarding: Service Users and Setup Scripts](#onboarding-service-users-and-setup-scripts)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into RDB.
+This guide details steps to use Helm charts to install the real-time reporting add-on end to end. Real-time reporting   provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database RDB. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Onboarding: Service Users and Setup Scripts](#onboarding-service-users-and-setup-scripts)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into RDB.
 
 ---
 
@@ -40,26 +40,28 @@ If there are problems encountered during Database Setup, please reach out to our
 
 1. Database Release Version: Verify the underlying database release version returned is 6.0.17. Execute the following query to verify the baseline NBS Release version:
 
-  ```sql
-    USE NBS_ODSE;
-    SELECT max(Version) current_version
-    FROM NBS_ODSE.dbo.NBS_Release;
+   ```sql
+   USE NBS_ODSE;
+   SELECT max(Version) current_version
+   FROM NBS_ODSE.dbo.NBS_Release;
+   ```
 
-    --or use the below query to check the config value
+   Or use the below query to check the config value:
 
-    use [NBS_ODSE];
-    select * from NBS_configuration where config_key = 'CODE_BASE'
-  ```
+   ```sql
+   use [NBS_ODSE];
+   select * from NBS_configuration where config_key = 'CODE_BASE'
+   ```
 
 2. **Classic ETL: Please ensure the following ETL batch jobs have run successfully before setting up the reporting database for Real Time Reporting.**
    - a. ETL scheduled jobs:
-     - `MasterEtl.bat`
-     - `PHCMartETL.bat`
-     - `covid19ETL.bat`
+   - `MasterEtl.bat`
+   - `PHCMartETL.bat`
+   - `covid19ETL.bat`
    - b. **Note: Ensure to take a backup of rdb database before proceeding with the next steps**
    - c. Database setup:
-     - **Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.**
-     - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under [Onboarding: UAT Database Setup](#onboarding-uat-database-setup) section.
+   - **Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.**
+   - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under [Onboarding: UAT Database Setup](#onboarding-uat-database-setup) section.
 
 3. Environment Variable: Set the appropriate environment variable to define the reporting database context. This ensures that scripts execute against the correct reporting database.
    - a. Option 1: RDB as default database. Please insert the following to NBS_configuration to default to RDB.
@@ -90,7 +92,7 @@ If there are problems encountered during Database Setup, please reach out to our
   - c. Ensure the RDS SQL Server has the Option for Backup and Restore Enabled in Options group.
   - d. Open any SQL Client and connect to SQL Server RDS instance.
   - e. Backup database to AWS S3.
-    - Run this procedure to back up the SQL Server database to S3.
+  - Run this procedure to back up the SQL Server database to S3.
 
       ```sql
       exec msdb.dbo.rds_backup_database
@@ -99,7 +101,7 @@ If there are problems encountered during Database Setup, please reach out to our
       @type='FULL'
       ```
 
-    - Run the procedure to check the status.
+  - Run the procedure to check the status.
 
       ```sql
       exec msdb.dbo.rds_task_status;
@@ -109,91 +111,98 @@ If there are problems encountered during Database Setup, please reach out to our
   - a. Open any SQL Client and connect to SQL Server RDS instance.
   - b. Restore RDB as rdb_modern by executing the following procedure.
 
-    ```sql
-    exec msdb.dbo.rds_restore_database
-    @restore_db_name='rdb_modern',
-    @s3_arn_to_restore_from='arn:aws:s3:::cdc-nbs-state-upload-shared/Classic-6.0.16/rdb_classic_gdit_07_10_5pmet.bak',
-    @type='FULL';
-    ```
+   ```sql
+   exec msdb.dbo.rds_restore_database
+   @restore_db_name='rdb_modern',
+   @s3_arn_to_restore_from='arn:aws:s3:::cdc-nbs-state-upload-shared/Classic-6.0.16/rdb_classic_gdit_07_10_5pmet.bak',
+   @type='FULL';
+   ```
 
-    - Run the procedure to check the status.
+- Run the procedure to check the status.
 
-      ```sql
-      exec msdb.dbo.rds_task_status;
-      ```
+```sql
+exec msdb.dbo.rds_task_status;
+```
 
 ### Onboarding: Service Users and Setup Scripts
 
 One time onboarding steps required for Real Time Reporting setup.
 
 1. Create database users: Each user will be provided with permissions it needs to do its job and nothing more! **Please review the scripts and update the PASSWORD field for before executing.**
-    - a. Create admin user: User provides Liquibase required permissions to maintain necessary database components for Real Time Reporting, and enable Change Data Capture for tables.
-      - Script location: [NEDSS-DataReporting/create-rtr-admin-user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/000-create_rtr_admin_user-001.sql)
-    - b. Create Real Time Reporting microservice user logins: Create dedicated user accounts for each Real Time Reporting microservice. These users are wired in Helm for each Real Time Reporting services.
-      - Script location: [NEDSS-DataReporting/service-user-login-script](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/001-service_users_login_creation-001.sql)
-      - Script location: [NEDSS-DataReporting/service-database-user-creation](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/002-service_database_user_creation-001.sql)
-2. Create kubernetes secrets: Kubernetes secrets are required for Real Time Reporting services to access the database. The secrets should be created for each service user created in step 1. (**Ignore this if kubernetes secrets are created in step** [kuberetes secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster))
-    - a. Create secrets for each service user, including the admin user created in step 1a. The secrets should include the database username and password for each service user.:
-      - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
-3. Create required database objects: Scripts required for Real Time Reporting can be executed via Liquibase or manually.
-    - Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section to create all necessary objects before moving to step 4.
-    - Option 2: The required database objects can also be manually created. Documentation on script execution sequence and supplemental `db_upgrade.bat` file is provided to support manual setup.
-      - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
-      - Please specify the database and proceed:
-        - `upgrade_db.bat server_name <database> username password`
-3. Load data and enable Change Data Capture: One time onboarding step is required after all database objects are created in Step 3.
-    - a. Option 1: Manual execution of scripts. Please review and execute scripts within the [data_load](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment) folder.
-      - i. Load metadata rows from NBS_ODSE and NBS_SRTE database tables to the reporting database.
-          - Script location: [000-nrt_metadata_load.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/000-nrt_metadata_load-001.sql)
-      - ii. Data load to nrt_<>_key tables
-      - Run remaining onboarding scripts starting from `/02_onboarding_script_data_load/001-*`.
-        - Script location: [/02_onboarding_script_data_load/001-*.sql](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load)
-      - iii.Enable Change Data Capture on NBS_ODSE and NBS_SRTE databases and tables:
-        - These are the final scripts that should be run before go-live.
-          - a. [1002-enable_cdc_on_odse_database.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1002-enable_cdc_on_odse_database-001.sql)
-          - b. [1003-enable_cdc_on_srte_database.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1003-enable_cdc_on_srte_database-001.sql)
-          - c. [1004-enable_cdc_on_odse_tables.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1004-enable_cdc_on_odse_tables-001.sql)
-          - d. [1005-enable_cdc_on_srte_tables.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1005-enable_cdc_on_srte_tables-001.sql)
-    - b. Option 2: `db_upgrade.bat` file with `--load-data` flag run against the master database.
-        - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
-        - `upgrade_db.bat --load-data server_name master username password`
 
-    ```sql
-       --Verify change data capture. is_cdc_enabled=1 indicates successful configuration.
+- a. Create admin user: User provides Liquibase required permissions to maintain necessary database components for Real Time Reporting, and enable Change Data Capture for tables.
+  - Script location: [NEDSS-DataReporting/create-rtr-admin-user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/000-create_rtr_admin_user-001.sql)
+- b. Create Real Time Reporting microservice user logins: Create dedicated user accounts for each Real Time Reporting microservice. These users are wired in Helm for each Real Time Reporting services.
+  - Script location: [NEDSS-DataReporting/service-user-login-script](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/001-service_users_login_creation-001.sql)
+  - Script location: [NEDSS-DataReporting/service-database-user-creation](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/002-service_database_user_creation-001.sql)
+
+2. Create kubernetes secrets: Kubernetes secrets are required for Real Time Reporting services to access the database. The secrets should be created for each service user created in step 1. (**Ignore this if kubernetes secrets are created in step** [kuberetes secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster))
+
+- a. Create secrets for each service user, including the admin user created in step 1a. The secrets should include the database username and password for each service user.:
+  - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
+
+3. Create required database objects: Scripts required for Real Time Reporting can be executed via Liquibase or manually.
+
+- Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section to create all necessary objects before moving to step 4.
+- Option 2: The required database objects can also be manually created. Documentation on script execution sequence and supplemental `db_upgrade.bat` file is provided to support manual setup.
+  - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
+  - Please specify the database and proceed:
+  - `upgrade_db.bat server_name <database> username password`
+
+3. Load data and enable Change Data Capture: One time onboarding step is required after all database objects are created in Step 3.
+
+- a. Option 1: Manual execution of scripts. Please review and execute scripts within the [data_load](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment) folder.
+  - i. Load metadata rows from NBS_ODSE and NBS_SRTE database tables to the reporting database.
+    - Script location: [000-nrt_metadata_load.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/000-nrt_metadata_load-001.sql)
+  - ii. Data load to nrt_<>_key tables
+  - Run remaining onboarding scripts starting from `/02_onboarding_script_data_load/001-*`.
+  - Script location: [/02_onboarding_script_data_load/001-*.sql](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load)
+  - iii.Enable Change Data Capture on NBS_ODSE and NBS_SRTE databases and tables:
+  - These are the final scripts that should be run before go-live.
+    - a. [1002-enable_cdc_on_odse_database.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1002-enable_cdc_on_odse_database-001.sql)
+    - b. [1003-enable_cdc_on_srte_database.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1003-enable_cdc_on_srte_database-001.sql)
+    - c. [1004-enable_cdc_on_odse_tables.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1004-enable_cdc_on_odse_tables-001.sql)
+    - d. [1005-enable_cdc_on_srte_tables.sql](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load/1005-enable_cdc_on_srte_tables-001.sql)
+- b. Option 2: `db_upgrade.bat` file with `--load-data` flag run against the master database.
+  - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
+  - `upgrade_db.bat --load-data server_name master username password`
+
+   ```sql
+      --Verify change data capture. is_cdc_enabled=1 indicates successful configuration.
        SELECT name,
        is_cdc_enabled
        FROM sys.databases;
 
-       --View ODSE tables with CDC enabled.
+      --View ODSE tables with CDC enabled.
        USE NBS_ODSE;
        SELECT
        name,
-       case when is_tracked_by_cdc  = 1 then 'YES'
-         else 'NO' end as is_tracked_by_cdc
+       case when is_tracked_by_cdc   = 1 then 'YES'
+       else 'NO' end as is_tracked_by_cdc
        FROM sys.tables
        WHERE is_tracked_by_cdc = 1;
 
-       -- View SRTE tables with CDC enabled
+      -- View SRTE tables with CDC enabled
        USE NBS_SRTE;
        SELECT
        name,
-       case when is_tracked_by_cdc  = 1 then 'YES'
-         else 'NO' end as is_tracked_by_cdc
+       case when is_tracked_by_cdc   = 1 then 'YES'
+       else 'NO' end as is_tracked_by_cdc
        FROM sys.tables
        WHERE is_tracked_by_cdc = 1;
-    ```
+   ```
 
-    ![cdc-enabled-odse-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_odse_tables.png "CDC for NBS_ODSE")
+   ![cdc-enabled-odse-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_odse_tables.png "CDC for NBS_ODSE")
 
-    ![cdc-enabled-srte-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_srte_tables.png "CDC for NBS_SRTE")
+   ![cdc-enabled-srte-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_srte_tables.png "CDC for NBS_SRTE")
 
 ***Troubleshooting tip:*** After `rdb_modern` is restored, if the Change Data Capture is not producing data, run the following script:
 
-   ```sql
-   -- Change DB owner after backup/restore
-   USE NBS_ODSE;
-   EXEC sp_changedbowner 'sa';
-   ```
+```sql
+-- Change DB owner after backup/restore
+USE NBS_ODSE;
+EXEC sp_changedbowner 'sa';
+```
 
 ### Continuous Integration for Real Time Reporting Database
 

@@ -1,15 +1,16 @@
 ---
-title: Hardware and software requirements
+title: Hardware and software
 layout: page
-parent: Prerequisites
-grand_parent: Deploy NBS 7
+parent: AWS prerequisites
 nav_order: 2
 ---
 
-## Hardware Requirements (AWS)
-
-<h4 align="center"><b> High Volume STLTs </b></h4>
+# Hardware and software requirements for AWS deployments
 {: .no_toc }
+
+## Hardware requirements
+
+### High-volume STLTs
 
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
@@ -17,8 +18,7 @@ nav_order: 2
 | Relational Database | SQL Server 2017+ Standard or Enterprise | New NBS 6.X.X Deployment Recommendations: [📝 Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html?CDC_AAref_Val=https://www.cdc.gov/nbs/resources/implementation-and-support.html) |
 | Persistent Store | EFS | 1 TB |
 
-<h4 align="center"><b> Low Volume STLTs </b></h4>
-{: .no_toc }
+### Low-volume STLTs
 
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
@@ -27,7 +27,6 @@ nav_order: 2
 | Persistent Store | EFS | 500 GB |
 
 ## Software requirements
-{: .no_toc }
 
 | **Software**        | **Version**                   | **Comments**                                                    |
 |---------------------|-------------------------------|-----------------------------------------------------------------|

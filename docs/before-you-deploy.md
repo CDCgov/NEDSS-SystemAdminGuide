@@ -1,7 +1,7 @@
 ---
 title: Before you deploy
 layout: page
-nav_order: 1
+nav_order: 2
 has_children: true
 description: Evaluation and planning content to help you assess NBS 7 readiness and choose a deployment configuration.
 ---
@@ -9,15 +9,15 @@ description: Evaluation and planning content to help you assess NBS 7 readiness 
 # NBS 7 Deployment Decision Guide
 {: .no_toc }
 
+This guide is for STLT IT administrators and technical decision-makers who operate NBS 6 and are evaluating whether to migrate to NBS 7. It covers whether NBS 7 is the right fit for your jurisdiction and, if so, how to plan your deployment. The guide surfaces decisions that might affect your timeline and configuration choices. Start here before you begin migration planning, and share this resource with your leadership and support teams.
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
-## Overview
-
-This guide is for STLT IT administrators and technical decision-makers who operate NBS 6 and are evaluating whether to migrate to NBS 7. It covers whether NBS 7 is the right fit for your jurisdiction and, if so, how to plan your deployment. The guide surfaces decisions that might affect your timeline and configuration choices. Start here before you begin migration planning, and share this resource with your leadership and support teams.
+## Purpose
 
 Use this guide to:
 
@@ -26,7 +26,7 @@ Use this guide to:
 - Understand the components that make up NBS 7 and what each one does
 - Prepare a recommendation for your deployment
 
-> Some factors that affect NBS 7 migration extend beyond infrastructure and configuration. For a summary of organizational, financial, and operational considerations, see [Operational considerations](../docs/before-you-deploy/operational_considerations.html).
+> Some factors that affect NBS 7 migration extend beyond infrastructure and configuration. For a summary of organizational, financial, and operational considerations, see [Operational considerations](leadership_considerations.html).
 {: .note }
 
 ## How this guide fits into the NBS 7 process
@@ -35,9 +35,9 @@ Three documents support the NBS 6 to NBS 7 transition. Each serves a different p
 
 | Document | Purpose | When to use |
 |:---|:---|:---|
-| **NBS 7 Deployment Decision Guide** (this guide) | Helps IT administrators and leadership evaluate NBS 7, understand hosting requirements, and choose a component configuration | Use first |
-| **NBS 7 Migration Info Sheet** | Guides your jurisdiction through the migration process, including timelines, roles, a compatibility checklist, and cutover planning | Use after confirming NBS 7 is the right fit |
-| **NBS 7 System Administrator Guide** | Provides step-by-step deployment instructions for your chosen configuration | Use when ready to deploy |
+| **NBS 7 Deployment Decision Guide** (you are here) | This resource helps IT administrators and leadership evaluate NBS 7, understand hosting requirements, and choose a component configuration | Use first |
+| **[NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731)** (requires login) | Hosted on NBS Central, this resource guides your jurisdiction through the migration process, including timelines, roles, a compatibility checklist, and cutover planning | Use after confirming NBS 7 is the right fit |
+| **[NBS 7 Deployment Guide](../docs/deploy-nbs7.htm)** | Provides step-by-step deployment instructions for your chosen configuration | Use when ready to deploy |
 
 Some prerequisites covered in this guide are also covered in the Migration Info Sheet. This guide reinforces the prerequisites so that your IT team can use it independently, before they begin the migration process.
 

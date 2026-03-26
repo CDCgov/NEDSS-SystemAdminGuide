@@ -1,13 +1,15 @@
 ---
-title: Quickstart
+title: Quick start (AWS)
 layout: page
 parent: Deploy NBS 7
 nav_order: 1
 nav_enabled: true
 ---
 
-# Quickstart
+# Quick start guide for AWS deployments
 {: .no_toc }
+
+This quick guide provides a streamlined step-by-step approach for deploying the NBS 7 infrastructure and microservices in an AWS environment. It is intended for experienced administrators who are familiar with AWS, [Kubernetes](https://kubernetes.io/), [Helm](https://helm.sh/), and [Terraform](https://www.terraform.io/).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -15,13 +17,12 @@ nav_enabled: true
 1. TOC
 {:toc}
 
-This quick guide provides a simple step-by-step approach for deploying the NBS 7 infrastructure and microservices in an AWS environment. It is intended for experienced administrators who are familiar with AWS, [Kubernetes](https://kubernetes.io/), [Helm](https://helm.sh/), and [Terraform](https://www.terraform.io/).
+This guide is NOT meant for a production deployment. For full production deployment steps and guidelines, [start here](../../docs/deploy-nbs7.html).
+{: .important }
 
-This guide is NOT meant for a production deployment. Please review AWS Infrastructure for a full production deployment and guidelines.
+The following resources will be installed and configured with this guide:
 
-### Following resources will be installed and configured with this guide
-
-#### Terraform
+### Terraform
 
 - Modern VPC, Subnets, Route Tables
 - EKS Cluster, Nodes
@@ -33,11 +34,11 @@ This guide is NOT meant for a production deployment. Please review AWS Infrastru
 - KMS
 - S3 Bucket
 
-#### Manual
+### Manual
 
 - Route53 Updates: Need to create dns entries in route53 to point app and data urls to network load balancer
 
-#### NBS7 Core Services
+### NBS7 Core Services
 
 1. **Elasticsearch** - For lightning-fast searches.
 2. **Modernization API** - This service incorporates essential modern NBS features such as patient search, event search, patient profile, investigations, etc.

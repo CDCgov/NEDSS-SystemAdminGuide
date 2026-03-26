@@ -1,21 +1,23 @@
 ---
-title: Deployment phases
+title: Deployment overview
 layout: page
 parent: Before you deploy
 nav_order: 1
 description: An overview of the five phases involved in an NBS 7 deployment, from planning through steady state operations.
 ---
 
-# Deployment phases
+# Deployment overview
 {: .no_toc }
 
 NBS 7 deployments vary significantly by jurisdiction. If you are just getting started, this page might help you understand where the  [Assess your readiness](assess-your-readiness.html) checklist fits in the overall process.
 
+<!--
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
+-->
 
 ## Example deployment phases
 

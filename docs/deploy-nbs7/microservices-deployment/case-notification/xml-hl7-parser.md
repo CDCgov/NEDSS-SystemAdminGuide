@@ -1,8 +1,7 @@
 ---
-title: Xml Hl7 Parser
+title: Xml Hl7 parser
 layout: page
-parent: Case Notification
-grand_parent: Microservices Deployment
+parent: Case notifications
 nav_order: 3
 nav_enabled: true
 ---

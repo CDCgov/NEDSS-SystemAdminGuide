@@ -1,8 +1,7 @@
 ---
-title: Data Extraction
+title: Data extraction
 layout: page
-parent: Case Notification
-grand_parent: Microservices Deployment
+parent: Case notifications
 nav_order: 4
 nav_enabled: true
 ---

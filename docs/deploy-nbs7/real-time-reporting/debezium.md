@@ -1,7 +1,7 @@
 ---
-title: RTR Debezium
+title: Debezium
 layout: page
-parent: Deploy real-time reporting (preview)
+parent: Real-time reporting (preview)
 nav_order: 2
 nav_enabled: true
 ---

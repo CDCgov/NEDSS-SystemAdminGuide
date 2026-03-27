@@ -1,7 +1,7 @@
 ---
-title: RTR Kafka connector
+title: Kafka connector
 layout: page
-parent: Deploy real-time reporting (preview)
+parent: Real-time reporting (preview)
 nav_order: 3
 nav_enabled: true
 ---

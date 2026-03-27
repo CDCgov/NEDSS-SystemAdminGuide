@@ -1,8 +1,8 @@
 ---
-title: Deploy real-time reporting (preview)
+title: Real-time reporting (preview)
 layout: page
 parent: Deploy NBS 7 microservices
-nav_order: 2
+nav_order: 11
 has_children: true
 nav_enabled: true
 redirect_from:

@@ -1,22 +1,14 @@
 ---
-title: Data Ingestion Service Integrations
+title: Service integrations
 layout: page
-parent: Data Ingestion
-grand_parent: Microservices Deployment
+parent: Data ingestion
 nav_order: 3
 nav_enabled: true
 ---
 
-## On this page
-{: .no_toc .text-delta }
+# Service integrations for data ingestion
 
-1. TOC
-{:toc}
+To install Rhapsody or SFTP service integrations, see the following documents:
 
-### Data Ingestion Rhapsody Route Integration
-
-[Data Ingestion Rhapsody Route Integration.pdf](docs/NM-NBS%207.11%20Data%20Ingestion%20Rhapsody%20Route%20Integration.pdf)
-
-### Data Ingestion SFTP Manual File Drop Off
-
-[Data Ingestion SFTP Manual File Drop Off.pdf](docs/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)
+- [Data Ingestion Rhapsody Route Integration.pdf](../images/NM-NBS%207.11%20Data%20Ingestion%20Rhapsody%20Route%20Integration.pdf)
+- [Data Ingestion SFTP Manual File Drop Off.pdf](../images/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)

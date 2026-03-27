@@ -1,7 +1,7 @@
 ---
-title: RTR Data Compare
+title: Data Compare
 layout: page
-parent: Deploy real-time reporting (preview)
+parent: Real-time reporting (preview)
 nav_order: 12
 nav_enabled: true
 ---

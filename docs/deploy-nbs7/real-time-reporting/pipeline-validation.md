@@ -1,7 +1,7 @@
 ---
-title: RTR pipeline validation
+title: Pipeline validation
 layout: page
-parent: Deploy real-time reporting (preview)
+parent: Real-time reporting (preview)
 nav_order: 11
 nav_enabled: true
 ---

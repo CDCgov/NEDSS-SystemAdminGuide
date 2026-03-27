@@ -1,8 +1,7 @@
 ---
-title: Data Processing
+title: Data processing
 layout: page
-parent: Microservices Deployment
-grand_parent: Deploy NBS 7
+parent: Deploy NBS 7 microservices
 nav_order: 7
 has_children: true
 nav_enabled: true
@@ -20,7 +19,7 @@ This guide is designed to assist clients who are working with Real Time Ingestio
 
 ## Flow Diagram
 
-![data-processing-flow-diagram](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-flow-diagram.png)
+![data-processing-flow-diagram](images/data-processing-flow-diagram.png)
 
 ## Deploy RTI ( Real Time Ingestion "data-processing-service") via helm chart
 
@@ -60,7 +59,7 @@ Values for ECR repository, ECR image tag, db server endpoints, and ingress host 
 5. Update the values file with the jdbc connection values in the following format:
 
 - The dbserver value is just a database server endpoint. Please don't include the port number
-   ![data-processing-dbendpoint](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/images/data-processing-dbendpoint.png)
+   ![data-processing-dbendpoint](images/data-processing-dbendpoint.png)
 - Note: Please ignore all the other values such as ingress, ingressHost, etc.
 
     ```yaml

@@ -1,7 +1,7 @@
 ---
-title: RTR Java services
+title: Java services
 layout: page
-parent: Deploy real-time reporting (preview)
+parent: Real-time reporting (preview)
 nav_order: 4
 nav_enabled: true
 ---

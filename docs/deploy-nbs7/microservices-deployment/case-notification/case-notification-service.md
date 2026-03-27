@@ -1,8 +1,7 @@
 ---
-title: Case Notification Service
+title: Notification service
 layout: page
-parent: Case Notification
-grand_parent: Microservices Deployment
+parent: Case notifications
 nav_order: 5
 nav_enabled: true
 ---
@@ -46,6 +45,9 @@ nav_enabled: true
      clientId: "EXAMPLE_XML-HL7-Parser_CLIENT_ID"
      secret: "EXAMPLE_XML-HL7-Parser_CLIENT_SECRET"
    ```
+
+   > The `api.clientId` and `api.secret` fields must match the Keycloak client credentials for the XML HL7 Parser service, not this service. Retrieve them from the `xml-hl7-parser-keycloak-client` credentials in the NBS realm.
+   {: .note }
 
 4. Install Pod
 

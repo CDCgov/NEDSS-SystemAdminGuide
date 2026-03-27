@@ -1,18 +1,11 @@
 ---
-title: Data Ingestion API Testing
+title: API testing
 layout: page
-parent: Data Ingestion
-grand_parent: Microservices Deployment
+parent: Data ingestion
 nav_order: 4
 nav_enabled: true
 ---
 
-## On this page
-{: .no_toc .text-delta }
+# API testing for data ingestion
 
-1. TOC
-{:toc}
-
-### Data Ingestion API Testing
-
-[Data Ingestion API Testing.pdf](docs/NM-NBS%207.11%20Data%20Ingestion%20API%20Testing.pdf)
+For data ingestion-related diagnostics and troubleshooting, see the [Data Ingestion API Testing](../images/NM-NBS%207.11%20Data%20Ingestion%20API%20Testing.pdf) (PDF) guide.

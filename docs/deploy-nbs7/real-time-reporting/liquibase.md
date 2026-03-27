@@ -1,8 +1,7 @@
 ---
-title: Liquibase
+title: RTR Liquibase
 layout: page
-parent: Real-Time Reporting (Preview)
-grand_parent: Deploy NBS 7
+parent: Deploy real-time reporting (preview)
 nav_order: 1
 nav_enabled: true
 ---

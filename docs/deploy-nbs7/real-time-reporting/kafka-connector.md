@@ -1,8 +1,7 @@
 ---
-title: Kafka connector
+title: RTR Kafka connector
 layout: page
-parent: Real-Time Reporting (Preview)
-grand_parent: Deploy NBS 7
+parent: Deploy real-time reporting (preview)
 nav_order: 3
 nav_enabled: true
 ---

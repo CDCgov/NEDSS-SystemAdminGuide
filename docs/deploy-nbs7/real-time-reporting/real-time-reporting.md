@@ -1,5 +1,5 @@
 ---
-title: Real-Time Reporting (Preview)
+title: Deploy real-time reporting (preview)
 layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 2
@@ -17,6 +17,8 @@ redirect_from:
 # Deploy real-time reporting
 {: .no_toc }
 
+This guide details steps to use Helm charts to install the real-time reporting add-on end to end. Real-time reporting   provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database RDB. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Onboarding: Service Users and Setup Scripts](#onboarding-service-users-and-setup-scripts)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into RDB.
+
 ## On this page
 {: .no_toc .text-delta }
 
@@ -26,17 +28,11 @@ redirect_from:
 > This feature is in Beta preview and not production ready.
 {: .important }
 
-This guide details steps to use Helm charts to install the real-time reporting add-on end to end. Real-time reporting   provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database RDB. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Onboarding: Service Users and Setup Scripts](#onboarding-service-users-and-setup-scripts)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into RDB.
-
----
-
-## Database Setup for Onboarding
-
 The database scripts referenced in the guide are maintained in the [DataReporting](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service) repository. The required database objects can be configured either by database change management tool Liquibase or manually executed. Both references will be provided within the same sections.
 
 If there are problems encountered during Database Setup, please reach out to our support team(email <mailto:nbs@cdc.gov>).
 
-### Onboarding: Prerequisites
+## Prerequisites
 
 1. Database Release Version: Verify the underlying database release version returned is 6.0.17. Execute the following query to verify the baseline NBS Release version:
 
@@ -82,7 +78,7 @@ If there are problems encountered during Database Setup, please reach out to our
        VALUES(N'ENV', N'UAT', N'RTR reporting database', N'Indicates scripts should be run against UAT rdb_modern database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
        ```
 
-### Onboarding: UAT Database Setup
+## Create rdb_modern database (optional)
 
 [Optional] Restore RDB as rdb_modern database: If a separate database is required as part of UAT, please create a restored backup of the RDB as rdb_modern. This ensures availability of classic ETL hydrated RDB and to host necessary components for Real Time Reporting. If you have AWS RDS, please run the following steps.
 
@@ -124,7 +120,7 @@ If there are problems encountered during Database Setup, please reach out to our
 exec msdb.dbo.rds_task_status;
 ```
 
-### Onboarding: Service Users and Setup Scripts
+## Create service users and database objects
 
 One time onboarding steps required for Real Time Reporting setup.
 
@@ -192,9 +188,9 @@ One time onboarding steps required for Real Time Reporting setup.
        WHERE is_tracked_by_cdc = 1;
    ```
 
-   ![cdc-enabled-odse-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_odse_tables.png "CDC for NBS_ODSE")
+   ![cdc-enabled-odse-tables](images/cdc_enabled_odse_tables.png "CDC for NBS_ODSE")
 
-   ![cdc-enabled-srte-tables](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/cdc_enabled_srte_tables.png "CDC for NBS_SRTE")
+   ![cdc-enabled-srte-tables](images/cdc_enabled_srte_tables.png "CDC for NBS_SRTE")
 
 ***Troubleshooting tip:*** After `rdb_modern` is restored, if the Change Data Capture is not producing data, run the following script:
 
@@ -204,7 +200,7 @@ USE NBS_ODSE;
 EXEC sp_changedbowner 'sa';
 ```
 
-### Continuous Integration for Real Time Reporting Database
+## Ongoing database upgrades
 
 After onboarding, future enhancements will be delivered using these two approaches.
 
@@ -212,6 +208,8 @@ After onboarding, future enhancements will be delivered using these two approach
 - Option 2: Manually executing the scripts located under <https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment>. Onboarding scripts are excluded.
 
 ---
+
+## Deploy RTR services
 
 Real Time Reporting services should be deployed in the following order:
 

@@ -1,8 +1,7 @@
 ---
 title: RTR pipeline validation
 layout: page
-parent: Real-Time Reporting (Preview)
-grand_parent: Deploy NBS 7
+parent: Deploy real-time reporting (preview)
 nav_order: 11
 nav_enabled: true
 ---
@@ -22,39 +21,39 @@ This example covers creating a Hepatitis Investigation from the NBS UI and verif
 
 1. Access the NBS UI with the username and password provided for the demo and click **Data Entry** in the top banner.
 
-   ![rtr-validation-via-ui](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-via-ui.png)
+   ![rtr-validation-via-ui](images/rtr-validation-via-ui.png)
 
 1. Under **Data Entry**, select **Lab Report** to start a report.
 
-   ![rtr-validation-lab-report](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report.png)
+   ![rtr-validation-lab-report](images/rtr-validation-lab-report.png)
 
 1. Add patient information to the lab report. Entity ID is required to complete the Patient tab. If SSN is selected, the authority should be `Social Security Administration`.
 
-   ![rtr-validation-lab-report-2](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-2.png)
+   ![rtr-validation-lab-report-2](images/rtr-validation-lab-report-2.png)
 
 1. Select the **Lab Report** tab and fill in the required details. The Program Area for this example is HEP. The **Resulted Test** section is required before submitting. Click **Submit** when done. Any errors will appear in red — correct them and resubmit.
 
-   ![rtr-validation-lab-report-3](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-3.png)
+   ![rtr-validation-lab-report-3](images/rtr-validation-lab-report-3.png)
 
 1. Navigate to the patient record via **Patient Search** or find the lab report in the **Documents Requiring Review** queue. From the patient record, open the **Events** tab to view the lab report.
 
-   ![rtr-validation-lab-report-4](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-4.png)
+   ![rtr-validation-lab-report-4](images/rtr-validation-lab-report-4.png)
 
 1. Click **Create Investigation** in the upper right corner.
 
-   ![rtr-validation-lab-report-create-investigation](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation.png)
+   ![rtr-validation-lab-report-create-investigation](images/rtr-validation-lab-report-create-investigation.png)
 
 1. Select a Hepatitis condition.
 
-   ![rtr-validation-lab-report-create-investigation-2](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation-2.png)
+   ![rtr-validation-lab-report-create-investigation-2](images/rtr-validation-lab-report-create-investigation-2.png)
 
 1. Complete the Investigation form and click **Submit**.
 
-   ![rtr-validation-lab-report-create-investigation-3](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation-3.png)
+   ![rtr-validation-lab-report-create-investigation-3](images/rtr-validation-lab-report-create-investigation-3.png)
 
 1. After 1–2 minutes, verify the data is available in the `PUBLICHEALTHCASEFACT_Modern` and Hepatitis datamarts. Use the Investigation ID from the form in the query below.
 
-   ![rtr-validation-lab-report-create-investigation-4](/NEDSS-SystemAdminGuide/docs/7_feature_preview/images/rtr-validation-lab-report-create-investigation-4.png)
+   ![rtr-validation-lab-report-create-investigation-4](images/rtr-validation-lab-report-create-investigation-4.png)
 
    ```sql
    DECLARE @local_id VARCHAR(20) = 'CAS10001017GA01'

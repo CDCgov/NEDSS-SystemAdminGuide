@@ -33,6 +33,12 @@ State IT security approval is often the longest-lead item in an NBS 7 migration.
 
 NBS 6 could run on-premises, but NBS 7 is a cloud-only system. Your jurisdiction needs an active cloud account (AWS or Azure) and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response.
 
+## Your cloud provider depends on your existing environment
+
+NBS 7 is fully supported on both AWS and Azure. Both providers host the same NBS 7 Kubernetes workloads, and once infrastructure is provisioned, the Bootstrap Kubernetes services and microservices deployment steps are identical. The difference is only in how the underlying cloud environment is provisioned.
+
+Choose the provider that aligns with your organization's existing infrastructure, contracts, and IT security approvals. If your jurisdiction already runs NBS 6 on AWS or Azure, continuing on the same platform avoids additional procurement and approval steps.
+
 ## Technical staffing requirements differ from NBS 6
 
 Migrating to NBS 7 involves skills that might differ from what your current NBS 6 team uses, including Kubernetes, Terraform, and cloud infrastructure management. Jurisdictions that assess their team's capacity early are poised to set more accurate migration timelines. Those without the necessary in-house expertise have typically built capacity or engaged a vendor before deployment.

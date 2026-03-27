@@ -55,6 +55,7 @@ A unified Spring Boot service that transforms streaming data from Kafka into rep
 > The five entity-specific RTR services (investigation-service, person-service, observation-service, organization-service, ldfdata-service) are being consolidated into a single `reporting-pipeline-service` as of early 2026. Check with your CDC NBS point of contact for the current deployment state.
 {: .note }
 
+<!--
 ## RDB\_Modern
 
 The modern reporting database introduced by RTR.
@@ -64,3 +65,4 @@ The modern reporting database introduced by RTR.
 | What it does in NBS 7 | Stores processed, structured public health records produced by the RTR domain services. Runs alongside the legacy RDB during migration. Downstream reporting and analytics tools connect to RDB\_Modern rather than directly to the operational database. |
 | When you need it | When your jurisdiction chooses NBS Core + RTR or NBS Complete. |
 | Dependencies | Populated by RTR domain services. Required by any reporting or analytics tools that your jurisdiction connects to NBS 7. |
+-->

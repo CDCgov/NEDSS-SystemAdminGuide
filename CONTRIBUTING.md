@@ -73,6 +73,17 @@ The `/templates` directory at the repo root contains starter files for the four 
 For front matter field reference, see [FRONT-MATTER.md](FRONT-MATTER.md).
 For formatting standards (headings, callouts, code blocks, links, images, tables), see [STYLES.md](STYLES.md).
 
+### Page layout convention
+
+Use this structure on content pages:
+
+1. H1 (`#`) that exactly matches `title:`
+2. Brief intro text directly under the H1
+3. `## On this page` TOC block
+4. First H2 section immediately after the TOC
+
+See [STYLES.md](STYLES.md) for the canonical pattern and examples.
+
 ## Scripts and commands
 
 ### Running locally

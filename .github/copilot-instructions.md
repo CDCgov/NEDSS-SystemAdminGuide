@@ -16,3 +16,10 @@ For any new page, start from the appropriate template in `/templates`:
 - `templates/landing.md` — section parent that orients the reader and links to child pages
 
 Follow these standards for all content you generate. If asked to write or edit a page, apply the correct template structure, front matter, and style conventions automatically without being asked.
+
+Page layout convention for content pages:
+
+- H1 that matches front matter title
+- Brief intro text directly under the H1
+- `On this page` TOC block
+- First H2 immediately after the TOC

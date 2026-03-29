@@ -26,12 +26,44 @@ parent: Initial Kubernetes Deployment
 ---
 
 # Kubernetes Bootstrapping
-{: .no_toc }
+
+This is an overview paragraph.
+
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## Before you begin
 ```
 
 The `# Heading` matches the front matter `title:` exactly. Every page needs it — JTD shows the title in the nav and breadcrumbs, but only your H1 creates the visible page heading. The first section heading after the H1 should be `##`.
+
+## 1.1 Page Layout Order
+
+Use this page layout sequence for content pages:
+
+1. H1 that matches the front matter `title:` exactly
+2. Brief intro text directly under the H1 (one sentence for reference pages; one to three sentences for concept, task, and landing pages)
+3. `On this page` TOC block
+4. First H2 section immediately after the TOC block
+
+**Required pattern:**
+
+```markdown
+# Page title
+
+Brief intro text.
+
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## First section heading
+```
 
 ---
 
@@ -182,6 +214,30 @@ SELECT * FROM nbs_case WHERE jurisdiction_code = 'GA';
 ## 4. Links
 
 Use descriptive link text. The link text should tell the reader where they are going or what the target document covers.
+
+### 4.1 Internal cross-links (within this doc set)
+
+For links to other pages in this guide, use the built-site HTML path convention:
+
+1. Find the page location under `_site/docs/...`.
+2. Remove `/_site` from the front of the path.
+3. Use the resulting `/docs/.../*.html` path in your Markdown link.
+
+Do not link to `.md` files for internal navigation links.
+
+**Example conversion:**
+
+- Source page link target in repo: `../deploy-nbs7/set-up-cloud-infrastructure.md`
+- Built page path: `_site/docs/deploy-nbs7/set-up-cloud-infrastructure.html`
+- Link to use in docs page: `../../docs/deploy-nbs7/set-up-cloud-infrastructure.html`
+
+**Anchor links:**
+
+Use standard heading anchors on the HTML target when linking to a section:
+
+```markdown
+See [NBS 7 core components](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nbs-modernization-api).
+```
 
 **Do this:**
 

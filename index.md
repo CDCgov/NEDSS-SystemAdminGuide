@@ -22,7 +22,7 @@ NBS 7 supports AWS and Azure as runtime options. The underlying system itself ha
 
 ## Intended Audience
 
-This guide is intended to be used to install NBS 7, a complex cloud-native application. It assumes familiarity with cloud technologies and tools: knowledge of your cloud service provider (e.g. AWS), runtime environment (e.g. [Kubernetes](https://kubernetes.io/)), experience running [Terraform](https://www.terraform.io/) and [Helm](https://helm.sh/), and experience debugging routine systems and infrastructure problems. You will need administrator-level access to your runtime environment, and access to a local system with a set of installed prerequisites.
+This guide is intended to be used to install NBS 7, a complex cloud-native application. It assumes familiarity with cloud technologies and tools: knowledge of your cloud service provider (e.g. AWS), runtime environment (e.g. [Kubernetes](https://kubernetes.io/)), experience running [Terraform](https://developer.hashicorp.com/terraform) and [Helm](https://helm.sh/), and experience debugging routine systems and infrastructure problems. You will need administrator-level access to your runtime environment, and access to a local system with a set of installed prerequisites.
 
 For more information on NBS, see the official CDC [National Electronic Disease Surveillance System Base System (NBS)](https://www.cdc.gov/nbs/php/index.html) website.
 

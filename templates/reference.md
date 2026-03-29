@@ -29,16 +29,15 @@ description: DESCRIPTION  # Optional but recommended. 1–2 sentences, under 160
 # TITLE
 {: .no_toc }
 
-## On this page
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
 <!--
+  Page layout convention:
+  1) H1 title
+  2) Brief intro/scope sentence
+  3) On this page TOC block
+  4) First H2 section
+
   Write exactly one sentence identifying what this page documents.
-  This is not an introduction paragraph — it is a single statement
-  of scope that helps the reader confirm they are on the right page.
+  Place it directly under the H1 to confirm scope immediately.
 
   Examples:
   - "This page documents all Helm values for the NBS Gateway chart."
@@ -52,6 +51,12 @@ description: DESCRIPTION  # Optional but recommended. 1–2 sentences, under 160
 -->
 
 ONE_SENTENCE_SCOPE_STATEMENT
+
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## [PARAMETER/VALUES/REQUIREMENTS TABLE HEADING]
 

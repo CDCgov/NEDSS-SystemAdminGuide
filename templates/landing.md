@@ -52,6 +52,12 @@ description: DESCRIPTION  # Optional but recommended. 1–2 sentences, under 160
 
 OPENING_PARAGRAPH
 
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
 ## In this section
 
 <!--
@@ -102,9 +108,4 @@ OPENING_PARAGRAPH
   - Do not skip heading levels.
   - Do not use bold text as a structural substitute for a heading.
   ================================================================
-
-  Landing pages typically do not need a TOC. The child page list
-  above serves as the navigation aid for this section. Do not add
-  a TOC block unless this page also contains substantial content
-  sections below the child list.
 -->

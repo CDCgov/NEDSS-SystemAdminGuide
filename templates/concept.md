@@ -30,31 +30,25 @@ description: DESCRIPTION  # Optional but recommended. 1–2 sentences, under 160
 # TITLE
 {: .no_toc }
 
+<!--
+  Page layout convention:
+  1) H1 title
+  2) Brief intro paragraph
+  3) On this page TOC block
+  4) First H2 section
+
+  Write a brief intro paragraph (1-3 sentences) directly under the H1.
+  Keep it scannable and focused on what this page explains and why it
+  matters.
+-->
+
+INTRO_PARAGRAPH
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
-
-<!--
-  Opening paragraph — write 1–3 sentences that answer:
-    1. What is this concept, in plain language?
-    2. Why does it matter to the reader?
-  Do not start with a bullet list or a component diagram. Ground
-  the reader in simple language before introducing technical detail.
-
-  Example of a strong opening:
-    "NBS 7 uses a microservices architecture to separate application
-    functions into independently deployable services. Each service
-    owns a specific domain — such as data ingestion or case
-    notification — and communicates with other services through
-    defined APIs. This design allows a single service to be updated
-    or replaced without affecting the rest of the system."
-
-  Example of a weak opening (do not write this):
-    "This document describes the architecture. The components are:
-    Elasticsearch, NiFi, Modernization API..." [starts with the list]
--->
 
 ## Overview
 

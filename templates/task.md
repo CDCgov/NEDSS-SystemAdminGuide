@@ -30,6 +30,19 @@ description: DESCRIPTION  # Optional but recommended. 1–2 sentences, under 160
 # TITLE
 {: .no_toc }
 
+<!--
+  Page layout convention:
+  1) H1 title
+  2) Brief intro paragraph
+  3) On this page TOC block
+  4) First H2 section
+
+  Write a brief intro paragraph (1-3 sentences) directly under the H1.
+  State what task the reader will complete and any essential context.
+-->
+
+INTRO_PARAGRAPH
+
 ## On this page
 {: .no_toc .text-delta }
 

@@ -67,6 +67,8 @@ We use GitHub-Flavored Markdown (GFM) for tables, fenced code blocks, lists, etc
 
 Just the Docs theme renders pages according to `_config.yml`, supporting navigation, collections, syntax highlighting, and more.
 
+Page layout convention for all content pages: place brief intro text directly under the H1, then include the `On this page` TOC block, and start the first H2 section immediately after the TOC. See [STYLES.md](STYLES.md).
+
 
 
 ## Building and Previewing Site Locally

@@ -344,9 +344,15 @@ kubectl get pods -A
 
 Follow these steps to clean up the environment.
 
+> These cleanup steps remove ingress resources and can immediately interrupt access to NBS 7 endpoints in this environment.
+{: .warning }
+
 1. Remove DNS entries:
     - `app.<site_name>.<domain>.com`
     - `data.<site_name>.<domain>.com`
+
+> Running `terraform destroy` permanently deletes infrastructure managed by this Terraform workspace.
+{: .warning }
 
 ```bash
 # Remove nlb and ingress routing

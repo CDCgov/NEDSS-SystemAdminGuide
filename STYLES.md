@@ -80,7 +80,7 @@ Callouts are styled block quotes. JTD applies the callout style based on a CSS c
 
 ### Available types
 
-#### `note` — Yellow
+#### `note` — Blue
 
 Use for helpful context, clarifications, or background information that readers may find useful but can skip without consequences.
 
@@ -89,7 +89,7 @@ Use for helpful context, clarifications, or background information that readers 
 {: .note }
 ```
 
-#### `important` — Blue
+#### `important` — Yellow
 
 Use for requirements, prerequisites, or steps that must be completed before proceeding. The reader cannot skip this.
 
@@ -116,7 +116,7 @@ Use to flag content that documents a recently added feature or a significant cha
 {: .new }
 ```
 
-#### `highlight` — Yellow (no label)
+#### `highlight` — Purple (no label)
 
 Use for inline callouts where you want visual emphasis without a title label. Useful for tips or one-liners that don't need a formal label.
 

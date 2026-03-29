@@ -3,13 +3,11 @@ title: Quick start (AWS)
 layout: page
 parent: Deploy NBS 7
 nav_order: 1
-nav_enabled: true
 ---
 
-# Quick start guide for AWS deployments
-{: .no_toc }
+# Quick start (AWS)
 
-This quick guide provides a streamlined step-by-step approach for deploying the NBS 7 infrastructure and microservices in an AWS environment. It is intended for experienced administrators who are familiar with AWS, [Kubernetes](https://kubernetes.io/), [Helm](https://helm.sh/), and [Terraform](https://www.terraform.io/).
+This page provides a streamlined path to deploy NBS 7 infrastructure and core microservices in AWS. It is intended for experienced administrators familiar with AWS, [Kubernetes](https://kubernetes.io/), [Helm](https://helm.sh/), and [Terraform](https://www.terraform.io/).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -17,39 +15,42 @@ This quick guide provides a streamlined step-by-step approach for deploying the 
 1. TOC
 {:toc}
 
-This guide is NOT meant for a production deployment. For full production deployment steps and guidelines, [start here](../../docs/deploy-nbs7.html).
+## Scope and limitations
+
+This guide is not intended for production deployment. For full production steps and guidance, see [Deploy NBS 7](../../docs/deploy-nbs7.html).
 {: .important }
 
-The following resources will be installed and configured with this guide:
+This quick start installs and configures the following resources.
 
-### Terraform
+### Terraform-managed resources
 
-- Modern VPC, Subnets, Route Tables
-- EKS Cluster, Nodes
-- Network Load Balancer
+- Modern VPC, subnets, and route tables
+- EKS cluster and nodes
+- Network load balancer
 - MSK
-- Amazon Prometheus
-- Amazon Grafana
+- Amazon Managed Service for Prometheus
+- Amazon Managed Grafana
 - EFS
 - KMS
-- S3 Bucket
+- S3 bucket
 
-### Manual
+### Manual configuration
 
-- Route53 Updates: Need to create dns entries in route53 to point app and data urls to network load balancer
+- Route53 updates: create DNS entries in Route53 to point app and data URLs to the network load balancer.
 
-### NBS7 Core Services
+### NBS 7 core services
 
-1. **Elasticsearch** - For lightning-fast searches.
-2. **Modernization API** - This service incorporates essential modern NBS features such as patient search, event search, patient profile, investigations, etc.
-3. **Nifi** - Populates Elasticsearch indices from the NBS database.
-4. **NBS Gateway** - Efficiently manages intricate strangler routing logic between modern and legacy NBS.
-5. **Data Ingestion** - Enables NBS to seamlessly ingest HL7 data from labs and other entities into the NBS system.
-6. **Keycloak** - Primary Identity Provider (IdP). Also used for token management and SSO integration, for example, OAuth, SAML integration with Okta, etc.
+- **Elasticsearch**: Search indexing and query support.
+- **Modernization API**: Modern NBS capabilities, including patient and event search.
+- **NiFi**: Elasticsearch index population from the NBS database.
+- **NBS Gateway**: Routing between modern and legacy NBS.
+- **Data ingestion**: HL7 ingestion from labs and other sources.
+- **Keycloak**: Primary identity provider (IdP), token management, and SSO integration.
 
 ## Prerequisites
 
-Tools to Install
+### Install these tools
+{: .no_toc }
 
 - [AWS CLI](https://aws.amazon.com/cli/) (v2.15+)
 - [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) (v1.5.5)
@@ -57,20 +58,20 @@ Tools to Install
 - [kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) (v1.27+)
 - [eksctl](https://eksctl.io/installation/) (optional but recommended)
 
-## Environment Requirements
+### Environment requirements
+{: .no_toc }
 
 - AWS Account with NBS 6.0.16 access (or newer)
-- DNS routing infrastructure: Domain info for modernized nbs application (e.g app.site_name.domain.com)
-- IAM Roles for Terraform and Kubernetes
-- Access to NBS 6 (sql server) databases to run scripts
+- DNS routing infrastructure: domain information for modernized NBS application URLs (for example, `app.site_name.domain.com`)
+- IAM roles for Terraform and Kubernetes
+- Access to NBS 6 (SQL Server) databases to run scripts
 - S3 bucket for Terraform state
 
-## Set Up AWS Infrastructure - Terraform
+## Set up AWS infrastructure (Terraform)
 
- <br>
-![NBS7_Infrastructure](/NEDSS-SystemAdminGuide/docs/quick_install_nbs7_architecture.png)
+![NBS 7 infrastructure diagram for quick-start deployment on AWS](../quick_install_nbs7_architecture.png)
 
-### Prepare the Directory
+### Prepare the directory
 {: .no_toc }
 
 ```bash
@@ -78,7 +79,7 @@ mkdir -p ~/nbs-setup/terraform/aws/nbs7-mySTLT-test
 cd ~/nbs-setup/terraform/aws/nbs7-mySTLT-test
 ```
 
-### Download Terraform Configuration
+### Download Terraform configuration
 {: .no_toc }
 
 Clone the infrastructure repo:
@@ -93,23 +94,24 @@ Copy standard template:
 cp -pr terraform/aws/samples/NBS7_standard terraform/aws/nbs7-mySTLT-test
 ```
 
-### Customize Variables
+### Customize variables
 {: .no_toc }
 
 - Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the instructions [here](https://github.com/CDCgov/NEDSS-Infrastructure/blob/main/terraform/aws/samples/NBS7_standard/README.md).
 
-> ℹ️ **Review the inbound rules** on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
+> Review inbound rules on the security groups attached to your database instance. Ensure the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
+{: .note }
 
-### Initialize and Apply Terraform
+### Initialize and apply Terraform
 {: .no_toc }
 
-```js
+```bash
 terraform init
 terraform plan
 terraform apply
 ```
 
-### Validate Infrastructure
+### Validate infrastructure
 {: .no_toc }
 
 - Confirm VPC, EKS cluster, subnets, and node groups are created.
@@ -121,7 +123,7 @@ kubectl get pods --namespace=cert-manager
 kubectl get nodes
 ```
 
-## Deploy Core Kubernetes Services - Helm
+## Deploy core Kubernetes services (Helm)
 
 ### Install NGINX Ingress
 {: .no_toc }
@@ -133,22 +135,22 @@ kubectl --namespace ingress-nginx get services -o wide -w ingress-nginx-controll
 kubectl get pods -n=ingress-nginx
 ```
 
-### Create DNS Entries in Route53
+### Create DNS entries in Route53
 {: .no_toc }
 
-- Modernized NBS application pointed to the new network load balancer in front of your Kubernetes cluster
+- Point the modernized NBS application URL to the new network load balancer in front of your Kubernetes cluster.
 
 ```bash
 app.<site_name>.<domain>.com
 ```
 
-- Data Services pointed to the new network load balancer in front of your Kubernetes cluster
+- Point the data services URL to the new network load balancer in front of your Kubernetes cluster.
 
 ```bash
 data.<site_name>.<domain>.com
 ```
 
-### Install Cert Manager (Optional)
+### Install Cert Manager (optional)
 {: .no_toc }
 
 ```bash
@@ -156,7 +158,7 @@ helm repo add jetstack https://charts.jetstack.io
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true
 ```
 
-### Install and Verify LinkerD (Optional)
+### Install and verify Linkerd (optional)
 {: .no_toc }
 
 ```bash
@@ -164,7 +166,7 @@ kubectl annotate namespace default "linkerd.io/inject=enabled"
 kubectl get namespace default -o=jsonpath='{.metadata.annotations}'
 ```
 
-### Install Cluster Autoscaler (Optional)
+### Install Cluster Autoscaler (optional)
 {: .no_toc }
 
 ```bash
@@ -172,7 +174,7 @@ helm repo add autoscaler https://kubernetes.github.io/autoscaler
 helm install cluster-autoscaler autoscaler/cluster-autoscaler -n kube-system
 ```
 
-### Verify Services are Running
+### Verify services are running
 {: .no_toc }
 
 ```bash
@@ -181,7 +183,7 @@ kubectl get pods -A
 
 ## Install Keycloak
 
-**Create Keycloak Database. Make sure to update the database password.**
+Create the Keycloak database. Make sure to update the database password.
 
 ```sql
 use master
@@ -200,7 +202,7 @@ BEGIN
 END
 ```
 
-### Install Keycloak Container
+### Install Keycloak container
 
 Edit the following parameters in `<helm extract directory>/charts/keycloak/values.yml`:
 
@@ -220,26 +222,27 @@ kubectl --namespace default port-forward "$POD_NAME" 8080;
 http://127.0.0.1:8080/auth
 ```
 
-### Configure Realm, Users and Clients
+### Configure realms, users, and clients
 
-- Login as Keycloak admin user
-- Upload <helm extract directory>/charts/keycloak/extra/01-NBS-realm-with-DI-client.json
-- Upload <helm extract directory>/charts/keycloak/extra/05-nbs-users-nnd-client.json
-- Upload NBS Users helm from <helm extract directory>/charts/keycloak/extra/02-nbs-users-realm.json
-- Run partial import from nbs-users realm for <helm extract directory>/charts/keycloak/extra/03-nbs-users-base-users.json
-- Run partial import from nbs-users realm for <helm extract directory>/charts/keycloak/extra/04-nbs-users-development-clients.json
+- Log in as the Keycloak admin user.
+- Upload `<helm extract directory>/charts/keycloak/extra/01-NBS-realm-with-DI-client.json`.
+- Upload `<helm extract directory>/charts/keycloak/extra/05-nbs-users-nnd-client.json`.
+- Upload `<helm extract directory>/charts/keycloak/extra/02-nbs-users-realm.json`.
+- Run partial import from the `nbs-users` realm for `<helm extract directory>/charts/keycloak/extra/03-nbs-users-base-users.json`.
+- Run partial import from the `nbs-users` realm for `<helm extract directory>/charts/keycloak/extra/04-nbs-users-development-clients.json`.
 
-## Deploy NBS Microservices - Helm
+## Deploy NBS 7 microservices (Helm)
 
-**Deploy the helm charts in the following order.**
+Deploy the Helm charts in the following order.
 
 1. `elasticsearch-efs`
 2. `modernization-api`
 3. `nifi-efs`
 4. `nbs-gateway`
-5. `dataingestion`
+5. `dataingestion-service`
 
-> ℹ️ Run the below commands from `<helm extract directory>/charts` directory
+> Run the following commands from the `<helm extract directory>/charts` directory.
+{: .note }
 
 ### Deploy Elasticsearch
 {: .no_toc }
@@ -277,10 +280,10 @@ Update the required parameters in `values.yaml` by following the table [here](ht
 helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gateway
 ```
 
-### Deploy DataIngestion
+### Deploy Data ingestion service
 {: .no_toc }
 
-Data Ingest DB creation and user permission should be executed prior to the deployment of the data ingestion:
+Create the Data Ingest database and set user permissions before deploying data ingestion:
 
 ```sql
 IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'NBS_DataIngest')
@@ -315,7 +318,7 @@ Update the required parameters in `values.yaml` by following the table [here](ht
 helm install dataingestion-service -f ./dataingestion-service/values.yaml dataingestion-service
 ```
 
-### Verify Services
+### Verify services
 {: .no_toc }
 
 - Confirm all pods are running before moving on.
@@ -324,28 +327,28 @@ helm install dataingestion-service -f ./dataingestion-service/values.yaml datain
 kubectl get pods -A
 ```
 
-## Validate Installation
+## Validate installation
 
-### Manual Tests
+### Manual tests
 {: .no_toc }
 
-- Login to the NBS UI (e.g., [https://app.example.com/nbs/login](https://app.example.com/nbs/login))
-- Check basic patient search functionality.
+- Log in to the NBS UI (for example, [https://app.example.com/nbs/login](https://app.example.com/nbs/login)).
+- Confirm basic patient search functionality.
 
-### Automated Tests
+### Automated tests
 {: .no_toc }
 
 - Use `nbs-test-api.sh` and `nbs-test-webui.sh` for basic API and UI smoke tests.
 
 ## Cleanup
 
-Follow the steps below to cleanup environment
+Follow these steps to clean up the environment.
+
+1. Remove DNS entries:
+    - `app.<site_name>.<domain>.com`
+    - `data.<site_name>.<domain>.com`
 
 ```bash
-# Remove DNS entries
-1. app.<site_name>.<domain>.com
-2. data.<site_name>.<domain>.com
-
 # Remove nlb and ingress routing
 helm list --namespace ingress-nginx
 helm uninstall --namespace ingress-nginx ingress-nginx

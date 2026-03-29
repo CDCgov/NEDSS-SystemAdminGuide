@@ -16,18 +16,18 @@ After completing this phase, proceed to [Validate the deployment](validate-the-d
 
 ## Overview
 
-We will use HELM CLI to deploy NBS microservices into Kubernetes cluster. Please deploy the helm charts in the following order. Verify that each microservice has started successfully before moving on to the next service.
+Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Deploy the Helm charts in the following order. Verify that each microservice starts successfully before moving to the next service.
 
-- elasticsearch-efs
-- modernization-api
-- nifi-efs
-- nbs-gateway
-- dataingestion
-- data-processing
-- nnd (data-sync)
-- case notifications
+- `elasticsearch-efs`
+- `modernization-api`
+- `nifi-efs`
+- `nbs-gateway`
+- `dataingestion-service`
+- `data-processing`
+- `nnd-service` (Data Sync)
+- `case-notification`
 
-Have the jdbc connection details handy for modernization-api, nifi-efs, data-ingestion, data processing and case notifications services
+Have JDBC connection details available for `modernization-api`, `nifi-efs`, `dataingestion-service`, `data-processing`, and `case-notification`.
 
 | Parameter     | Example                                                       |
 |---------------|----------------------------------------------------------------|
@@ -37,4 +37,5 @@ Have the jdbc connection details handy for modernization-api, nifi-efs, data-ing
 | DBUsername    | nbs_ods                                                        |
 | DBPassword    | *myrandompassword*                                             |
 
-**NOTE** - Run the helm install commands from the charts directory for all the microservices. And before running the helm install commands, make sure you are authenticated to aws with aws sts get-caller-identity
+> Run Helm install commands from the `charts` directory for all microservices. Before you run Helm install commands, verify you are authenticated to AWS by running `aws sts get-caller-identity`.
+{: .note }

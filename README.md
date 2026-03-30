@@ -4,10 +4,8 @@
 
 ## Quick Guide
 
-| Site | URL |
-|------|-----|
-| Production | https://cdcgov.github.io/NEDSS-SystemAdminGuide/ |
-| Stakeholder preview | https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/ |
+Production site: https://cdcgov.github.io/NEDSS-SystemAdminGuide/ 
+Stakeholder preview site: https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/
 
 | Action                       | Location                              |
 |----------------------------|---------------------------------------|

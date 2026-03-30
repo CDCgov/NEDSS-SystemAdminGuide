@@ -13,13 +13,16 @@ description: National Electronic Disease Surveillance System Base System (NBS) S
 
 # Canonical URL for the deployed site — used by JTD to build absolute links
 # and by the Jekyll sitemap plugin.
-url: https://cdcgov.github.io/NEDSS-SystemAdminGuide/
+url: https://cdcgov.github.io/NEDSS-SystemAdminGuide
 
 # -----------------------------------------------------------------------------
 # Theme and visual identity
 # -----------------------------------------------------------------------------
 
 theme: just-the-docs
+
+plugins:
+  - jekyll-redirect-from
 
 # Custom color scheme — defined in _sass/color_schemes/colors.scss.
 # The value here must match the filename (without .scss).

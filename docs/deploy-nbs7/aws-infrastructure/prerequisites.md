@@ -6,6 +6,10 @@ nav_order: 1
 toc_levels: 1..2
 nav_enabled: true
 has_children: true
+redirect_from:
+  - /docs/2_prerequisites/prereq.html
+  - /docs/2_prerequisites/prereq/
+description: Prepare your AWS cloud environment before you provision AWS for NBS 7.
 ---
 
 # Prerequisites for AWS deployments

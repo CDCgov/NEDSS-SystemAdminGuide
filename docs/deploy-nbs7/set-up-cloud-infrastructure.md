@@ -15,6 +15,5 @@ NBS 7 is fully supported on both AWS and Azure. Both providers host the same NBS
 
 Choose the guide that matches your cloud environment.
 
-
 - [Deploy on AWS](deploy-on-aws.html) - Provision the AWS VPC, EKS cluster, and supporting services using Terraform.
 - [Deploy on Azure](deploy-on-azure.html) - Provision the Azure virtual network, AKS cluster, and supporting services using Terraform.

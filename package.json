@@ -3,7 +3,11 @@
   "private": true,
   "scripts": {
     "lint": "markdownlint-cli2 \"docs/**/*.md\" \"*.md\"",
-    "link-check": "{ find docs -name '*.md' | xargs -n1 env FORCE_COLOR=1 markdown-link-check --config .markdown-link-check.json; FORCE_COLOR=1 markdown-link-check --config .markdown-link-check.json index.md ACCESSIBILITY.md FRONT-MATTER.md STYLES.md CONTRIBUTING.md WORKFLOW.md README.md; } | tee /tmp/link-check-out.txt; echo ''; echo '=== BROKEN LINKS SUMMARY ==='; grep -E '✖|ERROR' /tmp/link-check-out.txt || echo 'No broken links found.'; echo ''; echo 'Key: [✓] checked and alive  [/] skipped (ignored pattern)  [✖] dead link'"
+    "link-check:internal": "node scripts/check-internal-links.mjs",
+    "link-check:github": "node scripts/check-github-links.mjs",
+    "link-check:github:changed": "node scripts/check-github-links.mjs --changed",
+    "link-check:external": "node scripts/check-external-links.mjs",
+    "link-check": "npm run link-check:internal && npm run link-check:external && npm run link-check:github:changed"
   },
   "devDependencies": {
     "markdownlint-cli2": "^0.17.0",

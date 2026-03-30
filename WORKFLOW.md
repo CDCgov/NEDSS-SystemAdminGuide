@@ -6,7 +6,7 @@
    - **Windows only:** also install [Git for Windows](https://git-scm.com/download/win). This gives you the `git` command and the Git Bash terminal you'll use for all commands in this guide.
 2. Install the [GitHub Repositories extension](https://marketplace.visualstudio.com/items?itemName=GitHub.remotehub), if you don't have it already.
 3. Open VS Code and select **Clone Git Repository** on the splash page
-4. Paste `https://github.com/CDCgov/NEDSS-SystemAdminGuide` and press Enter
+4. Paste <https://github.com/CDCgov/NEDSS-SystemAdminGuide> and press Enter
 5. Choose your root user folder as the location
 6. Select **Yes** when prompted to open the repo folder
 7. Open a terminal: **Terminal > New Terminal**

@@ -17,7 +17,7 @@ redirect_from:
 # Deploy real-time reporting
 {: .no_toc }
 
-This guide details steps to use Helm charts to install the real-time reporting add-on end to end. Real-time reporting   provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database RDB. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Onboarding: Service Users and Setup Scripts](#onboarding-service-users-and-setup-scripts)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into RDB.
+This guide details steps to use Helm charts to install the real-time reporting add-on end to end. Real-time reporting provides rapid transformation and delivery of data from transactional database NBS_ODSE to the reporting database RDB. Changes are captured by enabling Change Data Capture on select NBS_ODSE and NBS_SRTE tables (list under [Create service users and database objects](#create-service-users-and-database-objects)). Row-level changes from these tables are published into Kafka topics and consumed by domain-specific Java services that extract and load data into RDB.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -56,8 +56,8 @@ If there are problems encountered during Database Setup, please reach out to our
    - `covid19ETL.bat`
    - b. **Note: Ensure to take a backup of rdb database before proceeding with the next steps**
    - c. Database setup:
-   - **Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.**
-   - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under [Onboarding: UAT Database Setup](#onboarding-uat-database-setup) section.
+     - **Option 1: Using RDB is the default database for Real Time Reporting. Please turn off the classic ETL batch jobs and proceed with the onboarding steps.**
+     - Option 2: Creating a separate database (rdb_modern) for Real Time Reporting. Steps are listed under [Create rdb_modern database (optional)](#create-rdb_modern-database-optional).
 
 3. Environment Variable: Set the appropriate environment variable to define the reporting database context. This ensures that scripts execute against the correct reporting database.
    - a. Option 1: RDB as default database. Please insert the following to NBS_configuration to default to RDB.
@@ -127,19 +127,18 @@ One time onboarding steps required for Real Time Reporting setup.
 1. Create database users: Each user will be provided with permissions it needs to do its job and nothing more! **Please review the scripts and update the PASSWORD field for before executing.**
 
 - a. Create admin user: User provides Liquibase required permissions to maintain necessary database components for Real Time Reporting, and enable Change Data Capture for tables.
-  - Script location: [NEDSS-DataReporting/create-rtr-admin-user](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/000-create_rtr_admin_user-001.sql)
+  - Script location: [NEDSS-DataReporting onboarding user creation scripts](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation)
 - b. Create Real Time Reporting microservice user logins: Create dedicated user accounts for each Real Time Reporting microservice. These users are wired in Helm for each Real Time Reporting services.
-  - Script location: [NEDSS-DataReporting/service-user-login-script](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/001-service_users_login_creation-001.sql)
-  - Script location: [NEDSS-DataReporting/service-database-user-creation](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation/002-service_database_user_creation-001.sql)
+  - Script location: [NEDSS-DataReporting onboarding user creation scripts](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation)
 
-2. Create kubernetes secrets: Kubernetes secrets are required for Real Time Reporting services to access the database. The secrets should be created for each service user created in step 1. (**Ignore this if kubernetes secrets are created in step** [kuberetes secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster))
+2. Create kubernetes secrets: Kubernetes secrets are required for Real Time Reporting services to access the database. The secrets should be created for each service user created in step 1. (**Ignore this if kubernetes secrets are created in step** [kuberetes secrets](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster))
 
 - a. Create secrets for each service user, including the admin user created in step 1a. The secrets should include the database username and password for each service user.:
   - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
 
 3. Create required database objects: Scripts required for Real Time Reporting can be executed via Liquibase or manually.
 
-- Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section to create all necessary objects before moving to step 4.
+- Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase](../../../docs/deploy-nbs7/real-time-reporting/liquibase.html) section to create all necessary objects before moving to step 4.
 - Option 2: The required database objects can also be manually created. Documentation on script execution sequence and supplemental `db_upgrade.bat` file is provided to support manual setup.
   - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
   - Please specify the database and proceed:
@@ -204,8 +203,8 @@ EXEC sp_changedbowner 'sa';
 
 After onboarding, future enhancements will be delivered using these two approaches.
 
-- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase/liquibase](1_liquibase.html) section.
-- Option 2: Manually executing the scripts located under <https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment>. Onboarding scripts are excluded.
+- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase](../../../docs/deploy-nbs7/real-time-reporting/liquibase.html) section.
+- Option 2: Manually execute the scripts located under [manual_deployment](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment). Onboarding scripts are excluded.
 
 ---
 
@@ -223,4 +222,4 @@ Real Time Reporting services should be deployed in the following order:
 - ldfdata-reporting-service
 - post-processing-reporting-service.
 
-Real Time Reporting services leverage Kubernetes secrets for accessing database credentials. Please refer to section [Creating Kubernetes Secrets](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html#create-kubernetes-secret-within-cluster) section.) for setting up secrets within the cluster.
+Real Time Reporting services leverage Kubernetes secrets for accessing database credentials. Please refer to section [Creating Kubernetes Secrets](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster) for setting up secrets within the cluster.

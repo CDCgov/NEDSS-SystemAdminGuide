@@ -86,7 +86,7 @@ nav_enabled: true
 
 7. Validate service
 
-- a. This is an internal service with no ingress. Validation should be part of [RTR Pipeline Validation](/NEDSS-SystemAdminGuide/docs/7_feature_preview/5_rtr_pipeline_validation.html#rtr-pipeline-validation)
+- a. This is an internal service with no ingress. Validation should be part of [RTR Pipeline Validation](../../../docs/deploy-nbs7/real-time-reporting/pipeline-validation.html)
 - b. If the service has any trouble connecting with the database, run this command to reset the ConfigMap.
 
   ```bash

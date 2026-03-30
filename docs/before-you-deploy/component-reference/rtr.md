@@ -14,7 +14,7 @@ RTR is an optional add-on that provides an event-driven reporting pipeline for n
 
 The following components are added to your NBS 7 deployment when you choose to deploy the RTR add-on.
 
-For information on benefits and impact on operating costs,  see [Operational considerations](../../before-you-deploy/operational_considerations.html).
+For information on benefits and impact on operating costs, see [Operational considerations](../../../docs/before-you-deploy/operational_considerations.html).
 {: .note }
 
 ## On this page

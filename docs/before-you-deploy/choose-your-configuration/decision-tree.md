@@ -26,7 +26,7 @@ The decision tree identifies a recommended starting point, not a final answer. C
 Is your jurisdiction planning to self-host and self-maintain NBS 7, or will you use a vendor to host or maintain it?
 
 - **Self-hosted, self-maintained** → Go to [Step 2](#step-2-state-it-security-approval).
-- **Vendor-hosted or vendor-maintained** → Go to [Vendor-managed deployment](3_vendor_managed_deployment.html).
+- **Vendor-hosted or vendor-maintained** → Go to [Vendor-managed deployment](../../docs/before-you-deploy/choose-your-configuration/vendor-managed-deployment.html).
 
 ## Step 2: State IT security approval
 
@@ -49,7 +49,7 @@ Does your jurisdiction have IT staff with skills in Kubernetes, Terraform, and c
 
 Will your jurisdiction obtain external assistance from a contractor, vendor, or consultant for deployment and ongoing maintenance?
 
-- **Yes** → Go to [Step 4](#step-4-current-nbs-6-hosting). Note that your vendor or contractor must be capable of Kubernetes-based deployments on AWS or Azure. See [Vendor-managed deployment](3_vendor_managed_deployment.html) for what to look for.
+- **Yes** → Go to [Step 4](#step-4-current-nbs-6-hosting). Note that your vendor or contractor must be capable of Kubernetes-based deployments on AWS or Azure. See [Vendor-managed deployment](../../docs/before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for what to look for.
 - **No** → **Stop.** Build internal capacity or identify a vendor before proceeding. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) for support resources.
 
 ## Step 4: Current NBS 6 hosting

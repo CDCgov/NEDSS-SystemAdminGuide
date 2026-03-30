@@ -25,6 +25,10 @@
       "comment": "Skip relative HTML page links (e.g., 1_liquibase.html) — these are valid same-directory internal links that cannot be resolved without a running server. The Jekyll build validates that the target files exist."
     },
     {
+      "pattern": "^(?!https?:|mailto:|#).+\\.html(?:#.*)?$",
+      "comment": "Skip internal HTML links (including /docs/... and relative .html targets). These are validated by scripts/check-internal-links.mjs, which maps HTML targets back to source Markdown files and checks section anchors."
+    },
+    {
       "pattern": "^https://app\\.example\\.com",
       "comment": "Skip placeholder example URL — used in Quickstart page as an illustration. Not a real link."
     },

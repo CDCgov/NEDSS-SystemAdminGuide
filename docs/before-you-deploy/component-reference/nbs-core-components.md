@@ -110,7 +110,7 @@ An open source identity and access management platform.
 
 > Health department leaders
 >
-> For guidance on Single Sign-On planning and early coordination requirements, see [Operational considerations](../leadership_considerations.html).
+> For guidance on Single Sign-On planning and early coordination requirements, see [Operational considerations](../../../docs/before-you-deploy/operational_considerations.html).
 {: .note-title }
 
 ## Database (NBS\_ODSE, NBS\_SRTE)

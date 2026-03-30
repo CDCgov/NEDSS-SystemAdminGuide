@@ -15,7 +15,7 @@ nav_enabled: true
 ## Deploy nbs-gateway via helm chart
 
 1. The helm chart for nbs-gateway should be available under `charts/nbs-gateway`.
-2. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 as shown in the [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
+2. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 as shown in the [Table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster).
 3. Ensure the image repository and tags are populated with the following:
 
    ```yaml
@@ -31,7 +31,7 @@ nav_enabled: true
      enabled: "false"
    ```
 
-5. Make sure OIDC is enabled for keycloak login authentication and update the client secret (need the value from keycloak - refer [Enable Keycloak Auth step h](/NEDSS-SystemAdminGuide/docs/5_keycloak/2_enable_keycloak_auth.html#enable-keycloak-auth))
+5. Make sure OIDC is enabled for keycloak login authentication and update the client secret (need the value from keycloak - refer [Enable Keycloak Auth step h](../../../docs/deploy-nbs7/keycloak/enable-keycloak-auth.html#enable-keycloak-auth))
 
    ```yaml
    Oidc:

@@ -15,7 +15,7 @@ nav_enabled: true
 ## Deploy Modernization API via helm chart
 
 1. The helm chart for modernization should be available under charts/modernization-api.
-2. In the values.yaml file, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app and app-classic.EXAMPLE_DOMAIN with the URL of your existing NBS 6 as shown in the [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
+2. In the values.yaml file, replace all occurrences of app.EXAMPLE_DOMAIN with the URL of your modern app and app-classic.EXAMPLE_DOMAIN with the URL of your existing NBS 6 as shown in the [DNS records table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records).
 3. Ensure the image repository and tags are populated with the following:
 
    ```yaml
@@ -24,7 +24,7 @@ nav_enabled: true
      tag: <release-version-tag> e.g v1.0.1
    ```
 
-4. Populate the jdbc section (refer [Table](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/0_microservices_deployment.html#nbs-microservices-deployment)) in the values file in the following format
+4. Populate the jdbc section (refer to [Deploy NBS 7 microservices](../../../docs/deploy-nbs7/deploy-nbs7-microservices.html)) in the values file in the following format
 
    ```yaml
    jdbc:

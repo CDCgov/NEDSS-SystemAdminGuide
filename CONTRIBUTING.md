@@ -93,9 +93,19 @@ See [STYLES.md](STYLES.md) for the canonical pattern and examples.
 | `bundle exec jekyll serve --livereload` | Starts a local Jekyll server with live reload at `http://localhost:4000`. The browser refreshes automatically when you save a file. | Ruby + Bundler (see README Option 2) |
 | `docker compose up` | Same as above, using Docker instead of a local Ruby install. | Docker Desktop (see README Option 3) |
 | `npm run lint` | Runs markdownlint against all `docs/**/*.md` and root `*.md` files. Reports formatting violations. | `npm install` from repo root |
-| `npm run link-check` | Checks all links in Markdown files for broken URLs. Note: this is slow on first run (one request per link). | `npm install` from repo root |
+| `npm run link-check` | Full local link validation for day-to-day use. Runs internal links + external links + GitHub links for changed files. | `npm install` from repo root |
+| `npm run link-check:internal` | Checks internal doc links and anchors using repo-aware logic for the `/docs/...html` convention. | `npm install` from repo root |
+| `npm run link-check:external` | Runs `markdown-link-check` across docs and top-level markdown files, then prints a broken-link summary. | `npm install` from repo root |
+| `npm run link-check:github:changed` | Checks GitHub URLs in changed markdown files only. Fast and suitable for regular editing workflow. | `npm install` from repo root |
+| `npm run link-check:github` | Checks all GitHub URLs across docs and top-level markdown files. Use before large link cleanup PRs or periodic audits. | `npm install` from repo root |
 
 Run `npm install` once from the repo root to install the lint and link-check tools before using those commands.
+
+Link-check implementation scripts live in `scripts/`:
+
+- `scripts/check-internal-links.mjs`
+- `scripts/check-external-links.mjs`
+- `scripts/check-github-links.mjs`
 
 ### What runs automatically
 

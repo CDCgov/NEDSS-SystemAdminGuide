@@ -73,7 +73,7 @@ Provides necessary foundational pieces to track and route ELR data flowing into 
 - Supports traffic and system health monitoring
 
 ## Real-Time Reporting (RTR) microservices
-Real-Time Reporting (RTR) provides rapid transformation and delivery of data from the transactional database (NBS_ODSE) to the reporting database (RDB). For detailed RTR deployment instructions, see the [Real-Time Reporting](/NEDSS-SystemAdminGuide/docs/7_feature_preview/0_rtr.html) section.
+Real-Time Reporting (RTR) provides rapid transformation and delivery of data from the transactional database (NBS_ODSE) to the reporting database (RDB). For detailed RTR deployment instructions, see [Deploy real-time reporting](../../docs/deploy-nbs7/real-time-reporting/real-time-reporting.html).
 
 There are 9 RTR services:
 

@@ -27,9 +27,13 @@ This guide outlines the detailed steps to install the NBS 7 RTI service, which w
 
 ### RTI micro service
 
-1. Please use the values file supplied as part of `nbs-helm-vX.Y.Z.zip` file. Use this [link](https://github.com/CDCgov/nbs-helm/releases) to download the zip file (scroll down to the Assets listed for the latest or previous releases). The `values.yaml` file should be under `charts\data-processing-service\values.yaml`.
-Values for ECR repository, ECR image tag, db server endpoints, and ingress host should be provided in the `values.yaml` file.
-2. Confirm that the following DNS entry were created and pointed to the network load balancer in front of your Kubernetes cluster (Make sure this is the ACTIVE NLB provisioned via `nginx-ingress` in the base install steps). This should be done in your authoritative DNS service (e.g., Route 53). Please replace `example.com` with the appropriate domain name in the `values.yaml` file.
+1. Use the values file supplied as part of `nbs-helm-vX.Y.Z.zip` file. Values for **ECR repository**, **ECR image tag**, **db server endpoints** and **ingress host** should be provided in the `values.yaml` file.
+   1. Navigate to the [NEDSS-Helm/releases](https://github.com/CDCgov/NEDSS-Helm/releases) page.
+   1. Scroll down to the Assets listed for the latest or previous releases.
+   1. Download the zip file for the release.
+   1. Find the `values.yaml` file under `charts\data-processing-service`.
+
+2. Confirm that the following DNS entries were created and pointed to the network load balancer in front of your Kubernetes cluster (Make sure this is the ACTIVE NLB provisioned via `nginx-ingress` in the base install steps). This should be done in your authoritative DNS service (e.g., Route 53). Please replace `example.com` with the appropriate domain name in the `values.yaml` file.
 
    Data processing service Application - e.g., `dataprocessingservice.example.com`
 3. Update the image repository and tag with the following:
@@ -88,7 +92,7 @@ Values for ECR repository, ECR image tag, db server endpoints, and ingress host 
 
 - Note: Check to see if the pod for data-processing-service is running using kubectl get pods
 
-7. API Testing Guide: [RTI API Testing and Integration](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/7a_data_processing_api_testing.html#data-processing-api-testing-and-integration)
+7. API Testing Guide: [RTI API Testing and Integration](../../../docs/deploy-nbs7/microservices-deployment/data-processing/api-testing.html)
 8. Validate the service
 
    ```text

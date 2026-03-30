@@ -16,7 +16,7 @@ nav_enabled: true
 
 1. Important Note: The NIFI ingress is intentionally disabled by default to enhance security. Consequently, the NIFI admin UI is not accessible out of the box. To enable access to the NIFI admin interface, it is necessary to activate the ingress feature by setting "ingress:enabled: true" within the values.yaml file before initiating the installation process using the Helm chart. For the sake of heightened security, it is strongly advised to establish a privately accessible domain name instead of a public one, considering the presence of known security vulnerabilities within NIFI.
 2. The helm chart for nifi should be available under charts/nifi-efs.
-3. In the values.yaml file, replace all occurrences of nifi.EXAMPLE_DOMAIN with your domain name as shown in [Table](/NEDSS-SystemAdminGuide/docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html#deploy-nginx-ingress-controller-on-the-kubernetes-cluster).
+3. In the values.yaml file, replace all occurrences of nifi.EXAMPLE_DOMAIN with your domain name as shown in [Table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster).
 4. Ensure the image repository and tags are populated with the following:
 
   ```yaml
@@ -26,7 +26,7 @@ nav_enabled: true
   ```
 
 5. Update the efsFileSystemId with the [efs-id](https://us-east-1.console.aws.amazon.com/efs/home?region=us-east-1#/file-systems).
-6. Populate jdbc connection string with the same information (refer [Table](/NEDSS-SystemAdminGuide/docs/6_microservices_deployment/0_microservices_deployment.html#nbs-microservices-deployment)) as before which includes the username and password.
+6. Populate jdbc connection string with the same information (refer to [Deploy NBS 7 microservices](../../../docs/deploy-nbs7/deploy-nbs7-microservices.html)) as before, which includes the username and password.
 
   ```yaml
   jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
@@ -45,6 +45,7 @@ nav_enabled: true
   ```bash
   kubectl get pods
   ```
+
 ## Validate Elasticsearch, Modernization-API and Nifi
 
 When you are able to perform the validation steps and get results back, it validates the following portions of the system are functioning properly:

@@ -14,9 +14,9 @@ The pages in this section describe each component in NBS 7. Use it to understand
 
 Components in this reference are organized by deployment scope:
 
-- [NBS 7 core components](3_component_reference/1_nbs_core_components/)
-- [Add-on: Real-Time Reporting (RTR)](3_component_reference/2_rtr/)
-- [Add-on: Data Ingestion (DI) API](3_component_reference/3_di_api/)
+- [NBS 7 core components](../../docs/before-you-deploy/component-reference/nbs-core-components.html)
+- [Add-on: Real-Time Reporting (RTR)](../../docs/before-you-deploy/component-reference/rtr.html)
+- [Add-on: Data Ingestion (DI) API](../../docs/before-you-deploy/component-reference/di-api.html)
 
 For deployment configuration details including configuration parameters, Helm chart values, and step-by-step setup instructions, see the **NBS 7 System Administrator Guide**.
 

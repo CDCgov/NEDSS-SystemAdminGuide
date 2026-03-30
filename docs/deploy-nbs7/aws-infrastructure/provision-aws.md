@@ -36,7 +36,7 @@ configuration files
    > Before you edit `terraform.tfvars` and `terraform.tf` files below, you can reference detailed information for each TF module under `terraform/aws/app-infrastructure` in a README file in each module's directory. Do not edit files in the individual modules.
    {: .note }
 
-1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the instructions [here](https://github.com/CDCgov/NEDSS-Infrastructure/blob/main/terraform/aws/samples/NBS7_standard/README.md)
+1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the instructions [here](https://github.com/CDCgov/NEDSS-Infrastructure/blob/main/terraform/aws/samples/README.md)
 1. Review the inbound rules on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
     - a. For example if the `modern-cidr` is `10.20.0.0/16`, there should be at least one rule in a security group associated to your database that allows MSSQL inbound access from your `modern-cidr` block
     ![mssql-inbound-from-modern-cidr](../images/myssql-inbound-from-modern-cidr.png)
@@ -108,4 +108,4 @@ configuration files
 
 The above command should list the worker nodes for the cluster.
 
-Congratulations! You have installed your core infrastructure and Kubernetes cluster. Next, see  [Initial Kubernetes Bootstrapping](../4_initial_kubernetes_deployment/0_kubernetes_bootstrapping.html) to configure your cluster using Helm charts.
+Congratulations! You have installed your core infrastructure and Kubernetes cluster. Next, see [Initial Kubernetes Deployment](../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html) to configure your cluster using Helm charts.

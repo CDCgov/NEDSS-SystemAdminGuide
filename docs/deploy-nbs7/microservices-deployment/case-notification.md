@@ -5,6 +5,9 @@ parent: Deploy NBS 7 microservices
 nav_order: 9
 has_children: true
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/9_case_notification.html
+  - /docs/6_microservices_deployment/9_case_notification/
 ---
 
 # Deploy case notifications

@@ -4,6 +4,11 @@ layout: page
 parent: Data ingestion
 nav_order: 2
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/6b_data_ingestion_smoke_test.html
+  - /docs/6_microservices_deployment/6b_data_ingestion_smoke_test/
+  - /docs/3_base_application/data-ingestion-smoke-test.html
+  - /docs/3_base_application/data-ingestion-smoke-test/
 ---
 
 # Smoke test for data ingestion

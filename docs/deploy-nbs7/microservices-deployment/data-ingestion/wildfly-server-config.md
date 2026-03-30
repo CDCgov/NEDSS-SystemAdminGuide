@@ -4,6 +4,11 @@ layout: page
 parent: Data ingestion
 nav_order: 1
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/6a_di_wildfly_Server_config.html
+  - /docs/6_microservices_deployment/6a_di_wildfly_Server_config/
+  - /docs/3_base_application/wildfly-server-config-di.html
+  - /docs/3_base_application/wildfly-server-config-di/
 ---
 
 # WildFly server configuration

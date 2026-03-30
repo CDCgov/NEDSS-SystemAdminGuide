@@ -4,6 +4,9 @@ layout: page
 parent: Real-time reporting (preview)
 nav_order: 11
 nav_enabled: true
+redirect_from:
+  - /docs/7_feature_preview/5_rtr_pipeline_validation.html
+  - /docs/7_feature_preview/5_rtr_pipeline_validation/
 ---
 
 # RTR pipeline validation

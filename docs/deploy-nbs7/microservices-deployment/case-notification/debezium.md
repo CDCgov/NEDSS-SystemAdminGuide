@@ -4,6 +4,9 @@ layout: page
 parent: Case notifications
 nav_order: 1
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/9a_debezium_case_notifications.html
+  - /docs/6_microservices_deployment/9a_debezium_case_notifications/
 ---
 
 ## On this page

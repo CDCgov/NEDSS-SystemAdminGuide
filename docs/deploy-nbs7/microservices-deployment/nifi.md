@@ -4,6 +4,11 @@ layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 3
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/3_nifi.html
+  - /docs/6_microservices_deployment/3_nifi/
+  - /docs/3_base_application/nifi.html
+  - /docs/3_base_application/nifi/
 ---
 
 ## On this page

@@ -12,6 +12,8 @@ redirect_from:
   - /docs/7_feature_preview/(DEPRECATED)7_investigation_reporting_service/
   - /docs/7_feature_preview/(DEPRECATED)8_ldfdata_reporting_service/
   - /docs/7_feature_preview/(DEPRECATED)9_post_processing_reporting_service/
+  - /docs/7_feature_preview/0_rtr.html
+  - /docs/7_feature_preview/0_rtr/
 ---
 
 # Deploy real-time reporting

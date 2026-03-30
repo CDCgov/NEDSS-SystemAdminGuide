@@ -5,6 +5,11 @@ parent: Validate ES, Mapi and Nifi
 grand_parent: Microservices Deployment
 nav_order: 1
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/5a_manual_validation_es_mapi_nifi.html
+  - /docs/6_microservices_deployment/5a_manual_validation_es_mapi_nifi/
+  - /docs/3_base_application/manual-validation-es-mapi-nifi.html
+  - /docs/3_base_application/manual-validation-es-mapi-nifi/
 ---
 
 ## On this page

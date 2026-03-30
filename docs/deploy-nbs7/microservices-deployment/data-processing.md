@@ -5,6 +5,9 @@ parent: Deploy NBS 7 microservices
 nav_order: 7
 has_children: true
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/7_data_processing.html
+  - /docs/6_microservices_deployment/7_data_processing/
 ---
 
 ## On this page

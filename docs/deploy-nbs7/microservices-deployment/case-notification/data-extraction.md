@@ -4,6 +4,9 @@ layout: page
 parent: Case notifications
 nav_order: 4
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/9d_data_extraction_service.html
+  - /docs/6_microservices_deployment/9d_data_extraction_service/
 ---
 
 ## On this page

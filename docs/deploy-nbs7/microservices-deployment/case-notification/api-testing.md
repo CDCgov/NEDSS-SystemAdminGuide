@@ -4,6 +4,9 @@ layout: page
 parent: Case notifications
 nav_order: 6
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/9f_testing.html
+  - /docs/6_microservices_deployment/9f_testing/
 ---
 
 ## On this page

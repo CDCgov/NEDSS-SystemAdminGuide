@@ -4,6 +4,11 @@ layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 4
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/4_nbs_gateway.html
+  - /docs/6_microservices_deployment/4_nbs_gateway/
+  - /docs/3_base_application/nbs-gateway.html
+  - /docs/3_base_application/nbs-gateway/
 ---
 
 ## On this page

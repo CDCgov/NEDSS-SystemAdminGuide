@@ -4,6 +4,11 @@ layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 2
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/2_modernization_api.html
+  - /docs/6_microservices_deployment/2_modernization_api/
+  - /docs/3_base_application/modernization-api.html
+  - /docs/3_base_application/modernization-api/
 ---
 
 ## On this page

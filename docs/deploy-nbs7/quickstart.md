@@ -3,6 +3,9 @@ title: Quick start (AWS)
 layout: page
 parent: Deploy NBS 7
 nav_order: 1
+redirect_from:
+  - /docs/quickstart.html
+  - /docs/quickstart/
 ---
 
 # Quick start (AWS)

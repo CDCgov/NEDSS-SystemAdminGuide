@@ -4,6 +4,9 @@ layout: page
 parent: Data processing
 nav_order: 1
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/7a_data_processing_api_testing.html
+  - /docs/6_microservices_deployment/7a_data_processing_api_testing/
 ---
 
 ## On this page

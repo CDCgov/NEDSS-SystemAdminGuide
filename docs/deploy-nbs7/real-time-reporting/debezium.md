@@ -4,6 +4,9 @@ layout: page
 parent: Real-time reporting (preview)
 nav_order: 2
 nav_enabled: true
+redirect_from:
+  - /docs/7_feature_preview/2_debezium-rtr.html
+  - /docs/7_feature_preview/2_debezium-rtr/
 ---
 
 # Debezium

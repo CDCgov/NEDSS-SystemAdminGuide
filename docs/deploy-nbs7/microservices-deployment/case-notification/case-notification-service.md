@@ -4,6 +4,9 @@ layout: page
 parent: Case notifications
 nav_order: 5
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/9e_case_notification.html
+  - /docs/6_microservices_deployment/9e_case_notification/
 ---
 
 # Case Notification Service

@@ -3,6 +3,9 @@ title: Architecture overview
 layout: page
 parent: Deploy NBS 7
 nav_order: 2
+redirect_from:
+  - /docs/1_introduction/architecture_and_microservices.html
+  - /docs/1_introduction/architecture_and_microservices/
 ---
 
 # NBS 7 architecture and microservices

@@ -5,6 +5,9 @@ parent: Deploy cluster infrastructure
 nav_order: 2
 has_children: true
 nav_enabled: true
+redirect_from:
+  - /docs/5_keycloak/1_keycloak_installation.html
+  - /docs/5_keycloak/1_keycloak_installation/
 ---
 
 # Keycloak Installation

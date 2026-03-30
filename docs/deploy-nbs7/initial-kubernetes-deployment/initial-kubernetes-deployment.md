@@ -5,6 +5,15 @@ parent: Deploy cluster infrastructure
 nav_order: 1
 has_children: true
 nav_enabled: true
+redirect_from:
+  - /docs/4_initial_kubernetes_deployment/0_kubernetes_bootstrapping.html
+  - /docs/4_initial_kubernetes_deployment/0_kubernetes_bootstrapping/
+  - /docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets.html
+  - /docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets/
+  - /docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html
+  - /docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment/
+  - /docs/4_initial_kubernetes_deployment/4_linkerd_and_autoscaler.html
+  - /docs/4_initial_kubernetes_deployment/4_linkerd_and_autoscaler/
 ---
 
 # Initial Kubernetes deployment

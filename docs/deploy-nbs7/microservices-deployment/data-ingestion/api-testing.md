@@ -4,6 +4,9 @@ layout: page
 parent: Data ingestion
 nav_order: 4
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/6d_di_data_ingestion_API_testing.html
+  - /docs/6_microservices_deployment/6d_di_data_ingestion_API_testing/
 ---
 
 # API testing for data ingestion

@@ -4,6 +4,9 @@ layout: page
 parent: Data ingestion
 nav_order: 3
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/6c_di_service_integrations.html
+  - /docs/6_microservices_deployment/6c_di_service_integrations/
 ---
 
 # Service integrations for data ingestion

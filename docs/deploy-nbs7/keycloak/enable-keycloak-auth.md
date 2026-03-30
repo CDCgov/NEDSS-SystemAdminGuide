@@ -4,6 +4,9 @@ layout: page
 parent: Deploy cluster infrastructure
 nav_order: 3
 nav_enabled: true
+redirect_from:
+  - /docs/5_keycloak/2_enable_keycloak_auth.html
+  - /docs/5_keycloak/2_enable_keycloak_auth/
 ---
 
 # Enable Keycloak Auth

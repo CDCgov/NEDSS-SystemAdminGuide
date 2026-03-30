@@ -5,6 +5,9 @@ parent: Deploy on AWS
 nav_order: 2
 has_children: true
 nav_enabled: true
+redirect_from:
+  - /docs/3_base_application/1_terraform-deployment.html
+  - /docs/3_base_application/1_terraform-deployment/
 ---
 
 # Provision the AWS cloud environment

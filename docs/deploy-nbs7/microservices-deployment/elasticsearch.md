@@ -4,6 +4,11 @@ layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 1
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/1_elasticsearch.html
+  - /docs/6_microservices_deployment/1_elasticsearch/
+  - /docs/3_base_application/elasticsearch.html
+  - /docs/3_base_application/elasticsearch/
 ---
 
 ## On this page

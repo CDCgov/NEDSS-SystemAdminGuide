@@ -5,6 +5,11 @@ parent: Deploy NBS 7 microservices
 nav_order: 6
 has_children: true
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/6_data_ingestion.html
+  - /docs/6_microservices_deployment/6_data_ingestion/
+  - /docs/3_base_application/data-ingestion.html
+  - /docs/3_base_application/data-ingestion/
 ---
 
 ## On this page

@@ -4,6 +4,9 @@ layout: page
 parent: Real-time reporting (preview)
 nav_order: 1
 nav_enabled: true
+redirect_from:
+  - /docs/7_feature_preview/1_liquibase.html
+  - /docs/7_feature_preview/1_liquibase/
 ---
 
 # Liquibase

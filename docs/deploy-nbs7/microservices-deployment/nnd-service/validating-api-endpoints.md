@@ -3,6 +3,9 @@ title: Validate API endpoints
 layout: page
 parent: NND Service (Data Sync)
 nav_order: 1
+redirect_from:
+  - /docs/6_microservices_deployment/8a_nnd_api_tesing.html
+  - /docs/6_microservices_deployment/8a_nnd_api_tesing/
 ---
 
 # Validate API endpoints

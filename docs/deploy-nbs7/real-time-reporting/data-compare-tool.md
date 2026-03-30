@@ -4,6 +4,9 @@ layout: page
 parent: Real-time reporting (preview)
 nav_order: 12
 nav_enabled: true
+redirect_from:
+  - /docs/7_feature_preview/6_data_compare_tool.html
+  - /docs/7_feature_preview/6_data_compare_tool/
 ---
 
 # RTR Data Compare validation tool

@@ -4,6 +4,9 @@ layout: page
 parent: Case notifications
 nav_order: 3
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/9c_xml_hl7_parser.html
+  - /docs/6_microservices_deployment/9c_xml_hl7_parser/
 ---
 
 ## On this page

@@ -5,6 +5,11 @@ parent: Validate ES, Mapi and Nifi
 grand_parent: Microservices Deployment
 nav_order: 3
 nav_enabled: true
+redirect_from:
+  - /docs/6_microservices_deployment/5c_web_ui_smoke_test.html
+  - /docs/6_microservices_deployment/5c_web_ui_smoke_test/
+  - /docs/3_base_application/web-ui-smoke-test.html
+  - /docs/3_base_application/web-ui-smoke-test/
 ---
 
 # Web UI Smoke Test (Scripted)

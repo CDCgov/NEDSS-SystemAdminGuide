@@ -1,14 +1,13 @@
 # NBS System Admin Guide User Guide
 
-
-**New contributor?** Start with the [Contributor Workflow](WORKFLOW.md) for setup instructions and daily git commands.
+**New contributor?** Start with the [Contributor File Map](#contributor-file-map).
 
 ## Quick Guide
 
 | Site | URL |
 |------|-----|
 | Production | https://cdcgov.github.io/NEDSS-SystemAdminGuide/ |
-| Stakeholder preview | https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/ _(temporary — pending CDCgov org transfer)_ |
+| Stakeholder preview | https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/ |
 
 | Action                       | Location                              |
 |----------------------------|---------------------------------------|
@@ -16,6 +15,36 @@
 | Previous release versions  | Any branch named `release-<version>` is automatically added under **PREVIOUS VERSIONS** |
 | Access versioned docs      | Located under **PREVIOUS VERSIONS** section |
 | Publish approved content without showing it in nav yet | `_guide_preview/*.md` — see [Hidden Draft Pages](#hidden-draft-pages) |
+
+## Contributor File Map
+
+Use this map to find contributor guidance quickly.
+
+### Start here
+
+| File | What it helps with |
+|------|--------------------|
+| [README.md](README.md) | Project overview, local preview options, and site workflow context |
+| [WORKFLOW.md](WORKFLOW.md) | Day-to-day git workflow, branch strategy, and preview-to-production process |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution standards, review expectations, CI checks, and local scripts/commands |
+
+### Writing standards
+
+| File | What it helps with |
+|------|--------------------|
+| [STYLES.md](STYLES.md) | Authoring style rules for headings, callouts, links, code blocks, images, and tables |
+| [FRONT-MATTER.md](FRONT-MATTER.md) | Required front matter fields and nav metadata rules for pages |
+| [ACCESSIBILITY.md](ACCESSIBILITY.md) | Accessibility requirements for alt text, heading order, links, and tables |
+
+### Governance and policy
+
+| File | What it helps with |
+|------|--------------------|
+| [code-of-conduct.md](code-of-conduct.md) | Community behavior expectations and reporting process |
+| [open_practices.md](open_practices.md) | Open-source collaboration practices and participation norms |
+| [rules_of_behavior.md](rules_of_behavior.md) | Required behavior and participation rules for this CDC project space |
+| [LICENSE](LICENSE) | Repository licensing terms and usage rights |
+| [CDCgov_README.md](CDCgov_README.md) | CDC open-source project baseline notes and agency-specific repository context |
 
 
 ## Implementation

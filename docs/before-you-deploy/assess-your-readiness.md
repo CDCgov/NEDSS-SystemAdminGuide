@@ -19,7 +19,7 @@ This page helps you assess whether NBS 7 is a viable option for your jurisdictio
 
 If you work through this page and find that your jurisdiction does not meet one or more prerequisites, you might still be able to move forward. You can address some gaps with planning and lead time, but other gaps might indicate that NBS 7 is not the right fit for your jurisdiction right now.
 
-For more information on migration planning, staffing, and budget, see [Operational considerations](../../docs/before-you-deploy/operational_considerations.html). For more information on staffing models, shared responsibilities, and technical compatibility, see the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) on NBS Central.
+For more information on migration planning, staffing, and budget, see [Operational considerations](../../docs/before-you-deploy/operational_considerations.html) in this guide, and the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) and [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) on NBS Central (NBS Central login required).
 {: .note }
 
 ## Not sure where to start?
@@ -30,17 +30,17 @@ If you are new to NBS 7 deployment, [Deployment phases](../../docs/before-you-de
 
 Has your jurisdiction obtained state IT security approval for cloud hosting and the software technologies that NBS 7 requires, including Kubernetes, Terraform, and Docker?
 
-- **Yes, or approval is not required** — Continue with the rest of this section.
-- **No, or unknown** — Approval timelines vary and can significantly affect your migration schedule. We recommend working with your state IT office while you continue to plan.
+- **Yes, or approval is not required**: Continue with the rest of this section.
+- **No, or unknown**: Approval timelines vary and can significantly affect your migration schedule. We recommend working with your state IT office while you continue to plan.
 
 See also: [Operational considerations](../../docs/before-you-deploy/operational_considerations.html) and [Set up cloud infrastructure](../../docs/deploy-nbs7/set-up-cloud-infrastructure.html).
 
 ## Cloud infrastructure
 
-NBS 7 has not been tested for on-premises deployment and CDC does not plan to support it. You need an active account with a supported cloud provider:
+NBS 7 has not been tested for on-premises deployment and CDC does not plan to support it. To deploy with CDC support, you need an active account with a supported cloud provider:
 
-- **Amazon Web Services (AWS)** — The primary supported option. NBS 7 has been fully tested on AWS.
-- **Microsoft Azure** — Supported via Terraform. Use this option if your jurisdiction has an existing Azure commitment or a compliance requirement that mandates Azure.
+- **Amazon Web Services (AWS)**: The primary supported option. NBS 7 has been fully tested on AWS.
+- **Microsoft Azure**: Supported via Terraform. Use this option if your jurisdiction has an existing Azure commitment or a compliance requirement that mandates Azure.
 
 See also: [Deploy cloud infrastructure on AWS](../../docs/deploy-nbs7/deploy-on-aws.html), [Deploy cloud infrastructure on Azure](../../docs/deploy-nbs7/deploy-on-azure.html), and [Compatibility matrix](../../docs/before-you-deploy/compatibility.html).
 
@@ -55,8 +55,8 @@ NBS 7 uses Kubernetes, a container orchestration platform. To deploy and maintai
 
 If your IT team does not have these skills, you have two options:
 
-- **Building capacity** — Train existing staff or hire staff with these skills before you begin deployment.
-- **Working with a vendor** — Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../../docs/before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
+- **Building capacity**: Train existing staff or hire staff with these skills before you begin deployment.
+- **Working with a vendor**: Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../../docs/before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
 
 See also: [Operational considerations](../../docs/before-you-deploy/operational_considerations.html) and [Choose your configuration](../../docs/before-you-deploy/choose-your-configuration.html).
 
@@ -64,11 +64,11 @@ See also: [Operational considerations](../../docs/before-you-deploy/operational_
 
 Before deployment, your network must meet the following requirements:
 
-- **NBS 6 and NBS 7 connectivity** — Each NBS 7 instance requires network connectivity to a corresponding NBS 6 instance. If your NBS 6 runs in a Virtual Private Cloud (VPC), that VPC must be connected to your NBS 7 environment.
-- **VM co-location** — Any virtual machines (VMs) that you use for NBS 7 components must exist within the same network.
-- **Encryption** — Encryption is required for all virtual network traffic between NBS 6 and NBS 7 components.
-- **Outbound access** — Your cloud environment needs outbound internet access to reach CDC systems.
-- **TLS/SSL certificate management** — You need a process to provision and renew TLS/SSL certificates for encrypted traffic.
+- **NBS 6 and NBS 7 connectivity**: Each NBS 7 instance requires network connectivity to a corresponding NBS 6 instance. If your NBS 6 runs in a Virtual Private Cloud (VPC), that VPC must be connected to your NBS 7 environment.
+- **VM co-location**: Any virtual machines (VMs) that you use for NBS 7 components must exist within the same network.
+- **Encryption**: Encryption is required for all virtual network traffic between NBS 6 and NBS 7 components.
+- **Outbound access**: Your cloud environment needs outbound internet access to reach CDC systems.
+- **TLS/SSL certificate management**: You need a process to provision and renew TLS/SSL certificates for encrypted traffic.
 
 Your specific network configuration will depend on your cloud provider and the existing infrastructure for your jurisdiction.
 
@@ -80,6 +80,7 @@ During migration, NBS 7 components gradually replace NBS 6 functionality while N
 
 - Your jurisdiction will run both systems in parallel during the transition.
 - Your NBS 6 instance must remain operational and accessible during migration.
+- Many jurisdictions provision a separate NBS 6 environment for migration activities and then cut over, rather than deploying NBS 7 changes directly against their primary NBS 6 production server.
 - You need to know your current NBS 6 hosting setup before you begin. Specifically, whether it is hosted on-premises or in the cloud, and if in the cloud, which provider.
 - **You must be running a compatible NBS 6.x version** before you can install any version of NBS 7. For more information, see [Compatibility matrix](../../docs/before-you-deploy/compatibility.html).
 

@@ -8,7 +8,7 @@ description: Evaluation and planning content to help you assess NBS 7 readiness 
 
 # NBS 7 Deployment Decision Guide
 
-This guide is for STLT IT administrators and technical decision-makers who operate NBS 6 and are evaluating whether to migrate to NBS 7. It covers whether NBS 7 is the right fit for your jurisdiction and, if so, how to plan your deployment. The guide surfaces decisions that might affect your timeline and configuration choices. Start here before you begin migration planning, and share this resource with your leadership and support teams.
+This section is for STLT IT administrators and technical decision-makers who operate NBS 6 and are evaluating whether to migrate to NBS 7. It covers whether NBS 7 is the right fit for your jurisdiction and, if so, how to plan your deployment. The decision guide content surfaces decisions that might affect your timeline and configuration choices. Start here before you begin migration planning, and share this resource with your leadership and support teams.
 
 ## Purpose
 
@@ -24,9 +24,9 @@ Use this guide to:
 
 ## How this guide fits into the NBS 7 process
 
-Three documents support the NBS 6 to NBS 7 transition. Each serves a different purpose:
+Three main resources support the NBS 6 to NBS 7 transition. Each serves a different purpose:
 
-| Document | Purpose | When to use |
+| Resource | Purpose | When to use |
 |:---|:---|:---|
 | **NBS 7 Deployment Decision Guide** (you are here) | This resource helps IT administrators and leadership evaluate NBS 7, understand hosting requirements, and choose a component configuration | Use first |
 | **[NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731)** (requires login) | Hosted on NBS Central, this resource guides your jurisdiction through the migration process, including timelines, roles, a compatibility checklist, and cutover planning | Use after confirming NBS 7 is the right fit |

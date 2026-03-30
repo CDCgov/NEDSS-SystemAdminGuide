@@ -41,9 +41,11 @@ For detailed checklists and deliverables for each phase, see the [NBS 7 Migratio
 
 The Planning phase covers discovery, environment setup, and project preparation. Security approval for cloud hosting and required technologies including Kubernetes, Terraform, and Docker is frequently the longest-lead item in this phase and the most common source of delay across the entire deployment. Starting that process early tends to reduce overall deployment time.
 
+Before planning detailed timelines, confirm your current NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../../docs/before-you-deploy/compatibility.html).
+
 | Activity | Description | Resource |
 |:---|:---|:---|
-| Readiness check-in | Initial planning and review of frequently asked questions. See [Assess your readiness](../../docs/before-you-deploy/assess-your-readiness.html) for the technical checklist | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) |
+| Readiness check-in | Initial planning and review of frequently asked questions. See [Assess your readiness](../../docs/before-you-deploy/assess-your-readiness.html) for the technical checklist and [NBS 6 and NBS 7 compatibility matrix](../../docs/before-you-deploy/compatibility.html) for version alignment. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) |
 | Identify project team | Define roles, responsibilities, and key stakeholders. See [Operational considerations](../../docs/before-you-deploy/operational_considerations.html) for staffing guidance | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) |
 | NBS 7 orientation | Review NBS 7 features with your migration team. See [Component reference](../../docs/before-you-deploy/component-reference.html) for a full component overview | [Choose your configuration](../../docs/before-you-deploy/choose-your-configuration.html) |
 | Create project plan | Draft a customized migration plan from the playbook checklists, including a migration risk registry | [Deployment scenarios](../../docs/before-you-deploy/deployment-scenarios.html) |
@@ -87,7 +89,7 @@ The Test phase validates that your NBS 7 environment is ready for production use
 
 ## Go-live
 
-The Go-live phase covers final preparation, cutover, and launch. This phase is shorter than the others but involves time-sensitive coordination across your team.
+The Go-live phase covers final preparation, cutover, and launch. This phase is shorter than the others but involves time-sensitive coordination across your team. In many jurisdictions, this cutover follows work in a separate migration environment rather than direct changes on the primary NBS 6 production server.
 
 | Activity | Description | Resource |
 |:---|:---|:---|

@@ -23,19 +23,21 @@ For technical deployment guidance, refer to [Assess your readiness](../../docs/b
 
 ## Migration is gradual, not a cutover
 
-NBS 7 does not replace NBS 6 in a single switch. Both systems run in parallel during the transition. NBS 7 components gradually take over functionality while NBS 6 continues to operate. The length of this parallel period depends on your jurisdiction's pace of deployment and configuration choices. Planning for the operational complexity and cost of maintaining two systems simultaneously is an integral part of migration preparation.
+NBS 7 does not replace NBS 6 in a single switch. Both systems run in parallel during the transition. NBS 7 components gradually take over functionality while NBS 6 continues to operate. The length of this parallel period depends on your jurisdiction's pace of deployment and configuration choices. Planning for the operational complexity and cost of maintaining two systems simultaneously is an integral part of migration preparation. Many jurisdictions provision a separate NBS 6 environment for migration activities and then cut over, rather than making these changes directly on their primary NBS 6 production server.
 
 See also: [Deployment phases](../../docs/before-you-deploy/deployment-phases.html) and [Deployment scenarios](../../docs/before-you-deploy/deployment-scenarios.html).
 
+Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 compatibility matrix](../../docs/before-you-deploy/compatibility.html) before you finalize migration timelines.
+
 ## State IT security approval takes time
 
-State IT security approval is often the longest-lead item in an NBS 7 migration. NBS 7 requires approval for cloud hosting and specific technologies including Kubernetes, Terraform, and Docker. Jurisdictions that start this process early, even when deployment is still months away, might avoid one of the most common causes of migration delays.
+State IT security approval is often the longest-lead item in an NBS 7 migration. NBS 7 requires approval for cloud hosting and specific technologies including Kubernetes, Terraform, and Docker. Because NBS handles PII and PHI, state IT review is often required even when a vendor manages parts of the deployment. Jurisdictions that start this process early, even when deployment is still months away, might avoid one of the most common causes of migration delays.
 
 See also: [Assess your readiness](../../docs/before-you-deploy/assess-your-readiness.html), [Set up cloud infrastructure](../../docs/deploy-nbs7/set-up-cloud-infrastructure.html), and [Deploy cloud infrastructure on AWS](../../docs/deploy-nbs7/deploy-on-aws.html) or [Deploy cloud infrastructure on Azure](../../docs/deploy-nbs7/deploy-on-azure.html).
 
 ## Cloud infrastructure requires ongoing budget
 
-NBS 6 could run on-premises, but NBS 7 is a cloud-only system. Your jurisdiction needs an active cloud account (AWS or Azure) and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response.
+CDC does not support on-premises installations of NBS 7. Your jurisdiction needs an active cloud account (AWS or Azure) and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response. Use the [NBS 7 Resource Estimator (NBS Central login required)](https://nbscentral.cdc.gov/documents/872) to project cloud-hosting costs based on your jurisdiction's record volume.
 
 See also: [Set up cloud infrastructure](../../docs/deploy-nbs7/set-up-cloud-infrastructure.html) and [Deployment scenarios](../../docs/before-you-deploy/deployment-scenarios.html).
 
@@ -59,9 +61,9 @@ The Real-Time Reporting (RTR) add-on reduces the time for data to appear in repo
 
 See also: [RTR component reference](../../docs/before-you-deploy/component-reference/rtr.html), [Real-time reporting deployment](../../docs/deploy-nbs7/real-time-reporting/real-time-reporting.html), and [Choose your configuration](../../docs/before-you-deploy/choose-your-configuration.html).
 
-## The Data Ingestion API is not yet a full middleware replacement
+## The Data Ingestion API adds a secure integration option
 
-The Data Ingestion (DI) API is a built-in data transit layer that can receive lab reports and case reports without third-party middleware. If your jurisdiction currently uses Rhapsody or Mirth Connect, the DI API is not yet a full replacement. Continuing to use your existing middleware for now is the current guidance. If your jurisdiction does not have existing middleware, the DI API is worth evaluating. Its capabilities are expected to expand as the product matures.
+The Data Ingestion (DI) API is a built-in REST API layer that accepts lab reports and case reports through middleware rather than through direct database access. It does not replace middleware such as Rhapsody or Mirth Connect. Instead, it gives jurisdictions an API-based ingestion path, which is especially useful when security constraints prevent middleware or other third-party tools from connecting directly to the NBS database. Jurisdictions that do not already have middleware will still need it before they can use the DI API.
 
 See also: [DI API component reference](../../docs/before-you-deploy/component-reference/di-api.html) and [Data ingestion microservice](../../docs/deploy-nbs7/microservices-deployment/data-ingestion.html).
 

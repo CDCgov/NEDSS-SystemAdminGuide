@@ -12,6 +12,8 @@ description: Provision the AWS cloud environment and deploy base infrastructure 
 
 This section walks you through provisioning the AWS cloud environment for NBS 7. You will verify that your AWS account, hardware, software, and network requirements are in place, then use Terraform to provision the VPC, EKS cluster, and supporting AWS services. Complete both steps in order before moving on to [Deploy cluster infrastructure](../../docs/deploy-nbs7/cluster-infrastructure.html).
 
+Before provisioning infrastructure, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../../docs/before-you-deploy/compatibility.html).
+
 ## What gets provisioned
 
 Terraform creates the following AWS resources during this phase:

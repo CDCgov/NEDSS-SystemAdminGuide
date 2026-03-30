@@ -35,6 +35,9 @@ Has your jurisdiction obtained state IT security approval for cloud hosting and 
 - **Yes, or approval is not required** → Go to [Step 3](#step-3-internal-technical-capacity).
 - **No, or unknown** → Begin the approval process now, then continue planning. Approval is required before deployment. Go to [Step 3](#step-3-internal-technical-capacity).
 
+Because NBS handles PII and PHI, state IT might still need to review and approve the deployment, even in vendor-managed models. See [State IT security approval takes time](../../docs/before-you-deploy/operational_considerations.html#state-it-security-approval-takes-time).
+{: .note }
+
 ## Step 3: Internal technical capacity
 
 Does your jurisdiction have IT staff with skills in Kubernetes, Terraform, and cloud infrastructure management, roughly half or more of the required skill set?
@@ -53,7 +56,7 @@ Will your jurisdiction obtain external assistance from a contractor, vendor, or 
 
 Where does your NBS 6 currently run?
 
-- **Already on AWS or Azure** → Go to [Step 5](#step-5-case-volume).
+- **Already on AWS or Azure** → Staying on the same provider avoids additional procurement and approval steps. Go to [Step 5](#step-5-case-volume).
 - **On-premises** → Your migration includes a cloud migration as well as an NBS 7 deployment. Plan for additional time and resources. Go to [Step 5](#step-5-case-volume).
 
 ## Step 5: Case volume

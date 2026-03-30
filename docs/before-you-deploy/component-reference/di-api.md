@@ -4,13 +4,14 @@ layout: page
 parent: Component reference
 grand_parent: Before you deploy
 nav_order: 3
-description: Details the Data Ingestion (DI) API add-on component, which accepts ELRs, eCRs, and PHDC files without requiring third-party middleware.
+description: Details the Data Ingestion (DI) API add-on component, which provides a REST API layer for routing incoming data into NBS through middleware.
 ---
 
-## Component reference: Data Ingestion (DI) API add-on
-{: .no_toc }
+# Component reference: Data Ingestion (DI) API add-on
 
-For information on migration planning, staffing, and budget, see [Operational considerations](leadership_considerations.html).
+The DI API is a REST API layer built into NBS 7 that accepts incoming public health data and routes it into NBS. Middleware such as Rhapsody or an equivalent integration engine preprocesses and formats the data, then sends it to the DI API instead of writing directly to the NBS database. 
+
+For information on the relationship between the DI API and your existing middleware, see [Operational considerations](../../../docs/before-you-deploy/operational_considerations.html).
 {: .note }
 
 <!--
@@ -21,14 +22,12 @@ For information on migration planning, staffing, and budget, see [Operational co
 {:toc}
 -->
 
-The DI API is a data transit layer built into NBS 7 that accepts incoming public health data and routes it into NBS without requiring third-party middleware. The DI API is added to your NBS 7 deployment when you choose to deploy the DI API add-on.
-
 ## DI API
 
-A modern data ingestion layer that accepts incoming public health data in multiple formats and routes it into NBS.
+A REST API layer that accepts incoming public health data in multiple formats and routes it into NBS.
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Accepts Electronic Case Reports (eCR), HL7 v2.x electronic lab reports (ELRs), and Public Health Document Container (PHDC) files. Validates, transforms, and routes incoming data to the appropriate NBS services. The DI API is designed to be more flexible and maintainable than legacy middleware solutions. |
-| When you need it | When your jurisdiction receives high volumes of ELRs or eCRs, or when you want to replace or evaluate alternatives to your current middleware (such as Rhapsody). Required for NBS Core + DI API and NBS Complete configurations. |
-| Dependencies | Requires NBS Core. Integrates with external data senders (laboratories, EHR systems, health information exchanges). Routes processed data into the NBS database via the Modernization API. |
+| What it does in NBS 7 | Accepts Electronic Case Reports (eCR), HL7 v2.x electronic lab reports (ELRs), and Public Health Document Container (PHDC) files through a standard API interface. Middleware preprocesses, enriches, and formats the data, then sends it to the DI API for ingestion into NBS. This supports near-real-time ingestion and gives jurisdictions an option when they do not want middleware or other third-party tools writing directly to the NBS database. |
+| When you need it | Use the DI API add-on when your jurisdiction needs an API-based ingestion path instead of direct database access. This is especially useful for jurisdictions with security constraints that prevent middleware from connecting directly to the NBS database. |
+| Dependencies | Requires middleware such as Rhapsody or an equivalent integration engine. External senders such as laboratories, EHR systems, and health information exchanges continue to send data through middleware, which then sends the processed payload to the DI API. |

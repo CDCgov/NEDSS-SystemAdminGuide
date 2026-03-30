@@ -20,6 +20,8 @@ NBS 7 is the base product. Two optional add-ons are available: Real-Time Reporti
 
 After you review the available options, use the [decision tree](2_decision_tree.html) to identify your recommended starting configuration. If your jurisdiction plans to use a vendor, see the [Vendor-managed deployment](3_vendor_managed_deployment.html) page.
 
+Before finalizing your configuration, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../../docs/before-you-deploy/compatibility.html).
+
 ---
 
 ## NBS 7
@@ -54,7 +56,6 @@ The application layer contains the NBS 7 services and legacy NBS 6 components th
 - [NBS Modernization API](../3_component_reference/1_nbs_core_components.html#nbs-modernization-api)
 - [NBS Web UI](../3_component_reference/1_nbs_core_components.html#nbs-web-ui)
 - [NBS Gateway](../3_component_reference/1_nbs_core_components.html#nbs-gateway)
-- [Page Builder](../3_component_reference/1_nbs_core_components.html#page-builder)
 - [Elasticsearch](../3_component_reference/1_nbs_core_components.html#elasticsearch)
 - [Nifi](../3_component_reference/1_nbs_core_components.html#nifi)
 - [Keycloak](../3_component_reference/1_nbs_core_components.html#keycloak)
@@ -70,7 +71,7 @@ The application layer contains the NBS 7 services and legacy NBS 6 components th
 
 ## Add-on: Real-Time Reporting (RTR)
 
-RTR is an optional add-on that replaces the legacy MasterETL batch process with an event-driven reporting pipeline. We recommend running RTR alongside MasterETL during transition, with the goal of eventually replacing it.
+RTR is an optional add-on that replaces the legacy MasterETL batch process with an event-driven reporting pipeline. We recommend that you run RTR alongside MasterETL during transition, with the goal of eventually replacing it.
 
 **With RTR, data is available within 5 minutes to 1 hour instead of 24 hours.**
 

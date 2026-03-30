@@ -9,12 +9,13 @@ nav_enabled: true
 ---
 
 # Component reference: Real-Time Reporting (RTR) add-on
-{: .no_toc }
 
-For information on migration planning, staffing, and budget, see [Operational considerations](leadership_considerations.html).
+RTR is an optional add-on that provides an event-driven reporting pipeline for near-real-time reporting. RTR replaces the legacy MasterETL batch process. During validation, both might run briefly in parallel to confirm that RTR output is accurate. Once validation is complete, retire MasterETL.
+
+The following components are added to your NBS 7 deployment when you choose to deploy the RTR add-on.
+
+For information on benefits and impact on operating costs,  see [Operational considerations](../../before-you-deploy/operational_considerations.html).
 {: .note }
-
-RTR works alongside the legacy MasterETL batch process during transition, with the goal of eventually replacing it. The following components are added to your NBS 7 deployment when you choose to deploy the RTR add-on.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -29,18 +30,19 @@ An open-source Change Data Capture (CDC) platform.
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Monitors the NBS database for changes in real time and streams those changes to Kafka as they occur. Debezium is the entry point for the RTR pipeline. Without it, downstream RTR components have no data to process. |
-| When you need it | When your jurisdiction chooses NBS Core + RTR or NBS Complete. |
 | Dependencies | Requires the NBS database (NBS\_ODSE) as its source. Streams data to the Kafka cluster. |
 
 ## Kafka and Kafka Connect
 
 Apache Kafka is an open source event-streaming platform. Kafka Connect is the framework that moves data between Kafka and other systems.
 
+If your jurisdiction chooses to use RTR but continue with batch reporting, Kafka is not required for that reporting path. Only near-real-time RTR reporting requires Kafka and Kafka Connect.
+{: .note }
+
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Acts as the message bus for the RTR pipeline. Kafka receives change events from Debezium and delivers them to the RTR domain services. Kafka Connect writes the processed output to RDB\_Modern staging tables for post-processing and reporting. |
-| When you need it | When your jurisdiction chooses NBS Core + RTR or NBS Complete. |
-| Dependencies | Receives events from Debezium. Delivers messages to RTR domain services. Kafka Connect writes processed data to RDB\_Modern. Requires sufficient cluster resources — Kafka is one of the more operationally demanding components in the RTR stack. |
+| Dependencies | Receives events from Debezium. Delivers messages to RTR domain services. Kafka Connect writes processed data to RDB\_Modern. Requires sufficient cluster resources; Kafka is one of the more operationally demanding components in the RTR stack. |
 
 ## RTR domain services
 
@@ -49,7 +51,6 @@ A unified Spring Boot service that transforms streaming data from Kafka into rep
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Consumes Kafka messages for each entity type (investigations, patients, organizations, observations, and LDF data), runs stored procedures to retrieve and format the data, and produces processed records for downstream storage in RDB\_Modern. A post-processing service then populates analytical datamarts and fact tables from the staging data. |
-| When you need it | When your jurisdiction chooses NBS Core + RTR or NBS Complete. |
 | Dependencies | Requires Kafka (message source) and NBS\_ODSE (operational data store). Populates RDB\_Modern staging tables, which are then consumed by the post-processing service. |
 
 > The five entity-specific RTR services (investigation-service, person-service, observation-service, organization-service, ldfdata-service) are being consolidated into a single `reporting-pipeline-service` as of early 2026. Check with your CDC NBS point of contact for the current deployment state.

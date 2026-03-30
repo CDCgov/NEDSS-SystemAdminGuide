@@ -26,22 +26,22 @@ For deployment configuration details including configuration parameters, Helm ch
 
 The following table shows which components are included in NBS 7 and its available add-ons.
 
+NBS 7 core components are required for all deployments. RTR and DI API are optional add-ons. Components for the add-ons are only required if your jurisdiction chooses to include them.
+
 | Component | NBS 7 | + RTR add-on | + DI API add-on |
 |:---|:---:|:---:|:---:|
 | [Legacy NBS 6](../../docs/before-you-deploy/component-reference/nbs-core-components.html#legacy-nbs-6) | ✓ | ✓ | ✓ |
 | [NBS Modernization API](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nbs-modernization-api) | ✓ | ✓ | ✓ |
 | [NBS Web UI](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nbs-web-ui) | ✓ | ✓ | ✓ |
 | [NBS Gateway](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nbs-gateway) | ✓ | ✓ | ✓ |
-| [Page Builder](../../docs/before-you-deploy/component-reference/nbs-core-components.html#page-builder) | ✓ | ✓ | ✓ |
 | [Elasticsearch](../../docs/before-you-deploy/component-reference/nbs-core-components.html#elasticsearch) | ✓ | ✓ | ✓ |
 | [Nifi](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nifi) | ✓ | ✓ | ✓ |
 | [Keycloak](../../docs/before-you-deploy/component-reference/nbs-core-components.html#keycloak) | ✓ | ✓ | ✓ |
 | [Database (NBS\_ODSE, NBS\_SRTE)](../../docs/before-you-deploy/component-reference/nbs-core-components.html#database-nbs_odse-nbs_srte) | ✓ | ✓ | ✓ |
 | [Infrastructure and networking layer](../../docs/before-you-deploy/component-reference/nbs-core-components.html#infrastructure-and-networking-layer-components) | ✓ | ✓ | ✓ |
 | [Debezium](../../docs/before-you-deploy/component-reference/rtr.html#debezium) | | ✓ | |
-| [Kafka and Kafka Connect](../../docs/before-you-deploy/component-reference/rtr.html#kafka-and-kafka-connect) | | ✓ | |
+| [Kafka and Kafka Connect](../../docs/before-you-deploy/component-reference/rtr.html#kafka-and-kafka-connect) | | ✓* | |
 | [RTR domain services](../../docs/before-you-deploy/component-reference/rtr.html#rtr-domain-services) | | ✓ | |
 | [DI API](../../docs/before-you-deploy/component-reference/di-api.html#di-api) | | | ✓ |
 
-> NBS 7 core components are required for all deployments. RTR and DI API are optional add-ons. Components for the add-ons are only required if your jurisdiction chooses to include them.
-{: .note }
+*Kafka and Kafka Connect are only required for near-real-time RTR reporting. Jurisdictions that deploy RTR but continue with batch reporting might not need Kafka.

@@ -5,6 +5,9 @@ parent: Deploy cloud infrastructure
 nav_order: 1
 has_children: true
 description: Provision the AWS cloud environment and deploy base infrastructure using Terraform before installing Kubernetes services.
+redirect_from:
+  - /docs/3_base_application/0_base_application.html
+  - /docs/3_base_application/0_base_application/
 ---
 
 # Deploy on AWS

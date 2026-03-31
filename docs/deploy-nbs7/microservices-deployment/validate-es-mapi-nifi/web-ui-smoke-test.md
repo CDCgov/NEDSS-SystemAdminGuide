@@ -2,7 +2,7 @@
 title: Web UI Smoke Test (Scripted)
 layout: page
 parent: Validate ES, Mapi and Nifi
-grand_parent: Microservices Deployment
+grand_parent: Deploy NBS 7 microservices
 nav_order: 3
 nav_enabled: true
 redirect_from:

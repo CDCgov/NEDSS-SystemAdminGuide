@@ -4,9 +4,6 @@ layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 8
 has_children: true
-redirect_from:
-  - /docs/6_microservices_deployment/8_nnd.html
-  - /docs/6_microservices_deployment/8_nnd/
 ---
 
 # NND Service (Data Sync)

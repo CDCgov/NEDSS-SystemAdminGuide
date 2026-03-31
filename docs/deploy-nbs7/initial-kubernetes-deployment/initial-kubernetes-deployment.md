@@ -12,6 +12,8 @@ redirect_from:
   - /docs/4_initial_kubernetes_deployment/1_creating_kubernetes_secrets/
   - /docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment.html
   - /docs/4_initial_kubernetes_deployment/2_nginx_ingress_deployment/
+  - /docs/4_initial_kubernetes_deployment/3_cert_manager_cluster_issuer.html
+  - /docs/4_initial_kubernetes_deployment/3_cert_manager_cluster_issuer/
   - /docs/4_initial_kubernetes_deployment/4_linkerd_and_autoscaler.html
   - /docs/4_initial_kubernetes_deployment/4_linkerd_and_autoscaler/
 ---

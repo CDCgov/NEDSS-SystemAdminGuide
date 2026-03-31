@@ -297,7 +297,7 @@ After changing `redirect_from` or `_config.yml`:
 |------|-------|
 | `terraform-plan-output.png` | `screenshot1.png` |
 | `keycloak-realm-settings.png` | `Keycloak_Settings.PNG` |
-| `kubernetes-pod-status-healthy.png` | `image.png` |
+| `kubernetes-pod-status-healthy.png` | `k8spodstatushealthy.png` |
 
 **Storage:** Place images in an `images/` subfolder within the relevant `docs/` section. For example, images for Keycloak docs go in `docs/5_keycloak/images/`.
 

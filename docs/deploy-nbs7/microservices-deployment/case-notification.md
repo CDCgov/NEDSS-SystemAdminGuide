@@ -8,6 +8,7 @@ nav_enabled: true
 redirect_from:
   - /docs/6_microservices_deployment/9_case_notification.html
   - /docs/6_microservices_deployment/9_case_notification/
+  - /docs/6_microservices_deployment/9b_keycloak_configuration.html
 ---
 
 # Deploy case notifications

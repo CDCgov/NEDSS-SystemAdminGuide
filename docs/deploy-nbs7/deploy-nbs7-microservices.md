@@ -24,6 +24,7 @@ Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Dep
 - `elasticsearch-efs`
 - `modernization-api`
 - `nifi-efs`
+- Validate ES, Mapi and Nifi
 - `nbs-gateway`
 - `dataingestion-service`
 - `data-processing`

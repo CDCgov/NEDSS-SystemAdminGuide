@@ -2,7 +2,7 @@
 title: Manual Validation
 layout: page
 parent: Validate ES, Mapi and Nifi
-grand_parent: Microservices Deployment
+grand_parent: Deploy NBS 7 microservices
 nav_order: 1
 nav_enabled: true
 redirect_from:

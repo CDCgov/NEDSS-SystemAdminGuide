@@ -4,7 +4,6 @@ layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 6
 has_children: true
-nav_enabled: true
 redirect_from:
   - /docs/6_microservices_deployment/6_data_ingestion.html
   - /docs/6_microservices_deployment/6_data_ingestion/
@@ -12,26 +11,26 @@ redirect_from:
   - /docs/3_base_application/data-ingestion/
 ---
 
+# Deploy the Data Ingestion service for NBS 7
+
+This page walks through deploying the Data Ingestion service, including database setup and Helm chart installation.
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
-## Data Ingestion Installation
-
-This guide sets out the detailed steps to installing NBS 7 Data Ingestion, end to end.
-
-### SQL Server - Databases
+## Before you begin
 
 The DataIngestion service utilizes three databases: NBS_Msgoute, NBS_ODSE and NBS_DataIngest.
 NBS_DataIngest is a new database essential for ingesting, validating Electronic Lab Reports (ELR), converting them into XML payloads, and integrating these XMLs into the NBS_MSGOUT database. It must be created before deploying the app on the EKS cluster.
 
-### Manual Sql script for DI
+### Create the NBS_DataIngest database
 
-Data Ingest DB creation and user permission in the following should be executed prior to the deployment of the data ingestion
+Run the following SQL scripts before deploying the Data Ingestion service.
 
-1. create-nbs-dataingest-db.sql
+1. Create the database:
 
    ```sql
    IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'NBS_DataIngest')
@@ -43,7 +42,7 @@ Data Ingest DB creation and user permission in the following should be executed 
    GO
    ```
 
-2. Run the following script to create required permissions for nbs_ods user to NBS_DataIngest database:
+1. Grant permissions for the `nbs_ods` user:
 
    ```sql
    USE [NBS_DataIngest]
@@ -60,46 +59,46 @@ Data Ingest DB creation and user permission in the following should be executed 
    GO
    ```
 
-### DI Liquibase
+### Liquibase
 
-- Data Ingestion comes with a built-in Liquibase that automatically handles any DB changes upon deployment.
+- Data Ingestion includes a built-in Liquibase integration that automatically applies database schema changes on deployment.
   - DB changes detail can be reviewed here:
     - **DI Liquibase:** [NEDSS-DataIngestion/data-ingestion-service/src/main/resources/db at main · CDCgov/NEDSS-DataIngestion](https://github.com/CDCgov/NEDSS-DataIngestion/tree/main/data-ingestion-service/src/main/resources/db)
-- Please refer to Deploy Data Ingestion via Helm chart for how to deploy DI.
+- See [Deploy Data Ingestion using Helm](#deploy-data-ingestion-using-helm) for deployment steps.
 
 ### Liquibase DB change verification
 
 - To verify whether the database changes were applied, first ensure the DI container is stable and running; since the container manages Liquibase, it won't start if Liquibase fails.
 - If there is failure by Liquibase, the DI pod will be unstable, and specific error can be found within the container log.
 
-### Deploy Data Ingestion via Helm chart
+## Deploy Data Ingestion using Helm
 
-1. Use the values file supplied as part of `nbs-helm-vX.Y.Z.zip` file. Values for **ECR repository**, **ECR image tag**, **db server endpoints**, **MSK(Kafka) bootstrap server**, and **ingress host** should be provided in the `values.yaml` file.
+1. Use the `values.yaml` file supplied in the `nbs-helm-vX.Y.Z.zip` release package. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, **MSK (Kafka) bootstrap server**, and **ingress host** values.
    1. Navigate to the [NEDSS-Helm/releases](https://github.com/CDCgov/NEDSS-Helm/releases) page.
    1. Scroll down to the Assets listed for the latest or previous releases.
    1. Download the zip file for the release.
    1. Find the `values.yaml` file under `charts\dataingestion-service`.
 
-2. Confirm that the following DNS entries were created and pointed to the network load balancer in front of your Kubernetes cluster (make sure this is the **ACTIVE NLB** provisioned via `nginx-ingress` in the base install steps). This should be done in your authoritative DNS service (e.g., Route 53).
-   Please replace EXAMPLE_DOMAIN with the appropriate domain name in the `values.yaml` file. Refer [Table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster).
-   DataIngestion service Application – e.g., data.site_name.example_domain.com
-3. Update the image repository and tag with the following:
+1. Confirm that DNS entries for the following host were created and point to the network load balancer in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned by `nginx-ingress` in the base install steps). Make this change in your authoritative DNS service (for example, Route 53).
+   Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [ingress controller domain table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster) for reference.
+   DataIngestion service application: `data.site_name.example_domain.com`
+1. Set the image repository and tag:
 
     ```yaml
     image:
       repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-ingestion-service"
       pullPolicy: IfNotPresent
-      tag: <release-version-tag> e.g v1.0.1
+      tag: <release-version-tag> # for example, v1.0.1
     ```
 
-4. To enable RTR ingress, make sure reporting service is true. Update it to false if RTR services are not used.
+1. To enable RTR ingress, set `reportingService.enabled` to `"true"`. Set it to `"false"` if RTR services are not used:
 
     ```yaml
     reportingService:
       enabled: "true"
     ```
 
-5. Update the values file with the jdbc connection values in the following format. The database 'NBS_DataIngest' is a newly created database that is being used by the data ingestion service application. The databases 'NBS_MSGOUTE' and 'NBS_ODSE' are existing databases used for NBS batch processing. The dbserver value is just a database server endpoint. Please don't include the port number.
+1. Set the JDBC connection values. `NBS_DataIngest` is the newly created database for the Data Ingestion service. `NBS_MSGOUTE` and `NBS_ODSE` are existing NBS databases. The `dbserver` value is the database server endpoint only; do not include the port number.
    ![data-ingestion-dbendpoint](images/data-ingestion-dbendpoint.png)
 
    ```yaml
@@ -109,7 +108,7 @@ Data Ingest DB creation and user permission in the following should be executed 
       password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    ```
 
-6. Use either one of the two Kafka broker endpoints ( Private endpoints - Plaintext) in the helm values file.
+1. Set the Kafka broker endpoint. Use either of the two private (plaintext) endpoints:
    ![data-ingestion-kafka-endpoint](images/data-ingestion-kafka-endpoint.png)
 
    ```yaml
@@ -117,20 +116,20 @@ Data Ingest DB creation and user permission in the following should be executed 
       cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
    ```
 
-7. Update the values.yaml to populate efsFileSystemId which is the EFS file system id from the AWS console. See image below.
+1. Set `efsFileSystemId` to the EFS file system ID from the AWS console:
    ![data-ingestion-efs](images/data-ingestion-efs.png)
 
    ```yaml
    efsFileSystemId: "EXAMPLE_EFS_ID"
    ```
 
-8. Keycloak Auth URI. Provide keycloak auth uri in the values.yaml file as shown below. In the default configuration this value should not need to change unless the name or namespace of the keycloak pod is modified.
+1. Set the Keycloak auth URI. In the default configuration this value should not need to change unless the name or namespace of the Keycloak pod is modified:
 
    ```yaml
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
    ```
 
-9. SFTP Server for the manual file drop-off. It's an OPTIONAL service. DI can poll ELRs from an external sFTP server. To configure this option, change sftp: enabled to "enabled" and put the appropriate host/username/password. If the SFTP server is unavailable or the manual drop-off option is not needed, the 'sftp: enabled' value should be 'disabled' or empty.
+1. **Optional:** Configure SFTP for manual ELR file drop-off. Data Ingestion can poll ELRs from an external SFTP server. To enable this, set `sftp.enabled` to `"enabled"` and provide the appropriate host, username, and password. If the SFTP server is unavailable or not needed, set `sftp.enabled` to `"disabled"` or leave it empty:
 
    ```yaml
    sftp:
@@ -144,23 +143,26 @@ Data Ingest DB creation and user permission in the following should be executed 
 
 For more information about SFTP support, please see: [data-ingestion-sftp-support](images/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)
 
-10. Deploy DataIngestion helm chart:
-After updating the values file, Run the following command to install dataingestion-service.
+1. Install the Data Ingestion service:
 
    ```bash
    helm install dataingestion-service -f ./dataingestion-service/values.yaml dataingestion-service
    ```
 
-- Note: Check to see if the pod for dataingestion-service is running using kubectl get pods
+   Confirm the pod is running before continuing:
 
-11. Validate the service
+   ```bash
+   kubectl get pods
+   ```
+
+1. Validate the service:
 
    ```text
    https://<data.EXAMPLE_DOMAIN>/ingestion/actuator/info
    https://<data.EXAMPLE_DOMAIN>/ingestion/actuator/health
    ```
 
-12. Swagger is disabled by default (usually in PROD). To enable swagger for testing, specify or overwrite springBootProfile with 'dev' under charts/dataingestion-service/values.yaml
+1. To enable Swagger for testing (disabled by default in production), set `springBootProfile` to `dev` under `charts/dataingestion-service/values.yaml`:
 
     ```text
     https://<data.EXAMPLE_DOMAIN>/ingestion/swagger-ui/index.html#/

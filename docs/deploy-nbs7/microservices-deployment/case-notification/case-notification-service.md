@@ -3,32 +3,26 @@ title: Notification service
 layout: page
 parent: Case notifications
 nav_order: 5
-nav_enabled: true
 redirect_from:
   - /docs/6_microservices_deployment/9e_case_notification.html
   - /docs/6_microservices_deployment/9e_case_notification/
 ---
 
-# Case Notification Service
-{: .no_toc }
+# Deploy Case Notification Service for NBS 7 case notifications
 
-## On this page
-{: .no_toc .text-delta }
+This page walks through deploying the Case Notification Service for case notification processing.
 
-1. TOC
-{:toc}
-
-1. Helm chart can be found under chart/case-notification-service
-2. Validate the image tag
+1. Locate the Helm chart at `charts/case-notification-service`.
+1. Set the image repository and tag:
 
    ```yaml
    image:
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-case-notification-service/case-notification-service"
      pullPolicy: IfNotPresent
-     tag: <release-version-tag> e.g v1.0.1
+    tag: <release-version-tag> # for example, v1.0.1
    ```
 
-3. Update the jdbc configurations
+1. Update JDBC and service configuration values:
 
    ```yaml
    ingressHost: "data.EXAMPLE_DOMAIN"
@@ -52,19 +46,19 @@ redirect_from:
    > The `api.clientId` and `api.secret` fields must match the Keycloak client credentials for the XML HL7 Parser service, not this service. Retrieve them from the `xml-hl7-parser-keycloak-client` credentials in the NBS realm.
    {: .note }
 
-4. Install Pod
+1. Install the service:
 
    ```bash
    helm install case-notification-service -f ./case-notification-service/values.yaml case-notification-service
    ```
 
-5. Verify Pod
+1. Verify the pod is running:
 
    ```bash
    kubectl get pods
    ```
 
-6. Validate the service
+1. Validate the service:
 
    ```text
    https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/info

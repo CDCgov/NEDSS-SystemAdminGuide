@@ -3,11 +3,14 @@ title: API testing and integration
 layout: page
 parent: Data processing
 nav_order: 1
-nav_enabled: true
 redirect_from:
   - /docs/6_microservices_deployment/7a_data_processing_api_testing.html
   - /docs/6_microservices_deployment/7a_data_processing_api_testing/
 ---
+
+# Test RTI API integration for Data Processing
+
+Use this page to validate Real Time Ingestion (RTI) by sending ELR data through the Data Ingestion endpoint and verifying RTI processing outcomes.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -15,31 +18,30 @@ redirect_from:
 1. TOC
 {:toc}
 
-## Data Processing API Testing and Integration
+## Run the integration test
 
-Test will be exactly similar to Data Ingestion ELR ingestion endpoint test, user will have to utilize DI ELR Ingestion to trigger RTI service. Please follow the DI ingestion API testing guide
+1. Follow the [Data Ingestion API testing guide](../../../docs/deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html) to submit ELR payloads.
+1. Add the `version` request header in the ELR ingestion API call:
+   - `version: 1` uses the legacy batch importer flow.
+   - `version: 2` bypasses the legacy batch importer and triggers RTI.
 
-- The only change a user will have to specify on ELR Ingestion API is the on specific header
-- Request Header (Additional)
-  - version: value is either 1 or 2, 1 is default
-  - If value is set to 1 the DI process will use the legacy batch importer process
-  - If value is set to 2, then DI will ignore legacy process and trigger the RTI
-    - For RTI testing, this is the only change required on the Data Ingestion ELR endpoint
+   For RTI testing, this header is the only required API change.
 
-  ![data-processing-api-testing-1](../images/data-processing-api-testing-1.jpg)
+   ![data-processing-api-testing-1](../images/data-processing-api-testing-1.jpg)
 
-To validate whether the data ingestion is successful, the user can also use DI status endpoint to verify the status.
+## Validate ingestion and RTI processing status
 
-- With the legacy flow, data status in NBS_Interface can be one of these three statuses: QUEUED, FAILED, and SUCESS
-- Similarly with RTI, data status in NBS_Interface can be one of these three statuses: RTI_QUEUED, RTI_FAILURE, and RTI_SUCESS_STEP_N
-  - There are 3 steps in RTI that can end up in the above statuses
-    - RTI_SUCESS_STEP_1
-      - Meaning data has passed through the core data process, and the specified data should be available in ODSE database
-    - RTI_SUCESS_STEP_2
-      - This will happen when WDS algorithm is specified, data will be running the algorithm and service will perform WDS comparison
-    - RTI_SUCESS_STEP_3
-      - Triggered once WDS is complete, the service will use the WDS result and assign the appropriate action for the ingested payload
+Use the DI status endpoint to verify processing status after submission.
 
-    ![data-processing-flow-diagram](../images/data-processing-api-testing-2.jpg)
+- Legacy flow status values in `NBS_Interface`: `QUEUED`, `FAILED`, `SUCESS`.
+- RTI flow status values in `NBS_Interface`: `RTI_QUEUED`, `RTI_FAILURE`, `RTI_SUCESS_STEP_N`.
 
-    ![data-processing-flow-diagram](../images/data-processing-api-testing-3.jpg)
+RTI processing can complete in three status steps:
+
+- `RTI_SUCESS_STEP_1`: Data passed through core processing and should be available in the ODSE database.
+- `RTI_SUCESS_STEP_2`: Applies when a WDS algorithm is configured; the service runs WDS comparison.
+- `RTI_SUCESS_STEP_3`: Triggered after WDS completes; the service assigns the appropriate action for the ingested payload.
+
+![data-processing-flow-diagram](../images/data-processing-api-testing-2.jpg)
+
+![data-processing-flow-diagram](../images/data-processing-api-testing-3.jpg)

@@ -10,7 +10,7 @@ This guide documents conventions that are actually in use in the repo. It does n
 
 | Level | Tag | When to use |
 |-------|-----|-------------|
-| H1 | `# Heading` | **Write this as the first line of body content, matching the front matter `title:`.** JTD does not inject the title automatically — omitting it leaves the page with no H1. Never write more than one H1. |
+| H1 | `# Heading` | **Write this as the first line of body content.** JTD does not inject the title automatically, so omitting it leaves the page with no visible page heading. Keep one H1 per page. The H1 can be longer and more descriptive than the front matter `title:` used in navigation. |
 | H2 | `## Heading` | Major sections. These appear in the in-page table of contents. |
 | H3 | `### Heading` | Subsections within an H2. These do **not** appear in the TOC (configured in `_config.yml` — `toc.max_level: 2`). |
 | H4+ | `#### Heading` | Use sparingly. If you need H4, the section is probably too deep — consider restructuring. |
@@ -19,13 +19,13 @@ This guide documents conventions that are actually in use in the repo. It does n
 
 ```markdown
 ---
-title: Kubernetes Bootstrapping
+title: Kubernetes setup
 layout: page
 nav_order: 2
 parent: Initial Kubernetes Deployment
 ---
 
-# Kubernetes Bootstrapping
+# Kubernetes setup for NBS 7
 
 This is an overview paragraph.
 
@@ -38,13 +38,31 @@ This is an overview paragraph.
 ## Before you begin
 ```
 
-The `# Heading` matches the front matter `title:` exactly. Every page needs it — JTD shows the title in the nav and breadcrumbs, but only your H1 creates the visible page heading. The first section heading after the H1 should be `##`.
+Every page needs an H1. JTD shows `title:` in navigation and breadcrumbs, but only your H1 creates the visible page heading in content. Keep `title:` concise for navigation, and use the H1 to provide full page context. The first section heading after the H1 should be `##`.
+
+### 1.0.1 Navigation Titles (Sidebar)
+
+Use the front matter `title:` as the navigation label, and keep it short enough to scan easily in the sidebar.
+
+- Remove redundancy: if the section context already provides detail, shorten the child title.
+- Use actionable language for task pages: use a verb phrase such as "Transfer data".
+- Handle acronyms carefully: use common acronyms (for example, API) and avoid uncommon abbreviations.
+- Prioritize clarity: prefer plain language over internal shorthand.
+
+Examples:
+
+- Full page H1: Managing OAuth 2.0 credentials
+  Nav title (`title:`): OAuth credentials
+- Full page H1: Retrieving data sets using API
+  Nav title (`title:`): Data sets
+- Full page H1: Getting started with the Core SDK
+  Nav title (`title:`): Core SDK
 
 ## 1.1 Page Layout Order
 
 Use this page layout sequence for content pages:
 
-1. H1 that matches the front matter `title:` exactly
+1. H1 as the first heading in the body (descriptive page heading)
 1. Brief intro text directly under the H1 (one sentence for reference pages; one to three sentences for concept, task, and landing pages)
 1. `On this page` TOC block
 1. First H2 section immediately after the TOC block
@@ -52,7 +70,7 @@ Use this page layout sequence for content pages:
 **Required pattern:**
 
 ```markdown
-# Page title
+# Descriptive page title
 
 Brief intro text.
 

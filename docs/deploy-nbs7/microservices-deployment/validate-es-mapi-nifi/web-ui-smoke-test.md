@@ -1,10 +1,9 @@
 ---
-title: Web UI Smoke Test (Scripted)
+title: Web UI smoke test
 layout: page
-parent: Validate ES, Mapi and Nifi
+parent: Validate ES, MAPI, and NiFi
 grand_parent: Deploy NBS 7 microservices
 nav_order: 3
-nav_enabled: true
 redirect_from:
   - /docs/6_microservices_deployment/5c_web_ui_smoke_test.html
   - /docs/6_microservices_deployment/5c_web_ui_smoke_test/
@@ -12,8 +11,7 @@ redirect_from:
   - /docs/3_base_application/web-ui-smoke-test/
 ---
 
-# Web UI Smoke Test (Scripted)
-{: .no_toc }
+# Web UI smoke test for NBS interface and search
 
 ## On this page
 {: .no_toc .text-delta }
@@ -21,25 +19,29 @@ redirect_from:
 1. TOC
 {:toc}
 
-`nbs-test-webui.sh` script is included in the infrastructure zip file (`scripts/observability/nbs-test-webui`)
+The `nbs-test-webui.sh` script is included in the infrastructure zip file at `scripts/observability/nbs-test-webui`.
 
-It will:
+This script will:
 
-- login
-- save all needed tokens
-- navigate to advanced search
-- search for all female patients and check count
-- if count is 0, note error; if greater than zero, good!
+- Log in
+- Save required tokens
+- Navigate to Advanced Search
+- Search for all female patients and check the count
+- Report an error if the count is 0
 
-It is a bash script that can be run via CloudShell if NBS is hosted in AWS or by any system with bash installed. **Curl** is the only other dependency.
+This Bash script can run using CloudShell if NBS is hosted in AWS, or on any system with Bash installed. `curl` is the only other dependency.
 
----
+## Usage
 
-## USAGE
+```bash
+nbs-test-webui.sh [-h] [-?] [-d] [-D] [-P] [-H BASE_HOST] [-U USER] [-c count]
+```
 
-nbs-test-webui.sh [-h] [-?] [-d] [-D] [-P] [-H BASE_HOST] [-U USER ] [-c count ]
+For example:
 
-e.g. ./nbs-test-webui.sh -d -H `http://app.<your-site>.<your-domain>.com`  -U exampleuser
+```bash
+./nbs-test-webui.sh -d -H http://app.<your-site>.<your-domain>.com -U exampleuser
+```
 
 | **Flag** | **Description** |
 |----------|------------------|

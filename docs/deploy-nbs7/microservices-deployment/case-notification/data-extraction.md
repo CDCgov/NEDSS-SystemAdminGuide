@@ -3,31 +3,26 @@ title: Data extraction
 layout: page
 parent: Case notifications
 nav_order: 4
-nav_enabled: true
 redirect_from:
   - /docs/6_microservices_deployment/9d_data_extraction_service.html
   - /docs/6_microservices_deployment/9d_data_extraction_service/
 ---
 
-## On this page
-{: .no_toc .text-delta }
+# Deploy Data Extraction Service for NBS 7 case notifications
 
-1. TOC
-{:toc}
+This page walks through deploying the Data Extraction Service for case notification workflows.
 
-## Data Extraction Service
-
-1. Helm chart can be found under chart/data-extraction-service
-2. Validate the image tag
+1. Locate the Helm chart at `charts/data-extraction-service`.
+1. Set the image repository and tag:
 
    ```yaml
    image:
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-case-notification-service/data-extraction-service"
      pullPolicy: IfNotPresent
-     tag: <release-version-tag> e.g v1.0.1
+     tag: <release-version-tag> # for example, v1.0.1
    ```
 
-3. Update the jdbc configurations
+1. Update JDBC and service configuration values:
 
    ```yaml
    ingressHost: "data.EXAMPLE_DOMAIN"
@@ -43,19 +38,19 @@ redirect_from:
      cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
    ```
 
-4. Install Pod
+1. Install the service:
 
    ```bash
    helm install data-extraction-service -f ./data-extraction-service/values.yaml data-extraction-service
    ```
 
-5. Verify Pod
+1. Verify the pod is running:
 
    ```bash
    kubectl get pods
    ```
 
-6. Validate the service
+1. Validate the service:
 
    ```text
    https://<data.EXAMPLE_DOMAIN>/data-extraction/actuator/health

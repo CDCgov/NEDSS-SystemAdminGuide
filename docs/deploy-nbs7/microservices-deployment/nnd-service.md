@@ -6,7 +6,7 @@ nav_order: 8
 has_children: true
 ---
 
-# NND Service (Data Sync)
+# Deploy NND Service (Data Sync) for NBS 7
 
 This section covers Data Sync capabilities for NND workflows, including cloud service deployment, endpoint validation, and on-premises setup patterns.
 

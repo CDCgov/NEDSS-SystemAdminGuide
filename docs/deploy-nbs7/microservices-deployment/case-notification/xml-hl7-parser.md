@@ -3,31 +3,26 @@ title: Xml Hl7 parser
 layout: page
 parent: Case notifications
 nav_order: 3
-nav_enabled: true
 redirect_from:
   - /docs/6_microservices_deployment/9c_xml_hl7_parser.html
   - /docs/6_microservices_deployment/9c_xml_hl7_parser/
 ---
 
-## On this page
-{: .no_toc .text-delta }
+# Deploy XML HL7 Parser Service for NBS 7 case notifications
 
-1. TOC
-{:toc}
+This page walks through deploying the XML HL7 Parser Service used by case notification workflows.
 
-## Xml Hl7 Parser Service
-
-1. Helm chart can be found under chart/xml-hl7-parser-service
-2. Validate the image tag
+1. Locate the Helm chart at `charts/xml-hl7-parser-service`.
+1. Set the image repository and tag:
 
    ```yaml
    image:
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-case-notification-service/xml-hl7-parser-service"
      pullPolicy: IfNotPresent
-     tag: <release-version-tag> e.g v1.0.1
+     tag: <release-version-tag> # for example, v1.0.1
    ```
 
-3. Update the jdbc configurations
+1. Update JDBC and service configuration values:
 
    ```yaml
    ingressHost: "data.EXAMPLE_DOMAIN"
@@ -40,19 +35,19 @@ redirect_from:
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
    ```
 
-4. Install Pod
+1. Install the service:
 
    ```bash
    helm install xml-hl7-parser-service -f ./xml-hl7-parser-service/values.yaml xml-hl7-parser-service
    ```
 
-5. Verify Pod
+1. Verify the pod is running:
 
    ```bash
    kubectl get pods
    ```
 
-6. Validate the service
+1. Validate the service:
 
    ```text
    https://<data.EXAMPLE_DOMAIN>/hl7-parser/actuator/info

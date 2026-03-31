@@ -8,7 +8,7 @@ description: An overview of the five phases involved in an NBS 7 deployment, fro
 
 # Deployment overview
 
-NBS 7 deployments vary significantly by jurisdiction. If you are just getting started, this page might help you understand where the  [Assess your readiness](assess-your-readiness.html) checklist fits in the overall process.
+NBS 7 deployments vary significantly by jurisdiction. If you are just getting started, this page can help you understand where the [Assess your readiness](assess-your-readiness.html) checklist fits in the overall process.
 
 <!--
 ## On this page
@@ -24,14 +24,14 @@ The phases in this table represent an example rollout scenario based on deployme
 
 | Phase | Goal | Minimum duration |
 |:---|:---|:---|
-| [Planning](#planning) | Establish your project team, [assess your readiness](assess-your-readiness.html), and create a customized migration plan | 2-3 months |
-| [Install](#install) | Provision cloud environments and deploy NBS 7 based on your [chosen configuration](choose-your-configuration.html) |  3-4 months |
-| [Test](#test) | Validate ingestion, egress, and system readiness before go-live | 3-4 months |
-| [Go-live](#go-live) | Complete cutover and launch NBS 7 in production | 1-2 months |
+| [Planning](#planning) | Establish your project team, [assess your readiness](assess-your-readiness.html), and create a customized migration plan | 2-5 months |
+| [Install](#install) | Provision cloud environments and deploy NBS 7 based on your [chosen configuration](choose-your-configuration.html) | 3-6 months |
+| [Test](#test) | Validate ingestion, egress, and system readiness before go-live | 3-6 months |
+| [Go-live](#go-live) | Complete cutover and launch NBS 7 in production | 1-4 months |
 | [Steady state](#steady-state) | Monitor live operations and maintain the system ongoing | Ongoing |
 
 {: .note }
-These are minimum estimates based on typical deployments. Actual timelines vary by jurisdiction. Security approval processes are the most common source of extended timelines in the Planning and Install phases.
+These are minimum estimates based on typical deployments. Actual timelines vary by jurisdiction. Security approval, procurement, and legal review processes are common sources of extended timelines in the Planning and Install phases.
 
 For detailed checklists and deliverables for each phase, see the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) on NBS Central.
 
@@ -78,11 +78,11 @@ The Test phase validates that your NBS 7 environment is ready for production use
 | Activity | Description | Resource |
 |:---|:---|:---|
 | Database restore process | Review and test the database restore process in the development environment | STLT database refresh procedure |
-| Ingestion and egress validation | Integrate and validate data ingestion and notification APIs to confirm pipelines | [Data ingestion API testing](../../docs/deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html) |
-| ELR ingestion testing | Test ingestion for individual ELRs and at scale | [Data ingestion smoke test](../../docs/deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html) |
-| Notifications testing | Coordinate with the MVPs team to validate notifications readiness | TBD |
+| Ingestion and egress validation | Integrate and validate data ingestion and notification pathways to confirm pipelines | [Data ingestion API testing](../../docs/deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html) if you are using the DI API |
+| ELR and or eCR ingestion testing | Test ingestion for individual ELRs and eCRs and at scale | [Data ingestion smoke test](../../docs/deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html) |
+| Notifications testing | Coordinate with the MVPs team to validate notifications readiness | Conditions received successfully |
 | Regression testing | Run test scripts across environments to validate readiness for UAT | [Validate the deployment](../../docs/deploy-nbs7/validate-the-deployment.html) |
-| Cutover and rollback review | Review and approve cutover and rollback plans | [Go-live](../../docs/deploy-nbs7/go-live.html) |
+| Cutover and rollback review | Review and approve cutover and rollback plans | Cutover and Rollback Plan |
 | UAT | Complete the agreed UAT plan across dev, test, and production environments | UAT test plan |
 
 ---
@@ -93,10 +93,10 @@ The Go-live phase covers final preparation, cutover, and launch. This phase is s
 
 | Activity | Description | Resource |
 |:---|:---|:---|
-| NBS 7 training | Perform scheduled training sessions and share materials with end users | NBS 7 training presentations |
-| Go/no-go decision | Make the final go-live decision and schedule the cutover date | [Go-live](../../docs/deploy-nbs7/go-live.html) |
+| NBS 7 training | Perform scheduled training sessions and share materials with end users | [NBS Visual Reference Guide](https://nbscentral.cdc.gov/documents/863) - NBS Central login required |
+| Go/no-go decision | Make the final go-live decision and schedule the cutover date | - |
 | Lock database and refresh | Freeze the database backup and finalize the cutover checklist | STLT production cut-over checklist |
-| Go-live day | Complete the cutover checklist and launch NBS 7 | [Go-live](../../docs/deploy-nbs7/go-live.html) |
+| Go-live day | Complete the cutover checklist and launch NBS 7 | - |
 
 ---
 
@@ -106,6 +106,6 @@ After go-live, your jurisdiction enters steady state operations. This phase is o
 
 | Activity | Description | Resource |
 |:---|:---|:---|
-| Monitor live operations | Implement the NBS 7 support process and track system performance | [Support](../../docs/deploy-nbs7/support.html) |
-| Complete retrospective | Conduct a go-live retrospective to capture lessons learned | Retro Mural |
+| Monitor live operations | Stand up long-term NBS 7 service desk support, review the NBS Administrator Guide for NBS support SOP, and track system performance | [Support](../../docs/deploy-nbs7/support.html) |
+| Complete retrospective | Conduct a go-live retrospective to capture lessons learned | - |
 | Upgrade to new releases | Test and upgrade to new NBS 7 releases periodically | [Maintain NBS 7](../../docs/maintain-nbs7.html) |

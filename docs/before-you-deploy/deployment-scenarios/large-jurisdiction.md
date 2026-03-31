@@ -3,6 +3,7 @@ title: Large jurisdiction, high volume, vendor-managed
 layout: page
 parent: Deployment scenarios
 grand_parent: Before you deploy
+published: false
 nav_order: 3
 description: Case study for a large, vendor-managed NBS Complete deployment at enterprise scale, covering high-availability and advanced configuration decisions.
 ---

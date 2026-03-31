@@ -3,6 +3,7 @@ title: Small jurisdiction, self-managed, AWS
 layout: page
 parent: Deployment scenarios
 grand_parent: Before you deploy
+published: false
 nav_order: 1
 description: Case study for a small, self-managed AWS deployment based on Montana's experience, covering configuration choices and lessons learned.
 ---

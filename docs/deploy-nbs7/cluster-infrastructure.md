@@ -2,7 +2,7 @@
 title: Deploy cluster infrastructure
 layout: page
 parent: Deploy NBS 7
-nav_order: 4
+nav_order: 5
 has_children: true
 description: Install and configure core Kubernetes infrastructure services, including NGINX Ingress, Cert Manager, Linkerd, and Keycloak, before deploying NBS 7 application services.
 ---

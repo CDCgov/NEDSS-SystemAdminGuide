@@ -3,9 +3,6 @@ title: Prerequisites for AWS
 layout: page
 parent: Deploy on AWS
 nav_order: 1
-toc_levels: 1..2
-nav_enabled: true
-has_children: true
 redirect_from:
   - /docs/2_prerequisites/prereq.html
   - /docs/2_prerequisites/prereq/
@@ -16,6 +13,9 @@ description: Prepare your AWS cloud environment before you provision AWS for NBS
 {: .no_toc }
 
 Before you deploy NBS 7, make sure your environment meets the requirements in each of the following areas.
+
+> Start with the cloud-agnostic [Prerequisites for NBS 7 deployment](../prerequisites.html), then complete the AWS-specific requirements on this page.
+{: .important }
 
 ## On this page
 {: .no_toc .text-delta }
@@ -84,7 +84,7 @@ You will need a local or cloud hosted workstation (e.g. CloudShell) with the set
 
 ## Network and database access requirements
 
-Installation of the NBS 7 infrastructure and microservices uses a new VPC, which is provisioned using the Terraform scripts included in [the provisioning steps](../../../docs/deploy-nbs7/aws-infrastructure/provision-aws.html).
+Installation of the NBS 7 infrastructure and microservices uses a new VPC, which is provisioned using the Terraform scripts included in [the provisioning steps](provision-aws.html).
 
 You must ensure that there is network access available from the location of modern NBS 7 components to the classic NBS 6 components, including the database server. The database server or RDS should allow access to the NBS 7 VPC address space. As a best practice, use a private route for this network access, rather than making it publicly accessible.
 

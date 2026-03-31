@@ -35,5 +35,5 @@ The NBS 6 SQL Server database (RDS or EC2) is not provisioned here — it is reu
 
 ## In this section
 
-- [Prerequisites for AWS](aws-infrastructure/prerequisites.html) — Verifies your AWS account, hardware, software, network, and security requirements before provisioning begins.
-- [Provision the AWS environment](aws-infrastructure/provision-aws.html) — Runs Terraform to create the VPC, EKS cluster, EFS, and supporting AWS services.
+- [Prerequisites for AWS](deploy-on-aws/prerequisites.html) — Verifies your AWS account, hardware, software, network, and security requirements before provisioning begins.
+- [Provision the AWS environment](deploy-on-aws/provision-aws.html) — Runs Terraform to create the VPC, EKS cluster, EFS, and supporting AWS services.

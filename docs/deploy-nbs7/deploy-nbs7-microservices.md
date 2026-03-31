@@ -2,7 +2,7 @@
 title: Deploy NBS 7 microservices
 layout: page
 parent: Deploy NBS 7
-nav_order: 5
+nav_order: 6
 has_children: true
 redirect_from:
   - /docs/6_microservices_deployment/0_microservices_deployment.html

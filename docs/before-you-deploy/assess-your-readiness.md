@@ -92,7 +92,7 @@ NBS 7 uses your existing NBS 6 database and does not require a schema migration.
 
 If your current NBS 6 database is hosted on-premises and you plan to move it to the cloud as part of your migration, you will need to copy the data from your existing environment and restore it to the new environment using a standard database backup and restore process. If you are not moving your NBS 6 database, no data migration action is required.
 
-See also: [Deployment scenarios](../../docs/before-you-deploy/deployment-scenarios.html) and [Deployment phases](../../docs/before-you-deploy/deployment-phases.html).
+See also: [Prerequisites for NBS 7 deployment](../../docs/deploy-nbs7/prerequisites.html#nbs-6-readiness), [Deployment scenarios](../../docs/before-you-deploy/deployment-scenarios.html), and [Deployment phases](../../docs/before-you-deploy/deployment-phases.html).
 
 ## CDC coordination
 

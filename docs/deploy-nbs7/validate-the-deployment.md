@@ -2,7 +2,7 @@
 title: Validate deployment
 layout: page
 parent: Deploy NBS 7
-nav_order: 6
+nav_order: 7
 has_children: true
 description: Confirm that all deployed NBS 7 components are functioning correctly before go-live, including microservice health, data ingestion pipelines, and NBS UI behavior.
 ---

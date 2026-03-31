@@ -2,7 +2,7 @@
 title: Deploy cloud infrastructure
 layout: page
 parent: Deploy NBS 7
-nav_order: 3
+nav_order: 4
 has_children: true
 description: Provision cloud infrastructure for NBS 7 on AWS or Azure before installing Kubernetes services.
 ---

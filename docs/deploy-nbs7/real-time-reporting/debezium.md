@@ -3,22 +3,14 @@ title: Debezium
 layout: page
 parent: Real-time reporting (preview)
 nav_order: 2
-nav_enabled: true
 redirect_from:
   - /docs/7_feature_preview/2_debezium-rtr.html
   - /docs/7_feature_preview/2_debezium-rtr/
 ---
 
-# Debezium
-{: .no_toc }
+# Deploy Debezium for real-time reporting (RTR)
 
-## On this page
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
-## Debezium source Connector/debezium-connect
+This page covers deploying the Debezium connector that captures change data from source tables and publishes events to Kafka topics for RTR processing.
 
 1. The Helm chart for debezium-connect should be available under charts/debezium.
 2. Validate image repository and tag:

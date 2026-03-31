@@ -4,6 +4,7 @@ layout: page
 parent: Deploy NBS 7
 nav_order: 6
 has_children: true
+published: false
 description: Perform smoke tests and verify system readiness before go-live, including API validation, web UI checks, and final cutover preparation.
 ---
 

@@ -2,31 +2,39 @@
 title: Introduction
 layout: home
 nav_order: 1
-description: Introduction to the National Electronic Disease Surveillance System (NEDSS) Base System (NBS) administration and deployment guide.
+description: Overview of the NBS system administration guide, including preparation, deployment, validation, and maintenance content for NBS 7.
 ---
 
 # Introduction
 
-The National Electronic Disease Surveillance System (NEDSS) Base System (NBS) is a CDC-developed disease surveillance system that health departments use to manage reportable disease data. This guide covers deploying and administering NBS 7, the modernized version of the platform built on cloud-native infrastructure. NBS 7 retains NBS 6 feature equivalence while introducing improved interfaces and optional near real-time patient search.
+The National Electronic Disease Surveillance System (NEDSS) Base System (NBS) is a CDC-developed disease surveillance system that health departments use to manage reportable disease data. NBS 7 is the modernized version of the platform, designed for deployment and operation on cloud-based infrastructure. This documentation supports the administration lifecycle for NBS 7, including planning, deployment, validation, and maintenance.
 {: .fw-300}
 
 ---
 
-## Purpose
+## Purpose and scope
 
-This guide helps NBS system administrators plan, deploy, validate, and maintain NBS 7. It provides the information needed to prepare the required environment and complete the initial installation.
+The NBS 7 System Administration guide helps you prepare for NBS 7, deploy the platform, validate that it is working correctly, and maintain it over time. It brings together operational guidance for system administration tasks across the NBS 7 lifecycle.
 
-## Runtime Environment Support
+The content is centered on system administration. It covers readiness and planning work before deployment, phased deployment guidance for NBS 7 infrastructure and services, and maintenance topics for operating environments after go-live.
 
-NBS 7 supports AWS and Azure as runtime options. The platform uses a cloud-agnostic approach, and this guide includes deployment guidance for both supported providers. NBS 7 runs on [Kubernetes](https://kubernetes.io/) and relies on tools such as [Terraform](https://developer.hashicorp.com/terraform) and [Helm](https://helm.sh/) to provision and manage infrastructure and services.
+## In this guide
 
-## Intended Audience
+- [Before you deploy](docs/before-you-deploy.html) covers readiness checks, configuration decisions, compatibility guidance, and pre-deployment planning.
+- [Deploy NBS 7](docs/deploy-nbs7.html) covers infrastructure, microservices, optional add-ons, and deployment validation steps.
+- [Maintain NBS 7](docs/maintain-nbs7.html) covers post-deployment administration and maintenance tasks.
 
-This guide is for system administrators who install and maintain NBS 7, a complex cloud-native application. It assumes familiarity with cloud technologies and tools, including your cloud provider, [Kubernetes](https://kubernetes.io/), [Terraform](https://developer.hashicorp.com/terraform), and [Helm](https://helm.sh/). You need administrator-level access to your runtime environment and access to a local system with the required prerequisites installed.
+## Runtime environment support
+
+NBS 7 supports AWS and Azure as runtime options. The platform uses a cloud-agnostic approach, and the deployment content includes guidance for both supported providers. NBS 7 runs on [Kubernetes](https://kubernetes.io/) and relies on tools such as [Terraform](https://developer.hashicorp.com/terraform) and [Helm](https://helm.sh/) to provision and manage infrastructure and services.
+
+## Intended audience
+
+The primary audience is system administrators at state, tribal, local, and territorial health departments who install, operate, and maintain NBS 7. The content assumes familiarity with your cloud platform, Kubernetes, Terraform, Helm, and related administration tasks. You need administrator-level access to your runtime environment and a local system with required prerequisites installed.
 
 For more information on NBS, see the official CDC [National Electronic Disease Surveillance System Base System (NBS)](https://www.cdc.gov/nbs/php/index.html) website.
 
-## Revision History
+## Revision history
 
 | Date         | Description        | Author |
 |:-------------|:------------------|:-------|

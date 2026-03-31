@@ -3,27 +3,17 @@ title: Liquibase
 layout: page
 parent: Real-time reporting (preview)
 nav_order: 1
-nav_enabled: true
 redirect_from:
   - /docs/7_feature_preview/1_liquibase.html
   - /docs/7_feature_preview/1_liquibase/
 ---
 
-# Liquibase
-{: .no_toc }
+# Deploy Liquibase for real-time reporting (RTR)
 
-## On this page
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
-## Liquibase Deployment
-
-The liquibase job runs once and goes to sleep. The job will update necessary SQL Server scripts for Real-Time Reporting.
+In RTR deployments, the Liquibase job runs once and applies required SQL Server database changes for onboarding and upgrades.
 
 1. The Helm chart for Liquibase should be available under charts/liquibase.
-    2. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster).
+1. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster).
 
       ```yaml
       image:
@@ -31,7 +21,7 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
         tag: <release-version-tag> e.g v1.0.1
       ```
 
-   3. Validate image repository and tag:
+1. Validate image repository and tag:
 
       ```yaml
        jdbc:
@@ -46,21 +36,21 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
          srte_password: "EXAMPLE_SRTE_DB_USER_PASSWORD"
       ```
 
-4. Update the `values.yaml` files and run the command to run the Liquibase. Configurations for the following should be on hand to update the `values.yaml`
+1. Update the `values.yaml` files and prepare the required configuration values.
 
-5. Install pod
+1. Install the pod:
 
    ```bash
    Helm install -f ./liquibase/values.yaml liquibase ./liquibase/
    ```
 
-6. Verify if pod is running
+1. Verify the pod is running:
 
    ```bash
    kubectl get pods
    ```
 
-7. Validate liquibase update from NBS databases using the DATABASECHANGELOG table:
+1. Validate Liquibase updates from NBS databases using the `DATABASECHANGELOG` table:
 
     ```sql
     --Last script executed should be 999-<database_name>_database_object_permission_grants-001.sql.
@@ -85,7 +75,7 @@ The liquibase job runs once and goes to sleep. The job will update necessary SQL
     ORDER BY DATEEXECUTED DESC;
     ```
 
-8. Troubleshooting for Liquibase: Please note, troubleshooting for Liquibase may vary depending on the database. If the issue persist after the initial troubleshooting, please reach out to our support team.
+1. Troubleshoot Liquibase. Troubleshooting can vary by database. If issues persist after initial troubleshooting, contact support.
     - a. If NBS_SRTE or any liquibase execution fails due to user permission issue. Run this script:
 
         ```sql

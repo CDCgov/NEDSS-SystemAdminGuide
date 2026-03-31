@@ -3,14 +3,14 @@ title: Data Compare
 layout: page
 parent: Real-time reporting (preview)
 nav_order: 12
-nav_enabled: true
 redirect_from:
   - /docs/7_feature_preview/6_data_compare_tool.html
   - /docs/7_feature_preview/6_data_compare_tool/
 ---
 
-# RTR Data Compare validation tool
-{: .no_toc }
+# Deploy and use the RTR Data Compare validation tool
+
+This page covers deploying and using the Data Compare tool to validate RTR output against classic ETL results.
 
 ## On this page
 {: .no_toc .text-delta }

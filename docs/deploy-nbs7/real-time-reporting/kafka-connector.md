@@ -3,22 +3,14 @@ title: Kafka connector
 layout: page
 parent: Real-time reporting (preview)
 nav_order: 3
-nav_enabled: true
 redirect_from:
   - /docs/7_feature_preview/3_kafka_connector.html
   - /docs/7_feature_preview/3_kafka_connector/
 ---
 
-# Kafka connector
-{: .no_toc }
+# Deploy the Kafka connector for real-time reporting (RTR)
 
-<!--
-## On this page
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
--->
+This page covers deploying the Kafka sink connector that consumes RTR topics and writes transformed data into reporting tables.
 
 1. The helm chart for Kafka connector should be available under `charts/kafka-connect-sink`.
 

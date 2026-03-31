@@ -1,9 +1,9 @@
 ---
 title: Go live
 layout: page
-parent: Validate the deployment
+parent: Validate deployment
 nav_order: 1
-nav_enabled: true
+published: false
 redirect_from:
   - /docs/go_live.html
   - /docs/go_live/

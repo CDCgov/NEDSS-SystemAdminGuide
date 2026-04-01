@@ -22,8 +22,12 @@ AWS supports each Kubernetes minor version for up to 26 months after its release
 * **Cost impact:** Amazon EKS clusters on extended support versions incur additional cost when they are running on a version in extended support. For more information, see [Amazon EKS extended support for Kubernetes version pricing](https://aws.amazon.com/blogs/containers/amazon-eks-extended-support-for-kubernetes-versions-pricing) on the AWS blog and the Amazon EKS [pricing page](https://aws.amazon.com/eks/pricing/).  
 * **Forced upgrades:** When a version exits extended support, [AWS automatically upgrades the control plane to the oldest supported version](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#extended-support-faqs). Automatic upgrades do not account for workload compatibility, add-on versions, or your deployment schedule. To maintain control over your upgrade timing, complete upgrades before the extended support window closes.  
 * **One minor version at a time:** You must upgrade the control plane one minor version at a time. You cannot skip versions. If you are multiple versions behind, you will need to repeat this procedure for each version hop. For more information, see [Update existing cluster to new Kubernetes version](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html#_step_2_review_upgrade_considerations) in the AWS documentation. 
+* **EKS control plane upgrades are irreversible:** You cannot downgrade a cluster to a previous Kubernetes version. If the upgrade causes unexpected issues, your recovery options are limited to debugging the upgraded cluster or restoring from a full environment backup. Ensure you have a tested backup and a rollback plan for your workloads before you begin.
 
-To minimize risk and ensure a clean state at each version hop, this procedure uses targeted Terraform **applies**.
+> Did you know?
+>
+>To receive advance notice of upcoming version deprecations and end-of-support dates, check the **Your account health** page in the [AWS Health Dashboard](https://health.aws.amazon.com/health/home) regularly. You can also subscribe to the [EKS Kubernetes release calendar](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar) to track upcoming release and retirement dates.
+{: .note-title }
 
 ## Prerequisites
 
@@ -46,17 +50,19 @@ You must upgrade one minor version at a time. You cannot skip versions. If you a
 
 ## Steps to complete
 
+To minimize risk and ensure a clean state at each version hop, this procedure uses targeted Terraform **applies**.
+
 ### Step 1: Identify target resources in Terraform state
 
 Before you run any targeted **applies**, identify the EKS resource addresses in your Terraform state.
 
-**Bash:**
+Bash:
 
 ```bash
 terraform state list | grep -E "aws_eks_cluster|aws_eks_node_group"
 ```
 
-**PowerShell:**
+PowerShell:
 
 ```powershell
 terraform state list | Select-String "aws_eks_cluster|aws_eks_node_group"

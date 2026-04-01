@@ -6,7 +6,6 @@ nav_order: 3
 ---
 
 # Update the EKS control plane
-{: .no_toc }
 
 You can use Terraform to upgrade the Amazon Elastic Kubernetes Service (EKS) control plane and node groups for your NBS 7 deployment. Perform a control plane upgrade when AWS releases a new Kubernetes version or when your current version approaches end-of-support.
 
@@ -18,21 +17,31 @@ You can use Terraform to upgrade the Amazon Elastic Kubernetes Service (EKS) con
 
 ## Considerations
 
-AWS retires Kubernetes versions on a scheduled basis. Clusters that run end-of-support versions do not receive security patches or technical support, so plan your upgrades before your current version reaches end-of-support.
+AWS supports each Kubernetes minor version for up to 26 months after its release in EKS.  That period comprises 14 months of standard support, followed by 12 months of extended support. Plan your upgrades before your current version exits standard support. For more information, see [Understand the Kubernetes version lifecycle on EKS \- Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html). 
 
-You must perform EKS control plane upgrades **one minor version at a time**. You cannot skip minor versions. To minimize risk and ensure a clean state at each version hop, this procedure uses targeted Terraform ***applies***.
+* **Cost impact:** Amazon EKS clusters on extended support versions incur additional cost when they are running on a version in extended support. For more information, see [Amazon EKS extended support for Kubernetes version pricing](https://aws.amazon.com/blogs/containers/amazon-eks-extended-support-for-kubernetes-versions-pricing) on the AWS blog and the Amazon EKS [pricing page](https://aws.amazon.com/eks/pricing/).  
+* **Forced upgrades:** When a version exits extended support, [AWS automatically upgrades the control plane to the oldest supported version](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#extended-support-faqs). Automatic upgrades do not account for workload compatibility, add-on versions, or your deployment schedule. To maintain control over your upgrade timing, complete upgrades before the extended support window closes.  
+* **One minor version at a time:** You must upgrade the control plane one minor version at a time. You cannot skip versions. If you are multiple versions behind, you will need to repeat this procedure for each version hop. For more information, see [Update existing cluster to new Kubernetes version](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html#_step_2_review_upgrade_considerations) in the AWS documentation. 
+
+To minimize risk and ensure a clean state at each version hop, this procedure uses targeted Terraform **applies**.
 
 ## Prerequisites
 
 Before you begin, confirm the following:
 
-* You have IAM permissions to modify Amazon EKS clusters and node groups.
-* You have installed Terraform and configured it with access to your NBS 7 state backend.
-* You have backed up your Terraform state backend.
-* You have installed the AWS CLI and `kubectl` and authenticated to your cluster.
-* Your cluster is in a healthy state. All nodes are in `Ready` status and no pods are in a failed state.
+**Access and tooling**
 
-You must perform upgrades one minor version at a time. You cannot skip versions.
+* You have IAM permissions to modify EKS clusters and node groups. Required actions include `eks:UpdateClusterVersion`, `eks:UpdateNodegroupVersion`, and `eks:DescribeCluster`. For the full list, see [Amazon EKS identity-based policy examples](https://docs.aws.amazon.com/eks/latest/userguide/security_iam_id-based-policy-examples.html) in the AWS documentation.  
+* You have installed Terraform and configured it with access to your NBS 7 state backend.  
+* You have installed the AWS CLI and `kubectl` and authenticated to your cluster.
+
+**Pre-upgrade checks**
+
+* You have backed up your Terraform state backend.  
+* Your cluster is in a healthy state. All nodes are in `Ready` status and no pods are in a failed state.  
+* You have verified that your target Kubernetes version is compatible with all EKS managed add-ons currently installed on your cluster. Note that Amazon EKS automatically installs self-managed add-ons such as the Amazon VPC CNI plugin, kube-proxy, and CoreDNS. For more information, see [Amazon EKS add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) and [Update an Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/updating-an-add-on.html) in the AWS documentation.
+
+You must upgrade one minor version at a time. You cannot skip versions. If you are multiple versions behind your target, plan to run this procedure once for each version hop.
 {: .important }
 
 ## Steps to complete
@@ -43,17 +52,24 @@ Before you run any targeted **applies**, identify the EKS resource addresses in 
 
 **Bash:**
 
-   ```bash
-   terraform state list | grep -E "aws_eks_cluster|aws_eks_node_group"
-   ```
+```bash
+terraform state list | grep -E "aws_eks_cluster|aws_eks_node_group"
+```
 
 **PowerShell:**
 
-   ```text
-   terraform state list | Select-String "aws_eks_cluster|aws_eks_node_group"
-   ```
+```powershell
+terraform state list | Select-String "aws_eks_cluster|aws_eks_node_group"
+```
 
-Take note of the full resource addresses that are returned. You will use these as targets in Steps 2 and 3\.
+For a standard NBS 7 deployment, the output should include:
+
+```
+module.eks.aws_eks_cluster.this
+module.eks.aws_eks_node_group.workers
+```
+
+These are the target addresses to use in the next steps. If your deployment uses a customized module structure and returns different addresses, substitute those addresses in the `-target` flags in Steps 2 and 3.
 
 ### Step 2: Upgrade the control plane
 
@@ -61,17 +77,17 @@ Repeat the following steps for each minor version between your current version a
 
 1. In your Terraform configuration, update the `cluster_version` variable to the next minor version:
 
-   ```text
+   ```terraform
    cluster_version = "<next_version>"
    ```
 
-2. Run a targeted apply against the cluster resource:
+1. Run a targeted apply against the cluster resource:
 
    ```bash
    terraform apply -target="module.eks.aws_eks_cluster.this"
    ```
 
-3. Confirm the cluster has reached `ACTIVE` status at the new version before you continue:
+1. Confirm the cluster has reached `ACTIVE` status at the new version before you continue:
 
    ```bash
    aws eks describe-cluster --name <cluster_name> \
@@ -80,7 +96,7 @@ Repeat the following steps for each minor version between your current version a
 
    The output should show the new version and `ACTIVE` status. Do not proceed until you have confirmed both values.
 
-4. Repeat steps 1–3 for each remaining minor version until the cluster reaches the target version.
+1. Repeat steps 1–3 in this section for each remaining minor version until the cluster reaches the target version.
 
 ### Step 3: Upgrade node groups
 
@@ -100,21 +116,63 @@ After the control plane reaches the target version, upgrade your node groups.
 
 All nodes should show `Ready` in the `STATUS` column.
 
-### Step 4: Reconcile configuration
+### Step 4: Upgrade EKS managed add-ons
 
-After all targeted applies are complete, run a full **plan** and **apply** to resolve any remaining configuration drift. Targeted applies do not update all dependent resources. This step ensures your infrastructure state is fully reconciled.
+After the node groups reach `Ready` status, upgrade your EKS managed add-ons to versions that are compatible with the new Kubernetes version. If you skip this step, you risk leaving add-ons running on incompatible versions, which might cause networking or DNS failures.
+
+1. List the add-ons installed on your cluster and their current versions:
 
    ```bash
-   terraform plan
-   terraform apply
+   aws eks list-addons --cluster-name <cluster_name>
    ```
+
+1. For each add-on, check which versions are compatible with your target Kubernetes version:
+
+   ```bash
+   aws eks describe-addon-versions \
+      --addon-name <addon_name> \
+      --kubernetes-version <target_version> \
+      --query "addons[].addonVersions[].addonVersion"
+   ```
+
+1. Update each add-on to the latest compatible version:
+
+   ```bash
+   aws eks update-addon \
+      --cluster-name <cluster_name> \
+      --addon-name <addon_name> \
+      --addon-version <target_addon_version> \
+      --resolve-conflicts OVERWRITE
+   ```
+
+   The `--resolve-conflicts OVERWRITE` flag allows the update to proceed even if you’ve customized your add-on configuration from the AWS default. If your deployment includes custom add-on configurations you need to preserve, use `--resolve-conflicts PRESERVE` instead. With `PRESERVE`, the update will fail rather than overwrite local changes, and you will need to resolve conflicts manually. If you are unsure which flag to use, check with your infrastructure team.
+   {: .important }
+
+1. Repeat the previous step for each add-on in your cluster.  
+1. Confirm each add-on reaches `ACTIVE` status before you move on:
+
+   ```bash
+   aws eks describe-addon \
+      --cluster-name <cluster_name> \
+      --addon-name <addon_name> \
+      --query "addon.{Version:addonVersion,Status:status}"
+   ```
+
+### Step 5: Reconcile configuration
+
+After all targeted **applies** are complete, run a full **plan** and **apply** to resolve any remaining configuration drift. Targeted **applies** do not update all dependent resources. This step ensures your infrastructure state is fully reconciled.
+
+```bash
+terraform plan
+terraform apply
+```
 
 Review the plan output before applying. Confirm that no unexpected changes are included.
 
 If Linkerd unexpectedly stops during the upgrade, see [Known issue: Linkerd and mTLS](#known-issue-linkerd-and-mtls) for troubleshooting guidance.
 {: .note }
 
-### Step 5: Verify the upgrade
+### Step 6: Verify the upgrade
 
 After completing steps 1 - 4, confirm the upgrade was successful.
 
@@ -145,8 +203,20 @@ During node group upgrades, Linkerd might unexpectedly stop. When this occurs, m
 
 **Required action:** After the node upgrade completes, restart all NBS services to reset mTLS state and restore full connectivity.
 
-```bash
-kubectl rollout restart deployment -n <namespace>
-```
+1. Identify the namespace where NBS services are running:
 
-Confirm the correct namespace for the rollout restart command.
+   ```bash
+   kubectl get namespaces
+   ```
+
+1. Confirm the deployments in that namespace before restarting:
+
+   ```bash
+   kubectl get deployments -n <namespace>
+   ```
+
+1. Restart all deployments in the namespace:
+
+   ```bash
+   kubectl rollout restart deployment -n <namespace>
+   ```

@@ -1,6 +1,7 @@
 ---
 title: Medium jurisdiction, existing middleware, RTR
 layout: page
+parent: Deployment scenarios
 grand_parent: Before you deploy
 nav_order: 2
 description: Case study for a medium jurisdiction with existing Rhapsody middleware deploying NBS Core + RTR, based on Kentucky's experience.

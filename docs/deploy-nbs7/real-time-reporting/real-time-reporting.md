@@ -134,14 +134,14 @@ Complete these one-time onboarding steps for real-time reporting (RTR) setup.
 - b. Create RTR microservice user logins: Create dedicated user accounts for each RTR microservice. These users are referenced in Helm values for RTR services.
   - Script location: [NEDSS-DataReporting onboarding user creation scripts](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation)
 
-2. Create Kubernetes secrets: Kubernetes secrets are required for RTR services to access the database. Create secrets for each service user from step 1. (Ignore this step if secrets were already created in [create secrets in your cluster](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).)
+2. Create Kubernetes secrets: Kubernetes secrets are required for RTR services to access the database. Create secrets for each service user from step 1. (Ignore this step if secrets were already created in [create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).)
 
 - a. Create secrets for each service user, including the admin user from step 1a. Each secret should include the database username and password.
   - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
 
 3. Create required database objects: Scripts required for RTR can be executed with Liquibase or manually.
 
-- Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase](../../../docs/deploy-nbs7/real-time-reporting/liquibase.html) section to create all necessary objects before moving to step 4.
+- Option 1: If Liquibase is the preferred approach, please refer to steps in the [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) section to create all necessary objects before moving to step 4.
 - Option 2: The required database objects can also be manually created. Documentation on script execution sequence and supplemental `db_upgrade.bat` file is provided to support manual setup.
   - Script location: [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment)
   - Please specify the database and proceed:
@@ -206,7 +206,7 @@ EXEC sp_changedbowner 'sa';
 
 After onboarding, future enhancements will be delivered using these two approaches.
 
-- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase](../../../docs/deploy-nbs7/real-time-reporting/liquibase.html) section.
+- Option 1: Execute Liquibase with the provided release tag. If Liquibase is the preferred method, please refer to steps in the [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) section.
 - Option 2: Manually execute the scripts located under [manual_deployment](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment). Onboarding scripts are excluded.
 
 ---
@@ -215,10 +215,10 @@ After onboarding, future enhancements will be delivered using these two approach
 
 Next, deploy the RTR services in the following order:
 
-- [Liquibase](../../../docs/deploy-nbs7/real-time-reporting/liquibase.html)
-- [Debezium](../../../docs/deploy-nbs7/real-time-reporting/debezium.html)
-- [Kafka connector](../../../docs/deploy-nbs7/real-time-reporting/kafka-connector.html)
-- [Java services](../../../docs/deploy-nbs7/real-time-reporting/rtr-java-services.html)
+- [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html)
+- [Debezium](../../deploy-nbs7/real-time-reporting/debezium.html)
+- [Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html)
+- [Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
   - `observation-reporting-service`
   - `person-reporting-service`
   - `organization-reporting-service`
@@ -226,5 +226,5 @@ Next, deploy the RTR services in the following order:
   - `ldfdata-reporting-service`
   - `post-processing-reporting-service`
 
-RTR services use Kubernetes secrets for database credentials. See [create secrets in your cluster](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
+RTR services use Kubernetes secrets for database credentials. See [create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
 {: .note }

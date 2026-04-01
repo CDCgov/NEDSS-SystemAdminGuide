@@ -26,7 +26,7 @@ The decision tree identifies a recommended starting point, not a final answer. C
 Is your jurisdiction planning to self-host and self-maintain NBS 7, or will you use a vendor to host or maintain it?
 
 - **Self-hosted, self-maintained** → Go to [Step 2](#step-2-state-it-security-approval).
-- **Vendor-hosted or vendor-maintained** → Go to [Vendor-managed deployment](../../docs/before-you-deploy/choose-your-configuration/vendor-managed-deployment.html).
+- **Vendor-hosted or vendor-maintained** → Go to [Vendor-managed deployment](vendor-managed-deployment.html).
 
 ## Step 2: State IT security approval
 
@@ -35,7 +35,7 @@ Has your jurisdiction obtained state IT security approval for cloud hosting and 
 - **Yes, or approval is not required** → Go to [Step 3](#step-3-internal-technical-capacity).
 - **No, or unknown** → Begin the approval process now, then continue planning. Approval is required before deployment. Go to [Step 3](#step-3-internal-technical-capacity).
 
-Because NBS handles PII and PHI, state IT might still need to review and approve the deployment, even in vendor-managed models. See [State IT security approval takes time](../../docs/before-you-deploy/operational_considerations.html#state-it-security-approval-takes-time).
+Because NBS handles PII and PHI, state IT might still need to review and approve the deployment, even in vendor-managed models. See [State IT security approval takes time](../operational_considerations.html#state-it-security-approval-takes-time).
 {: .note }
 
 ## Step 3: Internal technical capacity
@@ -49,7 +49,7 @@ Does your jurisdiction have IT staff with skills in Kubernetes, Terraform, and c
 
 Will your jurisdiction obtain external assistance from a contractor, vendor, or consultant for deployment and ongoing maintenance?
 
-- **Yes** → Go to [Step 4](#step-4-current-nbs-6-hosting). Note that your vendor or contractor must be capable of Kubernetes-based deployments on AWS or Azure. See [Vendor-managed deployment](../../docs/before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for what to look for.
+- **Yes** → Go to [Step 4](#step-4-current-nbs-6-hosting). Note that your vendor or contractor must be capable of Kubernetes-based deployments on AWS or Azure. See [Vendor-managed deployment](vendor-managed-deployment.html) for what to look for.
 - **No** → **Stop.** Build internal capacity or identify a vendor before proceeding. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) for support resources.
 
 ## Step 4: Current NBS 6 hosting

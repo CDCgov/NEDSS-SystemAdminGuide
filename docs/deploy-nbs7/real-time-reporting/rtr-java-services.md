@@ -69,7 +69,7 @@ This page covers deploying the RTR Java services that process streamed events fr
 
 7.Validate services (on browser).
     The following services should be available at the specified URLs. Replace `<exampledomain>` with your actual domain.
-   Replace `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster)
+   Replace `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster)
 
    a. investigation-svc
 

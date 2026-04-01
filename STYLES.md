@@ -235,26 +235,29 @@ Use descriptive link text. The link text should tell the reader where they are g
 
 ### 4.1 Internal cross-links (within this doc set)
 
-For links to other pages in this guide, use the built-site HTML path convention:
-
-1. Find the page location under `_site/docs/...`.
-1. Remove `/_site` from the front of the path.
-1. Use the resulting `/docs/.../*.html` path in your Markdown link.
+For links to other pages in this guide, use a relative HTML path from the current file to the target page.
 
 Do not link to `.md` files for internal navigation links.
 
 **Example conversion:**
 
 - Source page link target in repo: `../deploy-nbs7/set-up-cloud-infrastructure.md`
-- Built page path: `_site/docs/deploy-nbs7/set-up-cloud-infrastructure.html`
-- Link to use in docs page: `../../docs/deploy-nbs7/set-up-cloud-infrastructure.html`
+- Link to use from a page in `docs/before-you-deploy/`: `../deploy-nbs7/set-up-cloud-infrastructure.html`
+
+**How to build the link:**
+
+1. Start from the current page's directory.
+1. Navigate relatively to the target page.
+1. Use the target page's `.html` path in the Markdown link.
+
+Avoid `../../docs/...` or similar "up-and-back" paths in content. Those are harder to maintain and are not needed for internal navigation.
 
 **Anchor links:**
 
 Use standard heading anchors on the HTML target when linking to a section:
 
 ```markdown
-See [NBS 7 core components](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nbs-modernization-api).
+See [NBS 7 core components](component-reference/nbs-core-components.html#nbs-modernization-api).
 ```
 
 External links do not need special treatment in JTD — they render as standard links and open in the same tab by default.

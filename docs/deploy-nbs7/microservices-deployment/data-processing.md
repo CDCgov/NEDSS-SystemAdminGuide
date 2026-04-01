@@ -94,7 +94,7 @@ This section covers installing the NBS 7 RTI service.
    kubectl get pods
    ```
 
-1. See [RTI API testing and integration](../../../docs/deploy-nbs7/microservices-deployment/data-processing/api-testing.html) for API testing guidance.
+1. See [RTI API testing and integration](../../deploy-nbs7/microservices-deployment/data-processing/api-testing.html) for API testing guidance.
 1. Validate the service:
 
    ```text

@@ -10,7 +10,7 @@ description: Details each component in NBS 7 — the application, infrastructure
 # Component reference: NBS 7 core components
 {: .no_toc }
 
-For information on migration planning, staffing, and budget, see [Operational considerations](../../../docs/before-you-deploy/operational_considerations.html).
+For information on migration planning, staffing, and budget, see [Operational considerations](../../before-you-deploy/operational_considerations.html).
 {: .note }
 
 NBS 7 core components are organized into three layers: the application layer, the infrastructure layer, and the networking layer. The application layer components are documented individually below. [Infrastructure and networking layer components](#infrastructure-and-networking-layer-components) are summarized as a group.
@@ -33,7 +33,7 @@ The existing NBS 6 application. A WildFly-based UI and backend that most STLTs c
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | NBS Core does not replace NBS 6 immediately. Instead, it runs alongside it. During migration, the NBS Gateway routes requests between the legacy NBS 6 application and new NBS 7 services. NBS 6 continues to handle all functionality that has not yet been replaced by a modern NBS 7 equivalent. |
-| When you need it | Always. An operational NBS 6 instance is a prerequisite for any NBS 7 deployment. You must be running a [compatible NBS 6 version](../../../docs/before-you-deploy/compatibility.html) before you can install NBS 7. |
+| When you need it | Always. An operational NBS 6 instance is a prerequisite for any NBS 7 deployment. You must be running a [compatible NBS 6 version](../../before-you-deploy/compatibility.html) before you can install NBS 7. |
 | Dependencies | Required by NBS Gateway, Elasticsearch (via Nifi), and the NBS Modernization API. Must maintain network connectivity to your NBS 7 environment throughout the migration period. |
 
 ## NBS Modernization API
@@ -110,7 +110,7 @@ An open source identity and access management platform.
 
 > Health department leaders
 >
-> For guidance on Single Sign-On planning and early coordination requirements, see [Operational considerations](../../../docs/before-you-deploy/operational_considerations.html).
+> For guidance on Single Sign-On planning and early coordination requirements, see [Operational considerations](../../before-you-deploy/operational_considerations.html).
 {: .note-title }
 
 ## Database (NBS\_ODSE, NBS\_SRTE)

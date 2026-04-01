@@ -26,7 +26,7 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
 {: .important }
 
 1. Locate the Helm chart at `charts/nifi-efs`.
-1. In `values.yaml`, replace all occurrences of `nifi.EXAMPLE_DOMAIN` with your domain name. See the [ingress controller domain table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster) for reference.
+1. In `values.yaml`, replace all occurrences of `nifi.EXAMPLE_DOMAIN` with your domain name. See the [ingress controller domain table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster) for reference.
 1. Set the image repository and tag:
 
    ```yaml
@@ -36,7 +36,7 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
    ```
 
 1. Set `efsFileSystemId` to your [EFS file system ID](https://us-east-1.console.aws.amazon.com/efs/home?region=us-east-1#/file-systems).
-1. Set the JDBC connection string using the same database endpoint and credentials from [Deploy NBS 7 microservices](../../../docs/deploy-nbs7/deploy-nbs7-microservices.html):
+1. Set the JDBC connection string using the same database endpoint and credentials from [Deploy NBS 7 microservices](../../deploy-nbs7/deploy-nbs7-microservices.html):
 
    ```yaml
    jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"

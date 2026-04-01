@@ -24,7 +24,7 @@ The NBS Gateway service routes requests between NBS 7 microservices and the lega
 
 The Helm chart for NBS Gateway is located in the `charts/nbs-gateway` directory.
 
-1. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 as shown in the [Table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster).
+1. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 as shown in the [Table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster).
 1. Set the image repository and tag:
 
    ```yaml
@@ -40,7 +40,7 @@ The Helm chart for NBS Gateway is located in the `charts/nbs-gateway` directory.
      enabled: "false"
    ```
 
-1. Enable OIDC for Keycloak login authentication and set the client secret (see [Enable Keycloak Auth step h](../../../docs/deploy-nbs7/keycloak/enable-keycloak-auth.html#enable-keycloak-auth)):
+1. Enable OIDC for Keycloak login authentication and set the client secret (see [Enable Keycloak Auth step h](../../deploy-nbs7/keycloak/enable-keycloak-auth.html#enable-keycloak-auth)):
 
    ```yaml
    Oidc:

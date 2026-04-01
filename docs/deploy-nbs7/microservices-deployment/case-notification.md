@@ -24,12 +24,12 @@ This section sets out the detailed steps to installing NBS 7 Case Notification, 
 
 Case notifications comprise four services and should be deployed in the following order:
 
-  1. [Debezium](../../../docs/deploy-nbs7/microservices-deployment/case-notification/debezium.html)
-  1. [XML HL7 parser service](../../../docs/deploy-nbs7/microservices-deployment/case-notification/xml-hl7-parser.html)
-  1. [Data extraction service](../../../docs/deploy-nbs7/microservices-deployment/case-notification/data-extraction.html)
-  1. [Notification service](../../../docs/deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html)
+  1. [Debezium](../../deploy-nbs7/microservices-deployment/case-notification/debezium.html)
+  1. [XML HL7 parser service](../../deploy-nbs7/microservices-deployment/case-notification/xml-hl7-parser.html)
+  1. [Data extraction service](../../deploy-nbs7/microservices-deployment/case-notification/data-extraction.html)
+  1. [Notification service](../../deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html)
 
-Services 2-4 require you to first set up [Keycloak configuration](#keycloak-configuration). After you deploy all required services for case notifications, validate with [API testing](../../../docs/deploy-nbs7/microservices-deployment/case-notification/api-testing.html).
+Services 2-4 require you to first set up [Keycloak configuration](#keycloak-configuration). After you deploy all required services for case notifications, validate with [API testing](../../deploy-nbs7/microservices-deployment/case-notification/api-testing.html).
 
 ## Considerations
 
@@ -40,7 +40,7 @@ Case notifications are optional. Your jurisdiction can use either the NBS 7 case
 
 ## Dependencies
 
-Case notifications require [NND Sync](../../../docs/deploy-nbs7/microservices-deployment/nnd-service.html) for the full pipeline to function. Set up NND Sync before deploying case notification services. NND Sync is the only dependency. RDB Data Sync is not required.
+Case notifications require [NND Sync](../../deploy-nbs7/microservices-deployment/nnd-service.html) for the full pipeline to function. Set up NND Sync before deploying case notification services. NND Sync is the only dependency. RDB Data Sync is not required.
 
 ## Keycloak configuration
 
@@ -54,5 +54,5 @@ The XML HL7 parser, data extraction, and notification services require Keycloak.
 
 1. For each of the three services, import the corresponding Keycloak profile from [`NEDSS-Helm/charts/keycloak/extra`](https://github.com/CDCgov/NEDSS-Helm/tree/main/charts/keycloak/extra).
 
-> The Notification service also requires the Keycloak client ID and secret for the XML HL7 Parser service. These are configured with the `api.clientId` and `api.secret` fields in its `values.yaml`. See [Notification service](../../../docs/deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html) for more information.
+> The Notification service also requires the Keycloak client ID and secret for the XML HL7 Parser service. These are configured with the `api.clientId` and `api.secret` fields in its `values.yaml`. See [Notification service](../../deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html) for more information.
 {: .note }

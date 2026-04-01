@@ -20,7 +20,7 @@ NBS 7 deployments vary significantly by jurisdiction. If you are just getting st
 
 ## Example deployment phases
 
-The phases in this table represent an example rollout scenario based on deployments to date. Your jurisdiction's timeline, activities, and sequence might differ depending on your infrastructure, staffing, and security requirements. For more information, see [Operational considerations](../../docs/before-you-deploy/operational_considerations.html).
+The phases in this table represent an example rollout scenario based on deployments to date. Your jurisdiction's timeline, activities, and sequence might differ depending on your infrastructure, staffing, and security requirements. For more information, see [Operational considerations](../before-you-deploy/operational_considerations.html).
 
 | Phase | Goal | Minimum duration |
 |:---|:---|:---|
@@ -41,14 +41,14 @@ For detailed checklists and deliverables for each phase, see the [NBS 7 Migratio
 
 The Planning phase covers discovery, environment setup, and project preparation. Security approval for cloud hosting and required technologies including Kubernetes, Terraform, and Docker is frequently the longest-lead item in this phase and the most common source of delay across the entire deployment. Starting that process early tends to reduce overall deployment time.
 
-Before planning detailed timelines, confirm your current NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../../docs/before-you-deploy/compatibility.html).
+Before planning detailed timelines, confirm your current NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html).
 
 | Activity | Description | Resource |
 |:---|:---|:---|
-| Readiness check-in | Initial planning and review of frequently asked questions. See [Assess your readiness](../../docs/before-you-deploy/assess-your-readiness.html) for the technical checklist and [NBS 6 and NBS 7 compatibility matrix](../../docs/before-you-deploy/compatibility.html) for version alignment. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) |
-| Identify project team | Define roles, responsibilities, and key stakeholders. See [Operational considerations](../../docs/before-you-deploy/operational_considerations.html) for staffing guidance | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) |
-| NBS 7 orientation | Review NBS 7 features with your migration team. See [Component reference](../../docs/before-you-deploy/component-reference.html) for a full component overview | [Choose your configuration](../../docs/before-you-deploy/choose-your-configuration.html) |
-| Create project plan | Draft a customized migration plan from the playbook checklists, including a migration risk registry | [Deployment scenarios](../../docs/before-you-deploy/deployment-scenarios.html) |
+| Readiness check-in | Initial planning and review of frequently asked questions. See [Assess your readiness](../before-you-deploy/assess-your-readiness.html) for the technical checklist and [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) for version alignment. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) |
+| Identify project team | Define roles, responsibilities, and key stakeholders. See [Operational considerations](../before-you-deploy/operational_considerations.html) for staffing guidance | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) |
+| NBS 7 orientation | Review NBS 7 features with your migration team. See [Component reference](../before-you-deploy/component-reference.html) for a full component overview | [Choose your configuration](../before-you-deploy/choose-your-configuration.html) |
+| Create project plan | Draft a customized migration plan from the playbook checklists, including a migration risk registry | [Deployment scenarios](../before-you-deploy/deployment-scenarios.html) |
 | Communications plan | Develop and implement a communications plan customized to your timeline and needs | Communications plan |
 | Training plan | Implement an NBS 7 training plan customized for your jurisdiction | STLT user training plan |
 | Draft test plan | Customize a UAT plan for your requirements | STLT user acceptance test plan |
@@ -61,13 +61,13 @@ The Install phase covers provisioning your cloud environments and deploying NBS 
 
 | Activity | Description | Resource |
 |:---|:---|:---|
-| Data migration plan | Agree on and review the data migration plan, coordinate the data migration solution and test files | [Assess your readiness: Data migration](../../docs/before-you-deploy/assess-your-readiness.html#data-migration) |
-| Dev environment deployment | Create and deploy an initial NBS 7 development environment build | [Set up cloud infrastructure](../../docs/deploy-nbs7/set-up-cloud-infrastructure.html) |
-| Staging environment deployment | Create and deploy an initial NBS 7 test environment build | [Set up cloud infrastructure](../../docs/deploy-nbs7/set-up-cloud-infrastructure.html) |
-| Production environment deployment | Create and deploy an initial NBS 7 production environment build | [Deploy NBS 7 microservices](../../docs/deploy-nbs7/deploy-nbs7-microservices.html) |
+| Data migration plan | Agree on and review the data migration plan, coordinate the data migration solution and test files | [Assess your readiness: Data migration](../before-you-deploy/assess-your-readiness.html#data-migration) |
+| Dev environment deployment | Create and deploy an initial NBS 7 development environment build | [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html) |
+| Staging environment deployment | Create and deploy an initial NBS 7 test environment build | [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html) |
+| Production environment deployment | Create and deploy an initial NBS 7 production environment build | [Deploy NBS 7 microservices](../deploy-nbs7/deploy-nbs7-microservices.html) |
 | Complete database transfer | Complete customizations, user file sharing setup, and integration with your user management system | STLT database refresh procedure |
 | Roles and permissions migration | Map user roles and configure permissions in NBS 7 | User migration mapping |
-| SSO setup | Review state SSO and login requirements and integrate Keycloak with your existing login tools. See [Operational considerations](../../docs/before-you-deploy/operational_considerations.html) for SSO planning guidance | [Enable Keycloak authentication](../../docs/deploy-nbs7/keycloak/enable-keycloak-auth.html) |
+| SSO setup | Review state SSO and login requirements and integrate Keycloak with your existing login tools. See [Operational considerations](../before-you-deploy/operational_considerations.html) for SSO planning guidance | [Enable Keycloak authentication](../deploy-nbs7/keycloak/enable-keycloak-auth.html) |
 
 ---
 
@@ -78,10 +78,10 @@ The Test phase validates that your NBS 7 environment is ready for production use
 | Activity | Description | Resource |
 |:---|:---|:---|
 | Database restore process | Review and test the database restore process in the development environment | STLT database refresh procedure |
-| Ingestion and egress validation | Integrate and validate data ingestion and notification pathways to confirm pipelines | [Data ingestion API testing](../../docs/deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html) if you are using the DI API |
-| ELR and or eCR ingestion testing | Test ingestion for individual ELRs and eCRs and at scale | [Data ingestion smoke test](../../docs/deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html) |
+| Ingestion and egress validation | Integrate and validate data ingestion and notification pathways to confirm pipelines | [Data ingestion API testing](../deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html) if you are using the DI API |
+| ELR and or eCR ingestion testing | Test ingestion for individual ELRs and eCRs and at scale | [Data ingestion smoke test](../deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html) |
 | Notifications testing | Coordinate with the MVPs team to validate notifications readiness | Conditions received successfully |
-| Regression testing | Run test scripts across environments to validate readiness for UAT | [Validate the deployment](../../docs/deploy-nbs7/validate-the-deployment.html) |
+| Regression testing | Run test scripts across environments to validate readiness for UAT | [Validate the deployment](../deploy-nbs7/validate-the-deployment.html) |
 | Cutover and rollback review | Review and approve cutover and rollback plans | Cutover and Rollback Plan |
 | UAT | Complete the agreed UAT plan across dev, test, and production environments | UAT test plan |
 
@@ -106,6 +106,6 @@ After go-live, your jurisdiction enters steady state operations. This phase is o
 
 | Activity | Description | Resource |
 |:---|:---|:---|
-| Monitor live operations | Stand up long-term NBS 7 service desk support, review the NBS Administrator Guide for NBS support SOP, and track system performance | [Support](../../docs/deploy-nbs7/support.html) |
+| Monitor live operations | Stand up long-term NBS 7 service desk support, review the NBS Administrator Guide for NBS support SOP, and track system performance | [Support](../deploy-nbs7/support.html) |
 | Complete retrospective | Conduct a go-live retrospective to capture lessons learned | - |
-| Upgrade to new releases | Test and upgrade to new NBS 7 releases periodically | [Maintain NBS 7](../../docs/maintain-nbs7.html) |
+| Upgrade to new releases | Test and upgrade to new NBS 7 releases periodically | [Maintain NBS 7](../maintain-nbs7.html) |

@@ -4,7 +4,6 @@ layout: page
 parent: Before you deploy
 nav_order: 5
 has_children: true
-published: false
 description: Presents example NBS 7 deployment scenarios for small, medium, and large jurisdictions to illustrate configuration tradeoffs and real-world decisions.
 ---
 

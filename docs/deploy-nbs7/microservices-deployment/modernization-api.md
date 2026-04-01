@@ -23,7 +23,7 @@ This page walks through deploying the Modernization API using the `modernization
 ## Deploy Modernization API using Helm
 
 1. Locate the Helm chart at `charts/modernization-api`.
-1. In `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6. See the [DNS records table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records) for reference.
+1. In `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6. See the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records) for reference.
 1. Set the image repository and tag:
 
    ```yaml
@@ -32,7 +32,7 @@ This page walks through deploying the Modernization API using the `modernization
      tag: <release-version-tag> # for example, v1.0.1
    ```
 
-1. Set the JDBC connection string using the same database endpoint and credentials from [Deploy NBS 7 microservices](../../../docs/deploy-nbs7/deploy-nbs7-microservices.html):
+1. Set the JDBC connection string using the same database endpoint and credentials from [Deploy NBS 7 microservices](../../deploy-nbs7/deploy-nbs7-microservices.html):
 
    ```yaml
    jdbc:

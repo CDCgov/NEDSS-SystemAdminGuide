@@ -13,7 +13,7 @@ redirect_from:
 In RTR deployments, the Liquibase job runs once and applies required SQL Server database changes for onboarding and upgrades.
 
 1. The Helm chart for Liquibase should be available under charts/liquibase.
-1. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster).
+1. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster).
 
       ```yaml
       image:

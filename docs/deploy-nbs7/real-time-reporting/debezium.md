@@ -81,7 +81,7 @@ This page covers deploying the Debezium connector that captures change data from
 
 7. Validate service
 
-- a. This is an internal service with no ingress. Validation should be part of [RTR Pipeline Validation](../../../docs/deploy-nbs7/real-time-reporting/pipeline-validation.html)
+- a. This is an internal service with no ingress. Validation should be part of [RTR Pipeline Validation](../../deploy-nbs7/real-time-reporting/pipeline-validation.html)
 - b. If the service has any trouble connecting with the database, run this command to reset the ConfigMap.
 
   ```bash

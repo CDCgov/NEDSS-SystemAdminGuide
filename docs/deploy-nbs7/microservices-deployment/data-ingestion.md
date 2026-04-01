@@ -80,7 +80,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
    1. Find the `values.yaml` file under `charts\dataingestion-service`.
 
 1. Confirm that DNS entries for the following host were created and point to the network load balancer in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned by `nginx-ingress` in the base install steps). Make this change in your authoritative DNS service (for example, Route 53).
-   Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [ingress controller domain table](../../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster) for reference.
+   Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [ingress controller domain table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster) for reference.
    DataIngestion service application: `data.site_name.example_domain.com`
 1. Set the image repository and tag:
 

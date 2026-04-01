@@ -18,9 +18,9 @@ NBS 7 is the base product. Two optional add-ons are available: Real-Time Reporti
 1. TOC
 {:toc}
 
-After you review the available options, use the [decision tree](../../docs/before-you-deploy/choose-your-configuration/decision-tree.html) to identify your recommended starting configuration. If your jurisdiction plans to use a vendor, see the [Vendor-managed deployment](../../docs/before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) page.
+After you review the available options, use the [decision tree](../before-you-deploy/choose-your-configuration/decision-tree.html) to identify your recommended starting configuration. If your jurisdiction plans to use a vendor, see the [Vendor-managed deployment](../before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) page.
 
-Before finalizing your configuration, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../../docs/before-you-deploy/compatibility.html).
+Before finalizing your configuration, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html).
 
 ---
 
@@ -28,7 +28,7 @@ Before finalizing your configuration, verify that your NBS 6 version is compatib
 
 The base deployment. NBS 7 gives your jurisdiction NBS 6 feature parity on modern, cloud-based infrastructure, plus foundational improvements such as real-time patient search.
 
-NBS 7 core components are organized into three layers. For details on what each component does and when you need it, see [NBS 7 core components](../../docs/before-you-deploy/component-reference/nbs-core-components.html).
+NBS 7 core components are organized into three layers. For details on what each component does and when you need it, see [NBS 7 core components](../before-you-deploy/component-reference/nbs-core-components.html).
 
 ### Networking layer
 
@@ -52,14 +52,14 @@ The infrastructure layer provides the container orchestration platform and cloud
 
 The application layer contains the NBS 7 services and legacy NBS 6 components that users and administrators directly interact with.
 
-- [Legacy NBS 6](../../docs/before-you-deploy/component-reference/nbs-core-components.html#legacy-nbs-6)
-- [NBS Modernization API](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nbs-modernization-api)
-- [NBS Web UI](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nbs-web-ui)
-- [NBS Gateway](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nbs-gateway)
-- [Elasticsearch](../../docs/before-you-deploy/component-reference/nbs-core-components.html#elasticsearch)
-- [Nifi](../../docs/before-you-deploy/component-reference/nbs-core-components.html#nifi)
-- [Keycloak](../../docs/before-you-deploy/component-reference/nbs-core-components.html#keycloak)
-- [Cert Manager, FluentBit](../../docs/before-you-deploy/component-reference/nbs-core-components.html#infrastructure-and-networking-layer-components)
+- [Legacy NBS 6](../before-you-deploy/component-reference/nbs-core-components.html#legacy-nbs-6)
+- [NBS Modernization API](../before-you-deploy/component-reference/nbs-core-components.html#nbs-modernization-api)
+- [NBS Web UI](../before-you-deploy/component-reference/nbs-core-components.html#nbs-web-ui)
+- [NBS Gateway](../before-you-deploy/component-reference/nbs-core-components.html#nbs-gateway)
+- [Elasticsearch](../before-you-deploy/component-reference/nbs-core-components.html#elasticsearch)
+- [Nifi](../before-you-deploy/component-reference/nbs-core-components.html#nifi)
+- [Keycloak](../before-you-deploy/component-reference/nbs-core-components.html#keycloak)
+- [Cert Manager, FluentBit](../before-you-deploy/component-reference/nbs-core-components.html#infrastructure-and-networking-layer-components)
 - Database (NBS\_ODSE and NBS\_SRTE)
 
 {: .note-title }
@@ -75,11 +75,11 @@ RTR is an optional add-on that replaces the legacy MasterETL batch process with 
 
 **With RTR, data is available within 5 minutes to 1 hour instead of 24 hours.**
 
-RTR adds the following components to your NBS 7 deployment. For details, see [Add-on: Real-Time Reporting (RTR)](../../docs/before-you-deploy/component-reference/rtr.html).
+RTR adds the following components to your NBS 7 deployment. For details, see [Add-on: Real-Time Reporting (RTR)](../before-you-deploy/component-reference/rtr.html).
 
-- [Debezium](../../docs/before-you-deploy/component-reference/rtr.html#debezium)
-- [Kafka and Kafka Connect](../../docs/before-you-deploy/component-reference/rtr.html#kafka-and-kafka-connect)
-- [RTR domain services](../../docs/before-you-deploy/component-reference/rtr.html#rtr-domain-services)
+- [Debezium](../before-you-deploy/component-reference/rtr.html#debezium)
+- [Kafka and Kafka Connect](../before-you-deploy/component-reference/rtr.html#kafka-and-kafka-connect)
+- [RTR domain services](../before-you-deploy/component-reference/rtr.html#rtr-domain-services)
 
 {: .note-title }
 > Best for
@@ -92,7 +92,7 @@ RTR adds the following components to your NBS 7 deployment. For details, see [Ad
 
 The DI API is an optional add-on that provides a built-in data transit layer. It accepts incoming public health data in multiple formats and routes it into NBS without requiring third-party middleware.
 
-For details, see [Add-on: Data Ingestion (DI) API](../../docs/before-you-deploy/component-reference/di-api.html).
+For details, see [Add-on: Data Ingestion (DI) API](../before-you-deploy/component-reference/di-api.html).
 
 {: .note-title }
 > Best for

@@ -111,4 +111,4 @@ configuration files
 
 The above command should list the worker nodes for the cluster.
 
-Congratulations! You have installed your core infrastructure and Kubernetes cluster. Next, see [Initial Kubernetes Deployment](../../docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html) to configure your cluster using Helm charts.
+   Congratulations! You have installed your core infrastructure and Kubernetes cluster. Next, see [Initial Kubernetes Deployment](../initial-kubernetes-deployment/initial-kubernetes-deployment.html) to configure your cluster using Helm charts.

@@ -20,7 +20,7 @@ Use this page to validate Real Time Ingestion (RTI) by sending ELR data through 
 
 ## Run the integration test
 
-1. Follow the [Data Ingestion API testing guide](../../../docs/deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html) to submit ELR payloads.
+1. Follow the [Data Ingestion API testing guide](../data-ingestion/api-testing.html) to submit ELR payloads.
 1. Add the `version` request header in the ELR ingestion API call:
    - `version: 1` uses the legacy batch importer flow.
    - `version: 2` bypasses the legacy batch importer and triggers RTI.

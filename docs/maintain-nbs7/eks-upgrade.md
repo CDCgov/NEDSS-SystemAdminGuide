@@ -2,7 +2,7 @@
 title: Update EKS control plane
 layout: page
 parent: Maintain NBS 7
-nav_order: 3
+nav_order: 2
 ---
 
 # Update the EKS control plane
@@ -17,11 +17,11 @@ You can use Terraform to upgrade the Amazon Elastic Kubernetes Service (EKS) con
 
 ## Considerations
 
-AWS supports each Kubernetes minor version for up to 26 months after its release in EKS.  That period comprises 14 months of standard support, followed by 12 months of extended support. Plan your upgrades before your current version exits standard support. For more information, see [Understand the Kubernetes version lifecycle on EKS \- Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html). 
+AWS supports each Kubernetes minor version for up to 26 months after its release in EKS.  That period comprises 14 months of standard support, followed by 12 months of extended support. Plan your upgrades before your current version exits standard support. For more information, see [Understand the Kubernetes version lifecycle on EKS \- Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html).
 
-* **Cost impact:** Amazon EKS clusters on extended support versions incur additional cost when they are running on a version in extended support. For more information, see [Amazon EKS extended support for Kubernetes version pricing](https://aws.amazon.com/blogs/containers/amazon-eks-extended-support-for-kubernetes-versions-pricing) on the AWS blog and the Amazon EKS [pricing page](https://aws.amazon.com/eks/pricing/).  
-* **Forced upgrades:** When a version exits extended support, [AWS automatically upgrades the control plane to the oldest supported version](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#extended-support-faqs). Automatic upgrades do not account for workload compatibility, add-on versions, or your deployment schedule. To maintain control over your upgrade timing, complete upgrades before the extended support window closes.  
-* **One minor version at a time:** You must upgrade the control plane one minor version at a time. You cannot skip versions. If you are multiple versions behind, you will need to repeat this procedure for each version hop. For more information, see [Update existing cluster to new Kubernetes version](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html#_step_2_review_upgrade_considerations) in the AWS documentation. 
+* **Cost impact:** Amazon EKS clusters on extended support versions incur additional cost when they are running on a version in extended support. For more information, see [Amazon EKS extended support for Kubernetes version pricing](https://aws.amazon.com/blogs/containers/amazon-eks-extended-support-for-kubernetes-versions-pricing) on the AWS blog and the Amazon EKS [pricing page](https://aws.amazon.com/eks/pricing/).
+* **Forced upgrades:** When a version exits extended support, [AWS automatically upgrades the control plane to the oldest supported version](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#extended-support-faqs). Automatic upgrades do not account for workload compatibility, add-on versions, or your deployment schedule. To maintain control over your upgrade timing, complete upgrades before the extended support window closes.
+* **One minor version at a time:** You must upgrade the control plane one minor version at a time. You cannot skip versions. If you are multiple versions behind, you will need to repeat this procedure for each version hop. For more information, see [Update existing cluster to new Kubernetes version](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html#_step_2_review_upgrade_considerations) in the AWS documentation.
 * **EKS control plane upgrades are irreversible:** You cannot downgrade a cluster to a previous Kubernetes version. If the upgrade causes unexpected issues, your recovery options are limited to debugging the upgraded cluster or restoring from a full environment backup. Ensure you have a tested backup and a rollback plan for your workloads before you begin.
 
 > Did you know?
@@ -33,16 +33,16 @@ AWS supports each Kubernetes minor version for up to 26 months after its release
 
 Before you begin, confirm the following:
 
-**Access and tooling**
+### Access and tooling
 
-* You have IAM permissions to modify EKS clusters and node groups. Required actions include `eks:UpdateClusterVersion`, `eks:UpdateNodegroupVersion`, and `eks:DescribeCluster`. For the full list, see [Amazon EKS identity-based policy examples](https://docs.aws.amazon.com/eks/latest/userguide/security_iam_id-based-policy-examples.html) in the AWS documentation.  
-* You have installed Terraform and configured it with access to your NBS 7 state backend.  
+* You have IAM permissions to modify EKS clusters and node groups. Required actions include `eks:UpdateClusterVersion`, `eks:UpdateNodegroupVersion`, and `eks:DescribeCluster`. For the full list, see [Amazon EKS identity-based policy examples](https://docs.aws.amazon.com/eks/latest/userguide/security_iam_id-based-policy-examples.html) in the AWS documentation.
+* You have installed Terraform and configured it with access to your NBS 7 state backend.
 * You have installed the AWS CLI and `kubectl` and authenticated to your cluster.
 
-**Pre-upgrade checks**
+### Pre-upgrade checks
 
-* You have backed up your Terraform state backend.  
-* Your cluster is in a healthy state. All nodes are in `Ready` status and no pods are in a failed state.  
+* You have backed up your Terraform state backend.
+* Your cluster is in a healthy state. All nodes are in `Ready` status and no pods are in a failed state.
 * You have verified that your target Kubernetes version is compatible with all EKS managed add-ons currently installed on your cluster. Note that Amazon EKS automatically installs self-managed add-ons such as the Amazon VPC CNI plugin, kube-proxy, and CoreDNS. For more information, see [Amazon EKS add-ons](https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html) and [Update an Amazon EKS add-on](https://docs.aws.amazon.com/eks/latest/userguide/updating-an-add-on.html) in the AWS documentation.
 
 You must upgrade one minor version at a time. You cannot skip versions. If you are multiple versions behind your target, plan to run this procedure once for each version hop.
@@ -70,7 +70,7 @@ terraform state list | Select-String "aws_eks_cluster|aws_eks_node_group"
 
 For a standard NBS 7 deployment, the output should include:
 
-```
+```text
 module.eks.aws_eks_cluster.this
 module.eks.aws_eks_node_group.workers
 ```
@@ -154,7 +154,7 @@ After the node groups reach `Ready` status, upgrade your EKS managed add-ons to 
    The `--resolve-conflicts OVERWRITE` flag allows the update to proceed even if you’ve customized your add-on configuration from the AWS default. If your deployment includes custom add-on configurations you need to preserve, use `--resolve-conflicts PRESERVE` instead. With `PRESERVE`, the update will fail rather than overwrite local changes, and you will need to resolve conflicts manually. If you are unsure which flag to use, check with your infrastructure team.
    {: .important }
 
-1. Repeat the previous step for each add-on in your cluster.  
+1. Repeat the previous step for each add-on in your cluster.
 1. Confirm each add-on reaches `ACTIVE` status before you move on:
 
    ```bash

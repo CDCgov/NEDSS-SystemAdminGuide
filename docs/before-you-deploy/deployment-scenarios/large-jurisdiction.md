@@ -37,6 +37,7 @@ Large STLT with high case volumes, sophisticated analytics needs, and a vendor-m
 | Real-Time Reporting (RTR) | Yes | Required for high case volume and analytics needs |
 | DI API | Yes | Primary path for ELR and eCR ingestion |
 
+<!--
 ### Key configuration decisions
 
 - \[Placeholder: high-availability configuration specifics\]
@@ -49,6 +50,9 @@ Large STLT with high case volumes, sophisticated analytics needs, and a vendor-m
 - \[Placeholder: scaling considerations\]
 - \[Placeholder: cost management approach\]
 - \[Placeholder: challenges encountered with vendor-managed deployment\]
+-->
 
+> Best for
+>
 > Might apply to jurisdictions that have a large IT team or vendor support, high case volumes, advanced reporting or analytics needs, and require high-availability infrastructure.
-{: .best-for }
+{: .note-title }

@@ -8,7 +8,6 @@ description: A step-by-step decision tree that guides jurisdictions to a recomme
 ---
 
 # NBS 7 configuration decision tree
-{: .no_toc }
 
 Use the decision tree to identify your recommended starting configuration. Answer each question in order, then validate your recommendation with the CDC NBS team before you begin deployment.
 
@@ -63,29 +62,29 @@ Where does your NBS 6 currently run?
 
 What is the approximate annual reportable disease case volume in your jurisdiction?
 
-- **Lower volume** (fewer than approximately 50,000 cases per year) → Go to [Step 6](#step-6-data-intake-needs-lower-volume-jurisdictions).
-- **Higher volume** (50,000+ cases per year), or significant growth expected → Go to [Step 7](#step-7-reporting-needs-higher-volume-jurisdictions).
+- **Lower volume** (fewer than approximately 50,000 cases per year) → Go to [Step 7a](#step-7a-data-intake-needs-lower-volume-jurisdictions).
+- **Higher volume** (50,000+ cases per year), or significant growth expected → Go to [Step 6](#step-6-reporting-needs).
 
 {: .note }
 The 50,000 case threshold is a planning guideline, not a hard rule. Validate your volume assessment with CDC before making a final configuration decision.
 
-## Step 6: Data intake needs (lower-volume jurisdictions)
+## Step 6: Reporting needs
 
-Does your jurisdiction currently receive high volumes of electronic lab reports (ELRs) or electronic case reports (eCRs)?
+Does your jurisdiction need near-real-time reporting (data available within minutes to hours, rather than 24 hours)?
+
+- **No** → Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) to discuss your specific needs. **NBS 7** or **NBS 7 + DI API add-on** might be appropriate starting points.
+- **Yes** → Go to [Step 7b](#step-7b-data-intake-needs-higher-volume-jurisdictions).
+
+## Step 7a: Data intake needs (lower-volume jurisdictions)
+
+Does your jurisdiction receive high volumes of electronic lab reports (ELRs) or electronic case reports (eCRs)?
 
 - **No** → Recommended starting point: **NBS 7**. Validate with CDC before deploying.
 - **Yes** → Recommended starting point: **NBS 7 + DI API add-on**. Validate with CDC before deploying.
 
-## Step 7: Reporting needs (higher-volume jurisdictions)
+## Step 7b: Data intake needs (higher-volume jurisdictions)
 
-Does your jurisdiction need near-real-time reporting → data available within minutes to hours, rather than 24 hours?
-
-- **No** → Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) to discuss your specific needs. **NBS 7** or **NBS 7 + DI API add-on** might be appropriate starting points.
-- **Yes** → Go to [Step 8](#step-8-data-intake-needs-higher-volume-jurisdictions).
-
-## Step 8: Data intake needs (higher-volume jurisdictions)
-
-Does your jurisdiction currently receive high volumes of ELRs or eCRs?
+Does your jurisdiction receive high volumes of electronic lab reports (ELRs) or electronic case reports (eCRs)?
 
 - **No** → Recommended starting point: **NBS 7 + RTR add-on**. Validate with CDC before deploying.
 - **Yes** → Recommended starting point: **NBS 7 + RTR + DI API add-ons**. Validate with CDC before deploying.

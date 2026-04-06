@@ -15,4 +15,4 @@ The pages in this section cover actual NBS 7 deployment scenarios as example use
 1. TOC
 {:toc}
 
-After you have chosen your configuration, use the [**NBS 7 System Administrator Guide**](https://cdcgov.github.io/NEDSS-SystemAdminGuide/) for step-by-step deployment instructions.
+After you have chosen your configuration, use the [**Deploy NBS 7**](../deploy-nbs7.html) guide for step-by-step deployment instructions.

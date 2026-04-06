@@ -37,6 +37,7 @@ Small STLT with limited IT staff and a cloud-first infrastructure strategy. The 
 | Real-Time Reporting (RTR) | No | Not required at this case volume |
 | DI API | No | No existing high-volume ELR or eCR intake |
 
+<!--
 ### Key configuration decisions
 
 - \[Placeholder: specific AWS configuration choices, e.g. EKS node sizing, VPC setup\]
@@ -48,6 +49,9 @@ Small STLT with limited IT staff and a cloud-first infrastructure strategy. The 
 - \[Placeholder: what worked well\]
 - \[Placeholder: challenges encountered\]
 - \[Placeholder: what this jurisdiction would do differently\]
+-->
 
+> Best for
+>
 > Might apply to jurisdictions that have a small IT team, limited cloud experience, or a goal to get NBS 7 running with minimal complexity before adding advanced features.
-{: .best-for }
+{: .note-title }

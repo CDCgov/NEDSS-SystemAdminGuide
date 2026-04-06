@@ -94,7 +94,7 @@ NBS 7 requires specific versions of supporting software. The following table lis
 
 ## Next steps
 
-After confirming these prerequisites:
+After completing these prerequisites:
 
-1. If you are deploying on AWS, complete [Prerequisites for AWS](deploy-on-aws/prerequisites.html), then continue to [Deploy on AWS](deploy-on-aws.html).
-1. If you are deploying on Azure, complete [Prerequisites for Azure](deploy-on-azure/prerequisites.html), then continue to [Deploy on Azure](deploy-on-azure.html).
+1. If you are deploying on AWS, complete [Prerequisites for AWS](deploy-on-aws/prerequisites.html).
+1. If you are deploying on Azure, complete [Prerequisites for Azure](deploy-on-azure/prerequisites.html).

@@ -161,12 +161,3 @@ The imported configuration seeds a random client secret for each service client.
 1. Select `srte-data-keycloak-client` and open the **Credentials** tab.
 1. Click the eye icon to reveal the secret and copy it.
 1. Store the secret (for example, in AWS Secrets Manager at `keycloak/client/secret/srte`).
-
-### XML-HL7 parser client
-
-1. In the **NBS Realm**, open **Realm settings**, click the **Action** dropdown, and select **Partial Import**.
-1. Upload `<Helm extract directory>/charts/keycloak/extra/10-nbs-users-xml-hl7-parser-service.json` and click **Create**.
-1. Navigate to the **NBS Realm** in the left menu and click **Clients**.
-1. Select `xml-hl7-parser-keycloak-client` and open the **Credentials** tab.
-1. Click the eye icon to reveal the secret and copy it.
-1. Store the secret (for example, in AWS Secrets Manager at `keycloak/client/secret/xml-hl7-parser`).

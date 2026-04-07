@@ -74,10 +74,6 @@ nav_enabled: true
    - a. [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)
    - b. [NEDSS-Helm/charts/data-extraction-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/data-extraction-service/templates/deployment.yaml)
 
-3. **Xml-Hl7-Parser-Service**
-   - a. [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)
-   - b. [NEDSS-Helm/charts/xml-hl7-parser-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/xml-hl7-parser-service/templates/deployment.yaml)
-
 ---
 
 #### Case Notification Liquibase

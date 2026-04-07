@@ -24,4 +24,3 @@ nav_enabled: true
 
 2. The 3 Case notification service except for Debezium will also need keycloak profile
    [NEDSS-Helm/charts/keycloak/extra at main · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/tree/main/charts/keycloak/extra)
-3. Note: in Case-Notification-Service, it require XML-HL7-Parser-service keycloak id and secret to be definied in the environment variable

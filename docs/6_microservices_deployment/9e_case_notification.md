@@ -40,11 +40,6 @@ nav_enabled: true
 
    kafka:
      cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-
-   api:
-     host: "https://<data.EXAMPLE_DOMAIN>/hl7-parser"
-     clientId: "EXAMPLE_XML-HL7-Parser_CLIENT_ID"
-     secret: "EXAMPLE_XML-HL7-Parser_CLIENT_SECRET"
    ```
 
 4. Install Pod

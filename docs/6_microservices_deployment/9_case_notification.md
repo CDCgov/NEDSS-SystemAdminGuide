@@ -20,7 +20,6 @@ nav_enabled: true
   - If STLT choose modernize, then we can proceed with the following steps
 - If choose NOT to deploy Case Notification Service, these following services should not be turned on in Kubernetes
   - Debezium Case Notification
-  - XML HL7 Parser Service
   - Data Extraction Service
   - Case Notification Service
 
@@ -37,6 +36,5 @@ This guide sets out the detailed steps to installing NBS 7 Case Notification, en
 
 - Case Notification consist of 4 services and should be deployed in this top down order
   - Debezium Case Notification
-  - XML HL7 Parser Service
   - Data Extraction Service
   - Notification Service

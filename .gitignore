@@ -15,3 +15,6 @@ _site/
 vendor/
 .DS_Store
 node_modules/
+
+# IntelliJ
+.idea/

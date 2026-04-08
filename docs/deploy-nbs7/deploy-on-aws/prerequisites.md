@@ -108,3 +108,9 @@ The NBS 7 release requires that prospective users already have a working NBS 6 i
 NBS 7 extends functionality that is available to the authenticated user. NBS 7 therefore works alongside the existing authentication mechanism. No additional steps are needed to authenticate users for NBS 7.
 
 To assist those who are integrating NBS into their SSO ecosystem, a proof of concept in which authentication is performed using an Identity Provider (IdP) and a proxy is available on request. To request it, [please create a ticket here](https://nbscentral.cdc.gov/projects/nbs700/issues/new).
+
+## What to do now
+
+1. Complete the cloud-agnostic [Prerequisites](../prerequisites.html) if you haven't already
+1. Continue with [Provision the AWS cloud environment](provision-aws.html)
+1. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) if you need Azure planning support before this page is finalized

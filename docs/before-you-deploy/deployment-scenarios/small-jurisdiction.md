@@ -1,5 +1,5 @@
 ---
-title: Small jurisdiction, self-managed, AWS
+title: Small jurisdiction, self-managed cloud
 layout: page
 parent: Deployment scenarios
 grand_parent: Before you deploy
@@ -19,21 +19,19 @@ description: Case study for a small, self-managed AWS deployment based on Montan
 
 ### Profile
 
-Small STLT with limited IT staff and a cloud-first infrastructure strategy. The jurisdiction prioritized simplicity and maintainability over advanced features.
+Small STLT with limited IT staff and a cloud-first infrastructure strategy. The jurisdiction prioritized simplicity and maintainability over add-on features.
 
 ### Configuration
 
-| Setting | Value |
+| Deployment model | Hosting |
 |:---|:---|
-| Tier | NBS Core only |
-| Hosting | AWS, STLT-managed |
-| Middleware | No third-party middleware |
+| NBS core components only | AWS, STLT-managed |
 
 ### What was deployed
 
 | Component | Included | Notes |
 |:---|:---|:---|
-| NBS Core | Yes | Full core deployment |
+| NBS 7 | Yes | Full core deployment |
 | Real-Time Reporting (RTR) | No | Not required at this case volume |
 | DI API | No | No existing high-volume ELR or eCR intake |
 

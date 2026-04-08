@@ -1,5 +1,5 @@
 ---
-title: Large jurisdiction, high volume, vendor-managed
+title: Large jurisdiction, vendor-managed cloud
 layout: page
 parent: Deployment scenarios
 grand_parent: Before you deploy
@@ -23,17 +23,15 @@ Large STLT with high case volumes, sophisticated analytics needs, and a vendor-m
 
 ### Configuration
 
-| Setting | Value |
+| Deployment model | Hosting |
 |:---|:---|
-| Tier | NBS Complete (NBS Core + RTR + DI API) |
-| Hosting | Cloud vendor-managed, or hybrid with significant cloud presence |
-| Middleware | DI API (primary ingestion path) |
+| NBS 7 + RTR + DI API | Cloud vendor-managed, or hybrid with significant cloud presence |
 
 ### What was deployed
 
 | Component | Included | Notes |
 |:---|:---|:---|
-| NBS Core | Yes | Full core deployment |
+| NBS 7 | Yes | Full core deployment |
 | Real-Time Reporting (RTR) | Yes | Required for high case volume and analytics needs |
 | DI API | Yes | Primary path for ELR and eCR ingestion |
 

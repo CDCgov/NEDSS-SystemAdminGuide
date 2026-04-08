@@ -1,5 +1,5 @@
 ---
-title: Medium jurisdiction, existing middleware, RTR
+title: Medium jurisdiction, hybrid hosting
 layout: page
 parent: Deployment scenarios
 grand_parent: Before you deploy
@@ -19,23 +19,21 @@ description: Case study for a medium jurisdiction with existing Rhapsody middlew
 
 ### Profile
 
-Medium STLT with an existing Rhapsody middleware investment and a need for faster data turnaround than NBS 6 batch processing provides. The jurisdiction retained Rhapsody for data ingestion rather than replacing it with the DI API.
+Medium STLT with an existing Rhapsody middleware investment and a need for faster data turnaround than NBS 6 batch processing provides. The jurisdiction retained Rhapsody for data ingestion.
 
 ### Configuration
 
-| Setting | Value |
+| Deployment model | Hosting |
 |:---|:---|
-| Tier | NBS Core + RTR |
-| Hosting | Hybrid: cloud-hosted NBS 7, on-premises Rhapsody middleware |
-| Middleware | Rhapsody (retained) |
+| NBS 7 + RTR | Hybrid: cloud-hosted NBS 7, on-premises Rhapsody middleware |
 
 ### What was deployed
 
 | Component | Included | Notes |
 |:---|:---|:---|
-| NBS Core | Yes | Full core deployment |
+| NBS 7 | Yes | Full core deployment |
 | Real-Time Reporting (RTR) | Yes | Added for faster reporting turnaround |
-| DI API | No | Rhapsody retained for data ingestion |
+| DI API | No | Rhapsody for data ingestion |
 
 <!--
 ### Key configuration decisions

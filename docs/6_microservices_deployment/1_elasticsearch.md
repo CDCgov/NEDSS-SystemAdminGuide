@@ -24,7 +24,7 @@ nav_enabled: true
    ```yaml
    image:
       repository: "quay.io/us-cdcgov/cdc-nbs-modernization/elasticsearch"
-      tag: <release-version-tag> e.g v1.0.1
+      tag: <release-version-tag> // for example, v1.0.2
    ```
 
   After updating the values file, Run the following command from the charts directory to install Elasticsearch.

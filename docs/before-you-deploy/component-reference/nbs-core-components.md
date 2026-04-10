@@ -10,7 +10,7 @@ description: Details each component in NBS 7 — the application, infrastructure
 # Component reference: NBS 7 core components
 {: .no_toc }
 
-For information on migration planning, staffing, and budget, see [Operational considerations](../../before-you-deploy/operational_considerations.html).
+For information on migration planning, staffing, and budget, see [Operational considerations](../../before-you-deploy/operational-considerations.html).
 {: .note }
 
 NBS 7 core components are organized into three layers: the application layer, the infrastructure layer, and the networking layer. The application layer components are documented individually below. [Infrastructure and networking layer components](#infrastructure-and-networking-layer-components) are summarized as a group.
@@ -110,7 +110,7 @@ An open source identity and access management platform.
 
 > Health department leaders
 >
-> For guidance on Single Sign-On planning and early coordination requirements, see [Operational considerations](../../before-you-deploy/operational_considerations.html).
+> For guidance on Single Sign-On planning and early coordination requirements, see [Operational considerations](../../before-you-deploy/operational-considerations.html).
 {: .note-title }
 
 ## Database (NBS\_ODSE, NBS\_SRTE)

@@ -19,7 +19,7 @@ Use this section to:
 - understand the major components, prerequisites, and operational considerations that affect deployment
 - support go or no-go decisions before you commit time and resources to deployment
 
-> Some factors that affect NBS 7 migration extend beyond infrastructure and configuration. For a summary of organizational, financial, and operational considerations, see [Operational considerations](before-you-deploy/operational_considerations.html).
+> Some factors that affect NBS 7 migration extend beyond infrastructure and configuration. For a summary of organizational, financial, and operational considerations, see [Operational considerations](before-you-deploy/operational-considerations.html).
 {: .note }
 
 ## How this content fits into the NBS 7 process

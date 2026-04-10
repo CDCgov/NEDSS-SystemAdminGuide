@@ -19,7 +19,7 @@ This page helps you assess whether NBS 7 is a viable option for your jurisdictio
 
 If you work through this page and find that your jurisdiction does not meet one or more prerequisites, you might still be able to move forward. You can address some gaps with planning and lead time, but other gaps might indicate that NBS 7 is not the right fit for your jurisdiction right now.
 
-For more information on migration planning, staffing, and budget, see [Operational considerations](../before-you-deploy/operational_considerations.html) in this guide, and the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) and [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) on NBS Central (NBS Central login required).
+For more information on migration planning, staffing, and budget, see [Operational considerations](../before-you-deploy/operational-considerations.html) in this guide, and the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) and [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) on NBS Central (NBS Central login required).
 {: .note }
 
 ## Not sure where to start?
@@ -33,7 +33,7 @@ Has your jurisdiction obtained state IT security approval for cloud hosting and 
 - **Yes, or approval is not required**: Continue with the rest of this section.
 - **No, or unknown**: Approval timelines vary and can significantly affect your migration schedule. We recommend working with your state IT office while you continue to plan.
 
-See also: [Operational considerations](../before-you-deploy/operational_considerations.html) and [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html).
+See also: [Operational considerations](../before-you-deploy/operational-considerations.html) and [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html).
 
 ## Cloud infrastructure
 
@@ -58,7 +58,7 @@ If your IT team does not have these skills, you have two options:
 - **Building capacity**: Train existing staff or hire staff with these skills before you begin deployment.
 - **Working with a vendor**: Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
 
-See also: [Operational considerations](../before-you-deploy/operational_considerations.html) and [Choose your configuration](../before-you-deploy/choose-your-configuration.html).
+See also: [Operational considerations](../before-you-deploy/operational-considerations.html) and [Choose your configuration](../before-you-deploy/choose-your-configuration.html).
 
 ## Network readiness
 
@@ -84,7 +84,7 @@ During migration, NBS 7 components gradually replace NBS 6 functionality while N
 - You need to know your current NBS 6 hosting setup before you begin. Specifically, whether it is hosted on-premises or in the cloud, and if in the cloud, which provider.
 - **You must be running a compatible NBS 6.x version** before you can install any version of NBS 7. For more information, see [Compatibility matrix](../before-you-deploy/compatibility.html).
 
-See also: [Deployment phases](../before-you-deploy/deployment-phases.html) and [Operational considerations](../before-you-deploy/operational_considerations.html).
+See also: [Deployment phases](../before-you-deploy/deployment-phases.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
 
 ## Data migration
 
@@ -102,6 +102,6 @@ Reach out to your CDC NBS point of contact before you begin deployment. CDC prov
 - Identify the right configuration for your jurisdiction
 - Connect you with other jurisdictions that have already migrated
 
-See also: [Choose your configuration](../before-you-deploy/choose-your-configuration.html) and [Operational considerations](../before-you-deploy/operational_considerations.html).
+See also: [Choose your configuration](../before-you-deploy/choose-your-configuration.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
 
 **Contact:** [nbs@cdc.gov](mailto:nbs@cdc.gov)

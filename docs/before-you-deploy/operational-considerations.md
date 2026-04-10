@@ -4,10 +4,12 @@ layout: page
 parent: Before you deploy
 nav_order: 0
 description: Summarizes organizational, financial, and operational factors that affect NBS 7 migration planning.
+redirect_from:
+	- /docs/before-you-deploy/operational_considerations.html
+	- /docs/before-you-deploy/operational_considerations/
 ---
 
 # Operational considerations
-{: .no_toc }
 
 This page covers organizational, financial, and operational factors that affect NBS 7 migration planning. Some of these factors involve decisions or timelines that extend beyond the technical team and might be worth raising with others in your organization early in your planning process.
 

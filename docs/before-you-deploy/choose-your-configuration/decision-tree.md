@@ -34,7 +34,7 @@ Has your jurisdiction obtained state IT security approval for cloud hosting and 
 - **Yes, or approval is not required** → Go to [Step 3](#step-3-internal-technical-capacity).
 - **No, or unknown** → Begin the approval process now, then continue planning. Approval is required before deployment. Go to [Step 3](#step-3-internal-technical-capacity).
 
-Because NBS handles PII and PHI, state IT might still need to review and approve the deployment, even in vendor-managed models. See [State IT security approval takes time](../operational_considerations.html#state-it-security-approval-takes-time).
+Because NBS handles PII and PHI, state IT might still need to review and approve the deployment, even in vendor-managed models. See [State IT security approval takes time](../operational-considerations.html#state-it-security-approval-takes-time).
 {: .note }
 
 ## Step 3: Internal technical capacity
@@ -58,33 +58,40 @@ Where does your NBS 6 currently run?
 - **Already on AWS or Azure** → Staying on the same provider avoids additional procurement and approval steps. Go to [Step 5](#step-5-case-volume).
 - **On-premises** → Your migration includes a cloud migration as well as an NBS 7 deployment. Plan for additional time and resources. Go to [Step 5](#step-5-case-volume).
 
-## Step 5: Case volume
-
-What is the approximate annual reportable disease case volume in your jurisdiction?
-
-- **Lower volume** (fewer than approximately 50,000 cases per year) → Go to [Step 7a](#step-7a-data-intake-needs-lower-volume-jurisdictions).
-- **Higher volume** (50,000+ cases per year), or significant growth expected → Go to [Step 6](#step-6-reporting-needs).
-
-{: .note }
-The 50,000 case threshold is a planning guideline, not a hard rule. Validate your volume assessment with CDC before making a final configuration decision.
-
-## Step 6: Reporting needs
+## Step 5: Reporting needs
 
 Does your jurisdiction need near-real-time reporting (data available within minutes to hours, rather than 24 hours)?
 
-- **No** → Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) to discuss your specific needs. **NBS 7** or **NBS 7 + DI API add-on** might be appropriate starting points.
-- **Yes** → Go to [Step 7b](#step-7b-data-intake-needs-higher-volume-jurisdictions).
+- **Yes** → Go to [Step 6a](). 
+- **No** → Go to [Step 6b]().
 
-## Step 7a: Data intake needs (lower-volume jurisdictions)
 
-Does your jurisdiction receive high volumes of electronic lab reports (ELRs) or electronic case reports (eCRs)?
-
-- **No** → Recommended starting point: **NBS 7**. Validate with CDC before deploying.
-- **Yes** → Recommended starting point: **NBS 7 + DI API add-on**. Validate with CDC before deploying.
-
-## Step 7b: Data intake needs (higher-volume jurisdictions)
+## Step 6a: Data intake needs (real-time reporting path)
 
 Does your jurisdiction receive high volumes of electronic lab reports (ELRs) or electronic case reports (eCRs)?
 
-- **No** → Recommended starting point: **NBS 7 + RTR add-on**. Validate with CDC before deploying.
-- **Yes** → Recommended starting point: **NBS 7 + RTR + DI API add-ons**. Validate with CDC before deploying.
+- **Yes** → Recommended starting point: **NBS 7 + RTR + DI API add-ons**.
+- **No** → Recommended starting point: **NBS 7 + RTR add-on**.
+
+For information on cloud-hosting costs based on your jurisdiction's record volume, see [Case volume for cost estimation](#case-volume-for-cost-estimation).
+
+## Step 6b: Data intake needs (batch reporting path)
+
+Does your jurisdiction receive high volumes of electronic lab reports (ELRs) or electronic case reports (eCRs)? 
+
+- **Yes** → Recommended starting point: **NBS 7 + DI API add-on**.
+- **No** → Recommended starting point: **NBS 7 (no add-ons)**.
+
+For information on cloud-hosting costs based on your jurisdiction's record volume, see [Case volume for cost estimation](#case-volume-for-cost-estimation).
+
+---
+
+## Case volume for cost estimation
+
+What is the approximate annual reportable disease case volume in your jurisdiction?
+
+- **Lower volume** (fewer than approximately 50,000 cases per year) → Use the Small STLT profile in the [NBS 7 Resource Estimator (NBS Central login required)](https://nbscentral.cdc.gov/documents/872) to estimate cloud-hosting costs.
+- **Higher volume** (50,000+ cases per year) or significant growth expected → Use the Medium or Large STLT profile in the [NBS 7 Resource Estimator (NBS Central login required)](https://nbscentral.cdc.gov/documents/872) to estimate cloud-hosting costs.
+
+{: .note }
+The 50,000 case threshold is a planning guideline, not a hard rule. Validate your volume assessment with CDC before making a final configuration decision.

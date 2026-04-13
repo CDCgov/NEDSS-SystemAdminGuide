@@ -22,14 +22,13 @@ This section sets out the detailed steps to installing NBS 7 Case Notification, 
 
 ## Overview
 
-Case notifications comprise four services and should be deployed in the following order:
+Case notifications comprise three services and should be deployed in the following order:
 
   1. [Debezium](../../deploy-nbs7/microservices-deployment/case-notification/debezium.html)
-  1. [XML HL7 parser service](../../deploy-nbs7/microservices-deployment/case-notification/xml-hl7-parser.html)
   1. [Data extraction service](../../deploy-nbs7/microservices-deployment/case-notification/data-extraction.html)
   1. [Notification service](../../deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html)
 
-Services 2-4 require you to first set up [Keycloak configuration](#keycloak-configuration). After you deploy all required services for case notifications, validate with [API testing](../../deploy-nbs7/microservices-deployment/case-notification/api-testing.html).
+Services 2 and 3 require you to first set up [Keycloak configuration](#keycloak-configuration). After you deploy all required services for case notifications, validate with [API testing](../../deploy-nbs7/microservices-deployment/case-notification/api-testing.html).
 
 ## Considerations
 
@@ -44,7 +43,7 @@ Case notifications require [NND Sync](../../deploy-nbs7/microservices-deployment
 
 ## Keycloak configuration
 
-The XML HL7 parser, data extraction, and notification services require Keycloak. Complete this configuration before deploying them.
+The data extraction and notification services require Keycloak. Complete this configuration before deploying them.
 
 1. In each service's `values.yaml`, confirm the Keycloak auth URI. In the default configuration this value should not need to change unless the name or namespace of the Keycloak pod is modified.
 
@@ -54,5 +53,4 @@ The XML HL7 parser, data extraction, and notification services require Keycloak.
 
 1. For each of the three services, import the corresponding Keycloak profile from [`NEDSS-Helm/charts/keycloak/extra`](https://github.com/CDCgov/NEDSS-Helm/tree/main/charts/keycloak/extra).
 
-> The Notification service also requires the Keycloak client ID and secret for the XML HL7 Parser service. These are configured with the `api.clientId` and `api.secret` fields in its `values.yaml`. See [Notification service](../../deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html) for more information.
 {: .note }

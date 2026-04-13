@@ -71,7 +71,7 @@ A sample HL7 message has already been added to the request body section. Click o
 
 ### Step 3: Checking detailed status of Ingested Data API in Classic NBS
 
-Click on the Checking Status of Ingested Data API in New-Data-Ingestionpostman collection and then click on Authorization tab. Paste the token that was generated via Token Generation API into the token text box.
+Click on the Checking Status of Ingested Data API in New-Data-Ingestion postman collection and then click on Authorization tab. Paste the token that was generated via Token Generation API into the token text box.
 
 Click on the Headers section and enter the values within the clientid and clientsecret headers. Within the API URL, append the UUID generated as part of the response from the Ingesting Data API. Click on Send button. By Default, all the status goes to QUEUED status.
 

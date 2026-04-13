@@ -19,7 +19,7 @@ This page walks through deploying the Case Notification Service for case notific
    image:
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-case-notification-service/case-notification-service"
      pullPolicy: IfNotPresent
-    tag: <release-version-tag> # for example, v1.0.1
+     tag: <release-version-tag> # for example, v1.0.1
    ```
 
 1. Update JDBC and service configuration values:
@@ -36,14 +36,8 @@ This page walks through deploying the Case Notification Service for case notific
 
    kafka:
      cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-
-   api:
-     host: "https://<data.EXAMPLE_DOMAIN>/hl7-parser"
-     clientId: "EXAMPLE_XML-HL7-Parser_CLIENT_ID"
-     secret: "EXAMPLE_XML-HL7-Parser_CLIENT_SECRET"
    ```
 
-   > The `api.clientId` and `api.secret` fields must match the Keycloak client credentials for the XML HL7 Parser service, not this service. Retrieve them from the `xml-hl7-parser-keycloak-client` credentials in the NBS realm.
    {: .note }
 
 1. Install the service:

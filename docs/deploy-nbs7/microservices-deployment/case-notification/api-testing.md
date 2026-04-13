@@ -20,12 +20,10 @@ Use this page to validate ingress, PHIMNS property configuration, and supporting
 
 ## Ingress setup
 
-- All three case notification services use the same Data Ingestion ingress. Reuse the existing setup as needed.
+- Each notification service uses the same Data Ingestion ingress. Reuse the existing setup as needed.
   - **Data Extraction**: [NEDSS-Helm/charts/dataingestion-service/templates/ingress.yaml at 10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml)
 
   - **Case Notification**: [NEDSS-Helm/charts/dataingestion-service/templates/ingress.yaml at 10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml)
-
-  - **HL7 Parser**: [NEDSS-Helm/charts/dataingestion-service/templates/ingress.yaml at 10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml)
 
 ## PHIMNS properties
 
@@ -78,10 +76,6 @@ Use this page to validate ingress, PHIMNS property configuration, and supporting
 1. **Data-Extraction-Service**
    - [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)
    - [NEDSS-Helm/charts/data-extraction-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/data-extraction-service/templates/deployment.yaml)
-
-1. **Xml-Hl7-Parser-Service**
-   - [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications](https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/main/README.md)
-   - [NEDSS-Helm/charts/xml-hl7-parser-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/xml-hl7-parser-service/templates/deployment.yaml)
 
 ### Case notification Liquibase
 

@@ -8,7 +8,6 @@ description: Case study for a small, self-managed AWS deployment based on Montan
 ---
 
 ## Case study: Small jurisdiction, self-managed, AWS
-{: .no_toc }
 
 *Based on Montana's deployment.*
 

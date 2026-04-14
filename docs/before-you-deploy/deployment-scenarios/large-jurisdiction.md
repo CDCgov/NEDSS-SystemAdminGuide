@@ -8,7 +8,6 @@ description: Case study for a large, vendor-managed NBS Complete deployment at e
 ---
 
 ## Case study: Large jurisdiction, high volume, vendor-managed
-{: .no_toc }
 
 *Based on an enterprise-scale deployment.*
 

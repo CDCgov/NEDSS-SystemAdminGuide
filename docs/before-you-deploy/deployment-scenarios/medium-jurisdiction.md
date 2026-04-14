@@ -8,7 +8,6 @@ description: Case study for a medium jurisdiction with existing Rhapsody middlew
 ---
 
 ## Case study: Medium jurisdiction, existing middleware, RTR
-{: .no_toc }
 
 *Based on Kentucky's deployment.*
 

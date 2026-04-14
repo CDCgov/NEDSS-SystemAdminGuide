@@ -90,11 +90,19 @@ RTR adds the following components to your NBS 7 deployment. For details, see [Ad
 
 ## Add-on: Data Ingestion (DI) API
 
-The DI API is an optional add-on that provides a built-in data transit layer. It accepts incoming public health data in multiple formats and routes it into NBS without requiring third-party middleware.
+The DI API is an optional add-on that provides a built-in data transit layer. It provides a REST API interface for writing data to NBS, acting as a secure intermediary between your middleware and the database.
+
+| Integration Method | Rationale |
+| :--- | :--- |
+| **Direct SQL Write** | Standard for jurisdictions where middleware (Rhapsody) can access the database network directly. |
+| **DI API** | Used when security policies prohibit direct database access from third-party tools or when middleware cannot be co-located with NBS. |
+
+{: .important }
+The DI API is not a replacement for middleware. An integration engine like Rhapsody is still required to preprocess and format data before it is sent to the DI API.
 
 For details, see [Add-on: Data Ingestion (DI) API](../before-you-deploy/component-reference/di-api.html).
 
 {: .note-title }
 > Best for
 >
-> Jurisdictions that do not currently use Rhapsody or Mirth Connect for data ingestion, and want a built-in path for getting data into NBS 7.
+> Jurisdictions with security constraints that prevent third-party tools from writing directly to the network or database.

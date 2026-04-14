@@ -61,7 +61,7 @@ Where does your NBS 6 currently run?
 - **Already on AWS or Azure** → Staying on the same provider avoids additional procurement and approval steps. Go to [Step 5](#step-5-case-volume).
 - **On-premises** → Your migration includes a cloud migration as well as an NBS 7 deployment. Plan for additional time and resources. Go to [Step 5](#step-5-case-volume).
 
-For more information, see [Your cloud provider depends on your existing environment](../operational-considerations.html#your-cloud-provider-depends-on-your-existing-environment) on the Operational Considerations page.
+This step is informational and does not impact your suggested deployment configuration. For more information, see [Your cloud provider depends on your existing environment](../operational-considerations.html#your-cloud-provider-depends-on-your-existing-environment) on the Operational Considerations page.
 {: .note }
 
 ## Step 5: Reporting needs
@@ -74,16 +74,20 @@ Does your jurisdiction need near-real-time reporting (data available within minu
 Real-time reporting adds infrastructure complexity and requires additional cloud resources. For more information, see [Real-Time Reporting adds capability and cost](../operational-considerations.html#real-time-reporting-adds-capability-and-cost) on the Operational Considerations page.
 {: .note }
 
-## Step 6a: Data intake needs (real-time reporting path)
+## Step 6a: Database access requirements (real-time reporting path)
 
-Does your jurisdiction receive high volumes of electronic lab reports (ELRs) or electronic case reports (eCRs)?
+Some jurisdictions have security policies that prohibit third-party tools from writing directly to the database or require an intermediary layer when middleware and the database cannot be co-located.
+
+**Does your jurisdiction require an API layer to abstract database access?**
 
 - **Yes** → Suggested starting point: **NBS 7 + RTR + DI API add-ons**.
 - **No** → Suggested starting point: **NBS 7 + RTR add-on**.
 
-## Step 6b: Data intake needs (batch reporting path)
+## Step 6b: Database access requirements (legacy batch reporting path)
 
-Does your jurisdiction receive high volumes of electronic lab reports (ELRs) or electronic case reports (eCRs)? 
+Some jurisdictions have security policies that prohibit third-party tools from writing directly to the database or require an intermediary layer when middleware and the database cannot be co-located.
+
+**Does your jurisdiction require an API layer to abstract database access?**
 
 - **Yes** → Suggested starting point: **NBS 7 + DI API add-on**.
 - **No** → Suggested starting point: **NBS 7 (no add-ons)**.

@@ -43,13 +43,17 @@ CDC does not support on-premises installations of NBS 7. Your jurisdiction needs
 
 See also: [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html) and [Deployment scenarios](../before-you-deploy/deployment-scenarios.html).
 
-## Your cloud provider depends on your existing environment
+## Align cloud provider with jurisdictional strategy
 
-NBS 7 is fully supported on both AWS and Azure. Both providers host the same NBS 7 Kubernetes workloads, and once infrastructure is provisioned, the Bootstrap Kubernetes services and microservices deployment steps are identical. The difference is only in how the underlying cloud environment is provisioned.
+NBS 7 is fully supported on both Amazon Web Services (AWS) and Microsoft Azure. While the internal microservices and deployment steps are identical across platforms, the initial environment setup depends on your jurisdiction's existing infrastructure and procurement path.
 
-Choose the provider that aligns with your organization's existing infrastructure, contracts, and IT security approvals. If your jurisdiction already runs NBS 6 on AWS or Azure, continuing on the same platform avoids additional procurement and approval steps.
+Choose the provider that best aligns with your organization's current operational state:
 
-See also: [Deploy cloud infrastructure on AWS](../deploy-nbs7/deploy-on-aws.html), [Deploy cloud infrastructure on Azure](../deploy-nbs7/deploy-on-azure.html), and [Cluster infrastructure](../deploy-nbs7/cluster-infrastructure.html).
+- **Existing Infrastructure:** If your jurisdiction currently runs NBS 6 or other critical systems on a specific cloud platform, remaining on that platform avoids the need for new IT security approvals.
+- **Contractual Agreements:** Utilize existing Enterprise Agreements or pre-approved cloud spending to streamline procurement.
+- **Staff Expertise:** Align the choice with the existing skills of your cloud engineering or IT administration teams.
+
+See also: [Assess your readiness > Cloud infrastructure](assess-your-readiness.html/#cloud-infrastructure).
 
 ## Technical staffing requirements differ from NBS 6
 

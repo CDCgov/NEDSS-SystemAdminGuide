@@ -43,7 +43,7 @@ The networking layer manages traffic routing and secure communication between yo
 The infrastructure layer provides the container orchestration platform and cloud services that host and run NBS 7 components.
 
 - Kubernetes cluster (EKS on AWS, AKS on Azure)
-- NGINX Ingress Controller (being replaced by Traefik in future releases)
+- Traefik Ingress Controller (replaced NGINX as of NBS 7.12)
 - AWS or Azure managed services
 - Terraform infrastructure automation modules
 - Load balancer
@@ -65,7 +65,7 @@ The application layer contains the NBS 7 services and legacy NBS 6 components th
 {: .note-title }
 > Best for
 >
-> Jurisdictions with smaller IT teams, limited cloud experience, or a goal to establish a stable foundation before adding advanced features.
+> The base NBS 7 without add-ons might be suitable for jurisdictions with smaller IT teams, limited cloud experience, or a goal to establish a stable foundation before adding advanced features.
 
 ---
 
@@ -84,7 +84,7 @@ RTR adds the following components to your NBS 7 deployment. For details, see [Ad
 {: .note-title }
 > Best for
 >
-> Jurisdictions with higher case volumes, a need for faster data turnaround, or plans to connect to advanced analytics tools.
+> NBS 7 with the RTR add-on might be suitable for jurisdictions with higher case volumes, a need for faster data turnaround, or plans to connect to advanced analytics tools.
 
 ---
 
@@ -105,4 +105,4 @@ For details, see [Add-on: Data Ingestion (DI) API](../before-you-deploy/componen
 {: .note-title }
 > Best for
 >
-> Jurisdictions with security constraints that prevent third-party tools from writing directly to the network or database.
+> NBS 7 with the DI API add-on might be suitable for jurisdictions with security constraints that prevent third-party tools from writing directly to the network or database.

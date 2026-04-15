@@ -43,7 +43,7 @@ The modern backend API layer for NBS 7, built to replace NBS 6 functionality inc
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Provides modernized versions of core NBS features including patient search, event search, patient profile, and investigation management. As NBS 7 development progresses, additional NBS 6 features will migrate into this API layer. |
-| When you need it | Always. The Modernization API is a core component of NBS Core and is required for all NBS 7 configurations. |
+| When you need it | Always. The Modernization API is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires Legacy NBS 6 and NBS Gateway. Exposes functionality to the NBS Web UI. |
 
 ## NBS Web UI
@@ -52,8 +52,8 @@ The modern React/TypeScript frontend for NBS 7 features.
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Provides the user interface for modernized NBS 7 functionality. STLT users see a composite interface — some screens are served by the new NBS Web UI, while others continue to be served by the legacy NBS 6 UI. The NBS Gateway manages which interface handles each request. |
-| When you need it | Always. The NBS Web UI is a core component of NBS Core and is required for all NBS 7 configurations. |
+| What it does in NBS 7 | Provides the user interface for modernized NBS 7 functionality. STLT users see a composite interface. Some screens are served by the new NBS Web UI, while others continue to be served by the legacy NBS 6 UI. The NBS Gateway manages which interface handles each request. |
+| When you need it | Always. The NBS Web UI is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires NBS Gateway and the NBS Modernization API. |
 
 ## NBS Gateway
@@ -63,7 +63,7 @@ A routing service (built on Spring Cloud Gateway) that manages traffic between t
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Implements the strangler fig pattern by routing requests based on path. Requests for modernized features (such as patient search) go to NBS 7 services. All other requests go to Legacy NBS 6. This routing layer is what allows NBS 6 and NBS 7 to run simultaneously during migration without users needing to switch between systems. |
-| When you need it | Always. NBS Gateway is a core component of NBS Core and is required for all NBS 7 configurations. |
+| When you need it | Always. NBS Gateway is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires Legacy NBS 6, the NBS Modernization API, and the NBS Web UI. Sits behind the infrastructure layer ingress controller. |
 
 <!-- COMMENTING OUT PER EMMA/MAGGIE UNTIL 7.13
@@ -82,32 +82,32 @@ A Python FastAPI service intended to replace SAS-based report execution in NBS 7
 
 ## Elasticsearch
 
-An open source search and analytics engine optimized for speed and scalability.
+An open-source search and analytics engine optimized for speed and scalability.
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Powers real-time patient and event search in NBS 7. NBS 6 required batch processing before search results reflected recent data, so this is a key improvement. [Nifi](#nifi) populates Elasticsearch indices from the NBS database. |
-| When you need it | Always. Elasticsearch is a core component of NBS Core and is required for all NBS 7 configurations. |
+| What it does in NBS 7 | Powers real-time patient and event search in NBS 7. NBS 6 requires batch processing before search results can reflect recent data, so this is a key improvement. [Nifi](#nifi) populates Elasticsearch indices from the NBS database. |
+| When you need it | Always. Elasticsearch is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires Nifi to populate its indices from the NBS database. Search functionality in the NBS Web UI and Modernization API depends on Elasticsearch. |
 
 ## Nifi
 
-An open source data flow automation tool for moving and transforming data between systems.
+An open-source data flow automation tool for moving and transforming data between systems.
 
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Continuously moves data from the NBS database into Elasticsearch, keeping search indices current. Without Nifi, Elasticsearch indices would not reflect recent changes to patient and investigation records. |
-| When you need it | Always. Nifi is a core component of NBS Core and is required for all NBS 7 configurations. |
+| When you need it | Always. Nifi is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires the NBS database (NBS\_ODSE) as its data source and Elasticsearch as its destination. |
 
 ## Keycloak
 
-An open source identity and access management platform.
+An open-source identity and access management platform.
 
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Handles authentication for NBS 7, including token management and single sign-on (SSO) integration. Keycloak supports OAuth and SAML, which means your jurisdiction can integrate NBS 7 with an existing identity provider such as Okta or Active Directory Federation Services (ADFS) rather than managing a separate set of NBS credentials. |
-| When you need it | Always. Keycloak is a core component of NBS Core and is required for all NBS 7 configurations. |
+| When you need it | Always. Keycloak is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires network access to your identity provider if you are integrating with an existing SSO system. All NBS 7 services that require authentication depend on Keycloak. |
 
 > Health department leaders
@@ -127,14 +127,14 @@ The core SQL Server databases that store operational and reference data for NBS.
 
 ## Infrastructure and networking layer components
 
-The following components make up the infrastructure and networking layers of NBS Core. They are provisioned and managed primarily through Terraform and Helm, and most do not require configuration decisions from IT admins during the planning phase. They are documented here for awareness.
+The following components make up the infrastructure and networking layers of NBS 7. They are provisioned and managed primarily through Terraform and Helm, and most do not require configuration decisions from IT admins during the planning phase. They are documented here for awareness.
 
-Full configuration guidance is in the [NBS 7 System Administrator Guide](https://cdcgov.github.io/NEDSS-SystemAdminGuide/).
+Full configuration guidance is in the [Deploy NBS 7](../../deploy-nbs7.html) section of this guide.
 
 | Component | What it does in NBS 7 |
 |:---|:---|
 | Kubernetes (EKS/AKS) | Container orchestration platform that hosts and manages all NBS 7 services. EKS is used on AWS; AKS is used on Azure. |
-| NGINX Ingress Controller | Manages inbound traffic routing into the Kubernetes cluster. Currently being replaced by Traefik in future releases — confirm current status with your CDC NBS point of contact. |
+| Traefik Ingress Controller | Manages inbound traffic routing into the Kubernetes cluster. Traefik replaced NGINX as of the NBS 7.12 release. |
 | Terraform modules | Infrastructure-as-code tooling that provisions your cloud environment, including VPC, Kubernetes cluster, storage, and managed services. Four modules cover network/VPC, NBS 6 database layer, NBS 7 cluster, and application services. |
 | Cert Manager | Automates provisioning and renewal of TLS/SSL certificates for encrypted traffic within and into the NBS 7 environment. |
 | FluentBit | Lightweight log forwarding agent that collects and routes logs from NBS 7 services for monitoring and troubleshooting. |

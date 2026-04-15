@@ -18,7 +18,7 @@ Components in this reference are organized by deployment scope:
 - [Add-on: Real-Time Reporting (RTR)](../before-you-deploy/component-reference/rtr.html)
 - [Add-on: Data Ingestion (DI) API](../before-you-deploy/component-reference/di-api.html)
 
-For deployment configuration details including configuration parameters, Helm chart values, and step-by-step setup instructions, see the **NBS 7 System Administrator Guide**.
+For deployment configuration details including configuration parameters, Helm chart values, and step-by-step setup instructions, see the [Deploy NBS 7](../deploy-nbs7.html) section of this guide.
 
 ---
 

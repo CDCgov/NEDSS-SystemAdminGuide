@@ -9,7 +9,7 @@ description: A step-by-step decision tree that guides jurisdictions to a suggest
 
 # NBS 7 configuration decision tree
 
-Use the decision tree to identify a potential starting configuration. Answer each question in order, then validate your result with the CDC NBS team before you begin deployment.
+Use this decision tree to determine a baseline deployment model for your jurisdiction. Answer the questions in sequence to identify the suggested architecture for your infrastructure and integration needs.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -20,61 +20,54 @@ Use the decision tree to identify a potential starting configuration. Answer eac
 {: .important }
 The decision tree identifies a potential starting point, not a final answer. CDC provides free pre-deployment consultation to help jurisdictions validate their configuration choice. Connect with the CDC NBS team at [nbs@cdc.gov](mailto:nbs@cdc.gov) before you begin deployment.
 
-## Step 1: Hosting model
-
-Is your jurisdiction planning to self-host and self-maintain NBS 7, or will you use a vendor to host or maintain it?
-
-- **Self-hosted, self-maintained** → Go to [Step 2](#step-2-state-it-security-approval).
-- **Vendor-hosted or vendor-maintained** → Go to [Vendor-managed deployment](vendor-managed-deployment.html). Your vendor should complete steps 4–8 of this decision tree to identify your suggested configuration.
-
-## Step 2: State IT security approval
+## Step 1: State IT security approval
 
 Has your jurisdiction obtained state IT security approval for cloud hosting and the required software technologies (Kubernetes, Terraform, Docker)?
 
-- **Yes, or approval is not required** → Go to [Step 3](#step-3-internal-technical-capacity).
-- **No, or unknown** → It's a good idea to begin the approval process now, then continue planning. Approval is typically required before deployment. Go to [Step 3](#step-3-internal-technical-capacity).
+- **Yes, or approval is not required** → Go to [Step 2](#step-2-internal-technical-capacity).
+- **No, or unknown** → It's a good idea to begin the approval process now, then continue planning. Approval is typically required before deployment. Go to [Step 2](#step-2-internal-technical-capacity).
 
 Because NBS handles PII and PHI, state IT might still need to review and approve the deployment, even in vendor-managed models. For more information, see [State IT security approval takes time](../operational-considerations.html#state-it-security-approval-takes-time) on the Operational Considerations page.
 {: .note }
 
-## Step 3: Internal technical capacity
+## Step 2: Internal technical capacity
 
 Does your jurisdiction have IT staff with skills in Kubernetes, Terraform, and cloud infrastructure management, roughly half or more of the required skill set?
 
-- **Yes** → Go to [Step 4](#step-4-current-nbs-6-hosting).
-- **No** → Go to [Step 3a](#step-3a-external-assistance).
+- **Yes** → Go to [Step 3](#step-3-current-nbs-6-hosting).
+- **No** → Go to [Step 2a](#step-2a-external-assistance).
 
 For more information on technical capacity, see [Technical staffing requirements differ from NBS 6](../operational-considerations.html#technical-staffing-requirements-differ-from-nbs-6) on the Operational Considerations page.
 {: .note }
 
-## Step 3a: External assistance
+## Step 2a: External assistance
 
 Will your jurisdiction obtain external assistance from a contractor, vendor, or consultant for deployment and ongoing maintenance?
 
-- **Yes** → Go to [Step 4](#step-4-current-nbs-6-hosting). Note that your vendor or contractor must be capable of Kubernetes-based deployments on AWS or Azure. See [Vendor-managed deployment](vendor-managed-deployment.html) for what to look for.
+- **Yes** → Go to [Step 3](#step-3-current-nbs-6-hosting). Note that your vendor or contractor must be capable of Kubernetes-based deployments on AWS or Azure. See [Vendor-managed deployment](vendor-managed-deployment.html) for what to look for.
 - **No** → **Stop.** Build internal capacity or identify a vendor before proceeding. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) for support resources.
 
-## Step 4: Current NBS 6 hosting
+## Step 3: Current NBS 6 hosting
 
 Where does your NBS 6 currently run?
 
-- **Already on AWS or Azure** → Staying on the same provider avoids additional procurement and approval steps. Go to [Step 5](#step-5-case-volume).
-- **On-premises** → Your migration includes a cloud migration as well as an NBS 7 deployment. Plan for additional time and resources. Go to [Step 5](#step-5-case-volume).
+- **Already on AWS or Azure** → Staying on the same provider avoids additional procurement and approval steps. Go to [Step 4](#step-4-reporting-needs).
+- **On-premises** → Your migration includes a cloud migration as well as an NBS 7 deployment. Plan for additional time and resources. Go to [Step 4](#step-4-reporting-needs).
 
 This step is informational and does not impact your suggested deployment configuration. For more information, see [Your cloud provider depends on your existing environment](../operational-considerations.html#your-cloud-provider-depends-on-your-existing-environment) on the Operational Considerations page.
 {: .note }
 
-## Step 5: Reporting needs
+## Step 4: Reporting needs
 
 Does your jurisdiction need near-real-time reporting (data available within minutes to hours, rather than 24 hours)?
 
-- **Yes** → Go to [Step 6a](#step-6a-data-intake-needs-real-time-reporting-path). 
-- **No** → Go to [Step 6b](#step-6b-data-intake-needs-batch-reporting-path).
+- **Yes** → Go to [Step 5a](#step-5a-database-access-requirements-real-time-reporting-path).
+- **No** → Go to [Step 5b](#step-5b-database-access-requirements-legacy-batch-reporting-path).
 
 Real-time reporting adds infrastructure complexity and requires additional cloud resources. For more information, see [Real-Time Reporting adds capability and cost](../operational-considerations.html#real-time-reporting-adds-capability-and-cost) on the Operational Considerations page.
 {: .note }
 
-## Step 6a: Database access requirements (real-time reporting path)
+## Step 5a: Database access requirements (real-time reporting path)
 
 Some jurisdictions have security policies that prohibit third-party tools from writing directly to the database or require an intermediary layer when middleware and the database cannot be co-located.
 
@@ -83,7 +76,7 @@ Some jurisdictions have security policies that prohibit third-party tools from w
 - **Yes** → Suggested starting point: **NBS 7 + RTR + DI API add-ons**.
 - **No** → Suggested starting point: **NBS 7 + RTR add-on**.
 
-## Step 6b: Database access requirements (legacy batch reporting path)
+## Step 5b: Database access requirements (legacy batch reporting path)
 
 Some jurisdictions have security policies that prohibit third-party tools from writing directly to the database or require an intermediary layer when middleware and the database cannot be co-located.
 
@@ -92,7 +85,7 @@ Some jurisdictions have security policies that prohibit third-party tools from w
 - **Yes** → Suggested starting point: **NBS 7 + DI API add-on**.
 - **No** → Suggested starting point: **NBS 7 (no add-ons)**.
 
-The Data Ingestion (DI) API does not replace middleware such as Rhapsody or Mirth Connect. For more information, see [The Data Ingestion API adds a secure integration option](../operational-considerations.html#the-data-ingestion-api-adds-a-secure-integration-option) on the Operational Considerations page.
+For more information, see [The Data Ingestion API adds a secure integration option](../operational-considerations.html#the-data-ingestion-api-adds-a-secure-integration-option) on the Operational Considerations page.
 {: .note }
 
 ---

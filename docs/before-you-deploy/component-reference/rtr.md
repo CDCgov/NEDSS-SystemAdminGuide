@@ -10,7 +10,7 @@ nav_enabled: true
 
 # Component reference: Real-Time Reporting (RTR) add-on
 
-RTR is an optional add-on that provides an event-driven reporting pipeline for near-real-time reporting. RTR replaces the legacy MasterETL batch process. During validation, both might run briefly in parallel to confirm that RTR output is accurate. Once validation is complete, retire MasterETL.
+RTR is an optional add-on that provides an event-driven reporting pipeline for near-real-time reporting. RTR replaces the legacy MasterETL batch process. During validation, both might run briefly in parallel to confirm that RTR output is accurate. Once validation is complete, plan to retire MasterETL.
 
 The following components are added to your NBS 7 deployment when you choose to deploy the RTR add-on.
 
@@ -34,7 +34,7 @@ An open-source Change Data Capture (CDC) platform.
 
 ## Kafka and Kafka Connect
 
-Apache Kafka is an open source event-streaming platform. Kafka Connect is the framework that moves data between Kafka and other systems.
+Apache Kafka is an open-source event-streaming platform. Kafka Connect is the framework that moves data between Kafka and other systems.
 
 If your jurisdiction chooses to use RTR but continue with batch reporting, Kafka is not required for that reporting path. Only near-real-time RTR reporting requires Kafka and Kafka Connect.
 {: .note }
@@ -46,7 +46,7 @@ If your jurisdiction chooses to use RTR but continue with batch reporting, Kafka
 
 ## RTR domain services
 
-A unified Spring Boot service that transforms streaming data from Kafka into reportable public health records. Previously implemented as five separate entity-specific services (investigation, person, observation, organization, and LDF data), these are being consolidated into a single `reporting-pipeline-service` application to reduce deployment complexity and operational overhead.
+A unified Spring Boot service that transforms streaming data from Kafka into reportable public health records. Previously implemented as five separate entity-specific services (investigation, person, observation, organization, and LDF data), NBS 7 consolidates the services into a single `reporting-pipeline-service` application to reduce deployment complexity and operational overhead.
 
 | Attribute | Description |
 |:---|:---|

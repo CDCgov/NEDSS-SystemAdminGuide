@@ -7,7 +7,6 @@ description: Covers the technical prerequisites an STLT should meet before begin
 ---
 
 # Assess your readiness for NBS 7
-{: .no_toc }
 
 This page helps you assess whether NBS 7 is a viable option for your jurisdiction before you commit to a migration.
 

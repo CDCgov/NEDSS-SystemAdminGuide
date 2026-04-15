@@ -28,5 +28,5 @@ The following table shows which NBS 6 versions have been tested and verified as 
 | 7.6    | No | No | No | <span class="text-green">✓ Yes</span> | No |
 | 7.5    | No | No | No | No | <span class="text-green">✓ Yes</span> |
 
-> This table reflects verified compatibility data as of NBS 7.11.1. Compatibility data for versions not listed has not been established.
+> This table reflects verified compatibility data as of the latest release of NBS 7.x. Compatibility data for versions not listed has not been established.
 {: .note }

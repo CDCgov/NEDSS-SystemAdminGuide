@@ -32,7 +32,7 @@ This page walks through deploying Elasticsearch using the `elasticsearch-efs` He
    ```yaml
    image:
       repository: "quay.io/us-cdcgov/cdc-nbs-modernization/elasticsearch"
-      tag: <release-version-tag> # for example, v1.0.1
+      tag: <release-version-tag> // for example, v1.0.2
    ```
 
 1. Install Elasticsearch:

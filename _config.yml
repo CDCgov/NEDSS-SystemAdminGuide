@@ -11,12 +11,9 @@ title: NBS System Administrator Guide
 
 description: National Electronic Disease Surveillance System Base System (NBS) System Administrator Guide
 
-# Canonical URL for the deployed site — used by JTD to build absolute links
-# and by the Jekyll sitemap plugin.
-# TEMP: set to preview site for redirect testing — change back before merging to main:
-#   url: https://cdcgov.github.io
-#   baseurl: /NEDSS-SystemAdminGuide
-url: https://jburgh.github.io
+# Canonical URL for the deployed site — used by JTD to build absolute links and by the Jekyll sitemap plugin.
+url: https://cdcgov.github.io
+baseurl: /NEDSS-SystemAdminGuide
 
 # -----------------------------------------------------------------------------
 # Theme and visual identity

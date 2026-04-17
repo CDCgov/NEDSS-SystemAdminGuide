@@ -74,7 +74,8 @@ last_edit_time_format: "%b %e %Y at %I:%M %p"
 # Content Security Policy headers. Do not change until CSP policy is reviewed.
 # -----------------------------------------------------------------------------
 
-footer_content: "<p style=\"font-size: 12px; font-style: italic;\">&copy; <script>document.write(new Date().getFullYear())</script> Centers for Disease Control and Prevention (CDC). All Rights Reserved.</p>"
+# Comment out the CDC copyright footer by request from @Alex Bielen (2026-04-17).
+# footer_content: "<p style=\"font-size: 12px; font-style: italic;\">&copy; <script>document.write(new Date().getFullYear())</script> Centers for Disease Control and Prevention (CDC). All Rights Reserved.</p>"
 
 # -----------------------------------------------------------------------------
 # Callouts (admonition blocks)

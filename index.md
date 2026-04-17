@@ -40,5 +40,5 @@ For more information on NBS, see the official CDC [National Electronic Disease S
 
 | Date         | Description        | Author |
 |:-------------|:------------------|:-------|
-| April 16, 2026 | Site restructure | Jill Shaheen |
+| April 17, 2026 | Full site restructure | Jill Shaheen, Skylight Digital |
 | August 19, 2025 | 7.11.0 Minor Release | Anand Logan, Upasana Pattnaik, Kashyap Ramakur, Aaron Chapman, Duc Nguyen, Chuck Moss, Serban Zamfir |

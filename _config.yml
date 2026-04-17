@@ -11,15 +11,18 @@ title: NBS System Administrator Guide
 
 description: National Electronic Disease Surveillance System Base System (NBS) System Administrator Guide
 
-# Canonical URL for the deployed site — used by JTD to build absolute links
-# and by the Jekyll sitemap plugin.
-url: https://cdcgov.github.io/NEDSS-SystemAdminGuide/
+# Canonical URL for the deployed site — used by JTD to build absolute links and by the Jekyll sitemap plugin.
+url: https://cdcgov.github.io
+baseurl: /NEDSS-SystemAdminGuide
 
 # -----------------------------------------------------------------------------
 # Theme and visual identity
 # -----------------------------------------------------------------------------
 
 theme: just-the-docs
+
+plugins:
+  - jekyll-redirect-from
 
 # Custom color scheme — defined in _sass/color_schemes/colors.scss.
 # The value here must match the filename (without .scss).
@@ -44,9 +47,8 @@ aux_links:
 # To also surface H3 subsections, change max_level to 3.
 # -----------------------------------------------------------------------------
 
-toc:
-  min_level: 2   # Start TOC at H2 (H1 is reserved for the page title)
-  max_level: 2   # Stop at H2 — only top-level sections appear in TOC
+kramdown:
+  toc_levels: 2..2   # {:toc} includes H2 only — H1 is the page title, H3+ are too granular
 
 # -----------------------------------------------------------------------------
 # Page-level features
@@ -72,7 +74,8 @@ last_edit_time_format: "%b %e %Y at %I:%M %p"
 # Content Security Policy headers. Do not change until CSP policy is reviewed.
 # -----------------------------------------------------------------------------
 
-footer_content: "<p style=\"font-size: 12px; font-style: italic;\">&copy; <script>document.write(new Date().getFullYear())</script> Centers for Disease Control and Prevention (CDC). All Rights Reserved.</p>"
+# Comment out the CDC copyright footer by request from @Alex Bielen (2026-04-17).
+# footer_content: "<p style=\"font-size: 12px; font-style: italic;\">&copy; <script>document.write(new Date().getFullYear())</script> Centers for Disease Control and Prevention (CDC). All Rights Reserved.</p>"
 
 # -----------------------------------------------------------------------------
 # Callouts (admonition blocks)
@@ -84,19 +87,19 @@ footer_content: "<p style=\"font-size: 12px; font-style: italic;\">&copy; <scrip
 
 callouts:
   highlight:
-    color: yellow          # Yellow scale — title-less; use for inline emphasis
+    color: purple          # Purple scale — title-less; use for inline emphasis
   important:
     title: Important
-    color: blue            # Blue scale — requirements, critical prerequisites
+    color: yellow          # Yellow scale — required actions and prerequisites
   new:
     title: New
     color: green           # Green scale — recently added content or features
   note:
     title: Note
-    color: yellow          # Yellow scale — helpful context that isn't critical
+    color: blue            # Blue scale — helpful context that isn't critical
   warning:
     title: Warning
-    color: red             # Red scale — destructive actions or data-loss risks
+    color: red             # Red scale — destructive actions, risks, or breakage
 
 # -----------------------------------------------------------------------------
 # Collections — non-standard content directories Jekyll should process

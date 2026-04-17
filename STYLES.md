@@ -10,7 +10,7 @@ This guide documents conventions that are actually in use in the repo. It does n
 
 | Level | Tag | When to use |
 |-------|-----|-------------|
-| H1 | `# Heading` | **Write this as the first line of body content, matching the front matter `title:`.** JTD does not inject the title automatically — omitting it leaves the page with no H1. Never write more than one H1. |
+| H1 | `# Heading` | **Write this as the first line of body content.** JTD does not inject the title automatically, so omitting it leaves the page with no visible page heading. Keep one H1 per page. The H1 can be longer and more descriptive than the front matter `title:` used in navigation. |
 | H2 | `## Heading` | Major sections. These appear in the in-page table of contents. |
 | H3 | `### Heading` | Subsections within an H2. These do **not** appear in the TOC (configured in `_config.yml` — `toc.max_level: 2`). |
 | H4+ | `#### Heading` | Use sparingly. If you need H4, the section is probably too deep — consider restructuring. |
@@ -19,19 +19,69 @@ This guide documents conventions that are actually in use in the repo. It does n
 
 ```markdown
 ---
-title: Kubernetes Bootstrapping
+title: Kubernetes setup
 layout: page
 nav_order: 2
 parent: Initial Kubernetes Deployment
 ---
 
-# Kubernetes Bootstrapping
-{: .no_toc }
+# Kubernetes setup for NBS 7
+
+This is an overview paragraph.
+
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 ## Before you begin
 ```
 
-The `# Heading` matches the front matter `title:` exactly. Every page needs it — JTD shows the title in the nav and breadcrumbs, but only your H1 creates the visible page heading. The first section heading after the H1 should be `##`.
+Every page needs an H1. JTD shows `title:` in navigation and breadcrumbs, but only your H1 creates the visible page heading in content. Keep `title:` concise for navigation, and use the H1 to provide full page context. The first section heading after the H1 should be `##`.
+
+### 1.0.1 Navigation Titles (Sidebar)
+
+Use the front matter `title:` as the navigation label, and keep it short enough to scan easily in the sidebar.
+
+- Remove redundancy: if the section context already provides detail, shorten the child title.
+- Use actionable language for task pages: use a verb phrase such as "Transfer data".
+- Handle acronyms carefully: use common acronyms (for example, API) and avoid uncommon abbreviations.
+- Prioritize clarity: prefer plain language over internal shorthand.
+
+Examples:
+
+- Full page H1: Managing OAuth 2.0 credentials
+  Nav title (`title:`): OAuth credentials
+- Full page H1: Retrieving data sets using API
+  Nav title (`title:`): Data sets
+- Full page H1: Getting started with the Core SDK
+  Nav title (`title:`): Core SDK
+
+## 1.1 Page Layout Order
+
+Use this page layout sequence for content pages:
+
+1. H1 as the first heading in the body (descriptive page heading)
+1. Brief intro text directly under the H1 (one sentence for reference pages; one to three sentences for concept, task, and landing pages)
+1. `On this page` TOC block
+1. First H2 section immediately after the TOC block
+
+**Required pattern:**
+
+```markdown
+# Descriptive page title
+
+Brief intro text.
+
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## First section heading
+```
 
 ---
 
@@ -48,7 +98,7 @@ Callouts are styled block quotes. JTD applies the callout style based on a CSS c
 
 ### Available types
 
-#### `note` — Yellow
+#### `note` — Blue
 
 Use for helpful context, clarifications, or background information that readers may find useful but can skip without consequences.
 
@@ -57,7 +107,7 @@ Use for helpful context, clarifications, or background information that readers 
 {: .note }
 ```
 
-#### `important` — Blue
+#### `important` — Yellow
 
 Use for requirements, prerequisites, or steps that must be completed before proceeding. The reader cannot skip this.
 
@@ -84,7 +134,7 @@ Use to flag content that documents a recently added feature or a significant cha
 {: .new }
 ```
 
-#### `highlight` — Yellow (no label)
+#### `highlight` — Purple (no label)
 
 Use for inline callouts where you want visual emphasis without a title label. Useful for tips or one-liners that don't need a formal label.
 
@@ -183,21 +233,69 @@ SELECT * FROM nbs_case WHERE jurisdiction_code = 'GA';
 
 Use descriptive link text. The link text should tell the reader where they are going or what the target document covers.
 
-**Do this:**
+### 4.1 Internal cross-links (within this doc set)
+
+For links to other pages in this guide, use a relative HTML path from the current file to the target page.
+
+Do not link to `.md` files for internal navigation links.
+
+**Example conversion:**
+
+- Source page link target in repo: `../deploy-nbs7/set-up-cloud-infrastructure.md`
+- Link to use from a page in `docs/before-you-deploy/`: `../deploy-nbs7/set-up-cloud-infrastructure.html`
+
+**How to build the link:**
+
+1. Start from the current page's directory.
+1. Navigate relatively to the target page.
+1. Use the target page's `.html` path in the Markdown link.
+
+Avoid `../../docs/...` or similar "up-and-back" paths in content. Those are harder to maintain and are not needed for internal navigation.
+
+**Anchor links:**
+
+Use standard heading anchors on the HTML target when linking to a section:
 
 ```markdown
-See the [Keycloak installation guide](../5_keycloak/1_keycloak_installation.html) for prerequisites.
-Refer to the [Just the Docs configuration reference](https://just-the-docs.com/docs/configuration/).
-```
-
-**Not this:**
-
-```markdown
-Click [here](../5_keycloak/1_keycloak_installation.html) for more information.
-See [this page](https://just-the-docs.com/docs/configuration/) for details.
+See [NBS 7 core components](component-reference/nbs-core-components.html#nbs-modernization-api).
 ```
 
 External links do not need special treatment in JTD — they render as standard links and open in the same tab by default.
+
+### 4.2 Redirects
+
+Use redirects when a page has moved and you need old URLs to continue working.
+
+**Implement redirects:**
+
+1. Add `redirect_from:` on the destination page, meaning the page that should receive traffic from the old URL.
+1. List only old built-site URLs under `redirect_from:`.
+1. Indent each redirect URL with 2 spaces.
+1. Include both forms when relevant: the `.html` path and the trailing-slash path.
+
+**Front matter example:**
+
+```yaml
+---
+title: Prerequisites for AWS
+layout: page
+parent: Deploy on AWS
+nav_order: 1
+redirect_from:
+  - /docs/2_prerequisites/prereq.html
+  - /docs/2_prerequisites/prereq/
+description: Prepare your AWS cloud environment before you provision AWS for NBS 7.
+---
+```
+
+**Test redirects:**
+
+After changing `redirect_from` or `_config.yml`:
+
+1. Use `bundle exec jekyll serve --livereload` (or restart your Docker preview process) to restart local preview.
+1. Then `bundle exec jekyll build` to verify redirect artifacts are generated.
+1. Confirm that Jekyll generated a redirect file for the old URL under `_site/docs`.
+1. Test the old URL in browser.
 
 ---
 
@@ -220,7 +318,7 @@ External links do not need special treatment in JTD — they render as standard 
 |------|-------|
 | `terraform-plan-output.png` | `screenshot1.png` |
 | `keycloak-realm-settings.png` | `Keycloak_Settings.PNG` |
-| `kubernetes-pod-status-healthy.png` | `image.png` |
+| `kubernetes-pod-status-healthy.png` | `k8spodstatushealthy.png` |
 
 **Storage:** Place images in an `images/` subfolder within the relevant `docs/` section. For example, images for Keycloak docs go in `docs/5_keycloak/images/`.
 
@@ -306,7 +404,7 @@ some command
    > Run this only after verifying your credentials.
    {: .warning }
 
-2. Second step.
+1. Second step.
 ```
 
 **Paragraphs between steps** also break the list if unindented. If a note applies to the next step, put it inside that step as a callout rather than between steps as a bare paragraph.

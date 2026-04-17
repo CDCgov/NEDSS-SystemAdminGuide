@@ -33,10 +33,10 @@ JTD callouts use a `-000` background tint and `-300` foreground accent from a sh
 | Callout type | Foreground (`-300`) | Background (`-000`) | Ratio | AA normal | Notes |
 |---|---|---|---|---|---|
 | Note (blue) | #2474B6 | #E6EFF7 | 4.25 : 1 | ⚠️ Borderline | Slightly below 4.5:1. Body text inside callouts inherits `$body-heading-color` (#1A1A1A) at 17.40:1 — this pairing applies only to the accent border/title element. |
-| Warning (yellow) | #ECB046 | #FBEDD6 | 1.67 : 1 | Fail | Body text contrast is still high; the accent color alone fails. |
-| Important (red) | #CB3E6E | #F8E4EB | 3.88 : 1 | Fail | Falls short of 4.5:1 for normal text; passes 3.0:1 large-text threshold. |
+| Important (yellow) | #ECB046 | #FBEDD6 | 1.67 : 1 | Fail | Body text contrast is still high; the accent color alone fails. |
+| Warning (red) | #CB3E6E | #F8E4EB | 3.88 : 1 | Fail | Falls short of 4.5:1 for normal text; passes 3.0:1 large-text threshold. |
 | New (green) | #9ACC54 | #EAF5DC | 1.67 : 1 | Fail | Body text contrast is still high; the accent color alone fails. |
-| Highlight (purple) | (see [Callouts](#callouts) section) | — | — | See below | |
+| Highlight (purple) | #A1518B | #F1E9EE | 4.14 : 1 | Fail | Slightly below 4.5:1 for normal text; body text contrast remains high. |
 
 **Important caveat:** The failing ratios above apply to the `-300` accent color against the `-000` tint — most visibly in the left border stripe and any title text rendered in that color. Paragraph body text inside all callouts inherits the standard dark body color and maintains high contrast. Before treating any callout as non-compliant, verify in a built-site browser using DevTools color picker to confirm which elements actually render in the accent color.
 
@@ -49,10 +49,10 @@ Five callout types are configured in `_config.yml`. Each maps to a color scale:
 | Type | CSS class | Color scale | Use for |
 |------|-----------|-------------|---------|
 | Note | `.note` | Blue | Supplementary information; tips |
-| Warning | `.warning` | Yellow | Irreversible actions; potential data loss |
-| Important | `.important` | Red | Critical requirements; hard blockers |
+| Important | `.important` | Yellow | Critical requirements; hard blockers |
+| Warning | `.warning` | Red | Irreversible actions; potential data loss |
 | New | `.new` | Green | Feature availability; version requirements |
-| Highlight | `.highlight` | Purple | (see below) |
+| Highlight | `.highlight` | Purple | Inline emphasis without a title label |
 
 Callout syntax:
 
@@ -69,7 +69,7 @@ Using color as the only means of conveying information fails WCAG 2.1 Success Cr
 
 **Current status:** Zero uses of `{: .highlight }` exist in `docs/`. The callout is defined but unused.
 
-**Recommendation:** Remove the `highlight` entry from `_config.yml` and the corresponding purple color scale from `colors.scss`. If a purple callout is needed in the future, add a `title:` field to the `_config.yml` entry before use.
+**Recommendation:** Keep usage rare. If the site begins using `highlight`, verify that nearby copy still communicates meaning without relying on color alone.
 
 ## Images
 
@@ -164,4 +164,4 @@ The following issues are documented and tracked. They represent theme or infrast
 | Callout accent colors | Yellow-on-yellow-tint (1.67:1) and green-on-green-tint (1.67:1) fail WCAG AA for accent elements. Body text contrast is unaffected. | Known; body text passes. Accent-only failure pending upstream theme resolution. |
 | Red callout | Red-300 on red-000 (3.88:1) fails AA normal text threshold for accent elements. | Known; body text passes. |
 | Blue callout | Blue-300 on blue-000 (4.25:1) is borderline — 0.25 below the 4.5:1 AA normal threshold for accent elements. | Known; body text passes. Verify in built site. |
-| Highlight callout | No `title:` text label; color is the sole type indicator. | Unused in `docs/`; recommend removing from `_config.yml`. |
+| Highlight callout | No `title:` text label; color can become the sole type indicator if used incorrectly. | Unused in `docs/`; use sparingly and pair with clear wording. |

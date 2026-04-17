@@ -17,7 +17,6 @@ description: National Electronic Disease Surveillance System Base System (NBS) S
 #   url: https://cdcgov.github.io
 #   baseurl: /NEDSS-SystemAdminGuide
 url: https://jburgh.github.io
-baseurl: /CDCgov-NEDSS-SystemAdminGuide-preview
 
 # -----------------------------------------------------------------------------
 # Theme and visual identity

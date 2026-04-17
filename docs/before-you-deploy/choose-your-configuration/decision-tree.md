@@ -54,7 +54,7 @@ Where does your NBS 6 currently run?
 - **Already on AWS or Azure** → Staying on the same provider avoids additional procurement and approval steps. Go to [Step 4](#step-4-reporting-needs).
 - **On-premises** → Your migration includes a cloud migration as well as an NBS 7 deployment. Plan for additional time and resources. Go to [Step 4](#step-4-reporting-needs).
 
-This step is informational and does not impact your suggested deployment configuration. For more information, see [Your cloud provider depends on your existing environment](../operational-considerations.html#your-cloud-provider-depends-on-your-existing-environment) on the Operational Considerations page.
+This step is informational and does not impact your suggested deployment configuration. For more information, see [Align cloud provider with jurisdictional strategy](../operational-considerations.html#align-cloud-provider-with-jurisdictional-strategy) on the Operational Considerations page.
 {: .note }
 
 ## Step 4: Reporting needs

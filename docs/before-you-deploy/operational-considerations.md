@@ -53,7 +53,7 @@ Choose the provider that best aligns with your organization's current operationa
 - **Contractual Agreements:** Utilize existing Enterprise Agreements or pre-approved cloud spending to streamline procurement.
 - **Staff Expertise:** Align the choice with the existing skills of your cloud engineering or IT administration teams.
 
-See also: [Assess your readiness > Cloud infrastructure](assess-your-readiness.html/#cloud-infrastructure).
+See also: [Assess your readiness > Cloud infrastructure](assess-your-readiness.html#cloud-infrastructure).
 
 ## Technical staffing requirements differ from NBS 6
 

@@ -1,5 +1,5 @@
 ---
-title: Verbose truncation warnings
+title: Enable verbose truncation warnings
 layout: page
 parent: Maintain NBS 7
 redirect_from:

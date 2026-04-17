@@ -20,7 +20,7 @@ Before you begin deployment on any cloud provider, confirm that your jurisdictio
 
 Your NBS 6 instance is the foundation for NBS 7. Confirm the following:
 
-- **Compatible version:** Your NBS 6 version must be compatible with your target NBS 7 version. Check the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) before you begin.
+<!-- - **Compatible version:** Your NBS 6 version must be compatible with your target NBS 7 version. Check the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) before you begin. -->
 - **Database access and refresh:** If your current NBS 6 database is hosted on-premises and you plan to move it to the cloud, you must complete a database refresh and ensure that the database is accessible from your test environment. This is typically a jurisdiction-managed procedure using your organization's standard database backup and restore process.
 - **Database server access:** Your cloud environment must have network access to your NBS 6 database server (either on-premises RDS or EC2 instance, depending on your hosting setup). If the database is on-premises, network connectivity must be established before deployment begins.
 - **Related applications:** Any third-party products integrated with NBS 6, such as Rhapsody or SAS, must remain operational during the NBS 7 migration. Confirm that these systems will remain accessible from your NBS 7 environment.
@@ -76,10 +76,12 @@ Your deployment team should include at least one person who has:
 - Familiarity with your organization's cloud provider (AWS or Azure) and cloud networking concepts
 - Understanding of SQL Server database administration, including backup and restore procedures
 
+<!--
 If your team does not have this expertise, you have two options:
 
 - **Build internal capacity:** Train existing staff or hire staff with these skills before you begin deployment.
 - **Vendor-managed deployment:** Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
+-->
 
 ## Software versions
 

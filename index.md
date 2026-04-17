@@ -18,11 +18,13 @@ The NBS 7 System Administration guide helps you prepare for NBS 7, deploy the pl
 
 The content is centered on system administration. It covers readiness and planning work before deployment, phased deployment guidance for NBS 7 infrastructure and services, and maintenance topics for operating environments after go-live.
 
+<!--
 ## In this guide
 
 - [Before you deploy](docs/before-you-deploy.html) covers readiness checks, configuration decisions, compatibility guidance, and pre-deployment planning.
 - [Deploy NBS 7](docs/deploy-nbs7.html) covers infrastructure, microservices, optional add-ons, and deployment validation steps.
 - [Maintain NBS 7](docs/maintain-nbs7.html) covers post-deployment administration and maintenance tasks.
+-->
 
 ## Runtime environment support
 
@@ -38,5 +40,5 @@ For more information on NBS, see the official CDC [National Electronic Disease S
 
 | Date         | Description        | Author |
 |:-------------|:------------------|:-------|
-| April xx, 2026 | Site restructure and before-you-deploy content | Jill Shaheen |
+| April 16, 2026 | Site restructure | Jill Shaheen |
 | August 19, 2025 | 7.11.0 Minor Release | Anand Logan, Upasana Pattnaik, Kashyap Ramakur, Aaron Chapman, Duc Nguyen, Chuck Moss, Serban Zamfir |

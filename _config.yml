@@ -13,8 +13,11 @@ description: National Electronic Disease Surveillance System Base System (NBS) S
 
 # Canonical URL for the deployed site — used by JTD to build absolute links
 # and by the Jekyll sitemap plugin.
-# TEMP: set to preview site for redirect testing — change back to prod URL before merging to main.
-url: https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview
+# TEMP: set to preview site for redirect testing — change back before merging to main:
+#   url: https://cdcgov.github.io
+#   baseurl: /NEDSS-SystemAdminGuide
+url: https://jburgh.github.io
+baseurl: /CDCgov-NEDSS-SystemAdminGuide-preview
 
 # -----------------------------------------------------------------------------
 # Theme and visual identity

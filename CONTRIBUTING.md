@@ -141,6 +141,8 @@ Content with inline HTML that is intentionally used here.
 
 **Link check failures:** Investigate whether the link is genuinely broken. If it's a false positive (e.g., a GitHub URL that returns 429 due to rate limiting), add the URL pattern to `.markdown-link-check.json` with a comment explaining why it's ignored.
 
+Links inside HTML comments (`<!-- ... -->`) are ignored by the repository's link-check scripts. This allows authors to park draft or coming-soon links in commented sections without failing CI.
+
 The production deploy runs only after merge to `main`, not on PRs.
 
 ---

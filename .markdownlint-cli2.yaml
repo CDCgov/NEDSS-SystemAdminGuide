@@ -39,6 +39,11 @@ config:
   # features require inline HTML and Kramdown attribute syntax.
   MD033: false
 
+  # MD060 — Table column style
+  # Disabled: this rule enforces specific pipe-spacing/alignment styles that do
+  # not match established table formatting across existing docs.
+  MD060: false
+
   # MD041 — First line should be a top-level heading
   # Disabled: JTD pages use the title: front matter key as the H1 heading.
   # The first line of body content is typically the TOC block or a paragraph.

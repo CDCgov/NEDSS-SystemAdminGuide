@@ -50,6 +50,10 @@ function stripFencedCodeBlocks(text) {
   return out.join('\n');
 }
 
+function stripHtmlComments(text) {
+  return text.replace(/<!--[\s\S]*?-->/g, '');
+}
+
 function collectHeadingAnchors(mdText) {
   const lines = mdText.split('\n');
   const anchors = new Set();
@@ -129,7 +133,7 @@ const linkRegex = /!?\[[^\]]*\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
 
 for (const sourceFile of allFiles) {
   const raw = fs.readFileSync(sourceFile, 'utf8');
-  const text = stripFencedCodeBlocks(raw);
+  const text = stripHtmlComments(stripFencedCodeBlocks(raw));
 
   let match;
   while ((match = linkRegex.exec(text)) !== null) {

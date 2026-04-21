@@ -20,7 +20,11 @@ Before you begin deployment on any cloud provider, confirm that your jurisdictio
 
 Your NBS 6 instance is the foundation for NBS 7. Confirm the following:
 
+<<<<<<< HEAD
 - **Compatible version:** Your NBS 6 version must be compatible with your target NBS 7 version. Check the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) before you begin.
+=======
+- **Compatible version:** Your NBS 6 version must be compatible with your target NBS 7 version. Check the <!--[NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html)--> NBS 6 and NBS 7 compatibility matrix (coming soon) before you begin.
+>>>>>>> main
 - **Database access and refresh:** If your current NBS 6 database is hosted on-premises and you plan to move it to the cloud, you must complete a database refresh and ensure that the database is accessible from your test environment. This is typically a jurisdiction-managed procedure using your organization's standard database backup and restore process.
 - **Database server access:** Your cloud environment must have network access to your NBS 6 database server (either on-premises RDS or EC2 instance, depending on your hosting setup). If the database is on-premises, network connectivity must be established before deployment begins.
 - **Related applications:** Any third-party products integrated with NBS 6, such as Rhapsody or SAS, must remain operational during the NBS 7 migration. Confirm that these systems will remain accessible from your NBS 7 environment.

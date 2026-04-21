@@ -27,7 +27,11 @@ Before you deploy NBS 7, make sure your environment meets the requirements in ea
 
 Your AWS environment must:
 
+<<<<<<< HEAD
 - Contain a pre-existing AWS account that contains a production instance of NBS 6 that is listed in the [NBS 6 and NBS 7 compatibility matrix](../../before-you-deploy/compatibility.html), plus related third-party products such as Rhapsody and SAS
+=======
+- Contain a pre-existing AWS account that contains a production instance of NBS 6 that is listed in the NBS 6 and NBS 7 compatibility matrix page (coming soon), plus related third-party products such as Rhapsody and SAS
+>>>>>>> main
 - Have a properly configured DNS routing infrastructure
 - Be configured to enable you to create security groups and IAM roles
 - Provide access to NBS 6 databases that are located on an MS SQL Server instance (RDS or EC2)
@@ -72,15 +76,15 @@ Your AWS environment must:
 
 You will need a local or cloud hosted workstation (e.g. CloudShell) with the set of tools required to configure, deploy and maintain the NBS 7 system. The following tools should be installed on a local or cloud-based management machine to support this work:
 
-- **AWS CLI**: Download and installation instructions can be found [here](https://aws.amazon.com/cli/)
-  - Instructions for getting and using AWS credentials for use with the CLI can be found [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
+- **AWS CLI**: Download and installation instructions are in the [AWS CLI documentation](https://aws.amazon.com/cli/)
+  - Instructions for getting and using AWS credentials for use with the CLI are in the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
 - **GitHub CLI**: Download and installation instructions are here:
   <https://cli.github.com/>
-- **Terraform CLI**: Download and installation instructions are [here](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
+- **Terraform CLI**: Download and installation instructions are in the [Terraform CLI installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
   *(Tested through 1.5.5 Terraform, suggest install that specific version rather than the latest non-open source version)*
-- **Helm CLI**: Download and installation instructions are [here](https://helm.sh/docs/intro/install/)
-- **Kubernetes CLI**: Download and installation instructions are [here](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
-- **Optional, but nice to have, eksctl**: Download and installation instructions are [here](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
+- **Helm CLI**: Download and installation instructions are in the [Helm installation guide](https://helm.sh/docs/intro/install/)
+- **Kubernetes CLI**: Download and installation instructions are in the [kubectl installation guide for EKS](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
+- **Optional, but nice to have, eksctl**: Download and installation instructions are in the [eksctl installation guide](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 
 ## Network and database access requirements
 

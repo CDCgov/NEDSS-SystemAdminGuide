@@ -65,6 +65,29 @@ function collectMarkdownFiles() {
   return files.concat(topLevel);
 }
 
+function stripFencedCodeBlocks(text) {
+  const lines = text.split('\n');
+  const out = [];
+  let inFence = false;
+
+  for (const line of lines) {
+    const trimmed = line.trimStart();
+    if (trimmed.startsWith('```') || trimmed.startsWith('~~~')) {
+      inFence = !inFence;
+      out.push('');
+      continue;
+    }
+
+    out.push(inFence ? '' : line);
+  }
+
+  return out.join('\n');
+}
+
+function stripHtmlComments(text) {
+  return text.replace(/<!--[\s\S]*?-->/g, '');
+}
+
 function extractGitHubUrls(text) {
   const urls = new Set();
   const re = /https:\/\/github\.com\/[^\s)\]>]+/g;
@@ -125,7 +148,8 @@ async function main() {
   const urlToFiles = new Map();
 
   for (const file of files) {
-    const text = fs.readFileSync(file, 'utf8');
+    const raw = fs.readFileSync(file, 'utf8');
+    const text = stripHtmlComments(stripFencedCodeBlocks(raw));
     const urls = extractGitHubUrls(text);
     for (const url of urls) {
       if (!urlToFiles.has(url)) urlToFiles.set(url, new Set());

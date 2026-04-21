@@ -39,11 +39,11 @@ configuration files
    > Before you edit `terraform.tfvars` and `terraform.tf` files below, you can reference detailed information for each TF module under `terraform/aws/app-infrastructure` in a README file in each module's directory. Do not edit files in the individual modules.
    {: .note }
 
-1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the instructions [here](https://github.com/CDCgov/NEDSS-Infrastructure/blob/main/terraform/aws/samples/README.md)
+1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions](https://github.com/CDCgov/NEDSS-Infrastructure/blob/main/terraform/aws/samples/README.md)
 1. Review the inbound rules on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
     - a. For example if the `modern-cidr` is `10.20.0.0/16`, there should be at least one rule in a security group associated to your database that allows MSSQL inbound access from your `modern-cidr` block
     ![mssql-inbound-from-modern-cidr](../images/myssql-inbound-from-modern-cidr.png)
-1. Make sure you are authenticated to AWS. Confirm access to the intended account using the following command. (More information about authenticating to AWS can be found at the following [link](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).)
+1. Make sure you are authenticated to AWS. Confirm access to the intended account using the following command. (More information is available in the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).)
 
    ```text
    $ aws sts get-caller-identity

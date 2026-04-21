@@ -1,5 +1,5 @@
 # =============================================================================
-# NBS System Administrator Guide — Jekyll Site Configuration
+# NBS 7 System Administrator Guide — Jekyll Site Configuration
 # Theme: just-the-docs  https://just-the-docs.com
 # =============================================================================
 
@@ -7,9 +7,9 @@
 # Site identity
 # -----------------------------------------------------------------------------
 
-title: NBS System Administrator Guide
+title: NBS 7 System Administrator Guide
 
-description: National Electronic Disease Surveillance System Base System (NBS) System Administrator Guide
+description: National Electronic Disease Surveillance System Base System (NBS 7) System Administrator Guide
 
 # Canonical URL for the deployed site — used by JTD to build absolute links and by the Jekyll sitemap plugin.
 url: https://cdcgov.github.io

@@ -209,6 +209,7 @@ Complete these one-time onboarding steps for RTR setup.
 > USE NBS_ODSE;
 > EXEC sp_changedbowner 'sa';
 > ```
+>
 {: .note }
 
 ## Ongoing database upgrades

@@ -45,7 +45,6 @@ Follow these steps to configure and deploy the Liquibase Helm chart for RTR.
    The following fields define the JDBC connection strings for each NBS database. Each URL
    identifies the SQL Server endpoint, the database name, and the connection security settings.
 
-
     ```yaml
     jdbc:
        # SQL Server system database

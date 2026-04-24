@@ -10,7 +10,16 @@ redirect_from:
 
 # Deploy real-time reporting (RTR) Java services
 
+> The Java reporting services are being consolidated in an upcoming release. This section will be updated when that change lands.
+{: .note }
+
 This page covers deploying the RTR Java services that process streamed events from Kafka and load domain-specific reporting data.
+
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
 
 1. The helm chart for all RTR java services should be available under charts/rtr.
 2. Validate the Kubernetes secret for the database credentials:

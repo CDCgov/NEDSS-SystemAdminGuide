@@ -10,7 +10,7 @@ redirect_from:
 
 # Deploy Liquibase for real-time reporting (RTR)
 
-In RTR deployments, the Liquibase job runs once and applies required SQL Server database changes for onboarding and upgrades.
+In RTR deployments, the Liquibase job runs once and applies required SQL Server database changes for onboarding and upgrades. This page covers steps to deploy the Liquibase Helm chart.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,8 +22,7 @@ In RTR deployments, the Liquibase job runs once and applies required SQL Server 
 
 Follow these steps to configure and deploy the Liquibase Helm chart for RTR.
 
-> Verify that you are connected to the correct Kubernetes cluster before proceeding.
-> Run `kubectl config current-context` to confirm.
+> Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
 {: .important }
 
 1. Locate the Liquibase Helm chart in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/main/charts/liquibase).

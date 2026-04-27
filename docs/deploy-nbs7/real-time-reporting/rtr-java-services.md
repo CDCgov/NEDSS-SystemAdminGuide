@@ -10,105 +10,123 @@ redirect_from:
 
 # Deploy real-time reporting (RTR) Java services
 
+> The Java reporting services are being consolidated in an upcoming release. The service validation URLs reflect the NBS 7.12 configuration.
+{: .warning }
+
 This page covers deploying the RTR Java services that process streamed events from Kafka and load domain-specific reporting data.
 
-1. The helm chart for all RTR java services should be available under charts/rtr.
-2. Validate the Kubernetes secret for the database credentials:
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+> These steps require a Unix-compatible shell. On Windows, use Git Bash, WSL, or an equivalent terminal emulator.
+{: .note }
+
+## Installing RTR Java services
+
+Follow these steps to configure and deploy the RTR Java services Helm chart.
+
+> Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
+{: .important }
+
+1. Locate the Helm chart for all RTR Java services in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/rtr).
+
+1. Validate the Kubernetes secret for database credentials:
 
    ```bash
    kubectl get secret/database-access -o yaml
    ```
 
-   a. Ensure that the secret contains the correct database username and password, kafka cluster, and other necessary configurations.
-      If the secret does not exist, create it using the following command or by applying the provided YAML file
-      (Make sure to replace the placeholders with actual values):
-      Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
+   > Verify that the secret contains the correct database username and password, Kafka cluster, and other required configuration values. If the secret does not exist, create it by applying the provided YAML file. Replace all placeholder values before running:
+   >
+   > Script location: [NEDSS-Helm/nbs-secrets.yaml](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
+   >
+   > ```bash
+   > kubectl apply -f k8-manifests/nbs-secrets.yaml
+   > ```
+   >
+   {: .note }
 
-      ```bash
-      kubectl apply -f k8-manifests/nbs-secrets.yaml
-      ```
-
-3. Validate image repository:
+1. Validate the image repository: <!-- [SME REVIEW: confirm data-reporting-service is the correct consolidated image name] -->
 
    ```yaml
-     global.image.repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+   global.image.repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
    ```
 
-4. Update any feature flag for each of the services:
-   - a. Please ensure `PHCMartETL.bat` is turned off before enabling updates to PublicHealthCaseFact datamart via RTR.
+1. Update feature flags for each service. Verify that `PHCMartETL.bat` is turned off before enabling updates to the PublicHealthCaseFact datamart via RTR:
 
-      ```yaml
-      featureFlag:
-        investigation-reporting:
-           phcDatamartEnable: '''true'''
-      ```
+   ```yaml
+   featureFlag:
+     investigation-reporting:
+       phcDatamartEnable: '''true'''
+   ```
 
-5.Install helm chart for all the RTR java services
+1. Install the Helm chart for all RTR Java services:
 
    ```bash
    helm install rtr . -f values.yaml
    ```
 
-6.Verify if pods are all running
+1. Verify the pods are running:
 
    ```bash
    kubectl get pods
    ```
 
-   Example Expected output:
+   Expected output:
 
    ```text
-      NAME                                                READY   STATUS           RESTARTS             AGE
-      rtr-java-services-investigation-reporting-<hash>    1/1     Running            0                  2m6s
-      rtr-java-services-ldfdata-reporting-<hash>          1/1     Running            0                  2m6s
-      rtr-java-services-observation-reporting-<hash>      1/1     Running            0                  2m6s
-      rtr-java-services-organization-reporting-<hash>     1/1     Running            0                  2m6s
-      rtr-java-services-person-reporting-<hash>           1/1     Running            0                  2m6s
-      rtr-java-services-post-processing-reporting-<hash>  1/1     Running            0                  2m6s
-      ```
+   NAME                                                READY   STATUS    RESTARTS   AGE
+   rtr-java-services-investigation-reporting-<hash>    1/1     Running   0          2m6s
+   rtr-java-services-ldfdata-reporting-<hash>          1/1     Running   0          2m6s
+   rtr-java-services-observation-reporting-<hash>      1/1     Running   0          2m6s
+   rtr-java-services-organization-reporting-<hash>     1/1     Running   0          2m6s
+   rtr-java-services-person-reporting-<hash>           1/1     Running   0          2m6s
+   rtr-java-services-post-processing-reporting-<hash>  1/1     Running   0          2m6s
+   ```
 
-7.Validate services (on browser).
-    The following services should be available at the specified URLs. Replace `<exampledomain>` with your actual domain.
-   Replace `app.EXAMPLE_DOMAIN` with the URL of your modern app as shown in [Table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster)
+1. Validate the services. Replace `<exampledomain>` with your actual domain (see [Deploy NGINX ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster)):
 
-   a. investigation-svc
+   **investigation-svc**
 
    ```text
    https://data.<exampledomain>/reporting/investigation-svc/status
    Expected: Investigation Service Status OK
    ```
 
-   b. person-svc
+   **person-svc**
 
    ```text
    https://data.<exampledomain>/reporting/person-svc/status
    Expected: Person Service Status OK
    ```
 
-   c. observation-svc
+   **observation-svc**
 
    ```text
    https://data.<exampledomain>/reporting/observation-svc/status
    Expected: Observation Service Status OK
    ```
 
-   d. organization-svc
+   **organization-svc**
 
    ```text
    https://data.<exampledomain>/reporting/organization-svc/status
    Expected: Organization Service Status OK
    ```
 
-   e. ldfdata-svc
+   **ldfdata-svc**
 
-  ```text
-  https://data.<exampledomain>/reporting/ldfdata-svc/status
-  Expected: LDFData Service Status OK
-  ```
+   ```text
+   https://data.<exampledomain>/reporting/ldfdata-svc/status
+   Expected: LDFData Service Status OK
+   ```
 
-   f. post-processing-svc
+   **post-processing-svc**
 
-  ```text
-  https://data.<exampledomain>/reporting/post-processing-svc/status
-  Expected: Post Processing Service Status OK
-  ```
+   ```text
+   https://data.<exampledomain>/reporting/post-processing-svc/status
+   Expected: Post Processing Service Status OK
+   ```

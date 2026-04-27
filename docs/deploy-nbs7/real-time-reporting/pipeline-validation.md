@@ -2,7 +2,7 @@
 title: Pipeline validation
 layout: page
 parent: Real-time reporting (preview)
-nav_order: 11
+nav_order: 5
 redirect_from:
   - /docs/7_feature_preview/5_rtr_pipeline_validation.html
   - /docs/7_feature_preview/5_rtr_pipeline_validation/
@@ -18,47 +18,48 @@ Use this page to validate that RTR streaming updates move from ingestion through
 1. TOC
 {:toc}
 
-## Validate via the NBS UI
+## Validate using the NBS UI
 
-This example covers creating a Hepatitis Investigation from the NBS UI and verifying the results in the datamart tables. The data used is synthetic and randomly generated.
+This example uses a synthetic Hepatitis investigation to verify that data flows from the NBS UI through RTR into the reporting datamart tables. The data used is synthetic and randomly generated.
 
-1. Access the NBS UI with the username and password provided for the demo and click **Data Entry** in the top banner.
+1. Sign in to NBS and click **Data Entry** in the top banner.
 
-   ![rtr-validation-via-ui](images/rtr-validation-via-ui.png)
+   ![NBS Data Entry navigation banner with Data Entry option highlighted](images/rtr-validation-via-ui.png)
 
 1. Under **Data Entry**, select **Lab Report** to start a report.
 
-   ![rtr-validation-lab-report](images/rtr-validation-lab-report.png)
+   ![Data Entry menu with Lab Report option highlighted](images/rtr-validation-lab-report.png)
 
-1. Add patient information to the lab report. Entity ID is required to complete the Patient tab. If SSN is selected, the authority should be `Social Security Administration`.
+1. Add patient information to the lab report. Entity ID is required to complete the **Patient** tab. If SSN is selected as the identifier type, set the authority to `Social Security Administration`.
 
-   ![rtr-validation-lab-report-2](images/rtr-validation-lab-report-2.png)
+   ![Lab report Patient tab with Entity ID and SSN authority fields](images/rtr-validation-lab-report-2.png)
 
-1. Select the **Lab Report** tab and fill in the required details. The Program Area for this example is HEP. The **Resulted Test** section is required before submitting. Click **Submit** when done. Any errors will appear in red — correct them and resubmit.
+1. Select the **Lab Report** tab and fill in the required details. For this example, set **Program Area** to HEP. Complete the **Resulted Test** section before submitting. Click **Submit** when done. Correct any errors shown in red and resubmit.
 
-   ![rtr-validation-lab-report-3](images/rtr-validation-lab-report-3.png)
+   ![Lab Report tab with Program Area set to HEP and Resulted Test section completed](images/rtr-validation-lab-report-3.png)
 
-1. Navigate to the patient record via **Patient Search** or find the lab report in the **Documents Requiring Review** queue. From the patient record, open the **Events** tab to view the lab report.
+1. Navigate to the patient record using **Patient Search** or find the lab report in the **Documents Requiring Review** queue. From the patient record, open the **Events** tab to view the lab report.
 
-   ![rtr-validation-lab-report-4](images/rtr-validation-lab-report-4.png)
+   ![Patient record Events tab showing the submitted lab report](images/rtr-validation-lab-report-4.png)
 
 1. Click **Create Investigation** in the upper right corner.
 
-   ![rtr-validation-lab-report-create-investigation](images/rtr-validation-lab-report-create-investigation.png)
+   ![Patient record with Create Investigation button highlighted](images/rtr-validation-lab-report-create-investigation.png)
 
 1. Select a Hepatitis condition.
 
-   ![rtr-validation-lab-report-create-investigation-2](images/rtr-validation-lab-report-create-investigation-2.png)
+   ![Condition selection screen with a Hepatitis condition highlighted](images/rtr-validation-lab-report-create-investigation-2.png)
 
 1. Complete the Investigation form and click **Submit**.
 
-   ![rtr-validation-lab-report-create-investigation-3](images/rtr-validation-lab-report-create-investigation-3.png)
+   ![Completed Investigation form ready for submission](images/rtr-validation-lab-report-create-investigation-3.png)
 
-1. After 1–2 minutes, verify the data is available in the `PUBLICHEALTHCASEFACT_Modern` and Hepatitis datamarts. Use the Investigation ID from the form in the query below.
+1. After 1–2 minutes, verify the data is available in the `PUBLICHEALTHCASEFACT_Modern` and Hepatitis datamarts. Use the Investigation Local ID from the form to replace the example value in the query below.
 
-   ![rtr-validation-lab-report-create-investigation-4](images/rtr-validation-lab-report-create-investigation-4.png)
+   ![Investigation form showing the Investigation Local ID field](images/rtr-validation-lab-report-create-investigation-4.png)
 
    ```sql
+   -- Replace 'CAS10001017GA01' with the Investigation Local ID from the form
    DECLARE @local_id VARCHAR(20) = 'CAS10001017GA01'
 
    SELECT LASTUPDATE, PHCF.*
@@ -78,24 +79,22 @@ This example covers creating a Hepatitis Investigation from the NBS UI and verif
    WHERE INVESTIGATION_LOCAL_ID IN (@local_id);
    ```
 
-1. If data is missing from the datamart tables, run the query below to check for SQL script errors. If errors persist, contact the support team.
+1. If data is missing from the datamart tables, run the following query to check for SQL script errors. If errors persist, contact support at <mailto:nbs@cdc.gov>.
 
-    ```sql
-    SELECT *
-    FROM RDB_MODERN.DBO.JOB_FLOW_LOG
-    WHERE Status_Type = 'ERROR'
-    ORDER BY batch_id desc;
-    ```
+   ```sql
+   SELECT *
+   FROM RDB_MODERN.DBO.JOB_FLOW_LOG
+   WHERE Status_Type = 'ERROR'
+   ORDER BY batch_id desc;
+   ```
 
-## Validate via ELR ingestion
+## Validate using ELR ingestion
 
-Instead of creating entries through the NBS UI, you can test the pipeline using ELR (Electronic Lab Report) ingestion through the Data Ingestion service. See the Data Ingestion smoke test section in the release documentation for detailed steps.
+Instead of creating entries through the NBS UI, you can test the pipeline using ELR (Electronic Lab Report) ingestion through the Data Ingestion service. See the [Data Ingestion smoke test](../../deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html) for detailed steps.
 
-If Workflow Decision Support (WDS) is configured and a matching algorithm is detected during a HEP ELR ingestion, an investigation is automatically created and added to the investigation queue. If WDS is not configured, the ELR is still ingested successfully and appears in the **Documents Requiring Review** queue. From there, open the HEP lab report and continue from step 5 of the UI validation process above.
+If Workflow Decision Support (WDS) is configured and a matching algorithm is detected during a HEP ELR ingestion, an investigation is automatically created and added to the investigation queue. If WDS is not configured, the ELR is still ingested and appears in the **Documents Requiring Review** queue. Open the HEP lab report and continue from step 5 of the UI validation process above.
 
-The data used for this example is synthetic and randomly generated. Any HEP-related ELR (Hepatitis A, B, C, etc.) can be used.
-
-**Sample Hepatitis A ELR:**
+The data used for this example is synthetic and randomly generated. Any HEP-related ELR (Hepatitis A, B, C, etc.) can be used. The following sample Hepatitis A ELR can be used for testing:
 
 ```text
 MSH|^~\&|HL7 Generator^^|Family Health Center^42D7444477^CLIA|ALDOH^OID^ISO|AL^OID^ISO|202408261214||ORU^R01^ORU_R01|20240826121475|P|2.5.1

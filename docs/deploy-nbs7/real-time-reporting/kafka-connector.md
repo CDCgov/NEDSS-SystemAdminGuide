@@ -10,26 +10,47 @@ redirect_from:
 
 # Deploy the Kafka connector for real-time reporting (RTR)
 
-This page covers deploying the Kafka sink connector that consumes RTR topics and writes transformed data into reporting tables.
+This page covers steps to deploy the Kafka sink connector that consumes RTR topics and writes transformed data into reporting tables.
 
-1. The helm chart for Kafka connector should be available under `charts/kafka-connect-sink`.
+## On this page
+{: .no_toc .text-delta }
 
-1. Validate the image repository and tag:
+1. TOC
+{:toc}
+
+> These steps require a Unix-compatible shell. On Windows, use Git Bash, WSL, or an equivalent terminal emulator.
+{: .note }
+
+## Installing the Kafka connector
+
+Follow these steps to configure and deploy the Kafka connector Helm chart for RTR.
+
+> Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
+{: .important }
+
+1. Locate the Kafka connector Helm chart in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/kafka-connect-sink).
+
+1. Configure `values.yaml`. Replace all placeholder values before installation.
+
+   To retrieve your Kafka bootstrap server endpoints, see [Get bootstrap brokers](https://docs.aws.amazon.com/msk/latest/developerguide/msk-get-bootstrap-brokers.html) in the AWS MSK documentation.
 
    ```yaml
-   image: confluentinc/cp-kafka-connect
-   tag: <release-version-tag> e.g v1.0.1
-   ```
+   image:
+     # Kafka Connect image
+     repository: confluentinc/cp-kafka-connect
+     # Replace with the target release version tag, e.g. v1.0.1
+     tag: <release-version-tag>
 
-1. Update `values.yaml` with the RDB_modern hostname, username, password, and Kafka bootstrap server names:
-
-   ```yaml
    sqlServerConnector:
      config:
-       connection.url: jdbc:sqlserver://nbs-db.EXAMPLE_FIXME.nbspreview.com:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true;,
-       connection.user: EXAMPLE_FIXME,
-       connection.password: EXAMPLE_FIXME,
+       # [SME REVIEW: confirm databaseName should be rdb_modern, not rdb]
+       connection.url: "jdbc:sqlserver://nbs-db.EXAMPLE_FIXME.nbspreview.com:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true"
+       # SQL Server username for reporting database
+       connection.user: "EXAMPLE_FIXME"
+       connection.password: "EXAMPLE_FIXME"
+
    kafka:
+     # Kafka bootstrap server endpoint from AWS MSK
      bootstrapServers: "EXAMPLE_FIXME"
    ```
 
@@ -45,11 +66,21 @@ This page covers deploying the Kafka sink connector that consumes RTR topics and
    kubectl get pods
    ```
 
-1. Validate the service:
+1. Validate the service.
 
-   - This is an internal service with no ingress. Validation should be part of [RTR Pipeline Validation](../../deploy-nbs7/real-time-reporting/pipeline-validation.html).
-   - If the service has trouble connecting to the database, run this command to reset the ConfigMap:
+   > The Kafka connector is an internal service with no ingress. Validate it as part of [RTR pipeline validation](../../deploy-nbs7/real-time-reporting/pipeline-validation.html).
+   {: .note }
 
-   ```bash
-   kubectl delete configmap cp-kafka-connect-sqlserver-connect
-   ```
+After Debezium deploys successfully, continue to [Deploy Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html).
+
+## Troubleshooting
+
+If issues persist after initial troubleshooting, contact support at <mailto:nbs@cdc.gov>.
+
+### Database connection errors
+
+If the service has trouble connecting to the database, run the following command to reset the ConfigMap:
+
+```bash
+kubectl delete configmap cp-kafka-connect-sqlserver-connect
+```

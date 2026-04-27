@@ -53,7 +53,7 @@ If you encounter issues during database setup, contact support at <mailto:nbs@cd
    ```
 
 1. Verify that the following classic ETL batch jobs have completed successfully:
-   - `MasterEtl.bat`
+   - `MasterETL.bat`
    - `PHCMartETL.bat`
    - `covid19ETL.bat`
 

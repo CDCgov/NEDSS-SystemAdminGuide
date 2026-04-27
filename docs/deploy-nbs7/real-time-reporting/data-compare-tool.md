@@ -2,7 +2,7 @@
 title: Data Compare
 layout: page
 parent: Real-time reporting (preview)
-nav_order: 12
+nav_order: 6
 redirect_from:
   - /docs/7_feature_preview/6_data_compare_tool.html
   - /docs/7_feature_preview/6_data_compare_tool/
@@ -22,55 +22,60 @@ This page covers deploying and using the Data Compare tool to validate RTR outpu
 
 The Data Compare tool is an optional RTR validation service that allows STLT users to compare data processed by RTR against the classic ETL pipeline and identify differences.
 
-> This service is optional. STLTs may choose to install it only if they require RTR validation capabilities.
+> This service is optional. STLTs can choose to install it only if they require RTR validation capabilities.
 {: .note }
 
-The tool consists of two containerized services that communicate asynchronously via Kafka:
+The tool consists of two containerized services that communicate asynchronously through Kafka:
 
-- **Data Compare API** — pulls and prepares data from designated tables, then uploads it to an S3 bucket
-- **Data Compare Processor** — retrieves data from the S3 bucket and performs the comparison logic
+- **Data Compare API** - pulls and prepares data from designated tables, then uploads it to a cloud storage bucket
+- **Data Compare Processor** - retrieves data from the cloud storage bucket and performs the comparison logic
 
 Database changes are managed by Liquibase, integrated within the `DataCompareAPI` service. Schema changes are applied automatically during deployment. The database objects in the following directory are for reference only: [NEDSS-DataCompare/DataCompareAPIs/.../db/data_internal](https://github.com/CDCgov/NEDSS-DataCompare/tree/main/DataCompareAPIs/src/main/resources/db/data_internal)
 
 ## Prerequisites
 
-- Access to an AWS S3 bucket for data exchange
+Before deploying the Data Compare tool, verify the following:
+
+- Access to a cloud storage bucket for data exchange between the API and Processor services. These steps currently use Amazon S3. If you are not using Amazon S3, consult your cloud administrator for equivalent storage configuration.
+
 - Keycloak configured with the Data Compare API profile: [NEDSS-Helm/charts/keycloak/extra](https://github.com/CDCgov/NEDSS-Helm/tree/main/charts/keycloak/extra)
 
-In your `values.yaml`, provide the Keycloak auth URI:
+If your Keycloak pod uses a name or namespace other than the default, update the `authUri` in your `values.yaml`:
 
 ```yaml
 authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 ```
 
-> This value only needs to change if the Keycloak pod's name or namespace is modified.
+> These steps require a Unix-compatible shell. On Windows, use Git Bash, WSL, or an equivalent terminal emulator.
 {: .note }
+> Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
+{: .important }
 
-## Deploy via Helm
+## Deploy the Data Compare API
 
-### Data Compare API
+Follow these steps to configure and deploy the Data Compare API Helm chart.
 
-Helm chart location: `charts/data-compare-api-service`
+The Helm chart is located in `charts/data-compare-api-service` in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/data-compare-api-service).
 
-1. Validate the image tag in `values.yaml`:
+1. Configure `values.yaml`. Replace all placeholder values before installation:
 
    ```yaml
    image:
+     # Data Compare API image
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-compare-api-service"
      pullPolicy: IfNotPresent
-     tag: <release-version-tag>  # e.g. v1.0.1
-   ```
+     # Replace with the target release version tag, e.g. v1.0.1
+     tag: <release-version-tag>
 
-1. Update JDBC and other configuration values:
-
-   ```yaml
    ingressHost: "data.EXAMPLE_DOMAIN"
    jdbc:
+     # SQL Server endpoint
      dbserver: "EXAMPLE_DB_ENDPOINT"
      username: "EXAMPLE_ODSE_DB_USER"
      password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
    s3:
+     # AWS-specific: replace with your AWS Region and S3 bucket name
      region: "AWS REGION"
      bucketName: "S3 BucketName"
    ```
@@ -87,38 +92,40 @@ Helm chart location: `charts/data-compare-api-service`
    kubectl get pods
    ```
 
-1. Validate the service by opening the Swagger UI:
+1. Validate the service by opening the Swagger UI. Replace `<data.EXAMPLE_DOMAIN>` with your actual domain:
 
    ```text
    https://<data.EXAMPLE_DOMAIN>/comparison/swagger-ui/index.html
    ```
 
-### Data Compare Processor
+## Deploy the Data Compare Processor
 
-Helm chart location: `charts/data-compare-processor-service`
+Follow these steps to configure and deploy the Data Compare Processor Helm chart.
+
+The Helm chart is located in `charts/data-compare-processor-service` in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/data-compare-processor-service).
 
 > The Processor is a Kafka consumer microservice and does not expose any API endpoints.
 {: .note }
 
-1. Validate the image tag in `values.yaml`:
+1. Configure `values.yaml`. Replace all placeholder values before installation:
 
    ```yaml
    image:
+     # Data Compare Processor image
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-compare-processor-service"
      pullPolicy: IfNotPresent
-     tag: <release-version-tag>  # e.g. v1.0.1
-   ```
+     # Replace with the target release version tag, e.g. v1.0.1
+     tag: <release-version-tag>
 
-1. Update JDBC and other configuration values:
-
-   ```yaml
    ingressHost: "data.EXAMPLE_DOMAIN"
    jdbc:
+     # SQL Server endpoint
      dbserver: "EXAMPLE_DB_ENDPOINT"
      username: "EXAMPLE_ODSE_DB_USER"
      password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
    s3:
+     # AWS-specific: replace with your AWS Region and S3 bucket name
      region: "AWS REGION"
      bucketName: "S3 BucketName"
    ```
@@ -135,24 +142,24 @@ Helm chart location: `charts/data-compare-processor-service`
    kubectl get pods
    ```
 
-### Ingress
+## Configure ingress
 
-The Data Compare API uses the same ingress as the data ingestion service. Reuse the ingress config as needed: [dataingestion-service/templates/ingress.yaml](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml#L99)
+The Data Compare API uses the same ingress as the data ingestion service. Reuse the ingress configuration as needed: [dataingestion-service/templates/ingress.yaml](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml#L99)
 
 ## Verify the deployment
 
-Confirm both services are running without crashes:
+Confirm both services are running without errors:
 
 ```bash
 kubectl get pods
 kubectl logs <pod-name>
 ```
 
-The system is ready when both services are healthy and the Processor begins consuming from Kafka.
+Both services are ready when they are healthy and the Processor begins consuming from Kafka.
 
 ## Use the Data Compare tool
 
-The comparison process relies on the `Data_Compare_Config` table, which is created and populated by Liquibase when the Data Compare API is deployed. The table comes preloaded with records containing table names and queries that determine what data to compare.
+The comparison process relies on the `Data_Compare_Config` table, which Liquibase creates and populates when the Data Compare API deploys. The table comes preloaded with records containing table names and queries that determine what data to compare.
 
 To start a comparison, call:
 
@@ -162,13 +169,16 @@ POST /comparison/api/data-compare
 
 Pass the `runNowMode` header to control scope:
 
-- `true` — runs only on records in the config table where `runNow = true`; resets `runNow` to `false` when complete
-- `false` — runs on all records in the config table
+- `true` - runs only on records in the config table where `runNow = true`; resets `runNow` to `false` when complete
+- `false` - runs on all records in the config table
 
-This is an asynchronous endpoint. If authentication passes and there are no logical errors, it returns a success response immediately. The actual comparison runs in the background.
+This is an asynchronous endpoint. If authentication passes and there are no logical errors, it returns a success response immediately. The comparison runs in the background.
 
-**Data flow:**
+The following diagram shows the end-to-end data flow:
 
 ```text
 API → Pull data from SQL table → Upload to S3 → Kafka → Processor → Pull from S3 → Perform comparison → Upload results to S3
 ```
+
+> This data flow uses Amazon S3 as the storage provider. If you are not using Amazon S3, the upload and retrieval steps differ based on your cloud provider.
+{: .note }

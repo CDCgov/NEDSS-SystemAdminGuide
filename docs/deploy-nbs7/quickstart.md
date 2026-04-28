@@ -32,8 +32,8 @@ This quick start installs and configures the following resources.
 ### Terraform-managed resources
 
 - Modern VPC, subnets, and route tables
-- EKS cluster and nodes
-- Network load balancer
+- Amazon Elastic Kubernetes Service (Amazon EKS) cluster and nodes
+- Network Load Balancer (NLB)
 - MSK
 - Amazon Managed Service for Prometheus
 - Amazon Managed Grafana
@@ -43,7 +43,7 @@ This quick start installs and configures the following resources.
 
 ### Manual configuration
 
-- Route53 updates: create DNS entries in Route53 to point app and data URLs to the network load balancer.
+- Route53 updates: create DNS entries in Route53 to point app and data URLs to the Network Load Balancer.
 
 ### NBS 7 core services
 
@@ -121,8 +121,8 @@ terraform apply
 ### Validate infrastructure
 {: .no_toc }
 
-- Confirm VPC, EKS cluster, subnets, and node groups are created.
-- Verify EKS cluster authentication and running pods & nodes:
+- Confirm VPC, Amazon EKS cluster, subnets, and node groups are created.
+- Verify Amazon EKS cluster authentication and running pods and nodes:
 
 ```bash
 aws eks --region us-east-1 update-kubeconfig --name <clustername> e.g. cdc-nbs-sandbox
@@ -145,13 +145,13 @@ kubectl get pods -n=ingress-nginx
 ### Create DNS entries in Route53
 {: .no_toc }
 
-- Point the modernized NBS application URL to the new network load balancer in front of your Kubernetes cluster.
+- Point the modernized NBS application URL to the new Network Load Balancer in front of your Kubernetes cluster.
 
 ```bash
 app.<site_name>.<domain>.com
 ```
 
-- Point the data services URL to the new network load balancer in front of your Kubernetes cluster.
+- Point the data services URL to the new Network Load Balancer in front of your Kubernetes cluster.
 
 ```bash
 data.<site_name>.<domain>.com

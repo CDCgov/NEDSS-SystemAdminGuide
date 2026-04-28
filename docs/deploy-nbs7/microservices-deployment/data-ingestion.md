@@ -24,7 +24,7 @@ This page walks through deploying the Data Ingestion service, including database
 ## Before you begin
 
 The DataIngestion service utilizes three databases: NBS_Msgoute, NBS_ODSE and NBS_DataIngest.
-NBS_DataIngest is a new database essential for ingesting, validating Electronic Lab Reports (ELR), converting them into XML payloads, and integrating these XMLs into the NBS_MSGOUT database. It must be created before deploying the app on the EKS cluster.
+NBS_DataIngest is a new database essential for ingesting, validating Electronic Lab Reports (ELR), converting them into XML payloads, and integrating these XMLs into the NBS_MSGOUT database. It must be created before deploying the app on the Amazon EKS cluster.
 
 ### Create the NBS_DataIngest database
 
@@ -79,7 +79,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
    1. Download the zip file for the release.
    1. Find the `values.yaml` file under `charts\dataingestion-service`.
 
-1. Confirm that DNS entries for the following host were created and point to the network load balancer in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned by `nginx-ingress` in the base install steps). Make this change in your authoritative DNS service (for example, Route 53).
+1. Confirm that DNS entries for the following host were created and point to the Network Load Balancer (NLB) in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned in the base install steps). Make this change in your authoritative DNS service (for example, Route 53).
    Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) for reference.
    DataIngestion service application: `data.site_name.example_domain.com`
 1. Set the image repository and tag:

@@ -83,11 +83,11 @@ configuration files
     1. If terraform apply generates errors, review and resolve the errors, and then rerun step d.
 1. Verify Terraform was applied as expected by examining the logs
 1. Verify the [newly created VPC and subnets](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#Home:) were created as expected and confirm that the CIDR blocks you defined exist in the Route Tables
-1. Verify the [EKS Kubernetes cluster](https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/clusters) was created by selecting the cluster and inspecting Resources->Pods, Compute (expect 30+ pods at this point, and 3-5 compute nodes as per the min/max nodes defined in terraform/aws/app-infrastructure/eks-nbs/variables.tf)
+1. Verify the [Amazon Elastic Kubernetes Service (Amazon EKS) cluster](https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/clusters) was created by selecting the cluster and inspecting Resources->Pods, Compute (expect 30+ pods at this point, and 3-5 compute nodes as per the min/max nodes defined in terraform/aws/app-infrastructure/eks-nbs/variables.tf)
 1. Now that the infrastructure has been created using Terraform, deploy Kubernetes support services in the Kubernetes cluster via the following steps
     - a. Start the Terminal/command line:
         - i. Make sure you are still authenticated with AWS (reference the following [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)).
-        - ii. Authenticate into the Kubernetes cluster (EKS) using the following command and the [cluster name you deployed in the environment](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
+      - ii. Authenticate into the Amazon EKS cluster using the following command and the [cluster name you deployed in the environment](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
 
            ```bash
            aws eks --region us-east-1 update-kubeconfig --name <clustername> # e.g. cdc-nbs-sandbox
@@ -96,7 +96,7 @@ configuration files
         - iii. If the above command errors out, check
            - There are no issues with the AWS CLI installation
            - You have set the correct AWS environment variables
-           - You are using the correct cluster name (as per the EKS management console)
+           - You are using the correct cluster name (as shown in the Amazon EKS console)
     - b. Run the following command to check if you are able to run commands to interact with the Kubernetes objects and the cluster.
 
       ```bash

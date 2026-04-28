@@ -75,7 +75,7 @@ After you download and unzip the Helm configuration package, create the Kubernet
 
 ## Deploy Traefik ingress controller
 
-After you create and deploy your Kubernetes secrets, set up the Traefik ingress controller. This section explains how to install Traefik Custom Resource Definitions (CRDs), deploy Traefik for AWS or Azure, deploy NBS ingress resources, and create the DNS records your cluster needs to route traffic. After you complete these steps, configure Cert Manager to manage TLS certificates for your cluster.
+After you create and deploy your Kubernetes secrets, set up the Traefik ingress controller. This section explains how to install Traefik Custom Resource Definitions (CRDs), deploy Traefik for AWS or Azure, deploy NBS ingress resources, and create the DNS records your cluster needs to route traffic. After you complete these steps, [configure Cert Manager](#configure-cert-manager-optional) to manage TLS certificates for your cluster.
 
 ### Install Traefik CRDs
 
@@ -89,95 +89,95 @@ helm install traefik-crds traefik/traefik-crds --namespace traefik --create-name
 
 ### Deploy the Traefik controller
 
-Traefik uses the values in `charts/traefik/values.yaml` (AWS) or `charts/traefik/values-azure.yaml` (Azure) from the `nbs-helm-vX.Y.Z` zip file. These values are preconfigured to set up Prometheus metrics, configure Linkerd sidecar injection, set timeouts, and instruct the Traefik controller to create an AWS Network Load Balancer (EKS) or Azure Internal Load Balancer (AKS).
+The Traefik Helm charts are located in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/traefik). Traefik uses the values in `charts/traefik/values.yaml` (AWS) or `charts/traefik/values-azure.yaml` (Azure) from the `nbs-helm-vX.Y.Z` zip file. These values are preconfigured to set up Prometheus metrics, configure Linkerd sidecar injection, set timeouts, and instruct the Traefik controller to create an Amazon Elastic Kubernetes Service (Amazon EKS) Network Load Balancer (NLB) or Azure Kubernetes Service (AKS) internal load balancer.
 
-Choose the command for your environment:
+1. To create the Traefik Controller within Kubernetes, choose the appropriate command for your environment:
 
-**AWS (EKS):**
+   - **Amazon Elastic Kubernetes Service (Amazon EKS):**
 
-```bash
-helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml --skip-crds
-```
+   ```bash
+   helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml --skip-crds
+   ```
 
-**Azure (AKS):**
+   - **Azure Kubernetes Service (AKS):**
 
-```bash
-helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml --skip-crds
-```
+    ```bash
+    helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml --skip-crds
+    ```
 
-Monitor the deployment status:
+1. Monitor the deployment status:
 
-```bash
-kubectl --namespace traefik get services -o wide -w traefik
-```
+   ```bash
+   kubectl --namespace traefik get services -o wide -w traefik
+   ```
 
-> Use `Ctrl+C` to exit if the command is still running.
-{: .note }
+   > Use `Ctrl+C` to exit if the command is still running.
+   {: .note }
 
-In the AWS Management Console or Azure portal, verify that a load balancer was created and that its target groups point to the EKS or AKS cluster.
+1. In the AWS Management Console or Azure portal, verify that a load balancer was created and that its target groups point to the Amazon EKS or AKS cluster.
+1. Confirm the Traefik pod is running. The pod should show `2/2` for the Traefik and Linkerd sidecar containers:
 
-Confirm the Traefik pod is running. The pod should show `2/2` for the Traefik and Linkerd sidecar containers:
-
-```bash
-kubectl get pods -n traefik
-```
+   ```bash
+   kubectl get pods -n traefik
+   ```
 
 ### Deploy NBS ingress resources
 
 The `nbs-ingress` chart manages all NBS 7 application routing, including Keycloak, NBS Gateway, data ingestion services, and middleware. Deploy it independently of the application charts.
 
-Update the values in `charts/nbs-ingress/values.yaml` with your environment-specific hostnames, or pass them as `--set` flags.
+1. Locate the Traefik Helm charts in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/traefik). Update the values in `charts/nbs-ingress/values.yaml` with your environment-specific hostnames, or pass them as `--set` flags.
+1. Deploy the ingress resources:
 
-Deploy the ingress resources:
+   ```bash
+   helm install nbs-ingress ./nbs-ingress -n default -f ./nbs-ingress/values.yaml
+   ```
 
-```bash
-helm install nbs-ingress ./nbs-ingress -n default -f ./nbs-ingress/values.yaml
-```
+   Or with inline hostname overrides:
 
-Or with inline hostname overrides:
+   ```bash
+   helm install nbs-ingress ./nbs-ingress -n default \
+     --set appHost=app.SITE_NAME.EXAMPLE_DOMAIN \
+     --set dataHost=data.SITE_NAME.EXAMPLE_DOMAIN
+   ```
 
-```bash
-helm install nbs-ingress ./nbs-ingress -n default \
-  --set appHost=app.SITE_NAME.EXAMPLE_DOMAIN \
-  --set dataHost=data.SITE_NAME.EXAMPLE_DOMAIN
-```
+1. Verify the ingress resources were created:
 
-Verify the ingress resources were created:
-
-```bash
-kubectl get ingress -A
-kubectl get ingressroute -A
-kubectl get middleware -A
-```
+   ```bash
+   kubectl get ingress -A
+   kubectl get ingressroute -A
+   kubectl get middleware -A
+   ```
 
 ### Create DNS records
 
-Create A records or CNAME records in your DNS service (for example, Route 53 for AWS or Azure DNS for AKS) pointing the following subdomains to the load balancer. Replace `EXAMPLE_DOMAIN` with your domain name.
+Create A or CNAME records in your DNS service (for example, Route 53 for Amazon EKS or Azure DNS for AKS) pointing the following subdomains to the load balancer.
 
-To find the load balancer address:
+1. Find the load balancer address:
 
-```bash
-kubectl get svc traefik -n traefik
-```
+   ```bash
+   kubectl get svc traefik -n traefik
+   ```
 
-For AWS, `EXTERNAL-IP` is an NLB hostname (for example, `xxxxxx.elb.us-east-2.amazonaws.com`). Create CNAME or Alias A records pointing to this hostname. For Azure, `EXTERNAL-IP` is an IP address. Create A records pointing to this IP.
+1. Create CNAME, A, or ALIAS records that point to the correct hostname. For Amazon EKS, `EXTERNAL-IP` is an NLB hostname (for example, `xxxxxx.elb.us-east-2.amazonaws.com`). For Azure, `EXTERNAL-IP` is an IP address.
 
-> NiFi has known security vulnerabilities. Only add a NiFi DNS entry if you need to administer it directly. Omit it otherwise.
-{: .warning }
+   > NiFi has known security vulnerabilities. Only add a NiFi DNS entry if you need to administer it directly. Omit it otherwise.
+   {: .warning }
 
-| Subdomain | Template | Example |
-|---|---|---|
-| NBS application | `app.site_name.example_domain.com` | `app.fts3.nbspreview.com` |
-| Data services | `data.site_name.example_domain.com` | `data.fts3.nbspreview.com` |
-| NiFi (optional) | `nifi.site_name.example_domain.com` | `nifi.fts3.nbspreview.com` |
+   For the following example hostnames, replace `site_name.example_domain` with your site and domain names.
 
-Verify DNS propagation:
+   | Subdomain | Template | Example |
+   |---|---|---|
+   | NBS application | `app.site_name.example_domain.com` | `app.fts3.nbspreview.com` |
+   | Data services | `data.site_name.example_domain.com` | `data.fts3.nbspreview.com` |
+   | NiFi (use with caution) | `nifi.site_name.example_domain.com` | `nifi.fts3.nbspreview.com` |
 
-```bash
-dnslookup app.SITE_NAME.EXAMPLE_DOMAIN
-```
+1. Verify DNS propagation:
 
-The resolved address should match the Traefik load balancer.
+   ```bash
+   dnslookup app.SITE_NAME.EXAMPLE_DOMAIN
+   ```
+
+   The resolved address should match the Traefik load balancer.
 
 ### Verify the deployment
 
@@ -195,11 +195,11 @@ Verify response headers in browser DevTools (**F12** > **Network** tab):
 - `Cross-Origin-Opener-Policy: same-origin`
 - `Cache-Control: max-age=1209600, immutable` (on static assets such as `.js` and `.css` files)
 
-## Troubleshoot Traefik
+### Troubleshoot Traefik
 
 If issues persist after initial troubleshooting, contact support at <mailto:nbs@cdc.gov>.
 
-### Access the Traefik dashboard
+#### Access the Traefik dashboard
 
 The Traefik dashboard lets you inspect routers, services, and middleware:
 
@@ -209,27 +209,24 @@ kubectl port-forward -n traefik deployment/traefik 9000:9000
 
 Open `http://localhost:9000/dashboard/` in your browser.
 
-### View Traefik logs
+#### View Traefik logs
 
 ```bash
 kubectl logs -n traefik deployment/traefik -c traefik --tail=100
 ```
 
-### Common issues
+#### Common Traefik issues
 
-**418 "I'm a Teapot" response:** No router matched the request. Verify that `ingressClassName: traefik` and the hostname match.
+- **418 "I'm a Teapot" response:** No router matched the request. Verify that `ingressClassName: traefik` and the hostname match.
+- **502 Bad Gateway:** The backend service is not running or there is a port mismatch. Run `kubectl get svc` and `kubectl get endpoints` to check.
+- **TLS certificate errors:** Verify the TLS secret exists:
 
-**502 Bad Gateway:** The backend service is not running or there is a port mismatch. Run `kubectl get svc` and `kubectl get endpoints` to check.
+   ```bash
+   kubectl get secret <secretName>
+   ```
 
-**TLS certificate errors:** Verify the TLS secret exists:
-
-```bash
-kubectl get secret <secretName>
-```
-
-**Traefik pod showing 1/2:** The Linkerd sidecar is not injecting. Verify `linkerd.io/inject: enabled` is set in Traefik values.
-
-**Traefik pod on wrong node (AKS with Windows nodes):** Add `nodeSelector: kubernetes.io/os: linux` to Traefik values.
+- **Traefik pod showing 1/2:** The Linkerd sidecar is not injecting. Verify `linkerd.io/inject: enabled` is set in Traefik values.
+- **Traefik pod on wrong node (AKS with Windows nodes):** Add `nodeSelector: kubernetes.io/os: linux` to Traefik values.
 
 ## Configure cert-manager (optional)
 

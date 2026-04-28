@@ -21,13 +21,13 @@ redirect_from:
 
 ## Overview
 
-The deployment of Modern NBS 7 will complement and build upon the existing NBS 6 system, integrating through the strangler fig pattern. Users will experience a smooth transition between the modern NBS features and legacy NBS.
+The deployment of the modernized NBS 7 will complement and build upon the existing NBS 6 system, integrating through the strangler fig pattern. Users will experience a smooth transition between the modern NBS 7 features and legacy NBS 6.
 
-The Modern NBS will be hosted on a separate Virtual Private Cloud (VPC) to prevent any disruptions to the existing Classic NBS. These two VPCs will be interconnected to facilitate RDS access and other communication requirements.
+NBS 7 will be hosted on a separate Virtual Private Cloud (VPC) to prevent any disruptions to the existing Classic NBS. These two VPCs will be interconnected to facilitate RDS access and other communication requirements.
 
 ## Architecture
 
-The architecture diagram below illustrates the key components of the Modernized NBS.
+The architecture diagram below illustrates the key components of NBS 7.
 
 ![Infrastructure](images/nbs7_architecture_and_microservices.png)
 
@@ -35,7 +35,7 @@ The architecture diagram below illustrates the key components of the Modernized 
 
 The cloud environment for hosting NBS 7 is set up and configured using an [infrastructure as code](https://en.wikipedia.org/wiki/Infrastructure_as_code) approach. [Terraform](https://www.terraform.io/) code is used to provision and manage the cloud hosting environment, and [Helm](https://helm.sh/) is used to manage workloads in the [Kubernetes](https://kubernetes.io/) cluster. The code will be distributed from [GitHub](https://github.com/CDCgov).
 
-- The [Terraform](https://www.terraform.io/) modules provided will establish the NBS infrastructure within a dedicated VPC. This includes deploying AWS EKS, nodes, EBS storage, and provisioning EFS for persistent storage.
+- The [Terraform](https://www.terraform.io/) modules provided will establish the NBS infrastructure within a dedicated VPC. This includes deploying Amazon Elastic Kubernetes Service (Amazon EKS), nodes, EBS storage, and provisioning EFS for persistent storage.
 - Terraform will also handle the creation of essential networking resources, such as private/public subnets, NAT gateways, Internet Gateways, and VPC peering.
 - Additionally, Terraform will automate the setup of [Helm](https://helm.sh/) charts, including Fluent Bit and Cert Manager, and configure AWS-managed services such as AMP and AMG.
 
@@ -43,8 +43,8 @@ The cloud environment for hosting NBS 7 is set up and configured using an [infra
 
 NBS 7 introduces microservices for the modernized system, deployed using [Helm](https://helm.sh/) charts:
 
-- **Modernization API Service**: This service incorporates essential modern NBS features such as patient search, event search, patient profile, investigations, etc.
-- **NBS-gateway Service**: Leveraging Spring Cloud Gateway, this service efficiently manages intricate strangler routing logic between modern and legacy NBS.
+- **Modernization API Service**: This service incorporates essential NBS 7 features such as patient search, event search, patient profile, investigations, etc.
+- **NBS-gateway Service**: Leveraging Spring Cloud Gateway, this service efficiently manages intricate strangler routing logic between NBS 7 and NBS 6.
 - **Data Ingestion API Service**: Our dedicated service provides essential APIs that enable NBS to seamlessly ingest HL7 data from labs and other entities into the NBS system.
 
 ## NGINX Ingress
@@ -52,7 +52,7 @@ NBS 7 introduces microservices for the modernized system, deployed using [Helm](
 NGINX is deprecated and is replaced with Traefik.
 {: .important }
 
-Serving as the entry point into the [Kubernetes](https://kubernetes.io/) cluster, NGINX Ingress will intelligently route users based on predefined routing rules. Users will be directed to the modernized NBS 7 features (Modernization API Service) or classic NBS 6 features (NBS-gateway Service). The deployment of NGINX Ingress will be orchestrated using [Helm](https://helm.sh/) charts and values files.
+Serving as the entry point into the [Kubernetes](https://kubernetes.io/) cluster, NGINX Ingress will intelligently route users based on predefined routing rules. Users will be directed to the NBS 7 features (Modernization API Service) or classic NBS 6 features (NBS-gateway Service). The deployment of NGINX Ingress will be orchestrated using [Helm](https://helm.sh/) charts and values files.
 
 ## Shared services, tools, and containers
 
@@ -85,10 +85,10 @@ There are 9 RTR services:
 - **Observation services**: Processes Observation change events.
 - **Organization service**: Processes Organization change events.
 - **LDF service**: Processes LDF or State-defined field data change events.
-- **Investigation service**: Processes Public_health_case change events. This service also provides information for page builder investigation, notifications, confirmation method and updates the PublicHealthCaseFact_Modern datamart.
+- **Investigation service**: Processes Public_health_case change events. This service also provides information for page builder investigation, notifications, confirmation method and updates the `PublicHealthCaseFact_Modern` datamart.
 - **Post-processing service**: Calls the post-processing stored procedures to hydrate dimensions, fact tables, and datamarts.
-- **Debezium service**: Monitors and streams the selected list of NBS_ODSE and NBS_SRTE tables to Kafka topics.
-- **Kafka sink service**: Persists the data from the Kafka topics to the RDB_Modern database tables.
+- **Debezium service**: Monitors and streams the selected list of `NBS_ODSE` and `NBS_SRTE` tables to Kafka topics.
+- **Kafka sink service**: Persists the data from the Kafka topics to the `RDB_Modern` database tables.
 
 ## Data processing service
 Provides a seamless way to process ELR in near real-time instead of depending on the system-bounded ELR batch job. This eliminates the need for the STLT to set up a batch job on their system.
@@ -107,9 +107,9 @@ The Data Sync service provides a secure API to connect to the databases in the N
 
 ## AWS Managed Services
 
-- **[AWS Elastic Kubernetes Service (EKS)](https://aws.amazon.com/eks/)**: Terraform scripts will set up the instance of EKS that NBS 7 will use. This managed service handles all lifecycle events for the Kubernetes runtime (e.g., keeping the underlying nodes patched and up to date).
-- **[AWS Elastic File System (EFS)](https://aws.amazon.com/efs/)**: The NBS 7 system uses a network filesystem for persistent data storage.
-- **[AWS Managed Prometheus (AMP)](https://aws.amazon.com/prometheus/)**: NBS will harness AWS-managed Prometheus to capture metrics from Kubernetes ingress and various microservices.
-- **[AWS Managed Grafana (AMG)](https://aws.amazon.com/grafana/)**: NBS will leverage AWS Managed Grafana to visualize metrics from AMP and host operational dashboards. The initial set includes three dashboards, encompassing error rates, total request volume, and latency.
-- **[AWS Key Management Service (KMS)](https://aws.amazon.com/kms/)**: AWS infrastructure storage services like AWS EKS, EFS, and RDS utilize a managed key management store for persistence and encryption, ensuring a robust layer of security.
-- **[AWS Relational Database Service (RDS)](https://aws.amazon.com/rds/)**: Optionally, the database underlying the NBS 6 and 7 system may be configured to run as a fully managed MS SQL Server database instance.
+- **[Amazon Elastic Kubernetes Service (Amazon EKS)](https://docs.aws.amazon.com/eks/)**: Terraform scripts will set up the Amazon EKS cluster that NBS 7 uses. This managed service handles all lifecycle events for the Kubernetes runtime (for example, keeping the underlying nodes patched and up to date).
+- **[Amazon Elastic File System (Amazon EFS)](https://docs.aws.amazon.com/efs/)**: The NBS 7 system uses a network filesystem for persistent data storage.
+- **[Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/)**: NBS will harness Amazon Managed Service for Prometheus to capture metrics from Kubernetes ingress and various microservices.
+- **[Amazon Managed Grafana](https://docs.aws.amazon.com/grafana/)**: NBS will leverage Amazon Managed Grafana to visualize metrics from AMP and host operational dashboards. The initial set includes three dashboards, encompassing error rates, total request volume, and latency.
+- **[AWS Key Management Service (AWS KMS)](https://docs.aws.amazon.com/kms/)**: AWS infrastructure storage services like Amazon EKS, EFS, and RDS utilize a managed key management store for persistence and encryption, ensuring a robust layer of security.
+- **[Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/rds/)**: Optionally, the database underlying the NBS 6 and 7 system may be configured to run as a fully managed Microsoft SQL Server database instance.

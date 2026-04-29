@@ -70,7 +70,7 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
 
 ## Deploy Keycloak
 
-1. Authenticate to the EKS cluster:
+1. Authenticate to the Amazon EKS cluster:
 
    ```bash
    aws eks --region us-east-1 update-kubeconfig --name <clustername> # e.g. cdc-nbs-sandbox
@@ -92,7 +92,7 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
 
 ## Access the Keycloak admin interface
 
-> Port forwarding is not supported by CloudShell by default. Run these commands from a system that has both network access to the EKS endpoint and a browser. If you completed the installation from CloudShell, switch to a jumpbox or desktop with network connectivity to the EKS endpoint.
+> Port forwarding is not supported by CloudShell by default. Run these commands from a system that has both network access to the Amazon EKS endpoint and a browser. If you completed the installation from CloudShell, switch to a jumpbox or desktop with network connectivity to the Amazon EKS endpoint.
 {: .note }
 
 1. Set up port forwarding:

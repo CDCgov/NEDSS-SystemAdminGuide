@@ -43,7 +43,7 @@ Your AWS environment must:
 
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
-| Container runtime environment | EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
+| Container runtime environment | Amazon Elastic Kubernetes Service (Amazon EKS) | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
 | Relational Database | SQL Server 2017+ Standard or Enterprise | New NBS 6.X.X Deployment Recommendations: [📝 Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
 | Persistent Store | EFS | 1 TB |
 
@@ -51,7 +51,7 @@ Your AWS environment must:
 
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
-| Container runtime environment | EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
+| Container runtime environment | Amazon EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
 | Relational Database | Cloud Managed MS SQL Server Standard or Enterprise | New NBS 6.X.X Deployment Recommendations: [📝 Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
 | Persistent Store | EFS | 500 GB |
 
@@ -59,7 +59,7 @@ Your AWS environment must:
 
 | **Software**        | **Version**                   | **Comments**                                                    |
 |---------------------|-------------------------------|-----------------------------------------------------------------|
-| Kubernetes          | 1.25+                         | Deployed as EKS by default                                      |
+| Kubernetes          | 1.25+                         | Deployed as Amazon EKS by default                               |
 | Cert Manager        | 1.13                          | Deployed in Kubernetes                                          |
 | Elasticsearch       | 7.17                          | Deployed by default in Kubernetes                               |
 | Apache NiFi         | 1.19                          | Deployed in Kubernetes                                          |
@@ -83,7 +83,7 @@ You will need a local or cloud hosted workstation (e.g. CloudShell) with the set
 - **Terraform CLI**: Download and installation instructions are in the [Terraform CLI installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
   *(Tested through 1.5.5 Terraform, suggest install that specific version rather than the latest non-open source version)*
 - **Helm CLI**: Download and installation instructions are in the [Helm installation guide](https://helm.sh/docs/intro/install/)
-- **Kubernetes CLI**: Download and installation instructions are in the [kubectl installation guide for EKS](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
+- **Kubernetes CLI**: Download and installation instructions are in the [kubectl installation guide for Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
 - **Optional, but nice to have, eksctl**: Download and installation instructions are in the [eksctl installation guide](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
 
 ## Network and database access requirements

@@ -23,7 +23,7 @@ Use these steps to install the NBS 7 Data Sync service API in your cloud environ
 1. Use the values file supplied as part of [nbs-helm-vX.Y.Z.zip](https://github.com/CDCgov/NEDSS-Helm/releases). Download the zip file from [nbs-helm releases](https://github.com/CDCgov/NEDSS-Helm/releases) and scroll to **Assets** for the latest or previous release. The `values.yaml` file should be under `charts/nnd-service/values.yaml`.
    Provide values for *ECR repository, ECR image tag, db server endpoints, and ingress host* in the `values.yaml` file.
 
-2. Confirm that the following DNS entry was created and points to the network load balancer in front of your Kubernetes cluster (make sure this is the active NLB provisioned through nginx-ingress in the base install steps). Do this in your authoritative DNS service, such as Route 53.
+2. Confirm that the following DNS entry was created and points to the Network Load Balancer (NLB) in front of your Kubernetes cluster (make sure this is the active NLB provisioned in the base install steps). Do this in your authoritative DNS service, such as Route 53.
    Replace `example.com` with the appropriate domain name in the `values.yaml` file.
    NND service application, for example: `data.example.com`
 

@@ -26,7 +26,7 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
 {: .important }
 
 1. Locate the Helm chart at `charts/nifi-efs`.
-1. In `values.yaml`, replace all occurrences of `nifi.EXAMPLE_DOMAIN` with your domain name. See the [ingress controller domain table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-nginx-ingress-controller-on-your-cluster) for reference.
+1. In `values.yaml`, replace all occurrences of `nifi.EXAMPLE_DOMAIN` with your domain name. See the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) for reference.
 1. Set the image repository and tag:
 
    ```yaml

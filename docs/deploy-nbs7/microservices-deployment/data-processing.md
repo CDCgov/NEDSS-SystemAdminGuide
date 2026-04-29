@@ -37,7 +37,7 @@ This section covers installing the NBS 7 RTI service.
    1. Download the zip file for the release.
    1. Find the `values.yaml` file under `charts\data-processing-service`.
 
-1. Confirm that a DNS entry for the following host was created and points to the network load balancer in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned by `nginx-ingress` in the base install steps). Make this change in your authoritative DNS service (for example, Route 53). Replace `example.com` with your domain name in `values.yaml`.
+1. Confirm that a DNS entry for the following host was created and points to the Network Load Balancer (NLB) in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned in the base install steps). Make this change in your authoritative DNS service (for example, Route 53). Replace `example.com` with your domain name in `values.yaml`.
 
    Data processing service application: `dataprocessingservice.example.com`
 1. Set the image repository and tag:

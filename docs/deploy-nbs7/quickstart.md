@@ -104,7 +104,7 @@ cp -pr terraform/aws/samples/NBS7_standard terraform/aws/nbs7-mySTLT-test
 ### Customize variables
 {: .no_toc }
 
-- Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions](https://github.com/CDCgov/NEDSS-Infrastructure/blob/main/terraform/aws/samples/README.md).
+- Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions](https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/samples/README.md).
 
 > Review inbound rules on the security groups attached to your database instance. Ensure the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
 {: .note }
@@ -254,7 +254,7 @@ Deploy the Helm charts in the following order.
 ### Deploy Elasticsearch
 {: .no_toc }
 
-Update the required parameters in `values.yaml` by following the [Elasticsearch EFS chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/elasticsearch-efs/README.md)
+Update the required parameters in `values.yaml` by following the [Elasticsearch EFS chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/elasticsearch-efs/README.md)
 
 ```bash
 helm install elasticsearch -f ./elasticsearch-efs/values.yaml elasticsearch-efs
@@ -263,7 +263,7 @@ helm install elasticsearch -f ./elasticsearch-efs/values.yaml elasticsearch-efs
 ### Deploy Modernization API
 {: .no_toc }
 
-Update the required parameters in `values.yaml` by following the [Modernization API chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/modernization-api/README.md)
+Update the required parameters in `values.yaml` by following the [Modernization API chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/modernization-api/README.md)
 
 ```bash
 helm install modernization-api -f ./modernization-api/values.yaml modernization-api
@@ -272,7 +272,7 @@ helm install modernization-api -f ./modernization-api/values.yaml modernization-
 ### Deploy NiFi
 {: .no_toc }
 
-Update the required parameters in `values.yaml` by following the [NiFi EFS chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/nifi-efs/README.md)
+Update the required parameters in `values.yaml` by following the [NiFi EFS chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/nifi-efs/README.md)
 
 ```bash
 helm install nifi -f ./nifi-efs/values.yaml nifi-efs
@@ -281,7 +281,7 @@ helm install nifi -f ./nifi-efs/values.yaml nifi-efs
 ### Deploy NBS Gateway
 {: .no_toc }
 
-Update the required parameters in `values.yaml` by following the [NBS Gateway chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/nbs-gateway/README.md)
+Update the required parameters in `values.yaml` by following the [NBS Gateway chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/nbs-gateway/README.md)
 
 ```bash
 helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gateway
@@ -319,7 +319,7 @@ ALTER ROLE [db_owner] ADD MEMBER [nbs_ods]
 GO
 ```
 
-Update the required parameters in `values.yaml` by following the [Data Ingestion Service chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/main/charts/dataingestion-service/README.md)
+Update the required parameters in `values.yaml` by following the [Data Ingestion Service chart values table](https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/dataingestion-service/README.md)
 
 ```bash
 helm install dataingestion-service -f ./dataingestion-service/values.yaml dataingestion-service

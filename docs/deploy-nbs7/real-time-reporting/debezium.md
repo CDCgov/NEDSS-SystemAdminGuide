@@ -10,6 +10,9 @@ redirect_from:
 
 # Deploy Debezium for real-time reporting (RTR)
 
+> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
 This page covers steps to deploy the Debezium connector that captures change data from source tables and publishes events to Kafka topics for RTR processing.
 
 ## On this page
@@ -28,7 +31,7 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 > Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
 {: .important }
 
-1. Locate the Debezium Helm chart in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/debezium).
+1. Locate the Debezium Helm chart in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium).
 
 1. Configure `values.yaml`. Replace all placeholder values before installation.
 

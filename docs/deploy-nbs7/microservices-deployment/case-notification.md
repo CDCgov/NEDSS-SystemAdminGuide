@@ -51,6 +51,6 @@ The data extraction and notification services require Keycloak. Complete this co
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
    ```
 
-1. For each of the three services, import the corresponding Keycloak profile from [`NEDSS-Helm/charts/keycloak/extra`](https://github.com/CDCgov/NEDSS-Helm/tree/main/charts/keycloak/extra).
+1. For each of the three services, import the corresponding Keycloak profile from [`NEDSS-Helm/charts/keycloak/extra`](https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak/extra).
 
 {: .note }

@@ -21,6 +21,9 @@ redirect_from:
 # Initial Kubernetes deployment
 {: .no_toc }
 
+> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
 This page explains how to deploy the core Kubernetes infrastructure services that NBS 7 requires before you install application components. Complete the sections in order. After you complete these steps, proceed to [Keycloak Installation](../../deploy-nbs7/keycloak/keycloak-installation.html).
 
 ## On this page
@@ -89,7 +92,7 @@ helm install traefik-crds traefik/traefik-crds --namespace traefik --create-name
 
 ### Deploy the Traefik controller
 
-The Traefik Helm charts are located in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/traefik). Traefik uses the values in `charts/traefik/values.yaml` (AWS) or `charts/traefik/values-azure.yaml` (Azure) from the `nbs-helm-vX.Y.Z` zip file. These values are preconfigured to set up Prometheus metrics, configure Linkerd sidecar injection, set timeouts, and instruct the Traefik controller to create an Amazon Elastic Kubernetes Service (Amazon EKS) Network Load Balancer (NLB) or Azure Kubernetes Service (AKS) internal load balancer.
+The Traefik Helm charts are located in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/traefik). Traefik uses the values in `charts/traefik/values.yaml` (AWS) or `charts/traefik/values-azure.yaml` (Azure) from the `nbs-helm-vX.Y.Z` zip file. These values are preconfigured to set up Prometheus metrics, configure Linkerd sidecar injection, set timeouts, and instruct the Traefik controller to create an Amazon Elastic Kubernetes Service (Amazon EKS) Network Load Balancer (NLB) or Azure Kubernetes Service (AKS) internal load balancer.
 
 1. To create the Traefik Controller within Kubernetes, choose the appropriate command for your environment:
 
@@ -125,7 +128,7 @@ The Traefik Helm charts are located in the [NEDSS-Helm repository](https://githu
 
 The `nbs-ingress` chart manages all NBS 7 application routing, including Keycloak, NBS Gateway, data ingestion services, and middleware. Deploy it independently of the application charts.
 
-1. Locate the Traefik Helm charts in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/traefik). Update the values in `charts/nbs-ingress/values.yaml` with your environment-specific hostnames, or pass them as `--set` flags.
+1. Locate the Traefik Helm charts in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/traefik). Update the values in `charts/nbs-ingress/values.yaml` with your environment-specific hostnames, or pass them as `--set` flags.
 1. Deploy the ingress resources:
 
    ```bash

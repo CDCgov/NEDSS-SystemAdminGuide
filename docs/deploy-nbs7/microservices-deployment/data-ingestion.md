@@ -63,7 +63,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
 
 - Data Ingestion includes a built-in Liquibase integration that automatically applies database schema changes on deployment.
   - DB changes detail can be reviewed here:
-    - **DI Liquibase:** [NEDSS-DataIngestion/data-ingestion-service/src/main/resources/db at main · CDCgov/NEDSS-DataIngestion](https://github.com/CDCgov/NEDSS-DataIngestion/tree/main/data-ingestion-service/src/main/resources/db)
+    - **DI Liquibase:** [NEDSS-DataIngestion/data-ingestion-service/src/main/resources/db at {{ site.version_latest_tag }} · CDCgov/NEDSS-DataIngestion](https://github.com/CDCgov/NEDSS-DataIngestion/tree/{{ site.version_latest_tag }}/data-ingestion-service/src/main/resources/db)
 - See [Deploy Data Ingestion using Helm](#deploy-data-ingestion-using-helm) for deployment steps.
 
 ### Liquibase DB change verification

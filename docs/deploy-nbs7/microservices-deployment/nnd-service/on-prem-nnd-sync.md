@@ -60,7 +60,7 @@ Save the files to a secure directory with executable permissions to run the serv
 - **Important:** Do not allow any space between the argument name and value.
   - Example: `arg_name=arg_value`
 
-Reference for arguments: [README](https://github.com/CDCgov/NEDSS-NNDSS/tree/main/nnd-data-poll-service#readme)
+Reference for arguments: [README](https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service#readme)
 
 ---
 

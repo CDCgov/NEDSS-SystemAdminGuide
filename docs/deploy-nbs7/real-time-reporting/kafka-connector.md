@@ -10,6 +10,9 @@ redirect_from:
 
 # Deploy the Kafka connector for real-time reporting (RTR)
 
+> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
 This page covers steps to deploy the Kafka sink connector that consumes RTR topics and writes transformed data into reporting tables.
 
 ## On this page
@@ -28,7 +31,7 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
 > Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
 {: .important }
 
-1. Locate the Kafka connector Helm chart in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/kafka-connect-sink).
+1. Locate the Kafka connector Helm chart in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/kafka-connect-sink).
 
 1. Configure `values.yaml`. Replace all placeholder values before installation.
 

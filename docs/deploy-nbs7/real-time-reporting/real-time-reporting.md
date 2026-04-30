@@ -20,6 +20,9 @@ redirect_from:
 > This feature is in Beta preview and not production ready.
 {: .important }
 
+> This page applies to NBS {{ site.version_latest }}. Script links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
 Real-time reporting (RTR) is an optional add-on for NBS 7. RTR reduces reporting latency from as long as 24 hours to between 5 minutes and 1 hour. It uses Kafka Connect to stream row-level changes from source tables, which reduces reliance on the `MasterETL` batch process.
 
 This guide covers steps to install RTR with Helm charts. RTR transfers data from the transactional database `NBS_ODSE` to the reporting database `RDB`. Change Data Capture on select `NBS_ODSE` and `NBS_SRTE` tables detects row-level changes (see [Create service users and database objects](#create-service-users-and-database-objects) for the full table list). Those changes publish to Kafka topics, where RTR services extract and load the data into `RDB`.
@@ -30,7 +33,7 @@ This guide covers steps to install RTR with Helm charts. RTR transfers data from
 1. TOC
 {:toc}
 
-The database scripts referenced throughout this guide are maintained in the [NEDSS-DataReporting](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service) repository. You can create the required database objects through Liquibase, which will automatically implement database schema changes, or you can manually install database schema changes. Both options are referenced in the relevant sections.
+The database scripts referenced throughout this guide are maintained in the [NEDSS-DataReporting](https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service) repository. You can create the required database objects through Liquibase, which will automatically implement database schema changes, or you can manually install database schema changes. Both options are referenced in the relevant sections.
 {: .important }
 
 If you encounter issues during database setup, contact support at <mailto:nbs@cdc.gov>.
@@ -139,21 +142,21 @@ Complete these one-time onboarding steps for RTR setup.
 1. **Create database users.** Each user should have only the permissions required for its role. Review the scripts and update the `PASSWORD` values before execution.
 
    1. **Create admin user:** This user provides Liquibase permissions to maintain required database components for RTR and enable Change Data Capture on tables.
-      - Script location: [NEDSS-DataReporting onboarding user creation scripts](https://github.com/CDCgov/NEDSS-DataReporting/tree/v7.12.0/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation)
+      - Script location: [NEDSS-DataReporting onboarding user creation scripts](https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation)
 
    1. **Create RTR microservice user logins:** Create dedicated user accounts for each RTR microservice. These users are referenced in Helm values for RTR services.
-      - Script location: [NEDSS-DataReporting onboarding user creation scripts](https://github.com/CDCgov/NEDSS-DataReporting/tree/v7.12.0/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation)
+      - Script location: [NEDSS-DataReporting onboarding user creation scripts](https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation)
 
 1. **Create Kubernetes secrets.** Kubernetes secrets are required for RTR services to access the database. Create secrets for each service user from step 1. Skip this step if you already created secrets in [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
 
    1. **Create secrets for each service user:** Include the admin user from step 1a. Each secret should include the database username and password.
-      - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/main/k8-manifests/nbs-secrets.yaml)
+      - Script location: [NEDSS-DataReporting/create-kubernetes-secrets](https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/nbs-secrets.yaml)
 
 1. **Create required database objects.** Run the scripts for your chosen path:
 
    - **Liquibase:** See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) to create all necessary objects, then return here to complete step 4.
 
-   - **Manual:** See the script execution sequence and `db_upgrade` script in [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment). Run:
+   - **Manual:** See the script execution sequence and `db_upgrade` script in [NEDSS-DataReporting/db-upgrade](https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/stlt/manual_deployment). Run:
 
    ```bash
    upgrade_db.bat server_name <database> username password
@@ -163,7 +166,7 @@ Complete these one-time onboarding steps for RTR setup.
 
    - **Liquibase:** The `--load-data` flag is not required when using Liquibase. Proceed to [Deploy RTR services](#deploy-rtr-services).
 
-   - **Manual:** Navigate to the [02_onboarding_script_data_load](https://github.com/CDCgov/NEDSS-DataReporting/tree/v7.12.0/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load) and run all of the scripts in the order listed in the repository.
+   - **Manual:** Navigate to the [02_onboarding_script_data_load](https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load) and run all of the scripts in the order listed in the repository.
 
 1. **Verify Change Data Capture.** `is_cdc_enabled=1` indicates successful configuration.
 
@@ -217,7 +220,7 @@ Complete these one-time onboarding steps for RTR setup.
 After onboarding, future enhancements are delivered using one of these approaches:
 
 - **Liquibase:** Run Liquibase with the provided release tag. See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html).
-- **Manual:** Run the scripts in [manual_deployment](https://github.com/CDCgov/NEDSS-DataReporting/tree/main/liquibase-service/src/main/resources/stlt/manual_deployment). Onboarding scripts are excluded from upgrade runs.
+- **Manual:** Run the scripts in [manual_deployment](https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/stlt/manual_deployment). Onboarding scripts are excluded from upgrade runs.
 
 ---
 

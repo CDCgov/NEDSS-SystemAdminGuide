@@ -77,7 +77,7 @@ For step-by-step git commands, see [WORKFLOW.md](WORKFLOW.md).
 
 
 ## Previous Versions
-Branches starting with `release-` are automatically built and deployed under `/previous_versions/<branch>/` via GitHub Actions.
+Branches starting with `release-` are automatically built and deployed under `/previous_versions/<branch>/` via GitHub Actions. See [RELEASE-CHECKLIST.md](RELEASE-CHECKLIST.md).
 
 
 ## Hidden Draft Pages

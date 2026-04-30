@@ -109,10 +109,10 @@ If a user wants to direct **SRTE table data** into a separate SRTE database:
 ### Config table scripts
 
 - **Create config table**
-  [create_data_config.sql](https://github.com/CDCgov/NEDSS-NNDSS/blob/main/nnd-data-poll-service/src/main/resources/sql/config_table/create_data_config.sql)
+  [create_data_config.sql](https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/create_data_config.sql)
 
 - **Insert config records** (pick only the tables you want to download into that database, for example, only SRTE tables)
-  [poll_config_insert.sql](https://github.com/CDCgov/NEDSS-NNDSS/blob/main/nnd-data-poll-service/src/main/resources/sql/config_table/poll_config_insert.sql)
+  [poll_config_insert.sql](https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/poll_config_insert.sql)
 
 ---
 
@@ -143,4 +143,4 @@ GitHub: <https://github.com/CDCgov/NEDSS-NNDSS>
 - Execute the following `.sql` scripts to create necessary tables required to download the data.
 
 - **Database creation scripts** (includes RDB, SRTE, and RDB Modern)
-  [create_test_db SQL scripts](https://github.com/CDCgov/NEDSS-NNDSS/tree/main/nnd-data-poll-service/src/main/resources/sql/create_test_db)
+  [create_test_db SQL scripts](https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/create_test_db)

@@ -34,7 +34,7 @@ This page explains how to deploy the core Kubernetes infrastructure services tha
 
 ## Bootstrap Kubernetes
 
-1. Download the Helm configuration package from GitHub. Make sure you go through the release page and see what's included [Latest release of CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/releases).
+1. Download the Helm configuration package from the [CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}) repo on Github. Be sure to go through the [{{ site.version_latest_tag }} release page](https://github.com/CDCgov/NEDSS-Helm/releases/tag/{{ site.version_latest_tag }}) to see what's included .
 1. Open bash/mac/cloudshell/powershell and unzip the downloaded nbs-helm-vX.Y.Z zip file.
 1. **All helm commands should be executed from the charts directory.** Change directory to where you unzipped the helm **charts** folder `<Helm_Dir>/charts`.
 

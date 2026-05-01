@@ -87,7 +87,7 @@ last_edit_time_format: "%b %e %Y at %I:%M %p"
 
 # -----------------------------------------------------------------------------
 # Callouts (admonition blocks)
-# Usage: wrap a block quote in the callout class — see STYLES.md for syntax.
+# Usage: wrap a block quote in the callout class — see contributing/styles.md for syntax.
 # Each type maps to a named color scale in _sass/color_schemes/colors.scss.
 # callouts_level defaults to "quiet" (light scheme) or "loud" (dark scheme).
 # Omitting callouts_level keeps the JTD default — quiet for this light scheme.

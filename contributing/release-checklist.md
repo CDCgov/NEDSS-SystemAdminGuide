@@ -35,55 +35,38 @@ Identify the following values for the new release before starting any checklist 
 - [ ] Confirm the guide title reflects the new version (e.g., "NBS 7.13 System Administrator Guide").
   The title is set in `_config.yml` and must be updated manually alongside `version_latest`.
 
-### 3. Update version-sensitive pages
+### 3. Confirm version-sensitive pages
 
-The following pages contain hardcoded version references or version-specific
-content that requires manual review at each release.
+Every page that links to a GitHub repository at a specific version tag is version-sensitive.
+Links using `{{ site.version_latest_tag }}` update automatically when you update the variable
+in step 1. This step confirms those links resolve at the new tag and flags pages that also
+need manual content review.
 
-- [ ] `docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.md` — confirm
-  Traefik Helm chart links resolve correctly at the new tag.
-- [ ] `docs/deploy-nbs7/real-time-reporting/real-time-reporting.md` — confirm
-  NEDSS-DataReporting script links resolve correctly at the new tag.
-- [ ] `docs/deploy-nbs7/real-time-reporting/debezium.md` — confirm Helm chart link.
-- [ ] `docs/deploy-nbs7/real-time-reporting/kafka-connector.md` — confirm Helm chart link.
-- [ ] `docs/deploy-nbs7/real-time-reporting/rtr-java-services.md` — confirm Helm chart link;
-  review the consolidation warning callout for accuracy.
-- [ ] `docs/deploy-nbs7/real-time-reporting/data-compare-tool.md` — confirm both Helm chart links.
-- [ ] `docs/maintain-nbs7/eks-upgrade.md` — update the Kubernetes versions table;
-  confirm the conditional add-ons step (Step 4) still reflects the correct
-  `eks_nbs` module version behavior. *(Page not yet created as of 7.12.)*
+- [ ] Search the repo for any remaining hardcoded previous version tag (e.g., `v7.12.0`)
+  and update all instances to the new tag.
+- [ ] Work through the page list below and confirm each item.
 
-> Add pages to this list as version-sensitive content is identified.
+| Page | What to confirm |
+|------|----------------|
+| `docs/deploy-nbs7/quickstart.md` | NEDSS-Infrastructure and NEDSS-Helm chart README links resolve at the new tag. |
+| `docs/deploy-nbs7/deploy-on-aws/provision-aws.md` | NEDSS-Infrastructure Terraform README link resolves at the new tag. |
+| `docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.md` | NEDSS-Helm Traefik chart links resolve at the new tag. |
+| `docs/deploy-nbs7/real-time-reporting/real-time-reporting.md` | NEDSS-DataReporting script links and NEDSS-Helm secrets link resolve at the new tag. |
+| `docs/deploy-nbs7/real-time-reporting/liquibase.md` | NEDSS-Helm Liquibase chart link resolves at the new tag. |
+| `docs/deploy-nbs7/real-time-reporting/debezium.md` | NEDSS-Helm Debezium chart link resolves at the new tag. |
+| `docs/deploy-nbs7/real-time-reporting/kafka-connector.md` | NEDSS-Helm Kafka chart link resolves at the new tag. |
+| `docs/deploy-nbs7/real-time-reporting/rtr-java-services.md` | NEDSS-Helm RTR chart and NEDSS-Helm secrets links resolve at the new tag. Review the consolidation warning callout for accuracy. |
+| `docs/deploy-nbs7/real-time-reporting/data-compare-tool.md` | Both NEDSS-Helm links resolve at the new tag. NEDSS-DataCompare link stays at `main` — that repo has no version tags. |
+| `docs/deploy-nbs7/microservices-deployment/case-notification.md` | NEDSS-Helm Keycloak profile link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/data-ingestion.md` | NEDSS-DataIngestion DB scripts link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/case-notification/api-testing.md` | NEDSS-Helm templates and NEDSS-NNDSS-Case-Notifications links resolve at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-data-sync.md` | NEDSS-NNDSS scripts links resolve at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-nnd-sync.md` | NEDSS-NNDSS README link resolves at the new tag. |
+| `docs/maintain-nbs7/eks-upgrade.md` | Update the Kubernetes versions table. Confirm the conditional add-ons step (Step 4) still reflects the correct `eks_nbs` module version behavior. *(Page not yet created as of 7.12.)* |
 
-### 4. Update pinned repository links
+> Add rows to this table as version-sensitive pages are identified.
 
-Pages that link to GitHub repositories at a specific version tag are updated
-automatically via `{{ site.version_latest_tag }}`. Confirm updated links resolve correctly.
-
-- [ ] Search the repo for any remaining hardcoded previous version tag (e.g., `v7.12.0`) and
-  update all instances to the new tag.
-- [ ] Confirm updated links resolve correctly.
-
-Known pages with pinned repo links as of 7.12 (managed via `{{ site.version_latest_tag }}`):
-
-- `docs/deploy-nbs7/quickstart.md` (NEDSS-Infrastructure, NEDSS-Helm chart READMEs)
-- `docs/deploy-nbs7/deploy-on-aws/provision-aws.md` (NEDSS-Infrastructure Terraform README)
-- `docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.md` (NEDSS-Helm Traefik charts)
-- `docs/deploy-nbs7/real-time-reporting/real-time-reporting.md` (NEDSS-DataReporting scripts, NEDSS-Helm secrets)
-- `docs/deploy-nbs7/real-time-reporting/liquibase.md` (NEDSS-Helm Liquibase chart)
-- `docs/deploy-nbs7/real-time-reporting/debezium.md` (NEDSS-Helm Debezium chart)
-- `docs/deploy-nbs7/real-time-reporting/kafka-connector.md` (NEDSS-Helm Kafka chart)
-- `docs/deploy-nbs7/real-time-reporting/rtr-java-services.md` (NEDSS-Helm RTR chart, NEDSS-Helm secrets)
-- `docs/deploy-nbs7/real-time-reporting/data-compare-tool.md` (NEDSS-Helm; NEDSS-DataCompare link stays at `main` — repo has no version tags)
-- `docs/deploy-nbs7/microservices-deployment/case-notification.md` (NEDSS-Helm Keycloak profile)
-- `docs/deploy-nbs7/microservices-deployment/data-ingestion.md` (NEDSS-DataIngestion DB scripts)
-- `docs/deploy-nbs7/microservices-deployment/case-notification/api-testing.md` (NEDSS-Helm templates, NEDSS-NNDSS-Case-Notifications)
-- `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-data-sync.md` (NEDSS-NNDSS scripts)
-- `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-nnd-sync.md` (NEDSS-NNDSS README)
-
-> Add pages to this list as pinned links are identified.
-
-### 5. Review per-page version callouts
+### 4. Review per-page version callouts
 
 Pages with a per-page version callout (e.g., "This page applies to NBS 7.12")
 are updated automatically when `version_latest` is updated in step 1.
@@ -92,16 +75,16 @@ are updated automatically when `version_latest` is updated in step 1.
 
 > Add pages with callouts to this list as they are identified.
 
-### 6. Quality checks
+### 5. Quality checks
 
 - [ ] Run a link checker or manually spot-check for broken links (historically a
   known problem at release time).
 - [ ] Confirm all new or updated content meets Section 508 requirements (heading
-  structure, alt text, table formatting, hyperlink text).
+  structure, alt text, table formatting, hyperlink text). See [styles.md §10](styles.md#10-accessibility-compliance-record).
 - [ ] Confirm all new or updated content follows Global English and Google
-  Developer Style Guide conventions.
+  Developer Style Guide conventions. See [styles.md](styles.md).
 
-### 7. Archive the previous release
+### 6. Archive the previous release
 
 The site uses branch-based archiving. Any branch named `release-*` is
 automatically discovered by the GitHub Actions build workflow, checked out into
@@ -115,7 +98,7 @@ using `_config.yml` from `main`, Liquid variables (`{{ site.version_latest }}`,
 **current** release values, not the archived ones. The variables must be
 replaced with hardcoded values on the release branch before it is pushed.
 
-- [ ] From the current `main`, create a new branch named `release-7.12`:
+- [ ] From the current `main`, create a new branch named `release-7.12` (see [workflow.md](workflow.md) for git command reference):
   ```
   git checkout -b release-7.12
   ```
@@ -129,7 +112,7 @@ replaced with hardcoded values on the release branch before it is pushed.
 - [ ] Confirm the archived release appears correctly under "Previous Versions"
   in the sidebar.
 
-### 8. Create a per-release Jira ticket
+### 7. Create a per-release Jira ticket
 
 At the start of each release cycle, create a new Jira ticket in the STLT project
 under the [Admin Guide: polishing and hardening] epic. Use this checklist as the
@@ -138,7 +121,7 @@ into the new ticket, and track completion there.
 
 Suggested Jira ticket title: `Admin Guide: Update guide for NBS 7.XX release`
 
-### 9. Final review
+### 8. Final review
 
 - [ ] Confirm the live guide title shows the new version.
 - [ ] Confirm the site builds and deploys successfully on GitHub Pages.

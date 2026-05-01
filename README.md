@@ -23,16 +23,9 @@ Use this map to find contributor guidance quickly.
 | File | What it helps with |
 |------|--------------------|
 | [README.md](README.md) | Project overview, local preview options, and site workflow context |
-| [WORKFLOW.md](WORKFLOW.md) | Day-to-day git workflow, branch strategy, and preview-to-production process |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution standards, review expectations, CI checks, and local scripts/commands |
-
-### Writing standards
-
-| File | What it helps with |
-|------|--------------------|
-| [STYLES.md](STYLES.md) | Authoring style rules for headings, callouts, links, code blocks, images, and tables |
-| [FRONT-MATTER.md](FRONT-MATTER.md) | Required front matter fields and nav metadata rules for pages |
-| [ACCESSIBILITY.md](ACCESSIBILITY.md) | Accessibility requirements for alt text, heading order, links, and tables |
+| [workflow.md](contributing/workflow.md) | Day-to-day git workflow, branch strategy, and preview-to-production process |
+| [styles.md](contributing/styles.md) | Authoring standards: front matter, headings, callouts, links, code blocks, images, tables, and Section 508 / WCAG 2.1 AA compliance record |
 
 ### Governance and policy
 
@@ -73,11 +66,11 @@ The review workflow uses a dual long-lived branch system: `main` matches product
 4. Authors iterate: update the feature branch, re-merge to `preview`, repeat
 5. Once approved, the feature branch is merged to `main` via PR — never `preview` directly to `main`, as `preview` accumulates work from multiple authors
 
-For step-by-step git commands, see [WORKFLOW.md](WORKFLOW.md).
+For step-by-step git commands, see [workflow.md](contributing/workflow.md).
 
 
 ## Previous Versions
-Branches starting with `release-` are automatically built and deployed under `/previous_versions/<branch>/` via GitHub Actions.
+Branches starting with `release-` are automatically built and deployed under `/previous_versions/<branch>/` via GitHub Actions. See [release-checklist.md](contributing/release-checklist.md).
 
 
 ## Hidden Draft Pages
@@ -94,7 +87,7 @@ We use GitHub-Flavored Markdown (GFM) for tables, fenced code blocks, lists, etc
 
 Just the Docs theme renders pages according to `_config.yml`, supporting navigation, collections, syntax highlighting, and more.
 
-Page layout convention for all content pages: place brief intro text directly under the H1, then include the `On this page` TOC block, and start the first H2 section immediately after the TOC. See [STYLES.md](STYLES.md).
+Page layout convention for all content pages: place brief intro text directly under the H1, then include the `On this page` TOC block, and start the first H2 section immediately after the TOC. See [styles.md](contributing/styles.md).
 
 
 

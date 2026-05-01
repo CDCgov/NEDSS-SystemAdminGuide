@@ -25,7 +25,7 @@ Follow these steps to configure and deploy the Liquibase Helm chart for RTR.
 > Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
 {: .important }
 
-1. Locate the Liquibase Helm chart in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/main/charts/liquibase).
+1. Locate the Liquibase Helm chart in the [NEDSS-Helm repository][nedss-helm-liquibase-chart].
 1. Configure `values.yaml`. Replace all placeholder values before installation:
 
    Replace `app.EXAMPLE_DOMAIN` with the URL of your modern app (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
@@ -236,3 +236,5 @@ DELETE FROM RDB.dbo.DATABASECHANGELOG;
 USE rdb_modern;
 DELETE FROM rdb_modern.dbo.DATABASECHANGELOG;
 ```
+
+[nedss-helm-liquibase-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/liquibase>

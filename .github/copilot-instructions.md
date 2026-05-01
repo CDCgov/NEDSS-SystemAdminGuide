@@ -3,10 +3,8 @@
 Before helping with any content for this repo, read the following files:
 
 - **CONTRIBUTING.md** — branch naming, commit messages, PR expectations, review checklist
-- **WORKFLOW.md** — step-by-step git commands for daily workflow
-- **STYLES.md** — heading hierarchy, callouts, code blocks, links, images, tables
-- **FRONT-MATTER.md** — required fields for every page and how to fill them in
-- **ACCESSIBILITY.md** — alt text, heading, link, and table requirements
+- **contributing/workflow.md** — step-by-step git commands for daily workflow
+- **contributing/styles.md** — front matter, heading hierarchy, callouts, code blocks, links, images, tables, and Section 508 / WCAG 2.1 AA requirements
 
 For any new page, start from the appropriate template in `/templates`:
 

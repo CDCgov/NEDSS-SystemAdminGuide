@@ -10,6 +10,9 @@ redirect_from:
 
 # Deploy and use the RTR Data Compare validation tool
 
+> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
 This page covers deploying and using the Data Compare tool to validate RTR output against classic ETL results.
 
 ## On this page
@@ -38,7 +41,7 @@ Before deploying the Data Compare tool, verify the following:
 
 - Access to a cloud storage bucket for data exchange between the API and Processor services. These steps currently use Amazon S3. If you are not using Amazon S3, consult your cloud administrator for equivalent storage configuration.
 
-- Keycloak configured with the Data Compare API profile: [NEDSS-Helm/charts/keycloak/extra](https://github.com/CDCgov/NEDSS-Helm/tree/main/charts/keycloak/extra)
+- Keycloak configured with the Data Compare API profile: [NEDSS-Helm/charts/keycloak/extra][nedss-helm-keycloak-extra]
 
 If your Keycloak pod uses a name or namespace other than the default, update the `authUri` in your `values.yaml`:
 
@@ -55,7 +58,7 @@ authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
 Follow these steps to configure and deploy the Data Compare API Helm chart.
 
-The Helm chart is located in `charts/data-compare-api-service` in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/data-compare-api-service).
+The Helm chart is located in `charts/data-compare-api-service` in the [NEDSS-Helm repository][nedss-helm-data-compare-api-chart].
 
 1. Configure `values.yaml`. Replace all placeholder values before installation:
 
@@ -102,7 +105,7 @@ The Helm chart is located in `charts/data-compare-api-service` in the [NEDSS-Hel
 
 Follow these steps to configure and deploy the Data Compare Processor Helm chart.
 
-The Helm chart is located in `charts/data-compare-processor-service` in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/data-compare-processor-service).
+The Helm chart is located in `charts/data-compare-processor-service` in the [NEDSS-Helm repository][nedss-helm-data-compare-processor-chart].
 
 > The Processor is a Kafka consumer microservice and does not expose any API endpoints.
 {: .note }
@@ -182,3 +185,7 @@ API → Pull data from SQL table → Upload to S3 → Kafka → Processor → Pu
 
 > This data flow uses Amazon S3 as the storage provider. If you are not using Amazon S3, the upload and retrieval steps differ based on your cloud provider.
 {: .note }
+
+[nedss-helm-keycloak-extra]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak/extra>
+[nedss-helm-data-compare-api-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-compare-api-service>
+[nedss-helm-data-compare-processor-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-compare-processor-service>

@@ -23,9 +23,8 @@ redirect_from:
 
 This page covers the first deployment phase: provisioning the AWS cloud environment using Terraform. Complete the steps in this section before proceeding to [Initial Kubernetes Deployment](../initial-kubernetes-deployment/).
 
-1. Download the Terraform configuration package from GitHub. Make sure you go through the release page and see what's included in
-the current release on [CDCgov/NEDSS-Infrastructure](https://github.com/CDCgov/NEDSS-Infrastructure/releases)
-1. Open bash/mac/cloudshell/powershell and unzip the current version file downloaded in the previous step named nbs-infrastructure-vX.Y.Z zip.
+1. Go to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file.
+1. Open a terminal (bash, macOS Terminal, CloudShell, or PowerShell) and unzip the downloaded file.
 1. Create a new directory with an easily identifiable name e.g nbs7-mySTLT-test in /terraform/aws/ to hold your environment specific
 configuration files
 1. Copy terraform/aws/samples/NBS7_standard to the new directory and change into the new directory (Note: the samples directory
@@ -39,7 +38,7 @@ configuration files
    > Before you edit `terraform.tfvars` and `terraform.tf` files below, you can reference detailed information for each TF module under `terraform/aws/app-infrastructure` in a README file in each module's directory. Do not edit files in the individual modules.
    {: .note }
 
-1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions](https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/samples/README.md)
+1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions][nedss-infra-aws-samples-readme]
 1. Review the inbound rules on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
     - a. For example if the `modern-cidr` is `10.20.0.0/16`, there should be at least one rule in a security group associated to your database that allows MSSQL inbound access from your `modern-cidr` block
     ![mssql-inbound-from-modern-cidr](../images/myssql-inbound-from-modern-cidr.png)
@@ -111,3 +110,6 @@ configuration files
    ```
 
 You have now installed your core infrastructure and Kubernetes cluster. Next, see [Initial Kubernetes Deployment](../initial-kubernetes-deployment/initial-kubernetes-deployment.html) to configure your cluster using Helm charts.
+
+[nedss-infra-release-page]: <https://github.com/CDCgov/NEDSS-Infrastructure/releases/tag/{{ site.version_latest_tag }}>
+[nedss-infra-aws-samples-readme]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/samples/README.md>

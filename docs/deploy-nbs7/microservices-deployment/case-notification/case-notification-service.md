@@ -12,7 +12,10 @@ redirect_from:
 
 This page walks through deploying the Case Notification Service for case notification processing.
 
-1. Locate the Helm chart at `charts/case-notification-service`.
+> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
+1. Locate the Case Notification Service Helm chart in the [NEDSS-Helm repository][nedss-helm-case-notification-service-chart].
 1. Set the image repository and tag:
 
    ```yaml
@@ -58,3 +61,5 @@ This page walks through deploying the Case Notification Service for case notific
    https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/info
    https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/health
    ```
+
+[nedss-helm-case-notification-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/case-notification-service>

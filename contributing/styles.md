@@ -422,6 +422,54 @@ After changing `redirect_from` or `_config.yml`:
 1. Confirm that Jekyll generated a redirect file for the old URL under `_site/docs`.
 1. Test the old URL in browser.
 
+### 6.3 Reference-style links for templated GitHub URLs
+
+GitHub URLs that contain Liquid template values (e.g., `{{ site.version_latest_tag }}`) must use **reference-style links** rather than inline links. Inline links with Liquid values trigger markdownlint rule MD034 (bare URL in text), which is a blocking CI check.
+
+**Use inline links for** static URLs and internal cross-links — those are fine and easier to read when the URL is short.
+
+**Use reference-style links for** any GitHub URL that contains `{{ site.version_latest_tag }}` or another Liquid variable.
+
+**Reference-style syntax:**
+
+```markdown
+Locate the chart in the [NEDSS-Helm repository][nedss-helm-traefik-chart].
+
+[nedss-helm-traefik-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/traefik>
+```
+
+**Naming convention for reference labels:**
+
+Use lowercase hyphenated labels that identify the repo and target clearly. Keep them stable — a label used in the page body must match its definition exactly.
+
+| Pattern | Example label |
+|---------|--------------|
+| NEDSS-Helm chart | `nedss-helm-<chart-name>-chart` |
+| NEDSS-Helm specific file | `nedss-helm-<chart-name>-<file>` |
+| NEDSS-Infrastructure release page | `nedss-infra-release-page` |
+| NEDSS-Infrastructure specific file | `nedss-infra-<path-description>` |
+| NEDSS-NNDSS release page | `nedss-nndss-release-page` |
+| NEDSS-NNDSS specific file | `nedss-nndss-<description>` |
+
+**Placement rule:** Put all link definitions at the very end of the file, after all content. Never place a definition block in the middle of a page — it interrupts prose flow and makes definitions hard to find.
+
+**Full pattern for a page with templated links:**
+
+```markdown
+## Deploy the service
+
+1. Locate the Helm chart in the [NEDSS-Helm repository][nedss-helm-myservice-chart].
+1. Configure `values.yaml` as described below.
+
+[nedss-helm-myservice-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/myservice>
+```
+
+**When editing existing pages:**
+
+1. If you add a templated GitHub link, write it in reference style and add its definition at the bottom.
+2. If a file already has reference definitions at the bottom, add yours to the same block.
+3. Run `npm run lint` on the touched file before pushing. If `npm run link-check:github:changed` reports an error on a templated URL, check that the link definition uses angle-bracket syntax (`<https://...>`).
+
 ---
 
 ## 7. Images

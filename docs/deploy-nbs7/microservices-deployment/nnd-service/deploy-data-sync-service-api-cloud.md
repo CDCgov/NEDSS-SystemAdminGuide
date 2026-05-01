@@ -18,10 +18,12 @@ Use these steps to install the NBS 7 Data Sync service API in your cloud environ
 1. TOC
 {:toc}
 
+> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
 ## Prerequisites
 
-1. Use the values file supplied as part of [nbs-helm-vX.Y.Z.zip](https://github.com/CDCgov/NEDSS-Helm/releases). Download the zip file from [nbs-helm releases](https://github.com/CDCgov/NEDSS-Helm/releases) and scroll to **Assets** for the latest or previous release. The `values.yaml` file should be under `charts/nnd-service/values.yaml`.
-   Provide values for *ECR repository, ECR image tag, db server endpoints, and ingress host* in the `values.yaml` file.
+1. Locate the NND Service Helm chart in the [NEDSS-Helm repository][nedss-helm-nnd-service-chart]. Provide values for ECR repository, ECR image tag, database server endpoints, and ingress host in the `values.yaml` file.
 
 2. Confirm that the following DNS entry was created and points to the Network Load Balancer (NLB) in front of your Kubernetes cluster (make sure this is the active NLB provisioned in the base install steps). Do this in your authoritative DNS service, such as Route 53.
    Replace `example.com` with the appropriate domain name in the `values.yaml` file.
@@ -85,3 +87,5 @@ Use these steps to install the NBS 7 Data Sync service API in your cloud environ
    ```text
    https://<data.EXAMPLE_DOMAIN>/extraction/swagger-ui/index.html#/
    ```
+
+[nedss-helm-nnd-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nnd-service>

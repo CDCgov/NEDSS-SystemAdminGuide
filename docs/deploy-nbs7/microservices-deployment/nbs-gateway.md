@@ -20,10 +20,12 @@ The NBS Gateway service routes requests between NBS 7 microservices and the lega
 1. TOC
 {:toc}
 
+> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
 ## Deploy NBS Gateway using Helm
 
-The Helm chart for NBS Gateway is located in the `charts/nbs-gateway` directory.
-
+1. Locate the NBS Gateway Helm chart in the [NEDSS-Helm repository][nedss-helm-nbs-gateway-chart].
 1. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 as shown in the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller).
 1. Set the image repository and tag:
 
@@ -63,3 +65,5 @@ The Helm chart for NBS Gateway is located in the `charts/nbs-gateway` directory.
    ```
 
    If the pod is still creating or in any other non-running state, wait before continuing.
+
+[nedss-helm-nbs-gateway-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nbs-gateway>

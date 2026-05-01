@@ -12,7 +12,6 @@ redirect_from:
 
 > The Java reporting services are being consolidated in an upcoming release. The service validation URLs reflect the NBS {{ site.version_latest }} configuration.
 {: .warning }
-
 > This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
 {: .note }
 
@@ -34,7 +33,7 @@ Follow these steps to configure and deploy the RTR Java services Helm chart.
 > Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
 {: .important }
 
-1. Locate the Helm chart for all RTR Java services in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/rtr).
+1. Locate the Helm chart for all RTR Java services in the [NEDSS-Helm repository][nedss-helm-rtr-chart].
 
 1. Validate the Kubernetes secret for database credentials:
 
@@ -44,7 +43,7 @@ Follow these steps to configure and deploy the RTR Java services Helm chart.
 
    > Verify that the secret contains the correct database username and password, Kafka cluster, and other required configuration values. If the secret does not exist, create it by applying the provided YAML file. Replace all placeholder values before running:
    >
-   > Script location: [NEDSS-Helm/nbs-secrets.yaml](https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/nbs-secrets.yaml)
+   > Script location: [NEDSS-Helm/nbs-secrets.yaml][nedss-helm-k8-secrets-manifest]
    >
    > ```bash
    > kubectl apply -f k8-manifests/nbs-secrets.yaml
@@ -133,3 +132,6 @@ Follow these steps to configure and deploy the RTR Java services Helm chart.
    https://data.<exampledomain>/reporting/post-processing-svc/status
    Expected: Post Processing Service Status OK
    ```
+
+[nedss-helm-rtr-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/rtr>
+[nedss-helm-k8-secrets-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/nbs-secrets.yaml>

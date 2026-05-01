@@ -57,11 +57,23 @@ need manual content review.
 | `docs/deploy-nbs7/real-time-reporting/kafka-connector.md` | NEDSS-Helm Kafka chart link resolves at the new tag. |
 | `docs/deploy-nbs7/real-time-reporting/rtr-java-services.md` | NEDSS-Helm RTR chart and NEDSS-Helm secrets links resolve at the new tag. Review the consolidation warning callout for accuracy. |
 | `docs/deploy-nbs7/real-time-reporting/data-compare-tool.md` | Both NEDSS-Helm links resolve at the new tag. NEDSS-DataCompare link stays at `main` — that repo has no version tags. |
+| `docs/deploy-nbs7/keycloak/keycloak-installation.md` | NEDSS-Helm Keycloak chart, SQL script, and realm JSON file links resolve at the new tag. |
 | `docs/deploy-nbs7/microservices-deployment/case-notification.md` | NEDSS-Helm Keycloak profile link resolves at the new tag. |
-| `docs/deploy-nbs7/microservices-deployment/data-ingestion.md` | NEDSS-DataIngestion DB scripts link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/data-ingestion.md` | NEDSS-Helm Data Ingestion chart link and NEDSS-DataIngestion DB scripts link resolve at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/elasticsearch.md` | NEDSS-Helm Elasticsearch chart link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/modernization-api.md` | NEDSS-Helm Modernization API chart link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/nifi.md` | NEDSS-Helm NiFi chart link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/nbs-gateway.md` | NEDSS-Helm NBS Gateway chart link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/data-processing.md` | NEDSS-Helm Data Processing chart link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/case-notification/debezium.md` | NEDSS-Helm Debezium chart link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/case-notification/data-extraction.md` | NEDSS-Helm Data Extraction chart link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/case-notification/case-notification-service.md` | NEDSS-Helm Case Notification Service chart link resolves at the new tag. |
 | `docs/deploy-nbs7/microservices-deployment/case-notification/api-testing.md` | NEDSS-Helm templates and NEDSS-NNDSS-Case-Notifications links resolve at the new tag. |
-| `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-data-sync.md` | NEDSS-NNDSS scripts links resolve at the new tag. |
-| `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-nnd-sync.md` | NEDSS-NNDSS README link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/nnd-service/deploy-data-sync-service-api-cloud.md` | NEDSS-Helm NND Service chart link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/validate-es-mapi-nifi/api-smoke-test.md` | NEDSS-Infrastructure `nbs-test-api.sh` script link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/validate-es-mapi-nifi/web-ui-smoke-test.md` | NEDSS-Infrastructure `nbs-test-webui.sh` script link resolves at the new tag. |
+| `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-data-sync.md` | NEDSS-NNDSS scripts links resolve at the new tag. **Confirm the NEDSS-NNDSS release at the new tag includes a `vX.Y.Z.NEDSS.NBS.Modernized.Documentation.zip` asset** — this was absent from the v7.12.0 release. If the asset is missing, coordinate with the dev team before publishing. |
+| `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-nnd-sync.md` | NEDSS-NNDSS README link resolves at the new tag. Same documentation zip caveat as `on-prem-data-sync.md` above. |
 | `docs/maintain-nbs7/eks-upgrade.md` | Update the Kubernetes versions table. Confirm the conditional add-ons step (Step 4) still reflects the correct `eks_nbs` module version behavior. *(Page not yet created as of 7.12.)* |
 
 > Add rows to this table as version-sensitive pages are identified.

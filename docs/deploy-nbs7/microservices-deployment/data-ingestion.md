@@ -62,8 +62,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
 ### Liquibase
 
 - Data Ingestion includes a built-in Liquibase integration that automatically applies database schema changes on deployment.
-  - DB changes detail can be reviewed here:
-    - **DI Liquibase:** [NEDSS-DataIngestion/data-ingestion-service/src/main/resources/db at {{ site.version_latest_tag }} · CDCgov/NEDSS-DataIngestion](https://github.com/CDCgov/NEDSS-DataIngestion/tree/{{ site.version_latest_tag }}/data-ingestion-service/src/main/resources/db)
+- DB changes detail can be reviewed here: [NEDSS-DataIngestion/data-ingestion-service/src/main/resources/db at {{ site.version_latest_tag }} · CDCgov/NEDSS-DataIngestion][nedss-dataingestion-db]
 - See [Deploy Data Ingestion using Helm](#deploy-data-ingestion-using-helm) for deployment steps.
 
 ### Liquibase DB change verification
@@ -73,11 +72,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
 
 ## Deploy Data Ingestion using Helm
 
-1. Use the `values.yaml` file supplied in the `nbs-helm-vX.Y.Z.zip` release package. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, **MSK (Kafka) bootstrap server**, and **ingress host** values.
-   1. Navigate to the [NEDSS-Helm/releases](https://github.com/CDCgov/NEDSS-Helm/releases) page.
-   1. Scroll down to the Assets listed for the latest or previous releases.
-   1. Download the zip file for the release.
-   1. Find the `values.yaml` file under `charts\dataingestion-service`.
+1. Locate the Data Ingestion Service Helm chart in the [NEDSS-Helm repository][nedss-helm-dataingestion-service-chart]. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, **MSK (Kafka) bootstrap server**, and **ingress host** values in `values.yaml`.
 
 1. Confirm that DNS entries for the following host were created and point to the Network Load Balancer (NLB) in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned in the base install steps). Make this change in your authoritative DNS service (for example, Route 53).
    Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) for reference.
@@ -167,3 +162,6 @@ For more information about SFTP support, please see: [data-ingestion-sftp-suppor
     ```text
     https://<data.EXAMPLE_DOMAIN>/ingestion/swagger-ui/index.html#/
     ```
+
+[nedss-dataingestion-db]: <https://github.com/CDCgov/NEDSS-DataIngestion/tree/{{ site.version_latest_tag }}/data-ingestion-service/src/main/resources/db>
+[nedss-helm-dataingestion-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/dataingestion-service>

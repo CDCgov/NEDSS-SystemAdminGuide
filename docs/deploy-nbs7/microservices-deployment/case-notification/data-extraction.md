@@ -12,7 +12,10 @@ redirect_from:
 
 This page walks through deploying the Data Extraction Service for case notification workflows.
 
-1. Locate the Helm chart at `charts/data-extraction-service`.
+> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
+1. Locate the Data Extraction Service Helm chart in the [NEDSS-Helm repository][nedss-helm-data-extraction-service-chart].
 1. Set the image repository and tag:
 
    ```yaml
@@ -56,3 +59,5 @@ This page walks through deploying the Data Extraction Service for case notificat
    https://<data.EXAMPLE_DOMAIN>/data-extraction/actuator/health
    https://<data.EXAMPLE_DOMAIN>/data-extraction/actuator/info
    ```
+
+[nedss-helm-data-extraction-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-extraction-service>

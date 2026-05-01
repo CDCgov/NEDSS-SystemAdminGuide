@@ -19,7 +19,7 @@ redirect_from:
 1. TOC
 {:toc}
 
-The `nbs-test-api.sh` script is included in the infrastructure zip file at `scripts/observability/nbs-test-api`.
+The `nbs-test-api.sh` script is in the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-api].
 
 This script will:
 
@@ -44,3 +44,5 @@ nbs-test-api.sh -B https://app.<your-site>.<your-domain>.com -U <apiuser> -c 10
 ```
 
 This command verifies API functionality and populates the observability dashboards with initial traffic.
+
+[nedss-infra-nbs-test-api]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-api>

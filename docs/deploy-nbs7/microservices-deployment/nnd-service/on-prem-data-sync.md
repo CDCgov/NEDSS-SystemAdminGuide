@@ -47,7 +47,7 @@ The service supports multiple options to download the data:
 
 ## Set up the Data Availability service
 
-Download the above files (`.jar`, `.cmd`, and `.sql`) from the most recent GitHub release under the **data-sync directory** in the `v7.x.x.NEDSS.NBS.Modernized.Documentation.zip` file.
+Download the above files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page]. Under **Assets**, download the `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
 Save the files to a secure directory with executable permissions to run the services.
 
 Before you proceed, **choose where to send the data**:
@@ -109,10 +109,10 @@ If a user wants to direct **SRTE table data** into a separate SRTE database:
 ### Config table scripts
 
 - **Create config table**
-  [create_data_config.sql](https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/create_data_config.sql)
+  [create_data_config.sql][nedss-nndss-create-data-config]
 
 - **Insert config records** (pick only the tables you want to download into that database, for example, only SRTE tables)
-  [poll_config_insert.sql](https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/poll_config_insert.sql)
+  [poll_config_insert.sql][nedss-nndss-poll-config-insert]
 
 ---
 
@@ -130,7 +130,7 @@ Make sure you validate the **provided API endpoints** before running any Data Sy
 
 ## Repo reference
 
-GitHub: <https://github.com/CDCgov/NEDSS-NNDSS>
+GitHub: [NEDSS-NNDSS repository](https://github.com/CDCgov/NEDSS-NNDSS)
 
 ---
 
@@ -143,4 +143,9 @@ GitHub: <https://github.com/CDCgov/NEDSS-NNDSS>
 - Execute the following `.sql` scripts to create necessary tables required to download the data.
 
 - **Database creation scripts** (includes RDB, SRTE, and RDB Modern)
-  [create_test_db SQL scripts](https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/create_test_db)
+  [create_test_db SQL scripts][nedss-nndss-create-test-db]
+
+[nedss-nndss-release-page]: <https://github.com/CDCgov/NEDSS-NNDSS/releases/tag/{{ site.version_latest_tag }}>
+[nedss-nndss-create-data-config]: <https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/create_data_config.sql>
+[nedss-nndss-poll-config-insert]: <https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/poll_config_insert.sql>
+[nedss-nndss-create-test-db]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/create_test_db>

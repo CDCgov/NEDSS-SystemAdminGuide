@@ -31,7 +31,7 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
 > Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
 {: .important }
 
-1. Locate the Kafka connector Helm chart in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/kafka-connect-sink).
+1. Locate the Kafka connector Helm chart in the [NEDSS-Helm repository][nedss-helm-kafka-connect-sink-chart].
 
 1. Configure `values.yaml`. Replace all placeholder values before installation.
 
@@ -87,3 +87,5 @@ If the service has trouble connecting to the database, run the following command
 ```bash
 kubectl delete configmap cp-kafka-connect-sqlserver-connect
 ```
+
+[nedss-helm-kafka-connect-sink-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/kafka-connect-sink>

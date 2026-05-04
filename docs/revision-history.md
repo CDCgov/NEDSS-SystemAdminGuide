@@ -1,7 +1,7 @@
 ---
 title: Revision history
 layout: page
-nav_order: 5
+nav_order: 6
 description: A record of significant updates to the NBS 7 System Administrator Guide.
 ---
 

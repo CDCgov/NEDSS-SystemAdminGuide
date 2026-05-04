@@ -38,12 +38,3 @@ NBS 7 supports AWS and Azure as runtime options. The platform uses a cloud-agnos
 The primary audience is system administrators at state, tribal, local, and territorial health departments who install, operate, and maintain NBS 7. The content assumes familiarity with your cloud platform, Kubernetes, Terraform, Helm, and related administration tasks. You need administrator-level access to your runtime environment and a local system with required prerequisites installed.
 
 For more information on NBS, see the official CDC [National Electronic Disease Surveillance System Base System (NBS)](https://www.cdc.gov/nbs/php/index.html) website.
-
-## Revision history
-
-| Date         | Description        | Author |
-|:-------------|:------------------|:-------|
-| April 28, 2026 | Replace NGINX with [Traefik instructions](/NEDSS-SystemAdminGuide/docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) | Kate Saul, Jill Shaheen (Skylight Digital) |
-| April 24, 2026 | [RTR deployment](/NEDSS-SystemAdminGuide/docs/deploy-nbs7/real-time-reporting/real-time-reporting.html) content audit (7.12) | Jill Shaheen (Skylight Digital) |
-| April 17, 2026 | Full site restructure | Jill Shaheen (Skylight Digital) |
-| August 19, 2025 | 7.11.0 Minor Release | Anand Logan, Upasana Pattnaik, Kashyap Ramakur, Aaron Chapman, Duc Nguyen, Chuck Moss, Serban Zamfir |

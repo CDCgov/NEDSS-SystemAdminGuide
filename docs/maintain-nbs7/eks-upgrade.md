@@ -45,7 +45,7 @@ Before you begin, confirm the following:
 ### Access and tooling
 
 - You have IAM permissions to modify Amazon EKS clusters and node groups. Required actions include `eks:UpdateClusterVersion`, `eks:UpdateNodegroupVersion`, and `eks:DescribeCluster`. For the full list, see [Amazon EKS identity-based policy examples](https://docs.aws.amazon.com/eks/latest/userguide/security_iam_id-based-policy-examples.html) in the AWS documentation.
-- You have installed Terraform and configured it with access to your NBS 7 state backend. The Terraform configuration for this procedure is in the [eks-nbs](https://github.com/CDCgov/NEDSS-Infrastructure/tree/v7.12.0/terraform/aws/app-infrastructure/eks-nbs) directory of the NEDSS-Infrastructure repository.
+- You have installed Terraform and configured it with access to your NBS 7 state backend. The Terraform configuration for this procedure is in the [eks-nbs](https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/terraform/aws/app-infrastructure/eks-nbs) directory of the NEDSS-Infrastructure repository.
 - You have installed the AWS CLI and `kubectl` and authenticated to your cluster.
 
 ### Pre-upgrade checks
@@ -77,7 +77,7 @@ PowerShell:
 terraform state list | Select-String "aws_eks_cluster|aws_eks_node_group"
 ```
 
-For a standard NBS 7 deployment using the NEDSS-Infrastructure Terraform repository, the output should include (see [main.tf](https://github.com/CDCgov/NEDSS-Infrastructure/blob/v7.12.0/terraform/aws/app-infrastructure/eks-nbs/main.tf)):
+For a standard NBS 7 deployment using the NEDSS-Infrastructure Terraform repository, the output should include (see [main.tf](https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/app-infrastructure/eks-nbs/main.tf)):
 
 ```text
 module.eks_nbs.module.eks.aws_eks_cluster.this[0]
@@ -90,7 +90,7 @@ These are the target addresses to use in Steps 2 and 3. If your deployment uses 
 
 Repeat the following steps for each minor version between your current version and your target version. Do not proceed to the next version until the cluster reaches `ACTIVE` status at the current version.
 
-1. In [variables.tf](https://github.com/CDCgov/NEDSS-Infrastructure/blob/v7.12.0/terraform/aws/app-infrastructure/eks-nbs/variables.tf), update the `cluster_version` default value to the next minor version:
+1. In [variables.tf](https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/app-infrastructure/eks-nbs/variables.tf), update the `cluster_version` default value to the next minor version:
 
    ```terraform
    variable "cluster_version" {

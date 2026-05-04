@@ -25,7 +25,7 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
 > The NiFi ingress is disabled by default. To access the NiFi admin UI, set `ingress.enabled: true` in `values.yaml` before running the install command. Use a private domain name rather than a public one — NiFi has known security vulnerabilities.
 {: .important }
 
-1. Locate the Helm chart at `charts/nifi-efs`.
+1. Locate the NiFi Helm chart in the [NEDSS-Helm repository][nedss-helm-nifi-efs-chart].
 1. In `values.yaml`, replace all occurrences of `nifi.EXAMPLE_DOMAIN` with your domain name. See the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) for reference.
 1. Set the image repository and tag:
 
@@ -57,3 +57,5 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
    ```
 
    If the pod is still creating or in any other state, wait and troubleshoot before continuing.
+
+[nedss-helm-nifi-efs-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nifi-efs>

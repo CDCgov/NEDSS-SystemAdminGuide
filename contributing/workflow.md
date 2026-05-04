@@ -56,15 +56,6 @@ git config --global push.autoSetupRemote true
 - **Windows (Git Bash):** included with [Git for Windows](https://git-scm.com/download/win) — no action needed.
 
 
-## Branch Naming
-
-Prefix with your initials and use a descriptive name:
-```
-js/add-authentication-docs
-js/STLT-123-authentication
-```
-
-
 ## Daily Workflow
 
 ### 1. Start from an up-to-date `main`
@@ -89,6 +80,8 @@ git push -u origin your-initials/short-description
 ```
 
 Or if you set up automatic remote tracking, just `git push`.
+
+For commit message conventions, see [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ### 3. Stage for stakeholder review
 
@@ -133,7 +126,7 @@ git push origin preview
 
 ### 5. Merge to `main` when approved
 
-Open a PR on GitHub from your **feature branch** to `main` — not from `preview` to `main`.
+Open a PR on GitHub from your **feature branch** to `main` — not from `preview` to `main`. For PR description standards and review expectations, see [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 Go to https://github.com/CDCgov/NEDSS-SystemAdminGuide — GitHub will show a prompt to open a PR for your recently pushed branch.
 

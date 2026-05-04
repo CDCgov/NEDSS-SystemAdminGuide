@@ -10,3 +10,15 @@
     color: #008A17;
     font-weight: bold;
 }
+.version-banner {
+    padding: 0.35rem 1.5rem;
+    font-size: 0.75rem;
+    color: $grey-dk-100;
+    background-color: $sidebar-color;
+    border-bottom: 1px solid $border-color;
+}
+.version-banner--archived {
+    background-color: #fdf3cd;
+    color: #7a5c00;
+    border-bottom-color: #f0d060;
+}

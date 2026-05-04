@@ -22,7 +22,7 @@ This page walks through deploying the Modernization API using the `modernization
 
 ## Deploy Modernization API using Helm
 
-1. Locate the Helm chart at `charts/modernization-api`.
+1. Locate the Modernization API Helm chart in the [NEDSS-Helm repository][nedss-helm-modernization-api-chart].
 1. In `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6. See the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records) for reference.
 1. Set the image repository and tag:
 
@@ -82,3 +82,5 @@ This page walks through deploying the Modernization API using the `modernization
    ```
 
    If the pod is still creating or in any other state, wait and troubleshoot before continuing.
+
+[nedss-helm-modernization-api-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/modernization-api>

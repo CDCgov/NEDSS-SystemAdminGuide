@@ -31,8 +31,8 @@ This page explains how to deploy the core Kubernetes infrastructure services tha
 
 ## Bootstrap Kubernetes
 
-1. Download the Helm configuration package from GitHub. Make sure you go through the release page and see what's included [Latest release of CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/releases).
-1. Open bash/mac/cloudshell/powershell and unzip the downloaded nbs-helm-vX.Y.Z zip file.
+1. Download the Helm configuration package from the [CDCgov/NEDSS-Helm][nedss-helm-repo] repo on Github. Be sure to go through the [{{ site.version_latest_tag }} release page][nedss-helm-release-page] to see what's included.
+1. Open a terminal (bash, macOS Terminal, CloudShell, or PowerShell) and unzip the downloaded file.
 1. **All helm commands should be executed from the charts directory.** Change directory to where you unzipped the helm **charts** folder `<Helm_Dir>/charts`.
 
 ## Create secrets in your cluster
@@ -89,7 +89,7 @@ helm install traefik-crds traefik/traefik-crds --namespace traefik --create-name
 
 ### Deploy the Traefik controller
 
-The Traefik Helm charts are located in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/traefik). Traefik uses the values in `charts/traefik/values.yaml` (AWS) or `charts/traefik/values-azure.yaml` (Azure) from the `nbs-helm-vX.Y.Z` zip file. These values are preconfigured to set up Prometheus metrics, configure Linkerd sidecar injection, set timeouts, and instruct the Traefik controller to create an Amazon Elastic Kubernetes Service (Amazon EKS) Network Load Balancer (NLB) or Azure Kubernetes Service (AKS) internal load balancer.
+The Traefik Helm charts are located in the [NEDSS-Helm repository][nedss-helm-traefik-chart]. Traefik uses the values in `charts/traefik/values.yaml` (AWS) or `charts/traefik/values-azure.yaml` (Azure) from the downloaded chart package. These values are preconfigured to set up Prometheus metrics, configure Linkerd sidecar injection, set timeouts, and instruct the Traefik controller to create an Amazon Elastic Kubernetes Service (Amazon EKS) Network Load Balancer (NLB) or Azure Kubernetes Service (AKS) internal load balancer.
 
 1. To create the Traefik Controller within Kubernetes, choose the appropriate command for your environment:
 
@@ -125,7 +125,7 @@ The Traefik Helm charts are located in the [NEDSS-Helm repository](https://githu
 
 The `nbs-ingress` chart manages all NBS 7 application routing, including Keycloak, NBS Gateway, data ingestion services, and middleware. Deploy it independently of the application charts.
 
-1. Locate the Traefik Helm charts in the [NEDSS-Helm repository](https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/traefik). Update the values in `charts/nbs-ingress/values.yaml` with your environment-specific hostnames, or pass them as `--set` flags.
+1. Locate the Traefik Helm charts in the [NEDSS-Helm repository][nedss-helm-traefik-chart]. Update the values in `charts/nbs-ingress/values.yaml` with your environment-specific hostnames, or pass them as `--set` flags.
 1. Deploy the ingress resources:
 
    ```bash
@@ -235,7 +235,7 @@ cert-manager creates TLS certificates for workloads in your cluster and renews t
 > If you have manual certificates, skip steps 1 - 4 and store your certificates in Kubernetes secrets instead. For more information, see the [Kubernetes Secrets documentation](https://kubernetes.io/docs/concepts/configuration/secret/).
 {: .note }
 
-1. Locate the cluster issuer manifest in the `nbs-helm-v7.X.0` zip file at `k8-manifests/cluster-issuer-prod.yaml`.
+1. Locate the cluster issuer manifest at [`k8-manifests/cluster-issuer-prod.yaml`][nedss-helm-cluster-issuer-manifest] in the NEDSS-Helm repository.
 
 1. In `cluster-issuer-prod.yaml`, update the email address to a valid operations address. Let's Encrypt uses this address to notify you of upcoming certificate expirations if automatic renewal stops working.
 
@@ -308,3 +308,8 @@ Verify the pod is running:
 kubectl --namespace=kube-system get pods \
   -l "app.kubernetes.io/name=aws-cluster-autoscaler,app.kubernetes.io/instance=cluster-autoscaler"
 ```
+
+[nedss-helm-repo]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
+[nedss-helm-release-page]: <https://github.com/CDCgov/NEDSS-Helm/releases/tag/{{ site.version_latest_tag }}>
+[nedss-helm-traefik-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/traefik>
+[nedss-helm-cluster-issuer-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/cluster-issuer-prod.yaml>

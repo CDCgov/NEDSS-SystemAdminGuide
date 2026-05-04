@@ -19,7 +19,7 @@ redirect_from:
 1. TOC
 {:toc}
 
-The `nbs-test-webui.sh` script is included in the infrastructure zip file at `scripts/observability/nbs-test-webui`.
+The `nbs-test-webui.sh` script is in the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-webui].
 
 This script will:
 
@@ -54,3 +54,5 @@ For example:
 | `-B`     | baseurl url for hitting API |
 | `-U`     | user in the database with access to create and delete patients |
 | `-c`     | count number of iterations, default is 1 |
+
+[nedss-infra-nbs-test-webui]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-webui>

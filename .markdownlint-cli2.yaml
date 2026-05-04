@@ -72,5 +72,5 @@ ignores:
   # (e.g., tables, code examples, mixed prose) and are reviewed manually through
   # the code review process rather than automated lint.
   - "CONTRIBUTING.md"
-  - "WORKFLOW.md"
+  - "contributing/workflow.md"
   - "README.md"

@@ -31,11 +31,7 @@ This section covers installing the NBS 7 RTI service.
 
 ### RTI microservice
 
-1. Use the `values.yaml` file supplied in the `nbs-helm-vX.Y.Z.zip` release package. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, and **ingress host** values.
-   1. Navigate to the [NEDSS-Helm/releases](https://github.com/CDCgov/NEDSS-Helm/releases) page.
-   1. Scroll down to the Assets listed for the latest or previous releases.
-   1. Download the zip file for the release.
-   1. Find the `values.yaml` file under `charts\data-processing-service`.
+1. Locate the Data Processing Service Helm chart in the [NEDSS-Helm repository][nedss-helm-data-processing-service-chart]. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, and **ingress host** values in `values.yaml`.
 
 1. Confirm that a DNS entry for the following host was created and points to the Network Load Balancer (NLB) in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned in the base install steps). Make this change in your authoritative DNS service (for example, Route 53). Replace `example.com` with your domain name in `values.yaml`.
 
@@ -101,3 +97,5 @@ This section covers installing the NBS 7 RTI service.
    https://<data.EXAMPLE_DOMAIN>/rti/actuator/info
    https://<data.EXAMPLE_DOMAIN>/rti/actuator/health
    ```
+
+[nedss-helm-data-processing-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-processing-service>

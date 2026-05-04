@@ -19,8 +19,6 @@ redirect_from:
 
 > This feature is in Beta preview and not production ready.
 {: .important }
-> This page applies to NBS {{ site.version_latest }}. Script links are pinned to `{{ site.version_latest_tag }}`.
-{: .note }
 
 Real-time reporting (RTR) is an optional add-on for NBS 7. RTR reduces reporting latency from as long as 24 hours to between 5 minutes and 1 hour. It uses Kafka Connect to stream row-level changes from source tables, which reduces reliance on the `MasterETL` batch process.
 

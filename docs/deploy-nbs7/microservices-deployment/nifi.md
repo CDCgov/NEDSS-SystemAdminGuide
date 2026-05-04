@@ -20,9 +20,6 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
 1. TOC
 {:toc}
 
-> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
-{: .note }
-
 ## Deploy NiFi using Helm
 
 > The NiFi ingress is disabled by default. To access the NiFi admin UI, set `ingress.enabled: true` in `values.yaml` before running the install command. Use a private domain name rather than a public one — NiFi has known security vulnerabilities.

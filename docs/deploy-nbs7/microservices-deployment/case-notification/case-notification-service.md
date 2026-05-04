@@ -12,9 +12,6 @@ redirect_from:
 
 This page walks through deploying the Case Notification Service for case notification processing.
 
-> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
-{: .note }
-
 1. Locate the Case Notification Service Helm chart in the [NEDSS-Helm repository][nedss-helm-case-notification-service-chart].
 1. Set the image repository and tag:
 

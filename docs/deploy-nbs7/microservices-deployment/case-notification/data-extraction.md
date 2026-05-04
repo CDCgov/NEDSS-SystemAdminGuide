@@ -12,7 +12,6 @@ redirect_from:
 
 This page walks through deploying the Data Extraction Service for case notification workflows.
 
-
 1. Locate the Data Extraction Service Helm chart in the [NEDSS-Helm repository][nedss-helm-data-extraction-service-chart].
 1. Set the image repository and tag:
 

@@ -21,7 +21,6 @@ redirect_from:
 # Initial Kubernetes deployment
 {: .no_toc }
 
-
 This page explains how to deploy the core Kubernetes infrastructure services that NBS 7 requires before you install application components. Complete the sections in order. After you complete these steps, proceed to [Keycloak Installation](../../deploy-nbs7/keycloak/keycloak-installation.html).
 
 ## On this page

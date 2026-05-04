@@ -10,7 +10,6 @@ redirect_from:
 
 # Deploy the Kafka connector for real-time reporting (RTR)
 
-
 This page covers steps to deploy the Kafka sink connector that consumes RTR topics and writes transformed data into reporting tables.
 
 ## On this page

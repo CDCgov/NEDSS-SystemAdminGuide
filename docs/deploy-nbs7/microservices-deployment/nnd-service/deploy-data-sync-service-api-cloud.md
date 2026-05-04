@@ -18,7 +18,6 @@ Use these steps to install the NBS 7 Data Sync service API in your cloud environ
 1. TOC
 {:toc}
 
-
 ## Prerequisites
 
 1. Locate the NND Service Helm chart in the [NEDSS-Helm repository][nedss-helm-nnd-service-chart]. Provide values for ECR repository, ECR image tag, database server endpoints, and ingress host in the `values.yaml` file.

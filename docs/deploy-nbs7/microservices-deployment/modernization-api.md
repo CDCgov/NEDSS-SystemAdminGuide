@@ -20,7 +20,6 @@ This page walks through deploying the Modernization API using the `modernization
 1. TOC
 {:toc}
 
-
 ## Deploy Modernization API using Helm
 
 1. Locate the Modernization API Helm chart in the [NEDSS-Helm repository][nedss-helm-modernization-api-chart].

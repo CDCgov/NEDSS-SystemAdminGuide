@@ -10,7 +10,6 @@ redirect_from:
 
 # Deploy and use the RTR Data Compare validation tool
 
-
 This page covers deploying and using the Data Compare tool to validate RTR output against classic ETL results.
 
 ## On this page

@@ -12,7 +12,6 @@ redirect_from:
 
 This page walks through enabling Change Data Capture (CDC) and deploying the Debezium source connector used by case notification services.
 
-
 1. Enable Change Data Capture on `NBS_ODSE` for case notification. Sysadmin permissions are required. Then verify the configuration:
 
    ```sql

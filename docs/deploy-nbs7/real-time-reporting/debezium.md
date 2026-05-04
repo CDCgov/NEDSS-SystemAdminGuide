@@ -10,7 +10,6 @@ redirect_from:
 
 # Deploy Debezium for real-time reporting (RTR)
 
-
 This page covers steps to deploy the Debezium connector that captures change data from source tables and publishes events to Kafka topics for RTR processing.
 
 ## On this page

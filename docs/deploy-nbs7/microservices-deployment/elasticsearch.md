@@ -20,7 +20,6 @@ This page walks through deploying Elasticsearch using the `elasticsearch-efs` He
 1. TOC
 {:toc}
 
-
 ## Deploy Elasticsearch using Helm
 
 1. Locate the Elasticsearch Helm chart in the [NEDSS-Helm repository][nedss-helm-elasticsearch-efs-chart].

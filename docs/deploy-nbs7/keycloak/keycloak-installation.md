@@ -19,7 +19,6 @@ redirect_from:
 1. TOC
 {:toc}
 
-
 The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-gateway`, `data-ingestion-api`, and `nnd`. Locate the chart in the [NEDSS-Helm repository][nedss-helm-keycloak-chart] before beginning.
 
 ## Create the Keycloak database

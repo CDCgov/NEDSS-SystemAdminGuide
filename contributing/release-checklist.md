@@ -1,7 +1,6 @@
 # Admin Guide release checklist
 
-Use this checklist for each NBS 7 release. At the start of each release cycle,
-copy the checklist items into a new Jira ticket and track completion there.
+Use this checklist for each NBS 7 release.
 
 For the broader NBS release process (engineering, testing, beta, CDC approval),
 see the [Template] 6 Release Process Checklist in NBS Central.
@@ -10,7 +9,7 @@ see the [Template] 6 Release Process Checklist in NBS Central.
 
 ## Before you begin
 
-Identify the following values for the new release before starting any checklist items.
+Identify the following values and complete the setup steps before starting the checklist.
 
 | Value | Example | Notes |
 |---|---|---|
@@ -18,6 +17,8 @@ Identify the following values for the new release before starting any checklist 
 | New version tag | `v7.13.0` | Used in `version_latest_tag`; confirm tag exists in NEDSS-Infrastructure before starting |
 | Previous version number | `7.12` | Used in archiving steps |
 | Previous version tag | `v7.12.0` | Used in archiving steps |
+
+- [ ] Create a new Jira ticket in the STLT project under the **SysAdmin Guide: New release checklists** epic. Suggested title: `Admin Guide: Update guide for NBS X.XX release`. Copy the checklist items below as acceptance criteria and track completion there.
 
 ---
 
@@ -110,23 +111,14 @@ The following pages require manual content review beyond link verification:
 
 ### 5. Quality checks
 
-- [ ] Run a link checker or manually spot-check for broken links (historically a
+- [ ] Run the link checker `npm run lint` for broken links (historically a
   known problem at release time).
 - [ ] Confirm all new or updated content meets Section 508 requirements (heading
   structure, alt text, table formatting, hyperlink text). See [styles.md §10](styles.md#10-accessibility-compliance-record).
 - [ ] Confirm all new or updated content follows Global English and Google
   Developer Style Guide conventions. See [styles.md](styles.md).
 
-### 6. Create a per-release Jira ticket
-
-At the start of each release cycle, create a new Jira ticket in the STLT project
-under the [Admin Guide: polishing and hardening] epic. Use this checklist as the
-source of truth for line items. Copy the checklist items as acceptance criteria
-into the new ticket, and track completion there.
-
-Suggested Jira ticket title: `Admin Guide: Update guide for NBS 7.XX release`
-
-### 7. Final review
+### 6. Final review
 
 - [ ] Confirm the live guide title shows the new version.
 - [ ] Confirm the site builds and deploys successfully on GitHub Pages.

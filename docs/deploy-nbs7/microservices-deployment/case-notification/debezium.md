@@ -42,7 +42,7 @@ This page walks through enabling Change Data Capture (CDC) and deploying the Deb
     WHERE is_tracked_by_cdc = 1;
    ```
 
-1. Locate the Helm chart at `charts/debezium-case-notifications`.
+1. Locate the Debezium Helm chart in the [NEDSS-Helm repository][nedss-helm-debezium-case-notifications-chart].
 1. Set the image repository and tag:
 
    ```yaml
@@ -91,3 +91,5 @@ This page walks through enabling Change Data Capture (CDC) and deploying the Deb
     ```bash
     kubectl delete configmap case-notification-connectb
     ```
+
+[nedss-helm-debezium-case-notifications-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium-case-notifications>

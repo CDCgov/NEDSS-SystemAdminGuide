@@ -4,9 +4,9 @@ If you're new to this project, start here.
 
 ## Getting started
 
-**Workflow setup and daily git commands:** See [WORKFLOW.md](WORKFLOW.md). It covers cloning the repo, VS Code setup, branch and commit commands, and the staging-to-production workflow.
+**Workflow setup and daily git commands:** See [workflow.md](contributing/workflow.md). It covers cloning the repo, VS Code setup, branch and commit commands, and the staging-to-production workflow.
 
-**Formatting standards:** See [STYLES.md](STYLES.md). It covers headings, callout types, code blocks, links, images, and tables.
+**Formatting standards:** See [styles.md](contributing/styles.md). It covers front matter, headings, callout types, code blocks, links, images, tables, and accessibility requirements.
 
 ## Branch naming
 
@@ -17,7 +17,7 @@ js/add-authentication-docs
 js/STLT-123-keycloak-setup
 ```
 
-Full details in [WORKFLOW.md](WORKFLOW.md).
+Full details in [workflow.md](contributing/workflow.md).
 
 ## Commit messages
 
@@ -39,10 +39,10 @@ PRs should be reviewed within 2 business days. If yours sits longer, it's fine t
 Reviewers should check:
 
 - **Content accuracy** — reviewers are subject matter owners, not just proofreaders
-- **Style compliance** — verify formatting follows [STYLES.md](STYLES.md)
-- **Front matter** — confirm it's present and complete per [FRONT-MATTER.md](FRONT-MATTER.md)
+- **Style compliance** — verify formatting follows [styles.md](contributing/styles.md)
+- **Front matter** — confirm it's present and complete per [styles.md §1](contributing/styles.md#1-front-matter)
 - **No broken links or missing images**
-- **Accessibility** — confirm all images have descriptive alt text and no heading levels are skipped; see [ACCESSIBILITY.md](ACCESSIBILITY.md) for standards
+- **Accessibility** — confirm all images have descriptive alt text and no heading levels are skipped; see [styles.md §10](contributing/styles.md#10-accessibility-compliance-record) for standards
 
 ## Merging
 
@@ -65,13 +65,12 @@ The `/templates` directory at the repo root contains starter files for the four 
 
 1. Copy the template file to the appropriate `docs/` subdirectory.
 2. Rename it using lowercase-hyphenated convention: `deploy-nbs-gateway.md`, not `DeployNBSGateway.md`.
-3. Fill in all front matter fields. Replace every all-caps placeholder (`TITLE`, `NAV_ORDER`, `PARENT_TITLE`) with real values. See [FRONT-MATTER.md](FRONT-MATTER.md) for field definitions and requirements.
+3. Fill in all front matter fields. Replace every all-caps placeholder (`TITLE`, `NAV_ORDER`, `PARENT_TITLE`) with real values. See [styles.md §1](contributing/styles.md#1-front-matter) for field definitions and requirements.
 4. Write a `description:` for every new page — even if it is optional, it improves search results for every reader.
 5. Write the page content, using the HTML guidance comments as your brief.
 6. Remove all HTML guidance comments (`<!-- ... -->`) before committing. Guidance comments are not rendered by Jekyll but they should not be left in as dead weight.
 
-For front matter field reference, see [FRONT-MATTER.md](FRONT-MATTER.md).
-For formatting standards (headings, callouts, code blocks, links, images, tables), see [STYLES.md](STYLES.md).
+For front matter, formatting, and accessibility standards, see [styles.md](contributing/styles.md).
 
 ### Page layout convention
 
@@ -82,7 +81,7 @@ Use this structure on content pages:
 3. `## On this page` TOC block
 4. First H2 section immediately after the TOC
 
-See [STYLES.md](STYLES.md) for the canonical pattern and examples.
+See [styles.md](contributing/styles.md) for the canonical pattern and examples.
 
 ## Scripts and commands
 
@@ -112,7 +111,7 @@ Link-check implementation scripts live in `scripts/`:
 **On push to `main`:** `bundle exec jekyll build` runs via `jekyll.yml`, then deploys to GitHub Pages. Two additional steps run before the build:
 
 - **Cleanup `_guide_preview`:** Strips nav-related front matter keys (`parent`, `grand_parent`, `nav_order`, `has_children`) from `_guide_preview/` files before Jekyll builds. These keys have no effect on the nav-excluded collection, but stripping them prevents JTD from misinterpreting them during the build.
-- **Release versioning:** Discovers all branches matching `release-*`, checks them out into `_previous_versions/`, and generates a nav-accessible index page for each. This is how the **Previous Versions** section of the site is populated automatically.
+- **Release versioning:** Discovers all branches matching `release-*`, checks them out into `_previous_versions/`, and generates a nav-accessible index page for each. This is how the **Previous Versions** section of the site is populated automatically. See [release-checklist.md](contributing/release-checklist.md) for the full release process.
 
 **On push to `preview`:** `bundle exec jekyll build` runs via `jekyll-preview.yml` and deploys to the staging site.
 

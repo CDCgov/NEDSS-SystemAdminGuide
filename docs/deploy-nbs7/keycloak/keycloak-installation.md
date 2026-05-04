@@ -19,7 +19,7 @@ redirect_from:
 1. TOC
 {:toc}
 
-The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-gateway`, `data-ingestion-api`, and `nnd`.
+The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-gateway`, `data-ingestion-api`, and `nnd`. Locate the chart in the [NEDSS-Helm repository][nedss-helm-keycloak-chart] before beginning.
 
 ## Create the Keycloak database
 
@@ -31,7 +31,7 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
    - **Username** – `admin`
    - **Password** – `database_admin_password`
 
-1. Run the script below (from `<Helm extract directory>/charts/keycloak/nbs_keycloak.sql`) to create the Keycloak database and database user. Replace `'EXAMPLE_KCDB_PASS8675309'` with a complex password that meets your organization's standards. Store this password securely — you will need it in the `values.yaml` file in the next section.
+1. Run the script below (from [`charts/keycloak/nbs_keycloak.sql`][nedss-helm-keycloak-sql] in the NEDSS-Helm repository) to create the Keycloak database and database user. Replace `'EXAMPLE_KCDB_PASS8675309'` with a complex password that meets your organization's standards. Store this password securely — you will need it in the `values.yaml` file in the next section.
 
    ```bash
    use master
@@ -56,7 +56,7 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
 
 ## Configure the Helm chart
 
-1. In `{Helm extract directory}/charts/keycloak/values.yml`, update the following parameters:
+1. In [`charts/keycloak/values.yml`][nedss-helm-keycloak-values], update the following parameters:
 
    | **Parameter** | **Template Value** | **Example / Description** |
    |---|---|---|
@@ -76,7 +76,7 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
    aws eks --region us-east-1 update-kubeconfig --name <clustername> # e.g. cdc-nbs-sandbox
    ```
 
-1. From the charts directory, install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available. See the README in `Helm/charts/keycloak` for details.
+1. From the charts directory, install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available. See the [README in `charts/keycloak`][nedss-helm-keycloak-chart] for details.
 
    ```bash
    Helm install keycloak --namespace default -f keycloak/values.yaml keycloak
@@ -118,7 +118,7 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
 
    ![nbs-create-new-realm](images/create-new-nbs-realm-with-di-client.png)
 
-1. Upload `{Helm extract directory}/charts/keycloak/extra/01-NBS-realm-with-DI-client.json` and click **Create**. This imports the NBS realm and clients.
+1. Upload [`charts/keycloak/extra/01-NBS-realm-with-DI-client.json`][nedss-helm-keycloak-di-client] and click **Create**. This imports the NBS realm and clients.
 
    ![nbs-create-new-realm-2](images/create-new-nbs-realm-with-di-client-2.png)
    ![nbs-create-new-realm-3](images/create-new-nbs-realm-with-di-client-3.png)
@@ -148,7 +148,7 @@ The imported configuration seeds a random client secret for each service client.
    ![nnd-realm](images/nnd-realm.png)
    ![nnd-realm-partial-import](images/nnd-realm-partial-import.png)
 
-1. Upload `<Helm extract directory>/charts/keycloak/extra/05-nbs-users-nnd-client.json` and click **Create**.
+1. Upload [`charts/keycloak/extra/05-nbs-users-nnd-client.json`][nedss-helm-keycloak-nnd-client] and click **Create**.
 1. Navigate to the **NBS Realm** in the left menu and click **Clients**.
 1. Select `nnd-keycloak-client` and open the **Credentials** tab.
 1. Click the eye icon to reveal the secret and copy it.
@@ -160,8 +160,15 @@ The imported configuration seeds a random client secret for each service client.
 ### SRTE client
 
 1. In the **NBS Realm**, open **Realm settings**, click the **Action** dropdown, and select **Partial Import**.
-1. Upload `<Helm extract directory>/charts/keycloak/extra/06-nbs-users-srte-data-client.json` and click **Create**.
+1. Upload [`charts/keycloak/extra/06-nbs-users-srte-data-client.json`][nedss-helm-keycloak-srte-client] and click **Create**.
 1. Navigate to the **NBS Realm** in the left menu and click **Clients**.
 1. Select `srte-data-keycloak-client` and open the **Credentials** tab.
 1. Click the eye icon to reveal the secret and copy it.
 1. Store the secret (for example, in AWS Secrets Manager at `keycloak/client/secret/srte`).
+
+[nedss-helm-keycloak-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak>
+[nedss-helm-keycloak-sql]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/nbs_keycloak.sql>
+[nedss-helm-keycloak-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/values.yml>
+[nedss-helm-keycloak-di-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/01-NBS-realm-with-DI-client.json>
+[nedss-helm-keycloak-nnd-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/05-nbs-users-nnd-client.json>
+[nedss-helm-keycloak-srte-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/06-nbs-users-srte-data-client.json>

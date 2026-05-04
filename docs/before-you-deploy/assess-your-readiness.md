@@ -38,17 +38,17 @@ See also: [Operational considerations](../before-you-deploy/operational-consider
 
 NBS 7 requires a cloud-based environment for deployment. NBS 7 has not been tested for on-premises deployment, and CDC does not plan to support it. To deploy with CDC support, you need an active account with one of the following supported cloud providers:
 
-**Amazon Web Services (AWS)**
+### Amazon Web Services (AWS)
 
-  - **Strategic fit:** Preferred by jurisdictions with established AWS environments or those prioritizing a broad ecosystem of third-party security and data tools.
-  - **Technical readiness:** Aligns with teams experienced in managing container-native architectures via Amazon Elastic Kubernetes Service (EKS) and mature Terraform workflows.
-  - **Surveillance context:** Core components are extensively validated in AWS to ensure performance at peak ingestion volumes.
+- **Strategic fit:** Preferred by jurisdictions with established AWS environments or those prioritizing a broad ecosystem of third-party security and data tools.
+- **Technical readiness:** Aligns with teams experienced in managing container-native architectures via Amazon Elastic Kubernetes Service (EKS) and mature Terraform workflows.
+- **Surveillance context:** Core components are extensively validated in AWS to ensure performance at peak ingestion volumes.
 
-**Microsoft Azure**
+### Microsoft Azure
 
-  - **Strategic fit:** Preferred by jurisdictions with significant Microsoft ecosystem investments, such as those using Microsoft Entra ID (formerly Azure Active Directory) or existing Enterprise Agreements.
-  - **Technical readiness:** Provides a streamlined experience for organizations running Windows-based workloads or requiring integration with Microsoft 365 and Power Platform tools.
-  - **Surveillance context:** Supported via Terraform for configuration parity with AWS, allowing jurisdictions to meet internal mandates for Azure-hosted health data.
+- **Strategic fit:** Preferred by jurisdictions with significant Microsoft ecosystem investments, such as those using Microsoft Entra ID (formerly Azure Active Directory) or existing Enterprise Agreements.
+- **Technical readiness:** Provides a streamlined experience for organizations running Windows-based workloads or requiring integration with Microsoft 365 and Power Platform tools.
+- **Surveillance context:** Supported via Terraform for configuration parity with AWS, allowing jurisdictions to meet internal mandates for Azure-hosted health data.
 
 See also: [Deploy cloud infrastructure on AWS](../deploy-nbs7/deploy-on-aws.html), [Deploy cloud infrastructure on Azure](../deploy-nbs7/deploy-on-azure.html), and [Compatibility matrix](../before-you-deploy/compatibility.html).
 

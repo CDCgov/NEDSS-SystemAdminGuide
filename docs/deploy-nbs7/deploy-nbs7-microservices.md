@@ -15,6 +15,9 @@ description: Install and configure NBS 7 application services using Helm, includ
 
 This phase deploys the NBS 7 application services into your Kubernetes cluster using Helm. Deploy services in the order listed — each service has dependencies on the ones before it.
 
+> The pages in this section apply to NBS {{ site.version_latest }}. Github repo links are pinned to `{{ site.version_latest_tag }}`.
+{: .note }
+
 After completing this phase, proceed to [Validate the deployment](validate-the-deployment.html).
 
 ## Overview
@@ -24,7 +27,7 @@ Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Dep
 - `elasticsearch-efs`
 - `modernization-api`
 - `nifi-efs`
-- Validate ES, Mapi and Nifi
+- [Validate ES, Mapi and Nifi](microservices-deployment/validate-es-mapi-nifi.html)
 - `nbs-gateway`
 - `dataingestion-service`
 - `data-processing`

@@ -27,11 +27,7 @@ Before you deploy NBS 7, make sure your environment meets the requirements in ea
 
 Your AWS environment must:
 
-<<<<<<< HEAD
 - Contain a pre-existing AWS account that contains a production instance of NBS 6 that is listed in the [NBS 6 and NBS 7 compatibility matrix](../../before-you-deploy/compatibility.html), plus related third-party products such as Rhapsody and SAS
-=======
-- Contain a pre-existing AWS account that contains a production instance of NBS 6 that is listed in the NBS 6 and NBS 7 compatibility matrix page (coming soon), plus related third-party products such as Rhapsody and SAS
->>>>>>> main
 - Have a properly configured DNS routing infrastructure
 - Be configured to enable you to create security groups and IAM roles
 - Provide access to NBS 6 databases that are located on an MS SQL Server instance (RDS or EC2)

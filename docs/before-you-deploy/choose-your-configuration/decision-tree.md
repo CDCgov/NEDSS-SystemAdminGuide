@@ -92,7 +92,7 @@ For more information, see [The Data Ingestion API adds a secure integration opti
 
 ## Next steps: Estimate infrastructure costs
 
-After you determine your deployment model, you can use the jurisdictional sizing criteria provided in this section to identify which resource profile to use in the **NBS 7 Resource Estimator**. The estimator is an Excel-based tool available on NBS Central. It provides baseline values for provisioned resources, including compute (vCPU and Memory), SQL storage, and Kafka brokers. 
+After you determine your deployment model, you can use the jurisdictional sizing criteria provided in this section to identify which resource profile to use in the **NBS 7 Resource Estimator**. The estimator is an Excel-based tool available on NBS Central. It provides baseline values for provisioned resources, including compute (vCPU and Memory), SQL storage, and Kafka brokers.
 
 The following thresholds help you identify your profile for the estimator:
 

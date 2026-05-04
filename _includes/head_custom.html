@@ -1,3 +1,19 @@
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    var wrap = document.querySelector('.main-content-wrap');
+    if (!wrap) return;
+    var banner = document.createElement('div');
+    var match = window.location.pathname.match(/\/previous_versions\/release-([^/]+)\//);
+    if (match) {
+      banner.className = 'version-banner version-banner--archived';
+      banner.textContent = 'Archived: NBS ' + match[1];
+    } else {
+      banner.className = 'version-banner';
+      banner.textContent = 'NBS {{ site.version_latest }}';
+    }
+    wrap.parentNode.insertBefore(banner, wrap);
+  });
+</script>
 <link rel="icon" href="{{ '/assets/images/favicon/favicon.ico' | relative_url }}" sizes="any">
 <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/favicon/favicon.svg' | relative_url }}">
 <link rel="icon" type="image/png" sizes="96x96" href="{{ '/assets/images/favicon/favicon-96x96.png' | relative_url }}">

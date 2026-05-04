@@ -12,8 +12,6 @@ redirect_from:
 
 > The Java reporting services are being consolidated in an upcoming release. The service validation URLs reflect the NBS {{ site.version_latest }} configuration.
 {: .warning }
-> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
-{: .note }
 
 This page covers deploying the RTR Java services that process streamed events from Kafka and load domain-specific reporting data.
 

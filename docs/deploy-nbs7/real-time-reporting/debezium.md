@@ -10,8 +10,6 @@ redirect_from:
 
 # Deploy Debezium for real-time reporting (RTR)
 
-> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
-{: .note }
 
 This page covers steps to deploy the Debezium connector that captures change data from source tables and publishes events to Kafka topics for RTR processing.
 

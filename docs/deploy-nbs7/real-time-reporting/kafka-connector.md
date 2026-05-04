@@ -10,8 +10,6 @@ redirect_from:
 
 # Deploy the Kafka connector for real-time reporting (RTR)
 
-> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
-{: .note }
 
 This page covers steps to deploy the Kafka sink connector that consumes RTR topics and writes transformed data into reporting tables.
 

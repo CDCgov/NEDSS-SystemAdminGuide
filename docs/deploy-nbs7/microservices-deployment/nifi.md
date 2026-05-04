@@ -20,8 +20,6 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
 1. TOC
 {:toc}
 
-> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
-{: .note }
 
 ## Deploy NiFi using Helm
 

@@ -20,8 +20,6 @@ The NBS Gateway service routes requests between NBS 7 microservices and the lega
 1. TOC
 {:toc}
 
-> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
-{: .note }
 
 ## Deploy NBS Gateway using Helm
 

@@ -18,8 +18,6 @@ Use these steps to install the NBS 7 Data Sync service API in your cloud environ
 1. TOC
 {:toc}
 
-> This page applies to NBS {{ site.version_latest }}. Helm chart links are pinned to `{{ site.version_latest_tag }}`.
-{: .note }
 
 ## Prerequisites
 

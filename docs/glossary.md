@@ -10,7 +10,7 @@ description: "Definitions for terms and acronyms used in the NBS 7 System Admini
 
 Definitions for terms and acronyms used in this guide. Terms with NBS-specific meanings are defined in that context. General infrastructure terms are defined as they apply to NBS 7 deployments.
 
-[A](#a) · B · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
 
 ---
 
@@ -51,6 +51,18 @@ An open-source GitOps tool for deploying and managing Kubernetes applications. A
 ### Azure Blob Storage
 
 Azure object storage. Used for Terraform state files and NBS 7 logs in Azure deployments. The Azure equivalent of [Amazon S3](#s3).
+
+### Azure Key Vault
+
+An Azure service for creating and managing encryption keys, certificates, and application and database secrets. Used to protect sensitive configuration values in Azure NBS 7 deployments. The Azure equivalent of [AWS KMS](#kms).
+
+---
+
+## B
+
+### build provenance
+
+Verifiable, tamper-proof metadata documenting how a software artifact was created, including source code location, dependencies, build tools, and process logs. Build provenance supports software supply chain integrity by allowing you to confirm that a given artifact was built from a known, unmodified source.
 
 ---
 
@@ -354,6 +366,10 @@ In NBS, an observation originating from a healthcare provider (such as a hospita
 
 A logical partition within a Kubernetes cluster used to isolate resources. NBS 7 services are deployed into specific namespaces.
 
+### NIST 800-53
+
+**National Institute of Standards and Technology Special Publication 800-53 (Rev. 5).** A risk-based framework providing a catalog of security and privacy controls for federal information systems. STLTs deploying NBS 7 on cloud infrastructure may be required to demonstrate compliance with a NIST 800-53 control baseline as part of their agency's security authorization process.
+
 ### NBS
 
 **National Electronic Disease Surveillance System Base System.** A CDC-developed, web-based public health surveillance system that helps STLTs collect, manage, and share reportable and notifiable disease data. The subject of this guide.
@@ -474,6 +490,10 @@ In NBS, a category that groups related diseases or conditions for administrative
 
 ## R
 
+### RBAC
+
+**Role-Based Access Control.** An access management principle that restricts resource access based on a user's job role rather than individual identity. Applied when managing permissions in [AWS IAM](#iam), the Azure portal, and [Kubernetes](#kubernetes) cluster access controls.
+
 ### RDB
 
 **Reporting Database.** The NBS database that stores flattened data for reporting and analysis. Populated by [MasterETL](#masteretl) (legacy path) or [RTR](#rtr) (modern path). See also [RDB_Modern](#rdb_modern).
@@ -521,6 +541,10 @@ A standard code system for medications. RxNorm codes are stored in the NBS [SRTE
 ### SAS
 
 **Statistical Analysis System.** Analytics software used with [Classic NBS](#classic-nbs) for reporting. Referenced in NBS 6 compatibility documentation.
+
+### SBOM
+
+**Software Bill of Materials.** A formal, machine-readable inventory of the software components, dependencies, and libraries used to build an application. SBOMs are used to identify vulnerable or outdated components in a software supply chain. CDC and federal security requirements may require STLTs to produce or verify SBOMs for NBS 7 deployments.
 
 ### service mesh
 
@@ -581,6 +605,10 @@ In NBS, the act of reassigning an observation or investigation from one jurisdic
 ### values file (Helm)
 
 A YAML configuration file that supplies environment-specific settings to a [Helm chart](#helm-chart) during deployment. NBS 7 sysadmins customize values files to configure services for their environment.
+
+### VNet
+
+**Virtual Network.** An isolated cloud network in Azure. NBS 7 runs inside a VNet in Azure deployments. The Azure equivalent of [VPC](#vpc).
 
 ### VPC
 

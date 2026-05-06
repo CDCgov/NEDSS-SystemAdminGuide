@@ -7,7 +7,7 @@ nav_order: 2
 
 # Update the Amazon EKS control plane
 
-You can use Terraform to upgrade the Amazon Elastic Kubernetes Service (Amazon EKS) control plane and node groups for your NBS 7 deployment. Perform a control plane upgrade when AWS releases a new Kubernetes version or when your current version approaches end-of-support.
+You can use Terraform to upgrade the Amazon Elastic Kubernetes Service (Amazon EKS) control plane and node groups for your NBS 7 deployment. Perform a control plane upgrade when Amazon Web Services (AWS) releases a new Kubernetes version or when your current version approaches end-of-support.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -15,24 +15,18 @@ You can use Terraform to upgrade the Amazon Elastic Kubernetes Service (Amazon E
 1. TOC
 {:toc}
 
-## Supported Kubernetes versions
+## Kubernetes version compatibility
 
-The following Kubernetes versions are supported for NBS 7.12 deployments on Amazon EKS. For information about support windows and cost implications, see [Considerations](#considerations). 
+NBS {{ site.version_latest }} was tested against Kubernetes 1.35. To minimize cost, we suggest running the latest version in AWS standard support at the time of your deployment. For current version end dates, see [Understand the Kubernetes version lifecycle on EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html) in the AWS documentation.
 
-| Kubernetes version | Standard support ends |
-|---|---|
-| 1.35 (default) | 2027-02-28 |
-| 1.34 | 2026-10-27 |
-| 1.33 | 2026-06-28 |
+If you are running a version later than 1.35, NBS {{ site.version_latest }} is likely to work. Kubernetes is designed for backward compatibility across minor versions.
 
-## Considerations
+Before you begin the upgrade, review the following:
 
-AWS supports each Kubernetes minor version for up to 26 months after its release in Amazon EKS. That period comprises 14 months of standard support, followed by 12 months of extended support. Plan your upgrades before your current version exits standard support. For more information, see [Understand the Kubernetes version lifecycle on EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html) in the AWS documentation.
-
-- **Cost impact:** Amazon EKS clusters on extended support versions incur additional cost. For more information, see [Amazon EKS extended support for Kubernetes version pricing](https://aws.amazon.com/blogs/containers/amazon-eks-extended-support-for-kubernetes-versions-pricing) on the AWS blog and the Amazon EKS [pricing page](https://aws.amazon.com/eks/pricing/). For the currently supported Amazon EKS version end dates, see [Supported Kubernetes versions](#supported-kubernetes-versions).
+- **Cost impact:** Amazon EKS clusters on extended support versions incur additional cost. For more information, see [Amazon EKS extended support for Kubernetes version pricing](https://aws.amazon.com/blogs/containers/amazon-eks-extended-support-for-kubernetes-versions-pricing) on the AWS blog and the Amazon EKS [pricing page](https://aws.amazon.com/eks/pricing/).
 - **Forced upgrades:** When a version exits extended support, [AWS automatically upgrades the control plane to the oldest supported version](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#extended-support-faqs). Automatic upgrades do not account for workload compatibility, add-on versions, or your deployment schedule. To maintain control over your upgrade timing, complete upgrades before the extended support window closes.
 - **One minor version at a time:** You must upgrade the control plane one minor version at a time. You cannot skip versions. If you are multiple versions behind, you must repeat this procedure for each version. For more information, see [Update existing cluster to new Kubernetes version](https://docs.aws.amazon.com/eks/latest/userguide/update-cluster.html#_step_2_review_upgrade_considerations) in the AWS documentation.
-- **Control plane upgrades are irreversible:** You cannot downgrade a cluster to a previous Kubernetes version. If the upgrade causes unexpected issues, your recovery options are limited to debugging the upgraded cluster or restoring from a full environment backup. Ensure you have a tested backup and a rollback plan for your workloads before you begin.
+- **Control plane upgrades are irreversible:** You cannot downgrade a cluster to a previous Kubernetes version. If the upgrade causes unexpected issues, your recovery options are limited to debugging the upgraded cluster or restoring the cluster from a backup. Ensure you have a tested backup and a rollback plan for your workloads before you begin.
 - **Plan for downtime:** The control plane upgrade does not typically cause service disruption. However, the node group upgrade is likely to cause a disruption, primarily due to the Linkerd/mTLS issue described in [Known issue: Linkerd and mTLS](#known-issue-linkerd-and-mtls). Schedule a maintenance window before you begin.
 
 To receive advance notice of upcoming version deprecations and end-of-support dates, check the **Your account health** page in the [AWS Health Dashboard](https://health.aws.amazon.com/health/home) regularly. You can also subscribe to the [EKS Kubernetes release calendar](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html#kubernetes-release-calendar) to track upcoming release and retirement dates.
@@ -88,7 +82,7 @@ These are the target addresses to use in Steps 2 and 3. If your deployment uses 
 
 ### Step 2: Upgrade the control plane
 
-Repeat the following steps for each minor version between your current version and your target version. Do not proceed to the next version until the cluster reaches `ACTIVE` status at the current version.
+The AWS CLI and Terraform commands in Steps 2–6 work in both Bash and PowerShell. Repeat these steps for each minor version between your current version and your target version. Do not proceed to the next version until the cluster reaches `ACTIVE` status at the current version.
 
 1. In [variables.tf](https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/app-infrastructure/eks-nbs/variables.tf), update the `cluster_version` default value to the next minor version:
 

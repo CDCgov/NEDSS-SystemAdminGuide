@@ -85,43 +85,30 @@ For commit message conventions, see [CONTRIBUTING.md](../CONTRIBUTING.md).
 
 ### 3. Stage for stakeholder review
 
-Sync `preview` with `main` first to avoid conflicts, then merge your feature branch in:
+From your source branch, push it directly to the remote `preview` branch:
 
 ```bash
-git checkout preview
-git pull origin preview
-git merge main
-git merge your-initials/short-description
+git checkout your-initials/short-description
+git push origin your-initials/short-description:preview --force
 ```
 
-If there are merge conflicts, resolve them before continuing. Then push to trigger the preview site deploy:
+This replaces `preview` with the exact state of your source branch and triggers the preview site deploy.
 
-```bash
-git push origin preview
-```
-
-The preview site will update within a minute or two:
+Wait about 5 minutes for your changes to appear on the preview site:
 https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/
 
 Share that URL with stakeholders and collect feedback.
 
 ### 4. Iterate
 
-For each round of revisions, update your feature branch and re-push to `preview`:
+For each round of revisions, update your source branch and force-push it to `preview` again:
 
 ```bash
 git checkout your-initials/short-description
 # make edits
 git add <changed files>
 git commit -m "Updates from review"
-git checkout preview
-git merge your-initials/short-description
-```
-
-Resolve any conflicts, then push:
-
-```bash
-git push origin preview
+git push origin your-initials/short-description:preview --force
 ```
 
 ### 5. Merge to `main` when approved

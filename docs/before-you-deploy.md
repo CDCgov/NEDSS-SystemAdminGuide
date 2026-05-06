@@ -8,16 +8,16 @@ description: Evaluation and planning content to help you assess NBS 7 readiness 
 
 # Before deploying NBS 7
 
-This section is for STLT IT administrators and technical decision-makers who are evaluating and preparing for NBS 7. It brings together the readiness, compatibility, configuration, and planning information you need before deployment begins. Use it to understand what NBS 7 includes, what decisions your jurisdiction needs to make, and what conditions should be in place before you move into deployment work. It is intended to support an informed decision about whether to proceed with NBS 7 deployment planning.
+This section is for STLT IT administrators and technical decision-makers who are evaluating and preparing for NBS 7. It brings together the readiness, compatibility, configuration, and planning information you need before deployment begins. Use it to understand what NBS 7 includes, what decisions your jurisdiction needs to make, and what conditions should be in place before you move into deployment work. It is intended to support an informed decision about how to proceed with NBS 7 deployment planning.
 
 ## Purpose
 
 Use this section to:
 
-- assess whether NBS 7 deployment planning is the right next step for your jurisdiction
-- identify the right starting configuration for your jurisdiction, including optional add-ons
-- understand the major components, prerequisites, and operational considerations that affect deployment
-- support go or no-go decisions before you commit time and resources to deployment
+- Assess whether NBS 7 deployment planning is the right next step for your jurisdiction
+- Identify the right starting configuration for your jurisdiction, including optional add-ons
+- Understand the major components, prerequisites, and operational considerations that affect deployment
+- Support go or no-go decisions before you commit time and resources to deployment
 
 > Some factors that affect NBS 7 migration extend beyond infrastructure and configuration. For a summary of organizational, financial, and operational considerations, see [Operational considerations](before-you-deploy/operational-considerations.html).
 {: .note }

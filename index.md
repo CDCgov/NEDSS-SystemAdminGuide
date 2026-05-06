@@ -37,4 +37,7 @@ The primary audience is system administrators at state, tribal, local, and terri
 
 ## Additional resources
 
-For more information on NBS, see the official CDC [National Electronic Disease Surveillance System Base System (NBS)](https://www.cdc.gov/nbs/php/index.html) website and [NBS Central](https://nbscentral.cdc.gov/login), the community hub for NBS users where you can download software, access technical resources, and participate in user group calls. Access to NBS Central requires a login. To register for an NBS Central account, choose **Register** at the top of the login screen.
+For more information on NBS, see the official CDC [National Electronic Disease Surveillance System Base System (NBS)](https://www.cdc.gov/nbs/php/index.html) website and [NBS Central](https://nbscentral.cdc.gov/), the community hub for NBS users where you can download software, access technical resources, and participate in user group calls. 
+
+> Access to **NBS Central** requires a login. To register for an NBS Central account, choose **Register** at the top of the [login screen](https://nbscentral.cdc.gov/login).
+{: .note }

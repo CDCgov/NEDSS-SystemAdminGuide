@@ -12,7 +12,7 @@ description: Describes each NBS 7 component — what it does, when it is needed,
 
 The pages in this section describe each component in NBS 7. Use it to understand what each component does, why it is included in your deployment, and how it relates to other components.
 
-NBS 7 is deployed in phases. Components in this reference are organized by deployment phase: 
+NBS 7 is deployed in phases. Components in this reference are organized by deployment phase:
 
 - [NBS 7 core deployment](../before-you-deploy/component-reference/nbs-core-components.html)
 - [Real-Time Reporting (RTR) deployment](../before-you-deploy/component-reference/rtr.html)

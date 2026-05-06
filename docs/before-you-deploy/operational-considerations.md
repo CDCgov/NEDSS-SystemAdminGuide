@@ -69,7 +69,7 @@ See also: [RTR component reference](../before-you-deploy/component-reference/rtr
 
 ## The Data Ingestion API adds a secure integration option
 
-The Data Ingestion (DI) API is a built-in REST API layer that accepts lab reports and case reports. It gives jurisdictions an API-based ingestion path, which is useful when security constraints prevent middleware or other third-party tools from connecting directly to the NBS database. 
+The Data Ingestion (DI) API is a built-in REST API layer that accepts lab reports and case reports. It gives jurisdictions an API-based ingestion path, which is useful when security constraints prevent middleware or other third-party tools from connecting directly to the NBS database.
 
 See also: [DI API component reference](../before-you-deploy/component-reference/di-api.html) and [Data ingestion microservice](../deploy-nbs7/microservices-deployment/data-ingestion.html).
 

@@ -24,7 +24,7 @@ The content is centered on system administration. It covers readiness and planni
 ## In this guide
 
 - [Before you deploy](docs/before-you-deploy.html) covers readiness checks, configuration decisions, compatibility guidance, and pre-deployment planning.
-- [Deploy NBS 7](docs/deploy-nbs7.html) covers infrastructure, microservices, optional add-ons, and deployment validation steps.
+- [Deploy NBS 7](docs/deploy-nbs7.html) covers infrastructure, microservices, add-ons, and deployment validation steps.
 - [Maintain NBS 7](docs/maintain-nbs7.html) covers post-deployment administration and maintenance tasks.
 
 ## Runtime environment support
@@ -35,4 +35,6 @@ NBS 7 supports AWS and Azure as runtime options. The platform uses a cloud-agnos
 
 The primary audience is system administrators at state, tribal, local, and territorial health departments who install, operate, and maintain NBS 7. The content assumes familiarity with your cloud platform, Kubernetes, Terraform, Helm, and related administration tasks. You need administrator-level access to your runtime environment and a local system with required prerequisites installed.
 
-For more information on NBS, see the official CDC [National Electronic Disease Surveillance System Base System (NBS)](https://www.cdc.gov/nbs/php/index.html) website.
+## Additional resources
+
+For more information on NBS, see the official CDC [National Electronic Disease Surveillance System Base System (NBS)](https://www.cdc.gov/nbs/php/index.html) website and [NBS Central](https://nbscentral.cdc.gov/login), the community hub for NBS users where you can download software, access technical resources, and participate in user group calls. Access to NBS Central requires a login. To register for an NBS Central account, choose **Register** at the top of the login screen.

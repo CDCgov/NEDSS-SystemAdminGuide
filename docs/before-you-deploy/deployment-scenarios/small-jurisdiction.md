@@ -7,9 +7,7 @@ nav_order: 1
 description: Case study for a small, self-managed AWS deployment based on Montana's experience, covering configuration choices and lessons learned.
 ---
 
-## Case study: Small jurisdiction, self-managed, AWS
-
-*Based on Montana's deployment.*
+## Case study: Minimal cloud deployment
 
 1. TOC
 {:toc}

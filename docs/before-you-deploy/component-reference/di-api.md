@@ -1,5 +1,5 @@
 ---
-title: "Add-on: Data Ingestion (DI) API"
+title: "Data Ingestion (DI) API"
 layout: page
 parent: Component reference
 grand_parent: Before you deploy
@@ -7,7 +7,7 @@ nav_order: 3
 description: Details the Data Ingestion (DI) API add-on component, which provides a REST API layer for routing incoming data into NBS through middleware.
 ---
 
-# Component reference: Data Ingestion (DI) API add-on
+# Component reference: Data Ingestion (DI) API
 
 The DI API is a REST API layer built into NBS 7 that accepts incoming public health data and routes it into NBS. Middleware such as Rhapsody or an equivalent integration engine preprocesses and formats the data, then sends it to the DI API instead of writing directly to the NBS database.
 

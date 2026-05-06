@@ -7,9 +7,7 @@ nav_order: 3
 description: Case study for a large, vendor-managed NBS Complete deployment at enterprise scale, covering high-availability and advanced configuration decisions.
 ---
 
-## Case study: Large jurisdiction, high volume, vendor-managed
-
-*Based on an enterprise-scale deployment.*
+## Case study: Enterprise-scale deployment
 
 1. TOC
 {:toc}

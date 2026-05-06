@@ -33,20 +33,20 @@ The phases in this table represent an example rollout scenario based on deployme
 {: .note }
 These are minimum estimates based on typical deployments. Actual timelines vary by jurisdiction. Security approval, procurement, and legal review processes are common sources of extended timelines in the Planning and Install phases.
 
-For detailed checklists and deliverables for each phase, see the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) on NBS Central.
+For detailed checklists and deliverables for each phase, see the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) on NBS Central (login required; see [Additional resources](../../index.html#additional-resources)).
 
 ---
 
 ## Planning
 
-The Planning phase covers discovery, environment setup, and project preparation. Security approval for cloud hosting and required technologies including Kubernetes, Terraform, and Docker is frequently the longest-lead item in this phase and the most common source of delay across the entire deployment. Starting that process early tends to reduce overall deployment time.
+The Planning phase covers discovery, environment setup, and project preparation. Security approval for cloud-hosting and required technologies including Kubernetes, Terraform, and Docker can be a source of delay across the entire deployment. Starting that process early tends to reduce overall deployment time.
 
 Before planning detailed timelines, confirm that your current NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html).
 
 | Activity | Description | Resource |
 |:---|:---|:---|
-| Readiness check-in | Initial planning and review of frequently asked questions. See [Assess your readiness](../before-you-deploy/assess-your-readiness.html) for the technical checklist and [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) for version alignment. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) |
-| Identify project team | Define roles, responsibilities, and key stakeholders. See [Operational considerations](../before-you-deploy/operational-considerations.html) for staffing guidance | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) |
+| Readiness check-in | Initial planning and review of frequently asked questions. See [Assess your readiness](../before-you-deploy/assess-your-readiness.html) for the technical checklist and [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) for version alignment. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
+| Identify project team | Define roles, responsibilities, and key stakeholders. See [Operational considerations](../before-you-deploy/operational-considerations.html) for staffing guidance | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
 | NBS 7 orientation | Review NBS 7 features with your migration team. See [Component reference](../before-you-deploy/component-reference.html) for a full component overview | [Choose your configuration](../before-you-deploy/choose-your-configuration.html) |
 | Create project plan | Draft a customized migration plan from the playbook checklists, including a migration risk registry | [Deployment scenarios](../before-you-deploy/deployment-scenarios.html) |
 | Communications plan | Develop and implement a communications plan customized to your timeline and needs | Communications plan |
@@ -67,7 +67,7 @@ The Install phase covers provisioning your cloud environments and deploying NBS 
 | Production environment deployment | Create and deploy an initial NBS 7 production environment build | [Deploy NBS 7 microservices](../deploy-nbs7/deploy-nbs7-microservices.html) |
 | Complete database transfer | Complete customizations, user file sharing setup, and integration with your user management system | STLT database refresh procedure |
 | Roles and permissions migration | Map user roles and configure permissions in NBS 7 | User migration mapping |
-| SSO setup | Review state SSO and login requirements and integrate Keycloak with your existing login tools. See [Operational considerations](../before-you-deploy/operational-considerations.html) for SSO planning guidance | [Enable Keycloak authentication](../deploy-nbs7/keycloak/enable-keycloak-auth.html) |
+| SSO setup | Review jurisdictional SSO and login requirements and integrate Keycloak with your existing login tools. See [Operational considerations](../before-you-deploy/operational-considerations.html) for SSO planning guidance | [Enable Keycloak authentication](../deploy-nbs7/keycloak/enable-keycloak-auth.html) |
 
 ---
 
@@ -83,7 +83,7 @@ The Test phase validates that your NBS 7 environment is ready for production use
 | Notifications testing | Coordinate with the MVPs team to validate notifications readiness | Conditions received successfully |
 | Regression testing | Run test scripts across environments to validate readiness for UAT | [Validate the deployment](../deploy-nbs7/validate-the-deployment.html) |
 | Cutover and rollback review | Review and approve cutover and rollback plans | Cutover and Rollback Plan |
-| UAT | Complete the agreed UAT plan across dev, test, and production environments | UAT test plan |
+| UAT | Complete the agreed UAT plan across dev, staging, and production environments | UAT test plan |
 
 ---
 
@@ -93,7 +93,7 @@ The Go-live phase covers final preparation, cutover, and launch. This phase is s
 
 | Activity | Description | Resource |
 |:---|:---|:---|
-| NBS 7 training | Perform scheduled training sessions and share materials with end users | [NBS Visual Reference Guide](https://nbscentral.cdc.gov/documents/863) - NBS Central login required |
+| NBS 7 training | Perform scheduled training sessions and share materials with end users | [NBS Visual Reference Guide](https://nbscentral.cdc.gov/documents/863) - NBS Central login required; see [Additional resources](../../index.html#additional-resources) |
 | Go/no-go decision | Make the final go-live decision and schedule the cutover date | - |
 | Lock database and refresh | Freeze the database backup and finalize the cutover checklist | STLT production cut-over checklist |
 | Go-live day | Complete the cutover checklist and launch NBS 7 | - |
@@ -106,6 +106,6 @@ After go-live, your jurisdiction enters steady state operations. This phase is o
 
 | Activity | Description | Resource |
 |:---|:---|:---|
-| Monitor live operations | Stand up long-term NBS 7 service desk support, review the NBS Administrator Guide for NBS support SOP, and track system performance | [Support](../deploy-nbs7/support.html) |
+| Monitor live operations | Track system performance and understand your support options | [Get support](../support.html) |
 | Complete retrospective | Conduct a go-live retrospective to capture lessons learned | - |
 | Upgrade to new releases | Test and upgrade to new NBS 7 releases periodically | [Maintain NBS 7](../maintain-nbs7.html) |

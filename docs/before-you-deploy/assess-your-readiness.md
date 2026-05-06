@@ -18,19 +18,19 @@ This page helps you assess whether NBS 7 is a viable option for your jurisdictio
 
 If you work through this page and find that your jurisdiction does not meet one or more prerequisites, you might still be able to move forward. You can address some gaps with planning and lead time, but other gaps might indicate that NBS 7 is not the right fit for your jurisdiction right now.
 
-For more information on migration planning, staffing, and budget, see [Operational considerations](../before-you-deploy/operational-considerations.html) in this guide, and the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) and [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) on NBS Central (NBS Central login required).
+For more information on migration planning, staffing, and budget, see [Operational considerations](../before-you-deploy/operational-considerations.html) in this guide, and the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) and [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) on NBS Central (NBS Central login required; see [Additional resources](../../index.html#additional-resources)).
 {: .note }
 
 ## Not sure where to start?
 
 If you are new to NBS 7 deployment, [Deployment phases](../before-you-deploy/deployment-phases.html) provides an overview of an example rollout and where this readiness assessment fits.
 
-## State IT security approval
+## IT security approval
 
-Has your jurisdiction obtained state IT security approval for cloud hosting and the software technologies that NBS 7 requires, including Kubernetes, Terraform, and Docker?
+Has your jurisdiction obtained IT security approval for cloud hosting and the software technologies that NBS 7 requires, including Kubernetes, Terraform, and Docker?
 
 - **Yes, or approval is not required**: Continue with the rest of this section.
-- **No, or unknown**: Approval timelines vary and can significantly affect your migration schedule. We recommend working with your state IT office while you continue to plan.
+- **No, or unknown**: Approval timelines vary and can significantly affect your migration schedule. We recommend working with your IT office while you continue to plan.
 
 See also: [Operational considerations](../before-you-deploy/operational-considerations.html) and [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html).
 
@@ -52,7 +52,7 @@ NBS 7 requires a cloud-based environment for deployment. NBS 7 has not been test
 
 See also: [Deploy cloud infrastructure on AWS](../deploy-nbs7/deploy-on-aws.html), [Deploy cloud infrastructure on Azure](../deploy-nbs7/deploy-on-azure.html), and [Compatibility matrix](../before-you-deploy/compatibility.html).
 
-## Technical staff capacity
+## Staff Kubernetes expertise
 
 NBS 7 uses Kubernetes, a container orchestration platform. To deploy and maintain NBS 7, you need staff who can:
 
@@ -63,8 +63,8 @@ NBS 7 uses Kubernetes, a container orchestration platform. To deploy and maintai
 
 If your IT team does not have these skills, you have two options:
 
-- **Building capacity**: Train existing staff or hire staff with these skills before you begin deployment.
-- **Working with a vendor**: Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
+- **Build capacity**: Train existing staff or hire staff with these skills before you begin deployment.
+- **Work with a vendor**: Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
 
 See also: [Operational considerations](../before-you-deploy/operational-considerations.html) and [Choose your configuration](../before-you-deploy/choose-your-configuration.html).
 

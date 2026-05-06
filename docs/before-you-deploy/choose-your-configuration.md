@@ -26,7 +26,7 @@ Before finalizing your configuration, verify that your NBS 6 version is compatib
 
 ## NBS 7
 
-The base deployment. NBS 7 gives your jurisdiction NBS 6 feature parity on modern, cloud-based infrastructure, plus foundational improvements such as real-time patient search.
+The base deployment. NBS 7 gives your jurisdiction NBS 6 feature parity on modern, cloud-based infrastructure, plus foundational improvements such as real-time patient search and ongoing incremental modernized modules and functional areas.
 
 NBS 7 core components are organized into three layers. For details on what each component does and when you need it, see [NBS 7 core components](../before-you-deploy/component-reference/nbs-core-components.html).
 
@@ -90,17 +90,17 @@ RTR adds the following components to your NBS 7 deployment. For details, see [Ad
 
 ## Add-on: Data Ingestion (DI) API
 
-The DI API is an optional add-on that provides a built-in data transit layer. It provides a REST API interface for writing data to NBS, acting as a secure intermediary between your middleware and the database.
+The DI API provides a built-in data transit layer. It provides a REST API interface for writing data to NBS, acting as a secure intermediary between your middleware and the database.
 
 | Integration Method | Rationale |
 | :--- | :--- |
-| **Direct SQL Write** | Standard for jurisdictions where middleware (Rhapsody) can access the database network directly. |
+| **Direct SQL Write** | Standard for jurisdictions where middleware such as Rhapsody can access the database directly. |
 | **DI API** | Used when security policies prohibit direct database access from third-party tools or when middleware cannot be co-located with NBS. |
 
 {: .important }
-The DI API is not a replacement for middleware. An integration engine like Rhapsody is still required to preprocess and format data before it is sent to the DI API.
+The DI API is not a replacement for middleware. An integration engine suc as Rhapsody is required to preprocess and format data before it is sent to the DI API.
 
-For details, see [Add-on: Data Ingestion (DI) API](../before-you-deploy/component-reference/di-api.html).
+For more information, see [Data Ingestion (DI) API](../before-you-deploy/component-reference/di-api.html) in the Component Reference.
 
 {: .note-title }
 > Best for

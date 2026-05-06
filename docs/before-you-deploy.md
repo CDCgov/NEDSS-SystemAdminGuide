@@ -6,7 +6,7 @@ has_children: true
 description: Evaluation and planning content to help you assess NBS 7 readiness and choose a deployment configuration.
 ---
 
-# Before you deploy NBS 7
+# Before deploying NBS 7
 
 This section is for STLT IT administrators and technical decision-makers who are evaluating and preparing for NBS 7. It brings together the readiness, compatibility, configuration, and planning information you need before deployment begins. Use it to understand what NBS 7 includes, what decisions your jurisdiction needs to make, and what conditions should be in place before you move into deployment work. It is intended to support an informed decision about whether to proceed with NBS 7 deployment planning.
 
@@ -29,7 +29,7 @@ Three main resources support the NBS 6 to NBS 7 transition. Each serves a differ
 | Resource | Purpose | When to use |
 |:---|:---|:---|
 | **Before you deploy NBS 7** (you are here) | This resource helps IT administrators and leadership evaluate NBS 7, understand hosting requirements, and choose a component configuration | Use first |
-| **[NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731)** (requires login) | Hosted on NBS Central, this resource guides your jurisdiction through the migration process, including timelines, roles, a compatibility checklist, and cutover planning | Use after confirming NBS 7 is the right fit |
+| **[NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731)** (requires login; see [Additional resources](../index.html#additional-resources)) | Hosted on NBS Central, this resource guides your jurisdiction through the migration process, including timelines, roles, a compatibility checklist, and cutover planning | Use after confirming NBS 7 is the right fit |
 | **[NBS 7 Deployment Guide](deploy-nbs7.html)** | Provides step-by-step deployment instructions for your chosen configuration | Use when ready to deploy |
 
 {: .note }

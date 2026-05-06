@@ -1,5 +1,5 @@
 ---
-title: "Add-on: Real-Time Reporting (RTR)"
+title: "Real-Time Reporting (RTR)"
 layout: page
 parent: Component reference
 grand_parent: Before you deploy
@@ -8,11 +8,11 @@ description: "Details the four components added by the Real-Time Reporting (RTR)
 nav_enabled: true
 ---
 
-# Component reference: Real-Time Reporting (RTR) add-on
+# Component reference: Real-Time Reporting (RTR)
 
-RTR is an optional add-on that provides an event-driven reporting pipeline for near-real-time reporting. RTR replaces the legacy MasterETL batch process. During validation, both might run briefly in parallel to confirm that RTR output is accurate. Once validation is complete, plan to retire MasterETL.
+RTR provides an event-driven reporting pipeline for near-real-time reporting. RTR replaces the legacy MasterETL batch process. During validation, both might run briefly in parallel to confirm that RTR output is accurate. Once validation is complete, plan to retire MasterETL.
 
-The following components are added to your NBS 7 deployment when you choose to deploy the RTR add-on.
+The following components are added to your NBS 7 deployment when you deploy RTR.
 
 For information on benefits and impact on operating costs, see [Operational considerations](../../before-you-deploy/operational-considerations.html).
 {: .note }

@@ -20,14 +20,14 @@ Use this decision tree to determine a baseline deployment model for your jurisdi
 {: .important }
 The decision tree identifies a potential starting point, not a final answer. CDC provides free pre-deployment consultation to help jurisdictions validate their configuration choice. Connect with the CDC NBS team at [nbs@cdc.gov](mailto:nbs@cdc.gov) before you begin deployment.
 
-## Step 1: State IT security approval
+## Step 1: IT security approval
 
-Has your jurisdiction obtained state IT security approval for cloud hosting and the required software technologies (Kubernetes, Terraform, Docker)?
+Has your jurisdiction obtained the appropriate IT security approval for cloud hosting and the required software technologies (Kubernetes, Terraform, Docker)?
 
 - **Yes, or approval is not required** → Go to [Step 2](#step-2-internal-technical-capacity).
 - **No, or unknown** → It's a good idea to begin the approval process now, then continue planning. Approval is typically required before deployment. Go to [Step 2](#step-2-internal-technical-capacity).
 
-Because NBS handles PII and PHI, state IT might still need to review and approve the deployment, even in vendor-managed models. For more information, see [State IT security approval takes time](../operational-considerations.html#state-it-security-approval-takes-time) on the Operational Considerations page.
+Because NBS handles PII and PHI, IT might still need to review and approve the deployment, even in vendor-managed models. For more information, see [IT security approval can take time](../operational-considerations.html#it-security-approval-can-take-time) on the Operational Considerations page.
 {: .note }
 
 ## Step 2: Internal technical capacity
@@ -54,7 +54,7 @@ Where does your NBS 6 currently run?
 - **Already on AWS or Azure** → Staying on the same provider avoids additional procurement and approval steps. Go to [Step 4](#step-4-reporting-needs).
 - **On-premises** → Your migration includes a cloud migration as well as an NBS 7 deployment. Plan for additional time and resources. Go to [Step 4](#step-4-reporting-needs).
 
-This step is informational and does not impact your suggested deployment configuration. For more information, see [Align cloud provider with jurisdictional strategy](../operational-considerations.html#align-cloud-provider-with-jurisdictional-strategy) on the Operational Considerations page.
+This step is informational and does not change your suggested deployment configuration. For more information, see [Align cloud provider with jurisdictional strategy](../operational-considerations.html#align-cloud-provider-with-jurisdictional-strategy) on the Operational Considerations page.
 {: .note }
 
 ## Step 4: Reporting needs
@@ -92,7 +92,7 @@ For more information, see [The Data Ingestion API adds a secure integration opti
 
 ## Next steps: Estimate infrastructure costs
 
-After you determine your deployment model, you can use the jurisdictional sizing criteria provided in this section to identify which resource profile to use in the **NBS 7 Resource Estimator**. The estimator is an Excel-based tool available on NBS Central. It provides baseline values for provisioned resources, including compute (vCPU and Memory), SQL storage, and Kafka brokers.
+After you determine your deployment model, you can use the jurisdictional sizing criteria provided in this section to identify which resource profile to use in the **NBS 7 Resource Estimator**. The estimator is an Excel-based tool available on NBS Central (login required; see [Additional resources](../../../index.html#additional-resources)). It provides baseline values for provisioned resources, including compute (vCPU and Memory), SQL storage, and Kafka brokers.
 
 The following thresholds help you identify your profile for the estimator:
 
@@ -115,7 +115,7 @@ select count(*) from NBS_ODSE.dbo.Person
 
 To generate a monthly cost estimate for your deployment scenario:
 
-1. Log in to [NBS Central](https://nbscentral.cdc.gov/) and download the latest **[NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872)**.
+1. Log in to [NBS Central](https://nbscentral.cdc.gov/) and download the latest **[NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872)**. If you need access, see [Additional resources](../../../index.html#additional-resources).
 1. Identify the tab that matches your jurisdictional size.
 1. Input the quantities and suggested SKUs from that tab into the AWS Pricing Calculator or Azure Pricing Calculator.
 

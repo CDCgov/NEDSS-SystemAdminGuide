@@ -31,21 +31,21 @@ See also: [Deployment phases](../before-you-deploy/deployment-phases.html) and [
 
 Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) before you finalize migration timelines.
 
-## State IT security approval takes time
+## IT security approval can take time
 
-State IT security approval is often the longest-lead item in an NBS 7 migration. NBS 7 requires approval for cloud hosting and specific technologies including Kubernetes, Terraform, and Docker. Because NBS handles PII and PHI, state IT review is often required even when a vendor manages parts of the deployment. Jurisdictions that start this process early, even when deployment is still months away, might avoid one of the most common causes of migration delays.
+IT security approval is often one of the longest-lead items in an NBS 7 migration, though timelines vary significantly across jurisdictions. NBS 7 requires approval for cloud hosting and specific technologies including Kubernetes, Terraform, and Docker. Because NBS handles PII and PHI, IT review is often required even when a vendor manages parts of the deployment. Jurisdictions that start this process early, even when deployment is still months away, might avoid one of the most common causes of migration delays.
 
-See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.html), [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html), and [Deploy cloud infrastructure on AWS](../deploy-nbs7/deploy-on-aws.html) or [Deploy cloud infrastructure on Azure](../deploy-nbs7/deploy-on-azure.html).
+See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.html), [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html), and [Deploy cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html).
 
 ## Cloud infrastructure requires ongoing budget
 
-CDC does not support on-premises installations of NBS 7. Your jurisdiction needs an active cloud account (AWS or Azure) and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response. Use the [NBS 7 Resource Estimator (NBS Central login required)](https://nbscentral.cdc.gov/documents/872) to project cloud-hosting costs based on your jurisdiction's record volume.
+CDC does not support on-premises installations of NBS 7. Your jurisdiction needs an active cloud account with Amazon Web Services (AWS) or Microsoft Azure and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response. Use the [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) to project cloud-hosting costs based on your jurisdiction's record volume (NBS Central login required; see [Additional resources](../../index.html#additional-resources)).
 
 See also: [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html) and [Deployment scenarios](../before-you-deploy/deployment-scenarios.html).
 
 ## Align cloud provider with jurisdictional strategy
 
-NBS 7 is fully supported on both Amazon Web Services (AWS) and Microsoft Azure. While the internal microservices and deployment steps are identical across platforms, the initial environment setup depends on your jurisdiction's existing infrastructure and procurement path.
+NBS 7 is fully supported on both AWS and Azure. While the internal microservices and deployment steps are identical across platforms, the initial environment setup depends on your jurisdiction's existing infrastructure and procurement path.
 
 Choose the provider that best aligns with your organization's current operational state:
 
@@ -69,7 +69,7 @@ See also: [RTR component reference](../before-you-deploy/component-reference/rtr
 
 ## The Data Ingestion API adds a secure integration option
 
-The Data Ingestion (DI) API is a built-in REST API layer that accepts lab reports and case reports through middleware rather than through direct database access. It does not replace middleware such as Rhapsody or Mirth Connect. Instead, it gives jurisdictions an API-based ingestion path, which is especially useful when security constraints prevent middleware or other third-party tools from connecting directly to the NBS database. Jurisdictions that do not already have middleware will still need it before they can use the DI API.
+The Data Ingestion (DI) API is a built-in REST API layer that accepts lab reports and case reports. It gives jurisdictions an API-based ingestion path, which is useful when security constraints prevent middleware or other third-party tools from connecting directly to the NBS database. 
 
 See also: [DI API component reference](../before-you-deploy/component-reference/di-api.html) and [Data ingestion microservice](../deploy-nbs7/microservices-deployment/data-ingestion.html).
 

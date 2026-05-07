@@ -11,7 +11,7 @@ redirect_from:
 
 # Operational considerations
 
-This page covers organizational, financial, and operational factors that affect NBS 7 migration planning. Some of these factors involve decisions or timelines that extend beyond the technical team and might be worth raising with others in your organization early in your planning process.
+This page covers organizational, financial, and operational factors that affect NBS 7 migration planning. Some migration factors involve decisions or timelines that extend beyond the technical team and might be worth raising with others in your organization early in your planning process.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -27,7 +27,7 @@ For technical deployment guidance, refer to [Assess your readiness](../before-yo
 
 NBS 7 does not replace NBS 6 in a single switch. Both systems run in parallel during the transition. NBS 7 components gradually take over functionality while NBS 6 continues to operate. The length of this parallel period depends on your jurisdiction's pace of deployment and configuration choices. Planning for the operational complexity and cost of maintaining two systems simultaneously is an integral part of migration preparation. Many jurisdictions provision a separate NBS 6 environment for migration activities and then cut over, rather than making these changes directly on their primary NBS 6 production server.
 
-See also: [Deployment phases](../before-you-deploy/deployment-phases.html) and [Deployment scenarios](../before-you-deploy/deployment-scenarios.html).
+See also: [Deployment overview](../before-you-deploy/deployment-overview.html) and [Deployment scenarios](../before-you-deploy/deployment-scenarios.html).
 
 Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) before you finalize migration timelines.
 

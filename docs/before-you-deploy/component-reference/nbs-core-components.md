@@ -123,11 +123,11 @@ The core SQL Server databases that store operational and reference data for NBS.
 |:---|:---|
 | What it does in NBS 7 | NBS\_ODSE (Operational Data Store) is the primary transactional database where case, patient, investigation, and event records are stored. NBS\_SRTE (System Reference Tables) stores reference and metadata used across NBS, including LOINC, SNOMED CT, and other code sets used for data validation and mapping. |
 | When you need it | Always. Both databases are required for all NBS 7 configurations. |
-| Dependencies | Required by Legacy NBS 6, the Modernization API, Nifi, Debezium (if using RTR), and the DI API (if using the DI API add-on). |
+| Dependencies | Required by Legacy NBS 6, the Modernization API, Nifi, Debezium (for RTR), and the DI API. |
 
 ## Infrastructure and networking layer components
 
-The following components make up the infrastructure and networking layers of NBS 7. They are provisioned and managed primarily through Terraform and Helm, and most do not require configuration decisions from IT admins during the planning phase. They are documented here for awareness.
+The following components make up the infrastructure and networking layers of NBS 7. They are provisioned and managed primarily through Terraform and Helm, and most do not require configuration decisions from IT admins during the [planning stage](../../before-you-deploy/deployment-overview.html#planning). They are documented here for awareness.
 
 Full configuration guidance is in the [Deploy NBS 7](../../deploy-nbs7.html) section of this guide.
 

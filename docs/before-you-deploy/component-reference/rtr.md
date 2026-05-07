@@ -4,13 +4,13 @@ layout: page
 parent: Component reference
 grand_parent: Before you deploy
 nav_order: 2
-description: "Details the four components added by the Real-Time Reporting (RTR) add-on: Debezium, Kafka, RTR domain services, and RDB_Modern."
+description: "Details the four components added by Real-Time Reporting (RTR): Debezium, Kafka, RTR domain services, and RDB_Modern."
 nav_enabled: true
 ---
 
 # Component reference: Real-Time Reporting (RTR)
 
-RTR provides an event-driven reporting pipeline for near-real-time reporting. RTR replaces the legacy MasterETL batch process. During validation, both might run briefly in parallel to confirm that RTR output is accurate. Once validation is complete, plan to retire MasterETL.
+RTR provides an event-driven reporting pipeline for near-real-time reporting. RTR aims to eventually replace the classic MasterETL batch process. During migration, both run in parallel until full feature equivalence is met.
 
 The following components are added to your NBS 7 deployment when you deploy RTR.
 

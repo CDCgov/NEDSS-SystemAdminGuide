@@ -23,7 +23,7 @@ For more information on migration planning, staffing, and budget, see [Operation
 
 ## Not sure where to start?
 
-If you are new to NBS 7 deployment, [Deployment phases](../before-you-deploy/deployment-phases.html) provides an overview of an example rollout and where this readiness assessment fits.
+If you are new to NBS 7 deployment, [Deployment overview](../before-you-deploy/deployment-overview.html) provides example stages in a typical rollout and where this readiness assessment fits.
 
 ## IT security approval
 
@@ -40,7 +40,7 @@ NBS 7 requires a cloud-based environment for deployment. NBS 7 has not been test
 
 ### Amazon Web Services (AWS)
 
-- **Strategic fit:** Preferred by jurisdictions with established AWS environments or those prioritizing a broad ecosystem of third-party security and data tools.
+- **Strategic fit:** Preferred by jurisdictions with established AWS environments or those with existing AWS contract vehicles or organizational policies that standardize on AWS.
 - **Technical readiness:** Aligns with teams experienced in managing container-native architectures via Amazon Elastic Kubernetes Service (EKS) and mature Terraform workflows.
 - **Surveillance context:** Core components are extensively validated in AWS to ensure performance at peak ingestion volumes.
 
@@ -73,7 +73,6 @@ See also: [Operational considerations](../before-you-deploy/operational-consider
 Before deployment, your network must meet the following requirements:
 
 - **NBS 6 and NBS 7 connectivity**: Each NBS 7 instance requires network connectivity to a corresponding NBS 6 instance. If your NBS 6 runs in a Virtual Private Cloud (VPC), that VPC must be connected to your NBS 7 environment.
-- **VM co-location**: Any virtual machines (VMs) that you use for NBS 7 components must exist within the same network.
 - **Encryption**: Encryption is required for all virtual network traffic between NBS 6 and NBS 7 components.
 - **Outbound access**: Your cloud environment needs outbound internet access to reach CDC systems.
 - **TLS/SSL certificate management**: You need a process to provision and renew TLS/SSL certificates for encrypted traffic.
@@ -92,15 +91,15 @@ During migration, NBS 7 components gradually replace NBS 6 functionality while N
 - You need to know your current NBS 6 hosting setup before you begin. Specifically, whether it is hosted on-premises or in the cloud, and if in the cloud, which provider.
 - **You must be running a compatible NBS 6.x version** before you can install any version of NBS 7. For more information, see [Compatibility matrix](../before-you-deploy/compatibility.html).
 
-See also: [Deployment phases](../before-you-deploy/deployment-phases.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
+See also: [Deployment overview](../before-you-deploy/deployment-overview.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
 
 ## Data migration
 
-NBS 7 uses your existing NBS 6 database and does not require a schema migration. In most cases, no data migration is needed.
+NBS 7 uses your existing NBS 6 database and does not require a schema migration. Unless you choose to move your database from on premises to the cloud, no data migration should be needed.
 
 If your current NBS 6 database is hosted on-premises and you plan to move it to the cloud as part of your migration, you will need to copy the data from your existing environment and restore it to the new environment using a standard database backup and restore process. If you are not moving your NBS 6 database, no data migration action is required.
 
-See also: [Prerequisites for NBS 7 deployment](../deploy-nbs7/prerequisites.html#nbs-6-readiness), [Deployment scenarios](../before-you-deploy/deployment-scenarios.html), and [Deployment phases](../before-you-deploy/deployment-phases.html).
+See also: [Prerequisites for NBS 7 deployment](../deploy-nbs7/prerequisites.html#nbs-6-readiness), [Deployment scenarios](../before-you-deploy/deployment-scenarios.html), and [Deployment overview](../before-you-deploy/deployment-overview.html).
 
 ## CDC coordination
 

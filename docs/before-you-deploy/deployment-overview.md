@@ -3,12 +3,15 @@ title: Deployment overview
 layout: page
 parent: Before you deploy
 nav_order: 1
-description: An overview of the five phases involved in an NBS 7 deployment, from planning through steady state operations.
+description: An overview of the five stages involved in an NBS 7 deployment, from planning through steady state operations.
 ---
 
 # Deployment overview
 
 NBS 7 deployments vary significantly by jurisdiction. If you are just getting started, this page can help you understand where the [Assess your readiness](assess-your-readiness.html) checklist fits in the overall process.
+
+The activity tables on this page include links to resources in this guide and on NBS Central. Resources without links are suggested artifacts that your jurisdiction might create to support your migration.
+{: .note }
 
 <!--
 ## On this page
@@ -18,11 +21,11 @@ NBS 7 deployments vary significantly by jurisdiction. If you are just getting st
 {:toc}
 -->
 
-## Example deployment phases
+## Example deployment stages
 
-The phases in this table represent an example rollout scenario based on deployments to date. Your jurisdiction's timeline, activities, and sequence might differ depending on your infrastructure, staffing, and security requirements. For more information, see [Operational considerations](../before-you-deploy/operational-considerations.html).
+The stages in this table represent an example rollout scenario based on deployments to date. Your jurisdiction's timeline, activities, and sequence might differ depending on your infrastructure, staffing, and security requirements. For more information, see [Operational considerations](../before-you-deploy/operational-considerations.html).
 
-| Phase | Goal | Minimum duration |
+| Stage | Goal | Minimum duration |
 |:---|:---|:---|
 | [Planning](#planning) | Establish your project team, [assess your readiness](assess-your-readiness.html), and create a customized migration plan | 2-5 months |
 | [Install](#install) | Provision cloud environments and deploy NBS 7 based on your [chosen configuration](choose-your-configuration.html) | 3-6 months |
@@ -30,16 +33,14 @@ The phases in this table represent an example rollout scenario based on deployme
 | [Go-live](#go-live) | Complete cutover and launch NBS 7 in production | 1-4 months |
 | [Steady state](#steady-state) | Monitor live operations and maintain the system ongoing | Ongoing |
 
-{: .note }
-These are minimum estimates based on typical deployments. Actual timelines vary by jurisdiction. Security approval, procurement, and legal review processes are common sources of extended timelines in the Planning and Install phases.
-
-For detailed checklists and deliverables for each phase, see the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) on NBS Central (login required; see [Additional resources](../../index.html#additional-resources)).
+These are minimum estimates based on typical deployments. Actual timelines vary by jurisdiction. Security approval, procurement, and legal review processes are common sources of extended timelines in the Planning and Install stages.
+{: .important }
 
 ---
 
 ## Planning
 
-The Planning phase covers discovery, environment setup, and project preparation. Security approval for cloud-hosting and required technologies including Kubernetes, Terraform, and Docker can be a source of delay across the entire deployment. Starting that process early tends to reduce overall deployment time.
+The Planning stage covers discovery, environment setup, and project preparation. Security approval for cloud-hosting and required technologies including Kubernetes, Terraform, and Docker can be a source of delay across the entire deployment. Starting that process early tends to reduce overall deployment time.
 
 Before planning detailed timelines, confirm that your current NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html).
 
@@ -57,15 +58,15 @@ Before planning detailed timelines, confirm that your current NBS 6 version is c
 
 ## Install
 
-The Install phase covers provisioning your cloud environments and deploying NBS 7 across development, staging, and production. This phase has a dependency on security approval processes, which might extend the timeline.
+The Install stage covers provisioning your cloud environments and deploying NBS 7 across development, staging, and production. This stage has a dependency on security approval processes, which might extend the timeline.
 
 | Activity | Description | Resource |
 |:---|:---|:---|
 | Data migration plan | Agree on and review the data migration plan, coordinate the data migration solution and test files | [Assess your readiness: Data migration](../before-you-deploy/assess-your-readiness.html#data-migration) |
-| Dev environment deployment | Create and deploy an initial NBS 7 development environment build | [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html) |
-| Staging environment deployment | Create and deploy an initial NBS 7 test environment build | [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html) |
-| Production environment deployment | Create and deploy an initial NBS 7 production environment build | [Deploy NBS 7 microservices](../deploy-nbs7/deploy-nbs7-microservices.html) |
-| Complete database transfer | Complete customizations, user file sharing setup, and integration with your user management system | STLT database refresh procedure |
+| Dev environment deployment | Create and deploy an initial NBS 7 development environment build | [Deploy NBS 7](../deploy-nbs7.html) |
+| Staging environment deployment | Create and deploy an initial NBS 7 test environment build | [Deploy NBS 7](../deploy-nbs7.html) |
+| Production environment deployment | Create and deploy an initial NBS 7 production environment build | [Deploy NBS 7](../deploy-nbs7.html) |
+| Complete database transfer | Complete customizations, user file sharing setup, and integration with your user management system | Your own db refresh procedure |
 | Roles and permissions migration | Map user roles and configure permissions in NBS 7 | User migration mapping |
 | SSO setup | Review jurisdictional SSO and login requirements and integrate Keycloak with your existing login tools. See [Operational considerations](../before-you-deploy/operational-considerations.html) for SSO planning guidance | [Enable Keycloak authentication](../deploy-nbs7/keycloak/enable-keycloak-auth.html) |
 
@@ -73,7 +74,7 @@ The Install phase covers provisioning your cloud environments and deploying NBS 
 
 ## Test
 
-The Test phase validates that your NBS 7 environment is ready for production use. This phase also has a dependency on security processes and might run concurrently with some Install activities.
+The Test stage validates that your NBS 7 environment is ready for production use. This stage also has a dependency on security processes and might run concurrently with some Install activities.
 
 | Activity | Description | Resource |
 |:---|:---|:---|
@@ -89,7 +90,7 @@ The Test phase validates that your NBS 7 environment is ready for production use
 
 ## Go-live
 
-The Go-live phase covers final preparation, cutover, and launch. This phase is shorter than the others but involves time-sensitive coordination across your team. In many jurisdictions, this cutover follows work in a separate migration environment rather than direct changes on the primary NBS 6 production server.
+The Go-live stage covers final preparation, cutover, and launch. This stage is shorter than the others but involves time-sensitive coordination across your team. In many jurisdictions, this cutover follows work in a separate migration environment rather than direct changes on the primary NBS 6 production server.
 
 | Activity | Description | Resource |
 |:---|:---|:---|
@@ -102,7 +103,7 @@ The Go-live phase covers final preparation, cutover, and launch. This phase is s
 
 ## Steady state
 
-After go-live, your jurisdiction enters steady state operations. This phase is ongoing and includes monitoring, support, and periodic upgrades as new NBS 7 releases become available.
+After go-live, your jurisdiction enters steady state operations. This stage is ongoing and includes monitoring, support, and periodic upgrades as new NBS 7 releases become available.
 
 | Activity | Description | Resource |
 |:---|:---|:---|

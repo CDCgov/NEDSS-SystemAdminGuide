@@ -7,7 +7,7 @@ nav_order: 2
 
 # Update the Amazon EKS control plane
 
-You can use Terraform to upgrade the Amazon Elastic Kubernetes Service (Amazon EKS) control plane and node groups for your NBS 7 deployment. Perform a control plane upgrade when Amazon Web Services (AWS) releases a new Kubernetes version or when your current version approaches end-of-support.
+This page describes how to use Terraform to upgrade the Amazon Elastic Kubernetes Service (Amazon EKS) control plane and node groups for your NBS 7 deployment. You should perform a control plane upgrade when Amazon Web Services (AWS) releases a new Kubernetes version or when your current version approaches end-of-support.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -17,9 +17,7 @@ You can use Terraform to upgrade the Amazon Elastic Kubernetes Service (Amazon E
 
 ## Kubernetes version compatibility
 
-NBS {{ site.version_latest }} was tested against Kubernetes 1.35. To minimize cost, we suggest running the latest version in AWS standard support at the time of your deployment. For current version end dates, see [Understand the Kubernetes version lifecycle on EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html) in the AWS documentation.
-
-If you are running a version later than 1.35, NBS {{ site.version_latest }} is likely to work. Kubernetes is designed for backward compatibility across minor versions.
+While NBS {{ site.version_latest }} was tested against Kubernetes 1.35, later Kubernetes versions are expected to be compatible. To minimize cost, we suggest running the latest version in AWS standard support at the time of your deployment. For current version end dates, see [Understand the Kubernetes version lifecycle on EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html) in the AWS documentation.
 
 Before you begin the upgrade, review the following:
 

@@ -39,6 +39,17 @@ configuration files
    {: .note }
 
 1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions][nedss-infra-aws-samples-readme]
+
+   If you plan to deploy the Data Compare tool, also add the following variables to your `terraform.tfvars` before running `terraform apply`:
+
+   ```hcl
+   create_datacompare_irsa              = true
+   datacompare_s3_bucket_name           = "<your-s3-bucket-name>"
+   datacompare_s3_bucket_keyname_prefix = "<your-key-prefix>"
+   datacompare_namespace_and_service    = ["<namespace>:<service-account-name>"]
+   ```
+
+   This creates the IAM role (`<eks-cluster-name>-datacompare-role`) and S3 access policy required by the Data Compare pods. The role ARN is referenced during [Data Compare deployment](../../deploy-nbs7/real-time-reporting/data-compare-tool.html).
 1. Review the inbound rules on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
     - a. For example if the `modern-cidr` is `10.20.0.0/16`, there should be at least one rule in a security group associated to your database that allows MSSQL inbound access from your `modern-cidr` block
     ![mssql-inbound-from-modern-cidr](../images/myssql-inbound-from-modern-cidr.png)

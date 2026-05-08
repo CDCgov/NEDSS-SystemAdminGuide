@@ -4,7 +4,6 @@ layout: page
 parent: Deploy on AWS
 nav_order: 2
 has_children: true
-nav_enabled: true
 redirect_from:
    - /docs/3_base_application/1_terraform-deployment.html
    - /docs/3_base_application/1_terraform-deployment/
@@ -13,20 +12,24 @@ redirect_from:
 # Provision the AWS cloud environment
 {: .no_toc }
 
+This page covers the first deployment phase: provisioning the AWS cloud environment using Terraform. These steps prepare your Amazon Web Services (AWS) infrastructure and validate that the foundational resources are ready for Kubernetes deployment. Complete this section before proceeding to [Initial Kubernetes Deployment](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html).
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
-## Overview
+Before you begin, complete the general [Prerequisites](../../deploy-nbs7/prerequisites.html) and the AWS-specific [Prerequisites for deploying on AWS](../../deploy-nbs7/deploy-on-aws/prerequisites.html).
+{: .important }
 
-This page covers the first deployment phase: provisioning the AWS cloud environment using Terraform. Complete the steps in this section before proceeding to [Initial Kubernetes Deployment](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html).
+## Prepare deployment files and configuration
+
+Complete these steps to download the infrastructure package and prepare your environment-specific Terraform files.
 
 1. Go to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file.
 1. Open a terminal (bash, macOS Terminal, CloudShell, or PowerShell) and unzip the downloaded file.
-1. Create a new directory with an easily identifiable name e.g nbs7-mySTLT-test in /terraform/aws/ to hold your environment specific
-configuration files
+1. To hold your environment-specific configuration files, create a new directory in `/terraform/aws/`. Give the new directory an easily identifiable name such as `nbs7-mySTLT-test`.
 1. Copy `terraform/aws/samples/archive/NBS7_standard` to the new directory and change into the new directory.
 
    ```bash
@@ -34,12 +37,12 @@ configuration files
    cd terraform/aws/nbs7-mySTLT-test
    ```
 
-   > Before you edit `terraform.tfvars` and `terraform.tf` files below, you can reference detailed information for each TF module under `terraform/aws/app-infrastructure` in a README file in each module's directory. Do not edit files in the individual modules.
+   > Before you edit the `terraform.tfvars` and `terraform.tf` files, review the README files for each Terraform module under `terraform/aws/app-infrastructure` in each module's directory. Do not edit files in the individual modules.
    {: .note }
 
 1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values.
 
-   If you plan to deploy the Data Compare tool, also add the following variables to your `terraform.tfvars` before running `terraform apply`. If you deployed to a non-default namespace, adjust the `datacompare_namespace_and_service` value accordingly.
+   If you plan to deploy the Data Compare tool, also add the following variables to your `terraform.tfvars` before running `terraform apply`. If you deployed to a non-default namespace, you should adjust the `datacompare_namespace_and_service` value accordingly.
 
    ```hcl
    create_datacompare_irsa              = true
@@ -49,10 +52,14 @@ configuration files
    ```
 
    This creates the IAM role (`<eks-cluster-name>-datacompare-role`) and S3 access policy required by the Data Compare pods. The role ARN is referenced during [Data Compare deployment](../../deploy-nbs7/real-time-reporting/data-compare-tool.html).
-1. Review the inbound rules on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
-    - a. For example if the `modern-cidr` is `10.20.0.0/16`, there should be at least one rule in a security group associated to your database that allows MSSQL inbound access from your `modern-cidr` block
-    ![mssql-inbound-from-modern-cidr](../images/myssql-inbound-from-modern-cidr.png)
-1. Make sure you are authenticated to AWS. Confirm access to the intended account using the following command. (More information is available in the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).)
+
+## Validate AWS access and network prerequisites
+
+Before running Terraform, validate database network access and confirm that your AWS authentication is active.
+
+1. Review the inbound rules on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database. For example, if the `modern-cidr` is `10.20.0.0/16`, there should be at least one rule in a security group associated with your database that allows MSSQL inbound access from your `modern-cidr` block.
+   ![mssql-inbound-from-modern-cidr](../images/myssql-inbound-from-modern-cidr.png)
+1. Verify that you are authenticated to AWS. Use the following command to verify access to the intended account. For more information, see the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
 
    ```text
    $ aws sts get-caller-identity
@@ -63,62 +70,76 @@ configuration files
    }
    ```
 
-1. Terraform stores its state in an S3 bucket. The commands below assume that you are running Terraform authenticated to the same AWS account that contains your existing NBS 6 application. Please adjust accordingly if this does not match your setup.
-   1. Change directory to the account configuration directory if not already, i.e. the one containing `terraform.tfvars`, and `terraform.tf`
+## Run Terraform provisioning
 
-    ```text
-    cd terraform/aws/nbs7-mySTLT-test
-    ```
+Run the Terraform commands in order to initialize state and apply your infrastructure changes. Terraform stores its state in an Amazon S3 bucket. The following commands assume that you are running Terraform authenticated to the same AWS account that contains your existing NBS 6 application. Adjust the commands accordingly if this does not match your setup.
 
-   1. Initialize Terraform by running:
+1. Change to the account configuration directory created in Step 3 that contains `terraform.tfvars`, and `terraform.tf`. For this example, those files are in the `nbs7-mySTLT-test` directory.
 
-    ```text
-    terraform init
-    ```
+   ```text
+   cd terraform/aws/nbs7-mySTLT-test
+   ```
 
-   1. Run "terraform plan" to enable it to calculate the set of changes that need to be applied:
+1. Initialize Terraform by running:
 
-    ```text
-    terraform plan
-    ```
+   ```text
+   terraform init
+   ```
 
-    ![terraform-plan](../images/terraform-plan-latest.png)
-   1. Review the changes carefully to make sure that they 1) match your intention, and 2) do not unintentionally disturb other configuration on which you depend. Then run "terraform apply":
+1. Run `terraform plan` to calculate the set of changes that need to be applied:
 
-    ```text
-    terraform apply
-    ```
+   ```text
+   terraform plan
+   ```
 
-    1. If terraform apply generates errors, review and resolve the errors, and then rerun step d.
-1. Verify Terraform was applied as expected by examining the logs
-1. Verify the [newly created VPC and subnets](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#Home:) were created as expected and confirm that the CIDR blocks you defined exist in the Route Tables.
-1. Verify the [Amazon Elastic Kubernetes Service (Amazon EKS) cluster](https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/clusters) was created by selecting the cluster and inspecting Resources->Pods, Compute (expect 30+ pods at this point, and 3-5 compute nodes as per the min/max nodes defined in terraform/aws/app-infrastructure/eks-nbs/variables.tf).
-1. Now that the infrastructure has been created using Terraform, deploy Kubernetes support services in the Kubernetes cluster via the following steps.
-    - Start the Terminal/command line:
-        - Make sure you are still authenticated with AWS (reference the [Configuration and credential file settings](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)).
-        - Authenticate into the Amazon EKS cluster using the following command and the [cluster name that you deployed in the environment](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html)
+   ![terraform-plan](../images/terraform-plan-latest.png)
+1. Review the changes carefully to verify that they match your intention and do not unintentionally affect other configurations that you depend on. Then run `terraform apply`:
 
-           ```bash
-           aws eks --region us-east-1 update-kubeconfig --name <clustername> # e.g. cdc-nbs-sandbox
-           ```
+   ```text
+   terraform apply
+   ```
 
-        - If the above command errors out, confirm that:
-           - There are no issues with the AWS CLI installation
-           - You have set the correct AWS environment variables
-           - You are using the correct cluster name (as shown in the Amazon EKS console)
-    - Run the following command to check if you are able to run commands to interact with the Kubernetes objects and the cluster:
+1. If `terraform apply` generates errors, review and resolve the errors, then rerun `terraform apply`.
 
-      ```bash
-      kubectl get pods --namespace=cert-manager
-      ```
+## Validate provisioned AWS resources
 
-      This command should return 3 pods.  If it doesn't, refresh the AWS credentials and repeat the verification steps.
-1. List the worker nodes for the cluster:
+After applying Terraform, verify that the expected AWS infrastructure resources were created correctly.
+
+1. Examine the logs to verify that Terraform was applied as expected.
+1. Verify that the [newly created VPC and subnets](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#Home:) were created as expected, and verify that the CIDR blocks you defined exist in the Route Tables.
+1. To verify that the [Amazon Elastic Kubernetes Service (Amazon EKS) cluster](https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/clusters) successfully created, select the cluster and inspect **Resources > Pods** and **Compute**. You should expect to find at least 30 pods and 3 to 5 compute nodes depending on the min/max values defined in `terraform/aws/app-infrastructure/eks-nbs/variables.tf`.
+
+## Connect to EKS and validate cluster readiness
+
+Use these steps to connect to the cluster and verify that core Kubernetes resources are available before continuing.
+
+1. While authenticated with AWS, open a terminal or command line. Use the following command to authenticate into the Amazon EKS cluster and the [cluster name that you deployed in the environment](https://docs.aws.amazon.com/eks/latest/userguide/create-kubeconfig.html).
+
+   ```bash
+   aws eks --region us-east-1 update-kubeconfig --name <clustername> # e.g. cdc-nbs-sandbox
+   ```
+
+   If the command errors out, verify that:
+   - There are no issues with the AWS CLI installation.
+   - You have set the correct AWS environment variables.
+   - You are using the correct cluster name, as shown in the Amazon EKS console.
+1. Run the following command to verify that you can run commands to interact with the Kubernetes objects and the cluster:
+
+   ```bash
+   kubectl get pods --namespace=cert-manager
+   ```
+
+   This command should return 3 pods. If it does not, refresh your AWS credentials and repeat the verification steps.
+1. Verify that worker nodes are registered and ready to run workloads:
 
    ```bash
    kubectl get nodes
    ```
 
-You have now installed your core infrastructure and Kubernetes cluster. Next, see [Initial Kubernetes Deployment](../initial-kubernetes-deployment/initial-kubernetes-deployment.html) to configure your cluster using Helm charts.
+   Verify that multiple nodes are listed and each node shows a status of `Ready`. If nodes are missing or show `NotReady`, check node group health in Amazon EKS and verify your AWS authentication before continuing.
+
+## Next steps
+
+You have now installed your core infrastructure and Kubernetes cluster. Continue to [Initial Kubernetes Deployment](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html) to configure your cluster.
 
 [nedss-infra-release-page]: <https://github.com/CDCgov/NEDSS-Infrastructure/releases/tag/{{ site.version_latest_tag }}>

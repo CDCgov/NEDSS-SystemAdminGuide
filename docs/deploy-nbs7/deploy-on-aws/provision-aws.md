@@ -21,24 +21,23 @@ redirect_from:
 
 ## Overview
 
-This page covers the first deployment phase: provisioning the AWS cloud environment using Terraform. Complete the steps in this section before proceeding to [Initial Kubernetes Deployment](../initial-kubernetes-deployment/).
+This page covers the first deployment phase: provisioning the AWS cloud environment using Terraform. Complete the steps in this section before proceeding to [Initial Kubernetes Deployment](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html).
 
 1. Go to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file.
 1. Open a terminal (bash, macOS Terminal, CloudShell, or PowerShell) and unzip the downloaded file.
 1. Create a new directory with an easily identifiable name e.g nbs7-mySTLT-test in /terraform/aws/ to hold your environment specific
 configuration files
-1. Copy terraform/aws/samples/NBS7_standard to the new directory and change into the new directory (Note: the samples directory
-   contains other options than "standard", view the README file in that directory to chose most appropriate starting point)
+1. Copy `terraform/aws/samples/archive/NBS7_standard` to the new directory and change into the new directory.
 
    ```bash
-   cp -pr terraform/aws/samples/NBS7_standard/* terraform/aws/nbs7-mySTLT-test
+   cp -pr terraform/aws/samples/archive/NBS7_standard/* terraform/aws/nbs7-mySTLT-test
    cd terraform/aws/nbs7-mySTLT-test
    ```
 
    > Before you edit `terraform.tfvars` and `terraform.tf` files below, you can reference detailed information for each TF module under `terraform/aws/app-infrastructure` in a README file in each module's directory. Do not edit files in the individual modules.
    {: .note }
 
-1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions][nedss-infra-aws-samples-readme]
+1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values.
 
    If you plan to deploy the Data Compare tool, also add the following variables to your `terraform.tfvars` before running `terraform apply`:
 
@@ -123,4 +122,3 @@ configuration files
 You have now installed your core infrastructure and Kubernetes cluster. Next, see [Initial Kubernetes Deployment](../initial-kubernetes-deployment/initial-kubernetes-deployment.html) to configure your cluster using Helm charts.
 
 [nedss-infra-release-page]: <https://github.com/CDCgov/NEDSS-Infrastructure/releases/tag/{{ site.version_latest_tag }}>
-[nedss-infra-aws-samples-readme]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/samples/README.md>

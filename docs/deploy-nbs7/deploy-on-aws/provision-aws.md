@@ -29,12 +29,12 @@ Complete these steps to download the infrastructure package and prepare your env
 
 1. Go to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file.
 1. Open a terminal (bash, macOS Terminal, CloudShell, or PowerShell) and unzip the downloaded file.
-1. To hold your environment-specific configuration files, create a new directory in `/terraform/aws/`. Give the new directory an easily identifiable name such as `nbs7-mySTLT-test`.
+1. To hold your environment-specific configuration files, create a new directory in `/terraform/aws/`. Give the new directory an easily identifiable name such as `nbs7-mySTLT-config`.
 1. Copy `terraform/aws/samples/archive/NBS7_standard` to the new directory and change into the new directory.
 
    ```bash
-   cp -pr terraform/aws/samples/archive/NBS7_standard/* terraform/aws/nbs7-mySTLT-test
-   cd terraform/aws/nbs7-mySTLT-test
+   cp -pr terraform/aws/samples/archive/NBS7_standard/* terraform/aws/nbs7-mySTLT-config
+   cd terraform/aws/nbs7-mySTLT-config
    ```
 
    > Before you edit the `terraform.tfvars` and `terraform.tf` files, review the README files for each Terraform module under `terraform/aws/app-infrastructure` in each module's directory. Do not edit files in the individual modules.
@@ -74,10 +74,10 @@ Before running Terraform, validate database network access and confirm that your
 
 Run the Terraform commands in order to initialize state and apply your infrastructure changes. Terraform stores its state in an Amazon S3 bucket. The following commands assume that you are running Terraform authenticated to the same AWS account that contains your existing NBS 6 application. Adjust the commands accordingly if this does not match your setup.
 
-1. Change to the account configuration directory created in Step 3 that contains `terraform.tfvars`, and `terraform.tf`. For this example, those files are in the `nbs7-mySTLT-test` directory.
+1. Change to the account configuration directory created in [Prepare deployment files and configuration](#prepare-deployment-files-and-configuration) that contains `terraform.tfvars`, and `terraform.tf`. For this example, those files are in the `nbs7-mySTLT-config` directory.
 
    ```text
-   cd terraform/aws/nbs7-mySTLT-test
+   cd terraform/aws/nbs7-mySTLT-config
    ```
 
 1. Initialize Terraform by running:
@@ -105,9 +105,9 @@ Run the Terraform commands in order to initialize state and apply your infrastru
 
 After applying Terraform, verify that the expected AWS infrastructure resources were created correctly.
 
-1. Examine the logs to verify that Terraform was applied as expected.
-1. Verify that the [newly created VPC and subnets](https://us-east-1.console.aws.amazon.com/vpc/home?region=us-east-1#Home:) were created as expected, and verify that the CIDR blocks you defined exist in the Route Tables.
-1. To verify that the [Amazon Elastic Kubernetes Service (Amazon EKS) cluster](https://us-east-1.console.aws.amazon.com/eks/home?region=us-east-1#/clusters) successfully created, select the cluster and inspect **Resources > Pods** and **Compute**. You should expect to find at least 30 pods and 3 to 5 compute nodes depending on the min/max values defined in `terraform/aws/app-infrastructure/eks-nbs/variables.tf`.
+1. Review the `terraform apply` output in your terminal to verify that the infrastructure was created without errors.
+1. In the Amazon VPC console, verify that the newly created VPC and subnets were created as expected. Then review the associated Route Tables to verify that the CIDR blocks you defined are present.
+1. In the Amazon EKS console, select the cluster and inspect **Resources > Pods** and **Compute**. Verify that the cluster was created successfully and that at least 30 pods and 3 to 5 compute nodes are present, based on the minimum and maximum node values defined in `terraform/aws/app-infrastructure/eks-nbs/variables.tf`.
 
 ## Connect to EKS and validate cluster readiness
 

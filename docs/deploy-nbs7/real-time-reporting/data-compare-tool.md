@@ -38,6 +38,8 @@ Before deploying the Data Compare tool, verify the following:
 
 - Access to a cloud storage bucket for data exchange between the API and Processor services. These steps currently use Amazon S3. If you are not using Amazon S3, consult your cloud administrator for equivalent storage configuration.
 
+  For AWS deployments, an IAM role granting the Data Compare pods access to S3 must be provisioned before deployment. This role is created by Terraform in NEDSS-Infrastructure when `create_datacompare_irsa = true` is set in your `terraform.tfvars`. The role is named `<eks-cluster-name>-datacompare-role`. See [Provision the AWS environment](../deploy-on-aws/provision-aws.html) for details.
+
 - Keycloak configured with the Data Compare API profile: [NEDSS-Helm/charts/keycloak/extra][nedss-helm-keycloak-extra]
 
 If your Keycloak pod uses a name or namespace other than the default, update the `authUri` in your `values.yaml`:
@@ -79,6 +81,16 @@ The Helm chart is located in `charts/data-compare-api-service` in the [NEDSS-Hel
      region: "AWS REGION"
      bucketName: "S3 BucketName"
    ```
+
+1. For AWS deployments, add the IRSA role ARN to `values.yaml` to grant the pod access to S3:
+
+   ```yaml
+   serviceAccount:
+     annotations:
+       eks.amazonaws.com/role-arn: "arn:aws:iam::<ACCOUNT_ID>:role/<eks-cluster-name>-datacompare-role"
+   ```
+
+   Replace `<ACCOUNT_ID>` and `<eks-cluster-name>` with your values. The role is created during infrastructure provisioning. See [Provision the AWS environment](../deploy-on-aws/provision-aws.html) for details.
 
 1. Install the Helm chart:
 
@@ -129,6 +141,16 @@ The Helm chart is located in `charts/data-compare-processor-service` in the [NED
      region: "AWS REGION"
      bucketName: "S3 BucketName"
    ```
+
+1. For AWS deployments, add the IRSA role ARN to `values.yaml` to grant the pod access to S3:
+
+   ```yaml
+   serviceAccount:
+     annotations:
+       eks.amazonaws.com/role-arn: "arn:aws:iam::<ACCOUNT_ID>:role/<eks-cluster-name>-datacompare-role"
+   ```
+
+   Replace `<ACCOUNT_ID>` and `<eks-cluster-name>` with your values. The role is created during infrastructure provisioning. See [Provision the AWS environment](../deploy-on-aws/provision-aws.html) for details.
 
 1. Install the Helm chart:
 

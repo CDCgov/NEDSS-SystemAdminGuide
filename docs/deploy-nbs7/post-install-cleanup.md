@@ -2,7 +2,7 @@
 title: Clean up
 layout: page
 parent: Deploy NBS 7
-nav_order: 8
+nav_order: 10
 description: Steps to remove temporary deployment artifacts and tighten access after a successful NBS 7 installation.
 ---
 

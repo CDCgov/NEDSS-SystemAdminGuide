@@ -1,8 +1,9 @@
 ---
 title: Java services
 layout: page
-parent: Real-time reporting (preview)
+parent: Deploy real-time reporting
 nav_order: 4
+description: Covers deployment of RTR Java services that transform Kafka events and load reporting datamarts.
 redirect_from:
   - /docs/7_feature_preview/4_rtr_java_reporting_services.html
   - /docs/7_feature_preview/4_rtr_java_reporting_services/

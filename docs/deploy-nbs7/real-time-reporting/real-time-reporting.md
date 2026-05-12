@@ -1,9 +1,10 @@
 ---
-title: Real-time reporting (preview)
+title: Deploy real-time reporting
 layout: page
-parent: Deploy NBS 7 microservices
-nav_order: 11
+parent: Deploy NBS 7
+nav_order: 7
 has_children: true
+description: Guides deployment of RTR components that stream ODSE and SRTE changes to RDB through Kafka.
 redirect_from:
   - /docs/7_feature_preview/(DEPRECATED)4_observation_reporting_service/
   - /docs/7_feature_preview/(DEPRECATED)5_person_reporting_service/
@@ -15,12 +16,12 @@ redirect_from:
   - /docs/7_feature_preview/0_rtr/
 ---
 
-# Deploy the real-time reporting (RTR) add-on
+# Deploy real-time reporting (RTR)
 
 > This feature is in Beta preview and not production ready.
 {: .important }
 
-Real-time reporting (RTR) is an optional add-on for NBS 7. RTR reduces reporting latency from as long as 24 hours to between 5 minutes and 1 hour. It uses Kafka Connect to stream row-level changes from source tables, which reduces reliance on the `MasterETL` batch process.
+Real-time reporting (RTR) is an NBS 7 capability that reduces reporting latency from as long as 24 hours to between 5 minutes and 1 hour. It uses Kafka Connect to stream row-level changes from source tables, which reduces reliance on the `MasterETL` batch process.
 
 This guide covers steps to install RTR with Helm charts. RTR transfers data from the transactional database `NBS_ODSE` to the reporting database `RDB`. Change Data Capture on select `NBS_ODSE` and `NBS_SRTE` tables detects row-level changes (see [Create service users and database objects](#create-service-users-and-database-objects) for the full table list). Those changes publish to Kafka topics, where RTR services extract and load the data into `RDB`.
 

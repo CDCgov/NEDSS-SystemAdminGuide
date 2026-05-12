@@ -3,6 +3,7 @@ title: Glossary
 layout: page
 nav_order: 5
 description: "Definitions for terms and acronyms used in the NBS 7 System Administrator Guide."
+last_modified_date: 2026-05-12
 ---
 
 # Glossary
@@ -117,7 +118,7 @@ An Azure platform service for monitoring infrastructure health and performance. 
 
 ### Azure SQL
 
-A family of Azure-managed database services. In Azure NBS 7 deployments, Azure SQL Database or Azure Database for SQL Server are common options for hosting the NBS 6 MS-SQL database. The appropriate service depends on the STLT's existing infrastructure and licensing. The Azure equivalent of [Amazon RDS](#amazon-rds) in this context.
+A family of Azure-managed database services. In Azure NBS 7 deployments, Azure SQL Database or Azure Database for SQL Server are common options for hosting the NBS 6 database. The appropriate service depends on the STLT's existing infrastructure and licensing. The Azure equivalent of [Amazon RDS](#amazon-rds) in this context.
 
 ---
 
@@ -177,7 +178,7 @@ Any [NBS](#nbs) versions prior to 7.0.0, including all NBS 6.x releases. Classic
 
 ### condition
 
-In NBS, a disease or health event that is subject to public health reporting. Conditions may be nationally notifiable (reported to CDC) or only state-reportable. Not all conditions have a [PAM](#pam); many use the generic investigation form.
+In NBS, a disease or health event that is subject to public health reporting. Conditions may be nationally notifiable (reported to CDC) or only jurisdiction-level reportable. Not all conditions have a [PAM](#pam); some use the generic investigation form.
 
 ### container
 
@@ -429,9 +430,9 @@ In NBS, an observation originating from a healthcare provider (such as a hospita
 - **MPR:** The authoritative patient record in NBS, derived from all patient revisions (point-in-time demographics).
 - **MPI:** A cross-system index used to match and link patient records across sources.
 
-### MS-SQL
+### MS SQL
 
-**Microsoft SQL Server.** The relational database used by [Classic NBS](#classic-nbs) (NBS 6.x). NBS 7 connects to the existing NBS 6 MS-SQL database.
+**Microsoft SQL Server.** The relational database used by [Classic NBS](#classic-nbs) (NBS 6.x). NBS 7 connects to the existing NBS 6 MS SQL database.
 
 ### MSGOUT / MSGOUTE
 
@@ -485,7 +486,7 @@ A web-based portal providing helpdesk ticketing, collaboration forums, documenta
 
 ### NND
 
-**National Notifiable Disease.** A disease or condition that jurisdictions are required by federal policy to report to CDC. CDC maintains the national list; STLTs may also designate additional state-reportable conditions.
+**National Notifiable Disease.** A disease or condition that jurisdictions are required by federal policy to report to CDC. CDC maintains the national list; STLTs may also designate additional jurisdiction-level reportable conditions.
 
 ### NNDSS
 
@@ -599,7 +600,7 @@ The modernized reporting database in NBS 7, populated by the [RTR](#rtr) pipelin
 
 ### Amazon RDS
 
-**Amazon Relational Database Service.** An AWS-managed database service. Used to host the NBS 6 MS-SQL database in AWS deployments. In Azure deployments, [Azure SQL](#azure-sql) services are common options for this purpose.
+**Amazon Relational Database Service.** An AWS managed database service. In AWS deployments, RDS is one option for hosting the NBS 6 database. In Azure deployments, [Azure SQL](#azure-sql) services are common options for this purpose.
 
 <!-- **Work on patient matching is unfinished, and unclear when it will be picked up.**
 ### Record Linker
@@ -649,7 +650,7 @@ A standard code system for medications. RxNorm codes are stored in the NBS [SRTE
 
 ### SBOM
 
-**Software Bill of Materials.** A formal, machine-readable inventory of the software components, dependencies, and libraries used to build an application. SBOMs are used to identify vulnerable or outdated components in a software supply chain. CDC and federal security requirements may require STLTs to produce or verify SBOMs for NBS 7 deployments.
+**Software Bill of Materials.** A formal, machine-readable inventory of the software components, dependencies, and libraries used to build an application. SBOMs identify vulnerable or outdated components in a software supply chain. Security requirements may require CDC to produce SBOMs for NBS 7, which STLTs might reference as part of their own security authorization process.
 
 ### service mesh
 
@@ -662,6 +663,10 @@ An infrastructure layer that manages service-to-service communication within a d
 ### SNOMED CT
 
 **Systematized Nomenclature of Medicine - Clinical Terms.** A standard code system identifying clinical findings and organisms. Used in NBS [ELR](#elr) processing and stored in the [SRTE](#srt--srte) database.
+
+### SQL
+
+**Structured Query Language.** A standard language for managing and querying relational databases. NBS uses SQL-based databases throughout its architecture, including the application database and the [ODS and ODSE](#ods-and-odse), [RDB](#rdb), and [SRT and SRTE](#srt-and-srte) databases.
 
 ### SRT / SRTE
 

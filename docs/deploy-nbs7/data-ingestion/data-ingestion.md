@@ -1,19 +1,22 @@
 ---
-title: Data ingestion
+title: Deploy data ingestion service (DI API)
 layout: page
-parent: Deploy NBS 7 microservices
-nav_order: 6
+parent: Deploy NBS 7
+nav_order: 8
 has_children: true
+description: Deploy the Data Ingestion (DI) API service for ingesting, validating, and transforming Electronic Lab Reports into NBS.
 redirect_from:
-  - /docs/6_microservices_deployment/6_data_ingestion.html
-  - /docs/6_microservices_deployment/6_data_ingestion/
-  - /docs/3_base_application/data-ingestion.html
-  - /docs/3_base_application/data-ingestion/
+   - /docs/6_microservices_deployment/6_data_ingestion.html
+   - /docs/6_microservices_deployment/6_data_ingestion/
+   - /docs/3_base_application/data-ingestion.html
+   - /docs/3_base_application/data-ingestion/
+   - /docs/deploy-nbs7/microservices-deployment/data-ingestion.html
+   - /docs/deploy-nbs7/microservices-deployment/data-ingestion/
 ---
 
-# Deploy the Data Ingestion service for NBS 7
+# Deploy data ingestion service (DI API) for NBS 7
 
-This page walks through deploying the Data Ingestion service, including database setup and Helm chart installation.
+This page walks through deploying the DI API, including database setup and Helm chart installation.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -23,8 +26,7 @@ This page walks through deploying the Data Ingestion service, including database
 
 ## Before you begin
 
-The DataIngestion service utilizes three databases: NBS_Msgoute, NBS_ODSE and NBS_DataIngest.
-NBS_DataIngest is a new database essential for ingesting, validating Electronic Lab Reports (ELR), converting them into XML payloads, and integrating these XMLs into the NBS_MSGOUT database. It must be created before deploying the app on the Amazon EKS cluster.
+The DI API utilizes three databases: NBS_Msgoute, NBS_ODSE and NBS_DataIngest. NBS_DataIngest is a new database essential for ingesting, validating Electronic Lab Reports (ELR), converting them into XML payloads, and integrating these XMLs into the NBS_MSGOUT database. It must be created before deploying the app on the Amazon EKS cluster.
 
 ### Create the NBS_DataIngest database
 
@@ -136,7 +138,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
      filePaths: "/"
    ```
 
-For more information about SFTP support, please see: [data-ingestion-sftp-support](images/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)
+For more information about SFTP support, please see: [data-ingestion-sftp-support](../microservices-deployment/images/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)
 
 1. Install the Data Ingestion service:
 

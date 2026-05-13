@@ -1,8 +1,9 @@
 ---
 title: Data Compare
 layout: page
-parent: Real-time reporting (preview)
+parent: Deploy real-time reporting
 nav_order: 6
+description: Explains deployment and use of Data Compare to validate RTR output against classic ETL results.
 redirect_from:
   - /docs/7_feature_preview/6_data_compare_tool.html
   - /docs/7_feature_preview/6_data_compare_tool/

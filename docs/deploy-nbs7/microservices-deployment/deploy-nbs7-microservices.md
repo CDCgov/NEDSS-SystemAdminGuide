@@ -7,7 +7,9 @@ has_children: true
 redirect_from:
   - /docs/6_microservices_deployment/0_microservices_deployment.html
   - /docs/6_microservices_deployment/0_microservices_deployment/
-description: Install and configure NBS 7 application services using Helm, including Elasticsearch, NiFi, the Modernization API, and optional add-ons such as Real-Time Reporting.
+  - /docs/deploy-nbs7/deploy-nbs7-microservices.html
+  - /docs/deploy-nbs7/deploy-nbs7-microservices/
+description: Install and configure NBS 7 application services using Helm, including Elasticsearch, NiFi, and the Modernization API.
 ---
 
 # Deploy NBS 7 microservices
@@ -18,7 +20,7 @@ This phase deploys the NBS 7 application services into your Kubernetes cluster u
 > The pages in this section apply to NBS {{ site.version_latest }}. Github repo links are pinned to `{{ site.version_latest_tag }}`.
 {: .note }
 
-After completing this phase, proceed to [Validate the deployment](validate-the-deployment.html).
+After completing this phase, proceed to [Validate the deployment](../validate-the-deployment.html).
 
 ## Overview
 
@@ -27,7 +29,7 @@ Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Dep
 - `elasticsearch-efs`
 - `modernization-api`
 - `nifi-efs`
-- [Validate ES, Mapi and Nifi](microservices-deployment/validate-es-mapi-nifi.html)
+- [Validate ES, Mapi and Nifi](validate-es-mapi-nifi.html)
 - `nbs-gateway`
 - `dataingestion-service`
 - `data-processing`

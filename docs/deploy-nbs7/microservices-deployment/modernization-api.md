@@ -32,7 +32,7 @@ This page walks through deploying the Modernization API using the `modernization
      tag: <release-version-tag> # for example, v1.0.1
    ```
 
-1. Set the JDBC connection string using the same database endpoint and credentials from [Deploy NBS 7 microservices](../../deploy-nbs7/deploy-nbs7-microservices.html):
+1. Set the JDBC connection string using the same database endpoint and credentials from [Deploy NBS 7 microservices](./deploy-nbs7-microservices.html):
 
    ```yaml
    jdbc:

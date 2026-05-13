@@ -1,8 +1,9 @@
 ---
 title: Liquibase
 layout: page
-parent: Real-time reporting (preview)
+parent: Deploy real-time reporting
 nav_order: 1
+description: Explains deployment of the RTR Liquibase job to apply required schema changes across NBS databases.
 redirect_from:
   - /docs/7_feature_preview/1_liquibase.html
   - /docs/7_feature_preview/1_liquibase/

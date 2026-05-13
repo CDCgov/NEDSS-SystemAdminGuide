@@ -2,7 +2,7 @@
 title: Validate deployment
 layout: page
 parent: Deploy NBS 7
-nav_order: 7
+nav_order: 9
 has_children: true
 description: Confirm that all deployed NBS 7 components are functioning correctly before go-live, including microservice health, data ingestion pipelines, and NBS UI behavior.
 ---
@@ -35,12 +35,12 @@ Work through the areas in this table in order. Resolve failures before moving to
 | Elasticsearch, Modernization API, and NiFi (manual validation) | Name resolution is working; routing between NBS 6 and NBS 7 subsystems is correct; database connectivity from NBS 7 components is working; search indices are created and populated | [Manual validation](microservices-deployment/validate-es-mapi-nifi/manual-validation.html) |
 | Modernization API smoke test | API endpoints respond and return expected results | [API smoke test](microservices-deployment/validate-es-mapi-nifi/api-smoke-test.html) |
 | NBS UI and patient search smoke test | The NBS interface is accessible and patient search returns results | [Web UI smoke test](microservices-deployment/validate-es-mapi-nifi/web-ui-smoke-test.html) |
-| Data ingestion smoke test | Individual ELR and eCR messages are accepted and routed correctly | [Smoke test](microservices-deployment/data-ingestion/smoke-test.html) |
-| Data ingestion API testing | Data ingestion API endpoints are reachable and functioning | [API testing](microservices-deployment/data-ingestion/api-testing.html) |
+| Data ingestion smoke test | Individual ELR and eCR messages are accepted and routed correctly | [Smoke test](data-ingestion/smoke-test.html) |
+| Data ingestion API testing | Data ingestion API endpoints are reachable and functioning | [API testing](data-ingestion/api-testing.html) |
 | Data processing RTI integration | Real Time Ingestion processes ELR data correctly and returns expected status codes | [API testing and integration](microservices-deployment/data-processing/api-testing.html) |
 | Case notification API testing | Case notification service is processing and routing notifications correctly | [API testing](microservices-deployment/case-notification/api-testing.html) |
 | NND service API endpoints | Data sync API endpoints are reachable and credentials are valid | [Validate API endpoints](microservices-deployment/nnd-service/validating-api-endpoints.html) |
-| RTR pipeline validation (if deployed) | Streaming updates flow from ingestion through to reporting datamart tables | [Pipeline validation](real-time-reporting/pipeline-validation.html) |
+| RTR pipeline validation | Streaming updates flow from ingestion through to reporting datamart tables | [Pipeline validation](real-time-reporting/pipeline-validation.html) |
 
 ## System-level checks
 

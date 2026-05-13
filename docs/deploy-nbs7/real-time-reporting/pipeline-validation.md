@@ -1,8 +1,9 @@
 ---
 title: Pipeline validation
 layout: page
-parent: Real-time reporting (preview)
+parent: Deploy real-time reporting
 nav_order: 5
+description: Provides steps and SQL checks to confirm RTR data flows into reporting datamarts.
 redirect_from:
   - /docs/7_feature_preview/5_rtr_pipeline_validation.html
   - /docs/7_feature_preview/5_rtr_pipeline_validation/
@@ -90,7 +91,7 @@ This example uses a synthetic Hepatitis investigation to verify that data flows 
 
 ## Validate using ELR ingestion
 
-Instead of creating entries through the NBS UI, you can test the pipeline using ELR (Electronic Lab Report) ingestion through the Data Ingestion service. See the [Data Ingestion smoke test](../../deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html) for detailed steps.
+Instead of creating entries through the NBS UI, you can test the pipeline using ELR (Electronic Lab Report) ingestion through the Data Ingestion service. See the [Data Ingestion smoke test](../data-ingestion/smoke-test.html) for detailed steps.
 
 If Workflow Decision Support (WDS) is configured and a matching algorithm is detected during a HEP ELR ingestion, an investigation is automatically created and added to the investigation queue. If WDS is not configured, the ELR is still ingested and appears in the **Documents Requiring Review** queue. Open the HEP lab report and continue from step 5 of the UI validation process above.
 

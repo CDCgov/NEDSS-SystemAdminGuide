@@ -9,7 +9,7 @@ description: Provision cloud infrastructure for NBS 7 on AWS or Azure before ins
 
 # Deploy cloud infrastructure
 
-NBS 7 is fully supported on AWS and Azure. This section covers provisioning the underlying cloud infrastructure (the virtual network, container runtime, and storage services) before you install Kubernetes services.
+This section covers provisioning the underlying cloud infrastructure (the virtual network, container runtime, and storage services) before you install Kubernetes services.
 
 NBS 7 is fully supported on both AWS and Azure. Both providers host the same NBS 7 Kubernetes workloads, and once infrastructure is provisioned, the Bootstrap Kubernetes services and microservices deployment steps are identical. The difference is only in how the underlying cloud environment is provisioned.
 

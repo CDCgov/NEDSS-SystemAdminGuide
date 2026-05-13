@@ -12,4 +12,4 @@ description: Install and configure core Kubernetes infrastructure services, incl
 
 This phase installs the core infrastructure services that NBS 7 application components depend on. This includes the Kubernetes networking and certificate management stack, as well as Keycloak for identity and access management.
 
-Complete the steps in this phase in order before proceeding to [Deploy NBS 7 microservices](deploy-nbs7-microservices.html).
+Complete the steps in this phase in order before proceeding to [Deploy NBS 7 microservices](microservices-deployment/deploy-nbs7-microservices.html).

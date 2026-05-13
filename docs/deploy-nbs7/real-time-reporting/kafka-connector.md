@@ -1,8 +1,9 @@
 ---
 title: Kafka connector
 layout: page
-parent: Real-time reporting (preview)
+parent: Deploy real-time reporting
 nav_order: 3
+description: Shows how to deploy the Kafka sink connector that writes RTR topics into reporting tables.
 redirect_from:
   - /docs/7_feature_preview/3_kafka_connector.html
   - /docs/7_feature_preview/3_kafka_connector/

@@ -1,13 +1,12 @@
 ---
-title: Vendor-managed deployment
+title: Working with a vendor
 layout: page
-parent: Choose your configuration
-grand_parent: Before you deploy
-nav_order: 2
+parent: Before you deploy
+nav_order: 4
 description: Guidance for jurisdictions using a vendor to host or maintain NBS 7, including what to evaluate in a vendor and how to coordinate with CDC.
 ---
 
-# Vendor-managed deployment
+# Vendor-managed NBS 7 deployments
 {: .no_toc }
 
 If you plan to use a vendor to host or maintain NBS 7, confirm that they can:

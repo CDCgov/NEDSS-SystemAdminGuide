@@ -65,6 +65,8 @@ Definitions for terms and acronyms used in this guide. Terms with NBS-specific m
     it is used, then treat that mention as the linked occurrence.
 -->
 
+---
+
 [A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
 
 ---
@@ -135,17 +137,25 @@ An [Azure](#microsoft-azure) service for monitoring infrastructure health and pe
 
 A family of [Azure](#microsoft-azure)-managed database services. In Azure NBS 7 deployments, Azure SQL Database or Azure Database for SQL Server are common options for hosting the NBS 6 database. The appropriate service depends on the STLT's existing infrastructure and licensing. The Azure equivalent of [Amazon RDS](#amazon-rds) in this context.
 
+## B
+
 ---
 
-## B
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### build provenance
 
 Verifiable, tamper-proof metadata documenting how a software artifact was created, including source code location, dependencies, build tools, and process logs. Build provenance supports software supply chain integrity by allowing you to confirm that a given artifact was built from a known, unmodified source.
 
+## C
+
 ---
 
-## C
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### C-CDA
 
@@ -211,9 +221,13 @@ The component of a [Kubernetes](#kubernetes) cluster that manages cluster state,
 
 **Custom Resource Definition.** A schema that defines validation rules for a new resource type within [Kubernetes](#kubernetes). NBS 7 uses CRDs to extend the Kubernetes [API](#api) with custom resource types needed by its services.
 
+## D
+
 ---
 
-## D
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### [data ingestion pipeline](#data-ingestion-pipeline)
 
@@ -235,9 +249,13 @@ An open-source change data capture tool. Debezium monitors the NBS database for 
 
 **Domain Name System.** The system that translates domain names (such as `app.example.com`) to IP addresses. DNS routing must be configured as part of NBS 7 deployment to direct traffic to the [Kubernetes](#kubernetes) [ingress controller](#ingress-controller).
 
+## E
+
 ---
 
-## E
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### eCR
 
@@ -278,25 +296,37 @@ An open-source search and analytics engine. Used in NBS 7 to power fast patient 
 
 **Electronic Test Orders and Results.** A public health data exchange standard for transmitting laboratory test orders and results electronically. Related to [ELR](#elr) but covers the ordering side as well as results.
 
+## F
+
 ---
 
-## F
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### FHIR
 
 **Fast Healthcare Interoperability Resources.** A modern [HL7](#hl7) standard for healthcare data exchange using web APIs.
 
+## G
+
 ---
 
-## G
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### GitOps
 
 A practice of using Git repositories as the source of truth for infrastructure and application configuration. [ArgoCD](#argocd) implements GitOps for NBS 7 [Kubernetes](#kubernetes) deployments by applying changes defined in the NEDSS-Helm repository to the cluster.
 
+## H
+
 ---
 
-## H
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### HDInsight
 
@@ -318,9 +348,13 @@ A collection of files that define a [Kubernetes](#kubernetes) application deploy
 
 **Health Level Seven.** A set of international standards for exchanging clinical and administrative health data. NBS uses HL7 messaging, including version 2 (v2) and [CDA](#cda), for [ELR](#elr) ingestion and case notifications to CDC.
 
+## I
+
 ---
 
-## I
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### IaC
 
@@ -346,17 +380,25 @@ See [case investigation](#case-investigation). In NBS, "investigation" refers sp
 
 **Investigate and Respond Division.** The CDC division within [OPHDST](#ophdst) where NBS is housed, within the [PHIT](#phit) branch.
 
+## J
+
 ---
 
-## J
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### jurisdiction
 
 The geographic or programmatic scope of authority for a health department unit. In NBS, jurisdiction controls which records a user can view and act on. A user's [role](#role-nbs) includes their assigned jurisdiction or jurisdictions.
 
+## K
+
 ---
 
-## K
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### Kafka
 
@@ -378,9 +420,13 @@ The command-line tool for interacting with [Kubernetes](#kubernetes) clusters. N
 
 An open-source container orchestration platform that automates deployment, scaling, and management of containerized applications. NBS 7 runs on Kubernetes, managed through [Amazon EKS](#amazon-eks) on AWS or [AKS](#azure-kubernetes-service) on Azure.
 
+## L
+
 ---
 
-## L
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### lab report
 
@@ -406,9 +452,13 @@ A component that distributes incoming network traffic across multiple servers or
 
 **Logical Observation Identifiers Names and Codes.** A standard code system that identifies what was measured in a lab test. Used in [ELR](#elr) processing and stored in the NBS [SRTE](#srt--srte) database.
 
+## M
+
 ---
 
-## M
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### managed node group
 
@@ -461,9 +511,13 @@ In NBS, an observation originating from a healthcare provider (such as a hospita
 
 **Amazon Managed Streaming for Apache Kafka.** An AWS-managed version of [Kafka](#kafka), an open-source event streaming platform. Used by the NBS 7 [RTR](#rtr) pipeline and [data ingestion](#data-ingestion-pipeline) services for event streaming. In Azure deployments, [HDInsight](#hdinsight) serves the same function.
 
+## N
+
 ---
 
-## N
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### namespace (Kubernetes)
 
@@ -523,9 +577,13 @@ A group of [worker nodes](#worker-node) in Azure that share the same configurati
 
 A disease or condition that providers and laboratories are legally required to report to public health authorities. CDC maintains the national list. See also [reportable disease](#reportable-disease).
 
+## O
+
 ---
 
-## O
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### observation
 
@@ -543,9 +601,13 @@ Infrastructure that is hosted and managed at a physical location controlled by t
 
 **Office of Public Health Data, Surveillance, and Technology.** The CDC office that oversees NBS development and houses the [IRD](#ird) division.
 
+## P
+
 ---
 
-## P
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### Page Builder
 
@@ -605,9 +667,13 @@ The smallest deployable unit in [Kubernetes](#kubernetes). A pod contains one or
 
 In NBS, a category that groups related diseases or conditions for administrative and security purposes (for example, STD/HIV or Hepatitis). Users are assigned to program areas as part of their [role](#role-nbs).
 
+## R
+
 ---
 
-## R
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### RBAC
 
@@ -655,9 +721,13 @@ See [Reportability Response](#reportability-response).
 
 A standard code system for medications. RxNorm codes are stored in the NBS [SRTE](#srt--srte) database.
 
+## S
+
 ---
 
-## S
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### Amazon S3
 
@@ -711,9 +781,13 @@ A software migration strategy in which new functionality is built alongside a le
 
 A subdivision of a [VPC's](#amazon-vpc) IP address range. NBS 7 infrastructure uses public and private subnets to isolate internet-facing components from internal services.
 
+## T
+
 ---
 
-## T
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### Terraform
 
@@ -731,9 +805,13 @@ An open-source [ingress controller](#ingress-controller) and reverse proxy. Trae
 
 In NBS, the act of reassigning an [observation](#observation) or [case investigation](#case-investigation) from one [jurisdiction](#jurisdiction) or [program area](#program-area) to another. The receiving owner becomes responsible for investigation and resolution tasks.
 
+## V
+
 ---
 
-## V
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### values file (Helm)
 
@@ -747,9 +825,13 @@ A YAML configuration file that supplies environment-specific settings to a [Helm
 
 **Amazon Virtual Private Cloud.** An isolated cloud network in AWS. NBS 7 runs inside a VPC in AWS deployments. The AWS equivalent of [VNet](#vnet). See also [peering](#peering) and [subnet](#subnet).
 
+## W
+
 ---
 
-## W
+[A](#a) · [B](#b) · [C](#c) · [D](#d) · [E](#e) · [F](#f) · [G](#g) · [H](#h) · [I](#i) · [J](#j) · [K](#k) · [L](#l) · [M](#m) · [N](#n) · [O](#o) · [P](#p) · Q · [R](#r) · [S](#s) · [T](#t) · U · [V](#v) · [W](#w) · X · Y · Z
+
+---
 
 ### WDS
 

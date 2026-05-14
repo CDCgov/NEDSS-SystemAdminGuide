@@ -2,7 +2,7 @@
 title: Operational considerations
 layout: page
 parent: Before you deploy
-nav_order: 0
+nav_order: 3
 description: Summarizes organizational, financial, and operational factors that affect NBS 7 migration planning.
 redirect_from:
   - /docs/before-you-deploy/operational_considerations.html
@@ -65,7 +65,7 @@ See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.htm
 
 The Real-Time Reporting (RTR) add-on reduces the time for data to appear in reports from up to 24 hours to between 5 minutes and 1 hour. For jurisdictions managing active outbreaks or time-sensitive disease investigations, this improvement can meaningfully affect response time. RTR also adds infrastructure complexity and requires additional cloud resources. The reporting speed benefit and the additional operating cost are both worth weighing against your jurisdiction's case volume and reporting needs.
 
-See also: [RTR component reference](../before-you-deploy/component-reference/rtr.html), [Real-time reporting deployment](../deploy-nbs7/real-time-reporting/real-time-reporting.html), and [Choose your configuration](../before-you-deploy/choose-your-configuration.html).
+See also: [RTR component reference](../before-you-deploy/component-reference/rtr.html), [Real-time reporting deployment](../deploy-nbs7/real-time-reporting/real-time-reporting.html), and [Deployment phases](../before-you-deploy/deployment-phases.html).
 
 ## The Data Ingestion API adds a secure integration option
 

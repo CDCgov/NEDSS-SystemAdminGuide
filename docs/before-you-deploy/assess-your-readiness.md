@@ -1,8 +1,8 @@
 ---
-title: Assess your readiness
+title: Readiness assessment
 layout: page
 parent: Before you deploy
-nav_order: 2
+nav_order: 1
 description: Covers the technical prerequisites an STLT should meet before beginning NBS 7 migration, including cloud, staffing, and network requirements.
 ---
 
@@ -64,9 +64,9 @@ NBS 7 uses Kubernetes, a container orchestration platform. To deploy and maintai
 If your IT team does not have these skills, you have two options:
 
 - **Build capacity**: Train existing staff or hire staff with these skills before you begin deployment.
-- **Work with a vendor**: Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
+- **Work with a vendor**: Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../before-you-deploy/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
 
-See also: [Operational considerations](../before-you-deploy/operational-considerations.html) and [Choose your configuration](../before-you-deploy/choose-your-configuration.html).
+See also: [Operational considerations](../before-you-deploy/operational-considerations.html) and [Deployment phases](../before-you-deploy/deployment-phases.html).
 
 ## Network readiness
 
@@ -109,6 +109,6 @@ Reach out to your CDC NBS point of contact before you begin deployment. CDC prov
 - Identify the right configuration for your jurisdiction
 - Connect you with other jurisdictions that have already migrated
 
-See also: [Choose your configuration](../before-you-deploy/choose-your-configuration.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
+See also: [Deployment phases ](../before-you-deploy/deployment-phases.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
 
 **Contact:** [nbs@cdc.gov](mailto:nbs@cdc.gov)

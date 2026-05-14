@@ -1,12 +1,12 @@
 ---
-title: Deployment overview
+title: Deployment planning guide
 layout: page
 parent: Before you deploy
-nav_order: 1
+nav_order: 2
 description: An overview of the five stages involved in an NBS 7 deployment, from planning through steady state operations.
 ---
 
-# Deployment overview
+# NBS 7 deployment planning guide
 
 NBS 7 deployments vary significantly by jurisdiction. If you are just getting started, this page can help you understand where the [Assess your readiness](assess-your-readiness.html) checklist fits in the overall process.
 
@@ -28,7 +28,7 @@ The stages in this table represent an example rollout scenario based on deployme
 | Stage | Goal | Minimum duration |
 |:---|:---|:---|
 | [Planning](#planning) | Establish your project team, [assess your readiness](assess-your-readiness.html), and create a customized migration plan | 2-5 months |
-| [Install](#install) | Provision cloud environments and deploy NBS 7 based on your [chosen configuration](choose-your-configuration.html) | 3-6 months |
+| [Install](#install) | Provision cloud environments and deploy NBS 7 in [phases](deployment-phases.html) | 3-6 months |
 | [Test](#test) | Validate ingestion, egress, and system readiness before go-live | 3-6 months |
 | [Go-live](#go-live) | Complete cutover and launch NBS 7 in production | 1-4 months |
 | [Steady state](#steady-state) | Monitor live operations and maintain the system ongoing | Ongoing |
@@ -48,7 +48,7 @@ Before planning detailed timelines, confirm that your current NBS 6 version is c
 |:---|:---|:---|
 | Readiness check-in | Initial planning and review of frequently asked questions. See [Assess your readiness](../before-you-deploy/assess-your-readiness.html) for the technical checklist and [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) for version alignment. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
 | Identify project team | Define roles, responsibilities, and key stakeholders. See [Operational considerations](../before-you-deploy/operational-considerations.html) for staffing guidance | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
-| NBS 7 orientation | Review NBS 7 features with your migration team. See [Component reference](../before-you-deploy/component-reference.html) for a full component overview | [Choose your configuration](../before-you-deploy/choose-your-configuration.html) |
+| NBS 7 orientation | Review NBS 7 features with your migration team.| [Component reference](../before-you-deploy/component-reference.html) |
 | Create project plan | Draft a customized migration plan from the playbook checklists, including a migration risk registry | [Deployment scenarios](../before-you-deploy/deployment-scenarios.html) |
 | Communications plan | Develop and implement a communications plan customized to your timeline and needs | Communications plan |
 | Training plan | Implement an NBS 7 training plan customized for your jurisdiction | STLT user training plan |

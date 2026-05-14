@@ -79,7 +79,7 @@ Your deployment team should include at least one person who has:
 If your team does not have this expertise, you have two options:
 
 - **Build internal capacity:** Train existing staff or hire staff with these skills before you begin deployment.
-- **Vendor-managed deployment:** Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
+- **Vendor-managed deployment:** Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../before-you-deploy/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
 
 ## Software versions
 
@@ -96,5 +96,5 @@ NBS 7 requires specific versions of supporting software. The following table lis
 
 After completing these prerequisites:
 
-1. If you are deploying on AWS, complete [Prerequisites for AWS](deploy-on-aws/prerequisites.html).
-1. If you are deploying on Azure, complete [Prerequisites for Azure](deploy-on-azure/prerequisites.html).
+1. If you are deploying on **AWS**, complete [Prerequisites for AWS](deploy-on-aws/prerequisites.html).
+1. If you are deploying on **Azure**, complete [Prerequisites for Azure](deploy-on-azure/prerequisites.html).

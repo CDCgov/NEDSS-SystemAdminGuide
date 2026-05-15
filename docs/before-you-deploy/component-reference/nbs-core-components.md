@@ -33,7 +33,7 @@ The existing NBS 6 application. A WildFly-based UI and backend that most STLTs c
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | NBS Core does not replace NBS 6 immediately. Instead, it runs alongside it. During migration, the NBS Gateway routes requests between the legacy NBS 6 application and new NBS 7 services. NBS 6 continues to handle all functionality that has not yet been replaced by a modern NBS 7 equivalent. |
-| When you need it | Always. An operational NBS 6 instance is a prerequisite for any NBS 7 deployment. You must be running a [compatible NBS 6 version](../../before-you-deploy/compatibility.html) before you can install NBS 7. |
+| When you need it | Always. An operational NBS 6 instance is a prerequisite for any NBS 7 deployment. You must be running a [compatible NBS 6 version](../../compatibility.html) before you can install NBS 7. |
 | Dependencies | Required by NBS Gateway, Elasticsearch (via Nifi), and the NBS Modernization API. Must maintain network connectivity to your NBS 7 environment throughout the migration period. |
 
 ## NBS Modernization API
@@ -127,7 +127,7 @@ The core SQL Server databases that store operational and reference data for NBS.
 
 ## Infrastructure and networking layer components
 
-The following components make up the infrastructure and networking layers of NBS 7. They are provisioned and managed primarily through Terraform and Helm, and most do not require configuration decisions from IT admins during the [planning stage](../../before-you-deploy/deployment-overview.html#planning). They are documented here for awareness.
+The following components make up the infrastructure and networking layers of NBS 7. They are provisioned and managed primarily through Terraform and Helm, and most do not require configuration decisions from IT admins during the [planning stage](../../before-you-deploy/planning.html#planning). They are documented here for awareness.
 
 Full configuration guidance is in the [Deploy NBS 7](../../deploy-nbs7.html) section of this guide.
 

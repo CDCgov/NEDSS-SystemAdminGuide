@@ -1,7 +1,7 @@
 ---
 title: Before you deploy
 layout: page
-nav_order: 2
+nav_order: 3
 has_children: true
 description: Evaluation and planning content to help you assess NBS 7 readiness and choose a deployment configuration.
 ---

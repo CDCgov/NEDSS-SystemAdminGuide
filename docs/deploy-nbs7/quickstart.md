@@ -23,7 +23,7 @@ This page provides a streamlined path to deploy NBS 7 infrastructure and core mi
 This guide is not intended for production deployment. For full production steps and guidance, see [Deploy NBS 7](../deploy-nbs7.html).
 {: .important }
 
-Before starting this quick start, confirm your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html).
+Before starting this quick start, confirm your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
 
 This quick start installs and configures the following resources.
 

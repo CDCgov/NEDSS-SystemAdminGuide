@@ -2,7 +2,7 @@
 title: Deployment planning guide
 layout: page
 parent: Before you deploy
-nav_order: 2
+nav_order: 3
 description: An overview of the five stages involved in an NBS 7 deployment, from planning through steady state operations.
 ---
 
@@ -42,14 +42,14 @@ These are minimum estimates based on typical deployments. Actual timelines vary 
 
 The Planning stage covers discovery, environment setup, and project preparation. Security approval for cloud-hosting and required technologies including Kubernetes, Terraform, and Docker can be a source of delay across the entire deployment. Starting that process early tends to reduce overall deployment time.
 
-Before planning detailed timelines, confirm that your current NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html).
+Before planning detailed timelines, confirm that your current NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
 
 | Activity | Description | Resource |
 |:---|:---|:---|
-| Readiness check-in | Initial planning and review of frequently asked questions. See [Assess your readiness](../before-you-deploy/assess-your-readiness.html) for the technical checklist and [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) for version alignment. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
+| Readiness check-in | Initial planning and review of frequently asked questions. See [Assess your readiness](../before-you-deploy/assess-your-readiness.html) for the technical checklist and [NBS 6 and NBS 7 compatibility matrix](../compatibility.html) for version alignment. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
 | Identify project team | Define roles, responsibilities, and key stakeholders. See [Operational considerations](../before-you-deploy/operational-considerations.html) for staffing guidance | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
 | NBS 7 orientation | Review NBS 7 features with your migration team.| [Component reference](../before-you-deploy/component-reference.html) |
-| Create project plan | Draft a customized migration plan from the playbook checklists, including a migration risk registry | [Deployment scenarios](../before-you-deploy/deployment-scenarios.html) |
+| Create project plan | Draft a customized migration plan from the playbook checklists, including a migration risk registry | [Deployment scenarios](../before-you-deploy/deployment-phases.html) |
 | Communications plan | Develop and implement a communications plan customized to your timeline and needs | Communications plan |
 | Training plan | Implement an NBS 7 training plan customized for your jurisdiction | STLT user training plan |
 | Draft test plan | Customize a UAT plan for your requirements | STLT user acceptance test plan |
@@ -79,8 +79,8 @@ The Test stage validates that your NBS 7 environment is ready for production use
 | Activity | Description | Resource |
 |:---|:---|:---|
 | Database restore process | Review and test the database restore process in the development environment | STLT database refresh procedure |
-| Ingestion and egress validation | Integrate and validate data ingestion and notification pathways to confirm pipelines | [Data ingestion API testing](../deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html) if you are using the DI API |
-| ELR and or eCR ingestion testing | Test ingestion for individual ELRs and eCRs and at scale | [Data ingestion smoke test](../deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html) |
+| Ingestion and egress validation | Integrate and validate data ingestion and notification pathways to confirm pipelines | [Data ingestion API testing](../deploy-nbs7/data-ingestion/api-testing.html) if you are using the DI API |
+| ELR and or eCR ingestion testing | Test ingestion for individual ELRs and eCRs and at scale | [Data ingestion smoke test](../deploy-nbs7/data-ingestion/smoke-test.html) |
 | Notifications testing | Coordinate with the MVPs team to validate notifications readiness | Conditions received successfully |
 | Regression testing | Run test scripts across environments to validate readiness for UAT | [Validate the deployment](../deploy-nbs7/validate-the-deployment.html) |
 | Cutover and rollback review | Review and approve cutover and rollback plans | Cutover and Rollback Plan |

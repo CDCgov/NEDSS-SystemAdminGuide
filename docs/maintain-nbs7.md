@@ -1,7 +1,7 @@
 ---
 title: Maintain NBS 7
 layout: page
-nav_order: 4
+nav_order: 5
 has_children: true
 description: Operational guidance for maintaining your NBS 7 deployment after go-live.
 ---

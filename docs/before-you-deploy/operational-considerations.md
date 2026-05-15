@@ -2,7 +2,7 @@
 title: Operational considerations
 layout: page
 parent: Before you deploy
-nav_order: 3
+nav_order: 2
 description: Summarizes organizational, financial, and operational factors that affect NBS 7 migration planning.
 redirect_from:
   - /docs/before-you-deploy/operational_considerations.html
@@ -27,9 +27,9 @@ For technical deployment guidance, refer to [Assess your readiness](../before-yo
 
 NBS 7 does not replace NBS 6 in a single switch. Both systems run in parallel during the transition. NBS 7 components gradually take over functionality while NBS 6 continues to operate. The length of this parallel period depends on your jurisdiction's pace of deployment and configuration choices. Planning for the operational complexity and cost of maintaining two systems simultaneously is an integral part of migration preparation. Many jurisdictions provision a separate NBS 6 environment for migration activities and then cut over, rather than making these changes directly on their primary NBS 6 production server.
 
-See also: [Deployment overview](../before-you-deploy/deployment-overview.html) and [Deployment scenarios](../before-you-deploy/deployment-scenarios.html).
+See also: [Deployment overview](../before-you-deploy/planning.html) and [Deployment scenarios](../before-you-deploy/deployment-phases.html).
 
-Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html) before you finalize migration timelines.
+Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html) before you finalize migration timelines.
 
 ## IT security approval can take time
 
@@ -41,7 +41,7 @@ See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.htm
 
 CDC does not support on-premises installations of NBS 7. Your jurisdiction needs an active cloud account with Amazon Web Services (AWS) or Microsoft Azure and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response. Use the [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) to project cloud-hosting costs based on your jurisdiction's record volume (NBS Central login required; see [Additional resources](../../index.html#additional-resources)).
 
-See also: [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html) and [Deployment scenarios](../before-you-deploy/deployment-scenarios.html).
+See also: [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html) and [Deployment scenarios](../before-you-deploy/deployment-phases.html).
 
 ## Align cloud provider with jurisdictional strategy
 
@@ -59,7 +59,7 @@ See also: [Assess your readiness > Cloud infrastructure](assess-your-readiness.h
 
 Migrating to NBS 7 involves skills that might differ from what your current NBS 6 team uses, including Kubernetes, Terraform, and cloud infrastructure management. Jurisdictions that assess their team's capacity early are poised to set more accurate migration timelines. Those without the necessary in-house expertise have typically built capacity or engaged a vendor before deployment.
 
-See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.html) and [Vendor-managed deployment](../before-you-deploy/choose-your-configuration/vendor-managed-deployment.html).
+See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.html) and [Vendor-managed deployment](../before-you-deploy/vendor-managed-deployment.html).
 
 ## Real-Time Reporting adds capability and cost
 
@@ -71,7 +71,7 @@ See also: [RTR component reference](../before-you-deploy/component-reference/rtr
 
 The Data Ingestion (DI) API is a built-in REST API layer that accepts lab reports and case reports. It gives jurisdictions an API-based ingestion path, which is useful when security constraints prevent middleware or other third-party tools from connecting directly to the NBS database.
 
-See also: [DI API component reference](../before-you-deploy/component-reference/di-api.html) and [Data ingestion microservice](../deploy-nbs7/microservices-deployment/data-ingestion.html).
+See also: [DI API component reference](../before-you-deploy/component-reference/di-api.html) and [Data ingestion microservice](../deploy-nbs7/data-ingestion/data-ingestion.html).
 
 ## Single Sign-On requires early coordination
 

@@ -45,7 +45,7 @@ This page walks through deploying the Case Notification Service for case notific
 
    The `api.clientId` and `api.secret` fields must match the Keycloak client credentials for the XML HL7 Parser service, not this service. Retrieve them from the `xml-hl7-parser-keycloak-client` credentials in the NBS realm.
    {: .note }
-   
+
 1. Install the service:
 
    ```bash

@@ -80,8 +80,8 @@ Use this page to validate ingress, PHIMNS property configuration, and supporting
   - [NEDSS-Helm/charts/data-extraction-service/templates/deployment.yaml at {{ site.version_latest_tag }} · CDCgov/NEDSS-Helm][nedss-helm-data-extraction-deployment]
 
 - **Xml-Hl7-Parser-Service**
-   - [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
-   - [NEDSS-Helm/charts/xml-hl7-parser-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm][nedss-helm-data-extraction-deployment]
+  - [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
+  - [NEDSS-Helm/charts/xml-hl7-parser-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm][nedss-helm-data-extraction-deployment]
 
 ### Case notification Liquibase
 

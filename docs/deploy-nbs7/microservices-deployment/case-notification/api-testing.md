@@ -25,6 +25,8 @@ Use this page to validate ingress, PHIMNS property configuration, and supporting
 
   - **Case Notification**: [NEDSS-Helm/charts/dataingestion-service/templates/ingress.yaml at 10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml)
 
+  - **HL7 Parser**: [NEDSS-Helm/charts/dataingestion-service/templates/ingress.yaml at 10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml)
+
 ## PHIMNS properties
 
 - For services to be fully functional, STLT partners must provide CDC their PHIMS properties. This ensures data in the `TransportQ_Out` table is updated correctly when processed by CDC Case Notification. These values can be pulled from the existing NND Rhapsody route Variable Manager at the STLT level.
@@ -76,6 +78,10 @@ Use this page to validate ingress, PHIMNS property configuration, and supporting
 - **Data-Extraction-Service**
   - [NEDSS-NNDSS-Case-Notifications/README.md at {{ site.version_latest_tag }} · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
   - [NEDSS-Helm/charts/data-extraction-service/templates/deployment.yaml at {{ site.version_latest_tag }} · CDCgov/NEDSS-Helm][nedss-helm-data-extraction-deployment]
+
+- **Xml-Hl7-Parser-Service**
+  - [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
+  - [NEDSS-Helm/charts/xml-hl7-parser-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm][nedss-helm-data-extraction-deployment]
 
 ### Case notification Liquibase
 

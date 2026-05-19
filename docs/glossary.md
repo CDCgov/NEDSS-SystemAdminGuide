@@ -3,16 +3,32 @@ title: Glossary
 layout: page
 nav_order: 5
 description: "Definitions for terms and acronyms used in the NBS 7 System Administrator Guide."
-last_modified_date: 2026-05-12
+last_modified_date: 2026-05-18
 ---
 
 # Glossary
 {: .no_toc }
 
-Definitions for terms and acronyms used in this guide. Terms with NBS-specific meanings are defined in that context. General infrastructure terms are defined as they apply to NBS 7 deployments.
+Definitions for acronyms and technical terms used in this guide. For context on how a term applies to your specific deployment or configuration, see the relevant section of the guide.
 
 <!--
   ******** CONTRIBUTOR GUIDANCE ********
+
+  SCOPE AND PURPOSE
+  - This glossary is an acronym reference for eClearance. Its primary
+    function is to let technical documentation use terms like HL7, API,
+    and ELR without spelling them out on every page.
+  - Definitions must be general and durable. Write them to remain
+    accurate as the system evolves — not to describe current NBS behavior
+    or implementation details.
+  - NBS-specific context (how a term is used in NBS, which component
+    handles it, what it triggers) belongs in the admin guide at the point
+    of need, not here.
+  - Avoid version-specific references (for example, "NBS 7.12"). If a
+    version reference is unavoidable, use the major version ("NBS 7").
+  - Non-acronym terms are currently included but are under stakeholder
+    review and may be removed. Add non-acronym terms sparingly; prefer
+    placing NBS-domain context in the relevant guide page instead.
 
   ADDING NEW ENTRIES
   - Add each term as a ### heading under the correct letter section.
@@ -75,7 +91,7 @@ Definitions for terms and acronyms used in this guide. Terms with NBS-specific m
 
 ### AIMS
 
-**APHL Informatics Messaging System.** A platform managed by the Association of Public Health Laboratories (APHL) for public health data exchange and messaging. Some STLTs use AIMS to transmit [electronic lab reports](#elr) (ELRs) or [case notification](#case-notification) data to [CDC](#cdc).
+**APHL Informatics Messaging System.** A platform managed by the Association of Public Health Laboratories (APHL) for public health data exchange and messaging.
 
 ### AKS
 
@@ -83,27 +99,27 @@ See [Azure Kubernetes Service](#azure-kubernetes-service).
 
 ### AMG
 
-**Amazon Managed Grafana.** An AWS-managed version of Grafana, an open-source dashboarding platform. Visualizes metrics collected by [Amazon Managed Service for Prometheus](#amp). Used to monitor NBS 7 infrastructure. In Azure deployments, [Azure Monitor](#azure-monitor) covers this function.
+**Amazon Managed Grafana.** An AWS-managed version of Grafana, an open-source dashboarding platform.
 
 ### AMP
 
-**Amazon Managed Service for Prometheus.** An AWS-managed version of Prometheus, an open-source monitoring and alerting toolkit. Collects infrastructure metrics from NBS 7 components. Metrics are visualized in [Amazon Managed Grafana](#amg). In Azure deployments, [Azure Monitor](#azure-monitor) covers this function.
+**Amazon Managed Service for Prometheus.** An AWS-managed version of Prometheus, an open-source monitoring and alerting toolkit.
 
 ### API
 
-**Application Programming Interface.** A defined interface that allows software systems to communicate. NBS 7 exposes APIs for patient data, investigations, and external data integrations.
+**Application Programming Interface.** A defined interface that allows software systems to communicate.
 
 ### ArgoCD
 
-An open-source GitOps tool for deploying and managing [Kubernetes](#kubernetes) applications. ArgoCD implements the [GitOps](#gitops) pattern for NBS 7 deployments by syncing the cluster state to configuration defined in the [NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm) repository.
+An open-source GitOps tool for deploying and managing [Kubernetes](#kubernetes) applications.
 
 ### AVR
 
-**Analysis, Visualization, and Reporting.** An umbrella term for the reporting and analytics capabilities of NBS and related public health systems. May appear in documentation describing [RTR](#rtr) and reporting service functionality.
+**Analysis, Visualization, and Reporting.** An umbrella term for the reporting and analytics capabilities of NBS and related public health systems.
 
 ### AWS
 
-**Amazon Web Services.** A public cloud platform that STLTs might choose to host their NBS 7 deployment. STLTs that use AWS often engage with services such as [Amazon EKS](#amazon-eks), [Amazon MSK](#amazon-msk), [Amazon EFS](#amazon-efs), [Amazon RDS](#amazon-rds), [Amazon S3](#amazon-s3), [AWS KMS](#kms), [Amazon Managed Service for Prometheus](#amp), and [Amazon Managed Grafana](#amg). See also [Microsoft Azure](#microsoft-azure).
+**Amazon Web Services.** A public cloud platform. Often used with services such as [Amazon EKS](#amazon-eks), [Amazon MSK](#amazon-msk), [Amazon EFS](#amazon-efs), [Amazon RDS](#amazon-rds), [Amazon S3](#amazon-s3), [AWS KMS](#kms), [Amazon Managed Service for Prometheus](#amp), and [Amazon Managed Grafana](#amg). See also [Microsoft Azure](#microsoft-azure).
 
 ### Azure
 
@@ -111,31 +127,31 @@ See [Microsoft Azure](#microsoft-azure).
 
 ### Azure Blob Storage
 
-An [Azure](#microsoft-azure) service for object storage. Used for Terraform state files and NBS 7 logs in Azure deployments. The AWS equivalent is [Amazon S3](#amazon-s3).
+An [Azure](#microsoft-azure) service for object storage. Used for Terraform state files and logs in Azure deployments. The AWS equivalent is [Amazon S3](#amazon-s3).
 
 ### Azure Files
 
-An [Azure](#microsoft-azure) service for file storage. In Azure NBS 7 deployments, Azure Files and Azure NetApp Files are common options for the persistent file storage that [Amazon EFS](#amazon-efs) provides in AWS deployments. The appropriate service depends on the STLT's performance requirements and existing infrastructure.
+An [Azure](#microsoft-azure) service for file storage. In Azure deployments, Azure Files and Azure NetApp Files are common options for the persistent file storage that [Amazon EFS](#amazon-efs) provides in AWS deployments.
 
 ### Azure Key Vault
 
-An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets. Used to protect sensitive configuration values in Azure NBS 7 deployments. The Azure equivalent of [AWS KMS](#kms).
+An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets. Used to protect sensitive configuration values in Azure deployments. The Azure equivalent of [AWS KMS](#kms).
 
 ### Azure Kubernetes Service
 
-An [Azure](#microsoft-azure)-managed service for [Kubernetes](#kubernetes), commonly known as **AKS**. Hosts NBS 7 containerized services in Azure deployments. The AWS equivalent of AKS is [Amazon EKS](#amazon-eks).
+An [Azure](#microsoft-azure)-managed service for [Kubernetes](#kubernetes), commonly known as **AKS**. Hosts containerized services in Azure deployments. The AWS equivalent of AKS is [Amazon EKS](#amazon-eks).
 
 ### Azure Monitor
 
-An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. In Azure NBS 7 deployments, Azure Monitor covers the observability functions that [Amazon Managed Service for Prometheus](#amp) and [Amazon Managed Grafana](#amg) provide in AWS deployments — metrics collection and dashboard visualization. Azure Monitor includes Azure-managed Grafana as an optional dashboarding component. STLTs might use Azure Monitor alone or in combination with other observability tools.
+An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. In Azure deployments, Azure Monitor covers the observability functions that [Amazon Managed Service for Prometheus](#amp) and [Amazon Managed Grafana](#amg) provide in AWS deployments (metrics collection and dashboard visualization). Azure Monitor includes Azure-managed Grafana as an optional dashboarding component.
 
 ### Azure RBAC
 
-**Azure Role-Based Access Control.** An [Azure](#microsoft-azure) service for managing access to cloud resources. In Azure NBS 7 deployments, Azure RBAC controls resource-level permissions in the same way that [AWS IAM](#iam) does in AWS deployments. Often used in conjunction with [Microsoft Entra ID](#microsoft-entra-id) for identity management.
+**Azure Role-Based Access Control.** An [Azure](#microsoft-azure) service for managing access to cloud resources. In Azure deployments, Azure RBAC controls resource-level permissions in the same way that [AWS IAM](#iam) does in AWS deployments. Often used in conjunction with [Microsoft Entra ID](#microsoft-entra-id) for identity management.
 
 ### Azure SQL
 
-A family of [Azure](#microsoft-azure)-managed database services. In Azure NBS 7 deployments, Azure SQL Database or Azure Database for SQL Server are common options for hosting the NBS 6 database. The appropriate service depends on the STLT's existing infrastructure and licensing. The Azure equivalent of [Amazon RDS](#amazon-rds) in this context.
+A family of [Azure](#microsoft-azure)-managed database services. In Azure deployments, Azure SQL Database or Azure Database for SQL Server are common hosting options. The Azure equivalent of [Amazon RDS](#amazon-rds) in this context.
 
 ## B
 
@@ -159,11 +175,11 @@ Verifiable, tamper-proof metadata documenting how a software artifact was create
 
 ### C-CDA
 
-**Consolidated Clinical Document Architecture.** A broad [HL7](#hl7) standard for structured clinical documents, including discharge summaries and referral notes. The [eICR](#eicr) format is a public health-specific implementation of C-CDA. [NBS](#nbs) can ingest general C-CDA documents when they carry clinical data relevant to surveillance.
+**Consolidated Clinical Document Architecture.** A broad [HL7](#hl7) standard for structured clinical documents, including discharge summaries and referral notes. The [eICR](#eicr) format is a public health-specific implementation of C-CDA.
 
 ### case investigation
 
-The primary workflow unit in [NBS](#nbs). A case investigation records one instance of a disease or [condition](#condition) for a specific person, including clinical, epidemiological, and administrative data. Investigations may use the generic form (applicable to most conditions) or a condition-specific [PAM](#pam).
+A case investigation records one instance of a disease or [condition](#condition) for a specific person, including clinical, epidemiological, and administrative data. Investigations may use the generic form (applicable to most conditions) or a condition-specific [PAM](#pam).
 
 ### case notification
 
@@ -175,7 +191,7 @@ The collection, analysis, and reporting of data on individual disease cases. [NB
 
 ### CDA
 
-**Clinical Document Architecture.** An [HL7](#hl7) standard for structuring clinical documents for exchange. Used in the NBS 7 [data ingestion pipeline](#data-ingestion-pipeline): the `phdc-xsd-jaxb` library maps CDA/PHDC XML documents into NBS data structures. [C-CDA](#c-cda) is a US-specific implementation of CDA; [eICR](#eicr) is a public health-specific implementation of C-CDA.
+**Clinical Document Architecture.** An [HL7](#hl7) standard for structuring clinical documents for exchange. [C-CDA](#c-cda) is a US-specific implementation of CDA; [eICR](#eicr) is a public health-specific implementation of C-CDA.
 
 ### CDC
 
@@ -187,11 +203,11 @@ The collection, analysis, and reporting of data on individual disease cases. [NB
 
 ### change data capture
 
-A technique for tracking row-level changes in a database and streaming them to downstream systems in near real time. [Debezium](#debezium) performs change data capture in the NBS 7 [RTR](#rtr) pipeline.
+A technique for tracking row-level changes in a database and streaming them to downstream systems in near real time.
 
 ### CIDR
 
-**Classless Inter-Domain Routing.** A notation for specifying IP address ranges (for example, `10.0.0.0/16`). Used when configuring [Amazon VPC](#amazon-vpc) network settings and security group rules in NBS 7 infrastructure.
+**Classless Inter-Domain Routing.** A notation for specifying IP address ranges (for example, `10.0.0.0/16`).
 
 ### Classic NBS
 
@@ -199,27 +215,27 @@ Any [NBS](#nbs) versions prior to 7.0.0, including all NBS 6.x releases. Classic
 
 ### CLI
 
-**Command-Line Interface.** A text-based interface for running commands. NBS 7 sysadmins use several CLI tools, including the [AWS](#aws) CLI, [kubectl](#kubectl), and the [Terraform](#terraform) CLI.
+**Command-Line Interface.** A text-based interface for running commands. System admins might use several CLI tools, such as the [AWS](#aws) CLI, [kubectl](#kubectl), and the [Terraform](#terraform) CLI.
 
 ### condition
 
-In NBS, a disease or health event that is subject to public health reporting. Conditions may be nationally [notifiable](#notifiable-disease) (reported to [CDC](#cdc)) or only jurisdiction-level [reportable](#reportable-disease). Not all conditions have a [PAM](#pam); some use the generic investigation form.
+A disease or health event that is subject to public health reporting. Conditions may be nationally [notifiable](#notifiable-disease) (reported to [CDC](#cdc)) or only jurisdiction-level [reportable](#reportable-disease).
 
 ### container
 
-A lightweight, portable unit of software that packages an application and its dependencies so it runs consistently across environments. NBS 7 services are deployed as containers orchestrated by [Kubernetes](#kubernetes).
+A lightweight, portable unit of software that packages an application and its dependencies so it runs consistently across environments.
 
 ### container image
 
-A read-only template used to create containers. NBS 7 container images are hosted on `quay.io` and pulled during deployment.
+A read-only template used to create containers.
 
 ### control plane
 
-The component of a [Kubernetes](#kubernetes) cluster that manages cluster state, including scheduling workloads and maintaining desired configuration. In [Amazon EKS](#amazon-eks), the control plane is provided as a managed service charged per cluster per hour. You only manage your [worker nodes](#worker-node). In Azure's [AKS](#azure-kubernetes-service), the control plane is provided as a managed service at no additional cost. You only manage your [node pools](#node-pool).
+The component of a [Kubernetes](#kubernetes) cluster that manages cluster state, including scheduling workloads and maintaining desired configuration.
 
 ### CRD
 
-**Custom Resource Definition.** A schema that defines validation rules for a new resource type within [Kubernetes](#kubernetes). NBS 7 uses CRDs to extend the Kubernetes [API](#api) with custom resource types needed by its services.
+**Custom Resource Definition.** A schema that defines validation rules for a new resource type within [Kubernetes](#kubernetes). You can use CRDs to extend the Kubernetes [API](#api) with custom resource types needed by its services.
 
 ## D
 
@@ -229,25 +245,25 @@ The component of a [Kubernetes](#kubernetes) cluster that manages cluster state,
 
 ---
 
-### [data ingestion pipeline](#data-ingestion-pipeline)
+### data ingestion pipeline
 
 The [NBS 7](#nbs-7) services responsible for receiving, validating, and routing incoming public health data into NBS. Accepts data in [eICR](#eicr), [PHDC](#phdc), and [C-CDA](#c-cda) formats. The pipeline includes the [DI API](#di-api) as the entry point and integrations with [Elasticsearch](#elasticsearch) and the NBS operational database.
 
 ### Debezium
 
-An open-source change data capture tool. Debezium monitors the NBS database for row-level changes and streams them to [Kafka](#kafka) as part of the [RTR](#rtr) pipeline.
+An open-source change data capture tool.
 
 ### DI API
 
-**Data Integration API.** An NBS 7 service that provides an [API](#api) for external systems to push data into NBS. Requires separate deployment and configuration.
+**Data Integration API.** An NBS 7 service that provides an [API](#api) for external systems to push data into NBS.
 
 ### DIBBs
 
-**Data Integration Building Blocks.** CDC open-source middleware for public health data integration. <!-- Includes tools such as [Record Linker](#record-linker) for patient matching. -->
+**Data Integration Building Blocks.** CDC open-source middleware for public health data integration.
 
 ### DNS
 
-**Domain Name System.** The system that translates domain names (such as `app.example.com`) to IP addresses. DNS routing must be configured as part of NBS 7 deployment to direct traffic to the [Kubernetes](#kubernetes) [ingress controller](#ingress-controller).
+**Domain Name System.** The system that translates domain names (such as `app.example.com`) to IP addresses.
 
 ## E
 
@@ -259,11 +275,11 @@ An open-source change data capture tool. Debezium monitors the NBS database for 
 
 ### eCR
 
-**Electronic Case Reporting.** Automated reporting of disease cases from healthcare electronic health records ([EHRs](#ehr)) to public health agencies. Some STLTs ingest eCR data into NBS.
+**Electronic Case Reporting.** Automated reporting of disease cases from healthcare electronic health records ([EHRs](#ehr)) to public health agencies.
 
 ### Amazon EFS
 
-**Amazon Elastic File System.** AWS-managed file storage. Used by NBS 7 for persistent data, including [Elasticsearch](#elasticsearch) indices. In Azure deployments, [Azure Files](#azure-files) serves the same function.
+**Amazon Elastic File System.** AWS-managed file storage. The [Azure](#azure) equivalent to EFS is [Azure Files](#azure-files).
 
 ### EHR
 
@@ -271,26 +287,23 @@ An open-source change data capture tool. Debezium monitors the NBS database for 
 
 ### eICR
 
-**Electronic Initial Case Report.** A structured document automatically generated by an [EHR](#ehr) system when a clinician diagnoses a patient with a reportable condition. eICRs send relevant clinical data directly to public health agencies without manual data entry. eICR is the modern, preferred pathway for case reporting and the primary format the [DI API](#di-api) is designed to receive. After the DI API forwards an eICR to NBS, NBS returns a [Reportability Response](#reportability-response) to the originating EHR.
+**Electronic Initial Case Report.** A structured document automatically generated by an [EHR](#ehr) system when a clinician diagnoses a patient with a reportable condition. eICRs send relevant clinical data directly to public health agencies without manual data entry. eICR is the modern, preferred pathway for case reporting.
 
 ### Amazon EKS
 
-**Amazon Elastic Kubernetes Service.** AWS's managed Kubernetes service. Hosts NBS 7 containerized services in AWS deployments. In Azure deployments, [AKS](#azure-kubernetes-service) serves the same function.
+**Amazon Elastic Kubernetes Service.** A managed Kubernetes service from AWS. Hosts containerized services in AWS deployments. In Azure deployments, [AKS](#azure-kubernetes-service) serves the same function.
 
 ### Elasticsearch
 
-An open-source search and analytics engine. Used in NBS 7 to power fast patient and event search. Elasticsearch indices are populated from the NBS database by [NiFi](#nifi).
-
-> Elasticsearch version upgrades (for example, from version 7 to 8) involve schema changes. See the upgrade documentation before performing a version upgrade.
-{: .note }
+An open-source search and analytics engine.
 
 ### ELR
 
-**Electronic Lab Report.** Lab results transmitted electronically from laboratories to public health departments. NBS ingests ELRs via [HL7](#hl7) messaging. ELRs often trigger the creation of a [case investigation](#case-investigation).
+**Electronic Lab Report.** Lab results transmitted electronically from laboratories to public health departments.
 
 ### ETL
 
-**Extract, Transform, Load.** A batch process that moves and transforms data from one system to another. In NBS, the [MasterETL](#masteretl) batch job uses ETL to populate the [RDB](#rdb) from the NBS operational database. The [RTR](#rtr) pipeline replaces this batch approach with event-driven data movement during the NBS 7 transition.
+**Extract, Transform, Load.** A batch process that moves and transforms data from one system to another.
 
 ### ETOR
 
@@ -318,7 +331,7 @@ An open-source search and analytics engine. Used in NBS 7 to power fast patient 
 
 ### GitOps
 
-A practice of using Git repositories as the source of truth for infrastructure and application configuration. [ArgoCD](#argocd) implements GitOps for NBS 7 [Kubernetes](#kubernetes) deployments by applying changes defined in the NEDSS-Helm repository to the cluster.
+A practice of using Git repositories as the source of truth for infrastructure and application configuration.
 
 ## H
 
@@ -330,23 +343,23 @@ A practice of using Git repositories as the source of truth for infrastructure a
 
 ### HDInsight
 
-An Azure-managed Kafka service. Used by the NBS 7 [RTR](#rtr) pipeline and [data ingestion](#data-ingestion-pipeline) services for event streaming in Azure deployments. The Azure equivalent of [Amazon MSK](#amazon-msk).
+An Azure-managed Kafka service. Used for event streaming in Azure deployments. The AWS equivalent of HDInsight is [Amazon MSK](#amazon-msk).
 
 ### Helm
 
-A package manager for [Kubernetes](#kubernetes). NBS 7 uses Helm charts defined in the [NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm) repository to deploy and configure [microservices](#microservice).
+A package manager for [Kubernetes](#kubernetes).
 
 ### Helm chart
 
-A collection of files that define a [Kubernetes](#kubernetes) application deployment, including configuration templates and default values. Each NBS 7 [microservice](#microservice) has a corresponding Helm chart in the NEDSS-Helm repository.
+A collection of files that define a [Kubernetes](#kubernetes) application deployment, including configuration templates and default values.
 
 ### HIE / HIN
 
-**Health Information Exchange / Health Information Network.** Organizations or networks that facilitate electronic sharing of health information across providers and public health agencies. Some STLTs integrate NBS with a regional HIE.
+**Health Information Exchange / Health Information Network.** Organizations or networks that facilitate electronic sharing of health information across providers and public health agencies.
 
 ### HL7
 
-**Health Level Seven.** A set of international standards for exchanging clinical and administrative health data. NBS uses HL7 messaging, including version 2 (v2) and [CDA](#cda), for [ELR](#elr) ingestion and case notifications to CDC.
+**Health Level Seven.** A set of international standards for exchanging clinical and administrative health data.
 
 ## I
 
@@ -358,19 +371,19 @@ A collection of files that define a [Kubernetes](#kubernetes) application deploy
 
 ### IaC
 
-**Infrastructure as Code.** The practice of managing infrastructure through code (such as Terraform scripts) rather than manual configuration. NBS 7 uses IaC through [Terraform](#terraform) scripts in the NEDSS-Infrastructure repository.
+**Infrastructure as Code.** The practice of managing infrastructure through code (such as Terraform scripts) rather than manual configuration.
 
 ### IAM
 
-**AWS Identity and Access Management.** The AWS service for controlling access to cloud resources. Used to define roles and permissions for Terraform provisioning and Kubernetes operations in NBS 7 deployments. In Azure deployments, [Microsoft Entra ID](#microsoft-entra-id) and [Azure RBAC](#azure-rbac) serve the same function.
+**AWS Identity and Access Management.** The AWS service for controlling access to cloud resources. In Azure deployments, [Microsoft Entra ID](#microsoft-entra-id) and [Azure RBAC](#azure-rbac) serve the same function.
 
 ### IdP
 
-**Identity Provider.** A system that manages user authentication and issues identity tokens. [Keycloak](#keycloak) serves as the IdP for NBS 7.
+**Identity Provider.** A system that manages user authentication and issues identity tokens.
 
 ### ingress controller
 
-A [Kubernetes](#kubernetes) component that manages external access to services within a cluster, typically through HTTP/HTTPS routing rules. NBS 7.12 and higher use [Traefik](#traefik) as the ingress controller, with earlier 7.x releases using NGINX.
+A [Kubernetes](#kubernetes) component that manages external access to services within a cluster, typically through HTTP/HTTPS routing rules.
 
 ### investigation
 
@@ -390,7 +403,7 @@ See [case investigation](#case-investigation). In NBS, "investigation" refers sp
 
 ### jurisdiction
 
-The geographic or programmatic scope of authority for a health department unit. In NBS, jurisdiction controls which records a user can view and act on. A user's [role](#role-nbs) includes their assigned jurisdiction or jurisdictions.
+The geographic or programmatic scope of authority for a health department unit.
 
 ## K
 
@@ -402,23 +415,23 @@ The geographic or programmatic scope of authority for a health department unit. 
 
 ### Kafka
 
-**Apache Kafka.** An open-source distributed event streaming platform. Used by NBS 7's [RTR](#rtr) pipeline and [data ingestion](#data-ingestion-pipeline) services to move data between [microservices](#microservice) in near real time. Hosted on AWS as [Amazon MSK](#amazon-msk) or on Azure as [HDInsight](#hdinsight).
+**Apache Kafka.** An open-source distributed event streaming platform. Hosted on AWS as [Amazon MSK](#amazon-msk) or on Azure as [HDInsight](#hdinsight).
 
 ### Keycloak
 
-An open-source identity and access management tool. Serves as the primary [IdP](#idp) for NBS 7, managing user authentication, [SSO](#sso), and token issuance.
+An open-source identity and access management tool used for managing user authentication, [SSO](#sso), and token issuance.
 
 ### KMS
 
-**AWS Key Management Service.** The AWS service for creating and managing encryption keys. Used to encrypt NBS 7 data at rest. In Azure deployments, [Azure Key Vault](#azure-key-vault) serves the same function.
+**AWS Key Management Service.** The AWS service for creating and managing encryption keys. Used to encrypt data at rest. In Azure deployments, [Azure Key Vault](#azure-key-vault) serves the same function.
 
 ### kubectl
 
-The command-line tool for interacting with [Kubernetes](#kubernetes) clusters. NBS 7 sysadmins use `kubectl` to inspect cluster state, manage [pods](#pod), and run administrative commands.
+The command-line tool for interacting with [Kubernetes](#kubernetes) clusters.
 
 ### Kubernetes
 
-An open-source container orchestration platform that automates deployment, scaling, and management of containerized applications. NBS 7 runs on Kubernetes, managed through [Amazon EKS](#amazon-eks) on AWS or [AKS](#azure-kubernetes-service) on Azure.
+An open-source container orchestration platform that automates deployment, scaling, and management of containerized applications.
 
 ## L
 
@@ -430,7 +443,7 @@ An open-source container orchestration platform that automates deployment, scali
 
 ### lab report
 
-In NBS, an observation originating from a laboratory, containing lab orders and results. Lab reports may arrive electronically as an [ELR](#elr) or be entered manually. Lab reports often trigger the creation of a [case investigation](#case-investigation).
+An observation originating from a laboratory, containing lab orders and results. Lab reports may arrive electronically as an [ELR](#elr) or be entered manually. In NBS, lab reports often trigger the creation of a [case investigation](#case-investigation).
 
 ### LDF
 
@@ -438,19 +451,19 @@ In NBS, an observation originating from a laboratory, containing lab orders and 
 
 ### LIMS / LIS
 
-**Laboratory Information Management System / Laboratory Information System.** Software used by laboratories to manage samples, workflows, and results. STLTs and their reporting labs use LIMS/LIS systems as the source of [ELR](#elr) data transmitted to NBS.
+**Laboratory Information Management System / Laboratory Information System.** Software used by laboratories to manage samples, workflows, and results. STLTs and their reporting labs use LIMS/LIS systems as the source of [ELR](#elr) data.
 
 ### Linkerd
 
-An open-source service mesh for [Kubernetes](#kubernetes). Used in NBS 7 to manage encrypted communication between [microservices](#microservice) within the cluster.
+An open-source service mesh for [Kubernetes](#kubernetes).
 
 ### load balancer
 
-A component that distributes incoming network traffic across multiple servers or services. NBS 7 uses load balancers to route traffic to the [Kubernetes](#kubernetes) [ingress controller](#ingress-controller).
+A component that distributes incoming network traffic across multiple servers or services.
 
 ### LOINC
 
-**Logical Observation Identifiers Names and Codes.** A standard code system that identifies what was measured in a lab test. Used in [ELR](#elr) processing and stored in the NBS [SRTE](#srt--srte) database.
+**Logical Observation Identifiers Names and Codes.** A standard code system that identifies what was measured in a lab test. Used in [ELR](#elr) processing and stored in the [SRTE](#srt--srte) database.
 
 ## M
 
@@ -462,7 +475,7 @@ A component that distributes incoming network traffic across multiple servers or
 
 ### managed node group
 
-A group of [worker nodes](#worker-node) in AWS that share the same configuration, such as EC2 instance type and scaling settings. In AWS-based NBS 7 deployments, [Amazon EKS](#amazon-eks) provisions worker nodes as managed node groups. You manage managed node groups directly; the Amazon EKS [control plane](#control-plane) is provided as a managed service. The equivalent concept in [AKS](#azure-kubernetes-service) is a [node pool](#node-pool).
+A group of [worker nodes](#worker-node) in AWS that share the same configuration, such as EC2 instance type and scaling settings. In AWS-based deployments, [Amazon EKS](#amazon-eks) provisions worker nodes as managed node groups. You manage managed node groups directly; the Amazon EKS [control plane](#control-plane) is provided as a managed service. The equivalent concept in [AKS](#azure-kubernetes-service) is a [node pool](#node-pool).
 
 ### MasterETL
 
@@ -470,27 +483,27 @@ The [Classic NBS](#classic-nbs) batch process that extracts, transforms, and loa
 
 ### microservice
 
-A software architecture pattern in which an application is built as a collection of small, independently deployable services. NBS 7 is built as a set of microservices, each responsible for a specific function.
+A software architecture pattern in which an application is built as a collection of small, independently deployable services.
 
 ### Microsoft Azure
 
-A public cloud platform that STLTs might choose to host their NBS 7 deployment. STLTs that use Azure often engage with services such as [AKS](#azure-kubernetes-service), [HDInsight](#hdinsight), [Azure Files](#azure-files), [Azure SQL](#azure-sql), [Azure Blob Storage](#azure-blob-storage), [Azure Key Vault](#azure-key-vault), and [Azure Monitor](#azure-monitor). See also [AWS](#aws).
+A public cloud platform. Often used with services such as [AKS](#azure-kubernetes-service), [HDInsight](#hdinsight), [Azure Files](#azure-files), [Azure SQL](#azure-sql), [Azure Blob Storage](#azure-blob-storage), [Azure Key Vault](#azure-key-vault), and [Azure Monitor](#azure-monitor). See also [AWS](#aws).
 
 ### Microsoft Entra ID
 
-An Azure identity and access management service, formerly known as Azure Active Directory. In Azure NBS 7 deployments, Microsoft Entra ID handles identity and authentication functions similar to [AWS IAM](#iam), including user authentication and [RBAC](#rbac). Often used in conjunction with [Azure RBAC](#azure-rbac) for resource-level permissions.
+An Azure identity and access management service, formerly known as Azure Active Directory. In Azure deployments, Microsoft Entra ID handles identity and authentication functions similar to [AWS IAM](#iam), including user authentication and [RBAC](#rbac). Often used in conjunction with [Azure RBAC](#azure-rbac) for resource-level permissions.
 
 ### MMG
 
-**Message Mapping Guide.** A CDC-published guide that defines the [HL7](#hl7) message structure for reporting a specific notifiable condition to CDC. STLTs and NBS use MMGs to ensure [case notifications](#case-notification) conform to required formats.
+**Message Mapping Guide.** A CDC-published guide that defines the [HL7](#hl7) message structure for reporting a specific notifiable condition to CDC.
 
 ### morbidity report
 
-In NBS, an observation originating from a healthcare provider (such as a hospital or clinic), containing basic data about one instance of a disease. Morbidity reports typically arrive by paper or non-electronic means.
+An observation originating from a healthcare provider (such as a hospital or clinic), containing basic data about one instance of a disease. Morbidity reports typically arrive by paper or non-electronic means.
 
 ### MoU
 
-**Memorandum of Understanding.** A formal agreement between parties. A STLT may be required to establish a MoU with its cloud service provider before deploying NBS 7.
+**Memorandum of Understanding.** A formal agreement between parties. A STLT may be required to establish a MoU with new service providers.
 
 ### MPR / MPI
 
@@ -509,7 +522,7 @@ In NBS, an observation originating from a healthcare provider (such as a hospita
 
 ### Amazon MSK
 
-**Amazon Managed Streaming for Apache Kafka.** An AWS-managed version of [Kafka](#kafka), an open-source event streaming platform. Used by the NBS 7 [RTR](#rtr) pipeline and [data ingestion](#data-ingestion-pipeline) services for event streaming. In Azure deployments, [HDInsight](#hdinsight) serves the same function.
+**Amazon Managed Streaming for Apache Kafka.** An AWS-managed version of [Kafka](#kafka), an open-source event streaming platform. In Azure deployments, [HDInsight](#hdinsight) serves the same function.
 
 ## N
 
@@ -551,11 +564,11 @@ A web-based portal providing helpdesk ticketing, collaboration forums, documenta
 
 <!-- This is true as of May 2026, but is being phased out -->
 
-**Apache NiFi.** An open-source data flow automation tool. Used in NBS 7 to populate [Elasticsearch](#elasticsearch) indices from the NBS database.
+**Apache NiFi.** An open-source data flow automation tool.
 
 ### NIST 800-53
 
-**National Institute of Standards and Technology Special Publication 800-53 (Rev. 5).** A risk-based framework providing a catalog of security and privacy controls for federal information systems. STLTs deploying NBS 7 on cloud infrastructure may be required to demonstrate compliance with a NIST 800-53 control baseline as part of their agency's security authorization process.
+**National Institute of Standards and Technology Special Publication 800-53 (Rev. 5).** A risk-based framework providing a catalog of security and privacy controls for federal information systems.
 
 ### NND
 
@@ -571,7 +584,7 @@ See [worker node](#worker-node).
 
 ### node pool
 
-A group of [worker nodes](#worker-node) in Azure that share the same configuration, such as virtual machine size and operating system. In Azure NBS 7 deployments, [AKS](#azure-kubernetes-service) provisions worker nodes as node pools. You manage node pools directly; the AKS [control plane](#control-plane) is provided as a managed service. The equivalent concept in [Amazon EKS](#amazon-eks) is a [managed node group](#managed-node-group).
+A group of [worker nodes](#worker-node) in Azure that share the same configuration, such as virtual machine size and operating system. In Azure deployments, [AKS](#azure-kubernetes-service) provisions worker nodes as node pools. You manage node pools directly; the AKS [control plane](#control-plane) is provided as a managed service. The equivalent concept in [Amazon EKS](#amazon-eks) is a [managed node group](#managed-node-group).
 
 ### notifiable disease
 
@@ -595,7 +608,7 @@ In NBS, a report received by a health department from an external source (such a
 
 ### on-premises
 
-Infrastructure that is hosted and managed at a physical location controlled by the organization, rather than in a cloud environment. [Classic NBS](#classic-nbs) is commonly deployed on-premises. Hyphenated when used as an adjective.
+Infrastructure that is hosted and managed at a physical location controlled by the organization, rather than in a cloud environment. Hyphenated when used as an adjective.
 
 ### OPHDST
 
@@ -619,7 +632,7 @@ An NBS feature that allows administrators to build configurable forms for collec
 
 ### peering
 
-A network connection between two [Amazon VPCs](#amazon-vpc), or between an [Amazon VPC](#amazon-vpc) and an on-premises network, that allows resources in each to communicate as if on the same network. Used in NBS 7 deployments to connect the modern VPC to the [Classic NBS](#classic-nbs) environment.
+A network connection between two [Amazon VPCs](#amazon-vpc), or between an [Amazon VPC](#amazon-vpc) and an on-premises network, that allows resources in each to communicate as if on the same network.
 
 ### permission set
 
@@ -631,11 +644,11 @@ In NBS, a collection of objects and operations a user is authorized to access. A
 
 ### PHDC
 
-**Public Health Document Container.** An XML document format used in NBS for structured case data exchange.
+**Public Health Document Container.** An XML document format used for structured case data exchange.
 
 ### PHI
 
-**Protected Health Information.** Health data protected under HIPAA. NBS databases contain PHI; access and data handling must comply with applicable regulations.
+**Protected Health Information.** Health data protected under HIPAA.
 
 ### PHIN
 
@@ -645,7 +658,7 @@ In NBS, a collection of objects and operations a user is authorized to access. A
 
 ### PHIN VADS
 
-**Public Health Information Network Vocabulary Access and Distribution System.** A CDC-hosted repository of standardized vocabulary and code sets used in public health messaging. STLTs use PHIN VADS to access and validate code sets for NBS configuration.
+**Public Health Information Network Vocabulary Access and Distribution System.** A CDC-hosted repository of standardized vocabulary and code sets used in public health messaging.
 
 ### PHINMS
 
@@ -657,15 +670,15 @@ In NBS, a collection of objects and operations a user is authorized to access. A
 
 ### PII
 
-**Personally Identifiable Information.** Data that can identify an individual. NBS databases contain PII; access and data handling must comply with applicable regulations.
+**Personally Identifiable Information.** Data that can be used to identify, locate, or contact an individual.
 
 ### pod
 
-The smallest deployable unit in [Kubernetes](#kubernetes). A pod contains one or more containers that share network and storage resources. Each NBS 7 [microservice](#microservice) runs as one or more pods.
+The smallest deployable unit in [Kubernetes](#kubernetes). A pod contains one or more containers that share network and storage resources.
 
 ### program area
 
-In NBS, a category that groups related diseases or conditions for administrative and security purposes (for example, STD/HIV or Hepatitis). Users are assigned to program areas as part of their [role](#role-nbs).
+At CDC, a category that groups related diseases or conditions for administrative and security purposes (for example, STD/HIV or Hepatitis). Users are assigned to program areas as part of their [role](#role-nbs).
 
 ## R
 
@@ -677,7 +690,7 @@ In NBS, a category that groups related diseases or conditions for administrative
 
 ### RBAC
 
-**Role-Based Access Control.** An access management principle that restricts resource access based on a user's job role rather than individual identity. Applied when managing permissions in [AWS IAM](#iam), the Azure portal, and [Kubernetes](#kubernetes) cluster access controls.
+**Role-Based Access Control.** An access management principle that restricts resource access based on a user's job role rather than individual identity.
 
 ### RDB
 
@@ -689,12 +702,12 @@ The modernized reporting database in NBS 7, populated by the [RTR](#rtr) pipelin
 
 ### Amazon RDS
 
-**Amazon Relational Database Service.** An AWS managed database service. In AWS deployments, RDS is one option for hosting the NBS 6 database. In Azure deployments, [Azure SQL](#azure-sql) services are common options for this purpose.
+**Amazon Relational Database Service.** An AWS managed database service. [Azure SQL](#azure-sql) services are the Azure equivalent of Amazon RDS.
 
 <!-- **Work on patient matching is unfinished, and unclear when it will be picked up.**
 ### Record Linker
 
-A CDC open-source tool, part of [DIBBs](#dibbs), for matching and linking patient records across systems. Integrating with NBS 7 for patient deduplication.
+A CDC open-source tool, part of [DIBBs](#dibbs), for matching and linking patient records across systems.
 -->
 
 ### Reportability Response
@@ -719,7 +732,7 @@ See [Reportability Response](#reportability-response).
 
 ### RxNorm
 
-A standard code system for medications. RxNorm codes are stored in the NBS [SRTE](#srt--srte) database.
+A standard code system for medications.
 
 ## S
 
@@ -731,7 +744,7 @@ A standard code system for medications. RxNorm codes are stored in the NBS [SRTE
 
 ### Amazon S3
 
-**Amazon Simple Storage Service.** AWS object storage. Used for Terraform state files and NBS 7 logs. In Azure deployments, [Azure Blob Storage](#azure-blob-storage) serves the same function.
+**Amazon Simple Storage Service.** AWS object storage. In Azure deployments, [Azure Blob Storage](#azure-blob-storage) serves the same function.
 
 ### SAML
 
@@ -743,23 +756,23 @@ A standard code system for medications. RxNorm codes are stored in the NBS [SRTE
 
 ### SBOM
 
-**Software Bill of Materials.** A formal, machine-readable inventory of the software components, dependencies, and libraries used to build an application. SBOMs identify vulnerable or outdated components in a software supply chain. Security requirements may require CDC to produce SBOMs for NBS 7, which STLTs might reference as part of their own security authorization process.
+**Software Bill of Materials.** A formal, machine-readable inventory of the software components, dependencies, and libraries used to build an application. SBOMs identify vulnerable or outdated components in a software supply chain.
 
 ### service mesh
 
-An infrastructure layer that manages service-to-service communication within a distributed application, providing encryption, observability, and traffic management. [Linkerd](#linkerd) serves as the service mesh for NBS 7.
+An infrastructure layer that manages service-to-service communication within a distributed application, providing encryption, observability, and traffic management.
 
 ### SLA
 
-**Service Level Agreement.** A contract defining service performance expectations. A STLT may be required to establish an SLA with its cloud service provider when deploying NBS 7.
+**Service Level Agreement.** A contract defining service performance expectations. A STLT may be required to establish an SLA with a new service provider (for example, a cloud service provider).
 
 ### SNOMED CT
 
-**Systematized Nomenclature of Medicine - Clinical Terms.** A standard code system identifying clinical findings and organisms. Used in NBS [ELR](#elr) processing and stored in the [SRTE](#srt--srte) database.
+**Systematized Nomenclature of Medicine - Clinical Terms.** A standard code system identifying clinical findings and organisms.
 
 ### SQL
 
-**Structured Query Language.** A standard language for managing and querying relational databases. NBS uses SQL-based databases throughout its architecture, including the application database and the [ODS and ODSE](#ods--odse), [RDB](#rdb), and [SRT and SRTE](#srt--srte) databases.
+**Structured Query Language.** A standard language for managing and querying relational databases.
 
 ### SRT / SRTE
 
@@ -767,7 +780,7 @@ An infrastructure layer that manages service-to-service communication within a d
 
 ### SSO
 
-**Single Sign-On.** An authentication method that allows users to log in once to access multiple systems. NBS 7 supports SSO through [Keycloak](#keycloak).
+**Single Sign-On.** An authentication method that allows users to log in once to access multiple systems.
 
 ### STLT
 
@@ -775,11 +788,11 @@ An infrastructure layer that manages service-to-service communication within a d
 
 ### strangler fig pattern
 
-A software migration strategy in which new functionality is built alongside a legacy system and gradually replaces it, rather than rewriting everything at once. NBS 7 uses this pattern to modernize [Classic NBS](#classic-nbs) incrementally. The NBS Gateway routes requests between the modernized services and the Classic NBS application as migration proceeds.
+A software migration strategy in which new functionality is built alongside a legacy system and gradually replaces it, rather than rewriting everything at once.
 
 ### subnet
 
-A subdivision of a [VPC's](#amazon-vpc) IP address range. NBS 7 infrastructure uses public and private subnets to isolate internet-facing components from internal services.
+A subdivision of a [VPC's](#amazon-vpc) IP address range. Subnets are used to isolate internet-facing components from internal services.
 
 ## T
 
@@ -791,19 +804,19 @@ A subdivision of a [VPC's](#amazon-vpc) IP address range. NBS 7 infrastructure u
 
 ### Terraform
 
-An open-source infrastructure-as-code tool for provisioning and managing cloud resources. NBS 7 uses Terraform scripts in the [NEDSS-Infrastructure](https://github.com/CDCgov/NEDSS-Infrastructure) repository to provision cloud infrastructure. In AWS deployments, the scripts provision resources including [Amazon EKS](#amazon-eks), [Amazon VPC](#amazon-vpc), [Amazon MSK](#amazon-msk), and [Amazon EFS](#amazon-efs). In Azure deployments, the scripts provision resources including [AKS](#azure-kubernetes-service), [VNet](#vnet), [HDInsight](#hdinsight), and [Azure Files](#azure-files).
+An open-source infrastructure-as-code tool for provisioning and managing cloud resources. In AWS deployments, the scripts provision resources including [Amazon EKS](#amazon-eks), [Amazon VPC](#amazon-vpc), [Amazon MSK](#amazon-msk), and [Amazon EFS](#amazon-efs). In Azure deployments, the scripts provision resources including [AKS](#azure-kubernetes-service), [VNet](#vnet), [HDInsight](#hdinsight), and [Azure Files](#azure-files).
 
 ### TLS
 
-**Transport Layer Security.** A cryptographic protocol that secures data in transit. TLS is required for NBS 7 deployments.
+**Transport Layer Security.** A cryptographic protocol that secures data in transit.
 
 ### Traefik
 
-An open-source [ingress controller](#ingress-controller) and reverse proxy. Traefik replaced NGINX in NBS 7 deployments as of the 7.12 release.
+An open-source [ingress controller](#ingress-controller) and reverse proxy.
 
 ### transfer of ownership
 
-In NBS, the act of reassigning an [observation](#observation) or [case investigation](#case-investigation) from one [jurisdiction](#jurisdiction) or [program area](#program-area) to another. The receiving owner becomes responsible for investigation and resolution tasks.
+The act of reassigning an [observation](#observation) or [case investigation](#case-investigation) from one [jurisdiction](#jurisdiction) or [program area](#program-area) to another. The receiving owner becomes responsible for investigation and resolution tasks.
 
 ## V
 
@@ -815,15 +828,15 @@ In NBS, the act of reassigning an [observation](#observation) or [case investiga
 
 ### values file (Helm)
 
-A YAML configuration file that supplies environment-specific settings to a [Helm chart](#helm-chart) during deployment. NBS 7 sysadmins customize values files to configure services for their environment.
+A YAML configuration file that supplies environment-specific settings to a [Helm chart](#helm-chart) during deployment.
 
 ### VNet
 
-**Virtual Network.** An isolated cloud network in [Azure](#azure). NBS 7 runs inside a VNet in Azure deployments. The AWS equivalent of VNet is [Amazon VPC](#amazon-vpc).
+**Virtual Network.** An isolated cloud network in [Azure](#azure). The AWS equivalent of VNet is [Amazon VPC](#amazon-vpc).
 
 ### Amazon VPC
 
-**Amazon Virtual Private Cloud.** An isolated cloud network in AWS. NBS 7 runs inside a VPC in AWS deployments. The AWS equivalent of [VNet](#vnet). See also [peering](#peering) and [subnet](#subnet).
+**Amazon Virtual Private Cloud.** An isolated cloud network in AWS. The AWS equivalent of [VNet](#vnet). See also [peering](#peering) and [subnet](#subnet).
 
 ## W
 
@@ -839,7 +852,7 @@ A YAML configuration file that supplies environment-specific settings to a [Helm
 
 ### WildFly
 
-An open-source Java application server. [Classic NBS](#classic-nbs) (NBS 6.x) runs on WildFly. During NBS 7 deployments, the Classic NBS application continues to run on WildFly alongside the modernized microservices during the [strangler fig](#strangler-fig-pattern) transition.
+An open-source Java application server used as a runtime environment.
 
 ### worker node
 

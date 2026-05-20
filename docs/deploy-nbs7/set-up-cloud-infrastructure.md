@@ -13,7 +13,7 @@ This section covers provisioning the underlying cloud infrastructure (the virtua
 
 NBS 7 is fully supported on both AWS and Azure. Both providers host the same NBS 7 Kubernetes workloads, and once infrastructure is provisioned, the Bootstrap Kubernetes services and microservices deployment steps are identical. The difference is only in how the underlying cloud environment is provisioned.
 
-Choose the guide that matches your cloud environment.
+After completing the general [prerequisites](../deploy-nbs7/prerequisites.html), choose the guide that matches your cloud environment.
 
-- [Deploy on AWS](deploy-on-aws.html) - Provision the AWS VPC, Amazon Elastic Kubernetes Service (Amazon EKS) cluster, and supporting services using Terraform.
-- [Deploy on Azure](deploy-on-azure.html) - Provision the Azure virtual network, Azure Kubernetes Service (AKS) cluster, and supporting services using Terraform.
+- **[Deploy on AWS](deploy-on-aws.html)** - Provision the AWS VPC, Amazon Elastic Kubernetes Service (Amazon EKS) cluster, and supporting services using Terraform.
+- **[Deploy on Azure](deploy-on-azure.html)** - Provision the Azure virtual network, Azure Kubernetes Service (AKS) cluster, and supporting services using Terraform.

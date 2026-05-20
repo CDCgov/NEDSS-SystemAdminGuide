@@ -23,7 +23,7 @@ redirect_from:
 
 The deployment of the modernized NBS 7 will complement and build upon the existing NBS 6 system, integrating through the strangler fig pattern. Users will experience a smooth transition between the modern NBS 7 features and legacy NBS 6.
 
-NBS 7 will be hosted on a separate Virtual Private Cloud (VPC) to prevent any disruptions to the existing Classic NBS. These two VPCs will be interconnected to facilitate RDS access and other communication requirements.
+To prevent disruptions to the existing NBS 6 deployment, NBS 7 runs on a dedicated cloud network. A dedicated connection links the NBS 7 and NBS 6 network environments so that the systems can communicate.
 
 ## Architecture
 
@@ -33,15 +33,11 @@ The architecture diagram below illustrates the key components of NBS 7.
 
 ## Infrastructure as Code (IaC)
 
-The cloud environment for hosting NBS 7 is set up and configured using an [infrastructure as code](https://en.wikipedia.org/wiki/Infrastructure_as_code) approach. [Terraform](https://www.terraform.io/) code is used to provision and manage the cloud hosting environment, and [Helm](https://helm.sh/) is used to manage workloads in the [Kubernetes](https://kubernetes.io/) cluster. The code will be distributed from [GitHub](https://github.com/CDCgov).
-
-- The [Terraform](https://www.terraform.io/) modules provided will establish the NBS infrastructure within a dedicated VPC. This includes deploying Amazon Elastic Kubernetes Service (Amazon EKS), nodes, EBS storage, and provisioning EFS for persistent storage.
-- Terraform will also handle the creation of essential networking resources, such as private/public subnets, NAT gateways, Internet Gateways, and VPC peering.
-- Additionally, Terraform will automate the setup of [Helm](https://helm.sh/) charts, including Fluent Bit and Cert Manager, and configure AWS-managed services such as AMP and AMG.
+NBS 7 uses an [infrastructure as code](https://en.wikipedia.org/wiki/Infrastructure_as_code) approach. [Terraform](https://www.terraform.io/) provisions the cloud network, [Kubernetes](https://kubernetes.io/) cluster, and supporting infrastructure. [Helm](https://helm.sh/) automates the deployment of supporting services such as Fluent Bit and cert-manager. All code is available in [GitHub](https://github.com/CDCgov).
 
 ## NBS Microservices
 
-NBS 7 introduces microservices for the modernized system, deployed using [Helm](https://helm.sh/) charts:
+NBS 7 introduces microservices for the modernized system, deployed using Helm charts:
 
 - **Modernization API Service**: This service incorporates essential NBS 7 features such as patient search, event search, patient profile, investigations, etc.
 - **NBS-gateway Service**: Leveraging Spring Cloud Gateway, this service efficiently manages intricate strangler routing logic between NBS 7 and NBS 6.
@@ -52,18 +48,18 @@ NBS 7 introduces microservices for the modernized system, deployed using [Helm](
 NGINX is deprecated and is replaced with Traefik.
 {: .important }
 
-Serving as the entry point into the [Kubernetes](https://kubernetes.io/) cluster, NGINX Ingress will intelligently route users based on predefined routing rules. Users will be directed to the NBS 7 features (Modernization API Service) or classic NBS 6 features (NBS-gateway Service). The deployment of NGINX Ingress will be orchestrated using [Helm](https://helm.sh/) charts and values files.
+Serving as the entry point into the Kubernetes cluster, NGINX Ingress will intelligently route users based on predefined routing rules. Users will be directed to the NBS 7 features (Modernization API Service) or classic NBS 6 features (NBS-gateway Service). The deployment of NGINX Ingress will be orchestrated using Helm charts and values files.
 
 ## Shared services, tools, and containers
 
-- **Cert Manager**: This tool automates TLS certificate management and will be integrated into the infrastructure via [Terraform](https://www.terraform.io/). The certificate issuer connects to Let's Encrypt CA by default, and will be installed using YAML manifests and `kubectl` commands.
-- **Apache NiFi**: As an ETL tool, Apache NiFi populates Elasticsearch indices from the NBS database. Deployment of NiFi will follow [Helm](https://helm.sh/) charts and values files.
-- **Elasticsearch**: NBS relies on Elasticsearch for lightning-fast searches. The deployment of Elasticsearch will use [Helm](https://helm.sh/) chart and values files.
-- **Fluent Bit**: Fluent Bit serves as the log aggregator, collecting logs from various microservices and [Kubernetes](https://kubernetes.io/) components and, by default, pushing them to designated S3 buckets and CloudWatch.
+- **Cert Manager**: This tool automates TLS certificate management and will be integrated into the infrastructure via Terraform. The certificate issuer connects to Let's Encrypt CA by default, and will be installed using YAML manifests and `kubectl` commands.
+- **Apache NiFi**: As an ETL tool, Apache NiFi populates Elasticsearch indices from the NBS database. Deployment of NiFi will follow Helm charts and values files.
+- **Elasticsearch**: NBS relies on Elasticsearch for lightning-fast searches. The deployment of Elasticsearch will use Helm chart and values files.
+- **Fluent Bit**: Fluent Bit serves as the log aggregator, collecting logs from various microservices and Kubernetes components and, by default, pushing them to designated cloud storage and monitoring services.
 
-## Data ingestion service
+## Data Ingestion service
 
-Provides necessary foundational pieces to track and route ELR data flowing into NBS, and lays the groundwork to provide additional ingestion options for NBS.
+The Data Ingestion service provides necessary foundational pieces to track and route ELR data flowing into NBS, and lays the groundwork to provide additional ingestion options for NBS.
 
 - Accepts a variety of electronic lab reports using different versions and fields
 - Saves all incoming messages for auditing, debugging, and disaster recovery and you can configure how long messages are saved
@@ -76,19 +72,19 @@ Provides necessary foundational pieces to track and route ELR data flowing into 
 - Supports traffic and system health monitoring
 
 ## Real-Time Reporting (RTR) microservices
-Real-Time Reporting (RTR) provides rapid transformation and delivery of data from the transactional database (NBS_ODSE) to the reporting database (RDB). For detailed RTR deployment instructions, see [Deploy real-time reporting](../deploy-nbs7/real-time-reporting/real-time-reporting.html).
+Real-Time Reporting (RTR) provides rapid transformation and delivery of data from the transactional database (`NBS_ODSE`) to the reporting database (`RDB`). For detailed RTR deployment instructions, see [Deploy real-time reporting](../deploy-nbs7/real-time-reporting/real-time-reporting.html).
 
-There are 9 RTR services:
+The following services comprise RTR:
 
-- **Liquibase job**: Database version control management that deploys stored procedures, tables and views required for RTR pipeline.
-- **Person service**: Processes Patient and Provider change events.
-- **Observation services**: Processes Observation change events.
-- **Organization service**: Processes Organization change events.
-- **LDF service**: Processes LDF or State-defined field data change events.
-- **Investigation service**: Processes Public_health_case change events. This service also provides information for page builder investigation, notifications, confirmation method and updates the `PublicHealthCaseFact_Modern` datamart.
-- **Post-processing service**: Calls the post-processing stored procedures to hydrate dimensions, fact tables, and datamarts.
-- **Debezium service**: Monitors and streams the selected list of `NBS_ODSE` and `NBS_SRTE` tables to Kafka topics.
-- **Kafka sink service**: Persists the data from the Kafka topics to the `RDB_Modern` database tables.
+- **Liquibase job**: Database version control management that deploys stored procedures, tables and views required for RTR pipeline
+- **Person service**: Processes Patient and Provider change events
+- **Observation services**: Processes Observation change events
+- **Organization service**: Processes Organization change events
+- **LDF service**: Processes LDF or State-defined field data change events
+- **Investigation service**: Processes Public_health_case change events and provides information for page builder investigation, notifications, confirmation method, and updates the `PublicHealthCaseFact_Modern` datamart
+- **Post-processing service**: Calls the post-processing stored procedures to hydrate dimensions, fact tables, and datamarts
+- **Debezium service**: Monitors and streams the selected list of `NBS_ODSE` and `NBS_SRTE` tables to Kafka topics
+- **Kafka sink service**: Persists the data from the Kafka topics to the `RDB_Modern` database tables
 
 ## Data processing service
 Provides a seamless way to process ELR in near real-time instead of depending on the system-bounded ELR batch job. This eliminates the need for the STLT to set up a batch job on their system.
@@ -98,18 +94,9 @@ Provides a seamless way to process ELR in near real-time instead of depending on
 Data Sync is deprecated.
 {: .important }
 
-The Data Sync service provides a secure API to connect to the databases in the NBS cloud, with an API endpoint service and without interrupting any operations On-Prem at Jurisdictions.
+The Data Sync service provides a secure API to connect to the databases in the NBS cloud, with an API endpoint service and without interrupting any on-premises operations.
 
 ## Keycloak
 
-- At our core, we rely on Keycloak as our primary Identity Provider (IdP) and Data Ingestion APIs.
-- We also leverage Keycloak for token management and SSO integration, for example, OAuth, SAML integration with Okta, etc.
-
-## AWS Managed Services
-
-- **[Amazon Elastic Kubernetes Service (Amazon EKS)](https://docs.aws.amazon.com/eks/)**: Terraform scripts will set up the Amazon EKS cluster that NBS 7 uses. This managed service handles all lifecycle events for the Kubernetes runtime (for example, keeping the underlying nodes patched and up to date).
-- **[Amazon Elastic File System (Amazon EFS)](https://docs.aws.amazon.com/efs/)**: The NBS 7 system uses a network filesystem for persistent data storage.
-- **[Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/)**: NBS will harness Amazon Managed Service for Prometheus to capture metrics from Kubernetes ingress and various microservices.
-- **[Amazon Managed Grafana](https://docs.aws.amazon.com/grafana/)**: NBS will leverage Amazon Managed Grafana to visualize metrics from AMP and host operational dashboards. The initial set includes three dashboards, encompassing error rates, total request volume, and latency.
-- **[AWS Key Management Service (AWS KMS)](https://docs.aws.amazon.com/kms/)**: AWS infrastructure storage services like Amazon EKS, EFS, and RDS utilize a managed key management store for persistence and encryption, ensuring a robust layer of security.
-- **[Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/rds/)**: Optionally, the database underlying the NBS 6 and 7 system may be configured to run as a fully managed Microsoft SQL Server database instance.
+- At its core, NBS 7 relies on Keycloak as the primary Identity Provider (IdP) and Data Ingestion APIs.
+- NBS 7 also leverages Keycloak for token management and SSO integration (for example, OAuth or SAML integration with Okta).

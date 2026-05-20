@@ -63,72 +63,90 @@ If you encounter issues during database setup, contact support at <mailto:nbs@cd
 
 1. Choose a database path and use it consistently throughout this guide. Both paths support Liquibase or manual installation.
    - **RDB path:** Use `RDB` as the default reporting database. Turn off the classic ETL batch jobs and proceed to the next step.
-   - **rdb_modern path:** Create a separate reporting database. To create the database, see [Create rdb_modern database](#set-up-the-rdb_modern-database) before moving on to the next step.
+   - **rdb_modern path:** Create a separate reporting database. To create the database, see [Create rdb_modern database](#set-up-the-rdb_modern-database) before moving on to [Create service users and database objects](#create-service-users-and-database-objects)].
 
 1. Set the environment variable for your chosen path.
 
-   **RDB path:** Insert the following value into `NBS_configuration`: <!-- [SME REVIEW: confirm NBS_configuration table name and ENV variable phrasing] -->
+   - **RDB path:** Insert the following value into `NBS_configuration`: <!-- [SME REVIEW: confirm NBS_configuration table name and ENV variable phrasing] -->
 
-   ```sql
-   IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_configuration WHERE config_key ='ENV' AND config_value ='PROD')
-   INSERT INTO NBS_ODSE.dbo.NBS_configuration
-   (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
-   VALUES(N'ENV', N'PROD', N'RTR reporting database', N'Indicates scripts should be run against RDB database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
-   ```
+      ```sql
+      IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_configuration WHERE config_key ='ENV' AND config_value ='PROD')
+      INSERT INTO NBS_ODSE.dbo.NBS_configuration
+      (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
+      VALUES(N'ENV', N'PROD', N'RTR reporting database', N'Indicates scripts should be run against RDB database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
+      ```
 
-   **rdb_modern path:** This setting overrides the default `RDB` during script execution unless a script explicitly prompts for a database.
+   - **rdb_modern path:** This setting overrides the default `RDB` during script execution unless a script explicitly prompts for a database.
 
-   ```sql
-   IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_configuration WHERE config_key ='ENV' AND config_value ='UAT')
-   INSERT INTO NBS_ODSE.dbo.NBS_configuration
-   (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
-   VALUES(N'ENV', N'UAT', N'RTR reporting database', N'Indicates scripts should be run against UAT rdb_modern database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
-   ```
+      ```sql
+      IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_configuration WHERE config_key ='ENV' AND config_value ='UAT')
+      INSERT INTO NBS_ODSE.dbo.NBS_configuration
+      (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
+      VALUES(N'ENV', N'UAT', N'RTR reporting database', N'Indicates scripts should be run against UAT rdb_modern database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
+      ```
 
 ## Set up the rdb_modern database
 
-If you are on the **rdb_modern path**, complete this section. If you are on the **RDB path**, skip this section.
+If you are on the **rdb_modern path**, complete this section. If you are on the **RDB path**, move on to [Create service users and database objects](#create-service-users-and-database-objects). For more information on choosing a path, see Step 3 in the [Prerequisites](#prerequisites) section.
 
-If a separate database is required, restore `RDB` as `rdb_modern`. This keeps the classic ETL-hydrated `RDB` available while hosting components needed for RTR.
+RTR requires a dedicated reporting database. To create `rdb_modern`, you restore a copy of `RDB` under a new name. This keeps the classic ETL-hydrated `RDB` intact and available while `rdb_modern` hosts the data structures the RTR pipeline requires.
 
-> The following steps use Amazon RDS stored procedures (`rds_backup_database`, `rds_restore_database`). If you are not using Amazon RDS, consult your database administrator for equivalent backup and restore procedures.
+>Full setup procedures for **SQL Server on Amazon EC2 and Azure SQL** deployments are not yet available in this guide. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) for guidance.
 {: .important }
 
-1. Back up RDB:
+### Amazon RDS prerequisites for rdb_modern setup
+
+If you host your NBS 6 database on Amazon RDS, verify the following before proceeding.
+
+1. Verify that the **Backup and Restore** option is enabled for your Amazon RDS SQL Server instance:
    1. Sign in to the AWS Management Console and navigate to **RDS**.
-   1. In the **Options** group, verify that the **Backup and Restore** option is enabled for your RDS SQL Server instance.
-   1. Open a SQL client and connect to the SQL Server RDS instance.
-   1. Run the following procedure to back up the SQL Server database to S3:
+   1. Select your SQL Server instance and open the **Options** group.
+   1. Confirm that the **Backup and Restore** option is enabled.
 
-      ```sql
-      exec msdb.dbo.rds_backup_database
-      @source_db_name='RDB',
-      @s3_arn_to_backup_to='arn:aws:s3:::cdc-nbs-state-upload-shared/Classic-6.0.16/rdb_classic_2024_07_22_5pmet.bak',
-      @type='FULL'
-      ```
+1. Verify that the `ad hoc distributed queries` parameter is enabled on your RDS parameter group. This parameter is required to enable Change Data Capture on Amazon RDS.
 
-   1. Run the following procedure to check the status:
+   In the AWS Management Console, navigate to **RDS > Parameter groups** and confirm the following setting is present:
 
-      ```sql
-      exec msdb.dbo.rds_task_status;
-      ```
+   ```hcl
+   { name = "ad hoc distributed queries", value = "1" }
+   ```
 
-1. Restore `rdb_modern`:
-   1. Open a SQL client and connect to the SQL Server RDS instance.
-   1. Run the following procedure to restore RDB as `rdb_modern`:
+   If the parameter is not set, add it to your parameter group before proceeding. Changes to parameter groups may require a database restart.
 
-      ```sql
-      exec msdb.dbo.rds_restore_database
-      @restore_db_name='rdb_modern',
-      @s3_arn_to_restore_from='arn:aws:s3:::cdc-nbs-state-upload-shared/Classic-6.0.16/rdb_classic_gdit_07_10_5pmet.bak',
-      @type='FULL';
-      ```
+### Back up and restore RDB on Amazon RDS
 
-   1. Run the following procedure to check the status:
+If you host your NBS 6 database on Amazon RDS, use the following steps to perform a backup and restore.
 
-      ```sql
-      exec msdb.dbo.rds_task_status;
-      ```
+1. Open a SQL client and connect to your SQL Server instance.
+1. Run the following procedure to back up RDB to S3:
+
+```sql
+   exec msdb.dbo.rds_backup_database
+   @source_db_name='RDB',
+   @s3_arn_to_backup_to='arn:aws:s3:::cdc-nbs-state-upload-shared/Classic-6.0.16/rdb_classic_2024_07_22_5pmet.bak',
+   @type='FULL'
+```
+
+1. Run the following procedure to check the status:
+
+```sql
+   exec msdb.dbo.rds_task_status;
+```
+
+1. Run the following procedure to restore RDB as `rdb_modern`:
+
+```sql
+   exec msdb.dbo.rds_restore_database
+   @restore_db_name='rdb_modern',
+   @s3_arn_to_restore_from='arn:aws:s3:::cdc-nbs-state-upload-shared/Classic-6.0.16/rdb_classic_gdit_07_10_5pmet.bak',
+   @type='FULL';
+```
+
+1. Run the following procedure to check the status:
+
+```sql
+   exec msdb.dbo.rds_task_status;
+```
 
 ## Create service users and database objects
 
@@ -217,7 +235,7 @@ Complete these one-time onboarding steps for RTR setup.
 
 After onboarding, future enhancements are delivered using one of these approaches:
 
-- **Liquibase:** Run Liquibase with the provided release tag. See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html).
+- **Liquibase:** Run Liquibase with the {{ site.version_latest }} release tag. See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html).
 - **Manual:** Run the scripts in [manual_deployment][nedss-datareporting-manual-deployment]. Onboarding scripts are excluded from upgrade runs.
 
 ---

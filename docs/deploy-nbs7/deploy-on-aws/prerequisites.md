@@ -40,7 +40,7 @@ Your AWS environment must:
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
 | Container runtime environment | Amazon Elastic Kubernetes Service (Amazon EKS) | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
-| Relational Database | SQL Server 2017+ Standard or Enterprise | New NBS 6.X.X Deployment Recommendations: [📝 Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
+| Relational Database | SQL Server 2017+ Standard or Enterprise (hosted on Amazon RDS or a self-managed Amazon EC2 instance) | New NBS 6.X.X Deployment Recommendations: [Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
 | Persistent Store | EFS | 1 TB |
 
 ### Low-volume STLTs
@@ -48,7 +48,7 @@ Your AWS environment must:
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
 | Container runtime environment | Amazon EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
-| Relational Database | Cloud Managed MS SQL Server Standard or Enterprise | New NBS 6.X.X Deployment Recommendations: [📝 Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
+| Relational Database | Cloud Managed MS SQL Server Standard or Enterprise | New NBS 6.X.X Deployment Recommendations: [Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
 | Persistent Store | EFS | 500 GB |
 
 ## Software requirements
@@ -86,7 +86,7 @@ You will need a local or cloud hosted workstation (e.g. CloudShell) with the set
 
 Installation of the NBS 7 infrastructure and microservices uses a new VPC, which is provisioned using the Terraform scripts included in [the provisioning steps](provision-aws.html).
 
-You must ensure that there is network access available from the location of modern NBS 7 components to the classic NBS 6 components, including the database server. The database server or RDS should allow access to the NBS 7 VPC address space. As a best practice, use a private route for this network access, rather than making it publicly accessible.
+You must ensure that there is network access available from the location of modern NBS 7 components to the classic NBS 6 components, including the database server. The NBS 6 SQL Server database must allow access from the NBS 7 VPC address space, whether hosted on Amazon RDS or a self-managed EC2 instance. As a best practice, use a private route for this network access, rather than making it publicly accessible.
 
 A team member who has operational knowledge of and is familiar with using Terraform is most suited to create this infrastructure.
 
@@ -94,8 +94,7 @@ A team member who has operational knowledge of and is familiar with using Terraf
 
 ### Encryption management
 
-AWS infrastructure storage services like AWS EBS, EFS, and RDS utilize AWS Key Management Store (KMS) for encryption, ensuring a
-robust layer of security.
+AWS infrastructure storage services like Amazon EBS, EFS, and RDS utilize AWS Key Management Store (KMS) for encryption, ensuring a robust layer of security.
 
 ### End-user authentication
 

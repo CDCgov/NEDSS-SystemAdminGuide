@@ -211,7 +211,7 @@ A technique for tracking row-level changes in a database and streaming them to d
 
 ### Classic NBS
 
-Any [NBS](#nbs) versions prior to 7.0.0, including all NBS 6.x releases. Classic NBS is approaching end of support. [CDC](#cdc) has ceased active development on NBS 6 so that resources can focus on [NBS 7](#nbs-7). STLTs still running Classic NBS should plan to migrate to [NBS 7](#nbs-7) or evaluate an alternative solution.
+Any [NBS](#nbs) versions prior to 7.0.0, including all NBS 6.x releases. Classic NBS is approaching end of support. [CDC](#cdc) is phasing out active development on NBS 6 so that resources can focus on [NBS 7](#nbs-7). STLTs still running Classic NBS should plan to migrate to [NBS 7](#nbs-7) or evaluate an alternative solution.
 
 ### CLI
 
@@ -475,7 +475,7 @@ A component that distributes incoming network traffic across multiple servers or
 
 ### managed node group
 
-A group of [worker nodes](#worker-node) in AWS that share the same configuration, such as EC2 instance type and scaling settings. In AWS-based deployments, [Amazon EKS](#amazon-eks) provisions worker nodes as managed node groups. You manage managed node groups directly; the Amazon EKS [control plane](#control-plane) is provided as a managed service. The equivalent concept in [AKS](#azure-kubernetes-service) is a [node pool](#node-pool).
+A group of [worker nodes](#worker-node) in AWS that share the same configuration, such as EC2 instance type and scaling settings. The equivalent concept in [AKS](#azure-kubernetes-service) is a [node pool](#node-pool).
 
 ### MasterETL
 
@@ -584,7 +584,7 @@ See [worker node](#worker-node).
 
 ### node pool
 
-A group of [worker nodes](#worker-node) in Azure that share the same configuration, such as virtual machine size and operating system. In Azure deployments, [AKS](#azure-kubernetes-service) provisions worker nodes as node pools. You manage node pools directly; the AKS [control plane](#control-plane) is provided as a managed service. The equivalent concept in [Amazon EKS](#amazon-eks) is a [managed node group](#managed-node-group).
+A group of [worker nodes](#worker-node) in Azure that share the same configuration, such as virtual machine size and operating system. The equivalent concept in [Amazon EKS](#amazon-eks) is a [managed node group](#managed-node-group).
 
 ### notifiable disease
 
@@ -632,7 +632,7 @@ An NBS feature that allows administrators to build configurable forms for collec
 
 ### peering
 
-A network connection between two [Amazon VPCs](#amazon-vpc), or between an [Amazon VPC](#amazon-vpc) and an on-premises network, that allows resources in each to communicate as if on the same network.
+A network connection between two [Amazon VPCs](#amazon-vpc) or [VNets](#azure-vnet), or between one and an on-premises network, that allows resources in each to communicate as if on the same network. In [Amazon VPC](#amazon-vpc), this is called VPC peering. In [Azure](#azure), the equivalent is [VNet](#azure-vnet) peering.
 
 ### permission set
 
@@ -804,7 +804,7 @@ A subdivision of a [VPC's](#amazon-vpc) IP address range. Subnets are used to is
 
 ### Terraform
 
-An open-source infrastructure-as-code tool for provisioning and managing cloud resources. In AWS deployments, the scripts provision resources including [Amazon EKS](#amazon-eks), [Amazon VPC](#amazon-vpc), [Amazon MSK](#amazon-msk), and [Amazon EFS](#amazon-efs). In Azure deployments, the scripts provision resources including [AKS](#azure-kubernetes-service), [VNet](#vnet), [HDInsight](#hdinsight), and [Azure Files](#azure-files).
+An open-source infrastructure-as-code tool for provisioning and managing cloud resources. In AWS deployments, the scripts provision resources including [Amazon EKS](#amazon-eks), [Amazon VPC](#amazon-vpc), [Amazon MSK](#amazon-msk), and [Amazon EFS](#amazon-efs). In Azure deployments, the scripts provision resources including [AKS](#azure-kubernetes-service), [VNet](#azure-vnet), [HDInsight](#hdinsight), and [Azure Files](#azure-files).
 
 ### TLS
 
@@ -830,13 +830,13 @@ The act of reassigning an [observation](#observation) or [case investigation](#c
 
 A YAML configuration file that supplies environment-specific settings to a [Helm chart](#helm-chart) during deployment.
 
-### VNet
+### Azure VNet
 
-**Virtual Network.** An isolated cloud network in [Azure](#azure). The AWS equivalent of VNet is [Amazon VPC](#amazon-vpc).
+**Azsure Virtual Network.** An isolated cloud network in [Azure](#azure). The AWS equivalent of VNet is [Amazon VPC](#amazon-vpc).
 
 ### Amazon VPC
 
-**Amazon Virtual Private Cloud.** An isolated cloud network in AWS. The AWS equivalent of [VNet](#vnet). See also [peering](#peering) and [subnet](#subnet).
+**Amazon Virtual Private Cloud.** An isolated cloud network in AWS. The AWS equivalent of [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
 
 ## W
 

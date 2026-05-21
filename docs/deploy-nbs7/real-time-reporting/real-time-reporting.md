@@ -38,7 +38,7 @@ If you encounter issues during database setup, contact support at <mailto:nbs@cd
 
 ## Prerequisites
 
-1. RTR installation requires NBS 6.0.17 or higher. To verify your baseline NBS release version, run one of the following queries:
+1. RTR installation requires NBS 6.0.18.1 or higher, but the latest 6x version is best practice. To verify your baseline NBS release version, run one of the following queries:
 
    ```sql
    USE NBS_ODSE;
@@ -50,7 +50,7 @@ If you encounter issues during database setup, contact support at <mailto:nbs@cd
 
    ```sql
    USE [NBS_ODSE];
-   SELECT * FROM NBS_configuration WHERE config_key = 'CODE_BASE';
+   SELECT * FROM NBS_Configuration WHERE config_key = 'CODE_BASE';
    ```
 
 1. Verify that the following classic ETL batch jobs have completed successfully:
@@ -63,15 +63,15 @@ If you encounter issues during database setup, contact support at <mailto:nbs@cd
 
 1. Choose a database path and use it consistently throughout this guide. Both paths support Liquibase or manual installation.
    - **RDB path:** Use `RDB` as the default reporting database. Turn off the classic ETL batch jobs and proceed to the next step.
-   - **rdb_modern path:** Create a separate reporting database. To create the database, see [Create rdb_modern database](#set-up-the-rdb_modern-database) before moving on to [Create service users and database objects](#create-service-users-and-database-objects)].
+   - **rdb_modern path:** Create a separate reporting database. To create the database, see [Create rdb_modern database](#set-up-the-rdb_modern-database) before moving on to [Create service users and database objects](#create-service-users-and-database-objects).
 
 1. Set the environment variable for your chosen path.
 
-   - **RDB path:** Insert the following value into `NBS_configuration`: <!-- [SME REVIEW: confirm NBS_configuration table name and ENV variable phrasing] -->
+   - **RDB path:** Insert the following value into `NBS_Configuration`: <!-- [SME REVIEW: confirm NBS_Configuration table name and ENV variable phrasing] -->
 
       ```sql
-      IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_configuration WHERE config_key ='ENV' AND config_value ='PROD')
-      INSERT INTO NBS_ODSE.dbo.NBS_configuration
+      IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_Configuration WHERE config_key ='ENV' AND config_value ='PROD')
+      INSERT INTO NBS_ODSE.dbo.NBS_Configuration
       (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
       VALUES(N'ENV', N'PROD', N'RTR reporting database', N'Indicates scripts should be run against RDB database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
       ```
@@ -79,8 +79,8 @@ If you encounter issues during database setup, contact support at <mailto:nbs@cd
    - **rdb_modern path:** This setting overrides the default `RDB` during script execution unless a script explicitly prompts for a database.
 
       ```sql
-      IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_configuration WHERE config_key ='ENV' AND config_value ='UAT')
-      INSERT INTO NBS_ODSE.dbo.NBS_configuration
+      IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_Configuration WHERE config_key ='ENV' AND config_value ='UAT')
+      INSERT INTO NBS_ODSE.dbo.NBS_Configuration
       (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
       VALUES(N'ENV', N'UAT', N'RTR reporting database', N'Indicates scripts should be run against UAT rdb_modern database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
       ```
@@ -185,12 +185,15 @@ Complete these one-time onboarding steps for RTR setup.
    - **Manual:** Navigate to the [02_onboarding_script_data_load][nedss-datareporting-onboarding-data-load] and run all of the scripts in the order listed in the repository.
 
 1. **Verify Change Data Capture.** `is_cdc_enabled=1` indicates successful configuration.
+   
+   >In the following statements, `cdc` appears as part of SQL Server column and parameter names and refers to **Change Data Capture**, not the Centers for Disease Control and Prevention.
+   {: .note }
 
    ```sql
    SELECT name, is_cdc_enabled
    FROM sys.databases;
 
-   -- View ODSE tables with CDC enabled
+   -- View ODSE tables with Change Data Capture enabled
    USE NBS_ODSE;
    SELECT
      name,
@@ -198,7 +201,7 @@ Complete these one-time onboarding steps for RTR setup.
    FROM sys.tables
    WHERE is_tracked_by_cdc = 1;
 
-   -- View SRTE tables with CDC enabled
+   -- View SRTE tables with Change Data Capture enabled
    USE NBS_SRTE;
    SELECT
      name,
@@ -211,12 +214,12 @@ Complete these one-time onboarding steps for RTR setup.
 
     <div style="display: flex; gap: 2rem;">
       <figure>
-        <figcaption><strong>CDC-enabled tables in NBS_ODSE:</strong></figcaption>
-        <img src="images/cdc_enabled_odse_tables.png" alt="Query results showing 19 CDC-enabled tables in NBS_ODSE, all with is_tracked_by_cdc set to YES">
+        <figcaption><strong>Change Data Capture-enabled tables in NBS_ODSE:</strong></figcaption>
+        <img src="images/cdc_enabled_odse_tables.png" alt="Query results showing 19 Change Data Capture-enabled tables in NBS_ODSE, all with is_tracked_by_cdc set to YES">
       </figure>
       <figure>
-        <figcaption><strong>CDC-enabled tables in NBS_SRTE:</strong></figcaption>
-        <img src="images/cdc_enabled_srte_tables.png" alt="Query results showing 44 CDC-enabled tables in NBS_SRTE, all with is_tracked_by_cdc set to YES">
+        <figcaption><strong>Change Data Capture-enabled tables in NBS_SRTE:</strong></figcaption>
+        <img src="images/cdc_enabled_srte_tables.png" alt="Query results showing 44 Change Data Capture-enabled tables in NBS_SRTE, all with is_tracked_by_cdc set to YES">
       </figure>
     </div>
 

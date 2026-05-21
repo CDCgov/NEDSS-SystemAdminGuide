@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function () {
+function initTooltips() {
   var roots = Array.from(document.querySelectorAll('[data-tooltip-root]'));
   if (!roots.length) {
     return;
@@ -145,4 +145,10 @@ document.addEventListener('DOMContentLoaded', function () {
       closeAll();
     }
   });
-});
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initTooltips);
+} else {
+  initTooltips();
+}

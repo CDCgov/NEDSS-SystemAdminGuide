@@ -17,7 +17,7 @@ The National Electronic Disease Surveillance System (NEDSS) Base System (NBS) is
 
 ## Purpose and scope
 
-The NBS 7 System Administration guide helps you prepare for NBS 7, deploy the platform, validate that it is working correctly, and maintain it over time. It brings together operational guidance for system administration tasks across the NBS 7 lifecycle.
+The NBS 7 System Administration guide helps you prepare for {% include term-tooltip.html key="nbs-7" term="NBS 7" id="nbs7-home" %}, deploy the platform, validate that it is working correctly, and maintain it over time. It brings together operational guidance for system administration tasks across the NBS 7 lifecycle.
 
 The content is centered on system administration. It covers readiness and planning work before deployment, phased deployment guidance for NBS 7 infrastructure and services, and maintenance topics for operating environments after go-live.
 

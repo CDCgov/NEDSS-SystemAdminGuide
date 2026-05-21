@@ -31,28 +31,28 @@ This quick start installs and configures the following resources.
 
 ### Terraform-managed resources
 
-- Modern VPC, subnets, and route tables
-- Amazon Elastic Kubernetes Service (Amazon EKS) cluster and nodes
-- Network Load Balancer (NLB)
-- MSK
-- Amazon Managed Service for Prometheus
-- Amazon Managed Grafana
-- EFS
-- KMS
-- S3 bucket
+- Modern {% include term-tooltip.html key="amazon-vpc" term="VPC" id="vpc-quickstart-resources" %}, {% include term-tooltip.html key="subnet" term="subnets" id="subnets-quickstart-resources" %}, and route tables
+- {% include term-tooltip.html key="amazon-eks" term="Amazon EKS" id="eks-quickstart-resources" %} cluster and nodes
+- {% include term-tooltip.html key="load-balancer" term="Network Load Balancer" id="load-balancer-quickstart-resources" %} (NLB)
+- {% include term-tooltip.html key="amazon-msk" term="Amazon MSK" id="msk-quickstart-resources" %}
+- {% include term-tooltip.html key="amp" term="Amazon Managed Service for Prometheus" id="amp-quickstart-resources" %}
+- {% include term-tooltip.html key="amg" term="Amazon Managed Grafana" id="amg-quickstart-resources" %}
+- {% include term-tooltip.html key="amazon-efs" term="Amazon EFS" id="efs-quickstart-resources" %}
+- {% include term-tooltip.html key="kms" term="AWS KMS" id="kms-quickstart-resources" %}
+- {% include term-tooltip.html key="amazon-s3" term="Amazon S3 bucket" id="s3-quickstart-resources" %}
 
 ### Manual configuration
 
-- Route53 updates: create DNS entries in Route53 to point app and data URLs to the Network Load Balancer.
+- **Route53 updates**: create {% include term-tooltip.html key="dns" term="DNS" id="dns-quickstart-manual" %} entries in Route53 to point app and data URLs to the Network Load Balancer.
 
 ### NBS 7 core services
 
-- **Elasticsearch**: Search indexing and query support.
+- **{% include term-tooltip.html key="elasticsearch" term="Elasticsearch" id="elasticsearch-quickstart-core" %}**: Search indexing and query support.
 - **Modernization API**: Modern NBS capabilities, including patient and event search.
-- **NiFi**: Elasticsearch index population from the NBS database.
+- **{% include term-tooltip.html key="nifi" term="NiFi" id="nifi-quickstart-core" %}**: Elasticsearch index population from the NBS database.
 - **NBS Gateway**: Routing between modern and legacy NBS.
-- **Data ingestion**: HL7 ingestion from labs and other sources.
-- **Keycloak**: Primary identity provider (IdP), token management, and SSO integration.
+- **Data ingestion**: {% include term-tooltip.html key="hl7" term="HL7" id="hl7-quickstart-core" %} ingestion from labs and other sources.
+- **{% include term-tooltip.html key="keycloak" term="Keycloak" id="keycloak-quickstart-core" %}**: Primary identity provider (IdP), token management, and SSO integration.
 
 ## Prerequisites
 
@@ -62,7 +62,7 @@ This quick start installs and configures the following resources.
 - [AWS CLI](https://aws.amazon.com/cli/) (v2.15+)
 - [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) (v1.5.5)
 - [Helm](https://helm.sh/docs/intro/install/) (v3.12+)
-- [kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) (v1.27+)
+- [{% include term-tooltip.html key="kubectl" term="kubectl" id="kubectl-quickstart-prereq" %}](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) (v1.27+)
 - [eksctl](https://eksctl.io/installation/) (optional but recommended)
 
 ### Environment requirements
@@ -70,7 +70,7 @@ This quick start installs and configures the following resources.
 
 - AWS Account with NBS 6.0.16 access (or newer)
 - DNS routing infrastructure: domain information for modernized NBS application URLs (for example, `app.site_name.domain.com`)
-- IAM roles for Terraform and Kubernetes
+- {% include term-tooltip.html key="iam" term="IAM" id="iam-quickstart-env" %} roles for Terraform and Kubernetes
 - Access to NBS 6 (SQL Server) databases to run scripts
 - S3 bucket for Terraform state
 
@@ -106,7 +106,7 @@ cp -pr terraform/aws/samples/NBS7_standard terraform/aws/nbs7-mySTLT-test
 
 - Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions][nedss-infra-aws-samples-readme].
 
-> Review inbound rules on the security groups attached to your database instance. Ensure the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
+> Review inbound rules on the security groups attached to your database instance. Ensure the {% include term-tooltip.html key="cidr" term="CIDR" id="cidr-quickstart-note" %} you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
 {: .note }
 
 ### Initialize and apply Terraform
@@ -121,7 +121,7 @@ terraform apply
 ### Validate infrastructure
 {: .no_toc }
 
-- Confirm VPC, Amazon EKS cluster, subnets, and node groups are created.
+- Confirm VPC, Amazon EKS cluster, subnets, and {% include term-tooltip.html key="managed-node-group" term="node groups" id="node-groups-quickstart-validate" %} are created.
 - Verify Amazon EKS cluster authentication and running pods and nodes:
 
 ```bash
@@ -165,7 +165,7 @@ helm repo add jetstack https://charts.jetstack.io
 helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true
 ```
 
-### Install and verify Linkerd (optional)
+### Install and verify {% include term-tooltip.html key="linkerd" term="Linkerd" id="linkerd-quickstart-section" %} (optional)
 {: .no_toc }
 
 ```bash

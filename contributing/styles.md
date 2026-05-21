@@ -641,7 +641,7 @@ The following issues are documented and tracked. They represent theme or infrast
 
 Use the `term-tooltip` include for glossary-style terms that need an inline definition.
 
-1. Add or update the term definition in `_data/term_definitions.yml`.
+1. Add or update the term definition in `_data/glossary.yml`.
 1. Reference the term inline using the include.
 1. Use a page-unique `id` value for each tooltip instance.
 
@@ -651,7 +651,7 @@ Use the `term-tooltip` include for glossary-style terms that need an inline defi
 {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-runtime" %}
 ```
 
-- `key`: lookup key in `_data/term_definitions.yml`
+- `key`: lookup key in `_data/glossary.yml`
 - `term`: visible text in the paragraph
 - `id`: unique suffix used to build the tooltip element ID
 

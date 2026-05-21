@@ -65,6 +65,26 @@
     z-index: 100;
 }
 
+.glossary-term__tooltip p {
+    margin: 0;
+}
+
+.glossary-term__tooltip p + p,
+.glossary-term__tooltip ul + p,
+.glossary-term__tooltip ol + p {
+    margin-top: 0.5rem;
+}
+
+.glossary-term__tooltip ul,
+.glossary-term__tooltip ol {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.glossary-term__tooltip li + li {
+    margin-top: 0.25rem;
+}
+
 .glossary-term__tooltip::before {
     background: #ffffff;
     border-left: 1px solid $border-color;

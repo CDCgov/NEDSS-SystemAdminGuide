@@ -1,8 +1,16 @@
 {%- assign tooltip_term = include.term | default: include.key -%}
 {%- assign tooltip_definition = include.definition -%}
 {%- if tooltip_definition == nil and include.key -%}
-  {%- assign tooltip_definition = site.data.term_definitions[include.key] -%}
+  {%- for glossary_entry in site.data.glossary -%}
+    {%- assign glossary_slug = glossary_entry.term | slugify -%}
+    {%- if glossary_slug == include.key -%}
+      {%- assign tooltip_definition = glossary_entry.definition -%}
+      {%- break -%}
+    {%- endif -%}
+  {%- endfor -%}
 {%- endif -%}
+{%- assign glossary_href_prefix = site.baseurl | append: '/docs/glossary.html#' -%}
+{%- assign glossary_link_prefix = '](' | append: glossary_href_prefix -%}
 {%- assign tooltip_id_base = include.id | default: tooltip_term | slugify -%}
 {%- assign tooltip_id = 'tooltip-' | append: tooltip_id_base -%}
-{%- if tooltip_definition and tooltip_term -%}<span class="glossary-term" data-tooltip-root><button type="button" class="glossary-term__trigger" aria-describedby="{{ tooltip_id }}" aria-controls="{{ tooltip_id }}" aria-expanded="false" data-tooltip-trigger>{{ tooltip_term }}</button><span class="glossary-term__tooltip" id="{{ tooltip_id }}" role="tooltip" aria-hidden="true" hidden data-tooltip-content>{{ tooltip_definition }}</span></span>{%- else -%}{{ tooltip_term }}{%- endif -%}
+{%- if tooltip_definition and tooltip_term -%}<span class="glossary-term" data-tooltip-root><button type="button" class="glossary-term__trigger" aria-describedby="{{ tooltip_id }}" aria-controls="{{ tooltip_id }}" aria-expanded="false" data-tooltip-trigger>{{ tooltip_term }}</button><template data-tooltip-template>{{ tooltip_definition | replace: '](#', glossary_link_prefix | replace: '/NEDSS-SystemAdminGuide/docs/glossary.html#', glossary_href_prefix | markdownify }}</template><span class="glossary-term__tooltip" id="{{ tooltip_id }}" role="tooltip" aria-hidden="true" hidden data-tooltip-content></span></span>{%- else -%}{{ tooltip_term }}{%- endif -%}

@@ -4,12 +4,53 @@ document.addEventListener('DOMContentLoaded', function () {
     return;
   }
 
+  var closeDelay = 120;
+
+  function ensureContent(root) {
+    var content = root.querySelector('[data-tooltip-content]');
+    if (!content) {
+      return null;
+    }
+
+    if (content.dataset.tooltipHydrated === 'true') {
+      return content;
+    }
+
+    var template = root.querySelector('[data-tooltip-template]');
+    if (template) {
+      var decoder = document.createElement('textarea');
+      decoder.innerHTML = template.innerHTML;
+      content.innerHTML = decoder.value;
+    }
+
+    content.dataset.tooltipHydrated = 'true';
+    return content;
+  }
+
+  function clearCloseTimer(root) {
+    if (root.tooltipCloseTimer) {
+      window.clearTimeout(root.tooltipCloseTimer);
+      root.tooltipCloseTimer = null;
+    }
+  }
+
+  function scheduleClose(root) {
+    clearCloseTimer(root);
+    root.tooltipCloseTimer = window.setTimeout(function () {
+      if (!root.matches(':hover') && !root.matches(':focus-within')) {
+        setOpen(root, false);
+      }
+    }, closeDelay);
+  }
+
   function setOpen(root, open) {
     var trigger = root.querySelector('[data-tooltip-trigger]');
-    var content = root.querySelector('[data-tooltip-content]');
+    var content = ensureContent(root);
     if (!trigger || !content) {
       return;
     }
+
+    clearCloseTimer(root);
 
     trigger.setAttribute('aria-expanded', open ? 'true' : 'false');
     if (open) {
@@ -42,14 +83,23 @@ document.addEventListener('DOMContentLoaded', function () {
       setOpen(root, true);
     });
 
+    var content = root.querySelector('[data-tooltip-content]');
+    if (content) {
+      content.addEventListener('mouseenter', function () {
+        setOpen(root, true);
+      });
+
+      content.addEventListener('mouseleave', function () {
+        scheduleClose(root);
+      });
+    }
+
     trigger.addEventListener('focus', function () {
       setOpen(root, true);
     });
 
     root.addEventListener('mouseleave', function () {
-      if (!root.matches(':focus-within')) {
-        setOpen(root, false);
-      }
+      scheduleClose(root);
     });
 
     root.addEventListener('focusout', function () {

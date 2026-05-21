@@ -644,6 +644,8 @@ Use the `term-tooltip` include for glossary-style terms that need an inline defi
 1. Add or update the term definition in `_data/glossary.yml`.
 1. Reference the term inline using the include.
 1. Use a page-unique `id` value for each tooltip instance.
+1. If a page already defines the term in plain language on first mention, keep that first mention as-is and use the include on later mentions.
+1. If the first mention is the only place the term appears or the usage is ambiguous, leave a note for review instead of forcing a tooltip.
 
 **Data-driven definition (preferred):**
 
@@ -665,6 +667,12 @@ Use the `term-tooltip` include for glossary-style terms that need an inline defi
 
 ```markdown
 NBS 7 runs on {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-home" %} and relies on Terraform.
+```
+
+When a page introduces a term plainly first, follow-on uses can use the include:
+
+```markdown
+The content assumes familiarity with your cloud platform, {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-audience" %}, Terraform, Helm, and related administration tasks.
 ```
 
 ### Tooltip accessibility verification checklist

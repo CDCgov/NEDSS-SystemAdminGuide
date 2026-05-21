@@ -16,11 +16,17 @@ document.addEventListener('DOMContentLoaded', function () {
       return content;
     }
 
-    var template = root.querySelector('[data-tooltip-template]');
-    if (template) {
-      var decoder = document.createElement('textarea');
-      decoder.innerHTML = template.innerHTML;
-      content.innerHTML = decoder.value;
+    var html = root.getAttribute('data-tooltip-html');
+    if (html) {
+      content.innerHTML = html;
+
+      // Some browsers may return entity-encoded attribute values. If we still
+      // don't have rendered elements, decode once and re-apply.
+      if (!content.querySelector('*')) {
+        var decoder = document.createElement('textarea');
+        decoder.innerHTML = html;
+        content.innerHTML = decoder.value;
+      }
     }
 
     content.dataset.tooltipHydrated = 'true';

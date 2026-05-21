@@ -10,7 +10,7 @@ redirect_from:
 
 # Quick start (AWS)
 
-This page provides a streamlined path to deploy NBS 7 infrastructure and core microservices in AWS. It is intended for experienced administrators familiar with AWS, [Kubernetes](https://kubernetes.io/), [Helm](https://helm.sh/), and [Terraform](https://www.terraform.io/).
+This page provides a streamlined path to deploy {% include term-tooltip.html key="nbs-7" term="NBS 7" id="nbs-7-quickstart" %} infrastructure and core microservices in {% include term-tooltip.html key="aws" term="AWS" id="aws-quickstart" %}. It is intended for experienced administrators familiar with AWS, {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-quickstart" %} and relies on tools such as {% include term-tooltip.html key="terraform" term="Terraform" id="terraform-quickstart" %}, and {% include term-tooltip.html key="helm" term="Helm" id="helm-quickstart" %}.
 
 ## On this page
 {: .no_toc .text-delta }

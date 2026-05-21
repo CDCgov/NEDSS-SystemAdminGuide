@@ -34,7 +34,7 @@
 
 - term: AWS
   definition: |-
-    **Amazon Web Services.** A public cloud platform. Often used with services such as [Amazon EKS](#amazon-eks), [Amazon MSK](#amazon-msk), [Amazon EFS](#amazon-efs), [Amazon RDS](#amazon-rds), [Amazon S3](#amazon-s3), [AWS KMS](#kms), [Amazon Managed Service for Prometheus](#amp), and [Amazon Managed Grafana](#amg). See also [Microsoft Azure](#microsoft-azure).
+    **Amazon Web Services.** A public cloud platform. See also [Microsoft Azure](#microsoft-azure).
 
 - term: Azure
   definition: |-
@@ -306,7 +306,7 @@
 
 - term: Microsoft Azure
   definition: |-
-    A public cloud platform. Often used with services such as [AKS](#azure-kubernetes-service), [HDInsight](#hdinsight), [Azure Files](#azure-files), [Azure SQL](#azure-sql), [Azure Blob Storage](#azure-blob-storage), [Azure Key Vault](#azure-key-vault), and [Azure Monitor](#azure-monitor). See also [AWS](#aws).
+    A public cloud platform. See also [AWS](#aws).
 
 - term: Microsoft Entra ID
   definition: |-

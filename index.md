@@ -31,7 +31,7 @@ The content is centered on system administration. It covers readiness and planni
 
 ## Runtime environment support
 
-NBS 7 supports AWS and Azure as runtime options. The platform uses a cloud-agnostic approach, and the deployment content includes guidance for both supported providers. NBS 7 runs on {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-home" %} and relies on tools such as [Terraform](https://developer.hashicorp.com/terraform) and [Helm](https://helm.sh/) to provision and manage infrastructure and services.
+NBS 7 supports {% include term-tooltip.html key="aws" term="AWS" id="aws-home" %} and {% include term-tooltip.html key="microsoft-azure" term="Azure" id="azure-home" %} as runtime options. The platform uses a cloud-agnostic approach, and the deployment content includes guidance for both supported providers. NBS 7 runs on {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-home" %} and relies on tools such as {% include term-tooltip.html key="terraform" term="Terraform" id="terraform-home" %}, and {% include term-tooltip.html key="helm" term="Helm" id="helm-home" %} to provision and manage infrastructure and services.
 
 ## Intended audience
 

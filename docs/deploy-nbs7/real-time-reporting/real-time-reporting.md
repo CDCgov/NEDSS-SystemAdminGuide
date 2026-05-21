@@ -123,7 +123,7 @@ If you host your NBS 6 database on Amazon RDS, use the following steps to perfor
 ```sql
    exec msdb.dbo.rds_backup_database
    @source_db_name='RDB',
-   @s3_arn_to_backup_to='arn:aws:s3:::cdc-nbs-state-upload-shared/Classic-6.0.16/rdb_classic_2024_07_22_5pmet.bak',
+   @s3_arn_to_backup_to='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
    @type='FULL'
 ```
 
@@ -138,7 +138,7 @@ If you host your NBS 6 database on Amazon RDS, use the following steps to perfor
 ```sql
    exec msdb.dbo.rds_restore_database
    @restore_db_name='rdb_modern',
-   @s3_arn_to_restore_from='arn:aws:s3:::cdc-nbs-state-upload-shared/Classic-6.0.16/rdb_classic_gdit_07_10_5pmet.bak',
+   @s3_arn_to_restore_from='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
    @type='FULL';
 ```
 

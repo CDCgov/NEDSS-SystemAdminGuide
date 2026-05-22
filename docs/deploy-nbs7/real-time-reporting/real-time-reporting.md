@@ -146,7 +146,9 @@ This parameter is required to enable Change Data Capture on Amazon RDS. If it is
 
 ### Back up and restore RDB on Amazon RDS
 
-If you host your NBS 6 database on Amazon RDS, use the following steps to perform a backup and restore.
+Restoring RDB under a new name within the same instance requires the RDS backup and restore stored procedures. Use the steps below instead of the AWS Management Console snapshot restore functionality, which creates a new DB instance rather than a new database within an existing instance.
+
+Use the following steps to perform a backup and restore of your NBS 6 database on Amazon RDS.
 
 1. Open a SQL client and connect to your SQL Server instance.
 1. Run the following procedure to back up RDB to S3:
@@ -258,7 +260,7 @@ Complete these one-time onboarding steps for RTR setup.
 
 ### Troubleshooting Change Data Capture
 
-If Change Data Capture does not produce data after `rdb_modern` is restored, run the following script. This command assigns database ownership to the `sa` account, which has unrestricted access to your SQL Server instance. Before running it, confirm that the `sa` account is secured and that granting it ownership of `rdb_modern` is consistent with your jurisdiction's security policy.
+If Change Data Capture does not produce data after `rdb_modern` is restored, you can assign database ownership to the `sa` account, which has unrestricted access to your SQL Server instance. Before running it, confirm that the `sa` account is secured and that granting it ownership of `rdb_modern` is consistent with your jurisdiction's security policy. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) for guidance on reverting database ownership after Change Data Capture is established.
 
 ```sql
 USE NBS_ODSE;

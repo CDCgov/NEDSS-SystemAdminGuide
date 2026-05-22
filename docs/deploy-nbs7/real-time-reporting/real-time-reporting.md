@@ -91,27 +91,58 @@ If you are on the **rdb_modern path**, complete this section. If you are on the 
 
 RTR requires a dedicated reporting database. To create `rdb_modern`, you restore a copy of `RDB` under a new name. This keeps the classic ETL-hydrated `RDB` intact and available while `rdb_modern` hosts the data structures the RTR pipeline requires.
 
->Full setup procedures for **SQL Server on Amazon EC2 and Azure SQL** deployments are not yet available in this guide. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) for guidance.
+> Full setup procedures for **SQL Server on Amazon EC2 and Azure SQL** deployments are not yet available in this guide. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) for guidance.
 {: .important }
 
-### Amazon RDS prerequisites for rdb_modern setup
+### Enable Backup and Restore on Amazon RDS
 
-If you host your NBS 6 database on Amazon RDS, verify the following before proceeding.
+If you host your NBS 6 database on Amazon RDS, verify that the Backup and Restore option is enabled before proceeding. If it is already enabled, move on to [Enable ad hoc distributed queries](#enable-ad-hoc-distributed-queries).
 
-1. Verify that the **Backup and Restore** option is enabled for your Amazon RDS SQL Server instance:
-   1. Sign in to the AWS Management Console and navigate to **RDS**.
-   1. Select your SQL Server instance and open the **Options** group.
-   1. Confirm that the **Backup and Restore** option is enabled.
+1. Sign in to the AWS Management Console and navigate to the **Aurora and RDS** service console.
+1. Navigate to **Databases**, choose your SQL Server instance, and view the **Summary** and **Configuration** sections to find the **Engine** and **Engine version** values that you need in the next steps.
+1. Select **Option groups** from the navigation sidebar and choose the option group attached to your DB instance.
+1. Review the **Options** section and confirm that **SQLSERVER_BACKUP_RESTORE** is listed.
+   - If it is listed, no action is needed. Proceed to [Enable ad hoc distributed queries](#enable-ad-hoc-distributed-queries).
+   - If it is not listed, continue with the steps below to create a custom option group.
+1. Navigate to **Option groups** and select **Create group**. Configure the following:
+   - **Name:** Enter a descriptive name for your custom option group such as `sqlserver-backup-restore-se-15-00`.
+   - **Engine:** Select the SQL Server engine edition that matches your DB instance.
+   - **Major engine version:** Select the version that matches your DB instance.
+1. Select **Create** to save the empty group.
+1. Select your new option group from the list, choose **Add option**, and configure the following:
+   - **Option name:** Select **SQLSERVER_BACKUP_RESTORE**.
+   - **S3 bucket:** Select the S3 bucket where backups will be stored.
+   - **IAM role:** Select or create an IAM role that has permission to access the S3 bucket you use for backups.
+1. Select **Add option** to finish configuring the option group.
+1. Navigate to **Databases** and select your SQL Server DB instance.
+1. Select **Modify**.
+1. In the **Additional configuration** section, locate the **Option group** field and select your new custom option group.
+1. Select **Continue** and choose whether to apply the change immediately or during the next scheduled maintenance window. If your NBS 6 instance is running, applying immediately might cause a brief outage. Schedule the change during a maintenance window and notify NBS 6 users before proceeding.
+1. Select **Modify DB instance** to confirm your changes.
 
-1. Verify that the `ad hoc distributed queries` parameter is enabled on your RDS parameter group. This parameter is required to enable Change Data Capture on Amazon RDS.
+### Enable ad hoc distributed queries
 
-   In the AWS Management Console, navigate to **RDS > Parameter groups** and confirm the following setting is present:
+This parameter is required to enable Change Data Capture on Amazon RDS. If it is already enabled, move on to [Back up and restore RDB on Amazon RDS](#back-up-and-restore-rdb-on-amazon-rds).
 
-   ```hcl
-   { name = "ad hoc distributed queries", value = "1" }
-   ```
-
-   If the parameter is not set, add it to your parameter group before proceeding. Changes to parameter groups may require a database restart.
+1. Sign in to the AWS Management Console and navigate to the **Aurora and RDS** service console.
+1. Navigate to **Databases**, choose your SQL Server instance, and view the **Summary** and **Configuration** sections to find the **Engine**, **Engine version**, and **DB instance parameter group** values that you need in the next steps.
+1. Select **Parameter groups** from the navigation sidebar and choose the parameter group attached to your DB instance.
+1. Search for the `ad hoc distributed queries` parameter and confirm it is set to `1`.
+   - If the parameter is set to `1`, no action is needed. Proceed to [Back up and restore RDB on Amazon RDS](#back-up-and-restore-rdb-on-amazon-rds).
+   - If the parameter is set to `0` and your instance uses a custom parameter group, update the value to `1`, select **Save changes**, and proceed to [Back up and restore RDB on Amazon RDS](#back-up-and-restore-rdb-on-amazon-rds).
+   - If your instance uses the default parameter group, you cannot edit it directly. Continue with the steps below to create a custom parameter group.
+1. Select **Create parameter group** and configure the following:
+   - **Name:** Enter a descriptive name such as `enable-ad-hoc-distributed-queries`.
+   - **Engine type:** Select the SQL Server engine edition that matches your DB instance.
+   - **Parameter group family:** Select the engine and version that matches your DB instance.
+1. Select **Create** to save the parameter group.
+1. Open the new parameter group and select **Edit**.
+1. Search for `ad hoc distributed queries` and set the value to `1`.
+1. Navigate to **Databases** and select your SQL Server DB instance.
+1. Select **Modify**.
+1. In the **Additional configuration** section, locate the **Parameter group** field and select your new custom parameter group.
+1. Select **Continue** and choose whether to apply the change immediately or during the next scheduled maintenance window. If your NBS 6 instance is running, applying immediately might cause a brief outage. Schedule the change during a maintenance window and notify NBS 6 users before proceeding.
+1. Select **Modify DB instance** to confirm your changes.
 
 ### Back up and restore RDB on Amazon RDS
 
@@ -163,10 +194,10 @@ Complete these one-time onboarding steps for RTR setup.
    1. **Create RTR microservice user logins:** Create dedicated user accounts for each RTR microservice. These users are referenced in Helm values for RTR services.
       - Script location: [NEDSS-DataReporting onboarding user creation scripts][nedss-datareporting-onboarding-user-scripts]
 
-1. **Create Kubernetes secrets.** Kubernetes secrets are required for RTR services to access the database. Create secrets for each service user from step 1. Skip this step if you already created secrets in [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
-
-   1. **Create secrets for each service user:** Include the admin user from step 1a. Each secret should include the database username and password.
-      - Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]
+1. **Create Kubernetes secrets for each service user:** Include the admin user from step 1a. Each secret should include the database username and password. 
+   For steps to create secrets, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment,html#create-secrets-in-your-cluster).
+   
+   - Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]
 
 1. **Create required database objects.** Run the scripts for your chosen path:
 
@@ -178,7 +209,7 @@ Complete these one-time onboarding steps for RTR setup.
    upgrade_db.bat server_name <database> username password
    ```
 
-1. **Load data and enable Change Data Capture.** This one-time step is required after all database objects are created in step 3.
+1. **Load data and enable Change Data Capture.** This one-time step is required after all database objects are created in the previous step.
 
    - **Liquibase:** The `--load-data` flag is not required when using Liquibase. Proceed to [Deploy RTR services](#deploy-rtr-services).
 
@@ -225,14 +256,14 @@ Complete these one-time onboarding steps for RTR setup.
 
 1. **Back up all databases.** Before going live, take backups of `NBS_ODSE`, `NBS_SRTE`, `RDB`, and `rdb_modern` (if applicable).
 
-> If Change Data Capture is not producing data after `rdb_modern` is restored, run the following script:
->
-> ```sql
-> USE NBS_ODSE;
-> EXEC sp_changedbowner 'sa';
-> ```
->
-{: .note }
+### Troubleshooting Change Data Capture
+
+If Change Data Capture does not produce data after `rdb_modern` is restored, run the following script. This command assigns database ownership to the `sa` account, which has unrestricted access to your SQL Server instance. Before running it, confirm that the `sa` account is secured and that granting it ownership of `rdb_modern` is consistent with your jurisdiction's security policy.
+
+```sql
+USE NBS_ODSE;
+EXEC sp_changedbowner 'sa';
+```
 
 ## Ongoing database upgrades
 
@@ -245,15 +276,16 @@ After onboarding, future enhancements are delivered using one of these approache
 
 ## Deploy RTR services
 
-RTR services use Kubernetes secrets for database credentials. Create secrets for each microservice user and the admin user. The secrets should include the database username and password for each service user. For more information, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
-{: .important }
-
-Deploy the RTR services in the following order:
+Next, deploy the RTR services in the following order:
 
 1. [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html)
 1. [Debezium](../../deploy-nbs7/real-time-reporting/debezium.html)
 1. [Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html)
 1. [Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
+
+> Confirm that Kubernetes secrets exist for each RTR service user and the admin 
+> user before deploying. If you have not yet created them, see [Create service users and database objects](#create-service-users-and-database-objects).
+{: .important }
 
 [nedss-datareporting-liquibase-service]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service>
 [nedss-datareporting-onboarding-user-scripts]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation>

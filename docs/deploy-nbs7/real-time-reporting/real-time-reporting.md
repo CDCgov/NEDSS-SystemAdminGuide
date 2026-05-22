@@ -58,7 +58,7 @@ If you encounter issues during database setup, contact support at <mailto:nbs@cd
    - `PHCMartETL.bat`
    - `covid19ETL.bat`
 
-   > Back up the RDB database before you proceed. This step cannot be undone.
+   > Back up the `RDB` database before you proceed. This step cannot be undone.
    {: .warning }
 
 1. Choose a database path and use it consistently throughout this guide. Both paths support Liquibase or manual installation.
@@ -146,47 +146,47 @@ This parameter is required to enable Change Data Capture on Amazon RDS. If it is
 
 ### Back up and restore RDB on Amazon RDS
 
-Restoring RDB under a new name within the same instance requires the RDS backup and restore stored procedures. Use the steps below instead of the AWS Management Console snapshot restore functionality, which creates a new DB instance rather than a new database within an existing instance.
+Restoring `RDB` under a new name within the same instance requires the RDS backup and restore stored procedures. Use the steps below instead of the AWS Management Console snapshot restore functionality, which creates a new DB instance rather than a new database within an existing instance.
 
 Use the following steps to perform a backup and restore of your NBS 6 database on Amazon RDS.
 
 1. Open a SQL client and connect to your SQL Server instance.
-1. Run the following procedure to back up RDB to S3:
+1. Run the following procedure to back up `RDB` to Amazon S3:
 
-```sql
-   exec msdb.dbo.rds_backup_database
-   @source_db_name='RDB',
-   @s3_arn_to_backup_to='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
-   @type='FULL'
-```
-
-1. Run the following procedure to check the status:
-
-```sql
-   exec msdb.dbo.rds_task_status;
-```
-
-1. Run the following procedure to restore RDB as `rdb_modern`:
-
-```sql
-   exec msdb.dbo.rds_restore_database
-   @restore_db_name='rdb_modern',
-   @s3_arn_to_restore_from='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
-   @type='FULL';
-```
+   ```sql
+      exec msdb.dbo.rds_backup_database
+      @source_db_name='RDB',
+      @s3_arn_to_backup_to='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
+      @type='FULL'
+   ```
 
 1. Run the following procedure to check the status:
 
-```sql
-   exec msdb.dbo.rds_task_status;
-```
+   ```sql
+      exec msdb.dbo.rds_task_status;
+   ```
+
+1. Run the following procedure to restore `RDB` as `rdb_modern`:
+
+   ```sql
+      exec msdb.dbo.rds_restore_database
+      @restore_db_name='rdb_modern',
+      @s3_arn_to_restore_from='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
+      @type='FULL';
+   ```
+
+1. Run the following procedure to check the status:
+
+   ```sql
+      exec msdb.dbo.rds_task_status;
+   ```
 
 ## Create service users and database objects
 
 Complete these one-time onboarding steps for RTR setup.
 
 > Generate passwords for each service user before running the scripts. Password generation can take several minutes. Do not use spaces, equal signs (`=`), or colons (`:`). These characters cause script execution failures.
-{: .warning }
+{: .important }
 
 1. **Create database users.** Each user should have only the permissions required for its role. Review the scripts and update the `PASSWORD` values before execution.
 
@@ -196,9 +196,8 @@ Complete these one-time onboarding steps for RTR setup.
    1. **Create RTR microservice user logins:** Create dedicated user accounts for each RTR microservice. These users are referenced in Helm values for RTR services.
       - Script location: [NEDSS-DataReporting onboarding user creation scripts][nedss-datareporting-onboarding-user-scripts]
 
-1. **Create Kubernetes secrets for each service user:** Include the admin user from step 1a. Each secret should include the database username and password. 
-   For steps to create secrets, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment,html#create-secrets-in-your-cluster).
-   
+1. **Create Kubernetes secrets for each service user:** Include the admin user from step 1a. Each secret should include the database username and password. For steps to create secrets, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
+
    - Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]
 
 1. **Create required database objects.** Run the scripts for your chosen path:
@@ -218,7 +217,7 @@ Complete these one-time onboarding steps for RTR setup.
    - **Manual:** Navigate to the [02_onboarding_script_data_load][nedss-datareporting-onboarding-data-load] and run all of the scripts in the order listed in the repository.
 
 1. **Verify Change Data Capture.** `is_cdc_enabled=1` indicates successful configuration.
-   
+
    >In the following statements, `cdc` appears as part of SQL Server column and parameter names and refers to **Change Data Capture**, not the Centers for Disease Control and Prevention.
    {: .note }
 
@@ -247,46 +246,27 @@ Complete these one-time onboarding steps for RTR setup.
 
     <div style="display: flex; gap: 2rem;">
       <figure>
-        <figcaption><strong>Change Data Capture-enabled tables in NBS_ODSE:</strong></figcaption>
-        <img src="images/cdc_enabled_odse_tables.png" alt="Query results showing 19 Change Data Capture-enabled tables in NBS_ODSE, all with is_tracked_by_cdc set to YES">
+        <figcaption>Change Data Capture tables (NBS_ODSE)</figcaption>
+        <img src="images/cdc_enabled_odse_tables.png" alt="Query results showing 19 Change Data Capture enabled tables in NBS_ODSE, all with is_tracked_by_cdc set to YES">
       </figure>
       <figure>
-        <figcaption><strong>Change Data Capture-enabled tables in NBS_SRTE:</strong></figcaption>
-        <img src="images/cdc_enabled_srte_tables.png" alt="Query results showing 44 Change Data Capture-enabled tables in NBS_SRTE, all with is_tracked_by_cdc set to YES">
+        <figcaption><strong>Change Data Capture tables (NBS_SRTE)</strong></figcaption>
+        <img src="images/cdc_enabled_srte_tables.png" alt="Query results showing 44 Change Data Capture enabled tables in NBS_SRTE, all with is_tracked_by_cdc set to YES">
       </figure>
     </div>
 
 1. **Back up all databases.** Before going live, take backups of `NBS_ODSE`, `NBS_SRTE`, `RDB`, and `rdb_modern` (if applicable).
 
-### Troubleshooting Change Data Capture
-
-If Change Data Capture does not produce data after `rdb_modern` is restored, you can assign database ownership to the `sa` account, which has unrestricted access to your SQL Server instance. Before running it, confirm that the `sa` account is secured and that granting it ownership of `rdb_modern` is consistent with your jurisdiction's security policy. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) for guidance on reverting database ownership after Change Data Capture is established.
-
-```sql
-USE NBS_ODSE;
-EXEC sp_changedbowner 'sa';
-```
-
-## Ongoing database upgrades
-
-After onboarding, future enhancements are delivered using one of these approaches:
-
-- **Liquibase:** Run Liquibase with the {{ site.version_latest }} release tag. See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html).
-- **Manual:** Run the scripts in [manual_deployment][nedss-datareporting-manual-deployment]. Onboarding scripts are excluded from upgrade runs.
-
----
-
 ## Deploy RTR services
 
-Next, deploy the RTR services in the following order:
+Now that you have completed the onboarding setup, deploy the RTR services in the following order:
 
 1. [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html)
 1. [Debezium](../../deploy-nbs7/real-time-reporting/debezium.html)
 1. [Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html)
 1. [Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
 
-> Confirm that Kubernetes secrets exist for each RTR service user and the admin 
-> user before deploying. If you have not yet created them, see [Create service users and database objects](#create-service-users-and-database-objects).
+> Confirm that Kubernetes secrets exist for each RTR service user and the admin user before deploying. If you have not yet created them, see [Create service users and database objects](#create-service-users-and-database-objects).
 {: .important }
 
 [nedss-datareporting-liquibase-service]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service>
@@ -294,3 +274,14 @@ Next, deploy the RTR services in the following order:
 [nedss-helm-k8-secrets-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/nbs-secrets.yaml>
 [nedss-datareporting-manual-deployment]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/stlt/manual_deployment>
 [nedss-datareporting-onboarding-data-load]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load>
+
+---
+
+## After onboarding: database upgrades
+
+Database upgrades might deliver new RTR features and schema changes included in each NBS 7 release. You might also perform upgrades in response to security patches or other infrastructure changes in your environment.
+
+To apply database upgrades, use the same approach you selected during onboarding:
+
+- **Liquibase:** Run Liquibase with the {{ site.version_latest }} release tag. See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html).
+- **Manual:** Run the scripts in [manual_deployment][nedss-datareporting-manual-deployment]. Onboarding scripts are excluded from upgrade runs.

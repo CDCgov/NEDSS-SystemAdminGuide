@@ -31,14 +31,16 @@ This guide covers steps to install RTR with Helm charts. RTR transfers data from
 1. TOC
 {:toc}
 
-The database scripts referenced throughout this guide are maintained in the [NEDSS-DataReporting][nedss-datareporting-liquibase-service] repository. You can create the required database objects through Liquibase, which will automatically implement database schema changes, or you can manually install database schema changes. Both options are referenced in the relevant sections.
-{: .important }
-
-If you encounter issues during database setup, contact support at <mailto:nbs@cdc.gov>.
+Complete the sections on this page in order. Each section depends on the previous one. If you encounter issues during database setup, contact support at <mailto:nbs@cdc.gov>.
 
 ## Prerequisites
 
-1. RTR installation requires NBS 6.0.18.1 or higher, but the latest 6x version is best practice. To verify your baseline NBS release version, run one of the following queries:
+Before you begin, verify that your environment meets the following requirements and choose a database installation method. The method you choose applies throughout this guide.
+
+The database scripts referenced throughout this guide are maintained in the [NEDSS-DataReporting][nedss-datareporting-liquibase-service] repository. You can create the required database objects through Liquibase, which will automatically implement database schema changes, or you can manually install database schema changes. Both options are referenced in the relevant sections.
+{: .important }
+
+1. RTR installation requires NBS 6.0.18.1 or higher, but the latest 6x version is suggested. To verify your baseline NBS release version, run one of the following queries:
 
    ```sql
    USE NBS_ODSE;
@@ -67,13 +69,13 @@ If you encounter issues during database setup, contact support at <mailto:nbs@cd
 
 1. Set the environment variable for your chosen path.
 
-   - **RDB path:** Insert the following value into `NBS_Configuration`: <!-- [SME REVIEW: confirm NBS_Configuration table name and ENV variable phrasing] -->
+   - **RDB path:** Insert the following value into `NBS_Configuration`:
 
       ```sql
       IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_Configuration WHERE config_key ='ENV' AND config_value ='PROD')
       INSERT INTO NBS_ODSE.dbo.NBS_Configuration
       (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
-      VALUES(N'ENV', N'PROD', N'RTR reporting database', N'Indicates scripts should be run against RDB database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
+      VALUES(N'ENV', N'PROD', N'RTR reporting database', N'Indicates scripts should be run against RDB database', NULL, N'UAT, PROD', N'RTR', N'7.12.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
       ```
 
    - **rdb_modern path:** This setting overrides the default `RDB` during script execution unless a script explicitly prompts for a database.
@@ -82,7 +84,7 @@ If you encounter issues during database setup, contact support at <mailto:nbs@cd
       IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_Configuration WHERE config_key ='ENV' AND config_value ='UAT')
       INSERT INTO NBS_ODSE.dbo.NBS_Configuration
       (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
-      VALUES(N'ENV', N'UAT', N'RTR reporting database', N'Indicates scripts should be run against UAT rdb_modern database', NULL, N'UAT, PROD', N'RTR', N'7.11.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
+      VALUES(N'ENV', N'UAT', N'RTR reporting database', N'Indicates scripts should be run against UAT rdb_modern database', NULL, N'UAT, PROD', N'RTR', N'7.12.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
       ```
 
 ## Set up the rdb_modern database
@@ -103,7 +105,7 @@ If you host your NBS 6 database on Amazon RDS, verify that the Backup and Restor
 1. Select **Option groups** from the navigation sidebar and choose the option group attached to your DB instance.
 1. Review the **Options** section and confirm that **SQLSERVER_BACKUP_RESTORE** is listed.
    - If it is listed, no action is needed. Proceed to [Enable ad hoc distributed queries](#enable-ad-hoc-distributed-queries).
-   - If it is not listed, continue with the steps below to create a custom option group.
+   - If it is not listed, continue with the next steps to create a custom option group.
 1. Navigate to **Option groups** and select **Create group**. Configure the following:
    - **Name:** Enter a descriptive name for your custom option group such as `sqlserver-backup-restore-se-15-00`.
    - **Engine:** Select the SQL Server engine edition that matches your DB instance.
@@ -112,12 +114,12 @@ If you host your NBS 6 database on Amazon RDS, verify that the Backup and Restor
 1. Select your new option group from the list, choose **Add option**, and configure the following:
    - **Option name:** Select **SQLSERVER_BACKUP_RESTORE**.
    - **S3 bucket:** Select the S3 bucket where backups will be stored.
-   - **IAM role:** Select or create an IAM role that has permission to access the S3 bucket you use for backups.
+   - **IAM role:** Select or create an Amazon IAM role that has permission to access the S3 bucket you use for backups.
 1. Select **Add option** to finish configuring the option group.
 1. Navigate to **Databases** and select your SQL Server DB instance.
 1. Select **Modify**.
 1. In the **Additional configuration** section, locate the **Option group** field and select your new custom option group.
-1. Select **Continue** and choose whether to apply the change immediately or during the next scheduled maintenance window. If your NBS 6 instance is running, applying immediately might cause a brief outage. Schedule the change during a maintenance window and notify NBS 6 users before proceeding.
+1. Select **Continue** and choose whether to apply the change immediately or during the next scheduled maintenance window. If your NBS 6 instance is running, applying immediately might cause a brief outage. Schedule the change during a maintenance window and notify users before proceeding.
 1. Select **Modify DB instance** to confirm your changes.
 
 ### Enable ad hoc distributed queries
@@ -130,7 +132,7 @@ This parameter is required to enable Change Data Capture on Amazon RDS. If it is
 1. Search for the `ad hoc distributed queries` parameter and confirm it is set to `1`.
    - If the parameter is set to `1`, no action is needed. Proceed to [Back up and restore RDB on Amazon RDS](#back-up-and-restore-rdb-on-amazon-rds).
    - If the parameter is set to `0` and your instance uses a custom parameter group, update the value to `1`, select **Save changes**, and proceed to [Back up and restore RDB on Amazon RDS](#back-up-and-restore-rdb-on-amazon-rds).
-   - If your instance uses the default parameter group, you cannot edit it directly. Continue with the steps below to create a custom parameter group.
+   - If your instance uses the default parameter group, you cannot edit it directly. Continue with the next steps to create a custom parameter group.
 1. Select **Create parameter group** and configure the following:
    - **Name:** Enter a descriptive name such as `enable-ad-hoc-distributed-queries`.
    - **Engine type:** Select the SQL Server engine edition that matches your DB instance.
@@ -141,12 +143,12 @@ This parameter is required to enable Change Data Capture on Amazon RDS. If it is
 1. Navigate to **Databases** and select your SQL Server DB instance.
 1. Select **Modify**.
 1. In the **Additional configuration** section, locate the **Parameter group** field and select your new custom parameter group.
-1. Select **Continue** and choose whether to apply the change immediately or during the next scheduled maintenance window. If your NBS 6 instance is running, applying immediately might cause a brief outage. Schedule the change during a maintenance window and notify NBS 6 users before proceeding.
+1. Select **Continue** and choose whether to apply the change immediately or during the next scheduled maintenance window. If your NBS 6 instance is running, applying immediately might cause a brief outage. Schedule the change during a maintenance window and notify users before proceeding.
 1. Select **Modify DB instance** to confirm your changes.
 
 ### Back up and restore RDB on Amazon RDS
 
-Restoring `RDB` under a new name within the same instance requires the RDS backup and restore stored procedures. Use the steps below instead of the AWS Management Console snapshot restore functionality, which creates a new DB instance rather than a new database within an existing instance.
+Restoring `RDB` under a new name within the same instance requires the RDS backup and restore stored procedures. Use the following steps to create a new database within an existing instance. Note that the AWS Management Console snapshot restore functionality creates an entirely new DB instance and cannot be used for this purpose.
 
 Use the following steps to perform a backup and restore of your NBS 6 database on Amazon RDS.
 
@@ -183,45 +185,43 @@ Use the following steps to perform a backup and restore of your NBS 6 database o
 
 ## Create service users and database objects
 
-Complete these one-time onboarding steps for RTR setup.
+Complete the following steps to create the database users, Kubernetes secrets, and database objects that the RTR pipeline requires before [Change Data Capture](#enable-change-data-capture) can be enabled.
 
-> Generate passwords for each service user before running the scripts. Password generation can take several minutes. Do not use spaces, equal signs (`=`), or colons (`:`). These characters cause script execution failures.
+> Generate passwords for each service user before running the scripts. Password generation scripts can take several minutes to run. Do not use spaces, equal signs (`=`), or colons (`:`). These characters cause script execution failures.
 {: .important }
 
-1. **Create database users.** Each user should have only the permissions required for its role. Review the scripts and update the `PASSWORD` values before execution.
+1. **Create admin user.** This user provides Liquibase permissions to maintain required database components for RTR and enable [Change Data Capture](#enable-change-data-capture), which streams row-level database changes to the RTR pipeline. Review the script and update the `PASSWORD` value before execution. Script location: [NEDSS-DataReporting onboarding user creation scripts][nedss-datareporting-onboarding-user-scripts].
 
-   1. **Create admin user:** This user provides Liquibase permissions to maintain required database components for RTR and enable Change Data Capture on tables.
-      - Script location: [NEDSS-DataReporting onboarding user creation scripts][nedss-datareporting-onboarding-user-scripts]
+1. **Create RTR microservice user logins.** Create dedicated user accounts for each RTR microservice. These users are referenced in Helm values for RTR services. Review the scripts and update the `PASSWORD` values before execution. Script location: [NEDSS-DataReporting onboarding user creation scripts][nedss-datareporting-onboarding-user-scripts].
 
-   1. **Create RTR microservice user logins:** Create dedicated user accounts for each RTR microservice. These users are referenced in Helm values for RTR services.
-      - Script location: [NEDSS-DataReporting onboarding user creation scripts][nedss-datareporting-onboarding-user-scripts]
-
-1. **Create Kubernetes secrets for each service user:** Include the admin user from step 1a. Each secret should include the database username and password. For steps to create secrets, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
-
-   - Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]
+1. **Create Kubernetes secrets for each service user.** Include the admin user from step 1. Each secret should include the database username and password. Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]. For steps to create secrets, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
 
 1. **Create required database objects.** Run the scripts for your chosen path:
 
-   - **Liquibase:** See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) to create all necessary objects, then return here to complete step 4.
+   - **Liquibase:** See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) to create all necessary objects, then return here to continue.
 
    - **Manual:** See the script execution sequence and `db_upgrade` script in [NEDSS-DataReporting/db-upgrade][nedss-datareporting-manual-deployment]. Run:
 
-   ```bash
-   upgrade_db.bat server_name <database> username password
-   ```
+      ```bash
+      upgrade_db.bat server_name <database> username password
+      ```
 
-1. **Load data and enable Change Data Capture.** This one-time step is required after all database objects are created in the previous step.
+## Enable Change Data Capture
 
-   - **Liquibase:** The `--load-data` flag is not required when using Liquibase. Proceed to [Deploy RTR services](#deploy-rtr-services).
+Change Data Capture (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Complete the following steps to load the initial data, enable Change Data Capture, and verify the configuration before deploying RTR services.
+
+1. **Load data and enable Change Data Capture.** This one-time step is required after all database objects are created.
+
+   - **Liquibase:** The `--load-data` flag is not required when using Liquibase. Proceed to step 2.
 
    - **Manual:** Navigate to the [02_onboarding_script_data_load][nedss-datareporting-onboarding-data-load] and run all of the scripts in the order listed in the repository.
 
 1. **Verify Change Data Capture.** `is_cdc_enabled=1` indicates successful configuration.
 
-   >In the following statements, `cdc` appears as part of SQL Server column and parameter names and refers to **Change Data Capture**, not the Centers for Disease Control and Prevention.
+   > In the following statements, `cdc` appears as part of SQL Server column and parameter names and refers to **Change Data Capture**, not the Centers for Disease Control and Prevention.
    {: .note }
 
-   ```sql
+```sql
    SELECT name, is_cdc_enabled
    FROM sys.databases;
 
@@ -240,34 +240,34 @@ Complete these one-time onboarding steps for RTR setup.
      CASE WHEN is_tracked_by_cdc = 1 THEN 'YES' ELSE 'NO' END AS is_tracked_by_cdc
    FROM sys.tables
    WHERE is_tracked_by_cdc = 1;
-   ```
+```
 
    The following images show expected query results for a successful Change Data Capture configuration.
 
-    <div style="display: flex; gap: 2rem;">
-      <figure>
-        <figcaption>Change Data Capture tables (NBS_ODSE)</figcaption>
-        <img src="images/cdc_enabled_odse_tables.png" alt="Query results showing 19 Change Data Capture enabled tables in NBS_ODSE, all with is_tracked_by_cdc set to YES">
-      </figure>
-      <figure>
-        <figcaption><strong>Change Data Capture tables (NBS_SRTE)</strong></figcaption>
-        <img src="images/cdc_enabled_srte_tables.png" alt="Query results showing 44 Change Data Capture enabled tables in NBS_SRTE, all with is_tracked_by_cdc set to YES">
-      </figure>
-    </div>
+   <div style="display: flex; gap: 2rem;">
+     <figure>
+       <figcaption><strong>Change Data Capture tables (NBS_ODSE)</strong></figcaption>
+       <img src="images/cdc_enabled_odse_tables.png" alt="Query results showing 19 Change Data Capture enabled tables in NBS_ODSE, all with is_tracked_by_cdc set to YES">
+     </figure>
+     <figure>
+       <figcaption><strong>Change Data Capture tables (NBS_SRTE)</strong></figcaption>
+       <img src="images/cdc_enabled_srte_tables.png" alt="Query results showing 44 Change Data Capture enabled tables in NBS_SRTE, all with is_tracked_by_cdc set to YES">
+     </figure>
+   </div>
 
 1. **Back up all databases.** Before going live, take backups of `NBS_ODSE`, `NBS_SRTE`, `RDB`, and `rdb_modern` (if applicable).
 
 ## Deploy RTR services
 
-Now that you have completed the onboarding setup, deploy the RTR services in the following order:
+Now that you have completed database setup and onboarding, deploy the RTR services in the following order. Each service depends on the previous one completing successfully before deployment begins.
+
+> Confirm that Kubernetes secrets exist for each RTR service user and the admin user before deploying. If you have not yet created them, see [Create service users and database objects](#create-service-users-and-database-objects).
+{: .important }
 
 1. [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html)
 1. [Debezium](../../deploy-nbs7/real-time-reporting/debezium.html)
 1. [Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html)
 1. [Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
-
-> Confirm that Kubernetes secrets exist for each RTR service user and the admin user before deploying. If you have not yet created them, see [Create service users and database objects](#create-service-users-and-database-objects).
-{: .important }
 
 [nedss-datareporting-liquibase-service]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service>
 [nedss-datareporting-onboarding-user-scripts]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation>
@@ -279,7 +279,7 @@ Now that you have completed the onboarding setup, deploy the RTR services in the
 
 ## After onboarding: database upgrades
 
-Database upgrades might deliver new RTR features and schema changes included in each NBS 7 release. You might also perform upgrades in response to security patches or other infrastructure changes in your environment.
+Database upgrades deliver new RTR features and schema changes with each NBS 7 release. You might also perform upgrades in response to security patches or other infrastructure changes.
 
 To apply database upgrades, use the same approach you selected during onboarding:
 

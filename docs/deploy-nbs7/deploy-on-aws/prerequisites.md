@@ -12,7 +12,7 @@ description: Prepare your AWS cloud environment before you provision AWS for NBS
 # Prerequisites for AWS deployments
 {: .no_toc }
 
-Before you deploy NBS 7, make sure your environment meets the requirements in each of the following areas.
+Before you deploy NBS 7, confirm that your Amazon Web Services (AWS) environment meets the requirements in each of the following areas.
 
 > Start with the cloud-agnostic [Prerequisites for NBS 7 deployment](../prerequisites.html), then complete the AWS-specific requirements on this page.
 {: .important }
@@ -25,91 +25,81 @@ Before you deploy NBS 7, make sure your environment meets the requirements in ea
 
 ## AWS environment requirements
 
-Your AWS environment must:
+Your AWS environment must meet the following requirements:
 
-- Contain a pre-existing AWS account that contains a production instance of NBS 6 that is listed in the NBS 6 and NBS 7 compatibility matrix page (coming soon), plus related third-party products such as Rhapsody and SAS
-- Have a properly configured DNS routing infrastructure
-- Be configured to enable you to create security groups and IAM roles
-- Provide access to NBS 6 databases that are located on an MS SQL Server instance (RDS or EC2)
-- Have access to an S3 bucket to store Terraform (TF) state
+- An existing AWS account with a production instance of NBS 6 listed in the NBS 6 and NBS 7 compatibility matrix and related third-party products
+- A configured DNS routing infrastructure
+- Permissions to create security groups and AWS IAM roles
+- Access to NBS 6 databases hosted on a SQL Server instance. Two common hosting options with AWS include Amazon RDS and self-managed Amazon EC2. See [AWS services reference](../deploy-on-aws.html#aws-services-reference) for details.
+- Access to an Amazon S3 bucket to store Terraform state
 
 ## Hardware requirements
 
-### High-volume STLTs
-
-| **Type** | **Resource** | **Size** |
-|-----------|--------------|----------|
-| Container runtime environment | Amazon Elastic Kubernetes Service (Amazon EKS) | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
-| Relational Database | SQL Server 2017+ Standard or Enterprise (hosted on Amazon RDS or a self-managed Amazon EC2 instance) | New NBS 6.X.X Deployment Recommendations: [Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
-| Persistent Store | EFS | 1 TB |
-
-### Low-volume STLTs
+### Higher-volume STLTs
 
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
 | Container runtime environment | Amazon EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
-| Relational Database | Cloud Managed MS SQL Server Standard or Enterprise | New NBS 6.X.X Deployment Recommendations: [Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
-| Persistent Store | EFS | 500 GB |
+| Relational Database | SQL Server 2017+ Standard or Enterprise (hosted on Amazon RDS or a self-managed Amazon EC2 instance) | New NBS 6.X.X Deployment Recommendations: [Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
+| Persistent Store | Amazon EFS | 1 TB |
+
+### Lower-volume STLTs
+
+| **Type** | **Resource** | **Size** |
+|-----------|--------------|----------|
+| Container runtime environment | Amazon EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
+| Relational Database | SQL Server 2017+ Standard or Enterprise (hosted on Amazon RDS or a self-managed Amazon EC2 instance) | New NBS 6.X.X deployment recommendations: [Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
+| Persistent Store | Amazon EFS | 500 GB |
 
 ## Software requirements
 
-| **Software**        | **Version**                   | **Comments**                                                    |
-|---------------------|-------------------------------|-----------------------------------------------------------------|
-| Kubernetes          | 1.25+                         | Deployed as Amazon EKS by default                               |
-| Cert Manager        | 1.13                          | Deployed in Kubernetes                                          |
-| Elasticsearch       | 7.17                          | Deployed by default in Kubernetes                               |
-| Apache NiFi         | 1.19                          | Deployed in Kubernetes                                          |
-| NGINX Ingress       | 3.0.2                         | Must be deployed in Kubernetes                                  |
-| Prometheus          | 2.44                          | Deployed as AMP by default                                      |
-| Grafana             | 9.5.x                         | Deployed as AMG by default                                      |
-| FluentBit           | 1.9.x                         | Deployed in Kubernetes. Log storage can be configured.          |
-| NBS Classic         | NBS 6.0.16 (or newer version) | Reuse current NBS instance                                      |
-| SQL Server          | 2017+                         | Reuse current NBS instance                                      |
-| Kafka               | 2.8.1                         | Deployed as MSK. Needed only if running Data Ingestion Service. |
-| Keycloak            | 22.0.5+                       | Deployed in Kubernetes                                          |
+| **Software** | **Version** | **Comments** |
+|---|---|---|
+| Kubernetes | 1.25+ | Deployed as Amazon EKS by default |
+| Cert Manager | 1.13 | Deployed in Kubernetes |
+| Elasticsearch | 7.17 | Deployed by default in Kubernetes |
+| Apache NiFi | 1.19 | Deployed in Kubernetes |
+| Traefik | [confirm version] | Deployed in Kubernetes as ingress controller |
+| Prometheus | 2.44 | Deployed as Amazon Managed Service for Prometheus (AMP) by default |
+| Grafana | 9.5.x | Deployed as Amazon Managed Grafana (AMG) by default |
+| Fluent Bit | 1.9.x | Deployed in Kubernetes. Log storage can be configured. |
+| NBS Classic | 6.0.18.1 or higher | Reuse current NBS instance |
+| SQL Server | 2017+ | Reuse current NBS instance |
+| Kafka | 2.8.1 | Deployed as Amazon MSK |
+| Keycloak | 22.0.5+ | Deployed in Kubernetes |
 
 ## Management machine setup
 
-You will need a local or cloud hosted workstation (e.g. CloudShell) with the set of tools required to configure, deploy and maintain the NBS 7 system. The following tools should be installed on a local or cloud-based management machine to support this work:
+To configure, deploy, and maintain NBS 7, you need a local or cloud-hosted workstation such as AWS CloudShell with the following tools installed:
 
-- **AWS CLI**: Download and installation instructions are in the [AWS CLI documentation](https://aws.amazon.com/cli/)
-  - Instructions for getting and using AWS credentials for use with the CLI are in the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html)
-- **GitHub CLI**: Download and installation instructions are here:
-  <https://cli.github.com/>
-- **Terraform CLI**: Download and installation instructions are in the [Terraform CLI installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli)
-  *(Tested through 1.5.5 Terraform, suggest install that specific version rather than the latest non-open source version)*
+- **AWS CLI:** Download and installation instructions are in the [AWS CLI documentation](https://aws.amazon.com/cli/). For credential configuration, see the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
+- **GitHub CLI:** Download and installation instructions are at [cli.github.com](https://cli.github.com/).
+- **Terraform CLI:** Download and installation instructions are in the [Terraform CLI installation guide](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli). Version 1.5.5 has been tested with NBS 7. Installing this version is suggested over the latest non-open source version.
 - **Helm CLI**: Download and installation instructions are in the [Helm installation guide](https://helm.sh/docs/intro/install/)
-- **Kubernetes CLI**: Download and installation instructions are in the [kubectl installation guide for Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html)
-- **Optional, but nice to have, eksctl**: Download and installation instructions are in the [eksctl installation guide](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html)
+- **Kubernetes CLI (kubectl):** Download and installation instructions are in the [kubectl installation guide for Amazon EKS](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html).
+- **eksctl:** Download and installation instructions are in the [eksctl installation guide](https://docs.aws.amazon.com/eks/latest/userguide/eksctl.html).
 
 ## Network and database access requirements
 
-Installation of the NBS 7 infrastructure and microservices uses a new VPC, which is provisioned using the Terraform scripts included in [the provisioning steps](provision-aws.html).
+NBS 7 infrastructure and microservices are deployed into a new Amazon VPC, provisioned using the Terraform scripts in [Provision the AWS cloud environment](provision-aws.html).
 
-You must ensure that there is network access available from the location of modern NBS 7 components to the classic NBS 6 components, including the database server. The NBS 6 SQL Server database must allow access from the NBS 7 VPC address space, whether hosted on Amazon RDS or a self-managed EC2 instance. As a best practice, use a private route for this network access, rather than making it publicly accessible.
+Confirm that network access is available from NBS 7 components to classic NBS 6 components, including the database server. The NBS 6 SQL Server database must allow access from the NBS 7 VPC address space, whether hosted on Amazon RDS or a self-managed EC2 instance. Use a private route for this network access rather than a publicly accessible connection.
 
-A team member who has operational knowledge of and is familiar with using Terraform is most suited to create this infrastructure.
+The team member who creates this infrastructure should have operational knowledge of Terraform.
 
 ## Security requirements
 
 ### Encryption management
 
-AWS infrastructure storage services like Amazon EBS, EFS, and RDS utilize AWS Key Management Store (KMS) for encryption, ensuring a robust layer of security.
+AWS storage services including Amazon EBS, Amazon EFS, and Amazon RDS use AWS Key Management Service (AWS KMS) for encryption.
 
 ### End-user authentication
 
-The NBS 7 system will support end user authentication by integrating with a standards-based SSO system. It is designed to be deployed as a protected endpoint within your preexisting SSO ecosystem, and can be configured to work with a wide variety of standards compliant Identity Providers (e.g. Okta, AD).
+NBS 7 integrates with standards-based SSO systems and is designed to work with your existing Identity Provider (IdP), such as Okta. Because NBS 7 requires a working NBS 6 instance, an authentication mechanism is assumed to be in place. No additional authentication configuration is needed before deployment.
 
-This is similar to NBS 6. As documented in ["NEDSS Base System Release 4.4.1 Hardening NBS Perimeter Security"](https://nbscentral.cdc.gov/attachments/1995) (requires access on NBS central), NBS 6 does not authenticate users. Instead, it delegates authentication to a security proxy, which each State, Tribal, Local, and Territorial (STLT) must provide in order to deploy NBS.
-
-The NBS 7 release requires that prospective users already have a working NBS 6 instance, and therefore assumes that a user authentication mechanism is already in place.
-
-NBS 7 extends functionality that is available to the authenticated user. NBS 7 therefore works alongside the existing authentication mechanism. No additional steps are needed to authenticate users for NBS 7.
-
-To assist those who are integrating NBS into their SSO ecosystem, a proof of concept in which authentication is performed using an Identity Provider (IdP) and a proxy is available on request. To request it, [please create a ticket here](https://nbscentral.cdc.gov/projects/nbs700/issues/new).
+If you are integrating NBS into a new SSO ecosystem, a proof of concept is available on request.
 
 ## What to do now
 
 1. Complete the cloud-agnostic [Prerequisites](../prerequisites.html) if you haven't already
 1. Continue with [Provision the AWS cloud environment](provision-aws.html)
-1. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) if you need Azure planning support before this page is finalized

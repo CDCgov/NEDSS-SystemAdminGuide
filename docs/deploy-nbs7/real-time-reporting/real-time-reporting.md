@@ -21,9 +21,7 @@ redirect_from:
 > This feature is in Beta preview and not production ready.
 {: .important }
 
-Real-time reporting (RTR) is an NBS 7 capability that reduces reporting latency from as long as 24 hours to between 5 minutes and 1 hour. It uses Kafka Connect to stream row-level changes from source tables, which reduces reliance on the `MasterETL` batch process.
-
-This guide covers steps to install RTR with Helm charts. RTR transfers data from the transactional database `NBS_ODSE` to the reporting database `RDB`. Change Data Capture on select `NBS_ODSE` and `NBS_SRTE` tables detects row-level changes (see [Create service users and database objects](#create-service-users-and-database-objects) for the full table list). Those changes publish to Kafka topics, where RTR services extract and load the data into `RDB`.
+Real-time reporting (RTR) is an NBS 7 capability that reduces reporting latency from as long as 24 hours to between 5 minutes and 1 hour. RTR uses [Change Data Capture](#enable-change-data-capture) to detect row-level changes in source tables, publishes those changes to Kafka topics, and loads the data into the reporting database. This section covers steps to install RTR with Helm charts.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -37,10 +35,7 @@ Complete the sections on this page in order. Each section depends on the previou
 
 Before you begin, verify that your environment meets the following requirements and choose a database installation method. The method you choose applies throughout this guide.
 
-The database scripts referenced throughout this guide are maintained in the [NEDSS-DataReporting][nedss-datareporting-liquibase-service] repository. You can create the required database objects through Liquibase, which will automatically implement database schema changes, or you can manually install database schema changes. Both options are referenced in the relevant sections.
-{: .important }
-
-1. RTR installation requires NBS 6.0.18.1 or higher, but the latest 6x version is suggested. To verify your baseline NBS release version, run one of the following queries:
+1. RTR installation requires NBS 6.0.18.1 or higher. Running the latest NBS 6 release is suggested before proceeding. To verify your baseline NBS release version, run one of the following queries:
 
    ```sql
    USE NBS_ODSE;
@@ -98,7 +93,7 @@ RTR requires a dedicated reporting database. To create `rdb_modern`, you restore
 
 ### Enable Backup and Restore on Amazon RDS
 
-If you host your NBS 6 database on Amazon RDS, verify that the Backup and Restore option is enabled before proceeding. If it is already enabled, move on to [Enable ad hoc distributed queries](#enable-ad-hoc-distributed-queries).
+If you host your NBS 6 database on Amazon RDS, verify that the ****Backup and Restore** option is enabled before proceeding. Complete the following steps to verify your current setup and enable the configuration if needed.
 
 1. Sign in to the AWS Management Console and navigate to the **Aurora and RDS** service console.
 1. Navigate to **Databases**, choose your SQL Server instance, and view the **Summary** and **Configuration** sections to find the **Engine** and **Engine version** values that you need in the next steps.
@@ -124,9 +119,9 @@ If you host your NBS 6 database on Amazon RDS, verify that the Backup and Restor
 
 ### Enable ad hoc distributed queries
 
-This parameter is required to enable Change Data Capture on Amazon RDS. If it is already enabled, move on to [Back up and restore RDB on Amazon RDS](#back-up-and-restore-rdb-on-amazon-rds).
+This parameter is required to enable Change Data Capture on Amazon RDS. Complete the following steps to verify your current setting and enable the parameter if needed.
 
-1. Sign in to the AWS Management Console and navigate to the **Aurora and RDS** service console.
+1. If you haven't already, sign in to the AWS Management Console and navigate to the **Aurora and RDS** service console.
 1. Navigate to **Databases**, choose your SQL Server instance, and view the **Summary** and **Configuration** sections to find the **Engine**, **Engine version**, and **DB instance parameter group** values that you need in the next steps.
 1. Select **Parameter groups** from the navigation sidebar and choose the parameter group attached to your DB instance.
 1. Search for the `ad hoc distributed queries` parameter and confirm it is set to `1`.
@@ -148,7 +143,7 @@ This parameter is required to enable Change Data Capture on Amazon RDS. If it is
 
 ### Back up and restore RDB on Amazon RDS
 
-Restoring `RDB` under a new name within the same instance requires the RDS backup and restore stored procedures. Use the following steps to create a new database within an existing instance. Note that the AWS Management Console snapshot restore functionality creates an entirely new DB instance and cannot be used for this purpose.
+Use the following steps to create a new database within an existing instance. Restoring `RDB` under a new name within the same instance requires the RDS backup and restore stored procedures. Note that the AWS Management Console snapshot restore functionality creates an entirely new DB instance and cannot be used for this purpose.
 
 Use the following steps to perform a backup and restore of your NBS 6 database on Amazon RDS.
 
@@ -156,31 +151,34 @@ Use the following steps to perform a backup and restore of your NBS 6 database o
 1. Run the following procedure to back up `RDB` to Amazon S3:
 
    ```sql
-      exec msdb.dbo.rds_backup_database
-      @source_db_name='RDB',
-      @s3_arn_to_backup_to='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
-      @type='FULL'
+   exec msdb.dbo.rds_backup_database
+   @source_db_name='RDB',
+   @s3_arn_to_backup_to='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
+   @type='FULL'
    ```
+
+   > Use the same filename for `<rdb_backup_filename.bak>` in both the backup and restore procedures. The restore procedure retrieves the file that the backup procedure wrote to Amazon S3.
+   {: .note }
 
 1. Run the following procedure to check the status:
 
    ```sql
-      exec msdb.dbo.rds_task_status;
+   exec msdb.dbo.rds_task_status;
    ```
 
 1. Run the following procedure to restore `RDB` as `rdb_modern`:
 
    ```sql
-      exec msdb.dbo.rds_restore_database
-      @restore_db_name='rdb_modern',
-      @s3_arn_to_restore_from='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
-      @type='FULL';
+   exec msdb.dbo.rds_restore_database
+   @restore_db_name='rdb_modern',
+   @s3_arn_to_restore_from='arn:aws:s3:::<s3-bucket-name>/<s3-path-prefix>/<rdb_backup_filename.bak>',
+   @type='FULL';
    ```
 
 1. Run the following procedure to check the status:
 
    ```sql
-      exec msdb.dbo.rds_task_status;
+   exec msdb.dbo.rds_task_status;
    ```
 
 ## Create service users and database objects
@@ -198,12 +196,15 @@ Complete the following steps to create the database users, Kubernetes secrets, a
 
 1. **Create required database objects.** Run the scripts for your chosen path:
 
+   The database scripts referenced throughout this guide are maintained in the [NEDSS-DataReporting][nedss-datareporting-liquibase-service] repository. You can create the required database objects through Liquibase, which will automatically implement database schema changes, or you can manually install database schema changes. Both options are referenced in the relevant sections.
+   {: .important }
+
    - **Liquibase:** See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) to create all necessary objects, then return here to continue.
 
    - **Manual:** See the script execution sequence and `db_upgrade` script in [NEDSS-DataReporting/db-upgrade][nedss-datareporting-manual-deployment]. Run:
 
       ```bash
-      upgrade_db.bat server_name <database> username password
+      upgrade_db.bat <server_name> <database> <username> <password>
       ```
 
 ## Enable Change Data Capture
@@ -279,9 +280,9 @@ Now that you have completed database setup and onboarding, deploy the RTR servic
 
 ## After onboarding: database upgrades
 
-Database upgrades deliver new RTR features and schema changes with each NBS 7 release. You might also perform upgrades in response to security patches or other infrastructure changes.
+Database upgrades apply schema changes required by each NBS 7 release. Run database upgrades when you update NBS 7 to a new release version.
 
 To apply database upgrades, use the same approach you selected during onboarding:
 
-- **Liquibase:** Run Liquibase with the {{ site.version_latest }} release tag. See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html).
+- **Liquibase:** Run Liquibase with the release tag for your target NBS 7 version (for example, `v{{ site.version_latest }}.0`). For more information, see [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html).
 - **Manual:** Run the scripts in [manual_deployment][nedss-datareporting-manual-deployment]. Onboarding scripts are excluded from upgrade runs.

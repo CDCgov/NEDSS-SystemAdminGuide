@@ -131,11 +131,18 @@ Three checks run automatically on every pull request to `main`. You do not need 
 
 **If a check fails:** Fix the issue and push to the same branch. GitHub reruns all checks automatically — you don't need to close and reopen the PR.
 
-**Lint failures:** Either fix the violation or add an inline disable comment with a reason:
+**Lint failures:** Either fix the violation or add the narrowest inline disable comment needed, with a reason:
 ```markdown
 <!-- markdownlint-disable MD033 -->
 Content with inline HTML that is intentionally used here.
 <!-- markdownlint-enable MD033 -->
+```
+
+For a single line (for example, Liquid-generated fragment links that trigger `MD051` in source files), use a next-line disable:
+
+```markdown
+<!-- markdownlint-disable-next-line MD051 -->
+[A](#a) · [B](#b)
 ```
 
 **Link check failures:** Investigate whether the link is genuinely broken. If it's a false positive (e.g., a GitHub URL that returns 429 due to rate limiting), add the URL pattern to `.markdown-link-check.json` with a comment explaining why it's ignored.

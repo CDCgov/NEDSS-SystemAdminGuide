@@ -3,6 +3,7 @@ title: Glossary
 layout: page
 nav_order: 6
 description: Reference list of acronyms and technical terms used throughout the guide.
+published: false
 ---
 
 # Glossary

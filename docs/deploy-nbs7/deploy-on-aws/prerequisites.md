@@ -59,7 +59,7 @@ Your AWS environment must meet the following requirements:
 | Cert Manager | 1.13 | Deployed in Kubernetes |
 | Elasticsearch | 7.17 | Deployed by default in Kubernetes |
 | Apache NiFi | 1.19 | Deployed in Kubernetes |
-| Traefik | [confirm version] | Deployed in Kubernetes as ingress controller |
+| Traefik | 3.x | Deployed in Kubernetes as ingress controller |
 | Prometheus | 2.44 | Deployed as Amazon Managed Service for Prometheus (AMP) by default |
 | Grafana | 9.5.x | Deployed as Amazon Managed Grafana (AMG) by default |
 | Fluent Bit | 1.9.x | Deployed in Kubernetes. Log storage can be configured. |
@@ -101,5 +101,5 @@ If you are integrating NBS into a new SSO ecosystem, a proof of concept is avail
 
 ## What to do now
 
-1. Complete the cloud-agnostic [Prerequisites](../prerequisites.html) if you haven't already
+1. Confirm that you have completed both the AWS-specific requirements from this page and the cloud-agnostic [Prerequisites](../prerequisites.html)
 1. Continue with [Provision the AWS cloud environment](provision-aws.html)

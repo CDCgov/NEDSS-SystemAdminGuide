@@ -121,7 +121,7 @@ If you host your NBS 6 database on Amazon RDS, verify that the ****Backup and Re
 
 This parameter is required to enable Change Data Capture on Amazon RDS. Complete the following steps to verify your current setting and enable the parameter if needed.
 
-1. If you haven't already, sign in to the AWS Management Console and navigate to the **Aurora and RDS** service console.
+1. Sign in to the AWS Management Console and navigate to the **Aurora and RDS** service console.
 1. Navigate to **Databases**, choose your SQL Server instance, and view the **Summary** and **Configuration** sections to find the **Engine**, **Engine version**, and **DB instance parameter group** values that you need in the next steps.
 1. Select **Parameter groups** from the navigation sidebar and choose the parameter group attached to your DB instance.
 1. Search for the `ad hoc distributed queries` parameter and confirm it is set to `1`.

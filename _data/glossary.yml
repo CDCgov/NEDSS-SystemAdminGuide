@@ -42,31 +42,31 @@
 
 - term: Azure Blob Storage
   definition: |-
-    An [Azure](#microsoft-azure) service for object storage. The AWS equivalent is [Amazon S3](#amazon-s3).
+    An [Azure](#microsoft-azure) service for object storage. The [AWS](#aws) equivalent to Azure Blob Storage is [Amazon S3](#amazon-s3).
 
 - term: Azure Files
   definition: |-
-    An [Azure](#microsoft-azure) service for file storage. The equivalent of [Amazon EFS](#amazon-efs) in AWS deployments.
+    An [Azure](#microsoft-azure) service for file storage. The [AWS](#aws) equivalent to Azure Files is [Amazon EFS](#amazon-efs).
 
 - term: Azure Key Vault
   definition: |-
-    An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets. The AWS equivalent is [AWS KMS](#kms).
+    An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets. The [AWS](#aws) equivalent to Key Vault is [AWS KMS](#kms).
 
 - term: Azure Kubernetes Service
   definition: |-
-    An [Azure](#microsoft-azure)-managed service for [Kubernetes](#kubernetes), also known as **AKS**. Hosts containerized services. The AWS equivalent of AKS is [Amazon EKS](#amazon-eks).
+    An [Azure](#microsoft-azure)-managed service for [Kubernetes](#kubernetes), also known as **AKS**. Hosts containerized services. The [AWS](#aws) equivalent to AKS is [Amazon EKS](#amazon-eks).
 
 - term: Azure Monitor
   definition: |-
-    An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. The AWS equivalents are [Amazon Managed Service for Prometheus](#amp) and [Amazon Managed Grafana](#amg), providing metrics collection and dashboard visualization.
+    An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. The [AWS](#aws) equivalents are [Amazon Managed Service for Prometheus](#amp) and [Amazon Managed Grafana](#amg), providing metrics collection and dashboard visualization.
 
 - term: Azure RBAC
   definition: |-
-    **Azure Role-Based Access Control.** An [Azure](#microsoft-azure) service for managing access to cloud resources. The AWS equivalent is [AWS IAM](#iam). Often used in conjunction with [Microsoft Entra ID](#microsoft-entra-id) for identity management.
+    **Azure Role-Based Access Control.** An [Azure](#microsoft-azure) service for managing access to cloud resources, often used with [Microsoft Entra ID](#microsoft-entra-id) for identity management. The [AWS](#aws) equivalent to Azure RBAC is [AWS IAM](#iam).
 
 - term: Azure SQL
   definition: |-
-    A family of [Azure](#microsoft-azure)-managed database services (includes Azure SQL Database or Azure Database for SQL Server). The AWS equivalent of Azure SQL is [Amazon RDS](#amazon-rds).
+    A family of [Azure](#microsoft-azure)-managed database services (includes [Azure](#azure) SQL Database or [Azure](#azure) Database for SQL Server). The [AWS](#aws) equivalent to [Azure](#azure) SQL is [Amazon RDS](#amazon-rds).
 
 - term: build provenance
   definition: |-
@@ -173,7 +173,7 @@
 
 - term: Amazon EKS
   definition: |-
-    **Amazon Elastic Kubernetes Service.** A managed Kubernetes service from AWS. Hosts containerized services in AWS deployments. The Azure equivalent of Amazon EKS is [AKS](#azure-kubernetes-service).
+    **Amazon Elastic Kubernetes Service.** A managed Kubernetes service from AWS. Hosts containerized services in [AWS](#aws) deployments. The [Azure](#azure) equivalent to Amazon EKS is [AKS](#azure-kubernetes-service).
 
 - term: Elasticsearch
   definition: |-
@@ -201,7 +201,7 @@
 
 - term: HDInsight
   definition: |-
-    An Azure-managed Kafka service. Used for event streaming in Azure deployments. The AWS equivalent of HDInsight is [Amazon MSK](#amazon-msk).
+    An Azure-managed Kafka service. Used for event streaming in [Azure](#azure) deployments. The [AWS](#aws) equivalent to HDInsight is [Amazon MSK](#amazon-msk).
 
 - term: Helm
   definition: |-
@@ -225,7 +225,7 @@
 
 - term: IAM
   definition: |-
-    **AWS Identity and Access Management.** The AWS service for controlling access to cloud resources. The Azure equivalents of IAM are [Microsoft Entra ID](#microsoft-entra-id) and [Azure RBAC](#azure-rbac).
+    **AWS Identity and Access Management.** The [AWS](#aws) service for controlling access to cloud resources. The [Azure](#azure) equivalents of IAM are [Microsoft Entra ID](#microsoft-entra-id) and [Azure RBAC](#azure-rbac).
 
 - term: IdP
   definition: |-
@@ -249,7 +249,7 @@
 
 - term: Kafka
   definition: |-
-    **Apache Kafka.** An open-source distributed event streaming platform. Hosted on AWS as [Amazon MSK](#amazon-msk) or on Azure as [HDInsight](#hdinsight).
+    **Apache Kafka.** An open-source distributed event streaming platform. Hosted on [AWS](#aws) as [Amazon MSK](#amazon-msk) or on [Azure](#azure) as [HDInsight](#hdinsight).
 
 - term: Keycloak
   definition: |-
@@ -257,7 +257,7 @@
 
 - term: KMS
   definition: |-
-    **AWS Key Management Service.** The AWS service for creating and managing encryption keys. Used to encrypt data at rest. The Azure equivalent of KMS is [Azure Key Vault](#azure-key-vault).
+    **AWS Key Management Service.** The [AWS](#aws) service for creating and managing encryption keys. Used to encrypt data at rest. The [Azure](#azure) equivalent to KMS is [Azure Key Vault](#azure-key-vault).
 
 - term: kubectl
   definition: |-
@@ -293,7 +293,7 @@
 
 - term: managed node group
   definition: |-
-    A group of [worker nodes](#worker-node) in AWS that share the same configuration. The Azure equivalent of a managed node group is a [node pool](#node-pool) in [AKS](#azure-kubernetes-service).
+    A group of [worker nodes](#worker-node) in [AWS](#aws) that share the same configuration. The [Azure](#azure) equivalent to a managed node group is a [node pool](#node-pool) in [AKS](#azure-kubernetes-service).
 
 - term: MasterETL
   definition: |-
@@ -309,7 +309,7 @@
 
 - term: Microsoft Entra ID
   definition: |-
-    An Azure identity and access management service, formerly known as Azure Active Directory. The AWS equivalent is [AWS IAM](#iam).
+    An [Azure](#azure) identity and access management service, formerly known as [Azure](#azure) Active Directory. The [AWS](#aws) equivalent to Entra ID is [AWS IAM](#iam).
 
 - term: MMG
   definition: |-
@@ -341,7 +341,7 @@
 
 - term: Amazon MSK
   definition: |-
-    **Amazon Managed Streaming for Apache Kafka.** An AWS-managed version of [Kafka](#kafka), an open-source event streaming platform. The Azure equivalent of MSK is [HDInsight](#hdinsight).
+    **Amazon Managed Streaming for Apache Kafka.** An AWS-managed version of [Kafka](#kafka), an open-source event streaming platform. The [Azure](#azure) equivalent to MSK is [HDInsight](#hdinsight).
 
 - term: namespace (Kubernetes)
   definition: |-
@@ -393,7 +393,7 @@
 
 - term: node pool
   definition: |-
-    A group of [worker nodes](#worker-node) in Azure that share the same configuration. The AWS equivalent of a node pool is a [managed node group](#managed-node-group) in [Amazon EKS](#amazon-eks).
+    A group of [worker nodes](#worker-node) in [Azure](#azure) that share the same configuration. The [AWS](#aws) equivalent to a node pool is a [managed node group](#managed-node-group) in [Amazon EKS](#amazon-eks).
 
 - term: notifiable disease
   definition: |-
@@ -485,7 +485,7 @@
 
 - term: Amazon RDS
   definition: |-
-    **Amazon Relational Database Service.** An AWS managed database service. The Azure equivalent of Amazon RDS is [Azure SQL](#azure-sql).
+    **Amazon Relational Database Service.** An [AWS](#aws) managed database service. The [Azure](#azure) equivalent to Amazon RDS is [Azure SQL](#azure-sql).
 
 - term: Reportability Response
   definition: |-
@@ -513,7 +513,7 @@
 
 - term: Amazon S3
   definition: |-
-    **Amazon Simple Storage Service.** AWS object storage. The Azure equivalent of Amazon S3 is [Azure Blob Storage](#azure-blob-storage).
+    **Amazon Simple Storage Service.** [AWS](#aws) object storage. The [Azure](#azure) equivalent to Amazon S3 is [Azure Blob Storage](#azure-blob-storage).
 
 - term: SAML
   definition: |-
@@ -565,7 +565,7 @@
 
 - term: Terraform
   definition: |-
-    An open-source infrastructure-as-code tool for provisioning and managing cloud resources. Used in both AWS and Azure deployments.
+    An open-source infrastructure-as-code tool for provisioning and managing cloud resources. Used in both [AWS](#aws) and [Azure](#azure) deployments.
 
 - term: TLS
   definition: |-
@@ -585,11 +585,11 @@
 
 - term: Azure VNet
   definition: |-
-    **Azure Virtual Network.** An isolated cloud network in [Azure](#azure). The AWS equivalent of VNet is [Amazon VPC](#amazon-vpc).
+    **Azure Virtual Network.** An isolated cloud network in [Azure](#azure). The [AWS](#aws) equivalent to VNet is [Amazon VPC](#amazon-vpc).
 
 - term: Amazon VPC
   definition: |-
-    **Amazon Virtual Private Cloud.** An isolated cloud network in AWS. The AWS equivalent of [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
+    **Amazon Virtual Private Cloud.** An isolated cloud network in AWS. The [AWS](#aws) equivalent to [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
 
 - term: WDS
   definition: |-

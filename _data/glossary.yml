@@ -98,7 +98,7 @@
 
 - term: CDF
   definition: |-
-    **Commonly Defined Fields** (also: Collaboratively Defined Fields). Custom fields in NBS that are defined collaboratively across [jurisdictions](#jurisdiction), as distinct from [locally defined fields (LDFs)](#ldf). CDFs support import versioning.
+    **Commonly Defined Fields** (also: Collaboratively Defined Fields). Custom fields in NBS that are collaboratively defined across [jurisdictions](#jurisdiction), as distinct from [locally defined fields (LDFs)](#ldf). CDFs support import versioning.
 
 - term: change data capture
   definition: |-
@@ -165,7 +165,7 @@
 
 - term: EHR
   definition: |-
-    **Electronic Health Record.** A digital system used by clinical providers to record and manage patient health information. EHRs generate [eICR](#eicr) documents automatically when a reportable condition is diagnosed, enabling automated case reporting to public health agencies.
+    **Electronic Health Record.** A digital system used by clinical providers to record and manage patient health information. EHRs automatically generate [eICR](#eicr) documents when a reportable condition is diagnosed, enabling automated case reporting to public health agencies.
 
 - term: eICR
   definition: |-
@@ -181,7 +181,7 @@
 
 - term: ELR
   definition: |-
-    **Electronic Lab Report.** Lab results transmitted electronically from laboratories to public health departments.
+    **Electronic Lab Report.** Lab results that are electronically transmitted from laboratories to public health departments.
 
 - term: ETL
   definition: |-
@@ -189,7 +189,7 @@
 
 - term: ETOR
   definition: |-
-    **Electronic Test Orders and Results.** A public health data exchange standard for transmitting laboratory test orders and results electronically. Related to [ELR](#elr) but covers the ordering side as well as results.
+    **Electronic Test Orders and Results.** A public health data exchange standard for electronicallytransmitting laboratory test orders and results. Related to [ELR](#elr) but covers the ordering side as well as results.
 
 - term: FHIR
   definition: |-
@@ -237,7 +237,7 @@
 
 - term: investigation
   definition: |-
-    See [case investigation](#case-investigation). In NBS, "investigation" refers specifically to the record of a public health case investigation, not a general inquiry.
+    See [case investigation](#case-investigation). In NBS, "investigation" specifically refers to the record of a public health case investigation, not a general inquiry.
 
 - term: IRD
   definition: |-
@@ -273,7 +273,7 @@
 
 - term: LDF
   definition: |-
-    **Locally Defined Fields.** Custom fields added by an individual STLT within NBS to capture jurisdiction-specific data. LDFs are distinct from [CDFs](#cdf), which are shared across jurisdictions. Sysadmins configure LDFs during NBS setup and customization.
+    **Locally Defined Fields.** Custom fields added by an individual STLT within NBS to capture jurisdiction-specific data. LDFs are distinct from [CDFs](#cdf), which are shared across jurisdictions.
 
 - term: LIMS / LIS
   definition: |-
@@ -505,7 +505,7 @@
 
 - term: RTR
   definition: |-
-    **Real-Time Reporting.** An NBS 7 reporting pipeline that replaces the batch [ETL](#etl) approach with event-driven data movement using [Kafka](#kafka).
+    **Real-time reporting.** An NBS 7 reporting pipeline that is replacing the legacy batch [ETL](#etl) approach with event-driven data movement using [Kafka](#kafka).
 
 - term: RxNorm
   definition: |-

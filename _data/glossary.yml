@@ -3,6 +3,8 @@
 # - Add, edit, or remove terms here; do not edit generated glossary page content directly.
 # - Use Markdown in definitions when you need emphasis or cross-links.
 # - Glossary cross-links should target glossary-page anchors; the generated page rewrites them to the current site.baseurl.
+# - For cloud-specific terms, include a note about the equivalent service in the other cloud to help readers understand the mapping.
+# - Cloud equivalent language pattern: "The [AWS](#aws) equivalent to [Azure Service](#azure-service) is [AWS Service](#aws-service)." or vice versa.
 
 - term: AIMS
   definition: |-
@@ -26,7 +28,7 @@
 
 - term: ArgoCD
   definition: |-
-    An open-source GitOps tool for deploying and managing [Kubernetes](#kubernetes) applications.
+    An open-source [GitOps](#gitops) tool for deploying and managing [Kubernetes](#kubernetes) applications.
 
 - term: AVR
   definition: |-
@@ -189,7 +191,7 @@
 
 - term: ETOR
   definition: |-
-    **Electronic Test Orders and Results.** A public health data exchange standard for electronicallytransmitting laboratory test orders and results. Related to [ELR](#elr) but covers the ordering side as well as results.
+    **Electronic Test Orders and Results.** A public health data exchange standard for electronically transmitting laboratory test orders and results. Related to [ELR](#elr) but covers the ordering side as well as results.
 
 - term: FHIR
   definition: |-

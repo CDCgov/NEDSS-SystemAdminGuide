@@ -3,6 +3,7 @@ title: Glossary
 layout: page
 nav_order: 6
 description: Reference list of acronyms and technical terms used throughout the guide.
+published: false
 ---
 
 # Glossary
@@ -11,7 +12,7 @@ This page is generated from `_data/glossary.yml` and defines the acronyms and te
 
 <!--
 Contributor note:
-- This page is generated from _data/glossary.yml. Do not hand-edit the rendered content below.
+- This page is generated from _data/glossary.yml. DO NOT HAND-EDIT the rendered content below.
 - If you need to change a definition or cross-link, update the YAML data file instead.
 -->
 

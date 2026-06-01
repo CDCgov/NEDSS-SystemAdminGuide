@@ -112,6 +112,7 @@ Link-check implementation scripts live in `scripts/`:
 
 - **Cleanup `_guide_preview`:** Strips nav-related front matter keys (`parent`, `grand_parent`, `nav_order`, `has_children`) from `_guide_preview/` files before Jekyll builds. These keys have no effect on the nav-excluded collection, but stripping them prevents JTD from misinterpreting them during the build.
 - **Release versioning:** Discovers all branches matching `release-*`, checks them out into `_previous_versions/`, and generates a nav-accessible index page for each. This is how the **Previous Versions** section of the site is populated automatically. See [release-checklist.md](contributing/release-checklist.md) for the full release process.
+- **Front matter date:** Updates `last_modified_date` in any changed `.md` file to match its commit date, then pushes those changes back to `main` with `[skip ci]`. You do not need to update `last_modified_date` manually — leave the field in the front matter and the workflow keeps it accurate. If you work on a file that was also updated by a previous merged PR, you may see a trivial one-line conflict on `last_modified_date` when your PR is opened; resolve it by accepting `main`'s value.
 
 **On push to `preview`:** `bundle exec jekyll build` runs via `jekyll-preview.yml` and deploys to the staging site.
 
@@ -131,11 +132,18 @@ Three checks run automatically on every pull request to `main`. You do not need 
 
 **If a check fails:** Fix the issue and push to the same branch. GitHub reruns all checks automatically — you don't need to close and reopen the PR.
 
-**Lint failures:** Either fix the violation or add an inline disable comment with a reason:
+**Lint failures:** Either fix the violation or add the narrowest inline disable comment needed, with a reason:
 ```markdown
 <!-- markdownlint-disable MD033 -->
 Content with inline HTML that is intentionally used here.
 <!-- markdownlint-enable MD033 -->
+```
+
+For a single line (for example, Liquid-generated fragment links that trigger `MD051` in source files), use a next-line disable:
+
+```markdown
+<!-- markdownlint-disable-next-line MD051 -->
+[A](#a) · [B](#b)
 ```
 
 **Link check failures:** Investigate whether the link is genuinely broken. If it's a false positive (e.g., a GitHub URL that returns 429 due to rate limiting), add the URL pattern to `.markdown-link-check.json` with a comment explaining why it's ignored.

@@ -24,7 +24,7 @@ Use this map to find contributor guidance quickly.
 |------|--------------------|
 | [README.md](README.md) | Project overview, local preview options, and site workflow context |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution standards, review expectations, CI checks, and local scripts/commands |
-| [workflow.md](contributing/workflow.md) | Day-to-day git workflow, branch strategy, and preview-to-production process |
+| [workflow.md](contributing/workflow.md) | Day-to-day git workflow, branch strategy, preview-to-production process, and required `docs/revision-history.md` updates before merging to `main` |
 | [styles.md](contributing/styles.md) | Authoring standards: front matter, headings, callouts, links, code blocks, images, tables, and Section 508 / WCAG 2.1 AA compliance record |
 
 ### Governance and policy

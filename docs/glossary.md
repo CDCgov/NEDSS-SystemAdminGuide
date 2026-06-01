@@ -9,7 +9,7 @@ last_modified_date: 2026-05-18
 # Glossary
 {: .no_toc }
 
-Definitions for acronyms and technical terms used in this guide. For context on how a term applies to your specific deployment or configuration, see the relevant section of the guide.
+This page defines the acronyms and technical terms used throughout the NBS 7 System Administrator guide.
 
 <!--
   ******** CONTRIBUTOR GUIDANCE ********
@@ -53,16 +53,16 @@ Definitions for acronyms and technical terms used in this guide. For context on 
   CLOUD PROVIDER SCOPING PATTERN
   - Terms that are AWS-only or Azure-only services should include
     a cross-reference to their equivalent on the other platform,
-    using "In [provider] deployments, [equivalent term] serves the
-    same function." If no direct equivalent exists, name the
+    using "The <other provider> equivalent to <provider term> is 
+    [equivalent term](#)." If no direct equivalent exists, name the
     closest common option(s) with "such as" framing.
     Examples: Amazon EKS → AKS, Amazon MSK → HDInsight,
     Amazon S3 → Azure Blob Storage.
   - Terms that represent a concept with provider-specific
     implementations (VPC/VNet, peering, subnet, load balancer)
     use inline scoping:
-      "In AWS deployments, [AWS Product](#) covers this function.
-       In Azure deployments, [Azure Product](#) covers this function."
+      "The AWS equivalent to <Azure term> is [AWS term](#).
+       The Azure equivalent to <AWS term> is [Azure term](#)."
   - Terms that apply equally to all providers need no scoping.
     Examples: Kubernetes, Terraform, TLS, Helm.
   - If a future deployment path is added (for example, GCP),

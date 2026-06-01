@@ -1,10 +1,80 @@
-# Contributor guidance:
-# - This file is the single source of truth for glossary terms and tooltip definitions.
-# - Add, edit, or remove terms here; do not edit generated glossary page content directly.
-# - Use Markdown in definitions when you need emphasis or cross-links.
-# - Glossary cross-links should target glossary-page anchors; the generated page rewrites them to the current site.baseurl.
-# - For cloud-specific terms, include a note about the equivalent service in the other cloud to help readers understand the mapping.
-# - Cloud equivalent language pattern: "The [AWS](#aws) equivalent to [Azure Service](#azure-service) is [AWS Service](#aws-service)." or vice versa.
+#   /////////////////////////////////////////////////////////////////////////
+#
+#   ******** GLOSSARY CONTRIBUTOR GUIDANCE ********
+#
+#   FILE BASICS
+#   - This file is the single source of truth for glossary terms and tooltip definitions.
+#   - Add, edit, or remove terms here; do not edit generated glossary page content directly.
+#   - Use Markdown in definitions when you need emphasis or cross-links.
+#   - Glossary cross-links should target glossary-page anchors; the generated page rewrites them to the current site.baseurl.
+#
+#   SCOPE AND PURPOSE
+#   - This glossary is an acronym reference for eClearance. Its primary
+#     function is to let technical documentation use terms like HL7, API,
+#     and ELR without spelling them out on every page.
+#   - Definitions must be general and durable. Write them to remain
+#     accurate as the system evolves -- not to describe current NBS behavior
+#     or implementation details.
+#   - NBS-specific context (how a term is used in NBS, which component
+#     handles it, what it triggers) belongs in the admin guide at the point
+#     of need, not here.
+#   - Avoid version-specific references (for example, "NBS 7.12"). If a
+#     version reference is unavoidable, use the major version ("NBS 7").
+#   - Non-acronym terms are currently included but are under stakeholder
+#     review and may be removed. Add non-acronym terms sparingly; prefer
+#     placing NBS-domain context in the relevant guide page instead.
+#
+#   ADDING NEW ENTRIES
+#   - Add each term as a ### heading under the correct letter section.
+#   - Keep definitions present-tense and active voice.
+#   - Define acronyms in bold at the start of the definition:
+#     **Full Name.** Definition text here.
+#   - Cross-link related terms using [term](#anchor) syntax.
+#     Anchors are auto-generated from heading text: lowercase,
+#     spaces become hyphens, punctuation dropped.
+#     Examples: ### HIE / HIN -> #hie--hin , ### namespace (Kubernetes) -> #namespace-kubernetes
+#   - Use official AWS service names on first mention in a definition.
+#     Source of truth: https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html
+#     Examples: Amazon EKS, Amazon EFS, Amazon MSK, Amazon S3,
+#     Amazon RDS, AWS KMS, AWS IAM, Amazon Managed Service for Prometheus,
+#     Amazon Managed Grafana.
+#
+#   REDIRECT ENTRIES
+#   - Add a redirect entry (### ACRONYM / See [Full Term](#anchor)).
+#     for any initialism that is commonly spoken or used in prose
+#     rather than spelled out. Example: RR -> Reportability Response.
+#
+#   CLOUD PROVIDER SCOPING PATTERN
+#   - Terms that are AWS-only or Azure-only services should include
+#     a cross-reference to their equivalent on the other platform,
+#     using "The <other provider> equivalent to <provider term> is
+#     [equivalent term](#)." If no direct equivalent exists, name the
+#     closest common option(s) with "such as" framing.
+#     Examples: Amazon EKS -> AKS, Amazon MSK -> HDInsight,
+#     Amazon S3 -> Azure Blob Storage.
+#   - Terms that represent a concept with provider-specific
+#     implementations (VPC/VNet, peering, subnet, load balancer)
+#     use inline scoping:
+#       "The AWS equivalent to <Azure term> is [AWS term](#).
+#        The Azure equivalent to <AWS term> is [Azure term](#)."
+#   - Terms that apply equally to all providers need no scoping.
+#     Examples: Kubernetes, Terraform, TLS, Helm.
+#   - If a future deployment path is added (for example, GCP),
+#     extend the inline scoping sentence rather than changing the
+#     pattern.
+#
+#   GLOSSARY LINKING IN GUIDE
+#   - Link the first occurrence of a glossary term on each page.
+#   - Skip the link if the term is already defined inline in the
+#     same sentence.
+#   - Skip the link if the first occurrence is in a heading.
+#     Link the next occurrence in prose instead.
+#   - Skip the link if the first occurrence is in a code block.
+#     Consider adding a linked mention of the term in the prose
+#     immediately before the code block so it is defined before
+#     it is used, then treat that mention as the linked occurrence.
+#
+#   /////////////////////////////////////////////////////////////////////////
 
 - term: AIMS
   definition: |-
@@ -32,7 +102,7 @@
 
 - term: AVR
   definition: |-
-    **Analysis, Visualization, and Reporting.** An umbrella term for the reporting and analytics capabilities of NBS and related public health systems.
+    **Analysis, Visualization, and Reporting.** An umbrella term for the reporting and analytics capabilities of [NBS](#nbs) and related public health systems.
 
 - term: AWS
   definition: |-
@@ -60,7 +130,7 @@
 
 - term: Azure Monitor
   definition: |-
-    An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. The [AWS](#aws) equivalents are [Amazon Managed Service for Prometheus](#amp) and [Amazon Managed Grafana](#amg), providing metrics collection and dashboard visualization.
+    An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. The [AWS](#aws) equivalents are [Amazon Managed Service for Prometheus](#amp) for metrics collection and [Amazon Managed Grafana](#amg) for visualization.
 
 - term: Azure RBAC
   definition: |-
@@ -68,7 +138,7 @@
 
 - term: Azure SQL
   definition: |-
-    A family of [Azure](#microsoft-azure)-managed database services (includes [Azure](#azure) SQL Database or [Azure](#azure) Database for SQL Server). The [AWS](#aws) equivalent to [Azure](#azure) SQL is [Amazon RDS](#amazon-rds).
+    A family of [Azure](#microsoft-azure)-managed database services (includes [Azure](#microsoft-azure) SQL Database or [Azure](#microsoft-azure) Database for SQL Server). The [AWS](#aws) equivalent to [Azure](#microsoft-azure) SQL is [Amazon RDS](#amazon-rds).
 
 - term: build provenance
   definition: |-
@@ -80,7 +150,7 @@
 
 - term: case investigation
   definition: |-
-    A case investigation records one instance of a disease or [condition](#condition) for a specific person, including clinical, epidemiological, and administrative data. Investigations might use the generic form or a condition-specific [PAM](#pam).
+    Records one instance of a disease or [condition](#condition) for a specific person, including clinical, epidemiological, and administrative data. Investigations might use the generic form or a condition-specific [PAM](#pam).
 
 - term: case notification
   definition: |-
@@ -128,7 +198,7 @@
 
 - term: container image
   definition: |-
-    A read-only template used to create containers.
+    A read-only template used to create [containers](#container).
 
 - term: control plane
   definition: |-
@@ -143,15 +213,15 @@
     The [NBS 7](#nbs-7) services responsible for receiving, validating, and routing incoming public health data into NBS though the [DI API](#di-api) entry point. Accepts data in [eICR](#eicr), [PHDC](#phdc), and [C-CDA](#c-cda) formats.
 - term: Debezium
   definition: |-
-    An open-source change data capture tool.
+    An open-source [change data capture](#change-data-capture) tool.
 
 - term: DI API
   definition: |-
-    **Data Integration API.** An NBS 7 service that provides an [API](#api) for external systems to push data into NBS.
+    **Data Integration API.** An NBS 7 service that provides an [API](#api) for external systems to push data into [NBS](#nbs).
 
 - term: DIBBs
   definition: |-
-    **Data Integration Building Blocks.** CDC open-source middleware for public health data integration.
+    **Data Integration Building Blocks.** [CDC](#cdc) open-source middleware for public health data integration.
 
 - term: DNS
   definition: |-
@@ -163,23 +233,23 @@
 
 - term: Amazon EFS
   definition: |-
-    **Amazon Elastic File System.** AWS-managed file storage. The [Azure](#azure) equivalent to EFS is [Azure Files](#azure-files).
+    **Amazon Elastic File System.** AWS-managed file storage. The [Azure](#microsoft-azuremicrosoft-azure) equivalent to EFS is [Azure Files](#azure-files).
 
 - term: EHR
   definition: |-
-    **Electronic Health Record.** A digital system used by clinical providers to record and manage patient health information. EHRs automatically generate [eICR](#eicr) documents when a reportable condition is diagnosed, enabling automated case reporting to public health agencies.
+    **Electronic Health Record.** A digital system used by clinical providers to record and manage patient health information. EHRs automatically generate [eICR](#eicr) documents when a reportable [condition](#condition) is diagnosed, enabling automated case reporting to public health agencies.
 
 - term: eICR
   definition: |-
-    **Electronic Initial Case Report.** A structured document generated by an [EHR](#ehr) system when a clinician diagnoses a patient with a reportable condition. eICRs send relevant clinical data directly to public health agencies.
+    **Electronic Initial Case Report.** A structured document generated by an [EHR](#ehr) system when a clinician diagnoses a patient with a reportable [condition](#condition). eICRs send relevant clinical data directly to public health agencies.
 
 - term: Amazon EKS
   definition: |-
-    **Amazon Elastic Kubernetes Service.** A managed Kubernetes service from AWS. Hosts containerized services in [AWS](#aws) deployments. The [Azure](#azure) equivalent to Amazon EKS is [AKS](#azure-kubernetes-service).
+    **Amazon Elastic Kubernetes Service.** A managed [Kubernetes](#kubernetes) service from [AWS](#aws). Hosts containerized services in AWS deployments. The [Azure](#microsoft-azure) equivalent to Amazon EKS is [AKS](#azure-kubernetes-service).
 
 - term: Elasticsearch
   definition: |-
-    An open-source search and analytics engine.
+    An open-source search and analytics engine. See the [Elasticsearch](https://www.elastic.co/elasticsearch/) website.
 
 - term: ELR
   definition: |-
@@ -195,7 +265,7 @@
 
 - term: FHIR
   definition: |-
-    **Fast Healthcare Interoperability Resources.** A modern [HL7](#hl7) standard for healthcare data exchange using web APIs.
+    **Fast Healthcare Interoperability Resources.** A modern [HL7](#hl7) standard for healthcare data exchange using web [APIs](#api).
 
 - term: GitOps
   definition: |-
@@ -203,7 +273,7 @@
 
 - term: HDInsight
   definition: |-
-    An Azure-managed Kafka service. Used for event streaming in [Azure](#azure) deployments. The [AWS](#aws) equivalent to HDInsight is [Amazon MSK](#amazon-msk).
+    An [Azure](#microsoft-azure)-managed [Kafka](#kafka) service. Used for event streaming in Azure deployments. The [AWS](#aws) equivalent to HDInsight is [Amazon MSK](#amazon-msk).
 
 - term: Helm
   definition: |-
@@ -227,7 +297,7 @@
 
 - term: IAM
   definition: |-
-    **AWS Identity and Access Management.** The [AWS](#aws) service for controlling access to cloud resources. The [Azure](#azure) equivalents of IAM are [Microsoft Entra ID](#microsoft-entra-id) and [Azure RBAC](#azure-rbac).
+    **AWS Identity and Access Management.** The [AWS](#aws) service for controlling access to cloud resources. The [Azure](#microsoft-azure) equivalents of IAM are [Microsoft Entra ID](#microsoft-entra-id) and [Azure RBAC](#azure-rbac).
 
 - term: IdP
   definition: |-
@@ -243,7 +313,7 @@
 
 - term: IRD
   definition: |-
-    **Investigate and Respond Division.** The CDC division within [OPHDST](#ophdst) where NBS is housed, within the [PHIT](#phit) branch.
+    **Investigate and Respond Division.** The [CDC](#cdc) division within [OPHDST](#ophdst) where [NBS](#nbs) is housed, within the [PHIT](#phit) branch.
 
 - term: jurisdiction
   definition: |-
@@ -251,7 +321,7 @@
 
 - term: Kafka
   definition: |-
-    **Apache Kafka.** An open-source distributed event streaming platform. Hosted on [AWS](#aws) as [Amazon MSK](#amazon-msk) or on [Azure](#azure) as [HDInsight](#hdinsight).
+    **Apache Kafka.** An open-source distributed event streaming platform. Hosted on [AWS](#aws) as [Amazon MSK](#amazon-msk) or on [Azure](#microsoft-azure) as [HDInsight](#hdinsight).
 
 - term: Keycloak
   definition: |-
@@ -259,7 +329,7 @@
 
 - term: KMS
   definition: |-
-    **AWS Key Management Service.** The [AWS](#aws) service for creating and managing encryption keys. Used to encrypt data at rest. The [Azure](#azure) equivalent to KMS is [Azure Key Vault](#azure-key-vault).
+    **AWS Key Management Service.** The [AWS](#aws) service for creating and managing encryption keys. Used to encrypt data at rest. The [Azure](#microsoft-azure) equivalent to KMS is [Azure Key Vault](#azure-key-vault).
 
 - term: kubectl
   definition: |-
@@ -267,7 +337,7 @@
 
 - term: Kubernetes
   definition: |-
-    An open-source container orchestration platform that automates deployment, scaling, and management of containerized applications.
+    An open-source [container](#container) orchestration platform that automates deployment, scaling, and management of containerized applications.
 
 - term: lab report
   definition: |-
@@ -275,7 +345,7 @@
 
 - term: LDF
   definition: |-
-    **Locally Defined Fields.** Custom fields added by an individual STLT within NBS to capture jurisdiction-specific data. LDFs are distinct from [CDFs](#cdf), which are shared across jurisdictions.
+    **Locally Defined Fields.** Custom fields added by an individual [STLT](#stlt) within [NBS](#nbs) to capture jurisdiction-specific data. LDFs are distinct from [CDFs](#cdf), which are shared across jurisdictions.
 
 - term: LIMS / LIS
   definition: |-
@@ -295,7 +365,7 @@
 
 - term: managed node group
   definition: |-
-    A group of [worker nodes](#worker-node) in [AWS](#aws) that share the same configuration. The [Azure](#azure) equivalent to a managed node group is a [node pool](#node-pool) in [AKS](#azure-kubernetes-service).
+    A group of [worker nodes](#worker-node) in [AWS](#aws) that share the same configuration. The [Azure](#microsoft-azure) equivalent to a managed node group is a [node pool](#node-pool) in [AKS](#azure-kubernetes-service).
 
 - term: MasterETL
   definition: |-
@@ -311,11 +381,11 @@
 
 - term: Microsoft Entra ID
   definition: |-
-    An [Azure](#azure) identity and access management service, formerly known as [Azure](#azure) Active Directory. The [AWS](#aws) equivalent to Entra ID is [AWS IAM](#iam).
+    An [Azure](#microsoft-azure) identity and access management service, formerly known as Azure Active Directory. The [AWS](#aws) equivalent to Entra ID is [AWS IAM](#aws-iam).
 
 - term: MMG
   definition: |-
-    **Message Mapping Guide.** A CDC-published guide that defines the [HL7](#hl7) message structure for reporting a specific notifiable condition to CDC.
+    **Message Mapping Guide.** A [CDC](#cdc)-published guide that defines the [HL7](#hl7) message structure for reporting a specific notifiable [condition](#condition) to CDC.
 
 - term: morbidity report
   definition: |-
@@ -323,27 +393,27 @@
 
 - term: MoU
   definition: |-
-    **Memorandum of Understanding.** A formal agreement between parties. For example, a STLT might be required to establish a MoU with new service providers.
+    **Memorandum of Understanding.** A formal agreement between parties. For example, a [STLT](#stlt) might be required to establish a MoU with new service providers.
 
 - term: MPI
   definition: |-
-    **Master Patient Index.** A cross-system index used to match and link patient records across sources.
+    **Master Patient Index.** A cross-system index used to match and link patient records across sources. 
 
 - term: MPR
   definition: |-
-    **Master Patient Record.** The authoritative patient record in NBS, derived from all patient revisions (point-in-time demographics).
+    **Master Patient Record.** The authoritative patient record in [NBS](#nbs), derived from all patient revisions (point-in-time demographics). 
 
 - term: MS SQL
   definition: |-
-    **Microsoft SQL Server.** The relational database used by [Classic NBS](#classic-nbs) (NBS 6.x). NBS 7 connects to the existing NBS 6 MS SQL database.
+    **Microsoft SQL Server.** The relational database used by [Classic NBS](#classic-nbs) (NBS 6.x). [NBS 7](#nbs-7) connects to the existing NBS 6 MS SQL database.
 
 - term: MSGOUT / MSGOUTE
   definition: |-
-    **Messaging Database (Enterprise).** The NBS staging database for inbound and outbound messaging. Stores electronic messages going into and out of NBS.
+    **Messaging Database (Enterprise).** The [NBS](#nbs) staging database for inbound and outbound messaging. Stores electronic messages going into and out of NBS.
 
 - term: Amazon MSK
   definition: |-
-    **Amazon Managed Streaming for Apache Kafka.** An AWS-managed version of [Kafka](#kafka), an open-source event streaming platform. The [Azure](#azure) equivalent to MSK is [HDInsight](#hdinsight).
+    **Amazon Managed Streaming for Apache Kafka.** An [AWS](#aws)-managed version of [Kafka](#kafka), an open-source event streaming platform. The [Azure](#microsoft-azure) equivalent to MSK is [HDInsight](#hdinsight).
 
 - term: namespace (Kubernetes)
   definition: |-
@@ -351,7 +421,7 @@
 
 - term: NBS
   definition: |-
-    **National Electronic Disease Surveillance System Base System.** A CDC-developed software system for public health surveillance. Available as [Classic NBS](#classic-nbs) (NBS 6.x) and the modernized [NBS 7](#nbs-7).
+    **National Electronic Disease Surveillance System Base System.** A [CDC](#cdc)-developed software system for public health surveillance. Available as [Classic NBS](#classic-nbs) (NBS 6.x) and the modernized [NBS 7](#nbs-7).
 
 - term: NBS 6
   definition: |-
@@ -383,11 +453,11 @@
 
 - term: NND
   definition: |-
-    **National Notifiable Disease.** A disease or condition that jurisdictions are required by federal policy to report to CDC. CDC maintains the national list; STLTs can designate jurisdiction-level reportable conditions.
+    **National Notifiable Disease.** A disease or [condition](#condition) that [jurisdictions](#jurisdiction) are required by federal policy to report to [CDC](#cdc). [CDC](#cdc) maintains the national list; [STLTs](#stlt) can designate jurisdiction-level reportable conditions.
 
 - term: NNDSS
   definition: |-
-    **National Notifiable Diseases Surveillance System.** The CDC system that receives [case notification](#case-notification) data from STLTs.
+    **National Notifiable Diseases Surveillance System.** The [CDC](#cdc) system that receives [case notification](#case-notification) data from [STLTs](#stlt).
 
 - term: node
   definition: |-
@@ -395,19 +465,19 @@
 
 - term: node pool
   definition: |-
-    A group of [worker nodes](#worker-node) in [Azure](#azure) that share the same configuration. The [AWS](#aws) equivalent to a node pool is a [managed node group](#managed-node-group) in [Amazon EKS](#amazon-eks).
+    A group of [worker nodes](#worker-node) in [Azure](#microsoft-azure) that share the same configuration. The [AWS](#aws) equivalent to a node pool is a [managed node group](#managed-node-group) in [Amazon EKS](#amazon-eks).
 
 - term: notifiable disease
   definition: |-
-    A disease or condition that providers and laboratories are legally required to report to public health authorities. CDC maintains the national list. See also [reportable disease](#reportable-disease).
+    A disease or [condition](#condition) that providers and laboratories are legally required to report to public health authorities. [CDC](#cdc) maintains the national list. See also [reportable disease](#reportable-disease).
 
 - term: observation
   definition: |-
-    In NBS, a report received by a health department from an external source (such as a lab or provider). Observations include [lab reports](#lab-report) and [morbidity reports](#morbidity-report).
+    In [NBS](#nbs), a report received by a health department from an external source (such as a lab or provider). Observations include [lab reports](#lab-report) and [morbidity reports](#morbidity-report).
 
 - term: ODS / ODSE
   definition: |-
-    **Operational Data Store (Enterprise).** The NBS primary transactional database. Stores real-time case and investigation data. The "E" suffix reflects the current design iteration of the database schema.
+    **Operational Data Store (Enterprise).** The [NBS](#nbs) primary transactional database. Stores real-time case and investigation data. The "E" suffix reflects the current design iteration of the database schema.
 
 - term: on-premises
   definition: |-
@@ -415,27 +485,27 @@
 
 - term: OPHDST
   definition: |-
-    **Office of Public Health Data, Surveillance, and Technology.** The CDC office that oversees NBS development and houses the [IRD](#ird) division.
+    **Office of Public Health Data, Surveillance, and Technology.** The [CDC](#cdc) office that oversees [NBS](#nbs) development and houses the [IRD](#ird) division.
 
 - term: Page Builder
   definition: |-
-    An NBS feature that allows administrators to build configurable forms for collecting, analyzing, and sending notifications for disease and condition data.
+    An [NBS](#nbs) feature that allows administrators to build configurable forms for collecting, analyzing, and sending notifications for disease and [condition](#condition) data.
 
 - term: PAM
   definition: |-
-    **Program Area Module.** An NBS extension that adds disease-specific data collection fields and workflows beyond the base system. For example, the STD/HIV PAM adds fields specific to sexually transmitted diseases and HIV.
+    **Program Area Module.** An [NBS](#nbs) extension that adds disease-specific data collection fields and workflows beyond the base system. For example, the STD/HIV PAM adds fields specific to sexually transmitted diseases and HIV.
 
 - term: peering
   definition: |-
-    A network connection between two [Amazon VPCs](#amazon-vpc) or [VNets](#azure-vnet) that lets resources communicate as if on the same network. In [Amazon VPC](#amazon-vpc), this is called VPC peering. In [Azure](#azure), the equivalent is [VNet](#azure-vnet) peering.
+    A network connection between two [Amazon VPCs](#amazon-vpc) or [VNets](#azure-vnet) that lets resources communicate as if on the same network. In [Amazon VPC](#amazon-vpc), this is called VPC peering. In [Azure](#microsoft-azure), the equivalent is [VNet](#azure-vnet) peering.
 
 - term: permission set
   definition: |-
-    In NBS, a collection of objects and operations a user is authorized to access. A permission set is combined with [program area](#program-area), [jurisdiction](#jurisdiction), and access level to define a user's [role](#role-nbs).
+    In [NBS](#nbs), a collection of objects and operations a user is authorized to access. A permission set is combined with [program area](#program-area), [jurisdiction](#jurisdiction), and access level to define a user's [role](#role-nbs).
 
 - term: PHCR
   definition: |-
-    **Public Health Case Report.** An XML format used to import case data into NBS from legacy or external systems.
+    **Public Health Case Report.** An XML format used to import case data into [NBS](#nbs) from legacy or external systems.
 
 - term: PHDC
   definition: |-
@@ -447,11 +517,11 @@
 
 - term: PHIN
   definition: |-
-    **Public Health Information Network.** A CDC initiative establishing standards and tools for public health information exchange. The parent initiative for [PHIN VADS](#phin-vads) and historically for [PHINMS](#phinms).
+    **Public Health Information Network.** A [CDC](#cdc) initiative establishing standards and tools for public health information exchange. The parent initiative for [PHIN VADS](#phin-vads) and historically for [PHINMS](#phinms).
 
 - term: PHIN VADS
   definition: |-
-    **Public Health Information Network Vocabulary Access and Distribution System.** A CDC-hosted repository of standardized vocabulary and code sets used in public health messaging.
+    **Public Health Information Network Vocabulary Access and Distribution System.** A [CDC](#cdc)-hosted repository of standardized vocabulary and code sets used in public health messaging.
 
 - term: PHINMS
   definition: |-
@@ -459,7 +529,7 @@
 
 - term: PHIT
   definition: |-
-    **Public Health Investigation Tools.** The CDC branch within [IRD](#ird) that directly manages [NBS](#nbs).
+    **Public Health Investigation Tools.** The [CDC](#cdc) branch within [IRD](#ird) that directly manages [NBS](#nbs).
 
 - term: PII
   definition: |-
@@ -467,11 +537,11 @@
 
 - term: pod
   definition: |-
-    The smallest deployable unit in [Kubernetes](#kubernetes). A pod contains one or more containers that share network and storage resources.
+    The smallest deployable unit in [Kubernetes](#kubernetes). A pod contains one or more [containers](#container) that share network and storage resources.
 
 - term: program area
   definition: |-
-    At CDC, a category that groups related diseases or conditions for administrative and security purposes (for example, STD/HIV or Hepatitis). Users are assigned to program areas as part of their [role](#role-nbs).
+    At [CDC](#cdc), a category that groups related diseases or [conditions](#condition) for administrative and security purposes (for example, STD/HIV or Hepatitis). Users are assigned to program areas as part of their [role](#role-nbs).
 
 - term: RBAC
   definition: |-
@@ -483,23 +553,23 @@
 
 - term: RDB_Modern
   definition: |-
-    The modernized reporting database in NBS 7, populated by the [RTR](#rtr) pipeline.
+    The modernized reporting database in [NBS 7](#nbs-7), populated by the [RTR](#rtr) pipeline.
 
 - term: Amazon RDS
   definition: |-
-    **Amazon Relational Database Service.** An [AWS](#aws) managed database service. The [Azure](#azure) equivalent to Amazon RDS is [Azure SQL](#azure-sql).
+    **Amazon Relational Database Service.** An [AWS](#aws) managed database service. The [Azure](#microsoft-azure) equivalent to Amazon RDS is [Azure SQL](#azure-sql).
 
 - term: Reportability Response
   definition: |-
-    **Reportability Response (RR).** A structured message returned to an originating [EHR](#ehr) system after an [eICR](#eicr) is received and processed. The RR confirms whether the reported condition is reportable and to which jurisdiction.
+    **Reportability Response (RR).** A structured message returned to an originating [EHR](#ehr) system after an [eICR](#eicr) is received and processed.
 
 - term: reportable disease
   definition: |-
-    A disease or condition that providers are required to report to the local or state health department under jurisdiction law. Distinct from [notifiable disease](#notifiable-disease), which refers to federal reporting requirements to CDC.
+    A disease or condition that providers are required to report to the local or state health department under jurisdiction law. Distinct from [notifiable disease](#notifiable-disease), which refers to federal reporting requirements to [CDC](#cdc).
 
 - term: role (NBS)
   definition: |-
-    In NBS, the combination of a [permission set](#permission-set), [program area](#program-area) or areas, [jurisdiction](#jurisdiction) or jurisdictions, and access level assigned to a user. A user might have multiple roles.
+    In [NBS](#nbs), the combination of a [permission set](#permission-set), [program area](#program-area) or areas, [jurisdiction](#jurisdiction) or jurisdictions, and access level assigned to a user. A user may have multiple roles.
 
 - term: RR
   definition: |-
@@ -507,7 +577,7 @@
 
 - term: RTR
   definition: |-
-    **Real-time reporting.** An NBS 7 reporting pipeline that is replacing the legacy batch [ETL](#etl) approach with event-driven data movement using [Kafka](#kafka).
+    **Real-Time Reporting.** An [NBS 7](#nbs-7[) reporting pipeline that replaces the batch ETL approach with event-driven data movement using [Kafka](#kafka).
 
 - term: RxNorm
   definition: |-
@@ -515,7 +585,7 @@
 
 - term: Amazon S3
   definition: |-
-    **Amazon Simple Storage Service.** [AWS](#aws) object storage. The [Azure](#azure) equivalent to Amazon S3 is [Azure Blob Storage](#azure-blob-storage).
+    **Amazon Simple Storage Service.** [AWS](#aws) object storage. The [Azure](#microsoft-azure) equivalent to Amazon S3 is [Azure Blob Storage](#azure-blob-storage).
 
 - term: SAML
   definition: |-
@@ -535,7 +605,7 @@
 
 - term: SLA
   definition: |-
-    **Service Level Agreement.** A contract defining service performance expectations. A STLT might be required to establish an SLA with a new service provider (for example, a cloud service provider).
+    **Service Level Agreement.** A contract that defines service performance expectations. A STLT might be required to establish an SLA with a new service provider (for example, a cloud service provider).
 
 - term: SNOMED CT
   definition: |-
@@ -547,7 +617,7 @@
 
 - term: SRT / SRTE
   definition: |-
-    **System Reference Tables (Enterprise).** The NBS database that stores standard code sets including [LOINC](#loinc), [SNOMED CT](#snomed-ct), [RxNorm](#rxnorm), and FIPS codes.
+    **System Reference Tables (Enterprise).** The [NBS](#nbs) database that stores standard code sets including [LOINC](#loinc), [SNOMED CT](#snomed-ct), [RxNorm](#rxnorm), and [FIPS](#fips) codes.
 
 - term: SSO
   definition: |-
@@ -555,7 +625,7 @@
 
 - term: STLT
   definition: |-
-    **State, Territorial, Local, and Tribal.** The jurisdictions that operate NBS day-to-day.
+    **State, Territorial, Local, and Tribal.** The jurisdictions that operate [NBS](#nbs) day-to-day.
 
 - term: strangler fig pattern
   definition: |-
@@ -567,7 +637,7 @@
 
 - term: Terraform
   definition: |-
-    An open-source infrastructure-as-code tool for provisioning and managing cloud resources. Used in both [AWS](#aws) and [Azure](#azure) deployments.
+    An open-source [infrastructure-as-code](#iac) tool for provisioning and managing cloud resources. Used in both [AWS](#aws) and [Azure](#microsoft-azure) deployments.
 
 - term: TLS
   definition: |-
@@ -587,15 +657,15 @@
 
 - term: Azure VNet
   definition: |-
-    **Azure Virtual Network.** An isolated cloud network in [Azure](#azure). The [AWS](#aws) equivalent to VNet is [Amazon VPC](#amazon-vpc).
+    **Azure Virtual Network.** An isolated cloud network in [Azure](#microsoft-azure). The [AWS](#aws) equivalent to VNet is [Amazon VPC](#amazon-vpc).
 
 - term: Amazon VPC
   definition: |-
-    **Amazon Virtual Private Cloud.** An isolated cloud network in AWS. The [AWS](#aws) equivalent to [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
+    **Amazon Virtual Private Cloud.** An isolated cloud network in [AWS](#amazon-web-services). The [Azure](#microsoft-azure) equivalent to Amazon VPC is [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
 
 - term: WDS
   definition: |-
-    **Workflow Decision Support.** An NBS application feature that automates processing of incoming [ELR](#elr) and [eCR](#ecr) data. System administrators configure the [permission sets](#permission-set) and security derivation it depends on.
+    **Workflow Decision Support.** An [NBS](#nbs) application feature that automates processing of incoming [ELR](#elr) and [eCR](#ecr) data.
 
 - term: WildFly
   definition: |-
@@ -603,4 +673,4 @@
 
 - term: worker node
   definition: |-
-    A physical or virtual machine in a [Kubernetes](#kubernetes) cluster that runs containerized workloads ([pods](#pod)). In [Amazon EKS](#amazon-eks), worker nodes run as EC2 instances; in [AKS](#azure-kubernetes-service), they are provisioned as [node pools](#node-pool).
+    A physical or virtual machine in a [Kubernetes](#kubernetes) cluster that runs containerized workloads ([pods](#pod)). In [Amazon EKS](#amazon-eks), worker nodes run as [EC2](#ec2) instances; in [AKS](#azure-kubernetes-service), they are provisioned as [node pools](#node-pool).

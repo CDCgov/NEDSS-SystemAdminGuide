@@ -8,12 +8,15 @@ published: false
 
 # Glossary
 
-This page is generated from `_data/glossary.yml` and defines the acronyms and technical terms used throughout the guide.
+This page defines the acronyms and technical terms used throughout the NBS 7 System Administrator guide.
 
 <!--
+
 Contributor note:
-- This page is generated from _data/glossary.yml. DO NOT HAND-EDIT the rendered content below.
-- If you need to change a definition or cross-link, update the YAML data file instead.
+
+- This page is generated from _data/glossary.yml. Do not hand-edit the rendered content below.
+- If you need to change a definition or cross-link, update the  _data/glossary.yml YAML data file instead.
+
 -->
 
 {% assign glossary_entries = site.data.glossary | sort: 'term' -%}

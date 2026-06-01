@@ -11,6 +11,7 @@ This table records significant updates to the NBS 7 System Administrator Guide. 
 
 | Date | Description | Author |
 |:-----|:------------|:-------|
+| June 1, 2026 | New content: [Upgrade the Amazon EKS control plane](/NEDSS-SystemAdminGuide/docs/maintain-nbs7/eks-upgrade.html) | Jill Shaheen (Skylight Digital) |
 | April 28, 2026 | Replace NGINX with [Traefik instructions](/NEDSS-SystemAdminGuide/docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) | Kate Saul, Jill Shaheen (Skylight Digital) |
 | April 24, 2026 | [RTR deployment](/NEDSS-SystemAdminGuide/docs/deploy-nbs7/real-time-reporting/real-time-reporting.html) content audit (7.12) | Jill Shaheen (Skylight Digital) |
 | April 17, 2026 | Full site restructure | Jill Shaheen (Skylight Digital) |

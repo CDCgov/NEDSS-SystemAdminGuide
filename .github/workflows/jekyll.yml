@@ -16,7 +16,7 @@ on:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -35,6 +35,32 @@ jobs:
         uses: actions/checkout@v6
         with:
           fetch-depth: 0   # required to list all branches :contentReference[oaicite:1]{index=1}
+
+      - name: Update last_modified_date in changed docs
+        if: github.actor != 'github-actions[bot]'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          before="${{ github.event.before }}"
+          after="${{ github.sha }}"
+          if [ -z "$before" ] || [ "$before" = "0000000000000000000000000000000000000000" ]; then
+            changed=$(git diff --name-only HEAD~1 HEAD -- '*.md' 2>/dev/null || true)
+          else
+            changed=$(git diff --name-only "$before" "$after" -- '*.md')
+          fi
+          updated=0
+          for file in $changed; do
+            [ -f "$file" ] || continue
+            grep -q '^last_modified_date:' "$file" || continue
+            commit_date=$(git log -1 --format="%cs" -- "$file")
+            sed -i "s/^last_modified_date:.*$/last_modified_date: $commit_date/" "$file"
+            git add "$file"
+            updated=1
+          done
+          if [ "$updated" = "1" ]; then
+            git commit -m "chore: update last_modified_date [skip ci]"
+            git push
+          fi
 
       - name: Setup Ruby
         # https://github.com/ruby/setup-ruby/releases/tag/v1.207.0

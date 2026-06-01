@@ -114,31 +114,31 @@
 
 - term: Azure Blob Storage
   definition: |-
-    An [Azure](#microsoft-azure) service for object storage. The AWS equivalent to Azure Blob Storage is [Amazon S3](#amazon-s3).
+    An [Azure](#microsoft-azure) service for object storage. The [AWS](#aws) equivalent to Azure Blob Storage is [Amazon S3](#amazon-s3).
 
 - term: Azure Files
   definition: |-
-    An [Azure](#microsoft-azure) service for file storage. The AWS equivalent to Azure Files is [Amazon EFS](#amazon-efs).
+    An [Azure](#microsoft-azure) service for file storage. The [AWS](#aws) equivalent to Azure Files is [Amazon EFS](#amazon-efs).
 
 - term: Azure Key Vault
   definition: |-
-    An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets. The AWS equivalent to Key Vault is [AWS KMS](#aws-kms).
+    An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets. The [AWS](#aws) equivalent to Key Vault is [AWS KMS](#kms).
 
 - term: Azure Kubernetes Service
   definition: |-
-    An Azure-managed service for Kubernetes, also known as AKS. Hosts containerized services. The AWS equivalent to AKS is Amazon EKS.
+    An [Azure](#microsoft-azure)-managed service for [Kubernetes](#kubernetes), also known as **AKS**. Hosts containerized services. The [AWS](#aws) equivalent to AKS is [Amazon EKS](#amazon-eks).
 
 - term: Azure Monitor
   definition: |-
-    An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. The AWS equivalents are [Amazon Managed Service for Prometheus](#amazon-managed-service-for-prometheus) and [Amazon Managed Grafana](#amazon-managed-grafana) for metrics collection and dashboard visualization.
+    An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. The [AWS](#aws) equivalents are [Amazon Managed Service for Prometheus](#amp) for metrics collection and [Amazon Managed Grafana](#amg) for visualization.
 
 - term: Azure RBAC
   definition: |-
-    **Azure Role-Based Access Control.** An [Azure](#microsoft-azure) service for managing access to cloud resources, often used with [Microsoft Entra ID](#microsoft-entra-id) for identity management. The AWS equivalent to Azure RBAC is [AWS IAM](#aws-iam).
+    **Azure Role-Based Access Control.** An [Azure](#microsoft-azure) service for managing access to cloud resources, often used with [Microsoft Entra ID](#microsoft-entra-id) for identity management. The [AWS](#aws) equivalent to Azure RBAC is [AWS IAM](#iam).
 
 - term: Azure SQL
   definition: |-
-    A family of [Azure](#microsoft-azure)-managed database services (includes Azure SQL Database or Azure Database for SQL Server). The AWS equivalent to Azure SQL is [Amazon RDS](#amazon-rds).
+    A family of [Azure](#microsoft-azure)-managed database services (includes [Azure](#microsoft-azure) SQL Database or [Azure](#microsoft-azure) Database for SQL Server). The [AWS](#aws) equivalent to [Azure](#microsoft-azure) SQL is [Amazon RDS](#amazon-rds).
 
 - term: build provenance
   definition: |-
@@ -170,7 +170,7 @@
 
 - term: CDF
   definition: |-
-    **Commonly Defined Fields** (also: Collaboratively Defined Fields). Custom fields in NBS that are defined collaboratively across [jurisdictions](#jurisdiction), as distinct from [locally defined fields (LDFs)](#ldf). CDFs support import versioning.
+    **Commonly Defined Fields** (also: Collaboratively Defined Fields). Custom fields in NBS that are collaboratively defined across [jurisdictions](#jurisdiction), as distinct from [locally defined fields (LDFs)](#ldf). CDFs support import versioning.
 
 - term: change data capture
   definition: |-
@@ -190,7 +190,7 @@
 
 - term: condition
   definition: |-
-    A disease or health event that is subject to public health reporting. Conditions may be nationally [notifiable](#notifiable-disease) (reported to [CDC](#cdc)) or only jurisdiction-level [reportable](#reportable-disease).
+    A disease or health event that is subject to public health reporting. Conditions might be nationally [notifiable](#notifiable-disease) (reported to [CDC](#cdc)) or only jurisdiction-level [reportable](#reportable-disease).
 
 - term: container
   definition: |-
@@ -210,8 +210,7 @@
 
 - term: data ingestion pipeline
   definition: |-
-    The NBS 7 services responsible for receiving, validating, and routing incoming public health data into [NBS](#nbs) though the [DI API](#di-api) entry point. Accepts data in [eICR](#eicr), [PHDC](#phdc), and [C-CDA](#c-cda) formats.
-
+    The [NBS 7](#nbs-7) services responsible for receiving, validating, and routing incoming public health data into NBS though the [DI API](#di-api) entry point. Accepts data in [eICR](#eicr), [PHDC](#phdc), and [C-CDA](#c-cda) formats.
 - term: Debezium
   definition: |-
     An open-source [change data capture](#change-data-capture) tool.
@@ -234,7 +233,7 @@
 
 - term: Amazon EFS
   definition: |-
-    **Amazon Elastic File System.** AWS-managed file storage. The [Azure](#azure) equivalent to EFS is [Azure Files](#azure-files).
+    **Amazon Elastic File System.** AWS-managed file storage. The [Azure](#microsoft-azuremicrosoft-azure) equivalent to EFS is [Azure Files](#azure-files).
 
 - term: EHR
   definition: |-
@@ -246,7 +245,7 @@
 
 - term: Amazon EKS
   definition: |-
-    **Amazon Elastic Kubernetes Service.** A managed [Kubernetes](#kubernetes) service from [AWS](#aws). Hosts containerized services in AWS deployments. The [Azure](#azure) equivalent to Amazon EKS is [AKS](#aks).
+    **Amazon Elastic Kubernetes Service.** A managed [Kubernetes](#kubernetes) service from [AWS](#aws). Hosts containerized services in AWS deployments. The [Azure](#microsoft-azure) equivalent to Amazon EKS is [AKS](#azure-kubernetes-service).
 
 - term: Elasticsearch
   definition: |-
@@ -274,7 +273,7 @@
 
 - term: HDInsight
   definition: |-
-    An [Azure](#azure)-managed [Kafka](#kafka) service. Used for event streaming in Azure deployments. The [AWS](#aws) equivalent to HDInsight is [Amazon MSK](#amazon-msk).
+    An [Azure](#microsoft-azure)-managed [Kafka](#kafka) service. Used for event streaming in Azure deployments. The [AWS](#aws) equivalent to HDInsight is [Amazon MSK](#amazon-msk).
 
 - term: Helm
   definition: |-
@@ -298,7 +297,7 @@
 
 - term: IAM
   definition: |-
-    **AWS Identity and Access Management.** The AWS service for controlling access to cloud resources. The [Azure](#azure) equivalents of IAM are [Microsoft Entra ID](#microsoft-entra-id) and [Azure RBAC](#azure-rbac).
+    **AWS Identity and Access Management.** The [AWS](#aws) service for controlling access to cloud resources. The [Azure](#microsoft-azure) equivalents of IAM are [Microsoft Entra ID](#microsoft-entra-id) and [Azure RBAC](#azure-rbac).
 
 - term: IdP
   definition: |-
@@ -322,7 +321,7 @@
 
 - term: Kafka
   definition: |-
-    **Apache Kafka.** An open-source distributed event-streaming platform. Hosted on AWS as [Amazon MSK](#amazon-msk) or on Azure as [HDInsight](#hdinsight).
+    **Apache Kafka.** An open-source distributed event streaming platform. Hosted on [AWS](#aws) as [Amazon MSK](#amazon-msk) or on [Azure](#microsoft-azure) as [HDInsight](#hdinsight).
 
 - term: Keycloak
   definition: |-
@@ -330,7 +329,7 @@
 
 - term: KMS
   definition: |-
-    **AWS Key Management Service.** The AWS service for creating and managing encryption keys. Used to encrypt data at rest. The [Azure](#azure) equivalent to KMS is [Azure Key Vault](#azure-key-vault).
+    **AWS Key Management Service.** The [AWS](#aws) service for creating and managing encryption keys. Used to encrypt data at rest. The [Azure](#microsoft-azure) equivalent to KMS is [Azure Key Vault](#azure-key-vault).
 
 - term: kubectl
   definition: |-
@@ -342,7 +341,7 @@
 
 - term: lab report
   definition: |-
-    An observation originating from a laboratory, containing lab orders and results. Lab reports may arrive electronically as an [ELR](#elr) or be entered manually. In NBS, lab reports often trigger the creation of a [case investigation](#case-investigation).
+    An observation originating from a laboratory, containing lab orders and results. Lab reports might arrive electronically as an [ELR](#elr) or be entered manually, and often trigger the creation of a [case investigation](#case-investigation) in NBS.
 
 - term: LDF
   definition: |-
@@ -366,7 +365,7 @@
 
 - term: managed node group
   definition: |-
-    A group of [worker nodes](#worker-node) in AWS that share the same configuration. The Azure equivalent to a managed node group is a [node pool](#node-pool) in [AKS](#azure-kubernetes-service).
+    A group of [worker nodes](#worker-node) in [AWS](#aws) that share the same configuration. The [Azure](#microsoft-azure) equivalent to a managed node group is a [node pool](#node-pool) in [AKS](#azure-kubernetes-service).
 
 - term: MasterETL
   definition: |-
@@ -382,7 +381,7 @@
 
 - term: Microsoft Entra ID
   definition: |-
-    An [Azure](#microsoft-azure) identity and access management service, formerly known as Azure Active Directory. The AWS equivalent to Entra ID is [AWS IAM](#aws-iam).
+    An [Azure](#microsoft-azure) identity and access management service, formerly known as Azure Active Directory. The [AWS](#aws) equivalent to Entra ID is [AWS IAM](#aws-iam).
 
 - term: MMG
   definition: |-
@@ -410,15 +409,15 @@
 
 - term: MSGOUT / MSGOUTE
   definition: |-
-    **Messaging Database (Enterprise).** The [NBS](#nbs) staging database for inbound and outbound messaging. Stores electronic messages going into and out of NBS. Referenced in [data ingestion pipeline](#data-ingestion-pipeline) configuration.
+    **Messaging Database (Enterprise).** The [NBS](#nbs) staging database for inbound and outbound messaging. Stores electronic messages going into and out of NBS.
 
 - term: Amazon MSK
   definition: |-
-    **Amazon Managed Streaming for Apache Kafka.** An [AWS](#aws)-managed version of [Kafka](#kafka), an open-source event streaming platform. The [Azure](#azure) equivalent to MSK is [HDInsight](#hdinsight).
+    **Amazon Managed Streaming for Apache Kafka.** An [AWS](#aws)-managed version of [Kafka](#kafka), an open-source event streaming platform. The [Azure](#microsoft-azure) equivalent to MSK is [HDInsight](#hdinsight).
 
 - term: namespace (Kubernetes)
   definition: |-
-    A logical partition within a [Kubernetes](#kubernetes) cluster used to isolate resources. NBS 7 services are deployed into specific namespaces.
+    A logical partition within a [Kubernetes](#kubernetes) cluster used to isolate resources.
 
 - term: NBS
   definition: |-
@@ -430,7 +429,7 @@
 
 - term: NBS 7
   definition: |-
-    The modernized version of NBS, built as a containerized microservices platform deployed on cloud infrastructure. NBS 7 is the subject of this guide.
+    The modernized version of [NBS](#nbs), built as a containerized [microservices](#microservice) platform deployed on cloud infrastructure. NBS 7 is the subject of this guide.
 
 - term: NBS Central
   definition: |-
@@ -438,7 +437,7 @@
 
 - term: NEDSS
   definition: |-
-    National Electronic Disease Surveillance System. The federal initiative that establishes standards for electronic disease surveillance.
+    **National Electronic Disease Surveillance System.** The federal initiative that establishes standards for electronic disease surveillance.
 
 - term: NETSS
   definition: |-
@@ -466,7 +465,7 @@
 
 - term: node pool
   definition: |-
-    A group of [worker nodes](#worker-node) in [Azure](#azure) that share the same configuration. The [AWS](#aws) equivalent to a node pool is a managed node group in [Amazon EKS](#amazon-eks).
+    A group of [worker nodes](#worker-node) in [Azure](#microsoft-azure) that share the same configuration. The [AWS](#aws) equivalent to a node pool is a [managed node group](#managed-node-group) in [Amazon EKS](#amazon-eks).
 
 - term: notifiable disease
   definition: |-
@@ -474,7 +473,7 @@
 
 - term: observation
   definition: |-
-    In [NBS](#nbs), a report received by a health department from an external source (such as a lab or provider). Observations include lab reports and morbidity reports.
+    In [NBS](#nbs), a report received by a health department from an external source (such as a lab or provider). Observations include [lab reports](#lab-report) and [morbidity reports](#morbidity-report).
 
 - term: ODS / ODSE
   definition: |-
@@ -498,7 +497,7 @@
 
 - term: peering
   definition: |-
-    A network connection between two [Amazon VPCs](#amazon-vpc) or [VNets](#azure-vnet), or between one and an [on-premises network](#on-premises), that allows resources in each to communicate as if on the same network. In [Amazon VPC](#amazon-vpc), this is called VPC peering. In [Azure](#azure), the equivalent is [VNet](#azure-vnet) peering.
+    A network connection between two [Amazon VPCs](#amazon-vpc) or [VNets](#azure-vnet) that lets resources communicate as if on the same network. In [Amazon VPC](#amazon-vpc), this is called VPC peering. In [Azure](#microsoft-azure), the equivalent is [VNet](#azure-vnet) peering.
 
 - term: permission set
   definition: |-
@@ -550,15 +549,15 @@
 
 - term: RDB
   definition: |-
-    **Reporting Database.** The [NBS](#nbs) database that stores flattened data for reporting and analysis. See also [RDB_Modern](#rdb_modern).
+    **Reporting Database.** The NBS database that stores flattened data for reporting and analysis. See also [RDB_Modern](#rdb_modern).
 
 - term: RDB_Modern
   definition: |-
-    The modernized reporting database in [NBS 7](#nbs-7), populated by the RTR pipeline.
+    The modernized reporting database in [NBS 7](#nbs-7), populated by the [RTR](#rtr) pipeline.
 
 - term: Amazon RDS
   definition: |-
-    **Amazon Relational Database Service.** An [AWS](#amazon-web-services) managed database service. The Azure equivalent to Amazon RDS is [Azure SQL](#azure-sql).
+    **Amazon Relational Database Service.** An [AWS](#aws) managed database service. The [Azure](#microsoft-azure) equivalent to Amazon RDS is [Azure SQL](#azure-sql).
 
 - term: Reportability Response
   definition: |-
@@ -586,7 +585,7 @@
 
 - term: Amazon S3
   definition: |-
-    **Amazon Simple Storage Service.** AWS object storage. The Azure equivalent to Amazon S3 is [Azure Blob Storage](#azure-blob-storage).
+    **Amazon Simple Storage Service.** [AWS](#aws) object storage. The [Azure](#microsoft-azure) equivalent to Amazon S3 is [Azure Blob Storage](#azure-blob-storage).
 
 - term: SAML
   definition: |-
@@ -638,7 +637,7 @@
 
 - term: Terraform
   definition: |-
-    An open-source [infrastructure-as-code](#infrastructure-as-code) tool for provisioning and managing cloud resources. Used in both [AWS](#aws) and [Azure](#azure) deployments.
+    An open-source [infrastructure-as-code](#iac) tool for provisioning and managing cloud resources. Used in both [AWS](#aws) and [Azure](#microsoft-azure) deployments.
 
 - term: TLS
   definition: |-
@@ -658,11 +657,11 @@
 
 - term: Azure VNet
   definition: |-
-    **Azure Virtual Network.** An isolated cloud network in [Azure](#microsoft-azure). The AWS equivalent to VNet is [Amazon VPC](#amazon-vpc).
+    **Azure Virtual Network.** An isolated cloud network in [Azure](#microsoft-azure). The [AWS](#aws) equivalent to VNet is [Amazon VPC](#amazon-vpc).
 
 - term: Amazon VPC
   definition: |-
-    **Amazon Virtual Private Cloud.** An isolated cloud network in [AWS](#amazon-web-services). The Azure equivalent to Amazon VPC is [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
+    **Amazon Virtual Private Cloud.** An isolated cloud network in [AWS](#amazon-web-services). The [Azure](#microsoft-azure) equivalent to Amazon VPC is [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
 
 - term: WDS
   definition: |-
@@ -674,5 +673,4 @@
 
 - term: worker node
   definition: |-
-    A physical or virtual machine in a [Kubernetes](#kubernetes) cluster that runs containerized workloads ([pods](#pod)). In [Amazon EKS](#amazon-eks), worker nodes run as [EC2](#ec2) instances; in [AKS](#aks), they are provisioned as [node pools](#node-pool).
-
+    A physical or virtual machine in a [Kubernetes](#kubernetes) cluster that runs containerized workloads ([pods](#pod)). In [Amazon EKS](#amazon-eks), worker nodes run as [EC2](#ec2) instances; in [AKS](#azure-kubernetes-service), they are provisioned as [node pools](#node-pool).

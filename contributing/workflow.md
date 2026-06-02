@@ -115,6 +115,8 @@ git push origin your-initials/short-description:preview --force
 
 Open a PR on GitHub from your **feature branch** to `main` — not from `preview` to `main`. For PR description standards and review expectations, see [CONTRIBUTING.md](../CONTRIBUTING.md).
 
+Before merging, add or update an entry in `docs/revision-history.md` for any new or updated content that will be merged to `main`.
+
 Go to https://github.com/CDCgov/NEDSS-SystemAdminGuide — GitHub will show a prompt to open a PR for your recently pushed branch.
 
 After the PR is approved and merged, the production site updates automatically:

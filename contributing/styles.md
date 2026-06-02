@@ -636,3 +636,52 @@ The following issues are documented and tracked. They represent theme or infrast
 | Red callout | Red-300 on red-000 (3.88:1) fails AA normal text threshold for accent elements. | Known; body text passes. |
 | Blue callout | Blue-300 on blue-000 (4.25:1) is borderline — 0.25 below the 4.5:1 AA normal threshold for accent elements. | Known; body text passes. Verify in built site. |
 | Highlight callout | No `title:` text label; color can become the sole type indicator if used incorrectly. | Unused in `docs/`; use sparingly and pair with clear wording. |
+
+### Tooltip usage syntax
+
+Use the `term-tooltip` include for glossary-style terms that need an inline definition.
+
+1. Add or update the term definition in `_data/glossary.yml`.
+1. Reference the term inline using the include.
+1. Use a page-unique `id` value for each tooltip instance.
+1. If a page already defines the term in plain language on first mention, keep that first mention as-is and use the include on later mentions.
+1. If the first mention is the only place the term appears or the usage is ambiguous, leave a note for review instead of forcing a tooltip.
+
+**Data-driven definition (preferred):**
+
+```liquid
+{% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-runtime" %}
+```
+
+- `key`: lookup key in `_data/glossary.yml`
+- `term`: visible text in the paragraph
+- `id`: unique suffix used to build the tooltip element ID
+
+**Inline definition (one-off):**
+
+```liquid
+{% include term-tooltip.html term="Helm" id="helm-runtime" definition="A package manager for Kubernetes." %}
+```
+
+**In-paragraph example:**
+
+```markdown
+NBS 7 runs on {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-home" %} and relies on Terraform.
+```
+
+When a page introduces a term plainly first, follow-on uses can use the include:
+
+```markdown
+The content assumes familiarity with your cloud platform, {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-audience" %}, Terraform, Helm, and related administration tasks.
+```
+
+### Tooltip accessibility verification checklist
+
+When adding or modifying tooltip terms, verify all of the following before merge:
+
+1. **Keyboard open/close:** `Tab` to the term opens the tooltip; `Escape` closes it.
+1. **Hover/focus persistence:** Tooltip remains visible while hovered or while trigger has focus.
+1. **Dismiss without moving pointer:** `Escape` closes any open tooltip even when opened by mouse hover.
+1. **Screen reader announcement:** Trigger has `aria-describedby` that points to a unique tooltip `id`, and the tooltip uses `role="tooltip"`.
+1. **State sync:** Tooltip visibility and ARIA state remain synchronized (`hidden` with `aria-hidden`).
+1. **Touch behavior:** Tapping the term toggles the tooltip and tapping outside dismisses it.

@@ -35,6 +35,9 @@ Complete the sections on this page in order. Each section depends on the previou
 
 Before you begin, verify that your environment meets the following requirements and choose a database installation method. The method you choose applies throughout this guide.
 
+To reduce risk, consider setting up RTR in a testing environment before moving to production. This lets you run RTR alongside MasterETL and compare results, then turn off MasterETL only after you are satisfied with those results.
+{: .important }
+
 1. RTR installation requires NBS 6.0.18.1 or higher. Running the latest NBS 6 release is suggested before proceeding. To verify your baseline NBS release version, run one of the following queries:
 
    ```sql
@@ -58,7 +61,8 @@ Before you begin, verify that your environment meets the following requirements 
    > Back up the `RDB` database before you proceed. This step cannot be undone.
    {: .warning }
 
-1. Choose a database path and use it consistently throughout this guide. Both paths support Liquibase or manual installation.
+1. Choose a database path and use it consistently throughout this guide. Both paths support Liquibase or script-based installation.
+
    - **RDB path:** Use `RDB` as the default reporting database. Turn off the classic ETL batch jobs and proceed to the next step.
    - **rdb_modern path:** Create a separate reporting database. To create the database, see [Create rdb_modern database](#set-up-the-rdb_modern-database) before moving on to [Create service users and database objects](#create-service-users-and-database-objects).
 
@@ -188,24 +192,26 @@ Complete the following steps to create the database users, Kubernetes secrets, a
 > Generate passwords for each service user before running the scripts. Password generation scripts can take several minutes to run. Do not use spaces, equal signs (`=`), or colons (`:`). These characters cause script execution failures.
 {: .important }
 
-1. **Create admin user.** This user provides Liquibase permissions to maintain required database components for RTR and enable [Change Data Capture](#enable-change-data-capture), which streams row-level database changes to the RTR pipeline. Review the script and update the `PASSWORD` value before execution. Script location: [NEDSS-DataReporting onboarding user creation scripts][nedss-datareporting-onboarding-user-scripts].
+1. **Create admin user.** Run [000-create_rtr_admin_user-001.sql][nedss-datareporting-onboarding-user-scripts] from the NEDSS-DataReporting onboarding user creation scripts. This user provides Liquibase permissions to maintain required database components for RTR and enable Change Data Capture. Review the script and update the `PASSWORD` value before execution.
 
-1. **Create RTR microservice user logins.** Create dedicated user accounts for each RTR microservice. These users are referenced in Helm values for RTR services. Review the scripts and update the `PASSWORD` values before execution. Script location: [NEDSS-DataReporting onboarding user creation scripts][nedss-datareporting-onboarding-user-scripts].
+1. **Create RTR microservice user logins.** Run [001-service_users_login_creation-001.sql and 002-service_database_user_creation-001.sql][nedss-datareporting-onboarding-user-scripts] from the same directory. These scripts create dedicated user accounts for each RTR microservice, which are referenced in Helm values for RTR services. Review the scripts and update the `PASSWORD` values before execution.
 
 1. **Create Kubernetes secrets for each service user.** Include the admin user from step 1. Each secret should include the database username and password. Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]. For steps to create secrets, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
 
 1. **Create required database objects.** Run the scripts for your chosen path:
 
-   The database scripts referenced throughout this guide are maintained in the [NEDSS-DataReporting][nedss-datareporting-liquibase-service] repository. You can create the required database objects through Liquibase, which will automatically implement database schema changes, or you can manually install database schema changes. Both options are referenced in the relevant sections.
+   The database scripts referenced throughout this guide are maintained in the [NEDSS-DataReporting][nedss-datareporting-liquibase-service] repository. You can create the required database objects through Liquibase, which will automatically implement database schema changes, or you can use the provided scripts to install database schema changes. Both options are referenced in the relevant sections.
    {: .important }
 
-   - **Liquibase:** See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) to create all necessary objects, then return here to continue.
+   - **Liquibase:** See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) to create all necessary objects, then return here to continue. Liquibase also handles future database upgrades automatically, so no manual intervention is needed when you update NBS 7.
 
-   - **Manual:** See the script execution sequence and `db_upgrade` script in [NEDSS-DataReporting/db-upgrade][nedss-datareporting-manual-deployment]. Run:
+   - **Upgrade scripts:** See the script execution sequence and `db_upgrade` script in [NEDSS-DataReporting/db-upgrade][nedss-datareporting-manual-deployment]. Clone or download the repository, then run:
 
       ```bash
       upgrade_db.bat <server_name> <database> <username> <password>
       ```
+
+      When you update NBS 7 to a new release version, you will need to run the upgrade scripts again. See [After onboarding: database upgrades](#after-onboarding-database-upgrades).
 
 ## Enable Change Data Capture
 
@@ -215,7 +221,11 @@ Change Data Capture (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRT
 
    - **Liquibase:** The `--load-data` flag is not required when using Liquibase. Proceed to step 2.
 
-   - **Manual:** Navigate to the [02_onboarding_script_data_load][nedss-datareporting-onboarding-data-load] and run all of the scripts in the order listed in the repository.
+   - **Upgrade scripts:** Navigate to [02_onboarding_script_data_load][nedss-datareporting-onboarding-data-load] and clone or download the repository, then run:
+
+      ```bash
+      upgrade_db.bat --load-data <server_name> master <username> <password>  
+      ```
 
 1. **Verify Change Data Capture.** `is_cdc_enabled=1` indicates successful configuration.
 
@@ -265,7 +275,7 @@ Now that you have completed database setup and onboarding, deploy the RTR servic
 > Confirm that Kubernetes secrets exist for each RTR service user and the admin user before deploying. If you have not yet created them, see [Create service users and database objects](#create-service-users-and-database-objects).
 {: .important }
 
-1. [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html)
+1. [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html): Skip this step if you used the upgrade script path in [Create required database objects](#create-service-users-and-database-objects).
 1. [Debezium](../../deploy-nbs7/real-time-reporting/debezium.html)
 1. [Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html)
 1. [Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
@@ -282,7 +292,5 @@ Now that you have completed database setup and onboarding, deploy the RTR servic
 
 Database upgrades apply schema changes required by each NBS 7 release. Run database upgrades when you update NBS 7 to a new release version.
 
-To apply database upgrades, use the same approach you selected during onboarding:
-
-- **Liquibase:** Run Liquibase with the release tag for your target NBS 7 version (for example, `v{{ site.version_latest }}.0`). For more information, see [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html).
-- **Manual:** Run the scripts in [manual_deployment][nedss-datareporting-manual-deployment]. Onboarding scripts are excluded from upgrade runs.
+- If you chose the **Liquibase** path during onboarding, no action is needed. The Liquibase container applies schema changes automatically with each release.
+- If you chose the **upgrade scripts** path, navigate to [02_onboarding_script_data_load][nedss-datareporting-onboarding-data-load] and run all of the scripts in the order listed in the repository. Onboarding scripts are excluded from upgrade runs.

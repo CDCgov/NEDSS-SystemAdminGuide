@@ -77,16 +77,6 @@ After you download and unzip the Helm configuration package, create the Kubernet
 
 After you create and deploy your Kubernetes secrets, set up the Traefik ingress controller. This section explains how to install Traefik Custom Resource Definitions (CRDs), deploy Traefik for AWS or Azure, deploy NBS ingress resources, and create the DNS records your cluster needs to route traffic. After you complete these steps, [configure Cert Manager](#configure-cert-manager-optional) to manage TLS certificates for your cluster.
 
-### Install Traefik CRDs
-
-Install Traefik CRDs before installing the controller. These enable Traefik-specific resources such as IngressRoute and Middleware.
-
-```bash
-helm repo add traefik https://traefik.github.io/charts
-helm repo update
-helm install traefik-crds traefik/traefik-crds --namespace traefik --create-namespace
-```
-
 ### Deploy the Traefik controller
 
 The Traefik Helm charts are located in the [NEDSS-Helm repository][nedss-helm-traefik-chart]. Traefik uses the values in `charts/traefik/values.yaml` (AWS) or `charts/traefik/values-azure.yaml` (Azure) from the downloaded chart package. These values are preconfigured to set up Prometheus metrics, configure Linkerd sidecar injection, set timeouts, and instruct the Traefik controller to create an Amazon Elastic Kubernetes Service (Amazon EKS) Network Load Balancer (NLB) or Azure Kubernetes Service (AKS) internal load balancer.
@@ -95,15 +85,15 @@ The Traefik Helm charts are located in the [NEDSS-Helm repository][nedss-helm-tr
 
    - **Amazon Elastic Kubernetes Service (Amazon EKS):**
 
-   ```bash
-   helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml --skip-crds
-   ```
+      ```bash
+      helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml
+      ```
 
    - **Azure Kubernetes Service (AKS):**
 
-    ```bash
-    helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml --skip-crds
-    ```
+      ```bash
+      helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml
+      ```
 
 1. Monitor the deployment status:
 

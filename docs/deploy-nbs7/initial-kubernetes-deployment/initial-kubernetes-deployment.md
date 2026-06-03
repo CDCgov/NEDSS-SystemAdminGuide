@@ -85,15 +85,15 @@ The Traefik Helm charts are located in the [NEDSS-Helm repository][nedss-helm-tr
 
    - **Amazon Elastic Kubernetes Service (Amazon EKS):**
 
-   ```bash
-   helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml
-   ```
+      ```bash
+      helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml
+      ```
 
    - **Azure Kubernetes Service (AKS):**
 
-    ```bash
-    helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml
-    ```
+      ```bash
+      helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml
+      ```
 
 1. Monitor the deployment status:
 

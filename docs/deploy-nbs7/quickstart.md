@@ -10,7 +10,7 @@ redirect_from:
 
 # Quick start (AWS)
 
-This page provides a streamlined path to deploy NBS 7 infrastructure and core microservices in AWS. It is intended for experienced administrators familiar with AWS, [Kubernetes](https://kubernetes.io/), [Helm](https://helm.sh/), and [Terraform](https://www.terraform.io/).
+This page provides a streamlined path to deploy NBS 7 infrastructure and core microservices in AWS. It is intended for experienced administrators familiar with AWS, Kubernetes, Helm, and Terraform.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -30,18 +30,18 @@ This quick start installs and configures the following resources.
 ### Terraform-managed resources
 
 - Modern VPC, subnets, and route tables
-- Amazon Elastic Kubernetes Service (Amazon EKS) cluster and nodes
+- Amazon EKS cluster and nodes
 - Network Load Balancer (NLB)
-- MSK
+- Amazon MSK
 - Amazon Managed Service for Prometheus
 - Amazon Managed Grafana
-- EFS
-- KMS
-- S3 bucket
+- Amazon EFS
+- AWS KMS
+- Amazon S3 bucket
 
 ### Manual configuration
 
-- Route53 updates: create DNS entries in Route53 to point app and data URLs to the Network Load Balancer.
+- **Route53 updates**: create DNS entries in Route53 to point app and data URLs to the Network Load Balancer.
 
 ### NBS 7 core services
 
@@ -55,7 +55,6 @@ This quick start installs and configures the following resources.
 ## Prerequisites
 
 ### Install these tools
-{: .no_toc }
 
 - [AWS CLI](https://aws.amazon.com/cli/) (v2.15+)
 - [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) (v1.5.5)
@@ -64,7 +63,6 @@ This quick start installs and configures the following resources.
 - [eksctl](https://eksctl.io/installation/) (optional but recommended)
 
 ### Environment requirements
-{: .no_toc }
 
 - AWS Account with NBS 6.0.16 access (or newer)
 - DNS routing infrastructure: domain information for modernized NBS application URLs (for example, `app.site_name.domain.com`)
@@ -77,7 +75,6 @@ This quick start installs and configures the following resources.
 ![NBS 7 infrastructure diagram for quick-start deployment on AWS](../quick_install_nbs7_architecture.png)
 
 ### Prepare the directory
-{: .no_toc }
 
 ```bash
 mkdir -p ~/nbs-setup/terraform/aws/nbs7-mySTLT-test
@@ -85,7 +82,6 @@ cd ~/nbs-setup/terraform/aws/nbs7-mySTLT-test
 ```
 
 ### Download Terraform configuration
-{: .no_toc }
 
 Clone the infrastructure repo:
 
@@ -100,7 +96,6 @@ cp -pr terraform/aws/samples/NBS7_standard terraform/aws/nbs7-mySTLT-test
 ```
 
 ### Customize variables
-{: .no_toc }
 
 - Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions][nedss-infra-aws-samples-readme].
 
@@ -108,7 +103,6 @@ cp -pr terraform/aws/samples/NBS7_standard terraform/aws/nbs7-mySTLT-test
 {: .note }
 
 ### Initialize and apply Terraform
-{: .no_toc }
 
 ```bash
 terraform init
@@ -117,7 +111,6 @@ terraform apply
 ```
 
 ### Validate infrastructure
-{: .no_toc }
 
 - Confirm VPC, Amazon EKS cluster, subnets, and node groups are created.
 - Verify Amazon EKS cluster authentication and running pods and nodes:
@@ -131,7 +124,6 @@ kubectl get nodes
 ## Deploy core Kubernetes services (Helm)
 
 ### Install NGINX Ingress
-{: .no_toc }
 
 ```bash
 helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
@@ -141,7 +133,6 @@ kubectl get pods -n=ingress-nginx
 ```
 
 ### Create DNS entries in Route53
-{: .no_toc }
 
 - Point the modernized NBS application URL to the new Network Load Balancer in front of your Kubernetes cluster.
 
@@ -156,7 +147,6 @@ data.<site_name>.<domain>.com
 ```
 
 ### Install Cert Manager (optional)
-{: .no_toc }
 
 ```bash
 helm repo add jetstack https://charts.jetstack.io
@@ -164,7 +154,6 @@ helm install cert-manager jetstack/cert-manager --namespace cert-manager --creat
 ```
 
 ### Install and verify Linkerd (optional)
-{: .no_toc }
 
 ```bash
 kubectl annotate namespace default "linkerd.io/inject=enabled"
@@ -172,7 +161,6 @@ kubectl get namespace default -o=jsonpath='{.metadata.annotations}'
 ```
 
 ### Install Cluster Autoscaler (optional)
-{: .no_toc }
 
 ```bash
 helm repo add autoscaler https://kubernetes.github.io/autoscaler
@@ -180,7 +168,6 @@ helm install cluster-autoscaler autoscaler/cluster-autoscaler -n kube-system
 ```
 
 ### Verify services are running
-{: .no_toc }
 
 ```bash
 kubectl get pods -A
@@ -250,7 +237,6 @@ Deploy the Helm charts in the following order.
 {: .note }
 
 ### Deploy Elasticsearch
-{: .no_toc }
 
 Update the required parameters in `values.yaml` by following the [Elasticsearch EFS chart values table][nedss-helm-elasticsearch-efs-readme]
 
@@ -259,7 +245,6 @@ helm install elasticsearch -f ./elasticsearch-efs/values.yaml elasticsearch-efs
 ```
 
 ### Deploy Modernization API
-{: .no_toc }
 
 Update the required parameters in `values.yaml` by following the [Modernization API chart values table][nedss-helm-modernization-api-readme]
 
@@ -268,7 +253,6 @@ helm install modernization-api -f ./modernization-api/values.yaml modernization-
 ```
 
 ### Deploy NiFi
-{: .no_toc }
 
 Update the required parameters in `values.yaml` by following the [NiFi EFS chart values table][nedss-helm-nifi-efs-readme]
 
@@ -277,7 +261,6 @@ helm install nifi -f ./nifi-efs/values.yaml nifi-efs
 ```
 
 ### Deploy NBS Gateway
-{: .no_toc }
 
 Update the required parameters in `values.yaml` by following the [NBS Gateway chart values table][nedss-helm-nbs-gateway-readme]
 
@@ -286,7 +269,6 @@ helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gateway
 ```
 
 ### Deploy Data ingestion service
-{: .no_toc }
 
 Create the Data Ingest database and set user permissions before deploying data ingestion:
 
@@ -324,7 +306,6 @@ helm install dataingestion-service -f ./dataingestion-service/values.yaml datain
 ```
 
 ### Verify services
-{: .no_toc }
 
 - Confirm all pods are running before moving on.
 
@@ -335,13 +316,11 @@ kubectl get pods -A
 ## Validate installation
 
 ### Manual tests
-{: .no_toc }
 
 - Log in to the NBS UI (for example, [https://app.example.com/nbs/login](https://app.example.com/nbs/login)).
 - Confirm basic patient search functionality.
 
 ### Automated tests
-{: .no_toc }
 
 - Use `nbs-test-api.sh` and `nbs-test-webui.sh` for basic API and UI smoke tests.
 

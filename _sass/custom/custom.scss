@@ -22,3 +22,91 @@
     color: #7a5c00;
     border-bottom-color: #f0d060;
 }
+
+.glossary-term {
+    position: relative;
+    display: inline;
+}
+
+.glossary-term__trigger {
+    background: none;
+    border: 0;
+    color: inherit;
+    cursor: help;
+    display: inline;
+    font: inherit;
+    line-height: inherit;
+    padding: 0;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+    text-underline-offset: 0.15em;
+}
+
+.glossary-term__trigger:focus-visible {
+    outline: 2px solid #005ea2;
+    outline-offset: 2px;
+}
+
+.glossary-term__tooltip {
+    background: #ffffff;
+    border: 1px solid $border-color;
+    border-radius: 0.25rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    color: $body-text-color;
+    font-size: 0.85rem;
+    left: 50%;
+    line-height: 1.4;
+    max-width: min(24rem, 85vw);
+    min-width: 14rem;
+    padding: 0.6rem 0.75rem;
+    position: absolute;
+    top: calc(100% + 0.45rem);
+    transform: translateX(-50%);
+    z-index: 100;
+}
+
+.glossary-term__tooltip p {
+    margin: 0;
+}
+
+.glossary-term__tooltip p + p,
+.glossary-term__tooltip ul + p,
+.glossary-term__tooltip ol + p {
+    margin-top: 0.5rem;
+}
+
+.glossary-term__tooltip ul,
+.glossary-term__tooltip ol {
+    margin: 0.5rem 0 0;
+    padding-left: 1.25rem;
+}
+
+.glossary-term__tooltip li + li {
+    margin-top: 0.25rem;
+}
+
+.glossary-term__tooltip::before {
+    background: #ffffff;
+    border-left: 1px solid $border-color;
+    border-top: 1px solid $border-color;
+    content: "";
+    height: 0.6rem;
+    left: 50%;
+    position: absolute;
+    top: -0.32rem;
+    transform: translateX(-50%) rotate(45deg);
+    width: 0.6rem;
+}
+
+@media (max-width: 50rem) {
+    .glossary-term__tooltip {
+        left: 0;
+        max-width: min(24rem, 90vw);
+        transform: none;
+    }
+
+    .glossary-term__tooltip::before {
+        left: 1rem;
+        transform: rotate(45deg);
+    }
+}

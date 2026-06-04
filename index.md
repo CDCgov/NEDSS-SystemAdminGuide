@@ -29,7 +29,7 @@ The content is centered on system administration. It covers readiness and planni
 
 ## Runtime environment support
 
-NBS 7 supports AWS and Azure as runtime options. The platform uses a cloud-agnostic approach, and the deployment content includes guidance for both supported providers. NBS 7 runs on [Kubernetes](https://kubernetes.io/) and relies on tools such as [Terraform](https://developer.hashicorp.com/terraform) and [Helm](https://helm.sh/) to provision and manage infrastructure and services.
+NBS 7 supports AWS and Microsoft Azure as runtime options. The platform uses a cloud-agnostic approach, and the deployment content includes guidance for both supported providers. NBS 7 runs on Kubernetes and relies on tools such as Terraform, and Helm to provision and manage infrastructure and services.
 
 ## Intended audience
 
@@ -39,5 +39,5 @@ The primary audience is system administrators at state, tribal, local, and terri
 
 For more information on NBS, see the official CDC [National Electronic Disease Surveillance System Base System (NBS)](https://www.cdc.gov/nbs/php/index.html) website and [NBS Central](https://nbscentral.cdc.gov/), the community hub for NBS users where you can download software, access technical resources, and participate in user group calls.
 
-> Access to **NBS Central** requires a login. To register for an NBS Central account, choose **Register** at the top of the [login screen](https://nbscentral.cdc.gov/login).
+Access to **NBS Central** requires a login. To register for an NBS Central account, choose **Register** at the top of the [login screen](https://nbscentral.cdc.gov/login).
 {: .note }

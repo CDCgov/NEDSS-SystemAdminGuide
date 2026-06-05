@@ -26,7 +26,7 @@ Before finalizing your configuration, verify that your NBS 6 version is compatib
 
 ## Phase 1: NBS 7
 
-The first phase is the base deployment. NBS 7 gives your jurisdiction NBS 6 feature parity on modern, cloud-based infrastructure, plus foundational improvements such as real-time patient search and ongoing incremental modernized modules and functional areas.
+The first phase is the base deployment. NBS 7 gives your jurisdiction NBS 6 feature parity on modern, cloud-based infrastructure, with foundational improvements such as real-time patient search. Additional modules and functional areas are modernized incrementally across releases.
 
 >When to deploy
 >
@@ -75,7 +75,7 @@ RTR is the second deployment phase. It introduces an event-driven reporting pipe
 
 >When to deploy
 >
->Deploy Phase 2 after Phase 1 is stable in production. Jurisdictions with higher case volumes or time-sensitive reporting needs should prioritize this phase early. Jurisdictions with lower volumes can defer it, but RTR is part of the full deployment and should be planned from the start.
+>Deploy Phase 2 after Phase 1 is stable. RTR is part of the full deployment and should be planned from the start.
 {: .note-title }
 
 RTR adds the following components to your NBS 7 deployment. For details, see [Add-on: Real-Time Reporting (RTR)](../before-you-deploy/component-reference/rtr.html).
@@ -92,7 +92,7 @@ The DI API is the third deployment phase. It provides a built-in data transit la
 
 >When to deploy
 >
->Jurisdictions that need an API-based ingestion path due to security constraints should plan Phase 3 in parallel with or immediately after Phase 2. Jurisdictions using direct SQL writes through Rhapsody can defer Phase 3 until their integration requirements change.
+>Jurisdictions that need an API-based ingestion path due to security constraints should plan Phase 3 in parallel with or immediately after Phase 2.
 {: .note-title }
 
 The DI API supports two integration methods. The right choice depends on your jurisdiction's security policies and how your middleware is deployed.

@@ -36,7 +36,7 @@ See also: [Operational considerations](../before-you-deploy/operational-consider
 
 ## Cloud infrastructure
 
-NBS 7 requires a cloud-based environment for deployment. NBS 7 has not been tested for on-premises deployment, and CDC does not plan to support it. To deploy with CDC support, you need an active account with one of the following supported cloud providers:
+NBS 7 requires a cloud-based environment for deployment; CDC does not support on-premises installations. To deploy with CDC support, you need an active account with one of the following supported cloud providers:
 
 ### Amazon Web Services (AWS)
 

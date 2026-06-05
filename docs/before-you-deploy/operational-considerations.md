@@ -23,9 +23,9 @@ This page covers organizational, financial, and operational factors that affect 
 
 For technical deployment guidance, refer to [Assess your readiness](../before-you-deploy/assess-your-readiness.html) and the rest of this guide.
 
-## Migration is gradual, not a cutover
+## Plan for parallel operations
 
-NBS 7 does not replace NBS 6 in a single switch. Both systems run in parallel during the transition. NBS 7 components gradually take over functionality while NBS 6 continues to operate. The length of this parallel period depends on your jurisdiction's pace of deployment and configuration choices. Planning for the operational complexity and cost of maintaining two systems simultaneously is an integral part of migration preparation. Many jurisdictions provision a separate NBS 6 environment for migration activities and then cut over, rather than making these changes directly on their primary NBS 6 production server.
+Migration from NBS 6 to NBS 7 concludes with a cutover from your existing NBS 6 instance to the new NBS 7 deployment. Both systems run in parallel during the transition, and the length of this parallel period depends on your jurisdiction's pace of deployment and the decisions made along the way. Some jurisdictions opt to provision a separate NBS 6 environment for migration activities before cutting over, rather than making changes directly on their primary NBS 6 production server. Planning for the operational complexity and cost of maintaining two systems simultaneously is an integral part of migration preparation.
 
 See also: [Deployment overview](../before-you-deploy/planning.html) and [Deployment scenarios](../before-you-deploy/deployment-phases.html).
 
@@ -61,9 +61,9 @@ Migrating to NBS 7 involves skills that might differ from what your current NBS 
 
 See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.html) and [Vendor-managed deployment](../before-you-deploy/vendor-managed-deployment.html).
 
-## Real-Time Reporting adds capability and cost
+## Real-Time Reporting can be deployed as a follow-on
 
-The Real-Time Reporting (RTR) add-on reduces the time for data to appear in reports from up to 24 hours to between 5 minutes and 1 hour. For jurisdictions managing active outbreaks or time-sensitive disease investigations, this improvement can meaningfully affect response time. RTR also adds infrastructure complexity and requires additional cloud resources. The reporting speed benefit and the additional operating cost are both worth weighing against your jurisdiction's case volume and reporting needs.
+The Real-Time Reporting (RTR) pipeline reduces the time for data to appear in reports from up to 24 hours to between 5 minutes and 1 hour. For jurisdictions managing active outbreaks or time-sensitive disease investigations, this improvement can meaningfully affect response time. RTR adds infrastructure complexity and requires additional cloud resources. Jurisdictions that find RTR a significant lift at the time of initial deployment can choose to deploy core NBS 7 functionality first and adopt RTR as a follow-on. The reporting speed benefit and the additional operating cost are both worth weighing against your jurisdiction's case volume and reporting needs.
 
 See also: [RTR component reference](../before-you-deploy/component-reference/rtr.html), [Real-time reporting deployment](../deploy-nbs7/real-time-reporting/real-time-reporting.html), and [Deployment phases](../before-you-deploy/deployment-phases.html).
 

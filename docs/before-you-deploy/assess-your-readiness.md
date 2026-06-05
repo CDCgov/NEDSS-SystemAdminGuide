@@ -48,7 +48,7 @@ NBS 7 requires a cloud-based environment for deployment; CDC does not support on
 
 - **Strategic fit:** Preferred by jurisdictions with significant Microsoft ecosystem investments, such as those using Microsoft Entra ID (formerly Azure Active Directory) or existing Enterprise Agreements.
 - **Technical readiness:** Provides a streamlined experience for organizations running Windows-based workloads or requiring integration with Microsoft 365 and Power Platform tools.
-- **Surveillance context:** Supported via Terraform for configuration parity with AWS, allowing jurisdictions to meet internal mandates for Azure-hosted health data.
+- **Surveillance context:** Supported via Terraform, allowing jurisdictions to meet internal mandates for Azure-hosted health data.
 
 See also: [Deploy cloud infrastructure on AWS](../deploy-nbs7/deploy-on-aws.html), [Deploy cloud infrastructure on Azure](../deploy-nbs7/deploy-on-azure.html), and [Compatibility matrix](../compatibility.html).
 
@@ -72,7 +72,6 @@ See also: [Operational considerations](../before-you-deploy/operational-consider
 
 Before deployment, your network must meet the following requirements:
 
-- **NBS 6 and NBS 7 connectivity**: Each NBS 7 instance requires network connectivity to a corresponding NBS 6 instance. If your NBS 6 runs in a Virtual Private Cloud (VPC), that VPC must be connected to your NBS 7 environment.
 - **Encryption**: Encryption is required for all virtual network traffic between NBS 6 and NBS 7 components.
 - **Outbound access**: Your cloud environment needs outbound internet access to reach CDC systems.
 - **TLS/SSL certificate management**: You need a process to provision and renew TLS/SSL certificates for encrypted traffic.
@@ -83,11 +82,11 @@ See also: [Architecture and microservices](../deploy-nbs7/architecture-and-micro
 
 ## NBS 6 status
 
-During migration, NBS 7 components gradually replace NBS 6 functionality while NBS 6 continues to run. This means:
+Migration from NBS 6 to NBS 7 concludes with a cutover from your existing NBS 6 instance to the new NBS 7 deployment. This means that:
 
 - Your jurisdiction will run both systems in parallel during the transition.
 - Your NBS 6 instance must remain operational and accessible during migration.
-- Many jurisdictions provision a separate NBS 6 environment for migration activities and then cut over, rather than deploying NBS 7 changes directly against their primary NBS 6 production server.
+- Some jurisdictions provision a separate NBS 6 environment for migration activities and then cut over, rather than deploying NBS 7 changes directly against their primary NBS 6 production server.
 - You need to know your current NBS 6 hosting setup before you begin. Specifically, whether it is hosted on-premises or in the cloud, and if in the cloud, which provider.
 - **You must be running a compatible NBS 6.x version** before you can install any version of NBS 7. For more information, see [Compatibility matrix](../compatibility.html).
 
@@ -106,7 +105,6 @@ See also: [Prerequisites for NBS 7 deployment](../deploy-nbs7/prerequisites.html
 Reach out to your CDC NBS point of contact before you begin deployment. CDC provides deployment support at no cost and can help you:
 
 - Validate your technical readiness
-- Identify the right configuration for your jurisdiction
 - Connect you with other jurisdictions that have already migrated
 
 See also: [Deployment phases](../before-you-deploy/deployment-phases.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).

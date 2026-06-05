@@ -23,9 +23,6 @@ NBS 7 core components are organized into three layers: the application layer, th
 1. TOC
 {:toc}
 
-> The NBS Modernization API, NBS Web UI, and NBS Gateway are deployed together from the [NEDSS-Modernization](https://github.com/CDCgov/NEDSS-Modernization) repository. Each serves a distinct function, but vendors and admins scoping deployment work should be aware that they share a single deployment unit.
-{: .important }
-
 ## Legacy NBS 6
 
 The existing NBS 6 application. A WildFly-based UI and backend that most STLTs currently run.

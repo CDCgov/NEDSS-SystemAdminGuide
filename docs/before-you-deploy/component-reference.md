@@ -38,8 +38,6 @@ The following table shows which components are included in NBS 7. RTR and DI API
 | [Database (NBS\_ODSE, NBS\_SRTE)](../before-you-deploy/component-reference/nbs-core-components.html#database-nbs_odse-nbs_srte) | ✓ |  |  |
 | [Infrastructure and networking layer](../before-you-deploy/component-reference/nbs-core-components.html#infrastructure-and-networking-layer-components) | ✓ |  |  |
 | [Debezium](../before-you-deploy/component-reference/rtr.html#debezium) | | ✓ | |
-| [Kafka and Kafka Connect](../before-you-deploy/component-reference/rtr.html#kafka-and-kafka-connect) | | ✓* | |
+| [Kafka and Kafka Connect](../before-you-deploy/component-reference/rtr.html#kafka-and-kafka-connect) | | ✓ | ✓ |
 | [RTR domain services](../before-you-deploy/component-reference/rtr.html#rtr-domain-services) | | ✓ | |
 | [DI API](../before-you-deploy/component-reference/di-api.html#di-api) | | | ✓ |
-
-*Jurisdictions that deploy RTR but continue with batch reporting instead of using the real-time benefit might not need Kafka and Kafka Connect.

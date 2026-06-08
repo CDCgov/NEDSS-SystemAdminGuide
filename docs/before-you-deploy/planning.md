@@ -68,7 +68,7 @@ If security approval is still in progress when Install begins, it might extend t
 | Activity | Description | Suggested resource or action |
 |:---|:---|:---|
 | Deploy NBS 7 | Provision and deploy NBS 7 in your environment. Repeat for each environment in your jurisdiction's setup. | [Deploy NBS 7](../deploy-nbs7.html) |
-| Transfer database | Complete customizations, user file sharing setup, and integration with your user management system. [SME REVIEW: confirm what activities this row covers.] | Use your own database refresh procedure |
+| Transfer database | Complete customizations, user file sharing setup, and integration with your user management system. | Use your own database refresh procedure |
 | Migrate user roles and permissions | Map user roles and configure permissions in NBS 7. | Create a user migration map |
 | Configure SSO | Review SSO and login requirements and integrate Keycloak with your existing login tools. See [Operational considerations](../before-you-deploy/operational-considerations.html) for SSO planning guidance. | [Enable Keycloak authentication](../deploy-nbs7/keycloak/enable-keycloak-auth.html) |
 

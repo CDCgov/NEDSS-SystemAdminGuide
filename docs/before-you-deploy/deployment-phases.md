@@ -48,7 +48,7 @@ The networking layer manages traffic routing and secure communication between yo
 The infrastructure layer provides the container orchestration platform and cloud services that host and run NBS 7 components.
 
 - Kubernetes cluster (EKS on AWS, AKS on Azure)
-- Traefik Ingress Controller (replaced NGINX as of NBS 7.12)
+- Traefik Ingress Controller (as of NBS 7.12; formerly NGINX)
 - AWS or Azure managed services
 - Terraform infrastructure automation modules
 - Load balancer

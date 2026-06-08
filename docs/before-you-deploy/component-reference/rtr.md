@@ -10,7 +10,7 @@ nav_enabled: true
 
 # Component reference: Real-Time Reporting (RTR)
 
-RTR provides an event-driven reporting pipeline for near-real-time reporting. RTR aims to eventually replace the classic MasterETL batch process. During migration, both run in parallel until full feature equivalence is met.
+RTR provides an event-driven reporting pipeline for near-real-time reporting. RTR eventually replaces the classic MasterETL batch process. During migration, both run in parallel until full feature equivalence is met.
 
 The following components are added to your NBS 7 deployment when you deploy RTR.
 
@@ -36,9 +36,6 @@ An open-source Change Data Capture (CDC) platform.
 
 Apache Kafka is an open-source event-streaming platform. Kafka Connect is the framework that moves data between Kafka and other systems.
 
-If your jurisdiction chooses to use RTR but continue with batch reporting, Kafka is not required for that reporting path. Only near-real-time RTR reporting requires Kafka and Kafka Connect.
-{: .note }
-
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Acts as the message bus for the RTR pipeline. Kafka receives change events from Debezium and delivers them to the RTR domain services. Kafka Connect writes the processed output to RDB\_Modern staging tables for post-processing and reporting. |
@@ -46,14 +43,14 @@ If your jurisdiction chooses to use RTR but continue with batch reporting, Kafka
 
 ## RTR domain services
 
-A unified Spring Boot service that transforms streaming data from Kafka into reportable public health records. Previously implemented as five separate entity-specific services (investigation, person, observation, organization, and LDF data), NBS 7 consolidates the services into a single `reporting-pipeline-service` application to reduce deployment complexity and operational overhead.
+In NBS 7.12, a unified Spring Boot service that transforms streaming data from Kafka into reportable public health records. In NBS 7.13, implemented as five separate entity-specific services (investigation, person, observation, organization, and LDF data).
 
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Consumes Kafka messages for each entity type (investigations, patients, organizations, observations, and LDF data), runs stored procedures to retrieve and format the data, and produces processed records for downstream storage in RDB\_Modern. A post-processing service then populates analytical datamarts and fact tables from the staging data. |
 | Dependencies | Requires Kafka (message source) and NBS\_ODSE (operational data store). Populates RDB\_Modern staging tables, which are then consumed by the post-processing service. |
 
-> The five entity-specific RTR services (investigation-service, person-service, observation-service, organization-service, ldfdata-service) are being consolidated into a single `reporting-pipeline-service` as of early 2026. Check with your CDC NBS point of contact for the current deployment state.
+> The five entity-specific RTR services (investigation-service, person-service, observation-service, organization-service, ldfdata-service) are being consolidated into a single `reporting-pipeline-service` starting with NBS version 7.13. Check with your CDC NBS point of contact for the current deployment state.
 {: .note }
 
 <!--
@@ -64,6 +61,6 @@ The modern reporting database introduced by RTR.
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Stores processed, structured public health records produced by the RTR domain services. Runs alongside the legacy RDB during migration. Downstream reporting and analytics tools connect to RDB\_Modern rather than directly to the operational database. |
-| When you need it | When your jurisdiction chooses NBS Core + RTR or NBS Complete. |
+| When you need it | When your jurisdiction deploys RTR. |
 | Dependencies | Populated by RTR domain services. Required by any reporting or analytics tools that your jurisdiction connects to NBS 7. |
 -->

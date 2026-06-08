@@ -15,13 +15,12 @@ For information on migration planning, staffing, and budget, see [Operational co
 
 NBS 7 core components are organized into three layers: the application layer, the infrastructure layer, and the networking layer. The application layer components are documented individually below. [Infrastructure and networking layer components](#infrastructure-and-networking-layer-components) are summarized as a group.
 
-\[architecture diagram\]
-
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
+
 
 ## Legacy NBS 6
 
@@ -31,7 +30,7 @@ The existing NBS 6 application. A WildFly-based UI and backend that most STLTs c
 |:---|:---|
 | What it does in NBS 7 | NBS Core does not replace NBS 6 immediately. Instead, it runs alongside it. During migration, the NBS Gateway routes requests between the legacy NBS 6 application and new NBS 7 services. NBS 6 continues to handle all functionality that has not yet been replaced by a modern NBS 7 equivalent. |
 | When you need it | Always. An operational NBS 6 instance is a prerequisite for any NBS 7 deployment. You must be running a [compatible NBS 6 version](../../compatibility.html) before you can install NBS 7. |
-| Dependencies | Required by NBS Gateway, Elasticsearch (via Nifi), and the NBS Modernization API. Must maintain network connectivity to your NBS 7 environment throughout the migration period. |
+| Dependencies | Required by NBS Gateway, Elasticsearch (through NiFi), and the NBS Modernization API. Must maintain network connectivity to your NBS 7 environment throughout the migration period. |
 
 ## NBS Modernization API
 
@@ -66,7 +65,7 @@ A routing service (built on Spring Cloud Gateway) that manages traffic between t
 <!-- COMMENTING OUT PER EMMA/MAGGIE UNTIL 7.13
 ## Report Execution API
 
-A Python FastAPI service intended to replace SAS-based report execution in NBS 7. SAS 9.4 is currently required for report execution and must be carried forward into NBS 7 deployments until this component is production-ready. Jurisdictions with significant SAS infrastructure or licensing costs should monitor this component as NBS 7 matures.
+A Python FastAPI service intended to replace SAS-based report execution in NBS 7. SAS 9.4 is currently required for report execution and must be carried forward into NBS 7 deployments until this component is production-ready. Jurisdictions with sigNiFicant SAS infrastructure or licensing costs should monitor this component as NBS 7 matures.
 
 > This component is not yet confirmed for production. Check with your CDC NBS point of contact to find out whether it affects your deployment plan.
 {: .note }
@@ -83,18 +82,18 @@ An open-source search and analytics engine optimized for speed and scalability.
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Powers real-time patient and event search in NBS 7. NBS 6 requires batch processing before search results can reflect recent data, so this is a key improvement. [Nifi](#nifi) populates Elasticsearch indices from the NBS database. |
+| What it does in NBS 7 | Powers real-time patient and event search in NBS 7. NBS 6 requires batch processing before search results can reflect recent data, so this is a key improvement. [NiFi](#NiFi) populates Elasticsearch indices from the NBS database. |
 | When you need it | Always. Elasticsearch is a core component of NBS 7 and is required for all configurations. |
-| Dependencies | Requires Nifi to populate its indices from the NBS database. Search functionality in the NBS Web UI and Modernization API depends on Elasticsearch. |
+| Dependencies | Requires NiFi to populate its indices from the NBS database. Search functionality in the NBS Web UI and Modernization API depends on Elasticsearch. |
 
-## Nifi
+## NiFi
 
 An open-source data flow automation tool for moving and transforming data between systems.
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Continuously moves data from the NBS database into Elasticsearch, keeping search indices current. Without Nifi, Elasticsearch indices would not reflect recent changes to patient and investigation records. |
-| When you need it | Always. Nifi is a core component of NBS 7 and is required for all configurations. |
+| What it does in NBS 7 | Continuously moves data from the NBS database into Elasticsearch, keeping search indices current. Without NiFi, Elasticsearch indices would not reflect recent changes to patient and investigation records. |
+| When you need it | Always. NiFi is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires the NBS database (NBS\_ODSE) as its data source and Elasticsearch as its destination. |
 
 ## Keycloak
@@ -120,7 +119,7 @@ The core SQL Server databases that store operational and reference data for NBS.
 |:---|:---|
 | What it does in NBS 7 | NBS\_ODSE (Operational Data Store) is the primary transactional database where case, patient, investigation, and event records are stored. NBS\_SRTE (System Reference Tables) stores reference and metadata used across NBS, including LOINC, SNOMED CT, and other code sets used for data validation and mapping. |
 | When you need it | Always. Both databases are required for all NBS 7 configurations. |
-| Dependencies | Required by Legacy NBS 6, the Modernization API, Nifi, Debezium (for RTR), and the DI API. |
+| Dependencies | Required by Legacy NBS 6, the Modernization API, NiFi, Debezium (for RTR), and the DI API. |
 
 ## Infrastructure and networking layer components
 
@@ -132,7 +131,7 @@ Full configuration guidance is in the [Deploy NBS 7](../../deploy-nbs7.html) sec
 |:---|:---|
 | Kubernetes (EKS/AKS) | Container orchestration platform that hosts and manages all NBS 7 services. EKS is used on AWS; AKS is used on Azure. |
 | Traefik Ingress Controller | Manages inbound traffic routing into the Kubernetes cluster. Traefik replaced NGINX as of the NBS 7.12 release. |
-| Terraform modules | Infrastructure-as-code tooling that provisions your cloud environment, including VPC, Kubernetes cluster, storage, and managed services. Four modules cover network/VPC, NBS 6 database layer, NBS 7 cluster, and application services. |
+| Terraform modules | Infrastructure-as-code tooling that provisions your cloud environment, including VPC, Kubernetes cluster, storage, and managed services. |
 | Cert Manager | Automates provisioning and renewal of TLS/SSL certificates for encrypted traffic within and into the NBS 7 environment. |
 | FluentBit | Lightweight log forwarding agent that collects and routes logs from NBS 7 services for monitoring and troubleshooting. |
 | Linkerd | Service mesh (provisioned via Terraform) that manages encrypted communication between NBS 7 services inside the Kubernetes cluster. |

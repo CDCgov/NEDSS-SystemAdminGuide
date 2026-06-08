@@ -41,7 +41,7 @@ NBS 7 requires a cloud-based environment for deployment; CDC does not support on
 ### Amazon Web Services (AWS)
 
 - **Strategic fit:** Preferred by jurisdictions with established AWS environments or those with existing AWS contract vehicles or organizational policies that standardize on AWS.
-- **Technical readiness:** Aligns with teams experienced in managing container-native architectures via Amazon Elastic Kubernetes Service (EKS) and mature Terraform workflows.
+- **Technical readiness:** Aligns with teams experienced in managing container-native architectures via Amazon Elastic Kubernetes Service (Amazon EKS) and mature Terraform workflows.
 - **Surveillance context:** Core components are extensively validated in AWS to ensure performance at peak ingestion volumes.
 
 ### Microsoft Azure

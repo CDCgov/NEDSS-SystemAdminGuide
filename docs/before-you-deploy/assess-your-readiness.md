@@ -23,7 +23,7 @@ For more information on migration planning, staffing, and budget, see [Operation
 
 ## Not sure where to start?
 
-If you are new to NBS 7 deployment, [Deployment overview](../before-you-deploy/planning.html) provides example stages in a typical rollout and where this readiness assessment fits.
+If you are new to NBS 7 deployment, [Deployment planning guide](../before-you-deploy/planning.html) provides example stages in a typical rollout and where this readiness assessment fits.
 
 ## IT security approval
 
@@ -90,7 +90,7 @@ Migration from NBS 6 to NBS 7 concludes with a cutover from your existing NBS 6 
 - You need to know your current NBS 6 hosting setup before you begin. Specifically, whether it is hosted on-premises or in the cloud, and if in the cloud, which provider.
 - **You must be running a compatible NBS 6.x version** before you can install any version of NBS 7. For more information, see [Compatibility matrix](../compatibility.html).
 
-See also: [Deployment overview](../before-you-deploy/planning.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
+See also: [Deployment planning guide](../before-you-deploy/planning.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
 
 ## Data migration
 
@@ -98,7 +98,7 @@ NBS 7 uses your existing NBS 6 database and does not require a schema migration.
 
 If your current NBS 6 database is hosted on-premises and you plan to move it to the cloud as part of your migration, you will need to copy the data from your existing environment and restore it to the new environment using a standard database backup and restore process. If you are not moving your NBS 6 database, no data migration action is required.
 
-See also: [Prerequisites for NBS 7 deployment](../deploy-nbs7/prerequisites.html#nbs-6-readiness), [Deployment scenarios](../before-you-deploy/deployment-phases.html), and [Deployment overview](../before-you-deploy/planning.html).
+See also: [Prerequisites for NBS 7 deployment](../deploy-nbs7/prerequisites.html#nbs-6-readiness) and [Deployment planning guide](../before-you-deploy/planning.html).
 
 ## CDC coordination
 

@@ -27,7 +27,7 @@ For technical deployment guidance, refer to [Assess your readiness](../before-yo
 
 Migration from NBS 6 to NBS 7 concludes with a cutover from your existing NBS 6 instance to the new NBS 7 deployment. Both systems run in parallel during the transition, and the length of this parallel period depends on your jurisdiction's pace of deployment and the decisions made along the way. Some jurisdictions opt to provision a separate NBS 6 environment for migration activities before cutting over, rather than making changes directly on their primary NBS 6 production server. Planning for the operational complexity and cost of maintaining two systems simultaneously is an integral part of migration preparation.
 
-See also: [Deployment overview](../before-you-deploy/planning.html) and [Deployment scenarios](../before-you-deploy/deployment-phases.html).
+See also: [NBS 7 deployment planning guide](../before-you-deploy/planning.html).
 
 Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html) before you finalize migration timelines.
 
@@ -41,7 +41,7 @@ See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.htm
 
 CDC does not support on-premises installations of NBS 7. Your jurisdiction needs an active cloud account with Amazon Web Services (AWS) or Microsoft Azure and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response. Use the [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) to project cloud-hosting costs based on your jurisdiction's record volume (NBS Central login required; see [Additional resources](../../index.html#additional-resources)).
 
-See also: [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html) and [Deployment scenarios](../before-you-deploy/deployment-phases.html).
+See also: [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html).
 
 ## Align cloud provider with jurisdictional strategy
 

@@ -8,14 +8,14 @@ description: Evaluation and planning content to help you assess NBS 7 readiness 
 
 # Before deploying NBS 7
 
-This section is for STLT IT administrators and technical decision-makers who are evaluating and preparing for NBS 7. It brings together the readiness, compatibility, configuration, and planning information you need before deployment begins. Use it to understand what NBS 7 includes, what decisions your jurisdiction needs to make, and what conditions should be in place before you move into deployment work. It is intended to support an informed decision about how to proceed with NBS 7 deployment planning.
+This section is for STLT IT administrators and technical decision-makers who are evaluating and preparing for migration to NBS 7. It brings together the readiness, compatibility, configuration, and planning information you need before deployment begins. Use it to understand what NBS 7 includes, what decisions your jurisdiction needs to make, and what conditions should be in place before you move into deployment work. It is intended to support an informed decision about how to proceed with NBS 7 deployment planning.
 
 ## Purpose
 
 Use this section to:
 
 - Assess whether NBS 7 deployment planning is the right next step for your jurisdiction
-- Identify the right starting configuration for your jurisdiction, including optional add-ons
+- Identify the right starting point for your jurisdiction
 - Understand the major components, prerequisites, and operational considerations that affect deployment
 - Support go or no-go decisions before you commit time and resources to deployment
 

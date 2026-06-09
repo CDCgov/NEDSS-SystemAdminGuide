@@ -8,9 +8,8 @@ description: Describes the three NBS 7 deployment phases (the )core deployment, 
 ---
 
 # NBS 7 technical deployment phases
-{: .no_toc }
 
-NBS 7 is deployed in phases. The first phase is the [core deployment](#phase-1-nbs-7), which gives your jurisdiction NBS 6 feature parity on modern cloud infrastructure. [Real-Time Reporting (RTR)](#phase-2-real-time-reporting-rtr) and the [Data Ingestion (DI) API](#phase-3-data-ingestion-di-api) follow as subsequent phases. Most jurisdictions complete the core deployment first, then plan RTR and DI API deployment as their team builds operational confidence. Separating the phases reduces initial deployment risk and gives your team time to learn the system before taking on additional complexity.
+This page describes the three NBS 7 deployment phases and covers what each phase includes and when to deploy it. The first phase is the [core deployment](#phase-1-nbs-7), which gives your jurisdiction NBS 6 feature parity on modern cloud infrastructure. [Real-Time Reporting (RTR)](#phase-2-real-time-reporting-rtr) and the [Data Ingestion (DI) API](#phase-3-data-ingestion-di-api) follow as subsequent phases. Separating the phases reduces initial deployment risk and gives your team time to learn the system before taking on additional complexity.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -18,7 +17,7 @@ NBS 7 is deployed in phases. The first phase is the [core deployment](#phase-1-n
 1. TOC
 {:toc}
 
-After reviewing the phases, see [Assess your readiness](../before-you-deploy/assess-your-readiness.html) to confirm your jurisdiction is ready to begin. If your jurisdiction plans to use a vendor, see the [Vendor-managed deployment](../before-you-deploy/vendor-managed-deployment.html) page.
+After reviewing the phases, see [Assess your technical readiness](../before-you-deploy/assess-your-readiness.html) to confirm your jurisdiction is ready to begin. If your jurisdiction plans to use a vendor, see the [Vendor-managed deployment](../before-you-deploy/vendor-managed-deployment.html) page.
 
 Before finalizing your configuration, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
 
@@ -62,7 +61,7 @@ The application layer contains the NBS 7 services and legacy NBS 6 components th
 - [NBS Web UI](../before-you-deploy/component-reference/nbs-core-components.html#nbs-web-ui)
 - [NBS Gateway](../before-you-deploy/component-reference/nbs-core-components.html#nbs-gateway)
 - [Elasticsearch](../before-you-deploy/component-reference/nbs-core-components.html#elasticsearch)
-- [Nifi](../before-you-deploy/component-reference/nbs-core-components.html#nifi)
+- [NiFi](../before-you-deploy/component-reference/nbs-core-components.html#nifi)
 - [Keycloak](../before-you-deploy/component-reference/nbs-core-components.html#keycloak)
 - [Cert Manager, FluentBit](../before-you-deploy/component-reference/nbs-core-components.html#infrastructure-and-networking-layer-components)
 - [Database (NBS\_ODSE and NBS\_SRTE)](../before-you-deploy/component-reference/nbs-core-components.html#database-nbs_odse-nbs_srte)

@@ -8,7 +8,7 @@ description: An overview of the five stages involved in an NBS 7 deployment, fro
 
 # NBS 7 deployment planning guide
 
-NBS 7 deployments vary significantly by jurisdiction. If you are just getting started, this page can help you understand where the [Assess your readiness](assess-your-readiness.html) checklist fits in the overall process.
+NBS 7 deployments vary significantly by jurisdiction. If you are just getting started, this page can help you understand where the [Assess your technical readiness](assess-your-readiness.html) checklist fits in the overall process.
 
 The tables on this page link to resources where available. Unlinked resources are suggested artifacts. If they fit your jurisdiction's needs, you would need to create them.
 {: .note }
@@ -27,13 +27,13 @@ The stages in this table represent an example rollout scenario based on deployme
 
 | Stage | Goal | Minimum duration |
 |:---|:---|:---|
-| [Planning](#planning) | Establish your project team, [assess your readiness](assess-your-readiness.html), and create a customized migration plan | 2-5 months |
+| [Planning](#planning) | Establish your project team, [assess your technical readiness](assess-your-readiness.html), and create a customized migration plan | 2-5 months |
 | [Install](#install) | Provision cloud environments and deploy NBS 7 in [phases](deployment-phases.html) | 3-6 months |
-| [Test](#test) | Validate ingestion, egress, and system readiness before go-live | 3-6 months |
+| [Test](#test) | Validate ingestion, egress, and system technical readiness before go-live | 3-6 months |
 | [Go-live](#go-live) | Complete cutover and launch NBS 7 in production | 1-4 months |
-| [Steady state](#steady-state) | Monitor live operations and maintain the system ongoing | Ongoing |
+| [Steady state](#steady-state) | Monitor live operations and maintain the system | Ongoing |
 
-These are minimum duration estimates based on typical deployments. Actual timelines will vary by jurisdiction. Security approval, procurement, and legal review processes are common sources of extended timelines in the earlier stages.
+These are minimum duration estimates based on typical deployments. Actual timelines will vary by jurisdiction. Security approval, procurement, and legal review processes are common causes of delays in the earlier stages.
 {: .important }
 
 ---
@@ -46,12 +46,12 @@ Before planning detailed timelines, confirm that your current NBS 6 version is c
 
 | Activity | Description | Suggested resource or action |
 |:---|:---|:---|
-| Review readiness and compatibility | Review technical considerations and confirm your NBS 6 version is compatible with your target NBS 7 version. | [Assess your readiness](../before-you-deploy/assess-your-readiness.html), [NBS 6 and NBS 7 compatibility matrix](../compatibility.html), and [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
+| Review readiness and compatibility | Review technical considerations and confirm your NBS 6 version is compatible with your target NBS 7 version. | [Assess your technical readiness](../before-you-deploy/assess-your-readiness.html), [NBS 6 and NBS 7 compatibility matrix](../compatibility.html), and [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
 | Identify project team | Define roles, responsibilities, and key stakeholders. See [Operational considerations](../before-you-deploy/operational-considerations.html) for staffing guidance. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
 | Assess current environment | Document your existing NBS 6 setup, including ingestion and egress workflows, integrations, and hosting configuration. | Create a current state assessment |
 | Orient migration team to NBS 7 | Review NBS 7 components and features with your migration team. | [Component reference](../before-you-deploy/component-reference.html) |
 | Create project plan | Draft a migration plan customized for your jurisdiction. | Create a project plan |
-| Plan data migration | Agree on an approach, coordinate the data migration solution, and prepare test files. | Create a data migration plan; see [Assess your readiness: Data migration](../before-you-deploy/assess-your-readiness.html#data-migration) |
+| Plan data migration | Agree on an approach, coordinate the data migration solution, and prepare test files. | Create a data migration plan; see [Assess your technical readiness: Data migration](../before-you-deploy/assess-your-readiness.html#data-migration) |
 | Plan user support | Identify how end users will report issues after go-live and document the process. | Create a user support plan |
 | Plan user training | Identify training needs and develop materials customized for your jurisdiction. | Create a user training plan |
 | Plan communications | Develop a communications plan customized to your timeline and needs. | Create a communications plan |

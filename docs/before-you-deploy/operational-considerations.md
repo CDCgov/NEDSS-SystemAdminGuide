@@ -21,13 +21,13 @@ This page covers organizational, financial, and operational factors that affect 
 
 ---
 
-For technical deployment guidance, refer to [Assess your readiness](../before-you-deploy/assess-your-readiness.html) and the rest of this guide.
+For technical deployment guidance, refer to [Assess your technical readiness](../before-you-deploy/assess-your-readiness.html) and the rest of this guide.
 
 ## Plan for parallel operations
 
 Migration from NBS 6 to NBS 7 concludes with a cutover from your existing NBS 6 instance to the new NBS 7 deployment. Both systems run in parallel during the transition, and the length of this parallel period depends on your jurisdiction's pace of deployment and the decisions made along the way. Some jurisdictions opt to provision a separate NBS 6 environment for migration activities before cutting over, rather than making changes directly on their primary NBS 6 production server. Planning for the operational complexity and cost of maintaining two systems simultaneously is an integral part of migration preparation.
 
-See also: [NBS 7 deployment planning guide](../before-you-deploy/planning.html).
+See also: [NBS 7 Deployment planning guide](../before-you-deploy/planning.html).
 
 Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html) before you finalize migration timelines.
 
@@ -35,11 +35,11 @@ Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 c
 
 IT security approval is often one of the longest-lead items in an NBS 7 migration, though timelines vary significantly across jurisdictions. NBS 7 requires approval for cloud hosting and specific technologies including Kubernetes, Terraform, and Docker. Because NBS handles PII and PHI, IT review is often required even when a vendor manages parts of the deployment. Jurisdictions that start this process early, even when deployment is still months away, might avoid one of the most common causes of migration delays.
 
-See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.html), [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html), and [Deploy cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html).
+See also: [Assess your technical readiness](../before-you-deploy/assess-your-readiness.html), [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html), and [Deploy cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html).
 
 ## Cloud infrastructure requires ongoing budget
 
-CDC does not support on-premises installations of NBS 7. Your jurisdiction needs an active cloud account with Amazon Web Services (AWS) or Microsoft Azure and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response. Use the [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) to project cloud-hosting costs based on your jurisdiction's record volume (NBS Central login required; see [Additional resources](../../index.html#additional-resources)).
+CDC does not support on-premises installations of NBS 7. Your jurisdiction needs an active cloud account with Amazon Web Services (AWS) or Microsoft Azure and an ongoing budget to sustain cloud infrastructure costs. Cloud hosting costs scale with usage, so budget planning might account for both normal operations and surge scenarios such as outbreak response. Use the [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) to project cloud hosting costs based on your jurisdiction's record volume (NBS Central login required; see [Additional resources](../../index.html#additional-resources)).
 
 See also: [Set up cloud infrastructure](../deploy-nbs7/set-up-cloud-infrastructure.html).
 
@@ -49,17 +49,17 @@ NBS 7 is fully supported on both AWS and Azure. While the internal microservices
 
 Choose the provider that best aligns with your organization's current operational state:
 
-- **Existing Infrastructure:** If your jurisdiction currently runs NBS 6 or other critical systems on a specific cloud platform, remaining on that platform avoids the need for new IT security approvals.
-- **Contractual Agreements:** Utilize existing Enterprise Agreements or pre-approved cloud spending to streamline procurement.
-- **Staff Expertise:** Align the choice with the existing skills of your cloud engineering or IT administration teams.
+- **Existing infrastructure:** If your jurisdiction currently runs NBS 6 or other critical systems on a specific cloud platform, remaining on that platform avoids the need for new IT security approvals.
+- **Contractual agreements:** Utilize existing Enterprise Agreements or pre-approved cloud spending to streamline procurement.
+- **Staff expertise:** Align the choice with the existing skills of your cloud engineering or IT administration teams.
 
-See also: [Assess your readiness > Cloud infrastructure](assess-your-readiness.html#cloud-infrastructure).
+See also: [Assess your technical readiness > Cloud infrastructure](assess-your-readiness.html#cloud-infrastructure).
 
 ## Technical staffing requirements differ from NBS 6
 
-Migrating to NBS 7 involves skills that might differ from what your current NBS 6 team uses, including Kubernetes, Terraform, and cloud infrastructure management. Jurisdictions that assess their team's capacity early are poised to set more accurate migration timelines. Those without the necessary in-house expertise have typically built capacity or engaged a vendor before deployment.
+Migrating to NBS 7 requires expertise in Kubernetes, Terraform, and cloud infrastructure management that your current NBS 6 team might not have. Jurisdictions that assess their team's capacity early are poised to set more accurate migration timelines. Those without the necessary in-house expertise have typically built capacity or engaged a vendor before deployment.
 
-See also: [Assess your readiness](../before-you-deploy/assess-your-readiness.html) and [Vendor-managed deployment](../before-you-deploy/vendor-managed-deployment.html).
+See also: [Assess your technical readiness](../before-you-deploy/assess-your-readiness.html) and [Vendor-managed deployment](../before-you-deploy/vendor-managed-deployment.html).
 
 ## Real-Time Reporting can be deployed as a follow-on
 

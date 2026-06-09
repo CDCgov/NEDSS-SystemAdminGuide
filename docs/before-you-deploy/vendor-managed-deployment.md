@@ -7,7 +7,6 @@ description: Guidance for jurisdictions using a vendor to host or maintain NBS 7
 ---
 
 # Vendor-managed NBS 7 deployments
-{: .no_toc }
 
 If you plan to use a vendor to host or maintain NBS 7, confirm that they can:
 

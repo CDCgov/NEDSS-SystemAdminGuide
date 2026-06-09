@@ -6,9 +6,9 @@ nav_order: 1
 description: Covers the technical prerequisites an STLT should meet before beginning NBS 7 migration, including cloud, staffing, and network requirements.
 ---
 
-# Assess your readiness for NBS 7
+# Assess your technical readiness for NBS 7
 
-This page helps you assess whether NBS 7 is a viable option for your jurisdiction before you commit to a migration.
+This page covers the technical conditions your jurisdiction should review before committing to an NBS 7 migration, including cloud infrastructure, staffing, network readiness, and NBS 6 compatibility.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -23,7 +23,7 @@ For more information on migration planning, staffing, and budget, see [Operation
 
 ## Not sure where to start?
 
-If you are new to NBS 7 deployment, [Deployment planning guide](../before-you-deploy/planning.html) provides example stages in a typical rollout and where this readiness assessment fits.
+If you are new to NBS 7 deployment, the [Deployment planning guide](../before-you-deploy/planning.html) provides example stages in a typical rollout and where this readiness assessment fits.
 
 ## IT security approval
 
@@ -42,15 +42,13 @@ NBS 7 requires a cloud-based environment for deployment; CDC does not support on
 
 - **Strategic fit:** Preferred by jurisdictions with established AWS environments or those with existing AWS contract vehicles or organizational policies that standardize on AWS.
 - **Technical readiness:** Aligns with teams experienced in managing container-native architectures via Amazon Elastic Kubernetes Service (Amazon EKS) and mature Terraform workflows.
-- **Surveillance context:** Core components are extensively validated in AWS to ensure performance at peak ingestion volumes.
 
 ### Microsoft Azure
 
 - **Strategic fit:** Preferred by jurisdictions with significant Microsoft ecosystem investments, such as those using Microsoft Entra ID (formerly Azure Active Directory) or existing Enterprise Agreements.
 - **Technical readiness:** Provides a streamlined experience for organizations running Windows-based workloads or requiring integration with Microsoft 365 and Power Platform tools.
-- **Surveillance context:** Supported via Terraform, allowing jurisdictions to meet internal mandates for Azure-hosted health data.
 
-See also: [Deploy cloud infrastructure on AWS](../deploy-nbs7/deploy-on-aws.html), [Deploy cloud infrastructure on Azure](../deploy-nbs7/deploy-on-azure.html), and [Compatibility matrix](../compatibility.html).
+See also: [Deploy cloud infrastructure on AWS](../deploy-nbs7/deploy-on-aws.html), [Deploy cloud infrastructure on Azure](../deploy-nbs7/deploy-on-azure.html), and the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
 
 ## Staff Kubernetes expertise
 
@@ -88,7 +86,7 @@ Migration from NBS 6 to NBS 7 concludes with a cutover from your existing NBS 6 
 - Your NBS 6 instance must remain operational and accessible during migration.
 - Some jurisdictions provision a separate NBS 6 environment for migration activities and then cut over, rather than deploying NBS 7 changes directly against their primary NBS 6 production server.
 - You need to know your current NBS 6 hosting setup before you begin. Specifically, whether it is hosted on-premises or in the cloud, and if in the cloud, which provider.
-- **You must be running a compatible NBS 6.x version** before you can install any version of NBS 7. For more information, see [Compatibility matrix](../compatibility.html).
+- **You must be running a compatible NBS 6.x version** before you can install any version of NBS 7. For more information, see the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
 
 See also: [Deployment planning guide](../before-you-deploy/planning.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
 

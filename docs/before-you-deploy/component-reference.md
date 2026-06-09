@@ -8,7 +8,6 @@ description: Describes each NBS 7 component — what it does, when it is needed,
 ---
 
 # NBS 7 component reference
-{: .no_toc }
 
 The pages in this section describe each component in NBS 7. Use it to understand what each component does, why it is included in your deployment, and how it relates to other components.
 
@@ -33,7 +32,7 @@ The following table shows which components are included in NBS 7. RTR and DI API
 | [NBS Web UI](../before-you-deploy/component-reference/nbs-core-components.html#nbs-web-ui) | ✓ |  |  |
 | [NBS Gateway](../before-you-deploy/component-reference/nbs-core-components.html#nbs-gateway) | ✓ |  |  |
 | [Elasticsearch](../before-you-deploy/component-reference/nbs-core-components.html#elasticsearch) | ✓ |  |  |
-| [Nifi](../before-you-deploy/component-reference/nbs-core-components.html#nifi) | ✓ |  |  |
+| [NiFi](../before-you-deploy/component-reference/nbs-core-components.html#nifi) | ✓ |  |  |
 | [Keycloak](../before-you-deploy/component-reference/nbs-core-components.html#keycloak) | ✓ |  |  |
 | [Database (NBS\_ODSE, NBS\_SRTE)](../before-you-deploy/component-reference/nbs-core-components.html#database-nbs_odse-nbs_srte) | ✓ |  |  |
 | [Infrastructure and networking layer](../before-you-deploy/component-reference/nbs-core-components.html#infrastructure-and-networking-layer-components) | ✓ |  |  |

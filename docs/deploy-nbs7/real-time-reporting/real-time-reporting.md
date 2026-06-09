@@ -63,7 +63,7 @@ To reduce risk, consider setting up RTR in a testing environment before moving t
 
 1. Choose a database path and use it consistently throughout this guide. Both paths support Liquibase or script-based installation.
 
-   - **RDB path:** Use `RDB` as the default reporting database. Turn off the classic ETL batch jobs and proceed to the next step.
+   - **RDB path:** Use `RDB` as the default reporting database. Turn off the classic ETL batch jobs and proceed to the next step. MasterETL remains available for manual recovery runs if needed.
    - **rdb_modern path:** Create a separate reporting database. To create the database, see [Create rdb_modern database](#set-up-the-rdb_modern-database) before moving on to [Create service users and database objects](#create-service-users-and-database-objects).
 
 1. Set the environment variable for your chosen path.

@@ -49,6 +49,11 @@ config:
   # The first line of body content is typically the TOC block or a paragraph.
   MD041: false
 
+  # MD051 — Link fragments should be valid
+  # Disabled: Kramdown IAL syntax ({: #anchor-id }) sets custom HTML anchor IDs
+  # that markdownlint cannot resolve. These are valid Jekyll/Kramdown anchors.
+  MD051: false
+
 # Glob patterns for files and directories to exclude from linting.
 # markdownlint-cli2 uses the same glob syntax as .gitignore.
 ignores:

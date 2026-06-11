@@ -97,17 +97,7 @@ AWS storage services including Amazon EBS, Amazon EFS, and Amazon RDS use AWS Ke
 
 NBS 7 integrates with standards-based SSO systems and is designed to work with your existing Identity Provider (IdP), such as Okta. Because NBS 7 requires a working NBS 6 instance, an authentication mechanism is assumed to be in place. No additional authentication configuration is needed before deployment.
 
-<<<<<<< HEAD
 If you are integrating NBS into a new SSO ecosystem, a proof of concept is available on request.
-=======
-This is similar to NBS 6. As documented in ["NEDSS Base System Release 4.4.1 Hardening NBS Perimeter Security"](https://nbscentral.cdc.gov/attachments/1995) (requires access on NBS central; see [Additional resources](../../../index.html#additional-resources)), NBS 6 does not authenticate users. Instead, it delegates authentication to a security proxy, which each State, Tribal, Local, and Territorial (STLT) must provide in order to deploy NBS.
-
-The NBS 7 release requires that prospective users already have a working NBS 6 instance, and therefore assumes that a user authentication mechanism is already in place.
-
-NBS 7 extends functionality that is available to the authenticated user. NBS 7 therefore works alongside the existing authentication mechanism. No additional steps are needed to authenticate users for NBS 7.
-
-To assist those who are integrating NBS into their SSO ecosystem, a proof of concept in which authentication is performed using an Identity Provider (IdP) and a proxy is available on request. To request it, [please create a ticket here](https://nbscentral.cdc.gov/projects/nbs700/issues/new) (NBS Central login required; see [Additional resources](../../../index.html#additional-resources)).
->>>>>>> js/before-you-deploy
 
 ## What to do now
 

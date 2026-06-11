@@ -7,7 +7,7 @@ has_children: true
 description: Provision the Azure cloud environment for NBS 7. Deployment guide coming soon.
 ---
 
-# Deploy on Azure
+# Deploy NBS 7 on Azure
 
 Azure deployment documentation is in progress. For assistance with Azure deployments, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 

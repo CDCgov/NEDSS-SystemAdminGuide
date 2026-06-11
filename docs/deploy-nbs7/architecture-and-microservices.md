@@ -21,13 +21,13 @@ redirect_from:
 
 ## Overview
 
-The deployment of the modernized NBS 7 will complement and build upon the existing NBS 6 system, integrating through the strangler fig pattern. Users will experience a smooth transition between the modern NBS 7 features and legacy NBS 6.
+The deployment of the modernized NBS 7 complements and builds upon the existing NBS 6 system, integrating through the strangler fig pattern. Users experience a smooth transition between the modern NBS 7 features and legacy NBS 6.
 
 To prevent disruptions to the existing NBS 6 deployment, NBS 7 runs on a dedicated cloud network. A dedicated connection links the NBS 7 and NBS 6 network environments so that the systems can communicate.
 
 ## Architecture
 
-The architecture diagram below illustrates the key components of NBS 7.
+This diagram illustrates the key components of NBS 7.
 
 ![Infrastructure](images/nbs7_architecture_and_microservices.png)
 
@@ -43,23 +43,22 @@ NBS 7 introduces microservices for the modernized system, deployed using Helm ch
 - **NBS-gateway Service**: Leveraging Spring Cloud Gateway, this service efficiently manages intricate strangler routing logic between NBS 7 and NBS 6.
 - **Data Ingestion API Service**: Our dedicated service provides essential APIs that enable NBS to seamlessly ingest HL7 data from labs and other entities into the NBS system.
 
-## NGINX Ingress
+## Traefik Kubernetes Ingress provider
 
-NGINX is deprecated and is replaced with Traefik.
-{: .important }
-
-Serving as the entry point into the Kubernetes cluster, NGINX Ingress will intelligently route users based on predefined routing rules. Users will be directed to the NBS 7 features (Modernization API Service) or classic NBS 6 features (NBS-gateway Service). The deployment of NGINX Ingress will be orchestrated using Helm charts and values files.
+Serving as the entry point into the Kubernetes cluster, the Traefik Kubernetes Ingress provider intelligently routes users based on predefined routing rules. Users are directed to the NBS 7 features (Modernization API Service) or classic NBS 6 features (NBS-gateway Service). The deployment of Traefik is orchestrated using Helm charts and values files.
 
 ## Shared services, tools, and containers
 
-- **Cert Manager**: This tool automates TLS certificate management and will be integrated into the infrastructure via Terraform. The certificate issuer connects to Let's Encrypt CA by default, and will be installed using YAML manifests and `kubectl` commands.
-- **Apache NiFi**: As an ETL tool, Apache NiFi populates Elasticsearch indices from the NBS database. Deployment of NiFi will follow Helm charts and values files.
-- **Elasticsearch**: NBS relies on Elasticsearch for lightning-fast searches. The deployment of Elasticsearch will use Helm chart and values files.
+The following tools run alongside NBS 7 microservices to provide supporting infrastructure for certificate management, search, data flow, and logging.
+
+- **Cert Manager**: This tool automates TLS certificate management and is integrated into the infrastructure through Terraform. The certificate issuer connects to the **Let's Encrypt** Certificate Authority by default and is installed using YAML manifests and `kubectl` commands.
+- **Apache NiFi**: As an ETL tool, Apache NiFi populates Elasticsearch indices from the NBS database. Deployment of NiFi uses Helm charts and values files.
+- **Elasticsearch**: NBS relies on Elasticsearch for lightning-fast searches. The deployment of Elasticsearch uses Helm charts and values files.
 - **Fluent Bit**: Fluent Bit serves as the log aggregator, collecting logs from various microservices and Kubernetes components and, by default, pushing them to designated cloud storage and monitoring services.
 
 ## Data Ingestion service
 
-The Data Ingestion service provides necessary foundational pieces to track and route ELR data flowing into NBS, and lays the groundwork to provide additional ingestion options for NBS.
+The Data Ingestion service provides necessary foundational pieces to track and route electronic lab report (ELR) data flowing into NBS, and lays the groundwork to provide additional ingestion options.
 
 - Accepts a variety of electronic lab reports using different versions and fields
 - Saves all incoming messages for auditing, debugging, and disaster recovery and you can configure how long messages are saved
@@ -87,16 +86,9 @@ The following services comprise RTR:
 - **Kafka sink service**: Persists the data from the Kafka topics to the `RDB_Modern` database tables
 
 ## Data processing service
-Provides a seamless way to process ELR in near real-time instead of depending on the system-bounded ELR batch job. This eliminates the need for the STLT to set up a batch job on their system.
 
-## NND service
-
-Data Sync is deprecated.
-{: .important }
-
-The Data Sync service provides a secure API to connect to the databases in the NBS cloud, with an API endpoint service and without interrupting any on-premises operations.
+The NBS 7 data processing service provides a way to process electronic lab reports (ELRs) in near real-time instead of depending on the system-bounded ELR batch job.
 
 ## Keycloak
 
-- At its core, NBS 7 relies on Keycloak as the primary Identity Provider (IdP) and Data Ingestion APIs.
-- NBS 7 also leverages Keycloak for token management and SSO integration (for example, OAuth or SAML integration with Okta).
+Keycloak is an open-source identity and access management tool. NBS 7 uses Keycloak as the primary Identity Provider (IdP) for authentication, token management, and SSO integration with external identity providers such as Okta using OAuth or SAML.

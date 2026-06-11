@@ -147,7 +147,7 @@ This parameter is required to enable Change Data Capture on Amazon RDS. Complete
 
 ### Back up and restore RDB on Amazon RDS
 
-Use the following steps to create a new database within an existing instance. Restoring `RDB` under a new name within the same instance requires the RDS backup and restore stored procedures. Note that the AWS Management Console snapshot restore functionality creates an entirely new DB instance and cannot be used for this purpose.
+The following steps create a new database within an existing instance. Restoring `RDB` under a new name within the same instance requires the RDS backup and restore stored procedures. Note that the AWS Management Console snapshot restore functionality creates an entirely new DB instance and cannot be used for this purpose.
 
 Use the following steps to perform a backup and restore of your NBS 6 database on Amazon RDS.
 
@@ -232,7 +232,7 @@ Change Data Capture (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRT
    > In the following statements, `cdc` appears as part of SQL Server column and parameter names and refers to **Change Data Capture**, not the Centers for Disease Control and Prevention.
    {: .note }
 
-```sql
+   ```sql
    SELECT name, is_cdc_enabled
    FROM sys.databases;
 
@@ -251,7 +251,7 @@ Change Data Capture (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRT
      CASE WHEN is_tracked_by_cdc = 1 THEN 'YES' ELSE 'NO' END AS is_tracked_by_cdc
    FROM sys.tables
    WHERE is_tracked_by_cdc = 1;
-```
+   ```
 
    The following images show expected query results for a successful Change Data Capture configuration.
 

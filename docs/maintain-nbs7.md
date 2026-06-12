@@ -10,7 +10,7 @@ description: Operational guidance for maintaining your NBS 7 deployment after go
 
 This section covers the operational tasks that keep your NBS 7 environment healthy after go-live. It is intended for system administrators who maintain the infrastructure, platform components, and supporting configuration for a running NBS 7 deployment.
 
-> The procedures in this section reflect NBS {{ site.version_latest }}. For earlier releases, see **Previous Versions** in the sidebar.
+> The procedures in this section reflect NBS {{ site.version_latest }}. For other releases, see **Previous Versions** in the sidebar.
 {: .note }
 
 Use this section for recurring maintenance work such as upgrades, infrastructure version changes, and operational configuration updates. Work through the pages that match the change you need to make.
@@ -22,6 +22,3 @@ Use this section for recurring maintenance work such as upgrades, infrastructure
 - [Verbose truncation warnings](maintain-nbs7/verbose-truncation.html) describes how to enable SQL Server verbose truncation warnings for troubleshooting database write errors.
 - [Update EKS control plane](maintain-nbs7/eks-upgrade.html) walks through version-by-version EKS control plane and node group upgrades using Terraform.
 -->
-
-> Additional maintenance procedures are added to this section as they are documented. If the procedure you need is not yet covered here, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
-{: .note }

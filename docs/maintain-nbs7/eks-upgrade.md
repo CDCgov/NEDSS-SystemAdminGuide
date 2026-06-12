@@ -2,7 +2,8 @@
 title: Update the Amazon EKS control plane
 layout: page
 parent: Maintain NBS 7
-nav_order: 2
+nav_order: 3
+description: Use Terraform to upgrade the Amazon EKS control plane and node groups for NBS 7.
 ---
 
 # Update the Amazon EKS control plane

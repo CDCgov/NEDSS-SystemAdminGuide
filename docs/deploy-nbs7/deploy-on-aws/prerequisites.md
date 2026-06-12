@@ -27,7 +27,7 @@ Before you deploy NBS 7, confirm that your Amazon Web Services (AWS) environment
 
 Your AWS environment must meet the following requirements:
 
-- An existing AWS account with a production instance of NBS 6 listed in the NBS 6 and NBS 7 compatibility matrix and related third-party products
+- An existing AWS account with an instance of NBS 6 listed in the NBS 6 and NBS 7 compatibility matrix and related third-party products
 - A configured DNS routing infrastructure
 - Permissions to create security groups and AWS IAM roles
 - Access to NBS 6 databases hosted on a SQL Server instance. Two common hosting options with AWS include Amazon RDS and self-managed Amazon EC2. See [AWS services reference](../deploy-on-aws.html#aws-services-reference) for details.
@@ -57,11 +57,11 @@ Your AWS environment must meet the following requirements:
 |---|---|---|
 | Kubernetes | 1.25+ | Deployed as Amazon EKS by default |
 | Cert Manager | 1.13 | Deployed in Kubernetes |
-| Elasticsearch | 7.17 | Deployed by default in Kubernetes |
+| Elasticsearch | 9.x | Deployed by default in Kubernetes |
 | Apache NiFi | 1.19 | Deployed in Kubernetes |
 | Traefik | 3.x | Deployed in Kubernetes as ingress controller |
 | Prometheus | 2.44 | Deployed as Amazon Managed Service for Prometheus (AMP) by default |
-| Grafana | 9.5.x | Deployed as Amazon Managed Grafana (AMG) by default |
+| Grafana | 12.x | Deployed as Amazon Managed Grafana (AMG) by default |
 | Fluent Bit | 1.9.x | Deployed in Kubernetes. Log storage can be configured. |
 | NBS Classic | 6.0.18.1 or higher | Reuse current NBS instance |
 | SQL Server | 2017+ | Reuse current NBS instance |
@@ -83,7 +83,7 @@ To configure, deploy, and maintain NBS 7, you need a local or cloud-hosted works
 
 NBS 7 infrastructure and microservices are deployed into a new Amazon VPC, provisioned using the Terraform scripts in [Provision the AWS cloud environment](provision-aws.html).
 
-Confirm that network access is available from NBS 7 components to classic NBS 6 components, including the database server. The NBS 6 SQL Server database must allow access from the NBS 7 VPC address space, whether hosted on Amazon RDS or a self-managed EC2 instance. Use a private route for this network access rather than a publicly accessible connection.
+Confirm that network access is available from NBS 7 components to classic NBS 6 components, including the database server. Use a private route for this network access rather than a publicly accessible connection.
 
 The team member who creates this infrastructure should have operational knowledge of Terraform.
 
@@ -97,9 +97,9 @@ AWS storage services including Amazon EBS, Amazon EFS, and Amazon RDS use AWS Ke
 
 NBS 7 integrates with standards-based SSO systems and is designed to work with your existing Identity Provider (IdP), such as Okta. Because NBS 7 requires a working NBS 6 instance, an authentication mechanism is assumed to be in place. No additional authentication configuration is needed before deployment.
 
-If you are integrating NBS into a new SSO ecosystem, a proof of concept is available on request.
+## Next steps
 
-## What to do now
+After you satisfy the prerequisites on this page, complete the following steps in order.
 
 1. Confirm that you have completed both the AWS-specific requirements from this page and the cloud-agnostic [Prerequisites](../prerequisites.html)
 1. Continue with [Provision the AWS cloud environment](provision-aws.html)

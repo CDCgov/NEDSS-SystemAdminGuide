@@ -10,9 +10,9 @@ redirect_from:
   - /docs/3_base_application/0_base_application/
 ---
 
-# Deploy on AWS
+# Deploy NBS 7 on AWS
 
-This section walks you through provisioning the Amazon Web Services (AWS) cloud environment for NBS 7. You will verify that your AWS account, hardware, software, and network requirements are in place, then use Terraform to provision the VPC, Amazon Elastic Kubernetes Service (Amazon EKS) cluster, and supporting AWS services. Complete both steps in order before moving on to [Deploy cluster infrastructure](../deploy-nbs7/cluster-infrastructure.html).
+This section covers provisioning the Amazon Web Services (AWS) cloud environment for NBS 7. The steps use the Terraform modules provided in the NEDSS-Infrastructure repository, though jurisdictions can provision the required resources using whatever approach works best for their environment. Review this page before moving on to [Deploy cluster infrastructure](../deploy-nbs7/cluster-infrastructure.html).
 
 <!--
 Before provisioning infrastructure, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html).
@@ -40,7 +40,7 @@ Terraform creates the following AWS resources during the provisioning step. For 
 | Metrics collection | Amazon Managed Service for Prometheus (AMP) | Collects infrastructure and application metrics |
 | Metrics visualization | Amazon Managed Grafana (AMG) | Visualizes metrics from AMP |
 
-The NBS 6 SQL Server database is not provisioned here. It is reused from your existing NBS 6 deployment, whether hosted on Amazon RDS or on a self-managed Amazon EC2 instance.
+The NBS 6 SQL Server database is not provisioned here. It is reused from your existing NBS 6 deployment.
 {: .note }
 
 ## AWS services reference
@@ -64,20 +64,24 @@ Terraform provisions the following services in your AWS account during the [prov
 
 ### Admin-provided services
 
-These services are not provisioned by Terraform. You bring them to the deployment from your existing NBS 6 environment.
+These services are not provisioned by Terraform. You bring them to the deployment.
 
 #### SQL Server hosting options
 
-- **[Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/rds/)**: A managed SQL Server hosting option. STLTs that host the NBS 6 database on Amazon RDS use AWS-native stored procedures for backup and restore operations, which appear in later steps of this guide.
-- **[SQL Server on Amazon EC2](https://docs.aws.amazon.com/sql-server-ec2/latest/userguide/sql-server-on-ec2-overview.html)**: A self-managed SQL Server installation on an Amazon EC2 virtual machine. STLTs that host the NBS 6 database on Amazon EC2 use standard SQL Server backup and restore procedures instead of the AWS-native stored procedures.
+NBS 7 on AWS supports several SQL Server hosting configurations. Amazon RDS and Amazon EC2 are two common options.
 
-Your deployment uses one or the other. The NBS 6 SQL Server database is reused by NBS 7 — it is not replaced or re-provisioned during deployment. If you are unsure which approach your environment uses, confirm with your database administrator before proceeding.
+- **[Amazon Relational Database Service (Amazon RDS) for SQL Server](https://docs.aws.amazon.com/rds/)**: A managed SQL Server hosting option. AWS handles infrastructure maintenance tasks such as backups, patching, and availability on RDS.
+- **[SQL Server on Amazon EC2](https://docs.aws.amazon.com/sql-server-ec2/latest/userguide/sql-server-on-ec2-overview.html)**: A self-managed SQL Server installation on an Amazon EC2 virtual machine. With EC2, your team is responsible for infrastructure maintenance tasks.
 
 #### Identity and access management
+
+IAM roles and permissions control access to AWS resources and must be configured in your existing AWS account before Terraform provisioning begins.
 
 - **[AWS Identity and Access Management (AWS IAM)](https://docs.aws.amazon.com/iam/)**: An AWS service for controlling access to cloud resources. IAM roles and permissions must be configured in your existing AWS account before Terraform provisioning begins.
 
 ## Next steps
 
-- **[Prerequisites for AWS](deploy-on-aws/prerequisites.html)** — Verifies your AWS account, hardware, software, network, and security requirements before provisioning begins.
-- **[Provision the AWS environment](deploy-on-aws/provision-aws.html)** — Runs Terraform to create the VPC, Amazon EKS cluster, EFS, and supporting AWS services.
+After you review the services on this page, complete the following steps in order.
+
+1. **[Prerequisites for AWS](deploy-on-aws/prerequisites.html)**: Verifies your AWS account, hardware, software, network, and security requirements before provisioning begins.
+1. **[Provision the AWS environment](deploy-on-aws/provision-aws.html)**: Runs Terraform to create the VPC, Amazon EKS cluster, EFS, and supporting AWS services.

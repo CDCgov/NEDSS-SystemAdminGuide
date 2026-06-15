@@ -55,7 +55,7 @@ This page walks through enabling Change Data Capture (CDC) and deploying the Deb
 
    ```yaml
    properties:
-      bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+      bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT"
    sqlserverconnector:
       config:
          database.hostname: "EXAMPLE_DB_ENDPOINT",
@@ -65,11 +65,11 @@ This page walks through enabling Change Data Capture (CDC) and deploying the Deb
          database.dbname: nbs_odse,
          database.names: nbs_odse,
          database.server.name: odse,
-         database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_MULTI_CLUSTER_ENDPOINTS",
-         schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_MULTI_CLUSTER_ENDPOINTS"
+         database.history.kafka.bootstrap.servers: "EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS",
+         schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS"
    Env:
          name: BOOTSTRAP_SERVERS
-         value: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+         value: "EXAMPLE_KAFKA_ENDPOINT"
    ```
 
 1. Install the connector:

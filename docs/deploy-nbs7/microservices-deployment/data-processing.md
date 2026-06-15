@@ -21,7 +21,7 @@ This page walks through deploying the Real Time Ingestion (RTI) data processing 
 
 ## Overview
 
-RTI is a microservice that picks up ELR data after it has been ingested and queued in the NBS Interface table. It processes each record and either marks it as successful or delivers it to the NBS queue. Events are handled through Kafka — there is no direct user interaction with RTI. RTI is triggered through the Data Ingestion ELR endpoint and can work alongside the ELR importer batch job or replace it, providing near-real-time ELR processing without requiring a STLT-managed batch job.
+RTI is a microservice that picks up ELR data after it has been ingested and queued in the NBS Interface table. It processes each record and either marks it as successful or delivers it to the NBS queue. Events are handled through Kafka. There is no direct user interaction with RTI. RTI is triggered through the Data Ingestion ELR endpoint and can work alongside the ELR importer batch job or replace it, providing near-real-time ELR processing without requiring a STLT-managed batch job.
 
 ![data-processing-flow-diagram](images/data-processing-flow-diagram.png)
 
@@ -69,7 +69,7 @@ This section covers installing the NBS 7 RTI service.
     nbs:
        authuser: "EXAMPLE_NBS_AUTHUSER"
     kafka:
-       cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+       cluster: "EXAMPLE_KAFKA_ENDPOINT"
     dataingestion:
        uri: "data.EXAMPLE.DOMAIN"
     keycloak:

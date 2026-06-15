@@ -110,7 +110,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
 
    ```yaml
    kafka:
-      cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+      cluster: "EXAMPLE_KAFKA_ENDPOINT"
    ```
 
 1. Set `efsFileSystemId` to the EFS file system ID from the AWS console:

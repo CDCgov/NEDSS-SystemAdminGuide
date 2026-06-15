@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy Elasticsearch for NBS 7
 
-This page walks through deploying Elasticsearch using the `elasticsearch-efs` Helm chart.
+This page walks through deploying Elasticsearch using the `elasticsearch` Helm chart.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,7 +22,7 @@ This page walks through deploying Elasticsearch using the `elasticsearch-efs` He
 
 ## Deploy Elasticsearch using Helm
 
-1. Locate the Elasticsearch Helm chart in the [NEDSS-Helm repository][nedss-helm-elasticsearch-efs-chart].
+1. Locate the Elasticsearch Helm chart in the [NEDSS-Helm repository][nedss-helm-elasticsearch-chart].
 1. Set `efsFileSystemId` in `values.yaml` to the EFS file system ID from the AWS console.
 
    ![elasticsearch](images/elasticsearch.png)
@@ -38,7 +38,7 @@ This page walks through deploying Elasticsearch using the `elasticsearch-efs` He
 1. Install Elasticsearch:
 
    ```bash
-   helm install elasticsearch -f ./elasticsearch-efs/values.yaml elasticsearch-efs
+   helm install elasticsearch -f ./elasticsearch/values.yaml elasticsearch
    ```
 
 1. Confirm the pod is running before proceeding to the next deployment:
@@ -49,4 +49,4 @@ This page walks through deploying Elasticsearch using the `elasticsearch-efs` He
 
    If the pod is still creating or in any other state, wait and troubleshoot before continuing.
 
-[nedss-helm-elasticsearch-efs-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/elasticsearch-efs>
+[nedss-helm-elasticsearch-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/elasticsearch>

@@ -26,9 +26,9 @@ After completing this phase, proceed to [Validate the deployment](../validate-th
 
 Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Deploy the Helm charts in the following order. Verify that each microservice starts successfully before moving to the next service.
 
-- `elasticsearch-efs`
+- `elasticsearch`
 - `modernization-api`
-- `nifi-efs`
+- `nifi`
 - [Validate ES, Mapi and Nifi](validate-es-mapi-nifi.html)
 - `nbs-gateway`
 - `dataingestion-service`
@@ -36,7 +36,7 @@ Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Dep
 - `nnd-service` (Data Sync)
 - `case-notification`
 
-Have JDBC connection details available for `modernization-api`, `nifi-efs`, `dataingestion-service`, `data-processing`, and `case-notification`.
+Have JDBC connection details available for `modernization-api`, `nifi`, `dataingestion-service`, `data-processing`, and `case-notification`.
 
 | Parameter     | Example                                                       |
 |---------------|----------------------------------------------------------------|

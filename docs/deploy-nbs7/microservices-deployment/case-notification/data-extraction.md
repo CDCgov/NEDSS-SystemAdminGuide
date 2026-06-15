@@ -35,7 +35,7 @@ This page walks through deploying the Data Extraction Service for case notificat
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
    kafka:
-     cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+     cluster: "EXAMPLE_KAFKA_ENDPOINT"
    ```
 
 1. Install the service:

@@ -35,7 +35,7 @@ This page walks through deploying the Case Notification Service for case notific
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
 
    kafka:
-     cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+     cluster: "EXAMPLE_KAFKA_ENDPOINT"
 
    api:
      host: "https://<data.EXAMPLE_DOMAIN>/hl7-parser"

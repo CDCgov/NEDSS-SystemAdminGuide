@@ -13,36 +13,6 @@ redirect_from:
 
 # API smoke test for Modernization API
 
-## On this page
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
-The `nbs-test-api.sh` script is in the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-api].
-
-This script will:
-
-- Create a patient
-- Search for the patient
-- Delete that patient (the record still exists but is inactive)
-
-This Bash script can run using CloudShell if NBS is hosted in AWS, or on any system with Bash installed. It requires a database user that can run API calls.
-
-`curl` is the only other dependency.
-
-## Usage
-
-```bash
-nbs-test-api.sh [-h] [-?] [-d] [-D] [-P] [-B BASE_URL] [-U USER] [-c count]
-```
-
-For the initial smoke test run:
-
-```bash
-nbs-test-api.sh -B https://app.<your-site>.<your-domain>.com -U <apiuser> -c 10
-```
-
-This command verifies API functionality and populates the observability dashboards with initial traffic.
+Run the `nbs-test-api.sh` script from the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-api]. See the `README` in that folder for usage instructions and current script status.
 
 [nedss-infra-nbs-test-api]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-api>

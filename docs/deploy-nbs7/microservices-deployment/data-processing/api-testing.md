@@ -22,8 +22,6 @@ Use this page to validate Real Time Ingestion (RTI) by sending ELR data through 
 
 This procedure uses Postman to send API requests. Download and install Postman from the [Postman installation page](https://learning.postman.com/docs/getting-started/installation/installation-and-updates).
 
-You need a Keycloak client ID and client secret for the Data Sync service. Retrieve these from your Keycloak instance. See [Enable Keycloak authentication](../../../deploy-nbs7/keycloak/enable-keycloak-auth.html) for port forwarding instructions and steps to access the Keycloak UI. In the **nbs-users** realm, go to **Clients** > the client for the NND service > **Credentials** > **Client Secret**.
-
 ## Run the integration test
 
 This section covers submitting an ELR payload and triggering RTI processing.

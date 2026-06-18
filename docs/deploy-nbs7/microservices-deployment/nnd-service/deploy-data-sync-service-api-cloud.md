@@ -10,7 +10,10 @@ redirect_from:
 
 # Deploy Data Sync service API (cloud)
 
-Use these steps to install the NBS 7 Data Sync service API in your cloud environment.
+This page walks through deploying the NBS 7 Data Sync service API using the `nnd-service` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
+
+> This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
+{: .important }
 
 ## On this page
 {: .no_toc .text-delta }
@@ -21,25 +24,28 @@ Use these steps to install the NBS 7 Data Sync service API in your cloud environ
 ## Prerequisites
 
 1. Locate the NND Service Helm chart in the [NEDSS-Helm repository][nedss-helm-nnd-service-chart]. Provide values for ECR repository, ECR image tag, database server endpoints, and ingress host in the `values.yaml` file.
-
-2. Confirm that the following DNS entry was created and points to the Network Load Balancer (NLB) in front of your Kubernetes cluster (make sure this is the active NLB provisioned in the base install steps). Do this in your authoritative DNS service, such as Route 53.
-   Replace `example.com` with the appropriate domain name in the `values.yaml` file.
-   NND service application, for example: `data.example.com`
+1. Confirm that the following DNS entry was created and points to the Network Load Balancer (NLB) in front of your Kubernetes cluster. Use the active NLB provisioned during base install. Do this in your authoritative DNS service, such as Route 53. Replace `example.com` with the appropriate domain name in `values.yaml`:
+   - NND service application, for example: `data.example.com`
 
 ## Configure values and install
 
-1. Update the image repository and tag with the following:
+Set the required values in `values.yaml` before installing the chart.
+
+1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/nnd-service/` from that repository.
+1. Set the image repository and tag:
 
    ```yaml
    image:
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-service"
      pullPolicy: IfNotPresent
-     tag: <release-version-tag> e.g v1.0.1
+     tag: <release-version-tag> # for example, v1.0.1
    ```
 
-2. Update the values file with JDBC connection values in the following format. The `dbserver` value is only a database server endpoint. Do not include the port number.
+1. Set the JDBC connection values. The `dbserver` value is the database server endpoint only. Do not include the port number. For help determining these values, see the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices).
 
-   ![Example JDBC database endpoint field in values.yaml](../images/nnd-dbendpoint.png)
+   The following screenshot shows the database endpoint in the Amazon RDS console:
+
+   ![Amazon RDS console showing the Connectivity and security tab with the database endpoint highlighted in the Endpoint and port section](../images/nnd-dbendpoint.png)
 
    ```yaml
    jdbc:
@@ -48,41 +54,55 @@ Use these steps to install the NBS 7 Data Sync service API in your cloud environ
      password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    ```
 
-3. Update `values.yaml` to populate `efsFileSystemId`, which is the EFS file system ID from the AWS console.
+1. Set `efsFileSystemId` to the EFS file system ID from the AWS console.
 
-   ![Example EFS file system ID field in values.yaml](../images/nnd-efsid.png)
+   The following screenshot shows the file system ID in the Amazon EFS console:
+
+   ![Amazon EFS console showing the File systems list with the file system ID highlighted in the File system ID column](../images/nnd-efsid.png)
 
    ```yaml
    efsFileSystemId: "EXAMPLE_EFS_ID"
    ```
 
-4. Provide the Keycloak auth URI in `values.yaml` as shown below. In the default configuration, this value should not change unless the name or namespace of the Keycloak pod is modified.
+1. Set the Keycloak auth URI. In the default configuration, this value does not change unless the name or namespace of the Keycloak pod is modified:
 
    ```yaml
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
    ```
 
-5. Run the following command to install `nnd-service`.
+1. Install the `nnd-service` chart:
 
    ```bash
-   helm install nnd-service -f ./nnd-service/values.yaml nnd-service
+   helm install "nnd-service" ./nnd-service -f ./nnd-service/values.yaml
    ```
 
-6. Check whether the `nnd-service` pod is running by using `kubectl get pods`.
+1. Confirm the pod is running before continuing:
+
+   ```bash
+   kubectl get pods
+   ```
 
 ## Validate the deployment
 
-1. Validate the service by accessing:
+Use the actuator endpoints to confirm the service is running.
 
-   ```text
-   https://<data.EXAMPLE_DOMAIN>/extraction/actuator/info
-   https://<data.EXAMPLE_DOMAIN>/extraction/actuator/health
-   ```
+Run the info endpoint to confirm the service version and build details:
 
-2. Swagger is disabled by default (usually in production). To enable Swagger for testing, specify or overwrite `springBootProfile` with `'dev'` under `charts/nnd-service/values.yaml`.
+```text
+https://<data.EXAMPLE_DOMAIN>/extraction/actuator/info
+```
 
-   ```text
-   https://<data.EXAMPLE_DOMAIN>/extraction/swagger-ui/index.html#/
-   ```
+Run the health endpoint to confirm the service is running:
 
+```text
+https://<data.EXAMPLE_DOMAIN>/extraction/actuator/health
+```
+
+To enable Swagger for testing, specify or overwrite `springBootProfile` with `'dev'` in `charts/nnd-service/values.yaml`. Swagger is disabled by default in production.
+
+```text
+https://<data.EXAMPLE_DOMAIN>/extraction/swagger-ui/index.html#/
+```
+
+[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-nnd-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nnd-service>

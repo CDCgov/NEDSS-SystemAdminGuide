@@ -12,6 +12,9 @@ redirect_from:
 
 Use these instructions to deploy the on-premises Data Sync service that extracts data from the Modernized NBS cloud implementation and supports ongoing Notifiable Disease message transmission to CDC.
 
+> This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
+{: .important }
+
 ## On this page
 {: .no_toc .text-delta }
 
@@ -24,13 +27,11 @@ Use these instructions to deploy the on-premises Data Sync service that extracts
 
 To sync data for NNDSS through the NBS 7 Data Sync service, you need the following:
 
-- **Keycloak client ID and client secret** - CDC provides these values
-- **Data service URL** - CDC provides this value
-- **Release materials/package for Data Sync service** - CDC provides this package
-- Install the **Rhapsody engine and IDE**
-- Install an **MS SQL Server database**
-  - Can be on a different machine, or
-  - Repurpose an already existing SQL Server database (Rhapsody should have access to it)
+- **Keycloak client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, go to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
+- **Data service URL** - Retrieve this from your NBS environment.
+- **Release materials/package** - CDC provides this as a .zip file with each release.
+- Install the **Rhapsody engine and IDE**.
+- Install a **Microsoft SQL Server database** on a different machine, or repurpose an existing SQL Server database (Rhapsody should have access to it).
 - **Java 21 or higher**
 
 ---
@@ -48,7 +49,7 @@ NNDSS Data Sync service includes:
 
 ## Set up the Data Sync service for NNDSS
 
-Download the above files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page]. Under **Assets**, download the `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
+Download the Data Sync service files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page]. Under **Assets**, download the `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
 Save the files to a secure directory with executable permissions to run the services.
 
 ---

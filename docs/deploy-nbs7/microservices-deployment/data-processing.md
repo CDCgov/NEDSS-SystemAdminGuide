@@ -135,7 +135,7 @@ To find valid auth users, query the ODSE database. Replace `NBS_ODSE` if your da
 
    Expected output:
 
-   ```
+   ```text
    {
    "status": "UP",
    "groups": [
@@ -198,5 +198,6 @@ To find valid auth users, query the ODSE database. Replace `NBS_ODSE` if your da
    }
    }
    ```
+
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-data-processing-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-processing-service>

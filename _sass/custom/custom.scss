@@ -110,3 +110,39 @@
         transform: rotate(45deg);
     }
 }
+@media print {
+  /* Hide the Just the Docs side navigation, header search bar, and footer */
+  .side-bar, 
+  .site-header, 
+  .site-footer, 
+  .print-button-container,
+  .navigation-list {
+    display: none !important;
+  }
+
+  /* Expand the content container to utilize the full page width */
+  .main {
+    max-width: 100% !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  /* Force each documentation page to start on a fresh sheet of paper */
+  .page-break {
+    page-break-after: always;
+    break-after: page;
+  }
+
+  /* Prevent headings from separating from their following paragraphs */
+  h1, h2, h3 {
+    page-break-after: avoid;
+    break-after: avoid;
+  }
+
+  /* Adjust typography for readability on printed paper */
+  body {
+    color: #000 !important;
+    background: #fff !important;
+    font-size: 12pt;
+  }
+}

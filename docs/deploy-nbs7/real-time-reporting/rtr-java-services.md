@@ -9,12 +9,9 @@ redirect_from:
   - /docs/7_feature_preview/4_rtr_java_reporting_services/
 ---
 
-# Deploy real-time reporting (RTR) Java services
+# Deploy real-time reporting (RTR) Java service
 
-> The Java reporting services are being consolidated in an upcoming release. The service validation URLs reflect the NBS {{ site.version_latest }} configuration.
-{: .warning }
-
-This page covers deploying the RTR Java services that process streamed events from Kafka and load domain-specific reporting data.
+This page covers deploying the RTR Java service that process streamed events from Kafka and load domain-specific reporting data.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -53,21 +50,13 @@ Follow these steps to configure and deploy the RTR Java services Helm chart.
 1. Validate the image repository: <!-- [SME REVIEW: confirm data-reporting-service is the correct consolidated image name] -->
 
    ```yaml
-   global.image.repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
+   global.image.repository: "quay.io/us-cdcgov/cdc-nbs-modernization/"
    ```
 
-1. Update feature flags for each service. Verify that `PHCMartETL.bat` is turned off before enabling updates to the PublicHealthCaseFact datamart via RTR:
-
-   ```yaml
-   featureFlag:
-     investigation-reporting:
-       phcDatamartEnable: '''true'''
-   ```
-
-1. Install the Helm chart for all RTR Java services:
+1. Install the Helm chart for the RTR Java service:
 
    ```bash
-   helm install rtr . -f values.yaml
+   helm install reporting-pipeline-service . -f values.yaml
    ```
 
 1. Verify the pods are running:
@@ -80,56 +69,15 @@ Follow these steps to configure and deploy the RTR Java services Helm chart.
 
    ```text
    NAME                                                READY   STATUS    RESTARTS   AGE
-   rtr-java-services-investigation-reporting-<hash>    1/1     Running   0          2m6s
-   rtr-java-services-ldfdata-reporting-<hash>          1/1     Running   0          2m6s
-   rtr-java-services-observation-reporting-<hash>      1/1     Running   0          2m6s
-   rtr-java-services-organization-reporting-<hash>     1/1     Running   0          2m6s
-   rtr-java-services-person-reporting-<hash>           1/1     Running   0          2m6s
-   rtr-java-services-post-processing-reporting-<hash>  1/1     Running   0          2m6s
+   rtr-java-services-reporting-pipeline-service-<hash>    1/1     Running   0          2m6s
    ```
 
 1. Validate the services. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
 
-   **investigation-svc**
+   **reporting-pipeline-service**
 
    ```text
-   https://data.<exampledomain>/reporting/investigation-svc/status
-   Expected: Investigation Service Status OK
-   ```
-
-   **person-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/person-svc/status
-   Expected: Person Service Status OK
-   ```
-
-   **observation-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/observation-svc/status
-   Expected: Observation Service Status OK
-   ```
-
-   **organization-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/organization-svc/status
-   Expected: Organization Service Status OK
-   ```
-
-   **ldfdata-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/ldfdata-svc/status
-   Expected: LDFData Service Status OK
-   ```
-
-   **post-processing-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/post-processing-svc/status
-   Expected: Post Processing Service Status OK
+   https://data.<exampledomain>/reporting-pipeline-svc/actuor/health
    ```
 
 [nedss-helm-rtr-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/rtr>

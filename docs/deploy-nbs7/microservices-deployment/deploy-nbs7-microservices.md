@@ -60,7 +60,6 @@ The following table lists common Helm values used across NBS 7 microservices. Ha
 | `nbs.authuser` | `EXAMPLE_NBS_AUTHUSER` | `[SME REVIEW: Is this a Keycloak user, a database user, or something else?]` |
 | `keycloak.srte.clientId` | `EXAMPLE_SRTE_CLIENT_ID` | The Keycloak client ID for SRTE data access. The default is `srte-data-keycloak-client`. Confirm in the Keycloak admin UI under the **NBS** realm > **Clients**. |
 | `keycloak.srte.clientSecret` | `EXAMPLE_SRTE_CLIENT_SECRET` | The client secret for SRTE data access. Retrieve from the Keycloak admin UI: **NBS** realm > **Clients** > `srte-data-keycloak-client` > **Credentials** tab. |
-| `api.secret` | `EXAMPLE_XML-HL7-Parser_CLIENT_SECRET` | The client secret for the XML HL7 parser. Retrieve from the Keycloak admin UI: **NBS** realm > **Clients** > `xml-hl7-parser-keycloak-client` > **Credentials** tab. See [Enable Keycloak authentication](../keycloak/enable-keycloak-auth.html). |
 
 > Run Helm install commands from the `charts` directory for all microservices. Before you run Helm install commands, verify you are authenticated to AWS by running `aws sts get-caller-identity`.
 {: .note }

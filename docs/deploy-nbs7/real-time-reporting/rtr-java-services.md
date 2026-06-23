@@ -1,9 +1,9 @@
 ---
-title: Java services
+title: Java service
 layout: page
 parent: Deploy real-time reporting
 nav_order: 4
-description: Covers deployment of RTR Java services that transform Kafka events and load reporting datamarts.
+description: Covers deployment of the RTR Java service that transforms Kafka events and loads reporting datamarts.
 redirect_from:
   - /docs/7_feature_preview/4_rtr_java_reporting_services.html
   - /docs/7_feature_preview/4_rtr_java_reporting_services/
@@ -11,7 +11,7 @@ redirect_from:
 
 # Deploy real-time reporting (RTR) Java service
 
-This page covers deploying the RTR Java service that process streamed events from Kafka and load domain-specific reporting data.
+This page covers deploying the RTR Java service that processes streamed events from Kafka and loads domain-specific reporting data.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,14 +22,14 @@ This page covers deploying the RTR Java service that process streamed events fro
 > These steps require a Unix-compatible shell. On Windows, use Git Bash, WSL, or an equivalent terminal emulator.
 {: .note }
 
-## Installing RTR Java services
+## Installing the RTR Java service
 
-Follow these steps to configure and deploy the RTR Java services Helm chart.
+Follow these steps to configure and deploy the RTR Java service Helm chart.
 
 > Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
 {: .important }
 
-1. Locate the Helm chart for all RTR Java services in the [NEDSS-Helm repository][nedss-helm-rtr-chart].
+1. Locate the Helm chart for the RTR Java service in the [NEDSS-Helm repository][nedss-helm-rtr-chart].
 
 1. Validate the Kubernetes secret for database credentials:
 
@@ -72,12 +72,12 @@ Follow these steps to configure and deploy the RTR Java services Helm chart.
    rtr-java-services-reporting-pipeline-service-<hash>    1/1     Running   0          2m6s
    ```
 
-1. Validate the services. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
+1. Validate the service. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
 
    **reporting-pipeline-service**
 
    ```text
-   https://data.<exampledomain>/reporting-pipeline-svc/actuor/health
+   https://data.<exampledomain>/reporting-pipeline-svc/actuator/health
    ```
 
 [nedss-helm-rtr-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/rtr>

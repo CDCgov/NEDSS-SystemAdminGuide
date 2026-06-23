@@ -109,10 +109,6 @@ Now that you have completed database setup and onboarding, deploy the RTR servic
 1. [Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html)
 1. [Java service](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
 
-[nedss-datareporting-liquibase-service]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service>
-[nedss-datareporting-onboarding-user-scripts]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation>
 [nedss-helm-k8-secrets-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/nbs-secrets.yaml>
-[nedss-datareporting-manual-deployment]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/stlt/manual_deployment>
-[nedss-datareporting-onboarding-data-load]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load>
 
 ---

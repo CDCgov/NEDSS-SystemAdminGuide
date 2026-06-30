@@ -42,14 +42,6 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
      # Replace with the target release version tag, e.g. v1.0.1
      tag: <release-version-tag>
 
-   sqlServerConnector:
-     config:
-       # [SME REVIEW: confirm databaseName should be rdb_modern, not rdb]
-       connection.url: "jdbc:sqlserver://nbs-db.EXAMPLE_FIXME.nbspreview.com:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true"
-       # SQL Server username for reporting database
-       connection.user: "EXAMPLE_FIXME"
-       connection.password: "EXAMPLE_FIXME"
-
    kafka:
      # Kafka bootstrap server endpoint from AWS MSK
      bootstrapServers: "EXAMPLE_FIXME"

@@ -62,145 +62,53 @@ To reduce risk, consider setting up RTR in a testing environment before moving t
    > Back up the `RDB` database before you proceed. This step cannot be undone.
    {: .warning }
 
-1. Choose a database path and use it consistently throughout this guide. Both paths support Liquibase or script-based installation.
+1. Choose a database path and use it consistently throughout this guide.
 
    - **RDB path:** Use `RDB` as the default reporting database. Turn off the classic ETL batch jobs and proceed to the next step. MasterETL remains available for manual recovery runs if needed.
-   - **rdb_modern path:** Create a separate reporting database. To create the database, see [Set up the rdb_modern database](#set-up-the-rdb_modern-database-rdb_modern-path-only) before moving on to [Create service users and database objects](#create-service-users-and-database-objects).
-
-1. Set the environment variable for your chosen path.
-
-   - **RDB path:** Insert the following value into `NBS_Configuration`:
-
-      ```sql
-      IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_Configuration WHERE config_key ='ENV' AND config_value ='PROD')
-      INSERT INTO NBS_ODSE.dbo.NBS_Configuration
-      (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
-      VALUES(N'ENV', N'PROD', N'RTR reporting database', N'Indicates scripts should be run against RDB database', NULL, N'UAT, PROD', N'RTR', N'7.12.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
-      ```
-
-   - **rdb_modern path:** This setting overrides the default `RDB` during script execution unless a script explicitly prompts for a database.
-
-      ```sql
-      IF NOT EXISTS(SELECT 1 FROM NBS_ODSE.DBO.NBS_Configuration WHERE config_key ='ENV' AND config_value ='UAT')
-      INSERT INTO NBS_ODSE.dbo.NBS_Configuration
-      (config_key, config_value, short_name, desc_txt, default_value, valid_values, category, add_release, version_ctrl_nbr, add_user_id, add_time, last_chg_user_id, last_chg_time, status_cd, status_time, admin_comment, system_usage, config_value_large)
-      VALUES(N'ENV', N'UAT', N'RTR reporting database', N'Indicates scripts should be run against UAT rdb_modern database', NULL, N'UAT, PROD', N'RTR', N'7.12.0', 1, 0, getdate(), 0, getdate(), N'A', getdate(), NULL, NULL, NULL);
-      ```
+   - **rdb_modern path:** Create a separate reporting database by duplicating your existing reporting database. The exact steps depend on your SQL Server version and where it is hosted. If this process is unfamiliar, see [Microsoft's documentation on backup and restore operations](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases?view=sql-server-ver17) before moving on to [Create service users and secrets](#create-service-users-and-secrets).
 
 ## Set up the rdb_modern database (rdb_modern path only)
 
-If you are on the **rdb_modern path**, complete this section. If you are on the **RDB path**, move on to [Create service users and database objects](#create-service-users-and-database-objects). For more information on choosing a path, see Step 3 in the [Prerequisites](#prerequisites) section.
+If you are on the **rdb_modern path**, complete this section. If you are on the **RDB path**, move on to [Create service users and secrets](#create-service-users-and-secrets). For more information on choosing a path, see Step 3 in the [Prerequisites](#prerequisites) section.
 
 RTR requires a dedicated reporting database. To create `rdb_modern`, you restore a copy of `RDB` under a new name. This keeps the classic ETL-hydrated `RDB` intact and available while `rdb_modern` hosts the data structures the RTR pipeline requires.
 
-If your `RDB` database is hosted on Amazon RDS, follow the steps in [Back up and restore a SQL Server database on Amazon RDS](../../maintain-nbs7/rds-backup-restore.html). For all other database hosting providers, use your standard backup and restore procedure to create a copy of `RDB` as `rdb_modern`.
-
-## Create service users and database objects
+## Create service users and secrets
 
 Complete the following steps to create the database users, Kubernetes secrets, and database objects that the RTR pipeline requires before [Change Data Capture](#enable-change-data-capture) can be enabled.
 
-> Generate passwords for each service user before running the scripts. Password generation scripts can take several minutes to run. Do not use spaces, equal signs (`=`), or colons (`:`). These characters cause script execution failures.
-{: .important }
+Running the RTR pipeline requires SQL Server login accounts for two distinct purposes: running the bootstrap scripts and schema migrations, and running the application services. Depending on your environment, these can be two separate accounts or collapsed into one.
 
-1. **Create admin user.** Run [000-create_rtr_admin_user-001.sql][nedss-datareporting-onboarding-user-scripts] from the NEDSS-DataReporting onboarding user creation scripts. This user provides Liquibase permissions to maintain required database components for RTR and enable Change Data Capture. Review the script and update the `PASSWORD` value before execution.
+### Accounts at a Glance
 
-1. **Create RTR microservice user logins.** Run [001-service_users_login_creation-001.sql and 002-service_database_user_creation-001.sql][nedss-datareporting-onboarding-user-scripts] from the same directory. These scripts create dedicated user accounts for each RTR microservice, which are referenced in Helm values for RTR services. Review the scripts and update the `PASSWORD` values before execution.
+| Account | Purpose | Databases | Key Permissions |
+| :--- | :--- | :--- | :--- |
+| **Admin account** (e.g. `rtr-admin`) | Liquibase migrations | `NBS_ODSE`, `NBS_SRTE`, `RDB / RDB_MODERN`  | All NBS DBs: `db_owner` |
+| **Service account** (e.g. `rtr-service-user`) | Application services reading source data and writing to the reporting database | `NBS_ODSE`, `NBS_SRTE`, `RDB / RDB_MODERN` | ODSE/SRTE: `db_datareader`<br>RDB/RDB_MODERN: `db_owner` |
 
-1. **Create Kubernetes secrets for each service user.** Include the admin user from step 1. Each secret should include the database username and password. Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]. For steps to create secrets, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
+Two accounts cover everything: `rtr-admin` handles migrations, `rtr-service-user` runs the application. A single account with both sets of permissions also works if your environment doesn't require separation.
 
-1. **Create required database objects.** Run the scripts for your chosen path:
-
-   The database scripts referenced throughout this guide are maintained in the [NEDSS-DataReporting][nedss-datareporting-liquibase-service] repository. You can create the required database objects through Liquibase, which will automatically implement database schema changes, or you can use the provided scripts to install database schema changes. Both options are referenced in the relevant sections.
-   {: .important }
-
-   - **Liquibase:** See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) to create all necessary objects, then return here to continue. Liquibase also handles future database upgrades automatically, so no manual intervention is needed when you update NBS 7.
-
-   - **Upgrade scripts:** See the script execution sequence and `db_upgrade` script in [NEDSS-DataReporting/db-upgrade][nedss-datareporting-manual-deployment]. Clone or download the repository, then run:
-
-      ```bash
-      upgrade_db.bat <server_name> <database> <username> <password>
-      ```
-
-      When you update NBS 7 to a new release version, you will need to run the upgrade scripts again. See [After onboarding: database upgrades](#after-onboarding-database-upgrades).
+1. **Create Kubernetes secrets for each sql user.** Each secret should include the database username and password. Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]. For steps to create secrets, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
 
 ## Enable Change Data Capture
 
-Change Data Capture (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Complete the following steps to load the initial data, enable Change Data Capture, and verify the configuration before deploying RTR services.
+Change Data Capture (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Enabling CDC on these databases does require `sysadmin` level permissions, because of this, we have not automated its installation and have instead provided two scripts to manually apply.  For more information on SQL Server Change Data Capture, please review [Microsoft's official documentation](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/enable-and-disable-change-data-capture-sql-server?view=sql-server-ver17).
 
-1. **Load data and enable Change Data Capture.** This one-time step is required after all database objects are created.
+1. Apply bootstrap script [101 to enable CDC on NBS_ODSE](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/bootstrap/101-enable_cdc_on_odse_database-001.sql).
 
-   - **Liquibase:** The `--load-data` flag is not required when using Liquibase. Proceed to step 2.
-
-   - **Upgrade scripts:** Navigate to [02_onboarding_script_data_load][nedss-datareporting-onboarding-data-load] and clone or download the repository, then run:
-
-      ```bash
-      upgrade_db.bat --load-data <server_name> master <username> <password>  
-      ```
-
-1. **Verify Change Data Capture.** `is_cdc_enabled=1` indicates successful configuration.
-
-   > In the following statements, `cdc` appears as part of SQL Server column and parameter names and refers to **Change Data Capture**, not the Centers for Disease Control and Prevention.
-   {: .note }
-
-   ```sql
-   SELECT name, is_cdc_enabled
-   FROM sys.databases;
-
-   -- View ODSE tables with Change Data Capture enabled
-   USE NBS_ODSE;
-   SELECT
-     name,
-     CASE WHEN is_tracked_by_cdc = 1 THEN 'YES' ELSE 'NO' END AS is_tracked_by_cdc
-   FROM sys.tables
-   WHERE is_tracked_by_cdc = 1;
-
-   -- View SRTE tables with Change Data Capture enabled
-   USE NBS_SRTE;
-   SELECT
-     name,
-     CASE WHEN is_tracked_by_cdc = 1 THEN 'YES' ELSE 'NO' END AS is_tracked_by_cdc
-   FROM sys.tables
-   WHERE is_tracked_by_cdc = 1;
-   ```
-
-   The following images show expected query results for a successful Change Data Capture configuration.
-
-   <div style="display: flex; gap: 2rem;">
-     <figure>
-       <figcaption><strong>Change Data Capture tables (NBS_ODSE)</strong></figcaption>
-       <img src="images/cdc_enabled_odse_tables.png" alt="Query results showing 19 Change Data Capture enabled tables in NBS_ODSE, all with is_tracked_by_cdc set to YES">
-     </figure>
-     <figure>
-       <figcaption><strong>Change Data Capture tables (NBS_SRTE)</strong></figcaption>
-       <img src="images/cdc_enabled_srte_tables.png" alt="Query results showing 44 Change Data Capture enabled tables in NBS_SRTE, all with is_tracked_by_cdc set to YES">
-     </figure>
-   </div>
-
-1. **Back up all databases.** Before going live, take backups of `NBS_ODSE`, `NBS_SRTE`, `RDB`, and `rdb_modern` (if applicable).
+1. Apply bootstrap script [102 to enable CDC on NBS_SRTE](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/bootstrap/102-enable_cdc_on_srte_database-001.sql).
 
 ## Deploy RTR services
 
-Now that you have completed database setup and onboarding, deploy the RTR services in the following order. Each service depends on the previous one completing successfully before deployment begins.
+Now that you have completed database setup and onboarding, deploy the RTR services in the following order. Some services depend on the previous ones completing successfully before deployment begins.
 
-> Confirm that Kubernetes secrets exist for each RTR service user and the admin user before deploying. If you have not yet created them, see [Create service users and database objects](#create-service-users-and-database-objects).
+> Confirm that Kubernetes secrets exist for each RTR service user and the admin user before deploying.
 {: .important }
 
-1. [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html): Skip this step if you used the upgrade script path in [Create required database objects](#create-service-users-and-database-objects).
 1. [Debezium](../../deploy-nbs7/real-time-reporting/debezium.html)
 1. [Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html)
-1. [Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
+1. [Java service](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
 
-[nedss-datareporting-liquibase-service]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service>
-[nedss-datareporting-onboarding-user-scripts]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation>
 [nedss-helm-k8-secrets-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/nbs-secrets.yaml>
-[nedss-datareporting-manual-deployment]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/stlt/manual_deployment>
-[nedss-datareporting-onboarding-data-load]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/02_onboarding_script_data_load>
 
 ---
-
-## After onboarding: database upgrades
-
-Database upgrades apply schema changes required by each NBS 7 release. Run database upgrades when you update NBS 7 to a new release version.
-
-- If you chose the **Liquibase** path during onboarding, no action is needed. The Liquibase container applies schema changes automatically with each release.
-- If you chose the **upgrade scripts** path, navigate to [02_onboarding_script_data_load][nedss-datareporting-onboarding-data-load] and run all of the scripts in the order listed in the repository. Onboarding scripts are excluded from upgrade runs.

@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy the Modernization API for NBS 7
 
-This page walks through deploying the Modernization API using the `modernization-api` Helm chart.
+This page walks through deploying the Modernization API using the `modernization-api` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. Complete [Elasticsearch](./elasticsearch.html) before starting this page. After you finish, proceed to [NiFi](./nifi.html) deployment.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,17 +22,19 @@ This page walks through deploying the Modernization API using the `modernization
 
 ## Deploy Modernization API using Helm
 
-1. Locate the Modernization API Helm chart in the [NEDSS-Helm repository][nedss-helm-modernization-api-chart].
-1. In `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6. See the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records) for reference.
+Use the [modernization-api Helm chart][nedss-helm-modernization-api-chart] to deploy the Modernization API into your Kubernetes cluster. Before you begin, have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
+
+1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/modernization-api/` from that repository.
+1. In `values.yaml`, replace `app.EXAMPLE_DOMAIN` with the URL of your NBS 7 application and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 application. Use the values from the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records).
 1. Set the image repository and tag:
 
    ```yaml
    image:
      repository: "quay.io/us-cdcgov/cdc-nbs-modernization/modernization-api"
-     tag: <release-version-tag> # for example, v1.0.1
+     tag: <release-version-tag> # for example, v1.4.0
    ```
 
-1. Set the JDBC connection string using the same database endpoint and credentials from [Deploy NBS 7 microservices](./deploy-nbs7-microservices.html):
+1. Set the JDBC connection string using the database endpoint and credentials from the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices):
 
    ```yaml
    jdbc:
@@ -41,14 +43,14 @@ This page walks through deploying the Modernization API using the `modernization
      password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    ```
 
-1. Verify that page-builder is disabled:
+1. Verify that Page Builder is disabled:
 
    ```yaml
    pageBuilder:
      enabled: "false"
    ```
 
-1. Set the token secret and parameter secret to encrypt JWT tokens. Use the token secret generated for `pagebuilder-api`, and generate the parameter secret with `openssl rand -base64 32 | cut -c1-32`:
+1. Set the token secret and parameter secret. For values and instructions, see the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices):
 
    ```yaml
    security:
@@ -56,23 +58,20 @@ This page walks through deploying the Modernization API using the `modernization
      parameterSecret: "EXAMPLE_PARAMETER_SECRET"
    ```
 
-1. Verify that OIDC is enabled for Keycloak login authentication:
+1. Enable OIDC and set the client secret for Keycloak login authentication. See [Retrieve the nbs-modernization client secret](../keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) for instructions on retrieving the client secret.
 
-   ```yaml
-   Oidc:
+```yaml
+   oidc:
      enabled: "true"
-   ```
+     client:
+       id: "nbs-modernization"
+       secret: "EXAMPLE_OIDC_SECRET"
+```
 
 1. Install the Modernization API:
 
    ```bash
-   helm install modernization-api -f ./modernization-api/values.yaml modernization-api
-   ```
-
-1. Check the ingress for RTR services:
-
-   ```bash
-   kubectl describe ingress main-ingress-resource
+   helm install "modernization-api" ./modernization-api -f ./modernization-api/values.yaml
    ```
 
 1. Confirm the pod is running before proceeding to the next deployment:
@@ -81,6 +80,7 @@ This page walks through deploying the Modernization API using the `modernization
    kubectl get pods
    ```
 
-   If the pod is still creating or in any other state, wait and troubleshoot before continuing.
+If the pod is not in a running state, wait and troubleshoot before continuing to deploy the [NiFi](./nifi.html) microservice.
 
+[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-modernization-api-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/modernization-api>

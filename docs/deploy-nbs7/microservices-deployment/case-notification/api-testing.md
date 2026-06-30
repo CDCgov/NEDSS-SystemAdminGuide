@@ -2,7 +2,7 @@
 title: API testing
 layout: page
 parent: Case notifications
-nav_order: 6
+nav_order: 3
 redirect_from:
   - /docs/6_microservices_deployment/9f_testing.html
   - /docs/6_microservices_deployment/9f_testing/
@@ -10,7 +10,7 @@ redirect_from:
 
 # Test and integrate case notification APIs
 
-Use this page to validate ingress, PHIMNS property configuration, and supporting dependencies for case notification services.
+Use this page to validate PHIMNS property configuration and supporting dependencies for case notification services. Complete [Notification service](./case-notification-service.html) before starting this page.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -18,97 +18,59 @@ Use this page to validate ingress, PHIMNS property configuration, and supporting
 1. TOC
 {:toc}
 
-## Ingress setup
+## Configure PHIMNS properties
 
-- Each notification service uses the same Data Ingestion ingress. Reuse the existing setup as needed.
-  - **Data Extraction**: [NEDSS-Helm/charts/dataingestion-service/templates/ingress.yaml at 10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml)
+The case notification service requires PHINMS (Public Health Information Network Messaging System) properties to route case notifications correctly. Complete the following steps to configure them.
 
-  - **Case Notification**: [NEDSS-Helm/charts/dataingestion-service/templates/ingress.yaml at 10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml)
+1. Retrieve the following values from your integration engine configuration:
+   - **Required** property:
+      - `nbs_certificate_url`
+   - **Optional** properties:
+      - `phin_encryption`
+      - `phin_route`
+      - `phin_signature`
+      - `phin_public_key_address`
+      - `phin_public_key_base_dn`
+      - `phin_public_key_dn`
+      - `phin_recipient`
+      - `phin_priority`
 
-  - **HL7 Parser**: [NEDSS-Helm/charts/dataingestion-service/templates/ingress.yaml at 10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f · CDCgov/NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm/blob/10623c0d9788a6513bd51f4b6ed4eb0f79b30a2f/charts/dataingestion-service/templates/ingress.yaml)
+1. Share the values with your CDC partners. CDC will update the `NBS_Case_Notification_Config` table in `NBS_MSGOUTE` using the following script:
 
-## PHIMNS properties
+   ```sql
+   USE NBS_MSGOUTE;
+ 
+   UPDATE NBS_Case_Notification_Config
+   SET
+     nbs_certificate_url     = '<value>',
+     phin_encryption         = '<value>',
+     phin_route              = '<value>',
+     phin_signature          = '<value>',
+     phin_public_key_address = '<value>',
+     phin_public_key_base_dn = '<value>',
+     phin_public_key_dn      = '<value>',
+     phin_recipient          = '<value>',
+     phin_priority           = '<value>'
+   WHERE config_name = 'NON_STD_CASE_NOTIFICATION'
+   ```
 
-- For services to be fully functional, STLT partners must provide CDC their PHIMS properties. This ensures data in the `TransportQ_Out` table is updated correctly when processed by CDC Case Notification. These values can be pulled from the existing NND Rhapsody route Variable Manager at the STLT level.
+> If you host NBS on-premises without CDC support, you have full database access and can run this script yourself.
+{: .note }
 
-  - **Required**
-    - `nbs_certificate_url`: STLTs commonly keep this value hardcoded in the Rhapsody Variable Manager.
+## Verify Kafka configuration
 
-  - **Optional**: Some STLTs may have or need these:
-    - `phin_encryption`
-    - `phin_route`
-    - `phin_signature`
-    - `phin_public_key_address`
-    - `phin_public_key_base_dn`
-    - `phin_public_key_dn`
-    - `phin_recipient`
-    - `phin_priority`
+The case notification service uses Kafka to receive events from the Debezium source connector. Correct Kafka configuration ensures that new records inserted into `NBS_ODSE.CN_transportq_out` are detected and routed through the pipeline.
 
-- Once STLT values are provided, CDC should update the existing configuration in the case notification config table:
+- **Configure Kafka broker:** Use one of the available Kafka broker endpoints (`Private endpoints - Plaintext`) in the values file located in the [NEDSS-Helm/charts/debezium-case-notifications][nedss-helm-debezium-case-notifications] directory. The number of brokers varies by environment.
+- **Confirm Debezium connector:** Confirm that the Debezium source connector deployed in [Deploy the Debezium Kafka source connector](./debezium.html) is running on the `NBS_ODSE.CN_transportq_out` table before proceeding.
 
-  - **Table Name:** `NBS_Case_Notification_Config`
-  - **Update record where config name is:** `NON_STD_CASE_NOTIFICATION`
-  - **Update value:** Match STLT-provided values to the corresponding columns in the config table.
+## Verify deployment and database changes
 
-  - **Update Script - DB:** `NBS_MSGOUTE`
+The case notification service includes a built-in Liquibase integration that automatically applies database changes during deployment. Use the following checks to confirm the service deployed successfully and data is routing correctly.
 
-    ```sql
-    UPDATE NBS_Case_Notification_Config
-    SET
-      nbs_certificate_url    = 'REPLACE WITH VALUE, REMOVE IF NON IS PROVIDED',
-      phin_encryption        = 'REPLACE WITH VALUE, REMOVE IF NON IS PROVIDED',
-      phin_route             = 'REPLACE WITH VALUE, REMOVE IF NON IS PROVIDED',
-      phin_signature         = 'REPLACE WITH VALUE, REMOVE IF NON IS PROVIDED',
-      phin_public_key_address= 'REPLACE WITH VALUE, REMOVE IF NON IS PROVIDED',
-      phin_public_key_base_dn= 'REPLACE WITH VALUE, REMOVE IF NON IS PROVIDED',
-      phin_public_key_dn     = 'REPLACE WITH VALUE, REMOVE IF NON IS PROVIDED',
-      phin_recipient         = 'REPLACE WITH VALUE, REMOVE IF NON IS PROVIDED',
-      phin_priority          = 'REPLACE WITH VALUE, REMOVE IF NON IS PROVIDED'
-    WHERE config_name = 'NON_STD_CASE_NOTIFICATION'
-    ```
+- **Confirm pod status:** Confirm that the `case-notification-service` pod is stable and running. The pod will not start if Liquibase fails.
+- **If Liquibase fails:** Check the pod logs for errors. Database change details can be reviewed in the [NEDSS-NNDSS-Case-Notifications repository][nndss-case-notifications-db].
+- **If notifications do not appear:** Check the dead letter table (DLT). Faulty events that cannot be processed are routed to `MSGOUTE.case_notification_dlt`. Check this table if case notifications are not appearing in the expected output tables (`MSGOUTE.transportq_out` or `MSGOUTE.netsstransportq_out`).
 
-## Additional notes and troubleshooting
-
-### Case notification environment variables
-
-- **Case-Notification-Service**
-  - [NEDSS-NNDSS-Case-Notifications/README.md at {{ site.version_latest_tag }} · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
-  - [NEDSS-Helm/charts/case-notification-service/templates/deployment.yaml at {{ site.version_latest_tag }} · CDCgov/NEDSS-Helm][nedss-helm-case-notification-deployment]
-
-- **Data-Extraction-Service**
-  - [NEDSS-NNDSS-Case-Notifications/README.md at {{ site.version_latest_tag }} · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
-  - [NEDSS-Helm/charts/data-extraction-service/templates/deployment.yaml at {{ site.version_latest_tag }} · CDCgov/NEDSS-Helm][nedss-helm-data-extraction-deployment]
-
-- **Xml-Hl7-Parser-Service**
-  - [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
-  - [NEDSS-Helm/charts/xml-hl7-parser-service/templates/deployment.yaml at main · CDCgov/NEDSS-Helm][nedss-helm-data-extraction-deployment]
-
-### Case notification Liquibase
-
-- Case Notification includes a built-in Liquibase integration that automatically applies database changes during deployment.
-- DB changes detail can be reviewed here:
-  - [NEDSS-NNDSS-Case-Notifications/case-notification-service/src/main/resources/db at {{ site.version_latest_tag }} · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-db]
-  - See Deploy Data Ingestion using Helm for Data Ingestion deployment guidance.
-
-### Liquibase DB change verification
-
-- To verify database changes were applied, first ensure the case notification container is stable and running. Because the container manages Liquibase, it will not start if Liquibase fails.
-- If Liquibase fails, the DI pod will be unstable, and specific errors can be found in container logs.
-
-### Kafka
-
-1. Use either one of the two Kafka broker endpoints (`Private endpoints - Plaintext`) in the Helm values file.
-
-1. Deploy the required Debezium Source Connector on `NBS_ODSE..CN_TranportQ_Out` before deploying the services.
-
-  Details: [NEDSS-Helm/charts/debezium/values.yaml at {{ site.version_latest_tag }} · CDCgov/NEDSS-Helm][nedss-helm-debezium-values]
-
-### Additional case notification technical documentation
-
-[Technical Document](../images/Technical%20Document.pdf)
-
-[nndss-case-notifications-readme]: <https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/{{ site.version_latest_tag }}/README.md>
-[nedss-helm-case-notification-deployment]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/case-notification-service/templates/deployment.yaml>
-[nedss-helm-data-extraction-deployment]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/data-extraction-service/templates/deployment.yaml>
 [nndss-case-notifications-db]: <https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/tree/{{ site.version_latest_tag }}/case-notification-service/src/main/resources/db>
-[nedss-helm-debezium-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/debezium/values.yaml>
+[nedss-helm-debezium-case-notifications]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium-case-notifications>

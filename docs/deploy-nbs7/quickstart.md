@@ -227,9 +227,9 @@ http://127.0.0.1:8080/auth
 
 Deploy the Helm charts in the following order.
 
-1. `elasticsearch-efs`
+1. `elasticsearch`
 2. `modernization-api`
-3. `nifi-efs`
+3. `nifi`
 4. `nbs-gateway`
 5. `dataingestion-service`
 
@@ -238,10 +238,10 @@ Deploy the Helm charts in the following order.
 
 ### Deploy Elasticsearch
 
-Update the required parameters in `values.yaml` by following the [Elasticsearch EFS chart values table][nedss-helm-elasticsearch-efs-readme]
+Update the required parameters in `values.yaml` by following the [Elasticsearch EFS chart values table][nedss-helm-elasticsearch-readme]
 
 ```bash
-helm install elasticsearch -f ./elasticsearch-efs/values.yaml elasticsearch-efs
+helm install elasticsearch -f ./elasticsearch/values.yaml elasticsearch
 ```
 
 ### Deploy Modernization API
@@ -254,10 +254,10 @@ helm install modernization-api -f ./modernization-api/values.yaml modernization-
 
 ### Deploy NiFi
 
-Update the required parameters in `values.yaml` by following the [NiFi EFS chart values table][nedss-helm-nifi-efs-readme]
+Update the required parameters in `values.yaml` by following the [NiFi EFS chart values table][nedss-helm-nifi-readme]
 
 ```bash
-helm install nifi -f ./nifi-efs/values.yaml nifi-efs
+helm install nifi -f ./nifi/values.yaml nifi
 ```
 
 ### Deploy NBS Gateway
@@ -354,8 +354,8 @@ terraform destroy
 - For ongoing updates, check the GitHub repo for new releases.
 
 [nedss-infra-aws-samples-readme]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/samples/README.md>
-[nedss-helm-elasticsearch-efs-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/elasticsearch-efs/README.md>
+[nedss-helm-elasticsearch-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/elasticsearch/README.md>
 [nedss-helm-modernization-api-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/modernization-api/README.md>
-[nedss-helm-nifi-efs-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/nifi-efs/README.md>
+[nedss-helm-nifi-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/nifi/README.md>
 [nedss-helm-nbs-gateway-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/nbs-gateway/README.md>
 [nedss-helm-dataingestion-service-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/dataingestion-service/README.md>

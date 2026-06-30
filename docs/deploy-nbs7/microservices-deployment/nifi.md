@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy NiFi for NBS 7
 
-This page walks through deploying NiFi using the `nifi-efs` Helm chart.
+This page walks through deploying NiFi using the `nifi` Helm chart from the [NEDSS-Helm][nedss-helm-nifi-chart] repository for NBS version {{ site.version_latest }}. Complete [Modernization API](./modernization-api.html) before starting this page. After you finish, proceed to [Validate ES, MAPI, and NiFi](./validate-es-mapi-nifi.html).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,40 +22,52 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
 
 ## Deploy NiFi using Helm
 
-> The NiFi ingress is disabled by default. To access the NiFi admin UI, set `ingress.enabled: true` in `values.yaml` before running the install command. Use a private domain name rather than a public one — NiFi has known security vulnerabilities.
+Use the [nifi Helm chart][nedss-helm-nifi-chart] to deploy NiFi into your Kubernetes cluster. Before you begin, have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
+
+> `nifi.EXAMPLE_DOMAIN` only needs to be set if you enable the NiFi ingress. The NiFi ingress is disabled by default due to known security vulnerabilities. If you need access to the NiFi admin UI, use a private domain name.
 {: .important }
 
-1. Locate the NiFi Helm chart in the [NEDSS-Helm repository][nedss-helm-nifi-efs-chart].
-1. In `values.yaml`, replace all occurrences of `nifi.EXAMPLE_DOMAIN` with your domain name. See the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) for reference.
+1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm-nifi-chart]. The following steps use the files in `charts/nifi/` from that repository.
+1. Set `efsFileSystemId` to your file system ID. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for instructions.
+1. Set the JDBC connection string using the database endpoint and credentials from the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices):
+
+```yaml
+   jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
+```
+
+1. Set `nifiSensitivePropsKey` to a strong, randomly generated string of at least 12 characters:
+
+```yaml
+   nifiSensitivePropsKey: "EXAMPLE_NIFI_SENSITIVE_PROPS"
+```
+
 1. Set the image repository and tag:
 
-   ```yaml
+```yaml
    image:
      repository: quay.io/us-cdcgov/cdc-nbs-modernization/nifi
      tag: <release-version-tag> # for example, v1.0.1
-   ```
+```
 
-1. Set `efsFileSystemId` to your [EFS file system ID](https://us-east-1.console.aws.amazon.com/efs/home?region=us-east-1#/file-systems).
-1. Set the JDBC connection string using the same database endpoint and credentials from [Deploy NBS 7 microservices](./deploy-nbs7-microservices.html):
+1. If you are enabling the NiFi ingress, replace `nifi.EXAMPLE_DOMAIN` in `values.yaml` with your domain name. Use the value from the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records):
 
-   ```yaml
-   jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
-   ```
+```yaml
+   ingress:
+     enabled: true
+```
 
-1. Set `singleUserCredentialsUsername` to replace the default `admin` username.
-1. Set `singleUserCredentialsPassword` to your chosen password for the NiFi admin UI.
 1. Install NiFi:
 
-   ```bash
-   helm install nifi -f ./nifi-efs/values.yaml nifi-efs
-   ```
+```bash
+   helm install "nifi" ./nifi -f ./nifi/values.yaml
+```
 
 1. Confirm the pod is running before proceeding to the next deployment:
 
-   ```bash
+```bash
    kubectl get pods
-   ```
+```
 
-   If the pod is still creating or in any other state, wait and troubleshoot before continuing.
+If the pod is not in a running state, wait and troubleshoot before continuing to [validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
 
-[nedss-helm-nifi-efs-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nifi-efs>
+[nedss-helm-nifi-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nifi>

@@ -13,46 +13,23 @@ redirect_from:
 
 # Web UI smoke test for NBS interface and search
 
+The `nbs-test-webui.sh` script tests end-to-end functionality through the NBS web interface by logging in, navigating to **Advanced Search**, and searching for patient records. Use this test to confirm that the NBS UI, search, and authentication are working correctly after deployment.
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
-The `nbs-test-webui.sh` script is in the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-webui].
+## Prerequisites
 
-This script will:
+- Authenticated access to your NBS environment
+- A database user with access to patient records
+- Bash (the script can run in AWS CloudShell or on any system with Bash installed)
+- `curl`
 
-- Log in
-- Save required tokens
-- Navigate to Advanced Search
-- Search for all female patients and check the count
-- Report an error if the count is 0
+## Run the smoke test
 
-This Bash script can run using CloudShell if NBS is hosted in AWS, or on any system with Bash installed. `curl` is the only other dependency.
-
-## Usage
-
-```bash
-nbs-test-webui.sh [-h] [-?] [-d] [-D] [-P] [-H BASE_HOST] [-U USER] [-c count]
-```
-
-For example:
-
-```bash
-./nbs-test-webui.sh -d -H http://app.<your-site>.<your-domain>.com -U exampleuser
-```
-
-| **Flag** | **Description** |
-|----------|------------------|
-| `-h`     | will echo usage |
-| `-?`     | will echo usage |
-| `-d`     | will turn on debugging |
-| `-D`     | will turn on debugging |
-| `-P`     | will prompt at each step |
-| `-H`     | base host for hitting webui |
-| `-B`     | baseurl url for hitting API |
-| `-U`     | user in the database with access to create and delete patients |
-| `-c`     | count number of iterations, default is 1 |
+Run the `nbs-test-webui.sh` script from the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-webui]. See the README in that folder for usage instructions and current script status.
 
 [nedss-infra-nbs-test-webui]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-webui>

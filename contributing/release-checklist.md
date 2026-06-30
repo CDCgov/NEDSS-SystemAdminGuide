@@ -107,6 +107,7 @@ The following pages require manual content review beyond link verification:
 | `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-data-sync.md` | Confirm the NEDSS-NNDSS release at the new tag includes a `vX.Y.Z.NEDSS.NBS.Modernized.Documentation.zip` asset. If missing, coordinate with the dev team before publishing. |
 | `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-nnd-sync.md` | Same documentation zip caveat as `on-prem-data-sync.md`. |
 | `docs/maintain-nbs7/eks-upgrade.md` | Update the Kubernetes versions table. Confirm the conditional add-ons step still reflects correct module version behavior. *(Page not yet created as of 7.12.)* |
+| `docs/deploy-nbs7/microservices-deployment/modernization-api.md` | Confirm the example release-version-tag on line 35 |
 
 > Add rows to this table as pages requiring manual review are identified.
 

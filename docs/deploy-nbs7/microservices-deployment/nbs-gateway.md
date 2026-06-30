@@ -22,7 +22,7 @@ This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm c
 
 ## Deploy NBS Gateway using Helm
 
-Use the [nbs-gateway Helm chart][nedss-helm-nbs-gateway-chart] to deploy NBS Gateway into your Kubernetes cluster. NBS Gateway routes requests between NBS 7 microservices and the legacy NBS 6 application. Before you begin, have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices) if you need help determining any values.
+Use the [nbs-gateway Helm chart][nedss-helm-nbs-gateway-chart] to deploy NBS Gateway into your Kubernetes cluster. NBS Gateway routes requests between NBS 7 microservices and the legacy NBS 6 application. Before you begin, have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
 
 1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/nbs-gateway/` from that repository.
 1. In `values.yaml`, replace `app.EXAMPLE_DOMAIN` with the URL of your NBS 7 application and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 application. Use the values from the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records).
@@ -41,7 +41,7 @@ Use the [nbs-gateway Helm chart][nedss-helm-nbs-gateway-chart] to deploy NBS Gat
      enabled: "false"
    ```
 
-1. Enable OIDC and set the client secret for Keycloak login authentication. See [Configure the NBS gateway](../../deploy-nbs7/keycloak/enable-keycloak-auth.html#configure-the-nbs-gateway) for instructions on retrieving the client secret:
+1. Enable OIDC and set the client secret for Keycloak login authentication. See [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) for instructions on retrieving the client secret.
 
    ```yaml
    oidc:

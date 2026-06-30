@@ -41,7 +41,7 @@ Set the required values in `values.yaml` before installing the chart.
      tag: <release-version-tag> # for example, v1.0.1
    ```
 
-1. Set the JDBC connection values. The `dbserver` value is the database server endpoint only. Do not include the port number. For help determining these values, see the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices).
+1. Set the JDBC connection values. The `dbserver` value is the database server endpoint only. Do not include the port number. For help determining these values, see the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices).
 
    The following screenshot shows the database endpoint in the Amazon RDS console:
 

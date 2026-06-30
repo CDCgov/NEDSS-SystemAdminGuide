@@ -68,7 +68,7 @@ Use the [debezium-case-notifications Helm chart][nedss-helm-debezium-case-notifi
      tag: <release-version-tag> # for example, v1.0.1
    ```
 
-1. Update `values.yaml` with `NBS_ODSE` hostname, username, password, and Kafka bootstrap server values. For help determining these values, see the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices).
+1. Update `values.yaml` with `NBS_ODSE` hostname, username, password, and Kafka bootstrap server values. For help determining these values, see the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices).
 
    ```yaml
    properties:

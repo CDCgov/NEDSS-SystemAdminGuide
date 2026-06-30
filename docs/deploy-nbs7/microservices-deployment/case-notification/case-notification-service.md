@@ -44,7 +44,7 @@ The notification service requires Keycloak. Complete this configuration before d
      tag: <release-version-tag> # for example, v1.0.1
    ```
 
-1. Set the JDBC connection, Keycloak auth URI, and Kafka values. The `dbserver` value is the database server endpoint only. Do not include the port number. For help determining these values, see the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices). For a full list of environment variables, see the [NEDSS-NNDSS-Case-Notifications README][nndss-case-notifications-readme] and the [case-notification-service deployment template][nedss-helm-case-notification-deployment].
+1. Set the JDBC connection, Keycloak auth URI, and Kafka values. The `dbserver` value is the database server endpoint only. Do not include the port number. For help determining these values, see the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices). For a full list of environment variables, see the [NEDSS-NNDSS-Case-Notifications README][nndss-case-notifications-readme] and the [case-notification-service deployment template][nedss-helm-case-notification-deployment].
 
    ```yaml
    ingressHost: "data.EXAMPLE_DOMAIN"

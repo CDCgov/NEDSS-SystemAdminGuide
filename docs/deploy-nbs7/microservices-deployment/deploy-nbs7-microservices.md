@@ -24,18 +24,9 @@ After completing this phase, proceed to [Validate the deployment](../validate-th
 
 ## Overview
 
-Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Deploy the Helm charts in the following order. Verify that each microservice starts successfully before moving to the next service.
+Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Deploy the Helm charts in order. Verify that each microservice starts successfully before moving to the next service.
 
-- `elasticsearch`
-- `modernization-api`
-- `nifi`
-- `nbs-gateway`
-- `dataingestion-service`
-- `data-processing`
-- `nnd-service`
-- `case-notification`
-
-## Helm values for NBS 7 microservices
+## Helm values reference for NBS 7 microservices
 
 The following table lists common Helm values used across NBS 7 microservices. Have these values available before you begin deployment.
 
@@ -54,8 +45,8 @@ The following table lists common Helm values used across NBS 7 microservices. Ha
 | `singleUserCredentialsUsername` | `EXAMPLE_NIFI_ADMIN_USER` | A username for the NiFi admin UI. Choose any username except `admin`. |
 | `singleUserCredentialsPassword` | `EXAMPLE_NIFI_ADMIN_USER_PASSWORD` | A password for the NiFi admin UI account. |
 | `nifiSensitivePropsKey` | `EXAMPLE_NIFI_SENSITIVE_PROPS` | A randomly generated string of at least 12 characters. NiFi uses this key to encrypt sensitive values it stores internally. |
-| `oidc.client.secret` | `EXAMPLE_OIDC_SECRET` | The client secret for Keycloak login authentication. Retrieve this from the Keycloak admin UI: select the **NBS** realm, go to **Clients**, select the relevant client, and copy the value from the **Credentials** tab. See [Enable Keycloak authentication](../keycloak/enable-keycloak-auth.html). `[SME REVIEW: confirm which Keycloak client]` |
-| Example value: `kafka.cluster` | `EXAMPLE_KAFKA_ENDPOINT(S)` / `EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS` | A comma-delimited list of the private plaintext endpoints for your Kafka brokers. In AWS deployments, find these in the Amazon MSK console under your cluster > **View client information** > **Bootstrap servers (plaintext)**. `[Azure path TBD]` |
+| `oidc.client.secret` | `EXAMPLE_OIDC_SECRET` | The client secret for Keycloak login authentication. Retrieve this from the Keycloak admin UI: select the **NBS** realm, go to **Clients**, select the relevant client, and copy the value from the **Credentials** tab. See [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret). |
+| Example value: `kafka.cluster` | `EXAMPLE_KAFKA_ENDPOINT(S)` / `EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS` | A comma-delimited list of the private plaintext endpoints for your Kafka brokers. In AWS deployments, find these in the Amazon MSK console under your cluster > **View client information** > **Bootstrap servers (plaintext)**. `[SME REVIEW: Azure path TBD]` |
 | `sftp.*` | `EXAMPLE_SFTP_HOST` `EXAMPLE_SFTP_USER` `EXAMPLE_SFTP_PASS` `EXAMPLE_SFTP_FILE_EXTNS` `EXAMPLE_SFTP_FILE_PATHS` | Connection details for the SFTP server used by the data ingestion service, including host, username, password, file extensions, and file paths. `[SME REVIEW: confirm whether these are STLT-managed or provisioned as part of NBS infrastructure]` |
 | `nbs.authuser` | `EXAMPLE_NBS_AUTHUSER` | `[SME REVIEW: Is this a Keycloak user, a database user, or something else?]` |
 | `keycloak.srte.clientId` | `EXAMPLE_SRTE_CLIENT_ID` | The Keycloak client ID for SRTE data access. The default is `srte-data-keycloak-client`. Confirm in the Keycloak admin UI under the **NBS** realm > **Clients**. |

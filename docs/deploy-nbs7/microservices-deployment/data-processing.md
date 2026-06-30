@@ -27,7 +27,7 @@ RTI is a microservice that picks up ELR data after it has been ingested and queu
 
 ## Deploy RTI using Helm
 
-Use the [data-processing-service Helm chart][nedss-helm-data-processing-service-chart] to deploy the RTI service into your Kubernetes cluster. Before you begin, have your database credentials, Kafka endpoints, and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices) if you need help determining any values.
+Use the [data-processing-service Helm chart][nedss-helm-data-processing-service-chart] to deploy the RTI service into your Kubernetes cluster. Before you begin, have your database credentials, Kafka endpoints, and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
 ### RTI microservice
 
@@ -55,7 +55,7 @@ To find valid auth users, query the ODSE database. Replace `NBS_ODSE` if your da
    SELECT * FROM NBS_ODSE.dbo.Auth_user;
    ```
 
-1. Set the JDBC connection values. The `dbserver` value is the database server endpoint only. Do not include the port number. For help determining these values, see the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices).
+1. Set the JDBC connection values. The `dbserver` value is the database server endpoint only. Do not include the port number. For help determining these values, see the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices).
 
    ![Screenshot showing the dbserver field in the data processing service values.yaml file](images/data-processing-dbendpoint.png)
 

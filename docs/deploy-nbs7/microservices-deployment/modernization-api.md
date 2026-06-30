@@ -22,7 +22,7 @@ This page walks through deploying the Modernization API using the `modernization
 
 ## Deploy Modernization API using Helm
 
-Use the [modernization-api Helm chart][nedss-helm-modernization-api-chart] to deploy the Modernization API into your Kubernetes cluster. Before you begin, have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices) if you need help determining any values.
+Use the [modernization-api Helm chart][nedss-helm-modernization-api-chart] to deploy the Modernization API into your Kubernetes cluster. Before you begin, have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
 1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/modernization-api/` from that repository.
 1. In `values.yaml`, replace `app.EXAMPLE_DOMAIN` with the URL of your NBS 7 application and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 application. Use the values from the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records).
@@ -34,7 +34,7 @@ Use the [modernization-api Helm chart][nedss-helm-modernization-api-chart] to de
      tag: <release-version-tag> # for example, v1.4.0
    ```
 
-1. Set the JDBC connection string using the database endpoint and credentials from the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices):
+1. Set the JDBC connection string using the database endpoint and credentials from the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices):
 
    ```yaml
    jdbc:
@@ -50,7 +50,7 @@ Use the [modernization-api Helm chart][nedss-helm-modernization-api-chart] to de
      enabled: "false"
    ```
 
-1. Set the token secret and parameter secret. For values and instructions, see the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-for-nbs-7-microservices):
+1. Set the token secret and parameter secret. For values and instructions, see the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices):
 
    ```yaml
    security:
@@ -58,12 +58,15 @@ Use the [modernization-api Helm chart][nedss-helm-modernization-api-chart] to de
      parameterSecret: "EXAMPLE_PARAMETER_SECRET"
    ```
 
-1. Verify that OIDC is enabled for Keycloak login authentication. For Keycloak setup, see [Enable Keycloak authentication](../keycloak/enable-keycloak-auth.html):
+1. Enable OIDC and set the client secret for Keycloak login authentication. See [Retrieve the nbs-modernization client secret](../keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) for instructions on retrieving the client secret.
 
-   ```yaml
+```yaml
    oidc:
      enabled: "true"
-   ```
+     client:
+       id: "nbs-modernization"
+       secret: "EXAMPLE_OIDC_SECRET"
+```
 
 1. Install the Modernization API:
 

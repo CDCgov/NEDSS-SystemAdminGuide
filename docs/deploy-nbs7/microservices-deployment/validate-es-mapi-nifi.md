@@ -1,5 +1,5 @@
 ---
-title: Validate ES, MAPI, and NiFi
+title: Validate Elasticsearch, Modernization API, NiFi
 layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 4

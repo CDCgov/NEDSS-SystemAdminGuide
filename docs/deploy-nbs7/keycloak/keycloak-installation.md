@@ -267,9 +267,9 @@ Import the base NBS users and development clients into the nbs-users realm.
    ![Keycloak Partial import confirmation showing one added client named nbs-development](images/nbs-users-development-2.png)
 
 ## Retrieve the nbs-modernization client secret
- 
+
 The `nbs-modernization` client in the **nbs-users** realm is used for OIDC login authentication across NBS 7 microservices, including `modernization-api` and `nbs-gateway`. Retrieve its secret to set the `oidc.client.secret` value when you deploy these microservices.
- 
+
 1. In the **nbs-users** realm, go to **Clients** and select `nbs-modernization`.
 1. Open the **Credentials** tab and copy the **Client Secret**.
    ![Keycloak Credentials tab for the nbs-modernization client showing the masked client secret field with eye and copy icons and a Regenerate button](images/nbs-modernization.png)

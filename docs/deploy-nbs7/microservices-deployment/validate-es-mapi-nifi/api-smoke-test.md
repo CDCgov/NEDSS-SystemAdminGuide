@@ -1,8 +1,7 @@
 ---
 title: API smoke test
 layout: page
-parent: Validate ES, MAPI, and NiFi
-grand_parent: Deploy NBS 7 microservices
+parent: Validate Elasticsearch, Modernization API, NiFi
 nav_order: 2
 redirect_from:
   - /docs/6_microservices_deployment/5b_api_smoke_test.html

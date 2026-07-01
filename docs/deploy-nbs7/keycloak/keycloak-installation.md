@@ -79,6 +79,8 @@ Create the Keycloak database and database user before you deploy the Helm chart.
 
 1. In [values.yml][nedss-helm-keycloak-values], update the following parameters:
 
+   <!-- markdownlint-disable MD055 MD056 -->
+
    | Parameter | Template value | Description |
    |---|---|---|
    | `adminUser` | `admin` | Keycloak admin account for the web UI. Keep the template value or change it to match your organization's naming conventions. |
@@ -87,13 +89,8 @@ Create the Keycloak database and database user before you deploy the Helm chart.
    | `KC_DB_URL` | `jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;` | Replace `EXAMPLE_DB_ENDPOINT` with your database endpoint. |
    | `KC_DB_USERNAME` | `NBS_keycloak` | Keycloak database account. Keep the template value or change it to match your organization's naming conventions. |
    | `KC_DB_PASSWORD` | `EXAMPLE_KCDB_PASS8675309` | Must match the password you set in the previous section. |
-   <!-- markdownlint-disable MD058 -->
-   <div class="three-column-values-table" markdown="1">
-
    | `efsFileSystemId` | `EXAMPLE_EFS_ID` | **In AWS deployments:** The Amazon EFS file system ID from the AWS console or CLI. Provides persistent storage for themes. **In Azure deployments:** Azure Files requires different configuration. See [Deploy on Azure](../deploy-on-azure.html) for Azure file storage configuration. |
-
-   </div>
-   <!-- markdownlint-enable MD058 -->
+   {: .three-column-values-table }
 
 ## Deploy Keycloak
 

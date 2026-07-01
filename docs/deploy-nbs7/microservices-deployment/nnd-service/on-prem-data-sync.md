@@ -12,6 +12,9 @@ redirect_from:
 
 This section provides instructions for on-premises deployment of the **Data Availability service**, which extracts data from the modernized NBS cloud implementation so STLTs can keep copies of selected tables from **RDB, ODSE, and SRTE**.
 
+> This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
+{: .important }
+
 ## On this page
 {: .no_toc .text-delta }
 
@@ -20,12 +23,12 @@ This section provides instructions for on-premises deployment of the **Data Avai
 
 ## Prerequisites
 
-- **Keycloak client ID and client secret** - CDC provides these values
-- **Data service URL** - CDC provides this value
-- **Release materials/package** needed for the Data Sync service - CDC provides this package
-- **MS SQL Server database**
+- **Keycloak client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, go to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
+- **Data service URL** - Retrieve this from your NBS environment.
+- **Release materials/package** - CDC provides this as a .zip file with each release.
+- **Microsoft SQL Server database**
 - **Java 21 or higher**
-- **AWS S3** (Optional)
+- **Amazon S3** (Optional)
 
 ---
 
@@ -47,13 +50,13 @@ The service supports multiple options to download the data:
 
 ## Set up the Data Availability service
 
-Download the above files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page]. Under **Assets**, download the `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
+Download the Data Availability service files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page]. Under **Assets**, download the `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
 Save the files to a secure directory with executable permissions to run the services.
 
 Before you proceed, **choose where to send the data**:
 
 - SQL database
-- AWS S3 bucket
+- Amazon S3 bucket
 - Local directory
 
 The SQL database option uses a different setup (see **Appendix**).

@@ -44,7 +44,7 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 
    properties:
      # Kafka bootstrap server endpoint from AWS MSK
-     bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+     bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT"
 
    # Connector for NBS_ODSE transactional data
    sqlserverconnector_odse:
@@ -56,8 +56,8 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
        database.dbname: "nbs_odse"
        database.names: "nbs_odse"
        database.server.name: "odse"
-       database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+       database.history.kafka.bootstrap.servers: "EXAMPLE_KAFKA_ENDPOINT"
+       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_KAFKA_ENDPOINT"
 
    # Connector for NBS_ODSE metadata
    sqlserverconnector_odse_meta:
@@ -69,8 +69,8 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
        database.dbname: "nbs_odse"
        database.names: "nbs_odse"
        database.server.name: "odse-meta"
-       database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+       database.history.kafka.bootstrap.servers: "EXAMPLE_KAFKA_ENDPOINT"
+       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_KAFKA_ENDPOINT"
 
    # Connector for NBS_SRTE reference and terminology data
    sqlserverconnector_srte:
@@ -82,13 +82,13 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
        database.dbname: "nbs_srte"
        database.names: "nbs_srte"
        database.server.name: "srte"
-       database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+       database.history.kafka.bootstrap.servers: "EXAMPLE_KAFKA_ENDPOINT"
+       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_KAFKA_ENDPOINT"
 
    env:
      # Kafka bootstrap server endpoint from AWS MSK
      - name: BOOTSTRAP_SERVERS
-       value: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+       value: "EXAMPLE_KAFKA_ENDPOINT"
    ```
 
 1. Install the pod:

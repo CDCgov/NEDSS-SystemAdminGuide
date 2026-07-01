@@ -1,8 +1,7 @@
 ---
 title: Manual validation
 layout: page
-parent: Validate ES, MAPI, and NiFi
-grand_parent: Deploy NBS 7 microservices
+parent: Validate Elasticsearch, Modernization API, NiFi
 nav_order: 1
 redirect_from:
   - /docs/6_microservices_deployment/5a_manual_validation_es_mapi_nifi.html
@@ -15,23 +14,15 @@ redirect_from:
 
 Use these steps to validate end-to-end behavior in the NBS UI after deploying Elasticsearch, Modernization API, and NiFi.
 
-## On this page
-{: .no_toc .text-delta }
-
-1. TOC
-{:toc}
-
-## Manual steps
-
-Test end-to-end functionality using the following steps:
-
-1. Log in to the new NBS system using the URL you configured: `https://app.<your-site>.<your-domain>.com/nbs/login` (for example, `https://app.<your-site>.<your-domain>.com/nbs/login`).
+1. Log in to NBS using your configured URL, for example: `https://app.<your-site>.<your-domain>.com/nbs/login`.
 1. Select **Advanced Search**:
 
-   ![advanced-search-manual-validation](../images/manual-validation-1.png)
-1. View patient records. One way to do this is to select "Male" from the "Sex" drop-down and then select **Search**:
+   ![Advanced Search button in the NBS UI](../images/manual-validation-1.png)
+1. Run a search. For example, select **Male** from the **Sex** drop-down and select **Search**:
 
-   ![patient-search-manual-validation](../images/manual-validation-2.png)
-1. Confirm results appear in the pane on the right:
+   ![Patient search form with Sex drop-down set to Male](../images/manual-validation-2.png)
+1. Confirm that results appear in the results pane:
 
-   ![search-results-manual-validation](../images/manual-validation-3.png)
+   ![Search results pane showing patient records](../images/manual-validation-3.png)
+
+Continue to the [API smoke test for Modernization API](./api-smoke-test.html).

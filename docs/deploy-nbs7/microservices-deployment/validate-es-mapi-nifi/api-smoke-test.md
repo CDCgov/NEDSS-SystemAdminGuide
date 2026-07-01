@@ -1,8 +1,7 @@
 ---
 title: API smoke test
 layout: page
-parent: Validate ES, MAPI, and NiFi
-grand_parent: Deploy NBS 7 microservices
+parent: Validate Elasticsearch, Modernization API, NiFi
 nav_order: 2
 redirect_from:
   - /docs/6_microservices_deployment/5b_api_smoke_test.html
@@ -13,36 +12,26 @@ redirect_from:
 
 # API smoke test for Modernization API
 
+The `nbs-test-api.sh` script tests end-to-end API functionality by creating a patient record, searching for it, and marking it inactive. Use this test to confirm the Modernization API is responding correctly after deployment.
+
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
 
-The `nbs-test-api.sh` script is in the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-api].
+## Prerequisites
 
-This script will:
+To run the smoke test, you need:
 
-- Create a patient
-- Search for the patient
-- Delete that patient (the record still exists but is inactive)
+- Authenticated access to your NBS environment
+- A database user that can run API calls
+- A shell environment with `curl` installed (AWS CloudShell works if you use it, or any system with Bash and `curl` available)
 
-This Bash script can run using CloudShell if NBS is hosted in AWS, or on any system with Bash installed. It requires a database user that can run API calls.
+## Run the smoke test
 
-`curl` is the only other dependency.
+Run the `nbs-test-api.sh` script from the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-api]. See the `README` in that folder for usage instructions and current script status.
 
-## Usage
-
-```bash
-nbs-test-api.sh [-h] [-?] [-d] [-D] [-P] [-B BASE_URL] [-U USER] [-c count]
-```
-
-For the initial smoke test run:
-
-```bash
-nbs-test-api.sh -B https://app.<your-site>.<your-domain>.com -U <apiuser> -c 10
-```
-
-This command verifies API functionality and populates the observability dashboards with initial traffic.
+After performing a successful smoke test, continue to the [Web UI smoke test for NBS interface and search](./web-ui-smoke-test.html).
 
 [nedss-infra-nbs-test-api]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-api>

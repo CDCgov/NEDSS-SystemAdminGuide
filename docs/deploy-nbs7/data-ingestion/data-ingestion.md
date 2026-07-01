@@ -26,7 +26,7 @@ This page walks through deploying the DI API, including database setup and Helm 
 
 ## Before you begin
 
-The DI API utilizes three databases: NBS_Msgoute, NBS_ODSE and NBS_DataIngest. NBS_DataIngest is a new database essential for ingesting, validating Electronic Lab Reports (ELR), converting them into XML payloads, and integrating these XMLs into the NBS_MSGOUT database. It must be created before deploying the app on the Amazon EKS cluster.
+The DI API utilizes three databases: `NBS_Msgoute`, `NBS_ODSE` and `NBS_DataIngest`. `NBS_DataIngest` is a new database essential for ingesting, validating Electronic Lab Reports (ELR), converting them into XML payloads, and integrating the XML into the `NBS_MSGOUT` database. It must be created before deploying the app on the Kubernetes cluster.
 
 ### Create the NBS_DataIngest database
 
@@ -110,7 +110,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
 
    ```yaml
    kafka:
-      cluster: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+      cluster: "EXAMPLE_KAFKA_ENDPOINT"
    ```
 
 1. Set `efsFileSystemId` to the EFS file system ID from the AWS console:

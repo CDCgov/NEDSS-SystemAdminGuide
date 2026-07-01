@@ -111,32 +111,32 @@
     }
 }
 
-.main-content .three-column-values-table table {
+.main-content .three-column-values-table {
     table-layout: fixed;
     width: 100%;
 }
 
-.main-content .three-column-values-table table th:nth-child(1),
-.main-content .three-column-values-table table td:nth-child(1) {
+.main-content .three-column-values-table th:nth-child(1),
+.main-content .three-column-values-table td:nth-child(1) {
     width: 20%;
 }
 
-.main-content .three-column-values-table table th:nth-child(2),
-.main-content .three-column-values-table table td:nth-child(2) {
+.main-content .three-column-values-table th:nth-child(2),
+.main-content .three-column-values-table td:nth-child(2) {
     width: 45%;
 }
 
-.main-content .three-column-values-table table th:nth-child(3),
-.main-content .three-column-values-table table td:nth-child(3) {
+.main-content .three-column-values-table th:nth-child(3),
+.main-content .three-column-values-table td:nth-child(3) {
     width: 35%;
 }
 
-.main-content .three-column-values-table table td:nth-child(2),
-.main-content .three-column-values-table table td:nth-child(2) code {
+.main-content .three-column-values-table td:nth-child(2),
+.main-content .three-column-values-table td:nth-child(2) code {
     overflow-wrap: anywhere;
     word-break: break-word;
 }
 
-.main-content .three-column-values-table table td:nth-child(2) code {
+.main-content .three-column-values-table td:nth-child(2) code {
     white-space: normal;
 }

@@ -28,6 +28,8 @@ Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Dep
 
 The following table lists common Helm values used across NBS 7 microservices. Have these values available before you begin deployment.
 
+<!-- markdownlint-disable MD055 MD056 -->
+
 | Name of value | Placeholder in values.yaml | Description |
 |---|---|---|
 | `efsFileSystemId` | `EXAMPLE_EFS_ID` | **In AWS deployments:** The Amazon EFS file system ID for the shared network file system used by Elasticsearch and NiFi for persistent storage. Find this in the AWS EFS console under **File systems**, or in the Terraform outputs from infrastructure provisioning. **In Azure deployments:** Azure Files requires different values.yaml configuration. See [Deploy on Azure](../deploy-on-azure.html) for Azure file storage configuration. |
@@ -47,14 +49,9 @@ The following table lists common Helm values used across NBS 7 microservices. Ha
 | Example value: `kafka.cluster` | `EXAMPLE_KAFKA_ENDPOINT(S)` / `EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS` | A comma-delimited list of the private plaintext endpoints for your Kafka brokers. In AWS deployments, find these in the Amazon MSK console under your cluster > **View client information** > **Bootstrap servers (plaintext)**. `[SME REVIEW: Azure path TBD]` |
 | `sftp.*` | `EXAMPLE_SFTP_HOST` `EXAMPLE_SFTP_USER` `EXAMPLE_SFTP_PASS` `EXAMPLE_SFTP_FILE_EXTNS` `EXAMPLE_SFTP_FILE_PATHS` | Connection details for the SFTP server used by the data ingestion service, including host, username, password, file extensions, and file paths. `[SME REVIEW: confirm whether these are STLT-managed or provisioned as part of NBS infrastructure]` |
 | `nbs.authuser` | `EXAMPLE_NBS_AUTHUSER` | `[SME REVIEW: Is this a Keycloak user, a database user, or something else?]` |
-<!-- markdownlint-disable MD058 -->
-<div class="three-column-values-table" markdown="1">
-
 | `keycloak.srte.clientId` | `EXAMPLE_SRTE_CLIENT_ID` | The Keycloak client ID for SRTE data access. The default is `srte-data-keycloak-client`. Confirm in the Keycloak admin UI under the **NBS** realm > **Clients**. |
 | `keycloak.srte.clientSecret` | `EXAMPLE_SRTE_CLIENT_SECRET` | The client secret for SRTE data access. Retrieve from the Keycloak admin UI: **NBS** realm > **Clients** > `srte-data-keycloak-client` > **Credentials** tab. |
-
-</div>
-<!-- markdownlint-enable MD058 -->
+{: .three-column-values-table }
 
 > Run Helm install commands from the `charts` directory for all microservices. Before you run Helm install commands, verify you are authenticated to AWS by running `aws sts get-caller-identity`.
 {: .note }

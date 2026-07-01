@@ -25,7 +25,7 @@ This page walks through deploying the NBS 7 case notification service for NBS ve
 
 The case notification pipeline begins with a Debezium source connector monitoring the `ODSE.CN_transportq_out` table. When new data is inserted, the connector publishes it to a Kafka topic, which the case notification service consumes. The service processes each event and routes output to either `MSGOUTE.transportq_out` or `MSGOUTE.netsstransportq_out` depending on event type. Faulty events are routed to `MSGOUTE.case_notification_dlt` (Dead Letter Table) for investigation.
 
-> **Case notifications and [real-time reporting (RTR)](../real-time-reporting/real-time-reporting.html) must use the same Kafka cluster.** If you have not yet deployed RTR, note the Kafka cluster that you configure here and use it when you deploy RTR.
+> **Case notifications and [real-time reporting (RTR)](../real-time-reporting/real-time-reporting.html) can use the same Kafka cluster.** To reduce potential cost and installation impact, consider re-using the Kafka cluster that you configure here when you deploy RTR.
 {: .important }
 
 ## Considerations

@@ -20,8 +20,6 @@ This phase deploys the NBS 7 application services into your Kubernetes cluster u
 > The pages in this section apply to NBS {{ site.version_latest }}. Github links for the [NEDSS-Helm](https://github.com/CDCgov/NEDSS-Helm) repo are pinned to `{{ site.version_latest_tag }}`.
 {: .note }
 
-After completing this phase, proceed to [Validate the deployment](../validate-the-deployment.html).
-
 ## Overview
 
 Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Deploy the Helm charts in order. Verify that each microservice starts successfully before moving to the next service.
@@ -49,8 +47,14 @@ The following table lists common Helm values used across NBS 7 microservices. Ha
 | Example value: `kafka.cluster` | `EXAMPLE_KAFKA_ENDPOINT(S)` / `EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS` | A comma-delimited list of the private plaintext endpoints for your Kafka brokers. In AWS deployments, find these in the Amazon MSK console under your cluster > **View client information** > **Bootstrap servers (plaintext)**. `[SME REVIEW: Azure path TBD]` |
 | `sftp.*` | `EXAMPLE_SFTP_HOST` `EXAMPLE_SFTP_USER` `EXAMPLE_SFTP_PASS` `EXAMPLE_SFTP_FILE_EXTNS` `EXAMPLE_SFTP_FILE_PATHS` | Connection details for the SFTP server used by the data ingestion service, including host, username, password, file extensions, and file paths. `[SME REVIEW: confirm whether these are STLT-managed or provisioned as part of NBS infrastructure]` |
 | `nbs.authuser` | `EXAMPLE_NBS_AUTHUSER` | `[SME REVIEW: Is this a Keycloak user, a database user, or something else?]` |
+<!-- markdownlint-disable MD058 -->
+<div class="three-column-values-table" markdown="1">
+
 | `keycloak.srte.clientId` | `EXAMPLE_SRTE_CLIENT_ID` | The Keycloak client ID for SRTE data access. The default is `srte-data-keycloak-client`. Confirm in the Keycloak admin UI under the **NBS** realm > **Clients**. |
 | `keycloak.srte.clientSecret` | `EXAMPLE_SRTE_CLIENT_SECRET` | The client secret for SRTE data access. Retrieve from the Keycloak admin UI: **NBS** realm > **Clients** > `srte-data-keycloak-client` > **Credentials** tab. |
+
+</div>
+<!-- markdownlint-enable MD058 -->
 
 > Run Helm install commands from the `charts` directory for all microservices. Before you run Helm install commands, verify you are authenticated to AWS by running `aws sts get-caller-identity`.
 {: .note }

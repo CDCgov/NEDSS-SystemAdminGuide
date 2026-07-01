@@ -23,6 +23,8 @@ After deploying Elasticsearch, Modernization API, and NiFi, validate all three s
 
 ## In this section
 
-- [Manual validation](validate-es-mapi-nifi/manual-validation.html): Test end-to-end functionality by searching patient records in the NBS UI.
-- [API smoke test](validate-es-mapi-nifi/api-smoke-test.html): Run the `nbs-test-api.sh` smoke test against the Modernization API.
-- [Web UI smoke test](validate-es-mapi-nifi/web-ui-smoke-test.html): Run the `nbs-test-webui.sh` smoke test against the NBS web interface.
+This mid-point validation covers the following:
+
+1. **[Manual validation for Elasticsearch, Modernization API, and NiFi](validate-es-mapi-nifi/manual-validation.html)**: Test end-to-end functionality by searching patient records in the NBS UI.
+1. **[API smoke test for Modernization API](validate-es-mapi-nifi/api-smoke-test.html)**: Run the `nbs-test-api.sh` smoke test against the Modernization API.
+1. **[Web UI smoke test for NBS interface and search](validate-es-mapi-nifi/web-ui-smoke-test.html)**: Run the `nbs-test-webui.sh` smoke test against the NBS web interface.

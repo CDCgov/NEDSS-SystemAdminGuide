@@ -18,21 +18,9 @@ This page walks through deploying the Case Notification service using the [case-
 1. TOC
 {:toc}
 
-## Configure Keycloak
-
-The notification service requires Keycloak. Complete this configuration before deploying it.
-
-1. In `values.yaml`, confirm the Keycloak auth URI. In the default configuration, this value does not need to change unless the name or namespace of the Keycloak pod is modified:
-
-   ```yaml
-   authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
-   ```
-
-1. Import the Keycloak profile from case notifications from [NEDSS-Helm/charts/keycloak/extra][nedss-helm-keycloak-extra]:
-   1. In the NBS realm, open **Realm settings**, select the **Action** dropdown, and select **Partial Import**.
-   1. Upload `09-nbs-users-case-notification-service.json` and select **Create**.
-
 ## Deploy the Case Notification service using Helm
+
+Use the ['case-notification-service' Helm chart][nedss-helm-case-notification-service-chart] to deploy case notifications into your Kubernetes cluster. Before you begin, have your database credentials, domain values, and Kafka endpoint available. Confirm that the `case-notification-service` Keycloak client has been imported. See [Import additional service clients](../../keycloak/keycloak-installation.html#import-additional-service-clients) if you need help. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining any other values.
 
 1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/case-notification-service/` from that repository.
 1. Set the image repository and tag:
@@ -88,8 +76,9 @@ Run the health endpoint to confirm the service is running:
 https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/health
 ```
 
+After confirming a successful deployment, you can [test and integrate case notification APIs](./api-testing.html), and then proceed to deploy the [data ingestion service (DI API)](./../../data-ingestion/data-ingestion.html) or [real-time reporting (RTR)](./../../real-time-reporting/real-time-reporting.html) based on your deployment plan.
+
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-case-notification-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/case-notification-service>
 [nndss-case-notifications-readme]: <https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/{{ site.version_latest_tag }}/README.md>
 [nedss-helm-case-notification-deployment]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/case-notification-service/templates/deployment.yaml>
-[nedss-helm-keycloak-extra]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak/extra>

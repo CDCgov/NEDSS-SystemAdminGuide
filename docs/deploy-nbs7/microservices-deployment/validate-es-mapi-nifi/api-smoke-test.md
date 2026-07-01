@@ -22,13 +22,16 @@ The `nbs-test-api.sh` script tests end-to-end API functionality by creating a pa
 
 ## Prerequisites
 
+To run the smoke test, you need:
+
 - Authenticated access to your NBS environment
 - A database user that can run API calls
-- Bash (the script can run in AWS CloudShell or on any system with Bash installed)
-- `curl`
+- A shell environment with `curl` installed (AWS CloudShell works if you use it, or any system with Bash and `curl` available)
 
 ## Run the smoke test
 
-Run the `nbs-test-api.sh` script from the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-api]. See the README in that folder for usage instructions and current script status.
+Run the `nbs-test-api.sh` script from the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-api]. See the `README` in that folder for usage instructions and current script status.
+
+After performing a successful smoke test, continue to the [Web UI smoke test for NBS interface and search](./web-ui-smoke-test.html).
 
 [nedss-infra-nbs-test-api]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-api>

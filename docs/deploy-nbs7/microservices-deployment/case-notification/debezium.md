@@ -95,11 +95,13 @@ Use the [debezium-case-notifications Helm chart][nedss-helm-debezium-case-notifi
    helm install "debezium-case-notification-service-connect" ./debezium-case-notifications -f ./debezium-case-notifications/values.yaml
    ```
 
-1. Confirm the pod is running before continuing:
+1. Confirm the pod is running:
 
    ```bash
    kubectl get pods
    ```
+
+If the pod is not in a running state, wait and troubleshoot before continuing to [deploy the case notification service](./case-notification-service.html).
 
 ## Troubleshooting
 
@@ -107,15 +109,15 @@ If the service has trouble connecting to the database, delete the ConfigMap and 
 
 1. Delete the ConfigMap:
 
-```bash
+   ```bash
    kubectl delete configmap case-notification-connect
-```
+   ```
 
 1. Reinstall the chart:
 
-```bash
+   ```bash
    helm upgrade "debezium-case-notification-service-connect" ./debezium-case-notifications -f ./debezium-case-notifications/values.yaml
-```
+   ```
 
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-debezium-case-notifications-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium-case-notifications>

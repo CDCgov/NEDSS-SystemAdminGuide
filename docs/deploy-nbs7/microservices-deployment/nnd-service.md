@@ -13,7 +13,7 @@ This section covers Data Sync capabilities for National Notifiable Disease (NND)
 > The NND Service (Data Sync) deployment is optional. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }
 
-If you are not deploying the NND Service, proceed to [Case notification service](./case-notification.html).
+**If you are not deploying the NND Service, proceed to deploying the [Case notification service](./case-notification.html).**
 
 ## Terminology
 

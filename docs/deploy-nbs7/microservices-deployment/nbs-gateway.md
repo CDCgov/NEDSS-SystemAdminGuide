@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy NBS Gateway for NBS 7
 
-This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. Complete [Validate ES, MAPI, and NiFi](./validate-es-mapi-nifi.html) before starting this page. After you finish, proceed to [Data processing](./data-processing.html).
+This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. Complete [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html) before starting this page. After you finish, proceed to [Data processing](./data-processing.html).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,7 +22,7 @@ This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm c
 
 ## Deploy NBS Gateway using Helm
 
-Use the [nbs-gateway Helm chart][nedss-helm-nbs-gateway-chart] to deploy NBS Gateway into your Kubernetes cluster. NBS Gateway routes requests between NBS 7 microservices and the legacy NBS 6 application. Before you begin, have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
+Use the ['nbs-gateway' Helm chart][nedss-helm-nbs-gateway-chart] to deploy NBS Gateway into your Kubernetes cluster. NBS Gateway routes requests between NBS 7 microservices and the legacy NBS 6 application. Before you begin, have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
 
 1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/nbs-gateway/` from that repository.
 1. In `values.yaml`, replace `app.EXAMPLE_DOMAIN` with the URL of your NBS 7 application and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 application. Use the values from the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records).

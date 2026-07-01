@@ -27,9 +27,7 @@ Real Time Ingestion (RTI) is a microservice that picks up ELR data after it has 
 
 ## Deploy RTI using Helm
 
-Use the [data-processing-service Helm chart][nedss-helm-data-processing-service-chart] to deploy the RTI service into your Kubernetes cluster. Before you begin, have your database credentials, Kafka endpoints, and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
-
-### RTI microservice
+Use the ['data-processing-service' Helm chart][nedss-helm-data-processing-service-chart] to deploy the RTI service into your Kubernetes cluster. Before you begin, have your database credentials, Kafka endpoints, and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
 
 1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/data-processing-service/` from that repository.
 1. Confirm that a DNS entry for the data ingestion endpoint was created and points to the active Network Load Balancer (NLB) provisioned during [cluster infrastructure setup](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html). Then set `dataingestion.uri` in `values.yaml` to that domain name. Use the value from the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records).
@@ -49,7 +47,7 @@ Use the [data-processing-service Helm chart][nedss-helm-data-processing-service-
      authuser: "superuser"
    ```
 
-To find valid auth users, query the ODSE database. Replace `NBS_ODSE` if your database uses a different name:
+   To find valid auth users, query the ODSE database. Replace `NBS_ODSE` if your database uses a different name:
 
    ```sql
    SELECT * FROM NBS_ODSE.dbo.Auth_user;
@@ -89,115 +87,117 @@ To find valid auth users, query the ODSE database. Replace `NBS_ODSE` if your da
    ```
 
 1. See [RTI API testing and integration](../../deploy-nbs7/microservices-deployment/data-processing/api-testing.html) for API testing guidance.
-1. Validate the service by running the two commands below and verifying the output is similar to what is shown. These commands require the [jq JSON processor](https://jqlang.org/download/) to be installed.
+1. Validate the service by running the following commands and verifying that the output is similar to what is shown. These commands require the [jq JSON processor](https://jqlang.org/download/) to be installed.
 
-   Run the info endpoint to confirm the service version and build details:
+   1. Run the info endpoint to confirm the service version and build details:
 
-   ```bash
-   curl --silent https://<data.EXAMPLE_DOMAIN>/rti/actuator/info | jq
-   ```
+      ```bash
+      curl --silent https://<data.EXAMPLE_DOMAIN>/rti/actuator/info | jq
+      ```
 
-   Expected output:
+      Expected output:
 
-   ```text
-   {
-   "build": {
-      "artifact": "data-processing-service",
-      "name": "data-processing-service",
-      "time": "2026-03-24T15:47:15.920Z",
-      "version": "7.11.1-SNAPSHOT",
-      "group": "gov.cdc.dataprocessing"
-   },
-   "java": {
-      "version": "21.0.10",
-      "vendor": {
-         "name": "Amazon.com Inc.",
-         "version": "Corretto-21.0.10.7.1"
+      ```text
+      {
+      "build": {
+         "artifact": "data-processing-service",
+         "name": "data-processing-service",
+         "time": "2026-03-24T15:47:15.920Z",
+         "version": "7.11.1-SNAPSHOT",
+         "group": "gov.cdc.dataprocessing"
       },
-      "runtime": {
-         "name": "OpenJDK Runtime Environment",
-         "version": "21.0.10+7-LTS"
-      },
-      "jvm": {
-         "name": "OpenJDK 64-Bit Server VM",
-         "vendor": "Amazon.com Inc.",
-         "version": "21.0.10+7-LTS"
-      }
-   }
-   }
-   ```
-
-   Run the health endpoint to confirm the service is running:
-
-   ```bash
-      curl --silent https://<data.EXAMPLE_DOMAIN>/rti/actuator/health | jq
-   ```
-
-   Expected output:
-
-   ```text
-   {
-   "status": "UP",
-   "groups": [
-      "liveness",
-      "readiness"
-   ],
-   "components": {
-      "db": {
-         "status": "UP",
-         "components": {
-         "nbsDataSource": {
-            "status": "UP",
-            "details": {
-               "database": "Microsoft SQL Server",
-               "validationQuery": "isValid()"
-            }
+      "java": {
+         "version": "21.0.10",
+         "vendor": {
+            "name": "Amazon.com Inc.",
+            "version": "Corretto-21.0.10.7.1"
          },
-         "odseDataSource": {
-            "status": "UP",
-            "details": {
-               "database": "Microsoft SQL Server",
-               "validationQuery": "isValid()"
-            }
+         "runtime": {
+            "name": "OpenJDK Runtime Environment",
+            "version": "21.0.10+7-LTS"
          },
-         "srteDataSource": {
-            "status": "UP",
-            "details": {
-               "database": "Microsoft SQL Server",
-               "validationQuery": "isValid()"
-            }
-         }
-         }
-      },
-      "diskSpace": {
-         "status": "UP",
-         "details": {
-         "total": 42869960704,
-         "free": 21168852992,
-         "threshold": 10485760,
-         "path": "/.",
-         "exists": true
-         }
-      },
-      "livenessState": {
-         "status": "UP"
-      },
-      "ping": {
-         "status": "UP"
-      },
-      "readinessState": {
-         "status": "UP"
-      },
-      "ssl": {
-         "status": "UP",
-         "details": {
-         "validChains": [],
-         "invalidChains": []
+         "jvm": {
+            "name": "OpenJDK 64-Bit Server VM",
+            "vendor": "Amazon.com Inc.",
+            "version": "21.0.10+7-LTS"
          }
       }
-   }
-   }
-   ```
+      }
+      ```
+
+   1. Run the health endpoint to confirm the service is running:
+
+      ```bash
+         curl --silent https://<data.EXAMPLE_DOMAIN>/rti/actuator/health | jq
+      ```
+
+      Expected output:
+
+      ```text
+      {
+      "status": "UP",
+      "groups": [
+         "liveness",
+         "readiness"
+      ],
+      "components": {
+         "db": {
+            "status": "UP",
+            "components": {
+            "nbsDataSource": {
+               "status": "UP",
+               "details": {
+                  "database": "Microsoft SQL Server",
+                  "validationQuery": "isValid()"
+               }
+            },
+            "odseDataSource": {
+               "status": "UP",
+               "details": {
+                  "database": "Microsoft SQL Server",
+                  "validationQuery": "isValid()"
+               }
+            },
+            "srteDataSource": {
+               "status": "UP",
+               "details": {
+                  "database": "Microsoft SQL Server",
+                  "validationQuery": "isValid()"
+               }
+            }
+            }
+         },
+         "diskSpace": {
+            "status": "UP",
+            "details": {
+            "total": 42869960704,
+            "free": 21168852992,
+            "threshold": 10485760,
+            "path": "/.",
+            "exists": true
+            }
+         },
+         "livenessState": {
+            "status": "UP"
+         },
+         "ping": {
+            "status": "UP"
+         },
+         "readinessState": {
+            "status": "UP"
+         },
+         "ssl": {
+            "status": "UP",
+            "details": {
+            "validChains": [],
+            "invalidChains": []
+            }
+         }
+      }
+      }
+      ```
+
+To validate Real Time Ingestion (RTI) by sending ELR data through the Data Ingestion endpoint, proceed to [Test RTI API integration for Data Processing](./data-processing/api-testing.html).
 
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-data-processing-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-processing-service>

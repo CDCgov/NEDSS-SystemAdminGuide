@@ -22,13 +22,16 @@ The `nbs-test-webui.sh` script tests end-to-end functionality through the NBS we
 
 ## Prerequisites
 
+To run the smoke test, you need:
+
 - Authenticated access to your NBS environment
 - A database user with access to patient records
-- Bash (the script can run in AWS CloudShell or on any system with Bash installed)
-- `curl`
+- A shell environment with `curl` installed (AWS CloudShell works if you use it, or any system with Bash and `curl` available)
 
 ## Run the smoke test
 
-Run the `nbs-test-webui.sh` script from the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-webui]. See the README in that folder for usage instructions and current script status.
+Run the `nbs-test-webui.sh` script from the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-webui]. See the `README` in that folder for usage instructions and current script status.
+
+After successfully completing the validation steps, continue to deploy the [NBS Gateway service](../nbs-gateway.html).
 
 [nedss-infra-nbs-test-webui]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-webui>

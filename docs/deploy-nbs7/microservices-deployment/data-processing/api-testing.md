@@ -55,3 +55,5 @@ The following screenshot shows an example response from the status endpoint with
 The following screenshot shows an example response with an `RTI_SUCCESS_STEP_3` result:
 
 ![Postman response from the Check detail Status of Ingested Data API GET endpoint showing the nbsInfo object with nbsInterfaceStatus set to RTI_SUCCESS_STEP_3](../images/data-processing-api-testing-3.jpg)
+
+If ingestion and RTI processing are not working as expected, troubleshoot before continuing to deploy [NND Service (Data Sync)](./../nnd-service.html).

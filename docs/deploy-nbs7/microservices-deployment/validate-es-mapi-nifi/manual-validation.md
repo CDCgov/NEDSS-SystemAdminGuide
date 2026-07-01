@@ -24,3 +24,5 @@ Use these steps to validate end-to-end behavior in the NBS UI after deploying El
 1. Confirm that results appear in the results pane:
 
    ![Search results pane showing patient records](../images/manual-validation-3.png)
+
+Continue to the [API smoke test for Modernization API](./api-smoke-test.html).

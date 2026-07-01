@@ -11,10 +11,10 @@ redirect_from:
 
 # Deploy real-time reporting (RTR) Java services
 
-> The Java reporting services are being consolidated in an upcoming release. The service validation URLs reflect the NBS {{ site.version_latest }} configuration.
+> The Java reporting services are being consolidated in an upcoming release. The service validation URLs reflect the NBS 7.12 configuration.
 {: .warning }
 
-This page covers deploying the RTR Java services that process streamed events from Kafka and load domain-specific reporting data.
+This page covers deploying the RTR Java services that process streamed events from Kafka and load domain-specific reporting data. Before proceeding, schedule a maintenance window and notify users that NBS will be unavailable. Database changes made while RTR services are being deployed might not propagate to your reporting database.
 
 ## On this page
 {: .no_toc .text-delta }

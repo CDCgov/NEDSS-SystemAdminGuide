@@ -50,7 +50,7 @@ To reduce risk, consider setting up RTR in a testing environment before moving t
    Or:
 
    ```sql
-   USE [NBS_ODSE];
+   USE NBS_ODSE;
    SELECT * FROM NBS_Configuration WHERE config_key = 'CODE_BASE';
    ```
 

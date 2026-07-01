@@ -62,16 +62,15 @@ To reduce risk, consider setting up RTR in a testing environment before moving t
    > Back up the `RDB` database before you proceed. This step cannot be undone.
    {: .warning }
 
-1. Choose a database path and use it consistently throughout this guide.
+1. Choose a reporting database. RTR can write to your existing `RDB` database, or to a new database you create by duplicating `RDB`. Pick one option and use it consistently throughout this guide.
 
-   - **RDB path:** Use `RDB` as the default reporting database. Turn off the classic ETL batch jobs and proceed to the next step. MasterETL remains available for manual recovery runs if needed.
-   - **rdb_modern path:** Create a separate reporting database by duplicating your existing reporting database. The exact steps depend on your SQL Server version and where it is hosted. If this process is unfamiliar, see [Microsoft's documentation on backup and restore operations](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases?view=sql-server-ver17) before moving on to [Create service users and secrets](#create-service-users-and-secrets).
+   - **Use your existing RDB database** — RTR takes over writing to `RDB`. Turn off the classic ETL batch jobs and proceed to the next step. MasterETL remains available for manual recovery runs if needed.
 
-## Set up the rdb_modern database (rdb_modern path only)
+   - **Create a new reporting database** (recommended for first installs) — Duplicate your existing `RDB` and point RTR at the copy. This lets you run RTR alongside MasterETL to compare results before fully committing, then turn off MasterETL only once you are satisfied.
 
-If you are on the **rdb_modern path**, complete this section. If you are on the **RDB path**, move on to [Create service users and secrets](#create-service-users-and-secrets). For more information on choosing a path, see Step 3 in the [Prerequisites](#prerequisites) section.
-
-RTR requires a dedicated reporting database. To create `rdb_modern`, you restore a copy of `RDB` under a new name. This keeps the classic ETL-hydrated `RDB` intact and available while `rdb_modern` hosts the data structures the RTR pipeline requires.
+     If you choose this option, note the following before proceeding:
+     - The new database cannot be used for legacy SAS reporting.
+     - Run MasterETL one final time to make sure your `RDB` is fully up to date, then duplicate it under a new name. The exact steps depend on your SQL Server version and hosting environment. If this process is unfamiliar, see [Microsoft's documentation on backup and restore operations](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases?view=sql-server-ver17).
 
 ## Create service users and secrets
 

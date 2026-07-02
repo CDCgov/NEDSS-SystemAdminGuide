@@ -7,17 +7,17 @@
 # Site identity
 # -----------------------------------------------------------------------------
 
-title: NBS 7.12 System Administrator Guide
+title: NBS 7.13 System Administrator Guide
 
 description: National Electronic Disease Surveillance System Base System (NBS 7) System Administrator Guide
 
 # Current release version — update both values at the start of each release cycle.
-# Use {{ site.version_latest }} in page content for the version number (e.g., 7.12).
-# Use {{ site.version_latest_tag }} for pinned GitHub links (e.g., v7.12.0).
+# Use {{ site.version_latest }} in page content for the version number (e.g., 7.13).
+# Use {{ site.version_latest_tag }} for pinned GitHub links (e.g., v7.13.0).
 # When archiving a release, do a global find-and-replace of these variables with
 # hardcoded values before moving files to _previous_versions/.
-version_latest: "7.12"
-version_latest_tag: "v7.12.0"
+version_latest: "7.13"
+version_latest_tag: "v7.13.0"
 
 # Canonical URL for the deployed site — used by JTD to build absolute links and by the Jekyll sitemap plugin.
 url: https://cdcgov.github.io

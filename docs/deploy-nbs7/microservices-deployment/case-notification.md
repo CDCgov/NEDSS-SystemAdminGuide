@@ -11,8 +11,9 @@ redirect_from:
   - /docs/6_microservices_deployment/9b_keycloak_configuration.html
 ---
 
-# Deploy case notifications
-This section sets out the detailed steps to installing NBS 7 Case Notification, end to end.
+# Deploy case notifications for NBS 7
+
+This page walks through deploying the NBS 7 case notification service for NBS version {{ site.version_latest }}. Complete the [Data Processing](./data-processing.html) and optional [NND Service (Data Sync)](./nnd-service.html) deployments before starting this page. After you finish, proceed to deploy the [data ingestion service (DI API)](../data-ingestion/data-ingestion.html) or [real-time reporting (RTR)](../real-time-reporting/real-time-reporting.html) based on your deployment plan.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,39 +23,22 @@ This section sets out the detailed steps to installing NBS 7 Case Notification, 
 
 ## Overview
 
-Case notification services should be deployed in the following order:
+The case notification pipeline begins with a Debezium source connector monitoring the `ODSE.CN_transportq_out` table. When new data is inserted, the connector publishes it to a Kafka topic, which the case notification service consumes. The service processes each event and routes output to either `MSGOUTE.transportq_out` or `MSGOUTE.netsstransportq_out` depending on event type. Faulty events are routed to `MSGOUTE.case_notification_dlt` (Dead Letter Table) for investigation.
 
-  1. [Debezium](../../deploy-nbs7/microservices-deployment/case-notification/debezium.html)
-  1. [XML HL7 parser service](../../deploy-nbs7/microservices-deployment/case-notification/xml-hl7-parser.html)
-  1. [Data extraction service](../../deploy-nbs7/microservices-deployment/case-notification/data-extraction.html)
-  1. [Notification service](../../deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html)
-
-All services except Debezium require you to first set up [Keycloak configuration](#keycloak-configuration). After you deploy all required services for case notifications, validate with [API testing](../../deploy-nbs7/microservices-deployment/case-notification/api-testing.html).
+> **Case notifications and [real-time reporting (RTR)](../real-time-reporting/real-time-reporting.html) can use the same Kafka cluster.** To reduce potential cost and installation impact, consider re-using the Kafka cluster that you configure here when you deploy RTR.
+{: .important }
 
 ## Considerations
 
-Case notifications are optional. Your jurisdiction can use either the NBS 7 case notification services or continue to route case notifications through Rhapsody.
+Your jurisdiction can use either the NBS 7 case notification service or route case notifications through an integration engine like Rhapsody.
 
-- **If you are continuing with Rhapsody**, skip this section. Do not deploy any of the four services listed above, and do not enable them in Kubernetes.
-- **If you are moving to NBS 7 case notifications**, complete all four services in the order listed.
+- **If you are using an alternative integration engine**, skip this section. Do not deploy the notification service, and do not enable it in Kubernetes.
+- **If you are moving to NBS 7 case notifications**, complete the steps in this section.
 
-## Dependencies
+## Deployment overview
 
-Case notifications require [NND Sync](../../deploy-nbs7/microservices-deployment/nnd-service.html) for the full pipeline to function. Set up NND Sync before deploying case notification services. NND Sync is the only dependency. RDB Data Sync is not required.
+To deploy the notification service, complete the steps in the following order:
 
-## Keycloak configuration
-
-The XML HL7 parser, data extraction, and notification services require Keycloak. Complete this configuration before deploying them.
-
-1. In each service's `values.yaml`, confirm the Keycloak auth URI. In the default configuration this value should not need to change unless the name or namespace of the Keycloak pod is modified.
-
-   ```yaml
-   authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
-   ```
-
-1. For each of the three services, import the corresponding Keycloak profile from [`NEDSS-Helm/charts/keycloak/extra`][nedss-helm-keycloak-extra].
-
-> The Notification service also requires the Keycloak client ID and secret for the XML HL7 Parser service. These are configured with the `api.clientId` and `api.secret` fields in its `values.yaml`. See [Notification service](../../deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html) for more information.
-{: .note }
-
-[nedss-helm-keycloak-extra]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak/extra>
+1. [Deploy the Debezium Kafka source connector](../../deploy-nbs7/microservices-deployment/case-notification/debezium.html)
+1. [Deploy the case notification service](../../deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html)
+1. [Test and integrate case notification APIs](../../deploy-nbs7/microservices-deployment/case-notification/api-testing.html)

@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy NBS Gateway for NBS 7
 
-The NBS Gateway service routes requests between NBS 7 microservices and the legacy NBS 6 application. This page walks you through deploying NBS Gateway using Helm.
+This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. Complete [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html) before starting this page. After you finish, proceed to [Data processing](./data-processing.html).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,8 +22,10 @@ The NBS Gateway service routes requests between NBS 7 microservices and the lega
 
 ## Deploy NBS Gateway using Helm
 
-1. Locate the NBS Gateway Helm chart in the [NEDSS-Helm repository][nedss-helm-nbs-gateway-chart].
-1. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 as shown in the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller).
+Use the ['nbs-gateway' Helm chart][nedss-helm-nbs-gateway-chart] to deploy NBS Gateway into your Kubernetes cluster. NBS Gateway routes requests between NBS 7 microservices and the legacy NBS 6 application. Before you begin, have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
+
+1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/nbs-gateway/` from that repository.
+1. In `values.yaml`, replace `app.EXAMPLE_DOMAIN` with the URL of your NBS 7 application and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 application. Use the values from the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records).
 1. Set the image repository and tag:
 
    ```yaml
@@ -32,35 +34,36 @@ The NBS Gateway service routes requests between NBS 7 microservices and the lega
      tag: <release-version-tag> # for example, v1.0.1
    ```
 
-1. Verify page-builder is disabled:
+1. Verify that Page Builder is disabled:
 
    ```yaml
    pageBuilder:
      enabled: "false"
    ```
 
-1. Enable OIDC for Keycloak login authentication and set the client secret (see [Enable Keycloak Auth step h](../../deploy-nbs7/keycloak/enable-keycloak-auth.html#enable-keycloak-auth)):
+1. Enable OIDC and set the client secret for Keycloak login authentication. See [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) for instructions on retrieving the client secret.
 
    ```yaml
-   Oidc:
+   oidc:
      enabled: "true"
      client:
-      id: "nbs-modernization"
-      secret: "EXAMPLE_OIDC_SECRET"
+       id: "nbs-modernization"
+       secret: "EXAMPLE_OIDC_SECRET"
    ```
 
 1. Install NBS Gateway:
 
    ```bash
-   helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gateway
+   helm install "nbs-gateway" ./nbs-gateway -f ./nbs-gateway/values.yaml
    ```
 
-1. Verify the pod is running before proceeding to the next deployment:
+1. Confirm the pod is running before proceeding to the next deployment:
 
    ```bash
    kubectl get pods
    ```
 
-   If the pod is still creating or in any other non-running state, wait before continuing.
+If the pod is not in a running state, wait and troubleshoot before continuing to deploy [Data processing](./data-processing.html).
 
+[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-nbs-gateway-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nbs-gateway>

@@ -88,7 +88,7 @@ Follow these steps to configure and deploy the RTR Java services Helm chart.
    rtr-java-services-post-processing-reporting-<hash>  1/1     Running   0          2m6s
    ```
 
-1. Validate the services. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
+1. Validate the services. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
 
    **investigation-svc**
 

@@ -1,8 +1,8 @@
 ---
-title: Deploy NBS 7 microservices
+title: 4. Deploy NBS 7 microservices
 layout: page
-parent: Deploy NBS 7
-nav_order: 6
+parent: NBS 7 full deployment
+nav_order: 4
 has_children: true
 redirect_from:
   - /docs/6_microservices_deployment/0_microservices_deployment.html
@@ -53,12 +53,12 @@ The following table lists common Helm values used across NBS 7 microservices. Ha
 | `singleUserCredentialsUsername` | `EXAMPLE_NIFI_ADMIN_USER` | The username for the NiFi admin UI. Choose any username except `admin`. |
 | `singleUserCredentialsPassword` | `EXAMPLE_NIFI_ADMIN_USER_PASSWORD` | The password for the NiFi admin UI account. |
 | `nifiSensitivePropsKey` | `EXAMPLE_NIFI_SENSITIVE_PROPS` | The password that NiFi uses to derive an encryption key for sensitive values that it stores internally. Generate a random value of at least 12 characters with: `openssl rand -base64 32 \| cut -c1-32` |
-| `oidc.client.secret` | `EXAMPLE_OIDC_SECRET` | The client secret for Keycloak login authentication. Retrieve this from the Keycloak admin UI: select the **NBS** realm, go to **Clients**, select the relevant client, and copy the value from the **Credentials** tab. See [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret). |
+| `oidc.client.secret` | `EXAMPLE_OIDC_SECRET` | The client secret for Keycloak login authentication. Retrieve this from the Keycloak admin UI: select the **NBS** realm, go to **Clients**, select the relevant client, and copy the value from the **Credentials** tab. See [Retrieve the nbs-modernization client secret](../full-deploy/kubernetes-setup/deploy-keycloak.html#retrieve-the-nbs-modernization-client-secret). |
 | Varies by chart, for example: `kafka.cluster` | `EXAMPLE_KAFKA_ENDPOINT(S)` / `EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS` | A comma-separated list of the private plaintext endpoints for your Kafka brokers. In AWS deployments, find these in the Amazon MSK console under your cluster > **View client information** > **Bootstrap servers (plaintext)**. |
 | `sftp.*` | `EXAMPLE_SFTP_HOST` `EXAMPLE_SFTP_USER` `EXAMPLE_SFTP_PASS` `EXAMPLE_SFTP_FILE_EXTNS` `EXAMPLE_SFTP_FILE_PATHS` | Connection details for the external SFTP server used by the data ingestion service, including host, username, password, file extensions, and file paths. The SFTP server is managed by your jurisdiction and is not provisioned as part of NBS infrastructure. These values are required only if you configure SFTP polling for manual ELR file drop-off. |
 | `nbs.authuser` | `EXAMPLE_NBS_AUTHUSER` | The username of the NBS account that the data processing service uses to import and export data. Use a service account, typically the `ELRImporter` type user that your jurisdiction already has set up. |
-| `keycloak.srte.clientId` | `EXAMPLE_SRTE_CLIENT_ID` | The Keycloak client ID for SRTE data access. The default is `srte-data-keycloak-client`. This client is not included in the initial **NBS** realm import and requires a separate import step. See [Import additional service clients](../../deploy-nbs7/keycloak/keycloak-installation.html#import-additional-service-clients). |
-| `keycloak.srte.clientSecret` | `EXAMPLE_SRTE_CLIENT_SECRET` | The client secret for SRTE data access. After you import the client, retrieve the secret from the **Credentials** tab. See [Retrieve a client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-a-client-secret). |
+| `keycloak.srte.clientId` | `EXAMPLE_SRTE_CLIENT_ID` | The Keycloak client ID for SRTE data access. The default is `srte-data-keycloak-client`. This client is not included in the initial **NBS** realm import and requires a separate import step. See [Import additional service clients](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-additional-service-clients). |
+| `keycloak.srte.clientSecret` | `EXAMPLE_SRTE_CLIENT_SECRET` | The client secret for SRTE data access. After you import the client, retrieve the secret from the **Credentials** tab. See [Retrieve a client secret](../full-deploy/kubernetes-setup/deploy-keycloak.html#retrieve-a-client-secret). |
 {: .three-column-values-table }
 
 After you gather these values, continue to the deployment pages. The table of contents on this page lists the deployment pages in order, starting with the first service to deploy. Complete each page in sequence.

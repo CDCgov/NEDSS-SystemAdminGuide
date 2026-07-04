@@ -1,10 +1,11 @@
 ---
-title: Install Keycloak
+title: 3b. Deploy and configure Keycloak
 layout: page
-parent: Deploy cluster infrastructure
+parent: 3. Kubernetes setup
 nav_order: 2
 has_children: false
 nav_enabled: true
+description: Install Keycloak, create the NBS service and user realms, configure service clients, and retrieve client secrets for NBS 7 microservices deployment.
 redirect_from:
   - /docs/5_keycloak/1_keycloak_installation.html
   - /docs/5_keycloak/1_keycloak_installation/
@@ -12,7 +13,8 @@ redirect_from:
   - /docs/5_keycloak/2_enable_keycloak_auth/
   - /docs/deploy-nbs7/keycloak/enable-keycloak-auth.html
   - /docs/deploy-nbs7/keycloak/enable-keycloak-auth/
-description: Install Keycloak, create the NBS service and user realms, configure service clients, and retrieve client secrets for NBS 7 microservices deployment.
+  - /docs/deploy-nbs7/keycloak/keycloak-installation.html
+  - /docs/deploy-nbs7/keycloak/keycloak-installation/
 ---
 
 # Install Keycloak
@@ -89,7 +91,7 @@ Create the Keycloak database and database user before you deploy the Helm chart.
    | `KC_DB_URL` | `jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;` | Replace `EXAMPLE_DB_ENDPOINT` with your database endpoint. |
    | `KC_DB_USERNAME` | `NBS_keycloak` | Keycloak database account. Keep the template value or change it to match your organization's naming conventions. |
    | `KC_DB_PASSWORD` | `EXAMPLE_KCDB_PASS8675309` | Must match the password you set in the previous section. |
-   | `efsFileSystemId` | `EXAMPLE_EFS_ID` | **In AWS deployments:** The Amazon EFS file system ID from the AWS console or CLI. Provides persistent storage for themes. **In Azure deployments:** Azure Files requires different configuration. See [Deploy on Azure](../deploy-on-azure.html) for Azure file storage configuration. |
+   | `efsFileSystemId` | `EXAMPLE_EFS_ID` | **In AWS deployments:** The Amazon EFS file system ID from the AWS console or CLI. Provides persistent storage for themes. **In Azure deployments:** Azure Files requires different configuration. See [Deploy on Azure](../provision-cloud-infrastructure/cloud-prerequisites.html) for Azure file storage configuration. |
    {: .three-column-values-table }
 
 ## Deploy Keycloak
@@ -170,7 +172,7 @@ Keycloak uses two realms for NBS 7: the **NBS** realm for service clients, and t
 | NBS | [`01-NBS-realm-with-DI-client.json`][nedss-helm-keycloak-di-client] | Contains service clients for data ingestion, NND, and SRTE data access. Seeds the `di-keycloak-client` service client in the same step. |
 | nbs-users | [`02-nbs-users-realm.json`][nedss-helm-keycloak-nbs-users-realm] | Provides user-facing authentication for the NBS application and NBS gateway. Contains the client used by `modernization-api` and `nbs-gateway` for OIDC login. |
 
-> OIDC must be enabled when you deploy `modernization-api` and `nbs-gateway`. You configure OIDC during microservices deployment, not on this page. See [Deploy NBS 7 microservices](../microservices-deployment/deploy-nbs7-microservices.html) for OIDC configuration steps.
+> OIDC must be enabled when you deploy `modernization-api` and `nbs-gateway`. You configure OIDC during microservices deployment, not on this page. See [Deploy NBS 7 microservices](../../microservices-deployment/deploy-nbs7-microservices.html) for OIDC configuration steps.
 {: .note }
 
 1. From the side navigation, select **Create** realm.

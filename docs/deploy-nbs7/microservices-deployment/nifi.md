@@ -1,7 +1,7 @@
 ---
 title: NiFi
 layout: page
-parent: Deploy NBS 7 microservices
+parent: 4. Deploy NBS 7 microservices
 nav_order: 3
 redirect_from:
   - /docs/6_microservices_deployment/3_nifi.html
@@ -49,7 +49,7 @@ Use the ['nifi' Helm chart][nedss-helm-nifi-chart] to deploy NiFi into your Kube
      tag: <release-version-tag> # for example, v1.0.1
    ```
 
-1. If you are enabling the NiFi ingress, replace `nifi.EXAMPLE_DOMAIN` in `values.yaml` with your domain name. Use the value from the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records):
+1. If you are enabling the NiFi ingress, replace `nifi.EXAMPLE_DOMAIN` in `values.yaml` with your domain name. Use the value from the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records):
 
    ```yaml
    ingress:

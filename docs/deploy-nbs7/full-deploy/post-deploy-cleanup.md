@@ -1,9 +1,12 @@
 ---
-title: Clean up
+title: 5. Post-deploy cleanup
 layout: page
-parent: Deploy NBS 7
-nav_order: 10
+parent: NBS 7 full deployment
+nav_order: 5
 description: Steps to remove temporary deployment artifacts and tighten access after a successful NBS 7 installation.
+redirect_from:
+  - /docs/deploy-nbs7/post-install-cleanup.html
+  - /docs/deploy-nbs7/post-install-cleanup/
 ---
 
 # Post-install cleanup for NBS 7 deployments

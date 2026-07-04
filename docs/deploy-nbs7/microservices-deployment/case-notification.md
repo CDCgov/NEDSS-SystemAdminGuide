@@ -1,7 +1,7 @@
 ---
 title: Case notifications
 layout: page
-parent: Deploy NBS 7 microservices
+parent: 4. Deploy NBS 7 microservices
 nav_order: 9
 has_children: true
 nav_enabled: true

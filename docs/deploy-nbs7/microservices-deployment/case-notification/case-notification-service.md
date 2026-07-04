@@ -20,7 +20,7 @@ This page walks through deploying the Case Notification service using the [case-
 
 ## Deploy the Case Notification service using Helm
 
-Use the ['case-notification-service' Helm chart][nedss-helm-case-notification-service-chart] to deploy case notifications into your Kubernetes cluster. Before you begin, have your database credentials, domain values, and Kafka endpoint available. Confirm that the `case-notification-service` Keycloak client has been imported. See [Import additional service clients](../../keycloak/keycloak-installation.html#import-additional-service-clients) if you need help. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining any other values.
+Use the ['case-notification-service' Helm chart][nedss-helm-case-notification-service-chart] to deploy case notifications into your Kubernetes cluster. Before you begin, have your database credentials, domain values, and Kafka endpoint available. Confirm that the `case-notification-service` Keycloak client has been imported. See [Import additional service clients](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-additional-service-clients) if you need help. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining any other values.
 
 1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/case-notification-service/` from that repository.
 1. Set the image repository and tag:

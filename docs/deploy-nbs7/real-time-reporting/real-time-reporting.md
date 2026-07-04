@@ -2,7 +2,7 @@
 title: Deploy real-time reporting
 layout: page
 parent: Deploy NBS 7
-nav_order: 7
+nav_order: 3
 has_children: true
 description: Guides deployment of RTR components that stream ODSE and SRTE changes to RDB through Kafka.
 redirect_from:
@@ -145,7 +145,7 @@ Complete these one-time onboarding steps for RTR setup.
    1. **Create RTR microservice user logins:** Create dedicated user accounts for each RTR microservice. These users are referenced in Helm values for RTR services.
       - Script location: [NEDSS-DataReporting onboarding user creation scripts][nedss-datareporting-onboarding-user-scripts]
 
-1. **Create Kubernetes secrets.** Kubernetes secrets are required for RTR services to access the database. Create secrets for each service user from step 1. Skip this step if you already created secrets in [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
+1. **Create Kubernetes secrets.** Kubernetes secrets are required for RTR services to access the database. Create secrets for each service user from step 1. Skip this step if you already created secrets in [Create secrets in your cluster](../full-deploy/kubernetes-setup/deploy-core-services.html#create-secrets-in-your-cluster).
 
    1. **Create secrets for each service user:** Include the admin user from step 1a. Each secret should include the database username and password.
       - Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]
@@ -224,7 +224,7 @@ After onboarding, future enhancements are delivered using one of these approache
 
 ## Deploy RTR services
 
-RTR services use Kubernetes secrets for database credentials. Create secrets for each microservice user and the admin user. The secrets should include the database username and password for each service user. For more information, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
+RTR services use Kubernetes secrets for database credentials. Create secrets for each microservice user and the admin user. The secrets should include the database username and password for each service user. For more information, see [Create secrets in your cluster](../full-deploy/kubernetes-setup/deploy-core-services.html#create-secrets-in-your-cluster).
 {: .important }
 
 Deploy the RTR services in the following order:

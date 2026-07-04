@@ -1,12 +1,13 @@
 ---
-title: Remove an environment
+title: Undeploy NBS 7
 layout: page
-parent: Deploy NBS 7
-nav_order: 11
+nav_order: 5
 description: Steps to remove DNS entries, Helm ingress resources, and Terraform-managed infrastructure when decommissioning an NBS 7 environment.
 redirect_from:
   - /docs/removal_and_cleanup.html
   - /docs/removal_and_cleanup/
+  - /docs/deploy-nbs7/removal-and-cleanup.html
+  - /docs/deploy-nbs7/removal-and-cleanup/
 ---
 
 # Remove an NBS 7 environment

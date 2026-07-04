@@ -1,12 +1,16 @@
 ---
-title: Prerequisites for AWS
+title: 2a. Cloud prerequisites
 layout: page
-parent: Deploy on AWS
+parent: 2. Provision cloud infrastructure
 nav_order: 1
+description: Verify your AWS or Azure account, hardware, software, and network requirements before you provision the cloud environment for NBS 7.
 redirect_from:
   - /docs/2_prerequisites/prereq.html
   - /docs/2_prerequisites/prereq/
-description: Prepare your AWS cloud environment before you provision AWS for NBS 7.
+  - /docs/deploy-nbs7/deploy-on-aws/prerequisites.html
+  - /docs/deploy-nbs7/deploy-on-aws/prerequisites/
+  - /docs/deploy-nbs7/deploy-on-azure/prerequisites.html
+  - /docs/deploy-nbs7/deploy-on-azure/prerequisites/
 ---
 
 # Prerequisites for AWS deployments
@@ -84,7 +88,7 @@ You will need a local or cloud hosted workstation (e.g. CloudShell) with the set
 
 ## Network and database access requirements
 
-Installation of the NBS 7 infrastructure and microservices uses a new VPC, which is provisioned using the Terraform scripts included in [the provisioning steps](provision-aws.html).
+Installation of the NBS 7 infrastructure and microservices uses a new VPC, which is provisioned using the Terraform scripts included in [the provisioning steps](provision-cloud-environment.html).
 
 You must ensure that there is network access available from the location of modern NBS 7 components to the classic NBS 6 components, including the database server. The database server or RDS should allow access to the NBS 7 VPC address space. As a best practice, use a private route for this network access, rather than making it publicly accessible.
 
@@ -112,5 +116,37 @@ To assist those who are integrating NBS into their SSO ecosystem, a proof of con
 ## What to do now
 
 1. Complete the cloud-agnostic [Prerequisites](../prerequisites.html) if you haven't already
-1. Continue with [Provision the AWS cloud environment](provision-aws.html)
+1. Continue with [Provision the AWS cloud environment](provision-cloud-environment.html)
+1. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) if you need Azure planning support before this page is finalized
+
+<!-- MERGE (chunk 2): content absorbed from deploy-on-azure/prerequisites.md. Integrate Azure requirements alongside AWS, then delete this divider. -->
+
+# Prerequisites for Azure deployments
+
+This page is a placeholder for Azure-specific prerequisite guidance.
+
+> Start with the cloud-agnostic [Prerequisites for NBS 7 deployment](../prerequisites.html), then complete the AWS-specific requirements on this page.
+{: .important }
+
+## On this page
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+## Azure-specific prerequisites (coming soon)
+
+The Azure prerequisite checklist is under development and will include details for:
+
+- Azure subscription and tenant setup
+- Resource group and virtual network requirements
+- Private connectivity to NBS 6 dependencies
+- DNS and certificate configuration in Azure
+- Azure role assignments and identity integration
+- Azure tooling setup for deployment and operations
+
+## What to do now
+
+1. Complete the cloud-agnostic [Prerequisites](../prerequisites.html) if you haven't already
+1. Continue with [Deploy cloud infrastructure](../provision-cloud-infrastructure.html)
 1. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) if you need Azure planning support before this page is finalized

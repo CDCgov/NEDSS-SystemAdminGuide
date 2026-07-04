@@ -1,18 +1,20 @@
 ---
-title: Provision the AWS environment
+title: 2b. Provision cloud environment
 layout: page
-parent: Deploy on AWS
+parent: 2. Provision cloud infrastructure
 nav_order: 2
-has_children: true
+description: Use Terraform to provision the network, Kubernetes cluster, and supporting services for NBS 7 in AWS or Azure.
 redirect_from:
-   - /docs/3_base_application/1_terraform-deployment.html
-   - /docs/3_base_application/1_terraform-deployment/
+  - /docs/3_base_application/1_terraform-deployment.html
+  - /docs/3_base_application/1_terraform-deployment/
+  - /docs/deploy-nbs7/deploy-on-aws/provision-aws.html
+  - /docs/deploy-nbs7/deploy-on-aws/provision-aws/
 ---
 
 # Provision the AWS cloud environment
 {: .no_toc }
 
-This page covers the first deployment phase: provisioning the AWS cloud environment using Terraform. These steps prepare your Amazon Web Services (AWS) infrastructure and validate that the foundational resources are ready for Kubernetes deployment. Complete this section before proceeding to [Initial Kubernetes Deployment](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html).
+This page covers the first deployment phase: provisioning the AWS cloud environment using Terraform. These steps prepare your Amazon Web Services (AWS) infrastructure and validate that the foundational resources are ready for Kubernetes deployment. Complete this section before proceeding to [Initial Kubernetes Deployment](../kubernetes-setup/deploy-core-services.html).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -20,7 +22,7 @@ This page covers the first deployment phase: provisioning the AWS cloud environm
 1. TOC
 {:toc}
 
-Before you begin, complete the general [Prerequisites](../../deploy-nbs7/prerequisites.html) and the AWS-specific [Prerequisites for deploying on AWS](../../deploy-nbs7/deploy-on-aws/prerequisites.html).
+Before you begin, complete the general [Prerequisites](../prerequisites.html) and the AWS-specific [Prerequisites for deploying on AWS](cloud-prerequisites.html).
 {: .important }
 
 ## Prepare deployment files and configuration
@@ -51,14 +53,14 @@ Complete these steps to download the infrastructure package and prepare your env
    datacompare_namespace_and_service = ["default:data-compare-api-service", "default:data-compare-processor-service"]
    ```
 
-   This creates the IAM role (`<eks-cluster-name>-datacompare-role`) and S3 access policy required by the Data Compare pods. The role ARN is referenced during [Data Compare deployment](../../deploy-nbs7/real-time-reporting/data-compare-tool.html).
+   This creates the IAM role (`<eks-cluster-name>-datacompare-role`) and S3 access policy required by the Data Compare pods. The role ARN is referenced during [Data Compare deployment](../../real-time-reporting/data-compare-tool.html).
 
 ## Validate AWS access and network prerequisites
 
 Before running Terraform, validate database network access and confirm that your AWS authentication is active.
 
 1. Review the inbound rules on the security groups attached to your database instance and ensure that the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database. For example, if the `modern-cidr` is `10.20.0.0/16`, there should be at least one rule in a security group associated with your database that allows MSSQL inbound access from your `modern-cidr` block.
-   ![mssql-inbound-from-modern-cidr](../images/myssql-inbound-from-modern-cidr.png)
+   ![mssql-inbound-from-modern-cidr](images/myssql-inbound-from-modern-cidr.png)
 1. Verify that you are authenticated to AWS. Use the following command to verify access to the intended account. For more information, see the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
 
    ```text
@@ -92,7 +94,7 @@ Run the Terraform commands in order to initialize state and apply your infrastru
    terraform plan
    ```
 
-   ![terraform-plan](../images/terraform-plan-latest.png)
+   ![terraform-plan](images/terraform-plan-latest.png)
 1. Review the changes carefully to verify that they match your intention and do not unintentionally affect other configurations that you depend on. Then run `terraform apply`:
 
    ```text
@@ -140,6 +142,6 @@ Use these steps to connect to the cluster and verify that core Kubernetes resour
 
 ## Next steps
 
-You have now installed your core infrastructure and Kubernetes cluster. Continue to [Initial Kubernetes Deployment](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html) to configure your cluster.
+You have now installed your core infrastructure and Kubernetes cluster. Continue to [Initial Kubernetes Deployment](../kubernetes-setup/deploy-core-services.html) to configure your cluster.
 
 [nedss-infra-release-page]: <https://github.com/CDCgov/NEDSS-Infrastructure/releases/tag/{{ site.version_latest_tag }}>

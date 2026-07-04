@@ -1,9 +1,9 @@
 ---
-title: Deploy Kubernetes
+title: 3a. Deploy core services
 layout: page
-parent: Deploy cluster infrastructure
+parent: 3. Kubernetes setup
 nav_order: 1
-has_children: true
+has_children: false
 nav_enabled: true
 redirect_from:
   - /docs/4_initial_kubernetes_deployment/0_kubernetes_bootstrapping.html
@@ -16,12 +16,14 @@ redirect_from:
   - /docs/4_initial_kubernetes_deployment/3_cert_manager_cluster_issuer/
   - /docs/4_initial_kubernetes_deployment/4_linkerd_and_autoscaler.html
   - /docs/4_initial_kubernetes_deployment/4_linkerd_and_autoscaler/
+  - /docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html
+  - /docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment/
 ---
 
 # Initial Kubernetes deployment
 {: .no_toc }
 
-This page explains how to deploy the core Kubernetes infrastructure services that NBS 7 requires before you install application components. Complete the sections in order. After you complete these steps, proceed to [Keycloak Installation](../../deploy-nbs7/keycloak/keycloak-installation.html).
+This page explains how to deploy the core Kubernetes infrastructure services that NBS 7 requires before you install application components. Complete the sections in order. After you complete these steps, proceed to [Keycloak Installation](deploy-keycloak.html).
 
 ## On this page
 {: .no_toc .text-delta }

@@ -1,8 +1,11 @@
 ---
-title: Update the Amazon EKS control plane
+title: Update the Kubernetes control plane
 layout: page
 parent: Maintain NBS 7
 nav_order: 2
+redirect_from:
+  - /docs/maintain-nbs7/eks-upgrade.html
+  - /docs/maintain-nbs7/eks-upgrade/
 ---
 
 # Update the Amazon EKS control plane

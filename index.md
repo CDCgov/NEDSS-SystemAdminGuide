@@ -1,7 +1,8 @@
 ---
-title: Introduction
+title: NBS 7 Introduction
 layout: home
 nav_order: 1
+has_children: true
 description: Overview of the NBS system administration guide, including preparation, deployment, validation, and maintenance content for NBS 7.
 ---
 

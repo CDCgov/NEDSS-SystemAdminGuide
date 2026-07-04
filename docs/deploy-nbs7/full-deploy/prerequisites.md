@@ -1,9 +1,12 @@
 ---
-title: Prerequisites
+title: 1. NBS 7 prerequisites
 layout: page
-parent: Deploy NBS 7
-nav_order: 3
+parent: NBS 7 full deployment
+nav_order: 1
 description: Cloud-agnostic prerequisites for NBS 7 deployment, including NBS 6 readiness, network access, DNS, security, and local management machine setup.
+redirect_from:
+  - /docs/deploy-nbs7/prerequisites.html
+  - /docs/deploy-nbs7/prerequisites/
 ---
 
 # Prerequisites for NBS 7 deployment
@@ -33,7 +36,7 @@ Your network must provide connectivity from all NBS 7 components to NBS 6 compon
 - **Encryption required:** All virtual network traffic between NBS 6 and NBS 7 must be encrypted.
 - **VPC/network setup:** Confirm that your organization can provision and configure virtual private networks (VPCs) or equivalent network isolation and can allow the necessary connectivity.
 
-For provider-specific network setup, see [Prerequisites for AWS](deploy-on-aws/prerequisites.html) or [Prerequisites for Azure](deploy-on-azure/prerequisites.html).
+For provider-specific network setup, see [Prerequisites for AWS](provision-cloud-infrastructure/cloud-prerequisites.html) or [Prerequisites for Azure](provision-cloud-infrastructure/cloud-prerequisites.html).
 
 ## DNS and SSL/TLS certificates
 
@@ -65,7 +68,7 @@ You will need a local or cloud-hosted workstation (for example, AWS CloudShell, 
   - AWS CLI (if deploying to AWS)
   - Azure CLI (if deploying to Azure)
 
-For detailed installation instructions specific to your cloud provider, see [Prerequisites for AWS](deploy-on-aws/prerequisites.html) or [Prerequisites for Azure](deploy-on-azure/prerequisites.html).
+For detailed installation instructions specific to your cloud provider, see [Prerequisites for AWS](provision-cloud-infrastructure/cloud-prerequisites.html) or [Prerequisites for Azure](provision-cloud-infrastructure/cloud-prerequisites.html).
 
 ### Knowledge requirements
 
@@ -98,5 +101,5 @@ NBS 7 requires specific versions of supporting software. The following table lis
 
 After completing these prerequisites:
 
-1. If you are deploying on AWS, complete [Prerequisites for AWS](deploy-on-aws/prerequisites.html).
-1. If you are deploying on Azure, complete [Prerequisites for Azure](deploy-on-azure/prerequisites.html).
+1. If you are deploying on AWS, complete [Prerequisites for AWS](provision-cloud-infrastructure/cloud-prerequisites.html).
+1. If you are deploying on Azure, complete [Prerequisites for Azure](provision-cloud-infrastructure/cloud-prerequisites.html).

@@ -2,7 +2,7 @@
 title: Deploy data ingestion service (DI API)
 layout: page
 parent: Deploy NBS 7
-nav_order: 8
+nav_order: 4
 has_children: true
 description: Deploy the Data Ingestion (DI) API service for ingesting, validating, and transforming Electronic Lab Reports into NBS.
 redirect_from:
@@ -77,7 +77,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
 1. Locate the Data Ingestion Service Helm chart in the [NEDSS-Helm repository][nedss-helm-dataingestion-service-chart]. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, **MSK (Kafka) bootstrap server**, and **ingress host** values in `values.yaml`.
 
 1. Confirm that DNS entries for the following host were created and point to the Network Load Balancer (NLB) in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned in the base install steps). Make this change in your authoritative DNS service (for example, Route 53).
-   Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) for reference.
+   Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [Deploy Traefik ingress controller](../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller) for reference.
    DataIngestion service application: `data.site_name.example_domain.com`
 1. Set the image repository and tag:
 

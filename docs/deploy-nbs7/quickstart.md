@@ -10,6 +10,8 @@ redirect_from:
 
 # Quick start (AWS)
 
+<!-- [SME REVIEW] Azure quickstart inserts pending from Josh (DEV-265); retitle page to "NBS 7 quick start" when they land. -->
+
 This page provides a streamlined path to deploy NBS 7 infrastructure and core microservices in AWS. It is intended for experienced administrators familiar with AWS, Kubernetes, Helm, and Terraform.
 
 ## On this page

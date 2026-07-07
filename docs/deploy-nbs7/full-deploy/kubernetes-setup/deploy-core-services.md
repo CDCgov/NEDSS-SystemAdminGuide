@@ -20,10 +20,12 @@ redirect_from:
   - /docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment/
 ---
 
-# Initial Kubernetes deployment
-{: .no_toc }
+# Deploy core Kubernetes services
 
-This page explains how to deploy the core Kubernetes infrastructure services that NBS 7 requires before you install application components. Complete the sections in order. After you complete these steps, proceed to [Keycloak Installation](deploy-keycloak.html).
+This page covers how to deploy the core services that must be running in your Kubernetes cluster before you deploy the NBS 7 microservices: the Traefik ingress controller, cert-manager, and the Cluster Autoscaler. Complete the sections on this page in order, then continue to [Deploy and configure Keycloak](deploy-keycloak.html), which is also a core service.
+
+> The `kubectl` commands on this page require the cluster connection you configured in [Connect to Kubernetes cluster](../provision-cloud-infrastructure/provision-cloud-environment.html#connect-to-kubernetes-cluster).
+{: .note }
 
 ## On this page
 {: .no_toc .text-delta }
@@ -31,198 +33,202 @@ This page explains how to deploy the core Kubernetes infrastructure services tha
 1. TOC
 {:toc}
 
-## Bootstrap Kubernetes
+## Get the NEDSS-Helm charts
 
-1. Download the Helm configuration package from the [CDCgov/NEDSS-Helm][nedss-helm-repo] repo on Github. Be sure to go through the [{{ site.version_latest_tag }} release page][nedss-helm-release-page] to see what's included.
-1. Open a terminal (bash, macOS Terminal, CloudShell, or PowerShell) and unzip the downloaded file.
-1. **All helm commands should be executed from the charts directory.** Change directory to where you unzipped the helm **charts** folder `<Helm_Dir>/charts`.
+Complete these steps to download the Helm charts that deploy the core services and the NBS 7 microservices:
 
-## Create secrets in your cluster
-
-After you download and unzip the Helm configuration package, create the Kubernetes secrets that your cluster uses to connect to its databases. This section explains how to populate the `nbs-secrets.yaml` manifest with your environment-specific database credentials and deploy it to the cluster. After you complete this step, move on to deploy the Traefik ingress controller.
-
-1. Obtain the sample Kubernetes manifest to create secrets expected to be available on the cluster from `k8-manifests/nbs-secrets.yaml`.
-1. Replace string values wherever there is an `EXAMPLE_`:
-
-   | **Parameter** | **Template Value** | **Example/Description** |
-   |---|---|---|
-   | odse_url | `jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_ODSE_DB_NAME;encrypt=true;trustServerCertificate=true;` | `jdbc:sqlserver://mydbendpoint:1433;databaseName=nbs_odse;encrypt=true;trustServerCertificate=true;` |
-   | rdb_url | `jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_RDB_DB_NAME;encrypt=true;trustServerCertificate=true;` | `jdbc:sqlserver://mydbendpoint:1433;databaseName=nbs_rdb;encrypt=true;trustServerCertificate=true;` |
-   | odse_user | `EXAMPLE_ODSE_DB_USER` | ODSE database user |
-   | odse_pass | `EXAMPLE_ODSE_DB_USER_PASSWORD` | ODSE database password |
-   | rdb_user | `EXAMPLE_RDB_DB_USER` | RDB database user |
-   | rdb_pass | `EXAMPLE_RDB_DB_PASSWORD` | RDB database password |
-   | srte_user | `EXAMPLE_SRTE_DB_USER` | SRTE database user |
-   | srte_pass | `EXAMPLE_SRTE_DB_PASSWORD` | SRTE database password |
-   | investigation_reporting_user | `EXAMPLE_INVESTIGATION_REPORTING_DB_USER` | RTR investigation reporting database user |
-   | investigation_reporting_pass | `EXAMPLE_INVESTIGATION_REPORTING_DB_PASSWORD` | RTR investigation reporting database password |
-   | ldfdata_reporting_user | `EXAMPLE_LDFDATA_REPORTING_DB_USER` | RTR ldfdata reporting database user |
-   | ldfdata_reporting_pass | `EXAMPLE_LDFDATA_REPORTING_DB_PASSWORD` | RTR ldfdata reporting database password |
-   | observation_reporting_user | `EXAMPLE_OBSERVATION_REPORTING_DB_USER` | RTR observation reporting database user |
-   | observation_reporting_pass | `EXAMPLE_OBSERVATION_REPORTING_DB_PASSWORD` | RTR observation reporting database password |
-   | organization_reporting_user | `EXAMPLE_ORGANIZATION_REPORTING_DB_USER` | RTR organization reporting database user |
-   | organization_reporting_pass | `EXAMPLE_ORGANIZATION_REPORTING_DB_PASSWORD` | RTR organization reporting database password |
-   | person_reporting_user | `EXAMPLE_PERSON_REPORTING_DB_USER` | RTR person reporting database user |
-   | person_reporting_pass | `EXAMPLE_PERSON_REPORTING_DB_PASSWORD` | RTR person database password |
-   | post_processing_reporting_user | `EXAMPLE_POST_PROCESSING_REPORTING_DB_USER` | RTR post processing reporting database user |
-   | post_processing_reporting_pass | `EXAMPLE_POST_PROCESSING_REPORTING_DB_PASSWORD` | RTR post processing database password |
-
-1. Deploy the secrets to the cluster:
+1. Go to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the `nbs-helm-{{ site.version_latest_tag }}.zip` file.
+1. Unzip the downloaded file.
+1. In a terminal, change into the `charts` directory from the unzipped file:
 
    ```bash
-   kubectl apply -f k8-manifests/nbs-secrets.yaml
+   cd <HELM_DIR>/nbs-helm-{{ site.version_latest_tag }}/charts
    ```
 
-   ![kubernetes-secretes-within-cluster](images/kubernetes-secrets-within-cluster.png)
+Run all `helm` commands on this page from this `charts` directory.
+
+<!-- The "Create secrets in your cluster" section was deleted per Josh Olson's confirmation (2026-07-06): nbs-secrets.yaml was removed from NEDSS-Helm. See STLT-538 for reporting-pipeline-service credential configuration. -->
 
 ## Deploy Traefik ingress controller
 
-After you create and deploy your Kubernetes secrets, set up the Traefik ingress controller. This section explains how to install Traefik Custom Resource Definitions (CRDs), deploy Traefik for AWS or Azure, deploy NBS ingress resources, and create the DNS records your cluster needs to route traffic. After you complete these steps, [configure Cert Manager](#configure-cert-manager-optional) to manage TLS certificates for your cluster.
+The Traefik Helm chart in the [NEDSS-Helm repository][nedss-helm-repo] sets up Prometheus metrics, configures Linkerd sidecar injection for the `traefik` Kubernetes deployment, sets timeouts, and instructs the Traefik controller to create a Network Load Balancer (NLB) in AWS or an internal load balancer in Azure. This section covers how to deploy the Traefik controller, deploy the NBS ingress resources, and create the DNS records that route traffic to them.
 
 ### Deploy the Traefik controller
 
-The Traefik Helm charts are located in the [NEDSS-Helm repository][nedss-helm-traefik-chart]. Traefik uses the values in `charts/traefik/values.yaml` (AWS) or `charts/traefik/values-azure.yaml` (Azure) from the downloaded chart package. These values are preconfigured to set up Prometheus metrics, configure Linkerd sidecar injection, set timeouts, and instruct the Traefik controller to create an Amazon Elastic Kubernetes Service (Amazon EKS) Network Load Balancer (NLB) or Azure Kubernetes Service (AKS) internal load balancer.
+1. In the `traefik` chart directory, open the values file for your cloud provider:
+   - **AWS:** `traefik/values.yaml`
+   - **Azure:** `traefik/values-azure.yaml`
+1. Confirm that the `deployment` section of that file contains the following pod annotation:
 
-1. To create the Traefik Controller within Kubernetes, choose the appropriate command for your environment:
-
-   - **Amazon Elastic Kubernetes Service (Amazon EKS):**
-
-      ```bash
-      helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml
-      ```
-
-   - **Azure Kubernetes Service (AKS):**
-
-      ```bash
-      helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml
-      ```
-
-1. Monitor the deployment status:
-
-   ```bash
-   kubectl --namespace traefik get services -o wide -w traefik
+   ```yaml
+   podAnnotations:
+     linkerd.io/inject: enabled
    ```
 
-   > Use `Ctrl+C` to exit if the command is still running.
+1. Optional: To make the `kubectl logs` command return more information if you encounter issues, change `INFO` to `DEBUG` in the following snippet in that file:
+
+   ```yaml
+   logs:
+     general:
+       level: INFO
+   ```
+
+1. Add the Traefik Helm chart repository and update it:
+
+   ```bash
+   helm repo add traefik https://traefik.github.io/charts
+   helm repo update
+   ```
+
+1. Deploy the Traefik controller to your Kubernetes cluster with the command for your cloud provider:
+   - **AWS:**
+
+     ```bash
+     helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml
+     ```
+
+   - **Azure:**
+
+     ```bash
+     helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml
+     ```
+
+   > If your AKS cluster has Windows node pools, for example for NBS 6, append the following option to the Azure command so that Traefik is scheduled on a Linux node: `--set nodeSelector."kubernetes\.io/os"=linux`
    {: .note }
 
-1. In the AWS Management Console or Azure portal, verify that a load balancer was created and that its target groups point to the Amazon EKS or AKS cluster.
-1. Confirm the Traefik pod is running. The pod should show `2/2` for the Traefik and Linkerd sidecar containers:
+1. **Wait for the deployment to complete:** Run the following command and verify that it prints that the deployment was successfully rolled out:
 
-   ```bash
-   kubectl get pods -n traefik
+   ```text
+   $ kubectl rollout status deployment/traefik -n traefik
+   deployment "traefik" successfully rolled out
    ```
+
+1. **Confirm the Traefik pod is healthy:** Run the following command and verify that the pod has a `STATUS` of `Running` and that the two numbers in the `READY` column match:
+
+   ```text
+   $ kubectl get pods -n traefik
+   NAME                                          READY   STATUS    RESTARTS   AGE
+   traefik-<POD-TEMPLATE-HASH>-<RANDOM-STRING>   2/2     Running   0          5m
+   ```
+
+1. **Get the Traefik load balancer address:** Run the following command and confirm that ports 80 and 443 are listed under the `PORT(S)` column. The example output is from AWS:
+
+   ```text
+   $ kubectl get svc -n traefik
+   NAME      TYPE           CLUSTER-IP       EXTERNAL-IP                                          PORT(S)                                  AGE
+   traefik   LoadBalancer   172.xx.xxx.xxx   [HASH]-[RANDOM-ID].elb.[YOUR-REGION].amazonaws.com   80:[NODEPORT1]/TCP,443:[NODEPORT1]/TCP   6m
+   ```
+
+> Each instance of `[HASH]-[RANDOM-ID].elb.[YOUR-REGION].amazonaws.com` on this page refers to the same value: the address of your Traefik load balancer. For AWS, this is an NLB hostname. For Azure, this is an IP address.
+{: .note }
 
 ### Deploy NBS ingress resources
 
-The `nbs-ingress` chart manages all NBS 7 application routing, including Keycloak, NBS Gateway, data ingestion services, and middleware. Deploy it independently of the application charts.
+The `nbs-ingress` Helm chart manages all ingress routing between the NBS 7 applications deployed to your Kubernetes cluster. Complete these steps to deploy it:
 
-1. Locate the Traefik Helm charts in the [NEDSS-Helm repository][nedss-helm-traefik-chart]. Update the values in `charts/nbs-ingress/values.yaml` with your environment-specific hostnames, or pass them as `--set` flags.
-1. Deploy the ingress resources:
+1. In the `nbs-ingress/values.yaml` file (the same file is used for AWS and Azure), search for `EXAMPLE` and fill in your environment-specific values. The [Helm values reference for NBS 7 microservices][helm-values-table] lists the values to use.
+1. Deploy the ingress resources to your Kubernetes cluster:
 
    ```bash
    helm install nbs-ingress ./nbs-ingress -n default -f ./nbs-ingress/values.yaml
    ```
 
-   Or with inline hostname overrides:
+1. Verify that the ingress resources were created. If you use PowerShell, replace `grep -E` with `Select-String`. The example output is from AWS:
 
-   ```bash
-   helm install nbs-ingress ./nbs-ingress -n default \
-     --set appHost=app.SITE_NAME.EXAMPLE_DOMAIN \
-     --set dataHost=data.SITE_NAME.EXAMPLE_DOMAIN
-   ```
-
-1. Verify the ingress resources were created:
-
-   ```bash
-   kubectl get ingress -A
-   kubectl get ingressroute -A
-   kubectl get middleware -A
+   ```text
+   $ kubectl get ingress -A | grep -E "NAME|traefik"
+   NAMESPACE   NAME                        CLASS     HOSTS                  ADDRESS                                              PORTS     AGE
+   default     nbs-ingress-dataingestion   traefik   <YOUR-DATA-HOSTNAME>   [HASH]-[RANDOM-ID].elb.[YOUR-REGION].amazonaws.com   80, 443   5m
+   default     nbs-ingress-main            traefik   <YOUR-APP-HOSTNAME>    [HASH]-[RANDOM-ID].elb.[YOUR-REGION].amazonaws.com   80, 443   5m
    ```
 
 ### Create DNS records
 
-Create A or CNAME records in your DNS service (for example, Route 53 for Amazon EKS or Azure DNS for AKS) pointing the following subdomains to the load balancer.
+Create A records in your DNS service, such as Amazon Route 53 or Azure DNS, that point to the address of the Traefik load balancer:
 
-1. Find the load balancer address:
+1. **Retrieve the load balancer address:** The `kubectl get svc -n traefik` command in [Deploy the Traefik controller](#deploy-the-traefik-controller) printed the address of the Traefik load balancer under the `EXTERNAL-IP` column. Rerun that command if you need to retrieve the address again.
+1. **Create the records:** Create an A record for each hostname in the following table. Replace `<DOMAIN_NAME.TLD>` with your site and domain names from the [Helm values reference for NBS 7 microservices][helm-values-table]:
 
-   ```bash
-   kubectl get svc traefik -n traefik
-   ```
+   | Subdomain description | Hostname | Example |
+   |-----------------------|----------|---------|
+   | NBS application | `app.<DOMAIN_NAME.TLD>` | `app.nbsdemo.com` |
+   | Data services | `data.<DOMAIN_NAME.TLD>` | `data.nbsdemo.com` |
+   | NiFi (use with caution) | `nifi.<DOMAIN_NAME.TLD>` | `nifi.nbsdemo.com` |
 
-1. Create CNAME, A, or ALIAS records that point to the correct hostname. For Amazon EKS, `EXTERNAL-IP` is an NLB hostname (for example, `xxxxxx.elb.us-east-2.amazonaws.com`). For Azure, `EXTERNAL-IP` is an IP address.
+   > NiFi has known security vulnerabilities. Add a NiFi DNS record only if you need to administer NiFi directly. Otherwise, omit it.
+   {: .important }
 
-   > NiFi has known security vulnerabilities. Only add a NiFi DNS entry if you need to administer it directly. Omit it otherwise.
-   {: .warning }
-
-   For the following example hostnames, replace `site_name.example_domain` with your site and domain names.
-
-   | Subdomain | Template | Example |
-   |---|---|---|
-   | NBS application | `app.site_name.example_domain.com` | `app.fts3.nbspreview.com` |
-   | Data services | `data.site_name.example_domain.com` | `data.fts3.nbspreview.com` |
-   | NiFi (use with caution) | `nifi.site_name.example_domain.com` | `nifi.fts3.nbspreview.com` |
-
-1. Verify DNS propagation:
+   To create the records in your cloud provider:
+   - **AWS:** In the AWS Management Console, go to **Route 53** > **Hosted Zones** and select your hosted zone. Make note of your **Hosted zone ID**, because the verification step uses it. Create or edit each A record from the table so that its **Route traffic to** target is the hostname of your Traefik load balancer.
+   - **Azure:** In the Azure Portal, go to **DNS Zones** and select your DNS zone. Create or edit each A record from the table so that it points to the IP address of your Traefik load balancer. <!-- [SME REVIEW] DEV-265 comment 40 (Josh to Mike Ward, unresolved): in an STLT Azure environment, does this record need the public IP address of the Application Gateway instead of the IP address of the internal load balancer? -->
+1. **Verify the records:** For each record you created, run the following `nslookup` command and verify that it does not print an error such as `server can't find`. Records typically propagate within 60 seconds. If you encounter an error, rerun the command periodically for up to 5 minutes until it prints no error:
 
    ```bash
-   dnslookup app.SITE_NAME.EXAMPLE_DOMAIN
+   nslookup app.<DOMAIN_NAME.TLD>
    ```
 
-   The resolved address should match the Traefik load balancer.
+   For Azure, verify that the command prints the IP address of your Traefik load balancer.
 
-### Verify the deployment
+   For AWS, the `nslookup` command prints other IP addresses, so run the following command instead to verify the record target. Fill in your values in the strings surrounded by angle brackets, and verify that the output is the hostname of your Traefik load balancer:
 
-Open the application in a browser and verify the following:
+   ```text
+   $ aws route53 list-resource-record-sets \
+     --hosted-zone-id <YOUR_AWS_ROUTE53_HOSTED_ZONE_ID> \
+     --query "ResourceRecordSets[?Name=='app.<DOMAIN_NAME.TLD>.'].AliasTarget.DNSName" \
+     --output text
+   [HASH]-[RANDOM-ID].elb.[YOUR-REGION].amazonaws.com
+   ```
 
-- Keycloak login page loads with full styling (CSS, JS)
-- Authentication works (login and logout)
-- NBS 7 application pages load correctly
-- Data ingestion endpoints respond
-- Static assets load with correct caching headers
-
-Verify response headers in browser DevTools (**F12** > **Network** tab):
-
-- `X-Frame-Options: Allow`
-- `Cross-Origin-Opener-Policy: same-origin`
-- `Cache-Control: max-age=1209600, immutable` (on static assets such as `.js` and `.css` files)
+<!-- The "Final validation of Traefik and Keycloak" section moved to the end of Deploy and configure Keycloak per DEV-265 comment 41, because it depends on Keycloak. -->
 
 ### Troubleshoot Traefik
 
-If issues persist after initial troubleshooting, contact support at <mailto:nbs@cdc.gov>.
+If you encounter issues when you deploy or verify Traefik, the following sections provide suggestions.
 
 #### Access the Traefik dashboard
 
 The Traefik dashboard lets you inspect routers, services, and middleware:
 
-```bash
-kubectl port-forward -n traefik deployment/traefik 9000:9000
-```
+1. Run the following command, which creates a secure, temporary network tunnel between your local machine and the `traefik` pod in your Kubernetes cluster. Leave the command running:
 
-Open `http://localhost:9000/dashboard/` in your browser.
+   ```text
+   $ kubectl port-forward -n traefik deployment/traefik 9000:9000
+   Forwarding from 127.0.0.1:9000 -> 9000
+   Forwarding from [::1]:9000 -> 9000
+   ```
+
+1. Go to `http://localhost:9000/dashboard/` in your browser to access the Traefik dashboard. The following screenshot shows the dashboard:
+
+   <!-- RELEASE CHECKLIST: UI screenshot; reverify against the Traefik version shipped with each release. -->
+   ![Traefik dashboard with entrypoints panels for ports 80, 443, and 9000, and status panels showing all HTTP routers, services, and middleware in a success state](images/traefik-dashboard.png)
+
+1. When you finish using the dashboard, press Ctrl+C in the terminal that is running the port-forward command to stop the tunnel.
 
 #### View Traefik logs
+
+To print the most recent Traefik log entries, run the following command:
 
 ```bash
 kubectl logs -n traefik deployment/traefik -c traefik --tail=100
 ```
 
-#### Common Traefik issues
+#### Common Traefik issue
 
-- **418 "I'm a Teapot" response:** No router matched the request. Verify that `ingressClassName: traefik` and the hostname match.
-- **502 Bad Gateway:** The backend service is not running or there is a port mismatch. Run `kubectl get svc` and `kubectl get endpoints` to check.
-- **TLS certificate errors:** Verify the TLS secret exists:
+- **502 Bad Gateway:** Run the following command and confirm that ports 8443 and 8000 are listed under the `ENDPOINTS` column:
 
-   ```bash
-   kubectl get secret <secretName>
-   ```
+  ```text
+  $ kubectl get endpoints -n traefik
+  NAME      ENDPOINTS                                     AGE
+  traefik   [POD-IP-ADDRESS]:8443,[POD-IP-ADDRESS]:8000   10m
+  ```
 
-- **Traefik pod showing 1/2:** The Linkerd sidecar is not injecting. Verify `linkerd.io/inject: enabled` is set in Traefik values.
-- **Traefik pod on wrong node (AKS with Windows nodes):** Add `nodeSelector: kubernetes.io/os: linux` to Traefik values.
+#### Get support
+
+If issues persist after you complete the troubleshooting steps, email [nbs@cdc.gov](mailto:nbs@cdc.gov).
 
 ## Configure cert-manager (optional)
 
-cert-manager creates TLS certificates for workloads in your cluster and renews the certificates before they expire. By default, cert-manager uses [Let's Encrypt](https://letsencrypt.org/) as the certificate authority for NiFi and modernization-api services.
+cert-manager is a core service that Terraform deploys when you provision your cloud environment. It creates TLS certificates for workloads in your cluster and renews the certificates before they expire. By default, cert-manager uses [Let's Encrypt](https://letsencrypt.org/) as the certificate authority for the NiFi and modernization-api services.
 
 > If you have manual certificates, skip steps 1 - 4 and store your certificates in Kubernetes secrets instead. For more information, see the [Kubernetes Secrets documentation](https://kubernetes.io/docs/concepts/configuration/secret/).
 {: .note }
@@ -238,70 +244,53 @@ cert-manager creates TLS certificates for workloads in your cluster and renews t
    kubectl apply -f cluster-issuer-prod.yaml
    ```
 
-1. Verify the cluster issuer is deployed and in a ready state:
+1. Verify that the cluster issuer is deployed and in a ready state. You should see `letsencrypt-production` with a `READY` status of `True`:
 
    ```bash
    kubectl get clusterissuer
    ```
 
-   You should see `letsencrypt-production` with a `READY` status of `True`.
+   <!-- RELEASE CHECKLIST: UI screenshot; reverify each release. -->
+   ![Terminal output of the kubectl get clusterissuer command showing letsencrypt-production with a READY status of True](images/2_lets-encrypt.png)
 
-   ![lets-encrypt](images/2_lets-encrypt.png)
+## Deploy Cluster Autoscaler (AWS only)
 
-## Configure Linkerd and Cluster Autoscaler
+The Cluster Autoscaler is a Helm chart that horizontally scales cluster nodes as needed.
 
-### Annotate the default namespace for Linkerd
+> AKS clusters usually include a built-in cluster autoscaler, so this section applies to AWS only.
+{: .note }
 
-Linkerd must be installed as part of the Terraform infrastructure deployment before completing these steps. Annotating the default namespace enables Linkerd mTLS on all microservices deployed in the following steps.
+1. Update the following values in `charts/cluster-autoscaler/values.yaml` with values from the AWS console:
 
-1. Annotate the default namespace:
-
-   ```bash
-   kubectl annotate namespace default "linkerd.io/inject=enabled"
+   ```yaml
+   clusterName: <EXAMPLE_EKS_CLUSTER_NAME>
+   autoscalingGroups:
+     - name: <EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>
+       maxSize: 5
+       minSize: 3
+   awsRegion: <YOUR_AWS_REGION>
    ```
 
-   ![linkerd](images/3_linkerd.png)
-
-1. Verify the annotation is in place:
+1. Install the chart:
 
    ```bash
-   kubectl get namespace default -o=jsonpath='{.metadata.annotations}'
+   helm repo add autoscaler https://kubernetes.github.io/autoscaler
+   helm upgrade --install cluster-autoscaler autoscaler/cluster-autoscaler \
+     -f ./cluster-autoscaler/values.yaml \
+     --namespace kube-system
    ```
 
-   The output should include `{"linkerd.io/inject":"enabled"}`.
+1. Verify that the Cluster Autoscaler pod is running:
 
-1. If this is an update rather than a new install, restart the application pods in the default namespace so that Linkerd sidecars are injected. Restarted pods should show `2/2` in the ready column.
+   ```bash
+   kubectl --namespace=kube-system get pods | grep cluster-autoscaler
+   ```
 
-### Install the Cluster Autoscaler
+## Next steps
 
-The Cluster Autoscaler is a Helm chart that horizontally scales cluster nodes as needed. Update the following values in `charts/cluster-autoscaler/values.yaml` with values from the AWS console:
+Continue to [Deploy and configure Keycloak](deploy-keycloak.html).
 
-```yaml
-clusterName: <EXAMPLE_EKS_CLUSTER_NAME>
-autoscalingGroups:
-  - name: <EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>
-    maxSize: 5
-    minSize: 3
-awsRegion: us-east-1
-```
-
-Install the chart:
-
-```bash
-helm repo add autoscaler https://kubernetes.github.io/autoscaler
-helm upgrade --install cluster-autoscaler autoscaler/cluster-autoscaler \
-  -f ./cluster-autoscaler/values.yaml \
-  --namespace kube-system
-```
-
-Verify the pod is running:
-
-```bash
-kubectl --namespace=kube-system get pods \
-  -l "app.kubernetes.io/name=aws-cluster-autoscaler,app.kubernetes.io/instance=cluster-autoscaler"
-```
-
-[nedss-helm-repo]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-release-page]: <https://github.com/CDCgov/NEDSS-Helm/releases/tag/{{ site.version_latest_tag }}>
-[nedss-helm-traefik-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/traefik>
+[nedss-helm-repo]: <https://github.com/CDCgov/NEDSS-Helm>
 [nedss-helm-cluster-issuer-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/cluster-issuer-prod.yaml>
+[helm-values-table]: <../../microservices-deployment/deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices>

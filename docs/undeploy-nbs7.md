@@ -39,9 +39,9 @@ helm list --namespace ingress-nginx
 helm uninstall --namespace ingress-nginx ingress-nginx
 ```
 
-## Empty the FluentBit S3 bucket
+## Empty the OTEL collector S3 bucket
 
-Empty the S3 bucket used by FluentBit for log storage before running `terraform destroy`. Terraform cannot delete a non-empty S3 bucket and the destroy will fail if this step is skipped. Complete this step manually in the AWS Console or using the AWS CLI.
+Empty the S3 bucket used by the OpenTelemetry (OTEL) collector (`splunk-otel-collector`) for log storage before running `terraform destroy`. Terraform cannot delete a non-empty S3 bucket and the destroy will fail if this step is skipped. Complete this step manually in the AWS Console or using the AWS CLI.
 
 ## Destroy Terraform-managed infrastructure
 

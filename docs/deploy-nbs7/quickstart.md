@@ -347,7 +347,7 @@ Follow these steps to clean up the environment.
 helm list --namespace ingress-nginx
 helm uninstall --namespace ingress-nginx ingress-nginx
 
-# Empty fluentbit s3 bucket manually
+# Empty the OTEL collector (splunk-otel-collector) s3 bucket manually
 
 terraform destroy
 ```

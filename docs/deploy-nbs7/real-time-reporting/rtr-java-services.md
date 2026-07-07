@@ -45,51 +45,33 @@ Deploying the Java service is a two-phase process. The first deployment seeds th
 Install the Helm chart with post-processing disabled:
 
 ```bash
-helm install reporting-pipeline-service . -f values.yaml
+helm install -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
 ```
 
 Verify the pods are running:
 
 ```bash
-kubectl get pods -l app=reporting-pipeline-service
+kubectl get deployment reporting-pipeline-service
 ```
 
 Expected output:
 
 ```text
-NAME                                                         READY   STATUS    RESTARTS   AGE
-reporting-pipeline-service-<hash>                            1/1     Running   0          2m
-```
-
-Check the service logs to confirm it is processing events:
-
-```bash
-kubectl logs -l app=reporting-pipeline-service --tail=50 -f
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+reporting-pipeline-service   1/1     1            1           16m
 ```
 
 ## Monitor seeding progress
 
-The `/actuator/lag` endpoint reports how far behind the service is in consuming its Kafka topics. Use it to determine when initial seeding is complete. When all lag values reach zero, seeding is done.
+The `/actuator/lag` endpoint reports how far behind the service is in consuming its Kafka topics. Use it to determine when initial seeding is complete.
 
-Use `kubectl port-forward` to reach the endpoint from your local machine:
+Retrieve information on reporting-pipeline-service lag in your browser. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
 
-```bash
-kubectl port-forward svc/reporting-pipeline-service 8080:8080
+```text
+   https://data.<exampledomain>/reporting-pipeline-svc/actuator/lag
 ```
 
-Then in a separate terminal:
-
-```bash
-curl -s http://localhost:8080/actuator/lag | jq .
-```
-
-To poll continuously until lag reaches zero:
-
-```bash
-watch -n 10 "curl -s http://localhost:8080/actuator/lag | jq ."
-```
-
-When all topic lag values are `0`, seeding is complete. Stop the port-forward (`Ctrl+C`) and proceed to the next step.
+When all "messagesQueued" values are `0`, seeding is complete.
 
 ## Final deployment
 
@@ -105,14 +87,14 @@ Reinstall the chart with post-processing enabled:
 1. Upgrade the release:
 
    ```bash
-   helm upgrade reporting-pipeline-service . -f values.yaml
-   ```
+   helm upgrade -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
+
 
 1. Verify the pods restarted cleanly:
 
    ```bash
    kubectl rollout status deployment/reporting-pipeline-service
-   kubectl get pods -l app=reporting-pipeline-service
+   kubectl get deployment reporting-pipeline-service
    ```
 
 1. Confirm the service is healthy. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):

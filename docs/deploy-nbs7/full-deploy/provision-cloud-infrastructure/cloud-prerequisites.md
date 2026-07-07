@@ -31,10 +31,10 @@ Before you provision cloud infrastructure for NBS 7, verify that your cloud envi
 Your cloud environment must meet the following requirements:
 
 - An existing AWS account or Azure subscription that contains your NBS 6 instance. Your NBS 6 version must be compatible with your target NBS 7 version in the NBS 6 and NBS 7 compatibility table. <!-- LINK: update to the compatibility page when it publishes (see STLT-536 for the single-mention strategy) -->
-- A configured DNS routing infrastructure.
+- A configured Domain Name System (DNS) routing infrastructure.
 - Permissions to create the following resources:
-  - **AWS:** security groups and IAM roles
-  - **Azure:** Network Security Groups (NSGs) and RBAC role assignments
+  - **AWS:** security groups and AWS Identity and Access Management (IAM) roles
+  - **Azure:** Network Security Groups (NSGs) and Azure Role-Based Access Control (RBAC) role assignments
 - Access to store Terraform state files in an S3 bucket (AWS) or a storage account (Azure).
 
 ## Hardware requirements
@@ -75,7 +75,7 @@ Confirm that network access is available from the NBS 7 components to the classi
 
 ### End-user authentication
 
-NBS 7 supports end-user authentication by integrating with a standards-based SSO system. It is designed to be deployed as a protected endpoint within your existing SSO ecosystem, and it can be configured to work with standards-compliant identity providers such as Okta and Active Directory.
+NBS 7 supports end-user authentication by integrating with a standards-based Single Sign-On (SSO) system. It is designed to be deployed as a protected endpoint within your existing SSO ecosystem, and it can be configured to work with standards-compliant identity providers such as Okta and Active Directory.
 
 This approach is similar to NBS 6, which does not authenticate users. Instead, NBS 6 delegates authentication to a security proxy that each STLT provides.
 

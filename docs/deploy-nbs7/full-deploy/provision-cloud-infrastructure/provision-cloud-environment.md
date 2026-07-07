@@ -30,7 +30,7 @@ Your NBS 7 environment requires access to your NBS 6 SQL Server database. Confir
 
 ### AWS
 
-If your database is in Amazon RDS, review the inbound rules on the security groups attached to your database instance. Confirm that the CIDR block you intend to use for your NBS 7 VPC (`modern-cidr`) is allowed to access the database. For example, if the `modern-cidr` is `10.20.0.0/16`, at least one rule in a security group associated with your database must allow MSSQL inbound access from that block:
+If your database is in Amazon RDS, review the inbound rules on the security groups attached to your database instance. Confirm that the Classless Inter-Domain Routing (CIDR) block you intend to use for your NBS 7 VPC (`modern-cidr`) is allowed to access the database. For example, if the `modern-cidr` is `10.20.0.0/16`, at least one rule in a security group associated with your database must allow MSSQL inbound access from that block:
 
 ![AWS security group inbound rules table with a rule of type MSSQL that allows TCP port 1433 access from the modern-cidr source block 10.20.0.0/16](images/myssql-inbound-from-modern-cidr.png)
 
@@ -123,7 +123,7 @@ Complete these steps to download the infrastructure code and prepare your enviro
    datacompare_namespace_and_service = ["default:data-compare-api-service", "default:data-compare-processor-service"]
    ```
 
-   This creates the IAM role (`<eks-cluster-name>-datacompare-role`) and S3 access policy that the Data Compare pods require. The role ARN is referenced during [Data Compare deployment](../../real-time-reporting/data-compare-tool.html).
+   This creates the AWS Identity and Access Management (IAM) role (`<eks-cluster-name>-datacompare-role`) and S3 access policy that the Data Compare pods require. The role ARN is referenced during [Data Compare deployment](../../real-time-reporting/data-compare-tool.html).
 
 ## Run Terraform provisioning
 

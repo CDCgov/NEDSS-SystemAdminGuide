@@ -144,7 +144,7 @@ The `nbs-ingress` Helm chart manages all ingress routing between the NBS 7 appli
 
 ### Create DNS records
 
-Create A records in your DNS service, such as Amazon Route 53 or Azure DNS, that point to the address of the Traefik load balancer:
+Create A records in your Domain Name System (DNS) service, such as Amazon Route 53 or Azure DNS, that point to the address of the Traefik load balancer:
 
 1. **Retrieve the load balancer address:** The `kubectl get svc -n traefik` command in [Deploy the Traefik controller](#deploy-the-traefik-controller) printed the address of the Traefik load balancer under the `EXTERNAL-IP` column. Rerun that command if you need to retrieve the address again.
 1. **Create the records:** Create an A record for each hostname in the following table. Replace `<DOMAIN_NAME.TLD>` with your site and domain names from the [Helm values reference for NBS 7 microservices][helm-values-table]:
@@ -228,7 +228,7 @@ If issues persist after you complete the troubleshooting steps, email [nbs@cdc.g
 
 ## Configure cert-manager (optional)
 
-cert-manager is a core service that Terraform deploys when you provision your cloud environment. It creates TLS certificates for workloads in your cluster and renews the certificates before they expire. By default, cert-manager uses [Let's Encrypt](https://letsencrypt.org/) as the certificate authority for the NiFi and modernization-api services.
+cert-manager is a core service that Terraform deploys when you provision your cloud environment. It creates Transport Layer Security (TLS) certificates for workloads in your cluster and renews the certificates before they expire. By default, cert-manager uses [Let's Encrypt](https://letsencrypt.org/) as the certificate authority for the NiFi and modernization-api services.
 
 > If you have manual certificates, skip steps 1 - 4 and store your certificates in Kubernetes secrets instead. For more information, see the [Kubernetes Secrets documentation](https://kubernetes.io/docs/concepts/configuration/secret/).
 {: .note }

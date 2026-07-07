@@ -76,6 +76,10 @@
 #
 #   /////////////////////////////////////////////////////////////////////////
 
+- term: AGW
+  definition: |-
+    See [Azure Application Gateway](#azure-application-gateway).
+
 - term: AIMS
   definition: |-
     **APHL Informatics Messaging System.** A platform managed by the Association of Public Health Laboratories (APHL) for public health data exchange and messaging.
@@ -83,6 +87,10 @@
 - term: AKS
   definition: |-
     See [Azure Kubernetes Service](#azure-kubernetes-service).
+
+- term: AKV
+  definition: |-
+    See [Azure Key Vault](#azure-key-vault).
 
 - term: AMG
   definition: |-
@@ -112,6 +120,10 @@
   definition: |-
     See [Microsoft Azure](#microsoft-azure).
 
+- term: Azure Application Gateway
+  definition: |-
+    An [Azure](#microsoft-azure) web traffic load balancer, also known as **AGW**. The [AWS](#aws) equivalent to Azure Application Gateway is a [Network Load Balancer (NLB)](#nlb).
+
 - term: Azure Blob Storage
   definition: |-
     An [Azure](#microsoft-azure) service for object storage. The [AWS](#aws) equivalent to Azure Blob Storage is [Amazon S3](#amazon-s3).
@@ -122,7 +134,7 @@
 
 - term: Azure Key Vault
   definition: |-
-    An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets. The [AWS](#aws) equivalent to Key Vault is [AWS KMS](#kms).
+    An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets, also known as **AKV**. The [AWS](#aws) equivalent to Key Vault is [AWS KMS](#kms).
 
 - term: Azure Kubernetes Service
   definition: |-
@@ -411,6 +423,10 @@
   definition: |-
     **Amazon Managed Streaming for Apache Kafka.** An [AWS](#aws)-managed version of [Kafka](#kafka), an open-source event streaming platform. The [Azure](#microsoft-azure) equivalent to MSK is [HDInsight](#hdinsight).
 
+- term: mTLS
+  definition: |-
+    **Mutual TLS.** A method of [TLS](#tls) authentication in which both the client and the server verify each other's identity using certificates, rather than only the client verifying the server as in standard TLS.
+
 - term: namespace (Kubernetes)
   definition: |-
     A logical partition within a [Kubernetes](#kubernetes) cluster used to isolate resources.
@@ -447,6 +463,10 @@
   definition: |-
     **National Institute of Standards and Technology Special Publication 800-53 (Rev. 5).** A risk-based framework providing a catalog of security and privacy controls for federal information systems.
 
+- term: NLB
+  definition: |-
+    **Network Load Balancer.** An [AWS](#aws) load balancing service that operates at the network layer, often used for high-throughput or low-latency workloads. The [Azure](#microsoft-azure) equivalent to NLB is [Azure Application Gateway](#azure-application-gateway).
+
 - term: NND
   definition: |-
     **National Notifiable Disease.** A disease or [condition](#condition) that [jurisdictions](#jurisdiction) are required by federal policy to report to [CDC](#cdc).
@@ -467,6 +487,10 @@
   definition: |-
     A disease or [condition](#condition) that providers and laboratories are legally required to report to public health authorities. [CDC](#cdc) maintains the national list. See also [reportable disease](#reportable-disease).
 
+- term: NSG
+  definition: |-
+    **Network Security Group.** An [Azure](#microsoft-azure) resource that controls inbound and outbound network traffic for other Azure resources. The [AWS](#aws) equivalent to an NSG is a security group.
+
 - term: observation
   definition: |-
     In [NBS](#nbs), a report received by a health department from an external source (such as a lab or provider). Observations include [lab reports](#lab-report) and [morbidity reports](#morbidity-report).
@@ -474,6 +498,10 @@
 - term: ODS / ODSE
   definition: |-
     **Operational Data Store (Enterprise).** The [NBS](#nbs) primary transactional database. Stores real-time case and investigation data. The "E" suffix reflects the current design iteration of the database schema.
+
+- term: OIDC
+  definition: |-
+    **OpenID Connect.** An authentication protocol that allows an application to verify a user's identity through an [IdP](#idp).
 
 - term: on-premises
   definition: |-

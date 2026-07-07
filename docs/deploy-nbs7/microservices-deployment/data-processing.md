@@ -30,7 +30,7 @@ Real Time Ingestion (RTI) is a microservice that picks up ELR data after it has 
 Use the ['data-processing-service' Helm chart][nedss-helm-data-processing-service-chart] to deploy the RTI service into your Kubernetes cluster. Before you begin, have your database credentials, Kafka endpoints, and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../full-deploy/kubernetes-setup/deploy-keycloak.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
 
 1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/data-processing-service/` from that repository.
-1. Confirm that a DNS entry for the data ingestion endpoint was created and points to the active Network Load Balancer (NLB) provisioned during [cluster infrastructure setup](../full-deploy/kubernetes-setup/deploy-core-services.html). Then set `dataingestion.uri` in `values.yaml` to that domain name. Use the value from the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records).
+1. Confirm that a DNS entry for the data ingestion endpoint was created and points to the active Network Load Balancer (NLB) provisioned during [core services deployment](../full-deploy/kubernetes-setup/deploy-core-services.html). Then set `dataingestion.uri` in `values.yaml` to that domain name. Use the value from the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records).
 1. Set the image repository and tag:
 
    ```yaml

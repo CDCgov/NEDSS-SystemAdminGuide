@@ -42,16 +42,6 @@ Complete these steps to download the infrastructure package and prepare your env
 
 1. Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values.
 
-   If you plan to deploy the Data Compare tool, also add the following variables to your `terraform.tfvars` before running `terraform apply`. If you deployed to a non-default namespace, you should adjust the `datacompare_namespace_and_service` value accordingly.
-
-   ```hcl
-   create_datacompare_irsa              = true
-   datacompare_s3_bucket_name           = "<your-s3-bucket-name>"
-   datacompare_s3_bucket_keyname_prefix = "<your-key-prefix>"
-   datacompare_namespace_and_service = ["default:data-compare-api-service", "default:data-compare-processor-service"]
-   ```
-
-   This creates the IAM role (`<eks-cluster-name>-datacompare-role`) and S3 access policy required by the Data Compare pods. The role ARN is referenced during [Data Compare deployment](../../deploy-nbs7/real-time-reporting/data-compare-tool.html).
 
 ## Validate AWS access and network prerequisites
 

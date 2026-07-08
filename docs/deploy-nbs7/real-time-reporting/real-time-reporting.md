@@ -66,14 +66,9 @@ To reduce risk, consider setting up RTR in a testing environment before moving t
 
 ## Create service user
 
-Complete the following steps to create the database user that the RTR requires.
-
-Running RTR requires a SQL Server login account for two distinct purposes: configuring the database and running the application services.
-
 ### Account Permissions
 
 1. **Name**: Any name works, but we recommend using a name descriptive to the role, such as `rtr-service-user`.
-1. **Purpose**: The application services reading source database and writing to the reporting database.
 1. **Databases Permissions**:
   - `NBS_ODSE`: `db_datareader`
   - `NBS_SRTE`: `db_datareader`
@@ -81,7 +76,7 @@ Running RTR requires a SQL Server login account for two distinct purposes: confi
 
 ## Enable Change Data Capture
 
-Change Data Capture (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Enabling CDC on these databases does require `sysadmin` level permissions, so be sure to run the bootstrap script with a `sysadmin`account.  For more information on SQL Server Change Data Capture, please review [Microsoft's official documentation](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/enable-and-disable-change-data-capture-sql-server?view=sql-server-ver17).
+[Change Data Capture](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver17) (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Enabling CDC on these databases does require `sysadmin` level permissions, so be sure to run the bootstrap script with a `sysadmin` account.
 
 1. Apply bootstrap script [101 to enable CDC on NBS_ODSE and NBS_SRTE](https://github.com/CDCgov/NEDSS-DataReporting/blob/v7.13/bootstrap/101-enable_cdc_on_odse_srte_databases-001.sql).
 

@@ -10,7 +10,7 @@ redirect_from:
 
 # Test RTI API integration for Data Processing
 
-Use this page to validate Real Time Ingestion (RTI) by sending ELR data through the Data Ingestion endpoint and verifying RTI processing outcomes.
+Use this page to validate Real Time Ingestion (RTI) by sending ELR data through the data ingestion endpoint and verifying RTI processing outcomes.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -37,7 +37,7 @@ This section covers submitting an ELR payload and triggering RTI processing.
 
 ## Validate ingestion and RTI processing status
 
-Use the DI status endpoint (`/api/elrs/status-details`) to verify processing status after submission.
+Use the DI API status endpoint (`/api/elrs/status-details`) to verify processing status after submission.
 
 - Legacy flow status values in `NBS_Interface`: `QUEUED`, `FAILED`, `SUCCESS`.
 - RTI flow status values in `NBS_Interface`: `RTI_QUEUED`, `RTI_FAILURE`, `RTI_SUCCESS_STEP_N`.

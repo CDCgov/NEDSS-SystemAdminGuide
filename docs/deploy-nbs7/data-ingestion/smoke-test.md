@@ -3,7 +3,7 @@ title: Smoke test
 layout: page
 parent: Deploy data ingestion service (DI API)
 nav_order: 2
-description: Test DI API endpoints using Postman to verify token generation, data ingestion, and status tracking.
+description: Test Data Ingestion API (DI API) endpoints using Postman to verify token generation, data ingestion, and status tracking.
 redirect_from:
   - /docs/6_microservices_deployment/6b_data_ingestion_smoke_test.html
   - /docs/6_microservices_deployment/6b_data_ingestion_smoke_test/
@@ -24,8 +24,8 @@ redirect_from:
 
 ## Overview
 
-The Data Ingestion service is integrated with the Keycloak server to authenticate the DI service's public API endpoints.
-As the **Client Credentials Grant type flow** is used for authentication in the DI Service, we require the **Client Id** and **Client Secret** values to create the JWT token and make API calls.
+The data ingestion service is integrated with the Keycloak server to authenticate its public API endpoints.
+As the **Client Credentials Grant type flow** is used for authentication in the data ingestion service, we require the **Client Id** and **Client Secret** values to create the JWT token and make API calls.
 
 ## Prerequisite
 
@@ -40,13 +40,13 @@ As the **Client Credentials Grant type flow** is used for authentication in the 
 
 1. Only ELR Data that are HL7 messages with ORU RO1 Data type are in scope.
 2. Only HL7 messages with versions 2.3.1 and 2.5.1 are in scope.
-3. The DI service supports the transmit of HL7 messages with FHS header segments.
+3. The data ingestion service supports the transmit of HL7 messages with FHS header segments.
 
-**Note:** Posting the same HL7 message more than once is allowed, but be aware that due to a duplicate check, the validation will fail within the Data Ingestion system.
+**Note:** Posting the same HL7 message more than once is allowed, but be aware that due to a duplicate check, the validation will fail within the data ingestion system.
 
 ## Run Data Ingestion Smoke Test
 
-Open Postman application and click on import option. A pop up window shows up and then select `New-Data-Ingestion.postman_collection.json` file included in the release package and click on open to load Data Ingestion collection that has all API's related to the Data Ingestion service.
+Open Postman application and select import option. A pop up window shows up and then select `New-Data-Ingestion.postman_collection.json` file included in the release package and select open to load the Data Ingestion collection that has all API's related to the data ingestion service.
 
 ### Step 1: Token Generation API
 
@@ -55,7 +55,7 @@ Update the `clientid` and `clientsecret` values and then click **Send** to gener
 
 ![data-ingestion-token-generation](images/data-ingestion-token-generation-api.jpg)
 
-> **Note:** Tokens expire after 1 hour. They must be regenerated using the same token endpoint after 1 hour or when they expire in order to make DI Service API calls.
+> **Note:** Tokens expire after 1 hour. They must be regenerated using the same token endpoint after 1 hour or when they expire in order to make DI API calls.
 
 ### Step 2: Ingesting Data API
 
@@ -83,4 +83,4 @@ The below API provides the ELR Ingestion status:
 
 ![data-ingestion-status-nbs6](images/data-ingestion-status-nbs6.jpg)
 
-**This concludes the smoke test where the user posted the HL7 message via Data ingestion service which validated the incoming data.**
+**This concludes the smoke test where the user posted the HL7 message via data ingestion service which validated the incoming data.**

@@ -177,7 +177,7 @@ The NBS realm contains four service clients. `di-keycloak-client` is seeded with
 
 | Client | Import file | Used by |
 |---|---|---|
-| `di-keycloak-client` | Imported with the NBS realm; no separate import needed | Data ingestion service |
+| `di-keycloak-client` | Imported with the NBS realm; no separate import needed | data ingestion service |
 | `nnd-keycloak-client` | [`05-nbs-users-nnd-client.json`][nedss-helm-keycloak-nnd-client] | NND service |
 | `srte-data-keycloak-client` | [`06-nbs-users-srte-data-client.json`][nedss-helm-keycloak-srte-client] | SRTE data access |
 | `case-notification-service` | [`09-nbs-users-case-notification-service.json`][nedss-helm-keycloak-case-notification-client] | Case notification service |

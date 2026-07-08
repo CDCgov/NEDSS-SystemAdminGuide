@@ -3,7 +3,7 @@ title: API testing
 layout: page
 parent: Deploy data ingestion service (DI API)
 nav_order: 4
-description: Diagnostics and troubleshooting guide for DI API endpoints and operations.
+description: Diagnostics and troubleshooting guide for Data Ingestion API (DI API) endpoints and operations.
 redirect_from:
   - /docs/6_microservices_deployment/6d_di_data_ingestion_API_testing.html
   - /docs/6_microservices_deployment/6d_di_data_ingestion_API_testing/

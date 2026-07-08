@@ -26,5 +26,5 @@ If you followed the Quick start, you have already completed the data ingestion a
 {: .note }
 
 1. **[Deploy real-time reporting](deploy-nbs7/real-time-reporting/real-time-reporting.html):** Install components that stream `ODSE` and `SRTE` changes to the reporting database.
-1. **[Deploy data ingestion (DI) API](deploy-nbs7/data-ingestion/data-ingestion.html):** Install the DI API data transit layer for writing data to NBS.
+1. **[Deploy data ingestion service (DI API)](deploy-nbs7/data-ingestion/data-ingestion.html):** Install the DI API data transit layer for writing data to NBS.
 1. **[Validate the deployment](deploy-nbs7/validate-the-deployment.html):** Perform smoke tests and inspect monitoring, console, and admin interfaces.

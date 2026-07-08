@@ -47,67 +47,50 @@ To reduce risk, consider setting up RTR in a testing environment before moving t
    FROM NBS_ODSE.dbo.NBS_Release;
    ```
 
-   Or:
-
-   ```sql
-   USE [NBS_ODSE];
-   SELECT * FROM NBS_Configuration WHERE config_key = 'CODE_BASE';
-   ```
-
-1. Verify that the following classic ETL batch jobs have completed successfully:
-   - `MasterETL.bat`
+1. Run the ETL jobs one final time and make sure they complete successfully.
    - `PHCMartETL.bat`
+   - `MasterETL.bat`
    - `covid19ETL.bat`
+
+1. Choose a reporting database. RTR can write to your existing `RDB` database, or to a new database you create by duplicating `RDB`. Pick one option and use it consistently throughout this guide.
 
    > Back up the `RDB` database before you proceed. This step cannot be undone.
    {: .warning }
 
-1. Choose a reporting database. RTR can write to your existing `RDB` database, or to a new database you create by duplicating `RDB`. Pick one option and use it consistently throughout this guide.
-
    - **Use your existing RDB database** — RTR takes over writing to `RDB`. Turn off the classic ETL batch jobs and proceed to the next step. MasterETL remains available for manual recovery runs if needed.
 
-   - **Create a new reporting database** (recommended for first installs) — Duplicate your existing `RDB` and point RTR at the copy. This lets you run RTR alongside MasterETL to compare results before fully committing, then turn off MasterETL only once you are satisfied.
+   - **Create a new reporting database** (recommended) — Duplicate your existing `RDB`, this lets you run RTR alongside MasterETL to compare results before fully committing.  You can use any name for this reporting database, but for the remainder of this guide, we'll refer to it as `RDB_MODERN`.  The exact steps for database duplication depend on your SQL Server version and hosting environment.  If this process is unfamiliar, see [Microsoft's documentation on backup and restore operations](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases?view=sql-server-ver17).
 
-     If you choose this option, note the following before proceeding:
-     - The new database cannot be used for legacy SAS reporting.
-     - Run MasterETL one final time to make sure your `RDB` is fully up to date, then duplicate it under a new name. The exact steps depend on your SQL Server version and hosting environment. If this process is unfamiliar, see [Microsoft's documentation on backup and restore operations](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases?view=sql-server-ver17).
+   > If using a new reporting database, you must use the new reporting execution server to run reports (TODO: add link)
+   {: .note }
 
-## Create service users and secrets
+## Create service user
 
-Complete the following steps to create the database users, Kubernetes secrets, and database objects that the RTR pipeline requires before [Change Data Capture](#enable-change-data-capture) can be enabled.
+Complete the following steps to create the database user that the RTR requires.
 
-Running the RTR pipeline requires SQL Server login accounts for two distinct purposes: running the bootstrap scripts and schema migrations, and running the application services. Depending on your environment, these can be two separate accounts or collapsed into one.
+Running RTR requires a SQL Server login account for two distinct purposes: configuring the database and running the application services.
 
-### Accounts at a Glance
+### Account Permissions
 
-| Account | Purpose | Databases | Key Permissions |
-| :--- | :--- | :--- | :--- |
-| **Admin account** (e.g. `rtr-admin`) | Liquibase migrations | `NBS_ODSE`, `NBS_SRTE`, `RDB / RDB_MODERN`  | All NBS DBs: `db_owner` |
-| **Service account** (e.g. `rtr-service-user`) | Application services reading source data and writing to the reporting database | `NBS_ODSE`, `NBS_SRTE`, `RDB / RDB_MODERN` | ODSE/SRTE: `db_datareader`<br>RDB/RDB_MODERN: `db_owner` |
-
-Two accounts cover everything: `rtr-admin` handles migrations, `rtr-service-user` runs the application. A single account with both sets of permissions also works if your environment doesn't require separation.
-
-1. **Create Kubernetes secrets for each sql user.** Each secret should include the database username and password. Script location: [NEDSS-DataReporting/create-kubernetes-secrets][nedss-helm-k8-secrets-manifest]. For steps to create secrets, see [Create secrets in your cluster](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-secrets-in-your-cluster).
+1. **Name**: Any name works, but we recommend using a name descriptive to the role, such as `rtr-service-user`.
+1. **Purpose**: The application services reading source database and writing to the reporting database.
+1. **Databases Permissions**:
+  - `NBS_ODSE`: `db_datareader`
+  - `NBS_SRTE`: `db_datareader`
+  - `RDB` / `RDB_MODERN`: `db_owner`
 
 ## Enable Change Data Capture
 
-Change Data Capture (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Enabling CDC on these databases does require `sysadmin` level permissions, because of this, we have not automated its installation and have instead provided two scripts to manually apply.  For more information on SQL Server Change Data Capture, please review [Microsoft's official documentation](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/enable-and-disable-change-data-capture-sql-server?view=sql-server-ver17).
+Change Data Capture (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Enabling CDC on these databases does require `sysadmin` level permissions, so be sure to run the bootstrap script with a `sysadmin`account.  For more information on SQL Server Change Data Capture, please review [Microsoft's official documentation](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/enable-and-disable-change-data-capture-sql-server?view=sql-server-ver17).
 
-1. Apply bootstrap script [101 to enable CDC on NBS_ODSE](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/bootstrap/101-enable_cdc_on_odse_database-001.sql).
-
-1. Apply bootstrap script [102 to enable CDC on NBS_SRTE](https://github.com/CDCgov/NEDSS-DataReporting/blob/main/bootstrap/102-enable_cdc_on_srte_database-001.sql).
+1. Apply bootstrap script [101 to enable CDC on NBS_ODSE and NBS_SRTE](https://github.com/CDCgov/NEDSS-DataReporting/blob/v7.13/bootstrap/101-enable_cdc_on_odse_srte_databases-001.sql).
 
 ## Deploy RTR services
 
 Now that you have completed database setup and onboarding, deploy the RTR services in the following order. Some services depend on the previous ones completing successfully before deployment begins.
 
-> Confirm that Kubernetes secrets exist for each RTR service user and the admin user before deploying.
-{: .important }
-
 1. [Debezium](../../deploy-nbs7/real-time-reporting/debezium.html)
 1. [Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html)
 1. [Java service](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
-
-[nedss-helm-k8-secrets-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/nbs-secrets.yaml>
 
 ---

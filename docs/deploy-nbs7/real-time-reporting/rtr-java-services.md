@@ -31,14 +31,7 @@ Deploying the Java service is a two-phase process. The first deployment seeds th
 
 1. Locate the Helm chart for the RTR Java service in the [NEDSS-Helm repository][nedss-helm-rtr-chart].
 
-1. Copy the default `values.yaml` from the chart and fill in the required values for your environment — database connection, Kafka cluster, image repository, and any environment-specific overrides.
-
-1. Set `featureFlag.postProcessingEnable` to `"false"` for the initial deployment. This is required so that the first run seeds the `nrt_*` caching tables without triggering post-processing before the data is ready:
-
-   ```yaml
-   featureFlag:
-     postProcessingEnable: "false"
-   ```
+1. Edit the "EXAMPLE*" placeholder values in `values.yaml` and replace with the correct values for your environment — database connection, Kafka cluster, and any environment-specific overrides.
 
 ## Initial deployment
 

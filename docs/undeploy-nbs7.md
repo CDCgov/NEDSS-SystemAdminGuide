@@ -41,6 +41,8 @@ helm uninstall --namespace ingress-nginx ingress-nginx
 
 ## Empty the OTEL collector S3 bucket
 
+<!-- [SME REVIEW] Confirm with Josh whether Azure deployments run splunk-otel-collector or use Azure Monitor natively; the Azure observability Terraform module provisions Azure Monitor resources only. -->
+
 Empty the S3 bucket used by the OpenTelemetry (OTEL) collector (`splunk-otel-collector`) for log storage before running `terraform destroy`. Terraform cannot delete a non-empty S3 bucket and the destroy will fail if this step is skipped. Complete this step manually in the AWS Console or using the AWS CLI.
 
 ## Destroy Terraform-managed infrastructure

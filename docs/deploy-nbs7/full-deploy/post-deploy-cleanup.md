@@ -23,7 +23,7 @@ The following table contains common cleanup tasks that might not apply to your d
 | Task | Notes |
 |:---|:---|
 | Remove or rotate temporary deployment credentials | Revoke any service account tokens, API keys, or database passwords created specifically for the installation process |
-| Remove installer or Kubernetes setup jobs | Delete one-time Jobs or Pods that ran during Kubernetes setup and are no longer needed |
+| Remove installer or Kubernetes setup jobs | Delete one-time jobs or pods that ran during Kubernetes setup and are no longer needed |
 | Remove migration environment resources | Decommission dev or staging environments used during the cutover if they are no longer needed |
 | Archive NBS 6 resources | Once production NBS 7 is confirmed stable, follow your jurisdiction's data retention policy for NBS 6 application and configuration artifacts |
 | Review IAM roles and permissions | Remove any over-permissioned roles granted during deployment; confirm only operations-level access remains |

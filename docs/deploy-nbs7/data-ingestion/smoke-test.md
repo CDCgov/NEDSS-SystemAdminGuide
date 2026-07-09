@@ -24,7 +24,7 @@ redirect_from:
 
 ## Overview
 
-The data ingestion service is integrated with the Keycloak server to authenticate its public API endpoints.
+The data ingestion service is integrated with the Keycloak server to authenticate its public Data Ingestion API (DI API) endpoints.
 As the **Client Credentials Grant type flow** is used for authentication in the data ingestion service, we require the **Client Id** and **Client Secret** values to create the JWT token and make API calls.
 
 ## Prerequisite

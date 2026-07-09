@@ -74,7 +74,7 @@ Run the following SQL scripts before deploying the data ingestion service.
 
 ## Deploy the data ingestion service using Helm
 
-1. Locate the `dataingestion-service` Helm chart in the [NEDSS-Helm repository][nedss-helm-dataingestion-service-chart]. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, **MSK (Kafka) bootstrap server**, and **ingress host** values in `values.yaml`.
+1. Locate the Data Ingestion Service Helm chart in the [NEDSS-Helm repository][nedss-helm-dataingestion-service-chart]. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, **MSK (Kafka) bootstrap server**, and **ingress host** values in `values.yaml`.
 
 1. Confirm that DNS entries for the following host were created and point to the Network Load Balancer (NLB) in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned in the base install steps). Make this change in your authoritative DNS service (for example, Route 53).
    Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [Deploy Traefik ingress controller](../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller) for reference.

@@ -39,7 +39,7 @@ The cloud environment for hosting NBS 7 is set up and configured using an [infra
 
 - The [Terraform](https://www.terraform.io/) modules provided will establish the NBS infrastructure within a dedicated VPC. This includes deploying Amazon Elastic Kubernetes Service (Amazon EKS), nodes, EBS storage, and provisioning EFS for persistent storage.
 - Terraform will also handle the creation of essential networking resources, such as private/public subnets, NAT gateways, Internet Gateways, and VPC peering.
-- Additionally, Terraform will automate the setup of [Helm](https://helm.sh/) charts, including Fluent Bit and Cert Manager, and configure AWS-managed services such as AMP and AMG.
+- Additionally, Terraform will automate the setup of [Helm](https://helm.sh/) charts, including Fluent Bit and Cert Manager, and configure AWS-managed services such as AMP and AMG. <!-- [SME REVIEW] Stale: Fluent Bit replaced by OTEL collector; update with the architecture page pass (STLT-536). -->
 
 ## NBS Microservices
 
@@ -61,7 +61,7 @@ Serving as the entry point into the [Kubernetes](https://kubernetes.io/) cluster
 - **Cert Manager**: This tool automates TLS certificate management and will be integrated into the infrastructure via [Terraform](https://www.terraform.io/). The certificate issuer connects to Let's Encrypt CA by default, and will be installed using YAML manifests and `kubectl` commands.
 - **Apache NiFi**: As an ETL tool, Apache NiFi populates Elasticsearch indices from the NBS database. Deployment of NiFi will follow [Helm](https://helm.sh/) charts and values files.
 - **Elasticsearch**: NBS relies on Elasticsearch for lightning-fast searches. The deployment of Elasticsearch will use [Helm](https://helm.sh/) chart and values files.
-- **Fluent Bit**: Fluent Bit serves as the log aggregator, collecting logs from various microservices and [Kubernetes](https://kubernetes.io/) components and, by default, pushing them to designated S3 buckets and CloudWatch.
+- **Fluent Bit**: Fluent Bit serves as the log aggregator, collecting logs from various microservices and [Kubernetes](https://kubernetes.io/) components and, by default, pushing them to designated S3 buckets and CloudWatch. <!-- [SME REVIEW] Stale: Fluent Bit replaced by OTEL collector; update with the architecture page pass (STLT-536). -->
 
 ## Data ingestion service
 

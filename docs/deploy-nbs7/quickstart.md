@@ -272,7 +272,7 @@ Update the required parameters in `values.yaml` by following the [NBS Gateway ch
 helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gateway
 ```
 
-### Deploy Data Ingestion Service
+## Deploy the data ingestion service
 
 Create the Data Ingest database and set user permissions before deploying data ingestion:
 
@@ -303,7 +303,7 @@ ALTER ROLE [db_owner] ADD MEMBER [nbs_ods]
 GO
 ```
 
-Update the required parameters in `values.yaml` by following the [Data Ingestion Service chart values table][nedss-helm-dataingestion-service-readme]
+Update the required parameters in `values.yaml` by following the [data ingestion service chart values table][nedss-helm-dataingestion-service-readme]
 
 ```bash
 helm install dataingestion-service -f ./dataingestion-service/values.yaml dataingestion-service

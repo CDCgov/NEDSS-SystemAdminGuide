@@ -30,7 +30,7 @@ Before you provision cloud infrastructure for NBS 7, verify that your cloud envi
 
 Your cloud environment must meet the following requirements:
 
-- An existing AWS account or Azure subscription that contains your NBS 6 instance. Your NBS 6 version must be compatible with your target NBS 7 version in the NBS 6 and NBS 7 compatibility table. <!-- LINK: update to the compatibility page when it publishes (see STLT-536 for the single-mention strategy) -->
+- An existing AWS account or Azure subscription that contains your NBS 6 instance.
 - A configured Domain Name System (DNS) routing infrastructure.
 - Permissions to create the following resources:
   - **AWS:** security groups and AWS Identity and Access Management (IAM) roles
@@ -51,7 +51,7 @@ Confirm that your existing NBS 6 instance meets the following version requiremen
 
 | Software | Version | Comments |
 |----------|---------|----------|
-| NBS Classic | 6.0.18.1 or later <!-- [SME REVIEW] Version conflict: Josh's review doc says 6.0.18.1+; the previous page said 6.0.16+. Reconcile with the open NBS 6 version question (6.0.16.1 / 6.0.18.1 / 6.0.16.2) before publishing. --> | Reuse your current NBS instance |
+| NBS Classic | A supported NBS 6 version. See the [Supported NBS versions](../../../supported-versions.html) page. | Reuse your current NBS instance |
 | SQL Server | 2017 or later | Reuse your current NBS instance |
 
 ## Management workstation setup

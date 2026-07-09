@@ -11,8 +11,8 @@ description: Overview of the NBS system administration guide, including preparat
 The National Electronic Disease Surveillance System (NEDSS) Base System (NBS) is a CDC-developed disease surveillance system that health departments use to manage reportable disease data. NBS 7 is the modernized version of the platform, designed for deployment and operation on cloud-based infrastructure. This documentation supports the administration lifecycle for NBS 7, including planning, deployment, validation, and maintenance.
 {: .fw-300}
 
-> The content in this guide reflects NBS {{ site.version_latest }}. For procedures from earlier releases, see **Previous Versions** in the sidebar.
-{: .note }
+> The content in this guide reflects NBS {{ site.version_latest }}. For procedures from earlier releases, see **Previous Versions** in the sidebar. Each NBS 7 release supports specific NBS 6 versions. Before you begin any deployment or upgrade, verify that your NBS 6 version is supported for your target NBS 7 version on the [Supported NBS versions](/docs/supported-versions.html) page.
+{: .important }
 
 ---
 

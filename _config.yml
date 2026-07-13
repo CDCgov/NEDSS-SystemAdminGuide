@@ -18,6 +18,7 @@ description: National Electronic Disease Surveillance System Base System (NBS 7)
 # hardcoded values before moving files to _previous_versions/.
 version_latest: "7.13"
 version_latest_tag: "v7.13.0"
+version_k8s: "1.35"
 
 # Canonical URL for the deployed site — used by JTD to build absolute links and by the Jekyll sitemap plugin.
 url: https://cdcgov.github.io

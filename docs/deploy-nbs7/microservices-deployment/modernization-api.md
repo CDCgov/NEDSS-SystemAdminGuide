@@ -1,7 +1,7 @@
 ---
 title: Modernization API
 layout: page
-parent: 4. Deploy NBS 7 microservices
+parent: Deploy NBS 7 microservices
 nav_order: 2
 redirect_from:
   - /docs/6_microservices_deployment/2_modernization_api.html

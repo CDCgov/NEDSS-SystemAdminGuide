@@ -1,7 +1,7 @@
 ---
 title: NiFi
 layout: page
-parent: 4. Deploy NBS 7 microservices
+parent: Deploy NBS 7 microservices
 nav_order: 3
 redirect_from:
   - /docs/6_microservices_deployment/3_nifi.html

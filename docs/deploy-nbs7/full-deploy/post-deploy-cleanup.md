@@ -1,5 +1,5 @@
 ---
-title: 5. Post-deploy cleanup
+title: Post-deploy cleanup
 layout: page
 parent: NBS 7 full deployment
 nav_order: 5

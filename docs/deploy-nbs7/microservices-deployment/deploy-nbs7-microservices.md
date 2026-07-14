@@ -1,5 +1,5 @@
 ---
-title: 4. Deploy NBS 7 microservices
+title: Deploy NBS 7 microservices
 layout: page
 parent: NBS 7 full deployment
 nav_order: 4

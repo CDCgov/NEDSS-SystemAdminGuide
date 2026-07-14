@@ -1,5 +1,5 @@
 ---
-title: 1. NBS 7 prerequisites
+title: NBS 7 prerequisites
 layout: page
 parent: NBS 7 full deployment
 nav_order: 1

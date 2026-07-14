@@ -1,7 +1,7 @@
 ---
-title: 2a. Cloud prerequisites
+title: Cloud prerequisites
 layout: page
-parent: 2. Provision cloud infrastructure
+parent: Provision cloud infrastructure
 nav_order: 1
 description: Verify your AWS or Azure account, hardware, software, and network requirements before you provision the cloud environment for NBS 7.
 redirect_from:

@@ -1,5 +1,5 @@
 ---
-title: 2. Provision cloud infrastructure
+title: Provision cloud infrastructure
 layout: page
 parent: NBS 7 full deployment
 nav_order: 2

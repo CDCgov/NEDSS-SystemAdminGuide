@@ -138,7 +138,7 @@ Run the following SQL scripts before deploying the data ingestion service.
      filePaths: "/"
    ```
 
-For more information about SFTP support, please see: [data-ingestion-sftp-support](../microservices-deployment/images/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)
+   For more information about SFTP support, see [data-ingestion-sftp-support](../microservices-deployment/images/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)
 
 1. Install the data ingestion service:
 

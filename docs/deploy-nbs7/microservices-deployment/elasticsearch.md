@@ -1,7 +1,7 @@
 ---
 title: Elasticsearch
 layout: page
-parent: 4. Deploy NBS 7 microservices
+parent: Deploy NBS 7 microservices
 nav_order: 1
 redirect_from:
   - /docs/6_microservices_deployment/1_elasticsearch.html

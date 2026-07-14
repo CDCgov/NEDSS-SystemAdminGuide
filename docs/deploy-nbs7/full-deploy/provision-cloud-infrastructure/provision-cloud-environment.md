@@ -1,7 +1,7 @@
 ---
-title: 2b. Provision cloud environment
+title: Provision cloud environment
 layout: page
-parent: 2. Provision cloud infrastructure
+parent: Provision cloud infrastructure
 nav_order: 2
 description: Use Terraform to provision the network, Kubernetes cluster, and supporting services for NBS 7 in AWS or Azure.
 redirect_from:

@@ -1,7 +1,7 @@
 ---
 title: NBS Gateway
 layout: page
-parent: 4. Deploy NBS 7 microservices
+parent: Deploy NBS 7 microservices
 nav_order: 5
 redirect_from:
   - /docs/6_microservices_deployment/4_nbs_gateway.html

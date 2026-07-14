@@ -1,5 +1,5 @@
 ---
-title: 3. Set up Kubernetes
+title: Set up Kubernetes
 layout: page
 parent: NBS 7 full deployment
 nav_order: 3

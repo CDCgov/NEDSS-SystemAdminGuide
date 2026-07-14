@@ -1,7 +1,7 @@
 ---
-title: 3b. Deploy and configure Keycloak
+title: Deploy and configure Keycloak
 layout: page
-parent: 3. Set up Kubernetes
+parent: Set up Kubernetes
 nav_order: 2
 has_children: false
 nav_enabled: true

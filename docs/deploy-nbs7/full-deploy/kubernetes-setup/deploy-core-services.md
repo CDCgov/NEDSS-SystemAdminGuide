@@ -1,7 +1,7 @@
 ---
-title: 3a. Deploy core services
+title: Deploy core services
 layout: page
-parent: 3. Set up Kubernetes
+parent: Set up Kubernetes
 nav_order: 1
 has_children: false
 nav_enabled: true

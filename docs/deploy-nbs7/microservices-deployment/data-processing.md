@@ -1,7 +1,7 @@
 ---
 title: Data processing
 layout: page
-parent: 4. Deploy NBS 7 microservices
+parent: Deploy NBS 7 microservices
 nav_order: 6
 has_children: true
 redirect_from:

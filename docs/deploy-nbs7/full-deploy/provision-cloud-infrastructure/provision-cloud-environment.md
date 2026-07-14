@@ -102,9 +102,8 @@ Complete these steps to download the infrastructure code and prepare your enviro
    ```text
    $ ls -F | sort
    0-landing-zone/
-   1-nbs6/
-   2-nbs7/
-   3-applications/
+   1-nbs7/
+   2-applications/
    ```
 
    The [README in the NEDSS-Infrastructure repository][nedss-infra-readme] explains the layered Terraform design.
@@ -114,7 +113,7 @@ Complete these steps to download the infrastructure code and prepare your enviro
 
 1. In each Terraform layer directory, update the `terraform.tfvars` and `terraform.tf` files with your environment-specific values. The commentary in those files provides detailed instructions. Do not edit files in the individual Terraform modules.
 
-   If you plan to deploy the Data Compare tool on AWS, also add the following variables to your `terraform.tfvars` before you apply. If you deploy to a non-default namespace, adjust the `datacompare_namespace_and_service` value accordingly. <!-- [SME REVIEW] Confirm which Terraform layer's tfvars file receives the Data Compare variables in the layered structure (2-nbs7 or 3-applications). This block predates the layered design. -->
+   If you plan to deploy the Data Compare tool on AWS, also add the following variables to your `terraform.tfvars` before you apply. If you deploy to a non-default namespace, adjust the `datacompare_namespace_and_service` value accordingly. <!-- [SME REVIEW] Confirm which Terraform layer's tfvars file receives the Data Compare variables in the layered structure (`1-nbs7` or `2-applications`). This block predates the layered design. -->
 
    ```hcl
    create_datacompare_irsa              = true

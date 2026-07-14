@@ -3,6 +3,7 @@ title: Deploy NBS 7
 layout: page
 nav_order: 3
 has_children: true
+has_toc: false
 description: Step-by-step instructions for deploying NBS 7 on AWS or Azure.
 ---
 

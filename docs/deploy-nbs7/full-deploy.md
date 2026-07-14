@@ -7,7 +7,7 @@ has_children: true
 description: Complete step-by-step instructions for deploying NBS 7, from prerequisites through post-deployment cleanup.
 ---
 
-# NBS 7 full deployment
+# Deploy the full NBS {{ site.version_latest }} environment
 
 This section walks you through the NBS 7 deployment process in full detail, from prerequisites and infrastructure setup through microservices deployment and cleanup. If you are familiar with deploying NBS 7, or with your cloud provider, Terraform, Kubernetes, and Helm, you can use the [Quick start](quickstart.html) instead. Both paths create the same infrastructure and services.
 

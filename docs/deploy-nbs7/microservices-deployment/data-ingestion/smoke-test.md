@@ -11,6 +11,8 @@ redirect_from:
   - /docs/3_base_application/data-ingestion-smoke-test/
   - /docs/deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html
   - /docs/deploy-nbs7/microservices-deployment/data-ingestion/smoke-test/
+  - /docs/deploy-nbs7/data-ingestion/smoke-test.html
+  - /docs/deploy-nbs7/data-ingestion/smoke-test/
 ---
 
 # Smoke test for data ingestion

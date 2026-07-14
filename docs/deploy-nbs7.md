@@ -19,13 +19,6 @@ This section covers the NBS 7 deployment process, from prerequisites and infrast
 
 ## Additional deployment sections
 
-<!-- INTERIM (STLT-538): these sections relocate under Deploy NBS 7 microservices in the deferred microservices pass. Remove this block when they move. -->
+After you complete the steps in the full deployment or quick start, continue with the following section:
 
-After you complete the steps in the full deployment or quick start, continue with the following sections in order:
-
-If you followed the Quick start, you have already completed the data ingestion and validation steps. Complete only the sections you have not yet finished.
-{: .note }
-
-1. **[Deploy real-time reporting](deploy-nbs7/real-time-reporting/real-time-reporting.html):** Install components that stream `ODSE` and `SRTE` changes to the reporting database.
-1. **[Deploy data ingestion service (DI API)](deploy-nbs7/data-ingestion/data-ingestion.html):** Install the DI API data transit layer for writing data to NBS.
 1. **[Validate the deployment](deploy-nbs7/validate-the-deployment.html):** Perform smoke tests and inspect monitoring, console, and admin interfaces.

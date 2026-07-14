@@ -1,8 +1,8 @@
 ---
 title: Deploy data ingestion service (DI API)
 layout: page
-parent: Deploy NBS 7
-nav_order: 4
+parent: Deploy NBS 7 microservices
+nav_order: 9
 has_children: true
 description: Deploy the Data Ingestion API (DI API) for ingesting, validating, and transforming Electronic Lab Reports into NBS.
 redirect_from:
@@ -12,6 +12,8 @@ redirect_from:
    - /docs/3_base_application/data-ingestion/
    - /docs/deploy-nbs7/microservices-deployment/data-ingestion.html
    - /docs/deploy-nbs7/microservices-deployment/data-ingestion/
+   - /docs/deploy-nbs7/data-ingestion/data-ingestion.html
+   - /docs/deploy-nbs7/data-ingestion/
 ---
 
 # Deploy data ingestion service (DI API) for NBS 7
@@ -77,7 +79,7 @@ Run the following SQL scripts before deploying the data ingestion service.
 1. Locate the data ingestion service Helm chart (`dataingestion-service`) in the [NEDSS-Helm repository][nedss-helm-dataingestion-service-chart]. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, **MSK (Kafka) bootstrap server**, and **ingress host** values in `values.yaml`.
 
 1. Confirm that DNS entries for the following host were created and point to the Network Load Balancer (NLB) in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned in the base install steps). Make this change in your authoritative DNS service (for example, Route 53).
-   Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [Deploy Traefik ingress controller](../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller) for reference.
+   Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller) for reference.
    data ingestion service application: `data.site_name.example_domain.com`
 1. Set the image repository and tag:
 
@@ -138,7 +140,7 @@ Run the following SQL scripts before deploying the data ingestion service.
      filePaths: "/"
    ```
 
-   For more information about SFTP support, see [data-ingestion-sftp-support](../microservices-deployment/images/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)
+   For more information about SFTP support, see [data-ingestion-sftp-support](../images/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)
 
 1. Install the data ingestion service:
 

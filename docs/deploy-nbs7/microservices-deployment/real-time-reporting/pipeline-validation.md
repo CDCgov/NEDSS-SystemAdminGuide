@@ -7,6 +7,8 @@ description: Provides steps and SQL checks to confirm RTR data flows into report
 redirect_from:
   - /docs/7_feature_preview/5_rtr_pipeline_validation.html
   - /docs/7_feature_preview/5_rtr_pipeline_validation/
+  - /docs/deploy-nbs7/real-time-reporting/pipeline-validation.html
+  - /docs/deploy-nbs7/real-time-reporting/pipeline-validation/
 ---
 
 # Validate the real-time reporting (RTR) pipeline

@@ -7,6 +7,8 @@ description: Covers deployment of RTR Java services that transform Kafka events 
 redirect_from:
   - /docs/7_feature_preview/4_rtr_java_reporting_services.html
   - /docs/7_feature_preview/4_rtr_java_reporting_services/
+  - /docs/deploy-nbs7/real-time-reporting/rtr-java-services.html
+  - /docs/deploy-nbs7/real-time-reporting/rtr-java-services/
 ---
 
 # Deploy real-time reporting (RTR) Java services
@@ -88,7 +90,7 @@ Follow these steps to configure and deploy the RTR Java services Helm chart.
    rtr-java-services-post-processing-reporting-<hash>  1/1     Running   0          2m6s
    ```
 
-1. Validate the services. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
+1. Validate the services. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
 
    **investigation-svc**
 

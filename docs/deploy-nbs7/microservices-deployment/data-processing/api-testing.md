@@ -26,7 +26,7 @@ This procedure uses Postman to send API requests. Download and install Postman f
 
 This section covers submitting an ELR payload and triggering RTI processing.
 
-1. Follow the [Data Ingestion API (DI API) testing guide](../../data-ingestion/api-testing.html) to submit ELR payloads.
+1. Follow the [Data Ingestion API (DI API) testing guide](../data-ingestion/api-testing.html) to submit ELR payloads.
 1. In the API testing guide, locate the ELR ingestion endpoint (`/api/elrs`) and add the `version` header to that endpoint in the ELR ingestion API call:
    - `version: 1` uses the legacy batch importer flow.
    - `version: 2` bypasses the legacy batch importer and triggers RTI.

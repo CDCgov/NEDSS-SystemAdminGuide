@@ -72,7 +72,7 @@ The case notification service includes a built-in Liquibase integration that aut
 - **If Liquibase fails:** Check the pod logs for errors. Database change details can be reviewed in the [NEDSS-NNDSS-Case-Notifications repository][nndss-case-notifications-db].
 - **If notifications do not appear:** Check the dead letter table (DLT). Faulty events that cannot be processed are routed to `MSGOUTE.case_notification_dlt`. Check this table if case notifications are not appearing in the expected output tables (`MSGOUTE.transportq_out` or `MSGOUTE.netsstransportq_out`).
 
-After verifying these configurations, proceed to deploy the [data ingestion service (DI API)](./../../data-ingestion/data-ingestion.html) or [real-time reporting (RTR)](./../../real-time-reporting/real-time-reporting.html) based on your deployment plan.
+After verifying these configurations, proceed to deploy the [data ingestion service (DI API)](../data-ingestion/data-ingestion.html) or [real-time reporting (RTR)](../real-time-reporting/real-time-reporting.html) based on your deployment plan.
 
 [nndss-case-notifications-db]: <https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/tree/{{ site.version_latest_tag }}/case-notification-service/src/main/resources/db>
 [nedss-helm-debezium-case-notifications]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium-case-notifications>

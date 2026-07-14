@@ -7,6 +7,8 @@ description: Shows how to deploy the Kafka sink connector that writes RTR topics
 redirect_from:
   - /docs/7_feature_preview/3_kafka_connector.html
   - /docs/7_feature_preview/3_kafka_connector/
+  - /docs/deploy-nbs7/real-time-reporting/kafka-connector.html
+  - /docs/deploy-nbs7/real-time-reporting/kafka-connector/
 ---
 
 # Deploy the Kafka connector for real-time reporting (RTR)
@@ -69,10 +71,10 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
 
 1. Validate the service.
 
-   > The Kafka connector is an internal service with no ingress. Validate it as part of [RTR pipeline validation](../../deploy-nbs7/real-time-reporting/pipeline-validation.html).
+   > The Kafka connector is an internal service with no ingress. Validate it as part of [RTR pipeline validation](pipeline-validation.html).
    {: .note }
 
-After Debezium deploys successfully, continue to [Deploy Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html).
+After Debezium deploys successfully, continue to [Deploy Java services](rtr-java-services.html).
 
 ## Troubleshooting
 

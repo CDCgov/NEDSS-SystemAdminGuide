@@ -1,8 +1,8 @@
 ---
 title: Deploy real-time reporting
 layout: page
-parent: Deploy NBS 7
-nav_order: 3
+parent: Deploy NBS 7 microservices
+nav_order: 10
 has_children: true
 description: Guides deployment of RTR components that stream ODSE and SRTE changes to RDB through Kafka.
 redirect_from:
@@ -14,6 +14,8 @@ redirect_from:
   - /docs/7_feature_preview/(DEPRECATED)9_post_processing_reporting_service/
   - /docs/7_feature_preview/0_rtr.html
   - /docs/7_feature_preview/0_rtr/
+  - /docs/deploy-nbs7/real-time-reporting/real-time-reporting.html
+  - /docs/deploy-nbs7/real-time-reporting/
 ---
 
 # Deploy real-time reporting (RTR)
@@ -152,7 +154,7 @@ Complete these one-time onboarding steps for RTR setup.
 
 1. **Create required database objects.** Run the scripts for your chosen path:
 
-   - **Liquibase:** See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html) to create all necessary objects, then return here to complete step 4.
+   - **Liquibase:** See [Deploy Liquibase](liquibase.html) to create all necessary objects, then return here to complete step 4.
 
    - **Manual:** See the script execution sequence and `db_upgrade` script in [NEDSS-DataReporting/db-upgrade][nedss-datareporting-manual-deployment]. Run:
 
@@ -217,7 +219,7 @@ Complete these one-time onboarding steps for RTR setup.
 
 After onboarding, future enhancements are delivered using one of these approaches:
 
-- **Liquibase:** Run Liquibase with the provided release tag. See [Deploy Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html).
+- **Liquibase:** Run Liquibase with the provided release tag. See [Deploy Liquibase](liquibase.html).
 - **Manual:** Run the scripts in [manual_deployment][nedss-datareporting-manual-deployment]. Onboarding scripts are excluded from upgrade runs.
 
 ---
@@ -229,10 +231,10 @@ RTR services use Kubernetes secrets for database credentials. Create secrets for
 
 Deploy the RTR services in the following order:
 
-1. [Liquibase](../../deploy-nbs7/real-time-reporting/liquibase.html)
-1. [Debezium](../../deploy-nbs7/real-time-reporting/debezium.html)
-1. [Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html)
-1. [Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html)
+1. [Liquibase](liquibase.html)
+1. [Debezium](debezium.html)
+1. [Kafka connector](kafka-connector.html)
+1. [Java services](rtr-java-services.html)
 
 [nedss-datareporting-liquibase-service]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service>
 [nedss-datareporting-onboarding-user-scripts]: <https://github.com/CDCgov/NEDSS-DataReporting/tree/{{ site.version_latest_tag }}/liquibase-service/src/main/resources/db/001-master/01_onboarding_scripts_user_creation>

@@ -7,6 +7,8 @@ description: Explains deployment of the RTR Liquibase job to apply required sche
 redirect_from:
   - /docs/7_feature_preview/1_liquibase.html
   - /docs/7_feature_preview/1_liquibase/
+  - /docs/deploy-nbs7/real-time-reporting/liquibase.html
+  - /docs/deploy-nbs7/real-time-reporting/liquibase/
 ---
 
 # Deploy Liquibase for real-time reporting (RTR)
@@ -29,7 +31,7 @@ Follow these steps to configure and deploy the Liquibase Helm chart for RTR.
 1. Locate the Liquibase Helm chart in the [NEDSS-Helm repository][nedss-helm-liquibase-chart].
 1. Configure `values.yaml`. Replace all placeholder values before installation:
 
-   Replace `app.EXAMPLE_DOMAIN` with the URL of your modern app (see [Deploy Traefik ingress controller](../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
+   Replace `app.EXAMPLE_DOMAIN` with the URL of your modern app (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
 
    ```yaml
    image:

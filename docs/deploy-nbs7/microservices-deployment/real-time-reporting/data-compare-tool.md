@@ -7,6 +7,8 @@ description: Explains deployment and use of Data Compare to validate RTR output 
 redirect_from:
   - /docs/7_feature_preview/6_data_compare_tool.html
   - /docs/7_feature_preview/6_data_compare_tool/
+  - /docs/deploy-nbs7/real-time-reporting/data-compare-tool.html
+  - /docs/deploy-nbs7/real-time-reporting/data-compare-tool/
 ---
 
 # Deploy and use the RTR Data Compare validation tool
@@ -39,7 +41,7 @@ Before deploying the Data Compare tool, verify the following:
 
 - Access to a cloud storage bucket for data exchange between the API and Processor services. These steps currently use Amazon S3. If you are not using Amazon S3, consult your cloud administrator for equivalent storage configuration.
 
-  For AWS deployments, an IAM role granting the Data Compare pods access to S3 must be provisioned before deployment. This role is created by Terraform in NEDSS-Infrastructure when `create_datacompare_irsa = true` is set in your `terraform.tfvars`. The role is named `<eks-cluster-name>-datacompare-role`. See [Provision the AWS environment](../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) for details.
+  For AWS deployments, an IAM role granting the Data Compare pods access to S3 must be provisioned before deployment. This role is created by Terraform in NEDSS-Infrastructure when `create_datacompare_irsa = true` is set in your `terraform.tfvars`. The role is named `<eks-cluster-name>-datacompare-role`. See [Provision the AWS environment](../../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) for details.
 
 - Keycloak configured with the Data Compare API profile: [NEDSS-Helm/charts/keycloak/extra][nedss-helm-keycloak-extra]
 
@@ -91,7 +93,7 @@ The Helm chart is located in `charts/data-compare-api-service` in the [NEDSS-Hel
        eks.amazonaws.com/role-arn: "arn:aws:iam::<ACCOUNT_ID>:role/<eks-cluster-name>-datacompare-role"
    ```
 
-   Replace `<ACCOUNT_ID>` and `<eks-cluster-name>` with your values. The role is created during infrastructure provisioning. See [Provision the AWS environment](../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) for details.
+   Replace `<ACCOUNT_ID>` and `<eks-cluster-name>` with your values. The role is created during infrastructure provisioning. See [Provision the AWS environment](../../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) for details.
 
 1. Install the Helm chart:
 
@@ -151,7 +153,7 @@ The Helm chart is located in `charts/data-compare-processor-service` in the [NED
        eks.amazonaws.com/role-arn: "arn:aws:iam::<ACCOUNT_ID>:role/<eks-cluster-name>-datacompare-role"
    ```
 
-   Replace `<ACCOUNT_ID>` and `<eks-cluster-name>` with your values. The role is created during infrastructure provisioning. See [Provision the AWS environment](../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) for details.
+   Replace `<ACCOUNT_ID>` and `<eks-cluster-name>` with your values. The role is created during infrastructure provisioning. See [Provision the AWS environment](../../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) for details.
 
 1. Install the Helm chart:
 

@@ -76,7 +76,7 @@ Run the health endpoint to confirm the service is running:
 https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/health
 ```
 
-After confirming a successful deployment, you can [test and integrate case notification APIs](./api-testing.html), and then proceed to deploy the [data ingestion service (DI API)](./../../data-ingestion/data-ingestion.html) or [real-time reporting (RTR)](./../../real-time-reporting/real-time-reporting.html) based on your deployment plan.
+After confirming a successful deployment, you can [test and integrate case notification APIs](./api-testing.html), and then proceed to deploy the [data ingestion service (DI API)](../data-ingestion/data-ingestion.html) or [real-time reporting (RTR)](../real-time-reporting/real-time-reporting.html) based on your deployment plan.
 
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-case-notification-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/case-notification-service>

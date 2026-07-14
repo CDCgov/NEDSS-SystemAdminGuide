@@ -122,7 +122,7 @@ Complete these steps to download the infrastructure code and prepare your enviro
    datacompare_namespace_and_service = ["default:data-compare-api-service", "default:data-compare-processor-service"]
    ```
 
-   This creates the AWS Identity and Access Management (IAM) role (`<eks-cluster-name>-datacompare-role`) and S3 access policy that the Data Compare pods require. The role ARN is referenced during [Data Compare deployment](../../real-time-reporting/data-compare-tool.html).
+   This creates the AWS Identity and Access Management (IAM) role (`<eks-cluster-name>-datacompare-role`) and S3 access policy that the Data Compare pods require. The role ARN is referenced during [Data Compare deployment](../../microservices-deployment/real-time-reporting/data-compare-tool.html).
 
 ## Run Terraform provisioning
 

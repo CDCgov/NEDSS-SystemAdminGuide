@@ -7,6 +7,8 @@ description: Describes deploying Debezium to capture SQL Server changes and publ
 redirect_from:
   - /docs/7_feature_preview/2_debezium-rtr.html
   - /docs/7_feature_preview/2_debezium-rtr/
+  - /docs/deploy-nbs7/real-time-reporting/debezium.html
+  - /docs/deploy-nbs7/real-time-reporting/debezium/
 ---
 
 # Deploy Debezium for real-time reporting (RTR)
@@ -105,10 +107,10 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 
 1. Validate the service.
 
-   > Debezium is an internal service with no ingress. Validate it as part of [RTR pipeline validation](../../deploy-nbs7/real-time-reporting/pipeline-validation.html).
+   > Debezium is an internal service with no ingress. Validate it as part of [RTR pipeline validation](pipeline-validation.html).
    {: .note }
 
-After Debezium deploys successfully, continue to [Deploy Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html).
+After Debezium deploys successfully, continue to [Deploy Kafka connector](kafka-connector.html).
 
 ## Troubleshooting
 

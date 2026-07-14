@@ -11,6 +11,8 @@ redirect_from:
   - /docs/3_base_application/wildfly-server-config-di/
   - /docs/deploy-nbs7/microservices-deployment/data-ingestion/wildfly-server-config.html
   - /docs/deploy-nbs7/microservices-deployment/data-ingestion/wildfly-server-config/
+  - /docs/deploy-nbs7/data-ingestion/wildfly-server-config.html
+  - /docs/deploy-nbs7/data-ingestion/wildfly-server-config/
 ---
 
 # WildFly server configuration
@@ -18,4 +20,4 @@ redirect_from:
 Configure the Windows Task Scheduler on your NBS 6 WildFly server to run the ELR Importer batch process.
 
 1. Connect to the NBS 6 Windows server using a remote desktop client such as Microsoft Remote Desktop. You will need the server's hostname or IP address, username, and password.
-2. Follow the [Windows Task Scheduler for ELR Importer](../microservices-deployment/images/NM-Windows%20Task%20scheduler%20for%20ELRImporter.pdf) (PDF) guide to create and configure the scheduled task.
+2. Follow the [Windows Task Scheduler for ELR Importer](../images/NM-Windows%20Task%20scheduler%20for%20ELRImporter.pdf) (PDF) guide to create and configure the scheduled task.

@@ -42,11 +42,11 @@ These are minimum duration estimates based on typical deployments. Actual timeli
 
 The Planning stage covers discovery, environment setup, and project preparation. Security approval for cloud hosting and required technologies including Kubernetes, Terraform, and Docker can be a source of delay across the entire deployment. Early contact with your IT security office, before detailed timeline planning begins, might reduce the risk of delays.
 
-Before planning detailed timelines, confirm that your current NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
+Before planning detailed timelines, confirm that your current NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../supported-versions.html).
 
 | Activity | Description | Suggested resource or action |
 |:---|:---|:---|
-| Review readiness and compatibility | Review technical considerations and confirm your NBS 6 version is compatible with your target NBS 7 version. | [Assess your technical readiness](../before-you-deploy/assess-your-readiness.html), [NBS 6 and NBS 7 compatibility matrix](../compatibility.html), and [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
+| Review readiness and compatibility | Review technical considerations and confirm your NBS 6 version is compatible with your target NBS 7 version. | [Assess your technical readiness](../before-you-deploy/assess-your-readiness.html), [NBS 6 and NBS 7 compatibility matrix](../supported-versions.html), and [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
 | Identify project team | Define roles, responsibilities, and key stakeholders. See [Operational considerations](../before-you-deploy/operational-considerations.html) for staffing guidance. | [Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) (NBS Central login required; see [Additional resources](../../index.html#additional-resources)) |
 | Assess current environment | Document your existing NBS 6 setup, including ingestion and egress workflows, integrations, and hosting configuration. | Create a current state assessment |
 | Orient migration team to NBS 7 | Review NBS 7 components and features with your migration team. | [Component reference](../before-you-deploy/component-reference.html) |

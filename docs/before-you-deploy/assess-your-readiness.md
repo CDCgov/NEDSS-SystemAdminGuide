@@ -48,7 +48,7 @@ NBS 7 requires a cloud-based environment for deployment; CDC does not support on
 - **Strategic fit:** Preferred by jurisdictions with significant Microsoft ecosystem investments, such as those using Microsoft Entra ID (formerly Azure Active Directory) or existing Enterprise Agreements.
 - **Technical readiness:** Provides a streamlined experience for organizations running Windows-based workloads or requiring integration with Microsoft 365 and Power Platform tools.
 
-See also: [Deploy cloud infrastructure on AWS](../deploy-nbs7/deploy-on-aws.html), [Deploy cloud infrastructure on Azure](../deploy-nbs7/deploy-on-azure.html), and the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
+See also: [Deploy cloud infrastructure on AWS](../deploy-nbs7/deploy-on-aws.html), [Deploy cloud infrastructure on Azure](../deploy-nbs7/deploy-on-azure.html), and the [NBS 6 and NBS 7 compatibility matrix](../supported-versions.html).
 
 ## Staff Kubernetes expertise
 
@@ -86,7 +86,7 @@ Migration from NBS 6 to NBS 7 concludes with a cutover from your existing NBS 6 
 - Your NBS 6 instance must remain operational and accessible during migration.
 - Some jurisdictions provision a separate NBS 6 environment for migration activities and then cut over, rather than deploying NBS 7 changes directly against their primary NBS 6 production server.
 - You need to know your current NBS 6 hosting setup before you begin. Specifically, whether it is hosted on-premises or in the cloud, and if in the cloud, which provider.
-- **You must be running a compatible NBS 6.x version** before you can install any version of NBS 7. For more information, see the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
+- **You must be running a compatible NBS 6.x version** before you can install any version of NBS 7. For more information, see the [NBS 6 and NBS 7 compatibility matrix](../supported-versions.html).
 
 See also: [Deployment planning guide](../before-you-deploy/planning.html) and [Operational considerations](../before-you-deploy/operational-considerations.html).
 

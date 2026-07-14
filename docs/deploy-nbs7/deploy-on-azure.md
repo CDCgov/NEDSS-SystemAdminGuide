@@ -11,7 +11,7 @@ description: Provision the Azure cloud environment for NBS 7. Deployment guide c
 
 Azure deployment documentation is in progress. For assistance with Azure deployments, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 
-Before provisioning infrastructure, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
+Before provisioning infrastructure, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../supported-versions.html).
 
 ## In this section
 

@@ -19,7 +19,7 @@ This page describes the three NBS 7 deployment phases and covers what each phase
 
 After reviewing the phases, see [Assess your technical readiness](../before-you-deploy/assess-your-readiness.html) to confirm your jurisdiction is ready to begin. If your jurisdiction plans to use a vendor, see the [Vendor-managed deployment](../before-you-deploy/vendor-managed-deployment.html) page.
 
-Before finalizing your configuration, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html).
+Before finalizing your configuration, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../supported-versions.html).
 
 ---
 

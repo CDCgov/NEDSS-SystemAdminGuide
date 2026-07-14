@@ -29,7 +29,7 @@ Migration from NBS 6 to NBS 7 concludes with a cutover from your existing NBS 6 
 
 See also: [NBS 7 Deployment planning guide](../before-you-deploy/planning.html).
 
-Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 compatibility matrix](../compatibility.html) before you finalize migration timelines.
+Version prerequisite: confirm your NBS 6 baseline against the [NBS 6 and NBS 7 compatibility matrix](../supported-versions.html) before you finalize migration timelines.
 
 ## IT security approval can take time
 

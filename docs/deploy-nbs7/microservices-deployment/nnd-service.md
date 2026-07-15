@@ -25,9 +25,9 @@ This deployment section uses three related but distinct terms:
 
 ## In this section
 
-The pages in this section cover each component of the NND Service deployment in sequence:
+Complete the pages in this section in order. [Deploy NND Sync](./nnd-service/on-prem-nnd-sync.html) and [Deploy Data Availability (on-premises)](./nnd-service/on-prem-data-sync.html) are independent on-premises options. Complete either or both, depending on your STLT's needs.
 
-1. [Validate API endpoints](./nnd-service/validating-api-endpoints.html): Verify API connectivity, credential setup, and baseline endpoint responses.
-1. [Deploy NND Sync](./nnd-service/on-prem-nnd-sync.html): Configure the on-premises NNDSS integration workflow that uses Data Sync outputs.
-1. [Deploy Data Availability (on-premises)](./nnd-service/on-prem-data-sync.html): Configure on-premises options for syncing selected data to SQL Server, Amazon S3, or local storage.
-1. [Deploy Data Sync service API (cloud)](./nnd-service/deploy-data-sync-service-api-cloud.html): Install and configure the cloud Data Sync service API with Helm.
+1. **[Deploy Data Sync service API](./nnd-service/deploy-data-sync-service-api-cloud.html)**: Install and configure the cloud Data Sync service API with Helm.
+1. **[Validate API endpoints](./nnd-service/validating-api-endpoints.html)**: Verify API connectivity, credential setup, and baseline endpoint responses.
+1. **[Deploy NND Sync](./nnd-service/on-prem-nnd-sync.html)**: Configure the on-premises NNDSS integration workflow that uses Data Sync outputs.
+1. **[Deploy Data Availability](./nnd-service/on-prem-data-sync.html)**: Configure on-premises options for syncing selected data to SQL Server, Amazon S3, or local storage.

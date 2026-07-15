@@ -1,16 +1,16 @@
 ---
-title: Deploy Data Availability (on-premises)
+title: Deploy Data Availability
 layout: page
 parent: NND Service (Data Sync)
-nav_order: 3
+nav_order: 4
 redirect_from:
   - /docs/6_microservices_deployment/8c_nnd_stlt_on_prem_configuration_data_sync.html
   - /docs/6_microservices_deployment/8c_nnd_stlt_on_prem_configuration_data_sync/
 ---
 
-# Deploy Data Availability (on-premises)
+# Deploy Data Availability
 
-This section provides instructions for on-premises deployment of the **Data Availability service**, which extracts data from the modernized NBS cloud implementation so STLTs can keep copies of selected tables from **RDB, ODSE, and SRTE**.
+This section provides instructions for on-premises deployment of the **Data Availability service**, which extracts data from the modernized NBS cloud implementation so STLTs can keep copies of selected tables from **RDB, ODSE, and SRTE**. Complete [Validate API endpoints](./validating-api-endpoints.html) before starting this page.
 
 > This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }
@@ -23,6 +23,7 @@ This section provides instructions for on-premises deployment of the **Data Avai
 
 ## Prerequisites
 
+- Complete [Validate API endpoints](./validating-api-endpoints.html).
 - **Keycloak client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, go to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
 - **Data service URL** - Retrieve this from your NBS environment.
 - **Release materials/package** - CDC provides this as a .zip file with each release.
@@ -126,8 +127,6 @@ If a user wants to direct **SRTE table data** into a separate SRTE database:
 - **Important:** No spaces between argument name and value.
   - Example: `arg_name=arg_value`
 - For customizations, refer to **#readme**.
-
-Make sure you validate the **provided API endpoints** before running any Data Sync services.
 
 ---
 

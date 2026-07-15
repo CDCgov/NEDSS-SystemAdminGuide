@@ -1,16 +1,16 @@
 ---
-title: Deploy Data Sync service API (cloud)
+title: Deploy Data Sync service API
 layout: page
 parent: NND Service (Data Sync)
-nav_order: 4
+nav_order: 1
 redirect_from:
    - /docs/6_microservices_deployment/8_nnd.html
    - /docs/6_microservices_deployment/8_nnd/
 ---
 
-# Deploy Data Sync service API (cloud)
+# Deploy Data Sync service API
 
-This page walks through deploying the NBS 7 Data Sync service API using the `nnd-service` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
+This page walks through deploying the NBS 7 Data Sync service API using the `nnd-service` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. After you finish this page, proceed to [Validate API endpoints](./validating-api-endpoints.html).
 
 > This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }

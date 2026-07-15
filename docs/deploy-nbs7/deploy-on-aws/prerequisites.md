@@ -37,21 +37,27 @@ Your AWS environment must meet the following requirements:
 
 ### Higher-volume STLTs
 
+These specifications are suggested for jurisdictions with more than 10 million person records. The following table lists the recommended hardware for higher-volume deployments.
+
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
-| Container runtime environment | Amazon EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
-| Relational Database | SQL Server 2017+ Standard or Enterprise (hosted on Amazon RDS or a self-managed Amazon EC2 instance) | New NBS 6.X.X Deployment Recommendations: [Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
+| Container runtime environment | Amazon EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) m5.large |
+| Relational Database | SQL Server 2017+ Standard or Enterprise (hosted on Amazon RDS or a self-managed Amazon EC2 instance) | |
 | Persistent Store | Amazon EFS | 1 TB |
 
 ### Lower-volume STLTs
 
+These specifications are suggested for jurisdictions with fewer than 10 million person records. The following table lists the recommended hardware for lower-volume deployments.
+
 | **Type** | **Resource** | **Size** |
 |-----------|--------------|----------|
-| Container runtime environment | Amazon EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) r5.xlarge |
-| Relational Database | SQL Server 2017+ Standard or Enterprise (hosted on Amazon RDS or a self-managed Amazon EC2 instance) | New NBS 6.X.X deployment recommendations: [Implementation and Support FAQs](https://www.cdc.gov/nbs/php/technical-resources/implementation-and-support-faqs.html) |
+| Container runtime environment | Amazon EKS | 4 Nodes - Linux (4 cores/32 GB RAM, 100GB block storage) m5.large |
+| Relational Database | SQL Server 2017+ Standard or Enterprise (hosted on Amazon RDS or a self-managed Amazon EC2 instance) | |
 | Persistent Store | Amazon EFS | 500 GB |
 
 ## Software requirements
+
+The following table lists the software versions required for NBS 7 deployments on AWS. Versions marked as deployed by default are provisioned automatically during the deployment process.
 
 | **Software** | **Version** | **Comments** |
 |---|---|---|
@@ -99,7 +105,7 @@ NBS 7 integrates with standards-based SSO systems and is designed to work with y
 
 ## Next steps
 
-After you satisfy the prerequisites on this page, complete the following steps in order.
+After you satisfy the prerequisites on this page, complete the following steps in order:
 
 1. Confirm that you have completed both the AWS-specific requirements from this page and the cloud-agnostic [Prerequisites](../prerequisites.html)
 1. Continue with [Provision the AWS cloud environment](provision-aws.html)

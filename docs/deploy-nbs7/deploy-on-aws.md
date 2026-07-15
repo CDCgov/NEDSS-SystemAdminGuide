@@ -46,7 +46,7 @@ The NBS 6 SQL Server database is not provisioned here. It is reused from your ex
 ## AWS services reference
 {: #aws-services-reference }
 
-The following AWS services are used in NBS 7 deployments. For a summary of which services Terraform provisions during this phase, see [What gets provisioned](#what-gets-provisioned).
+The following AWS services are commonly used in NBS 7 deployments. For a summary of which services Terraform provisions during this phase, see [What gets provisioned](#what-gets-provisioned).
 
 ### Terraform-provisioned services
 

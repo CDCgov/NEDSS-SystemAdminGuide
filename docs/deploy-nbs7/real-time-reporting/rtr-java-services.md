@@ -11,7 +11,7 @@ redirect_from:
 
 # Deploy real-time reporting (RTR) Java service
 
-This page covers deploying the RTR Java service that processes streamed events from Kafka and loads domain-specific reporting data.
+This page covers deploying the RTR Java services that process streamed events from Kafka and load domain-specific reporting data. Before proceeding, schedule a maintenance window and notify users that NBS will be unavailable. Database changes made while RTR services are being deployed might not propagate to your reporting database.
 
 Deploying the Java service is a two-phase process. The first deployment seeds the `nrt_*` caching tables that RTR depends on. Once seeding is complete, you reinstall the chart with post-processing enabled.
 

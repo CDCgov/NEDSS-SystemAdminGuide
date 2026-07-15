@@ -14,26 +14,19 @@ redirect_from:
 
 This page walks through deploying Elasticsearch using the `elasticsearch` Helm chart from the [NEDSS-Helm][nedss-helm-elasticsearch-chart] repository for NBS version {{ site.version_latest }}. This is the first microservice to deploy. After you finish, proceed to [Modernization API](./modernization-api.html) deployment.
 
-## On this page
-{: .no_toc .text-delta }
+## Prerequisites
 
-1. TOC
-{:toc}
+Complete the following before you begin this page:
+
+- If you haven't already, complete [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
+- Have your persistent storage configuration values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
 ## Deploy Elasticsearch using Helm
 
-Use the ['elasticsearch' Helm chart][nedss-helm-elasticsearch-chart] to deploy Elasticsearch into your Kubernetes cluster. Before you begin, have your persistent storage configuration values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
+Complete the following steps to deploy the ['elasticsearch' Helm chart][nedss-helm-elasticsearch-chart] from the `charts/elasticsearch/` directory of your cloned NEDSS-Helm repository:
 
-1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm-elasticsearch-chart]. The following steps use the files in `charts/elasticsearch/` from that repository.
-1. Set `efsFileSystemId` in `values.yaml` to the file system ID for your environment. In AWS deployments, this is the Amazon EFS file system ID from the AWS console. In Azure deployments, Azure Files requires different configuration. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for details.
-1. Set the image repository and tag:
-
-   ```yaml
-   image:
-     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/elasticsearch"
-     tag: <release-version-tag> # for example, v1.0.2
-   ```
-
+1. <!-- [SME REVIEW] The Azure azure.files.storageAccountName and azure.files.resourceGroupName values aren't in the Helm values reference table yet. We need to add them there. -->
+   In the `elasticsearch/values.yaml` file, search for `EXAMPLE` and fill in your environment-specific values for AWS or Azure as appropriate. The [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
 1. Install Elasticsearch:
 
    ```bash

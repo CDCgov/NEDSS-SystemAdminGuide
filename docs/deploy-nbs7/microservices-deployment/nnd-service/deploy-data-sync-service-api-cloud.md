@@ -23,48 +23,29 @@ This page walks through deploying the NBS 7 Data Sync service API using the `nnd
 
 ## Prerequisites
 
-1. Locate the NND Service Helm chart in the [NEDSS-Helm repository][nedss-helm-nnd-service-chart]. Provide values for ECR repository, ECR image tag, database server endpoints, and ingress host in the `values.yaml` file.
-1. Confirm that the following DNS entry was created and points to the Network Load Balancer (NLB) in front of your Kubernetes cluster. Use the active NLB provisioned during base install. Do this in your authoritative DNS service, such as Route 53. Replace `example.com` with the appropriate domain name in `values.yaml`:
-   - NND service application, for example: `data.example.com`
+Complete the following before you begin this page:
+
+- If you haven't already, complete [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
+- Complete [Data Processing](../data-processing.html) deployment.
 
 ## Configure values and install
 
-Set the required values in `values.yaml` before installing the chart.
+Complete the following steps to deploy the ['nnd-service' Helm chart][nedss-helm-nnd-service-chart] from the `charts/nnd-service/` directory of your cloned NEDSS-Helm repository:
 
-1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/nnd-service/` from that repository.
-1. Set the image repository and tag:
-
-   ```yaml
-   image:
-     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nnd-service"
-     pullPolicy: IfNotPresent
-     tag: <release-version-tag> # for example, v1.0.1
-   ```
-
-1. Set the JDBC connection values. The `dbserver` value is the database server endpoint only. Do not include the port number. For help determining these values, see the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices).
+1. Confirm that the following DNS entry was created and points to the Network Load Balancer (NLB) in front of your Kubernetes cluster. Use the active NLB provisioned during base install. Do this in your authoritative DNS service, such as Route 53. Replace `example.com` with the appropriate domain name in `values.yaml`:
+   - NND service application, for example: `data.example.com`
+1. Search `values.yaml` for `EXAMPLE` and fill in the JDBC connection values and EFS file system ID. The `dbserver` value is the database server endpoint only; do not include the port number. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
 
    The following screenshot shows the database endpoint in the Amazon RDS console:
 
    ![Amazon RDS console showing the Connectivity and security tab with the database endpoint highlighted in the Endpoint and port section](../images/nnd-dbendpoint.png)
 
-   ```yaml
-   jdbc:
-     dbserver: "EXAMPLE_DB_ENDPOINT"
-     username: "EXAMPLE_ODSE_DB_USER"
-     password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
-   ```
-
-1. Set `efsFileSystemId` to the EFS file system ID from the AWS console.
-
    The following screenshot shows the file system ID in the Amazon EFS console:
 
    ![Amazon EFS console showing the File systems list with the file system ID highlighted in the File system ID column](../images/nnd-efsid.png)
 
-   ```yaml
-   efsFileSystemId: "EXAMPLE_EFS_ID"
-   ```
-
-1. Set the Keycloak auth URI. In the default configuration, this value does not change unless the name or namespace of the Keycloak pod is modified:
+1. <!-- [SME REVIEW] This value isn't in the Helm values reference table yet. Confirm whether to add it there or keep it documented here before removing this walkthrough. -->
+   Set the Keycloak auth URI. In the default configuration, this value does not change unless the name or namespace of the Keycloak pod is modified:
 
    ```yaml
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"

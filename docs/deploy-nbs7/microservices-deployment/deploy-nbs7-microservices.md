@@ -30,6 +30,7 @@ Complete the following steps before you deploy the first microservice:
 1. Verify that you are authenticated to your cloud provider and that your session targets the account for your NBS environment.
    - **AWS:** Run `aws sts get-caller-identity` and confirm the output shows your NBS account ID.
    - **Azure:** Run `az account show` and confirm the output shows your NBS subscription.
+1. Use Git to clone your own local copy of the public [NEDSS-Helm][nedss-helm] repository.
 1. Navigate to the `charts` directory of your cloned NEDSS-Helm repository. Run all Helm install commands from this directory.
 
 ## Helm values reference for NBS 7 microservices
@@ -62,3 +63,5 @@ The following table lists common Helm values used across NBS 7 microservices. Ha
 {: .three-column-values-table }
 
 After you gather these values, continue to the deployment pages. The table of contents on this page lists the deployment pages in order, starting with the first service to deploy. Complete each page in sequence.
+
+[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>

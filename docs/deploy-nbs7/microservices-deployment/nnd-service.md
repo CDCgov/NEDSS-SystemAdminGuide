@@ -8,7 +8,7 @@ has_children: true
 
 # NND Service (Data Sync)
 
-This section covers Data Sync capabilities for National Notifiable Disease (NND) workflows, including cloud service deployment, endpoint validation, and on-premises setup patterns.
+This section covers Data Sync capabilities for National Notifiable Disease (NND) workflows, including cloud service deployment, endpoint validation, and on-premises setup patterns. After you finish this deployment, proceed to [Case notifications](./case-notification.html).
 
 > The NND Service (Data Sync) deployment is optional. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }

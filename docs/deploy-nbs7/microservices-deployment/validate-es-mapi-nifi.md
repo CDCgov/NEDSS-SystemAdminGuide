@@ -11,7 +11,9 @@ redirect_from:
 
 # Validate Elasticsearch, Modernization API, and NiFi
 
-After deploying Elasticsearch, Modernization API, and NiFi, validate all three services before continuing with the remaining microservices. Successful validation confirms that:
+After deploying Elasticsearch, Modernization API, and NiFi, validate all three services before continuing with the remaining microservices. After you finish the validation section, proceed to [Deploy NBS Gateway](./nbs-gateway.html).
+
+Successful validation confirms that:
 
 - Name resolution is working
 - Traffic routing between NBS 6 and NBS 7 is working

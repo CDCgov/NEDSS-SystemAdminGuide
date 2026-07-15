@@ -11,7 +11,7 @@ redirect_from:
 
 # Deploy the Data Processing service for NBS 7
 
-This page walks through deploying the Real Time Ingestion (RTI) data processing service using the `data-processing-service` Helm chart from the [NEDSS-Helm][nedss-helm-data-processing-service-chart] repository for NBS version {{ site.version_latest }}. Complete [NBS Gateway](./nbs-gateway.html) before starting this page. After you finish, proceed to [NND Service (Data Sync)](./nnd-service.html).
+This page walks through deploying the Real Time Ingestion (RTI) data processing service using the `data-processing-service` Helm chart from the [NEDSS-Helm][nedss-helm-data-processing-service-chart] repository for NBS version {{ site.version_latest }}. Complete [NBS Gateway](./nbs-gateway.html) before starting this page. After you finish deploying and [validating](./data-processing/api-testing.html) the data processing service, proceed to [NND Service (Data Sync)](./nnd-service.html).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -25,21 +25,19 @@ Real Time Ingestion (RTI) is a microservice that picks up ELR data after it has 
 
 ![Diagram showing the data processing flow from ELR ingestion through Kafka to the NBS queue](images/data-processing-flow-diagram.png)
 
+## Prerequisites
+
+Complete the following before you begin this page:
+
+- If you haven't already, complete [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
+- Complete [NBS Gateway](./nbs-gateway.html) deployment.
+- Have your database credentials, Kafka endpoints, and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../full-deploy/kubernetes-setup/deploy-keycloak.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
+
 ## Deploy RTI using Helm
 
-Use the ['data-processing-service' Helm chart][nedss-helm-data-processing-service-chart] to deploy the RTI service into your Kubernetes cluster. Before you begin, have your database credentials, Kafka endpoints, and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../full-deploy/kubernetes-setup/deploy-keycloak.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
+Complete the following steps to deploy the ['data-processing-service' Helm chart][nedss-helm-data-processing-service-chart] from the `charts/data-processing-service/` directory of your cloned NEDSS-Helm repository:
 
-1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/data-processing-service/` from that repository.
-1. Confirm that a DNS entry for the data ingestion endpoint was created and points to the active Network Load Balancer (NLB) provisioned during [core services deployment](../full-deploy/kubernetes-setup/deploy-core-services.html). Then set `dataingestion.uri` in `values.yaml` to that domain name. Use the value from the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records).
-1. Set the image repository and tag:
-
-   ```yaml
-   image:
-     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-processing-service"
-     pullPolicy: IfNotPresent
-     tag: <release-version-tag> # for example, v1.0.1
-   ```
-
+1. Confirm that a DNS entry for the data ingestion endpoint was created and points to the active Network Load Balancer (NLB) provisioned during [core services deployment](../full-deploy/kubernetes-setup/deploy-core-services.html).
 1. Set the auth user. RTI uses a valid NBS user to process data. Set `nbs.authuser` to a valid user from `ODSE.Auth_User`:
 
    ```yaml
@@ -53,26 +51,9 @@ Use the ['data-processing-service' Helm chart][nedss-helm-data-processing-servic
    SELECT * FROM NBS_ODSE.dbo.Auth_user;
    ```
 
-1. Set the JDBC connection values. The `dbserver` value is the database server endpoint only. Do not include the port number. For help determining these values, see the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices).
+1. In the `data-processing-service/values.yaml` file, search for `EXAMPLE` and fill in your environment-specific values for the JDBC connection, data ingestion ingress domain, Kafka cluster endpoint, and SRTE Keycloak client. The `dbserver` value is the database server endpoint only; do not include the port number. The [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
 
    ![Screenshot showing the dbserver field in the data processing service values.yaml file](images/data-processing-dbendpoint.png)
-
-   ```yaml
-   jdbc:
-     dbserver: "EXAMPLE_DB_ENDPOINT"
-     username: "EXAMPLE_ODSE_DB_USER"
-     password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
-   nbs:
-     authuser: "EXAMPLE_NBS_AUTHUSER"
-   kafka:
-     cluster: "EXAMPLE_KAFKA_ENDPOINT"
-   dataingestion:
-     uri: "data.EXAMPLE.DOMAIN"
-   keycloak:
-     srte:
-       clientId: "EXAMPLE_SRTE_CLIENT_ID"
-       clientSecret: "EXAMPLE_SRTE_CLIENT_SECRET"
-   ```
 
 1. Install the data processing service:
 
@@ -199,5 +180,4 @@ Use the ['data-processing-service' Helm chart][nedss-helm-data-processing-servic
 
 To validate Real Time Ingestion (RTI) by sending ELR data through the data ingestion endpoint, proceed to [Test RTI API integration for Data Processing](./data-processing/api-testing.html).
 
-[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-data-processing-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-processing-service>

@@ -81,6 +81,7 @@ Reinstall the chart with post-processing enabled:
 
    ```bash
    helm upgrade -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
+   ```
 
 
 1. Verify the pods restarted cleanly:

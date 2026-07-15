@@ -31,7 +31,7 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 
 1. Locate the Debezium Helm chart in the [NEDSS-Helm repository][nedss-helm-debezium-chart].
 
-1. Configure `values.yaml`. Replace all placeholder values before installation.
+1. Edit the "EXAMPLE_*" placeholder values in `values.yaml` and replace with the correct values for your environment (eg EXAMPLE_KAFKA_ENDPOINT).
 
    To retrieve your Kafka bootstrap server endpoints, see [Get bootstrap brokers](https://docs.aws.amazon.com/msk/latest/developerguide/msk-get-bootstrap-brokers.html) in the AWS MSK documentation.
 
@@ -44,12 +44,12 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 
    properties:
      # Kafka bootstrap server endpoint from AWS MSK
-     bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+     bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT"
 
    env:
      # Kafka bootstrap server endpoint from AWS MSK
      - name: BOOTSTRAP_SERVERS
-       value: "EXAMPLE_MSK_KAFKA_ENDPOINT"
+       value: "EXAMPLE_KAFKA_ENDPOINT"
    ```
 
 1. Install the pod:
@@ -61,7 +61,7 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 1. Verify the pod is running:
 
    ```bash
-   kubectl get pods
+   kubectl get deployment debezium-debezium-rtr-connect
    ```
 
 1. Validate the service.
@@ -80,7 +80,7 @@ If issues persist after initial troubleshooting, contact support at <mailto:nbs@
 If the service has trouble connecting to the database, run the following command to reset the ConfigMap:
 
 ```bash
-kubectl delete configmap cp-kafka-connect-sqlserver-connect
+kubectl delete configmap debezium-rtr-connect
 ```
 
 [nedss-helm-debezium-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium>

@@ -56,7 +56,7 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
 1. Verify the pod is running:
 
    ```bash
-   kubectl get pods
+   kubectl get deployment kafka-connect-sink-cp-kafka-connect
    ```
 
 1. Validate the service.

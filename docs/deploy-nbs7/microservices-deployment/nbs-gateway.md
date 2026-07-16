@@ -16,7 +16,7 @@ This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm c
 
 ## Prerequisites
 
-This page assumes you've completed [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is  [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
+This page assumes you've completed [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
 
 Have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Import service clients and retrieve secrets](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help determining any values.
 

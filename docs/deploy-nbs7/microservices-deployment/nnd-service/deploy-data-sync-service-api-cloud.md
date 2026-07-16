@@ -23,7 +23,7 @@ This page walks through deploying the NBS 7 Data Sync service API using the `nnd
 
 ## Prerequisites
 
-This page assumes you've completed [Before you begin](../../microservices-deployment/deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is the [Data Processing](../data-processing.html) deployment.
+This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is the [Data Processing](../data-processing.html) deployment.
 
 ## Configure values and install
 

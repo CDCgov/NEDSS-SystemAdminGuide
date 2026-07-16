@@ -16,11 +16,9 @@ This page walks through deploying NiFi using the `nifi` Helm chart from the [NED
 
 ## Prerequisites
 
-Complete the following before you begin this page:
+This page assumes you've completed [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is the [Modernization API](./modernization-api.html) deployment.
 
-- If you haven't already, complete [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
-- Complete [Modernization API](./modernization-api.html) deployment.
-- Have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
+Have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
 ## Deploy NiFi using Helm
 

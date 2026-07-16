@@ -169,58 +169,6 @@ Keycloak uses two realms for NBS 7: the **NBS** realm for service clients, and t
 
    ![Keycloak realm selector dropdown listing the Keycloak master realm, NBS realm, and nbs-users realm](images/nbs-users-realm-3.png)
 
-## Configure service clients
-
-The imported configuration seeds a random client secret for each service client. You can regenerate these secrets or use them as generated. Retrieve and store each secret before you proceed to microservices deployment.
-
-The NBS realm contains four service clients. `di-keycloak-client` is seeded with the initial realm import; the remaining three require a separate import step before you can retrieve their secrets.
-
-| Client | Import file | Used by |
-|---|---|---|
-| `di-keycloak-client` | Imported with the NBS realm; no separate import needed | data ingestion service |
-| `nnd-keycloak-client` | [`05-nbs-users-nnd-client.json`][nedss-helm-keycloak-nnd-client] | NND service |
-| `srte-data-keycloak-client` | [`06-nbs-users-srte-data-client.json`][nedss-helm-keycloak-srte-client] | SRTE data access |
-| `case-notification-service` | [`09-nbs-users-case-notification-service.json`][nedss-helm-keycloak-case-notification-client] | Case notification service |
-
-### Retrieve a client secret
-
-Use the following steps to retrieve the secret for any of the four service clients in the table.
-
-1. In the **NBS** realm, go to **Clients** and select the client.
-1. Open the **Credentials** tab.
-1. Select the eye icon to reveal the secret and copy it.
-1. Store the secret securely in your organization's secrets manager, such as AWS Secrets Manager or Azure Key Vault.
-
-The following screenshots show this procedure for `di-keycloak-client`. The **Credentials** tab looks the same for the other two clients, with the client-specific secret shown in the same field.
-
-![Keycloak Clients list in the NBS realm with di-keycloak-client highlighted in the Client ID column](images/di-client-id.png)
-
-![Keycloak Credentials tab for di-keycloak-client showing the masked client secret field with eye and copy icons and a Regenerate button](images/di-client-secret.png)
-
-### Import additional service clients
-
-The following clients are not included in the initial **NBS** realm import and require a separate Partial Import step before you can retrieve their secrets:
-
-| Client | Import file | Used by |
-|---|---|---|
-| `nnd-keycloak-client` | [`05-nbs-users-nnd-client.json`][nedss-helm-keycloak-nnd-client] | NND service |
-| `srte-data-keycloak-client` | [`06-nbs-users-srte-data-client.json`][nedss-helm-keycloak-srte-client] | SRTE data access |
-| `case-notification-service` | [`09-nbs-users-case-notification-service.json`][nedss-helm-keycloak-case-notification-client] | Case notification service |
-
-For each client, complete the following steps:
-
-1. In the **NBS** realm, go to **Realm settings**, select the **Action** dropdown, and select **Partial Import**.
-
-   ![Keycloak NBS realm welcome page, shown before navigating to Realm settings](images/nnd-realm.png)
-
-   Selecting **Partial Import** opens the following dialog, overlaying the **Realm settings** page, where you upload the client JSON file.
-
-   ![Keycloak Partial import dialog open over the NBS realm settings page, with an empty resource file upload area and an Import button](images/nnd-realm-partial-import.png)
-
-1. Upload the import file for the client and select **Import**.
-
-After each import completes, follow [Retrieve a client secret](#retrieve-a-client-secret) to get the secret for that client.
-
 ## Import base users and clients
 
 Import the base NBS users and development clients into the **nbs-users** realm.
@@ -248,17 +196,6 @@ Import the base NBS users and development clients into the **nbs-users** realm.
    After the import completes, Keycloak confirms that the client was added.
 
    ![Keycloak Partial import confirmation showing one added client named nbs-development](images/nbs-users-development-2.png)
-
-## Retrieve the nbs-modernization client secret
-
-The `nbs-modernization` client in the **nbs-users** realm is used for OIDC login authentication across NBS 7 microservices, including `modernization-api` and `nbs-gateway`. Retrieve its secret to set the `oidc.client.secret` value when you deploy these microservices.
-
-1. In the **nbs-users** realm, go to **Clients** and select `nbs-modernization`.
-1. Open the **Credentials** tab and copy the **Client Secret**.
-
-   ![Keycloak Credentials tab for the nbs-modernization client showing the masked client secret field with eye and copy icons and a Regenerate button](images/nbs-modernization.png)
-
-1. Store this value securely in your organization's secrets manager, such as AWS Secrets Manager or Azure Key Vault. You will use it when setting `oidc.client.secret` in the values files for `modernization-api`, `nbs-gateway`, and other NBS 7 microservices that use OIDC login during microservices deployment.
 
 ## Set the login theme (optional)
 
@@ -294,6 +231,44 @@ This validation depends on the DNS records from [Deploy core Kubernetes services
    ```
 
    ![NBS 7 home page with browser console expanded to show the Network tab with verifiable values highlighted](images/nbs7-home-page.png)
+
+## Import service clients and retrieve secrets
+
+The imported configuration seeds a random client secret for most service clients. You can regenerate these secrets or use them as generated. Retrieve and store each secret before you proceed to microservices deployment.
+
+<!-- [SME REVIEW] The three NBS-realm client import files (05-nbs-users-nnd-client.json, 06-nbs-users-srte-data-client.json, 09-nbs-users-case-notification-service.json) all carry an "nbs-users" prefix despite importing into the NBS realm, not the nbs-users realm. Confirm whether this is just a repo-wide file-naming convention unrelated to which realm consumes the file, or whether the filenames are wrong and should be renamed to avoid confusion. -->
+
+| Client | Realm | Import needed | Import file | Used by |
+|---|---|---|---|---|
+| `case-notification-service` | NBS | <span class="text-green">✓ Yes</span> | [09-nbs-users-case-notification-service.json][nedss-helm-keycloak-case-notification-client] | [Case notification service](../../microservices-deployment/case-notification/case-notification-service.html) |
+| `di-keycloak-client` | NBS | No | Not needed | [Data ingestion service](../../microservices-deployment/data-ingestion/data-ingestion.html) |
+| `nbs-modernization` | nbs-users | No | Not needed | OIDC login for [Modernization API](../../microservices-deployment/modernization-api.html) and [NBS Gateway](../../microservices-deployment/nbs-gateway.html) |
+| `nnd-keycloak-client` | NBS | <span class="text-green">✓ Yes</span> | [05-nbs-users-nnd-client.json][nedss-helm-keycloak-nnd-client] | [NND service](../../microservices-deployment/nnd-service/deploy-data-sync-service-api-cloud.html) |
+| `srte-data-keycloak-client` | NBS | <span class="text-green">✓ Yes</span> | [06-nbs-users-srte-data-client.json][nedss-helm-keycloak-srte-client] | SRTE data access |
+
+### Import the additional clients
+
+For each service client that has **Yes** in the **Import needed** column of the [clients table](#import-service-clients-and-retrieve-secrets), complete the following steps:
+
+1. In the realm listed for that client, go to **Realm settings**, select the **Action** dropdown, and select **Partial Import**.
+1. Upload the import file listed for that client and select **Import**.
+
+After each import completes, follow [Retrieve a client secret](#retrieve-a-client-secret) to get the secret for that client.
+
+### Retrieve a client secret
+
+Use the following steps to retrieve the secret for any service client in the [clients table](#import-service-clients-and-retrieve-secrets):
+
+1. In the realm listed for that client, go to **Clients** and select the client.
+1. Open the **Credentials** tab.
+1. Select the eye icon to reveal the secret and copy it.
+1. Store the secret securely in your organization's secrets manager, such as AWS Secrets Manager or Azure Key Vault.
+
+The following screenshots show this procedure for `di-keycloak-client`. The **Credentials** tab looks the same for the other clients, with the client-specific secret shown in the same field.
+
+![Keycloak Clients list in the NBS realm with di-keycloak-client highlighted in the Client ID column](images/di-client-id.png)
+
+![Keycloak Credentials tab for di-keycloak-client showing the masked client secret field with eye and copy icons and a Regenerate button](images/di-client-secret.png)
 
 ## Next steps
 

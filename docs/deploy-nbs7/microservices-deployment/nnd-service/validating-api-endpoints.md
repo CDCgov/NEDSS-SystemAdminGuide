@@ -23,9 +23,9 @@ Use this check to confirm that your environment can reach the Data Sync API befo
 
 ## Prerequisites
 
-Complete [Deploy Data Sync service API (cloud)](./deploy-data-sync-service-api-cloud.html) deployment before you begin. This procedure uses Postman to send API requests. Download and install Postman from the [Postman installation page](https://learning.postman.com/docs/getting-started/installation/installation-and-updates).
+Complete the [Deploy Data Sync service API](./deploy-data-sync-service-api-cloud.html) deployment before you begin. This procedure uses Postman to send API requests. Download and install Postman from the [Postman installation page](https://learning.postman.com/docs/getting-started/installation/installation-and-updates).
 
-You need a Keycloak client ID and client secret for the Data Sync service. Retrieve these from your Keycloak instance. See [Access the Keycloak admin interface](../../full-deploy/kubernetes-setup/deploy-keycloak.html#access-the-keycloak-admin-interface) for port forwarding instructions and steps to access the Keycloak UI. In the **NBS** realm, go to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
+You need a Keycloak client ID and client secret for the Data Sync service, `nnd-keycloak-client`. Retrieve these from your Keycloak instance. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) on the **Deploy and configure Keycloak** page.
 
 ## Validate token generation in Postman
 

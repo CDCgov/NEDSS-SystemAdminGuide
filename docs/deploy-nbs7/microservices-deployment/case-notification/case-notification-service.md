@@ -18,12 +18,12 @@ This page walks through deploying the Case Notification service using the [case-
 1. TOC
 {:toc}
 
-## Prerequisites
+## Deploy the Case Notification service using Helm
 
-Complete the following before you begin this page:
+This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is [Debezium Kafka connector deployment](./debezium.html) for case notifications.
 
-- If you haven't already, complete [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
-- Complete [Debezium Kafka connector deployment](./debezium.html) for case notifications.
+- Have your database credentials, domain values, and Kafka endpoint available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining any values.
+- Confirm that the `case-notification-service` Keycloak client has been imported. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help.
 
 ## Deploy the Case Notification service using Helm
 

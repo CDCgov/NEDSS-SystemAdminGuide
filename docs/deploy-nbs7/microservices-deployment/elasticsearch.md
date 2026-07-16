@@ -18,7 +18,7 @@ This page walks through deploying Elasticsearch using the `elasticsearch` Helm c
 
 Complete the following before you begin this page:
 
-- If you haven't already, complete [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
+- Complete the steps in [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
 - Have your persistent storage configuration values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
 ## Deploy Elasticsearch using Helm

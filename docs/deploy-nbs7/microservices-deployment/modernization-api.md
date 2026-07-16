@@ -16,11 +16,9 @@ This page walks through deploying the Modernization API using the `modernization
 
 ## Prerequisites
 
-Complete the following before you begin this page:
+This page assumes you've completed [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is [Elasticsearch](./elasticsearch.html).
 
-- If you haven't already, complete [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
-- Complete [Elasticsearch](./elasticsearch.html) deployment.
-- Have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
+Have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
 ## Deploy Modernization API using Helm
 
@@ -29,7 +27,7 @@ Complete the following steps to deploy the ['modernization-api' Helm chart][neds
 1. Search `values.yaml` for `EXAMPLE` and fill in your environment-specific values:
    - For the NBS 7 and NBS 6 application domain values, use the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records).
    - For the database connection, token secret, and parameter secret values, see the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices).
-   - For the OIDC client secret used for Keycloak login authentication, see [Retrieve the nbs-modernization client secret](../full-deploy/kubernetes-setup/deploy-keycloak.html#retrieve-the-nbs-modernization-client-secret).
+   - For the OIDC client secret used for Keycloak login authentication, see [Import service clients and retrieve secrets](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets).
 1. Confirm the following feature flags in `values.yaml`:
    - Page Builder is disabled:
 

@@ -20,12 +20,10 @@ This page walks through enabling Change Data Capture (CDC) and deploying the Deb
 
 ## Prerequisites
 
-Complete the following before you begin the procedures in this section:
+This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and [Data Processing](../data-processing.html) deployment. If your deployment plan includes [NND Service (Data Sync)](../nnd-service.html), complete it before this page.
 
-- If you haven't already, complete [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
-- Complete [Data Processing](../data-processing.html) deployment. Optionally, complete [NND Service (Data Sync)](../nnd-service.html) deployment first.
 - Have your database credentials, domain values, and Kafka endpoint available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining any values.
-- Confirm that the `case-notification-service` Keycloak client has been imported. See [Import additional service clients](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-additional-service-clients) if you need help.
+- Confirm that the `case-notification-service` Keycloak client has been imported. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help.
 
 ## Enable Change Data Capture
 

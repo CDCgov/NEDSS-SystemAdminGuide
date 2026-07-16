@@ -16,11 +16,9 @@ This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm c
 
 ## Prerequisites
 
-Complete the following before you begin this page:
+This page assumes you've completed [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is  [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
 
-- If you haven't already, complete [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase.
-- Complete [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
-- Have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../full-deploy/kubernetes-setup/deploy-keycloak.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
+Have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Import service clients and retrieve secrets](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help determining any values.
 
 ## Deploy NBS Gateway using Helm
 
@@ -28,7 +26,7 @@ Complete the following steps to deploy the ['nbs-gateway' Helm chart][nedss-helm
 
 1. Search `values.yaml` for `EXAMPLE` and fill in your environment-specific values:
    - For the NBS 7 and NBS 6 application domain values, use the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records).
-   - For the OIDC client secret used for Keycloak login authentication, see [Retrieve the nbs-modernization client secret](../full-deploy/kubernetes-setup/deploy-keycloak.html#retrieve-the-nbs-modernization-client-secret).
+   - For the OIDC client secret used for Keycloak login authentication, see [Import service clients and retrieve secrets](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets).
 1. Confirm the following feature flags in `values.yaml`:
    - Page Builder is disabled:
 

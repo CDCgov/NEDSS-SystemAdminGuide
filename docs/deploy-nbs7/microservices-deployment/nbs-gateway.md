@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy NBS Gateway for NBS 7
 
-This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. NBS Gateway routes requests between NBS 7 microservices and the legacy NBS 6 application. After you finish this page, proceed to [Data processing](./data-processing.html).
+This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. NBS Gateway routes requests between NBS 7 microservices and the legacy NBS 6 application.
 
 ## Prerequisites
 

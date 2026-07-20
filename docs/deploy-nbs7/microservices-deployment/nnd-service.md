@@ -4,6 +4,7 @@ layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 7
 has_children: true
+has_toc: false
 ---
 
 # NND Service (Data Sync)
@@ -25,7 +26,7 @@ This deployment section uses three related but distinct terms:
 
 ## In this section
 
-Complete the pages in this section in order. [Deploy NND Sync](./nnd-service/on-prem-nnd-sync.html) and [Deploy Data Availability (on-premises)](./nnd-service/on-prem-data-sync.html) are independent on-premises options. Complete either or both, depending on your STLT's needs.
+Complete the pages in this section in order:
 
 1. **[Deploy Data Sync service API](./nnd-service/deploy-data-sync-service-api-cloud.html)**: Install and configure the cloud Data Sync service API with Helm.
 1. **[Validate API endpoints](./nnd-service/validating-api-endpoints.html)**: Verify API connectivity, credential setup, and baseline endpoint responses.

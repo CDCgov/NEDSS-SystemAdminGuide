@@ -10,7 +10,7 @@ redirect_from:
 
 # Deploy the Case Notification service for NBS 7
 
-This page walks through deploying the Case Notification service using the [case-notification-service][nedss-helm-case-notification-service-chart] Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. Complete [Debezium](./debezium.html) before starting this page. After you finish deploying the notification service, proceed to [API testing](./api-testing.html).
+This page walks through deploying the Case Notification service using the [case-notification-service][nedss-helm-case-notification-service-chart] Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -18,7 +18,7 @@ This page walks through deploying the Case Notification service using the [case-
 1. TOC
 {:toc}
 
-## Deploy the Case Notification service using Helm
+## Prerequisites
 
 This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is [Debezium Kafka connector deployment](./debezium.html) for case notifications.
 

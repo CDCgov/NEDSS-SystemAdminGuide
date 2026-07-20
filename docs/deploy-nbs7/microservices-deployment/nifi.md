@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy NiFi for NBS 7
 
-This page walks through deploying NiFi using the `nifi` Helm chart from the [NEDSS-Helm][nedss-helm-nifi-chart] repository for NBS version {{ site.version_latest }}. After you finish this page, proceed to [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
+This page walks through deploying NiFi using the `nifi` Helm chart from the [NEDSS-Helm][nedss-helm-nifi-chart] repository for NBS version {{ site.version_latest }}.
 
 ## Prerequisites
 

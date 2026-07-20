@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy Elasticsearch for NBS 7
 
-This page walks through deploying Elasticsearch using the `elasticsearch` Helm chart from the [NEDSS-Helm][nedss-helm-elasticsearch-chart] repository for NBS version {{ site.version_latest }}. This is the first microservice to deploy. After you finish, proceed to [Modernization API](./modernization-api.html) deployment.
+This page walks through deploying Elasticsearch using the `elasticsearch` Helm chart from the [NEDSS-Helm][nedss-helm-elasticsearch-chart] repository for NBS version {{ site.version_latest }}. This is the first microservice to deploy.
 
 ## Prerequisites
 

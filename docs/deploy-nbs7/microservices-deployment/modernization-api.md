@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy the Modernization API for NBS 7
 
-This page walks through deploying the Modernization API using the `modernization-api` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. After you finish this page, proceed to [NiFi](./nifi.html) deployment.
+This page walks through deploying the Modernization API using the `modernization-api` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
 
 ## Prerequisites
 

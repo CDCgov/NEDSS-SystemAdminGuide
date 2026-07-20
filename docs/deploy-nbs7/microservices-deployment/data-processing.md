@@ -11,7 +11,7 @@ redirect_from:
 
 # Deploy the Data Processing service for NBS 7
 
-This page walks through deploying the Real Time Ingestion (RTI) data processing service using the `data-processing-service` Helm chart from the [NEDSS-Helm][nedss-helm-data-processing-service-chart] repository for NBS version {{ site.version_latest }}. Complete [NBS Gateway](./nbs-gateway.html) before starting this page. After you finish deploying and [validating](./data-processing/api-testing.html) the data processing service, proceed to [NND Service (Data Sync)](./nnd-service.html).
+This page walks through deploying the Real Time Ingestion (RTI) data processing service using the `data-processing-service` Helm chart from the [NEDSS-Helm][nedss-helm-data-processing-service-chart] repository for NBS version {{ site.version_latest }}.
 
 ## On this page
 {: .no_toc .text-delta }

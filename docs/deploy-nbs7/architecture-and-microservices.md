@@ -75,7 +75,7 @@ Real-Time Reporting (RTR) provides rapid transformation and delivery of data fro
 
 The following services comprise RTR:
 
-- **Reporting Pipeline service**: ⏺ consumes ODSE/SRTE change events from Kafka, transforms them via stored procedures, and hydrates the reporting database's dimensions, facts, and datamarts in near real time.
+- **Reporting Pipeline service**: Consumes ODSE/SRTE change events from Kafka, transforms them via stored procedures, and hydrates the reporting database's dimensions, facts, and datamarts in near real time.
 - **Debezium service**: Monitors and streams the selected list of `NBS_ODSE` and `NBS_SRTE` tables to Kafka topics
 - **Kafka sink service**: Persists the data from the Kafka topics to the `RDB_Modern` database tables
 

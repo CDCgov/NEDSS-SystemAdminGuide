@@ -10,7 +10,7 @@
     "link-check": "npm run link-check:internal && npm run link-check:external && npm run link-check:github:changed"
   },
   "devDependencies": {
-    "markdownlint-cli2": "^0.23.0",
+    "markdownlint-cli2": "^0.23.1",
     "markdown-link-check": "^3.12.0"
   }
 }

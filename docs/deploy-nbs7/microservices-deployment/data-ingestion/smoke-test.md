@@ -9,8 +9,6 @@ redirect_from:
   - /docs/6_microservices_deployment/6b_data_ingestion_smoke_test/
   - /docs/3_base_application/data-ingestion-smoke-test.html
   - /docs/3_base_application/data-ingestion-smoke-test/
-  - /docs/deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html
-  - /docs/deploy-nbs7/microservices-deployment/data-ingestion/smoke-test/
   - /docs/deploy-nbs7/data-ingestion/smoke-test.html
   - /docs/deploy-nbs7/data-ingestion/smoke-test/
 ---
@@ -52,8 +50,8 @@ Open Postman application and select import option. A pop up window shows up and 
 
 ### Step 1: Token Generation API
 
-Click on the Token Generation API in `New-Data-Ingestion` Postman collection.
-Update the `clientid` and `clientsecret` values and then click **Send** to generate a new token.
+Select the Token Generation API in the `New-Data-Ingestion` Postman collection.
+Update the **clientid** and **clientsecret** values, then select **Send** to generate a new token.
 
 ![data-ingestion-token-generation](images/data-ingestion-token-generation-api.jpg)
 

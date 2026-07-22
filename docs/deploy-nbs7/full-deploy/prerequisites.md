@@ -19,6 +19,15 @@ Before you begin deployment on any cloud provider, confirm that your jurisdictio
 1. TOC
 {:toc}
 
+## Knowledge requirements
+
+Your deployment team should include at least one person who has:
+
+- Working knowledge of Terraform configuration and the ability to read and modify HCL code
+- Kubernetes administration experience or the willingness to build this capability with training
+- Familiarity with your organization's cloud provider (AWS or Azure) and cloud networking concepts
+- Understanding of SQL Server database administration, including backup and restore procedures
+
 ## NBS 6 readiness
 
 Your NBS 6 instance is the foundation for NBS 7. Confirm the following:
@@ -38,6 +47,23 @@ Your network must provide connectivity from all NBS 7 components to NBS 6 compon
 
 For provider-specific network setup, see [Prerequisites for AWS](provision-cloud-infrastructure/cloud-prerequisites.html) or [Prerequisites for Azure](provision-cloud-infrastructure/cloud-prerequisites.html).
 
+## Required tools and software
+
+You will need a local or cloud-hosted workstation (for example, AWS CloudShell, Azure Cloud Shell, or a local laptop) with specific tools installed to support deployment and ongoing maintenance.
+
+The following table lists the minimum supported versions of the required software. The [Cloud prerequisites](provision-cloud-infrastructure/cloud-prerequisites.html) page lists additional tools and the specific versions used in testing.
+
+| **Software**        | **Minimum version**             |
+|:---|:---|
+| Kubernetes CLI      | kubectl 1.25                    |
+| Helm CLI            | 3.0                             |
+| Terraform CLI       | 1.15.6                          |
+| GitHub CLI          | latest                          |
+| Cloud provider CLI  | latest AWS or Azure CLI version |
+| Docker              | 20.x                            |
+
+For installation instructions specific to your cloud provider, see [Cloud prerequisites](provision-cloud-infrastructure/cloud-prerequisites.html).
+
 ## DNS and SSL/TLS certificates
 
 Your deployment requires DNS resolution and certificate management:
@@ -53,49 +79,6 @@ Your organization must have or be prepared to establish the following security c
 - **Identity and access management:** You must be able to create and manage cloud IAM roles and policies (AWS) or role-based access control (Azure).
 - **Single Sign-On (optional but recommended):** NBS 7 uses Keycloak for identity management. If your organization uses a centralized identity provider such as Okta or Active Directory, Keycloak can integrate with it so users log in with their existing jurisdiction credentials. Coordinate with your identity provider administrators early in the planning process if you plan to integrate.
 - **Existing authentication mechanism:** NBS 7 assumes your organization already has a working NBS 6 instance and therefore already has end-user authentication in place. NBS 7 extends this authentication; no new user authentication steps are required.
-
-## Local management machine and tools
-
-You will need a local or cloud-hosted workstation (for example, AWS CloudShell, Azure Cloud Shell, or a local laptop) with specific tools installed to support deployment and ongoing maintenance.
-
-### Required tools
-
-- **Terraform CLI** (version 1.5.5 or later recommended)
-- **Helm CLI** (3.0 or later)
-- **Kubernetes CLI** (`kubectl`)
-- **GitHub CLI** (for accessing deployment configuration and documentation)
-- **Cloud provider CLI:**
-  - AWS CLI (if deploying to AWS)
-  - Azure CLI (if deploying to Azure)
-
-For detailed installation instructions specific to your cloud provider, see [Prerequisites for AWS](provision-cloud-infrastructure/cloud-prerequisites.html) or [Prerequisites for Azure](provision-cloud-infrastructure/cloud-prerequisites.html).
-
-### Knowledge requirements
-
-Your deployment team should include at least one person who has:
-
-- Working knowledge of Terraform configuration and the ability to read and modify HCL code
-- Kubernetes administration experience or the willingness to build this capability with training
-- Familiarity with your organization's cloud provider (AWS or Azure) and cloud networking concepts
-- Understanding of SQL Server database administration, including backup and restore procedures
-
-<!--
-If your team does not have this expertise, you have two options:
-
-- **Build internal capacity:** Train existing staff or hire staff with these skills before you begin deployment.
-- **Vendor-managed deployment:** Contract with a vendor to deploy or manage your NBS 7 infrastructure. See [Vendor-managed deployment](../before-you-deploy/choose-your-configuration/vendor-managed-deployment.html) for guidance on what to look for in a vendor.
--->
-
-## Software versions
-
-NBS 7 requires specific versions of supporting software. The following table lists the minimum versions; cloud provider setup pages list additional tools and the specific versions used in testing.
-
-| **Software**    | **Minimum version** |
-|:---|:---|
-| Kubernetes      | 1.25                |
-| Helm            | 3.0                 |
-| Terraform       | 1.5.5               |
-| Docker          | 20.x                |
 
 ## Next steps
 

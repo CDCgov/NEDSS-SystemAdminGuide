@@ -17,7 +17,7 @@ redirect_from:
 
 Before you provision cloud infrastructure for NBS 7, verify that your cloud environment, workstation tools, and network access meet the requirements on this page. These requirements apply to both AWS and Azure deployments. Where the two providers differ, each requirement lists the AWS and Azure equivalents.
 
-> Start with the cloud-agnostic [Prerequisites for NBS 7 deployment](../prerequisites.html), then verify the cloud requirements on this page.
+> Start with the [Prerequisites for NBS 7 deployment](../prerequisites.html), then verify the cloud requirements on this page.
 {: .important }
 
 ## On this page
@@ -37,31 +37,27 @@ Your cloud environment must meet the following requirements:
   - **Azure:** Network Security Groups (NSGs) and Azure Role-Based Access Control (RBAC) role assignments
 - Access to store Terraform state files in an S3 bucket (AWS) or a storage account (Azure).
 
-## Hardware requirements
+## Database and Windows Server requirements
 
-Your existing NBS 6 environment provides the database server that NBS 7 reuses. Confirm that it meets the following requirement. The compute, storage, and container resources for NBS 7 do not exist yet. Terraform creates them in [Provision cloud environment](provision-cloud-environment.html).
+Your existing NBS 6 environment provides the database server that NBS 7 reuses. Confirm that your existing server meets the following requirements. The compute, storage, and container resources for NBS 7 do not exist yet. Terraform creates them in [Provision cloud environment](provision-cloud-environment.html).
 
-| Type | Resource | Size |
-|------|----------|------|
-| Relational database | SQL Server 2017 or later, Standard or Enterprise | Sized for your current NBS 6 production workload <!-- [SME REVIEW] CDC requested no reference to the Implementation and Support FAQs. Confirm where database sizing guidance now lives, or whether pointing to nbs@cdc.gov is the interim answer. --> |
-
-## Software requirements
-
-Confirm that your existing NBS 6 instance meets the following version requirements:
-
-| Software | Version | Comments |
-|----------|---------|----------|
-| NBS Classic | A supported NBS 6 version. See the [Supported NBS versions](../../../supported-versions.html) page. | Reuse your current NBS instance |
-| SQL Server | 2017 or later | Reuse your current NBS instance |
+| Software | Version |
+|----------|---------|
+| NBS Classic | See [Supported NBS versions](../../../supported-versions.html) |
+| Microsoft Windows Server | Windows Server 2022 - *preferred*, Windows Server 2025 |
+| Microsoft SQL Server | SQL Server 2022 (16.x) - *preferred*, SQL Server 2025 (17.x) |
 
 ## Management workstation setup
 
-To configure, deploy, and maintain NBS 7, you need a local workstation or a cloud-hosted shell such as AWS CloudShell or Azure Cloud Shell. Install the following tools on that workstation. Each item links to download and installation instructions:
+To configure, deploy, and maintain NBS 7, you need a local workstation or a cloud-hosted shell such as AWS CloudShell or Azure Cloud Shell. Install the following tools on that workstation. Each item links to download and installation instructions.
+
+For information about supported software versions, see [NBS 7 prerequisites](../prerequisites.html#required-tools-and-software).
+{: .important }
 
 - **Cloud provider CLI:**
   - **AWS:** [AWS CLI](https://aws.amazon.com/cli/) (the `aws` command). To set up credentials, see the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
   - **Azure:** [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) (the `az` command). Also install [kubelogin](https://github.com/Azure/kubelogin), which `kubectl` requires for Azure authentication.
-- [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) (the `terraform` command). Version 1.5.5 is suggested because it has been tested with NBS 7. <!-- RELEASE CHECKLIST: version-specific claim; verify the tested Terraform version each release. -->
+- [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) (the `terraform` command).
 - [Helm CLI](https://helm.sh/docs/intro/install/) (the `helm` command).
 - [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) (the Kubernetes CLI).
 
@@ -83,6 +79,6 @@ NBS 7 requires a working NBS 6 instance, so it assumes that a user authenticatio
 
 ## What to do now
 
-1. Complete the cloud-agnostic [Prerequisites](../prerequisites.html) if you have not already.
+1. Complete the general [Prerequisites](../prerequisites.html) if you have not already.
 1. Continue with [Provision cloud environment](provision-cloud-environment.html).
 1. Contact [nbs@cdc.gov](mailto:nbs@cdc.gov) if you have questions about AWS or Azure planning.

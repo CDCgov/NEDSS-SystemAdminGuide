@@ -40,7 +40,6 @@ Work through the areas in this table in order. Resolve failures before moving to
 | Data processing RTI integration | Real Time Ingestion processes ELR data correctly and returns expected status codes | [API testing and integration](microservices-deployment/data-processing/api-testing.html) |
 | Case notification API testing | Case notification service is processing and routing notifications correctly | [API testing](microservices-deployment/case-notification/api-testing.html) |
 | NND service API endpoints | Data sync API endpoints are reachable and credentials are valid | [Validate API endpoints](microservices-deployment/nnd-service/validating-api-endpoints.html) |
-| RTR pipeline validation | Streaming updates flow from ingestion through to reporting datamart tables | [Pipeline validation](real-time-reporting/pipeline-validation.html) |
 
 ## System-level checks
 

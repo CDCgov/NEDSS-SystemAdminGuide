@@ -59,11 +59,6 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
    kubectl get deployment kafka-connect-sink-cp-kafka-connect
    ```
 
-1. Validate the service.
-
-   > The Kafka connector is an internal service with no ingress. Validate it as part of [RTR pipeline validation](../../deploy-nbs7/real-time-reporting/pipeline-validation.html).
-   {: .note }
-
 After Debezium deploys successfully, continue to [Deploy Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html).
 
 ## Troubleshooting

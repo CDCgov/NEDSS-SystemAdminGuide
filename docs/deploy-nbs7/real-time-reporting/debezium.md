@@ -64,11 +64,6 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
    kubectl get deployment debezium-debezium-rtr-connect
    ```
 
-1. Validate the service.
-
-   > Debezium is an internal service with no ingress. Validate it as part of [RTR pipeline validation](../../deploy-nbs7/real-time-reporting/pipeline-validation.html).
-   {: .note }
-
 After Debezium deploys successfully, continue to [Deploy Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html).
 
 ## Troubleshooting

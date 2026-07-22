@@ -10,13 +10,20 @@ redirect_from:
 
 # Deploy the Debezium Kafka source connector for NBS 7 case notifications
 
-This page walks through enabling Change Data Capture (CDC) and deploying the Debezium source connector used by case notification services. Complete [Case notifications](../case-notification.html) before starting this page. After you finishthe connector deployment, proceed to deploying the [case notification service](./case-notification-service.html).
+This page walks through enabling Change Data Capture (CDC) and deploying the Debezium source connector used by case notification services. Complete [Case notifications](../case-notification.html) before starting this page. After you finish the connector deployment, proceed to deploying the [case notification service](./case-notification-service.html).
 
 ## On this page
 {: .no_toc .text-delta }
 
 1. TOC
 {:toc}
+
+## Prerequisites
+
+This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and [Data Processing](../data-processing.html) deployment. If your deployment plan includes [NND Service (Data Sync)](../nnd-service.html), complete it before this page.
+
+- Have your database credentials, domain values, and Kafka endpoint available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining any values.
+- Confirm that the `case-notification-service` Keycloak client has been imported. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help.
 
 ## Enable Change Data Capture
 
@@ -57,36 +64,17 @@ Enable Change Data Capture on `NBS_ODSE` before deploying the connector. Sysadmi
 
 ## Deploy the Debezium connector using Helm
 
-Use the [debezium-case-notifications Helm chart][nedss-helm-debezium-case-notifications-chart] to deploy the connector into your Kubernetes cluster.
+Complete the following steps to deploy the ['debezium-case-notifications' Helm chart][nedss-helm-debezium-case-notifications-chart] from the `charts/debezium-case-notifications/` directory of your cloned NEDSS-Helm repository:
 
-1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/debezium-case-notifications/` from that repository.
-1. Set the image repository and tag:
-
-   ```yaml
-   image:
-     repository: quay.io/debezium/connect
-     tag: <release-version-tag> # for example, v1.0.1
-   ```
-
-1. Update `values.yaml` with `NBS_ODSE` hostname, username, password, and Kafka bootstrap server values. For help determining these values, see the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices).
+1. In the `debezium-case-notifications/values.yaml` file, search for `EXAMPLE` and fill in your environment-specific values for the `NBS_ODSE` hostname, database credentials, and Kafka bootstrap server endpoints. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use. The connector's SQL Server config is preconfigured for the `NBS_ODSE` database and doesn't need to change:
 
    ```yaml
-   properties:
-     bootstrap_server: "EXAMPLE_KAFKA_ENDPOINT"
    sqlserverconnector:
      config:
-       database.hostname: "EXAMPLE_DB_ENDPOINT"
        database.port: 1433
-       database.user: "EXAMPLE_DB_USER"
-       database.password: "EXAMPLE_DB_USER_PASSWORD"
        database.dbname: nbs_odse
        database.names: nbs_odse
        database.server.name: odse
-       database.history.kafka.bootstrap.servers: "EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS"
-       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS"
-   Env:
-       name: BOOTSTRAP_SERVERS
-       value: "EXAMPLE_KAFKA_ENDPOINT"
    ```
 
 1. Install the connector:
@@ -119,5 +107,4 @@ If the service has trouble connecting to the database, delete the ConfigMap and 
    helm upgrade "debezium-case-notification-service-connect" ./debezium-case-notifications -f ./debezium-case-notifications/values.yaml
    ```
 
-[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-debezium-case-notifications-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium-case-notifications>

@@ -10,6 +10,8 @@ redirect_from:
 
 # Quick start (AWS)
 
+<!-- [SME REVIEW] Azure quickstart inserts pending from Josh (DEV-265); retitle page to "NBS 7 quick start" when they land. -->
+
 This page provides a streamlined path to deploy NBS 7 infrastructure and core microservices in AWS. It is intended for experienced administrators familiar with AWS, Kubernetes, Helm, and Terraform.
 
 ## On this page
@@ -23,9 +25,7 @@ This page provides a streamlined path to deploy NBS 7 infrastructure and core mi
 This guide is not intended for production deployment. For full production steps and guidance, see [Deploy NBS 7](../deploy-nbs7.html).
 {: .important }
 
-<!--
-Before starting this quick start, confirm your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html).
--->
+Before starting this quick start, confirm that your NBS 6 version is supported for your target NBS 7 version. See the [Supported NBS versions](../supported-versions.html) page.
 
 This quick start installs and configures the following resources.
 
@@ -270,7 +270,7 @@ Update the required parameters in `values.yaml` by following the [NBS Gateway ch
 helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gateway
 ```
 
-### Deploy Data ingestion service
+## Deploy the data ingestion service
 
 Create the Data Ingest database and set user permissions before deploying data ingestion:
 
@@ -301,7 +301,7 @@ ALTER ROLE [db_owner] ADD MEMBER [nbs_ods]
 GO
 ```
 
-Update the required parameters in `values.yaml` by following the [Data Ingestion Service chart values table][nedss-helm-dataingestion-service-readme]
+Update the required parameters in `values.yaml` by following the [data ingestion service chart values table][nedss-helm-dataingestion-service-readme]
 
 ```bash
 helm install dataingestion-service -f ./dataingestion-service/values.yaml dataingestion-service
@@ -345,7 +345,7 @@ Follow these steps to clean up the environment.
 helm list --namespace ingress-nginx
 helm uninstall --namespace ingress-nginx ingress-nginx
 
-# Empty fluentbit s3 bucket manually
+# Empty the OTEL collector (splunk-otel-collector) s3 bucket manually
 
 terraform destroy
 ```

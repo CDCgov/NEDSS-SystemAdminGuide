@@ -2,7 +2,7 @@
 title: Case notifications
 layout: page
 parent: Deploy NBS 7 microservices
-nav_order: 9
+nav_order: 8
 has_children: true
 nav_enabled: true
 redirect_from:
@@ -13,7 +13,7 @@ redirect_from:
 
 # Deploy case notifications for NBS 7
 
-This page walks through deploying the NBS 7 case notification service for NBS version {{ site.version_latest }}. Complete the [Data Processing](./data-processing.html) and optional [NND Service (Data Sync)](./nnd-service.html) deployments before starting this page. After you finish, proceed to deploy the [data ingestion service (DI API)](../data-ingestion/data-ingestion.html) or [real-time reporting (RTR)](../real-time-reporting/real-time-reporting.html) based on your deployment plan.
+This page walks through deploying the NBS 7 case notification service for NBS version {{ site.version_latest }}. Complete the [Data Processing](./data-processing.html) and optional [NND Service (Data Sync)](./nnd-service.html) deployments before starting this page. After you finish, proceed to deploy the [data ingestion service (DI API)](data-ingestion/data-ingestion.html) or [real-time reporting (RTR)](real-time-reporting/real-time-reporting.html) based on your deployment plan.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -25,7 +25,7 @@ This page walks through deploying the NBS 7 case notification service for NBS ve
 
 The case notification pipeline begins with a Debezium source connector monitoring the `ODSE.CN_transportq_out` table. When new data is inserted, the connector publishes it to a Kafka topic, which the case notification service consumes. The service processes each event and routes output to either `MSGOUTE.transportq_out` or `MSGOUTE.netsstransportq_out` depending on event type. Faulty events are routed to `MSGOUTE.case_notification_dlt` (Dead Letter Table) for investigation.
 
-> **Case notifications and [real-time reporting (RTR)](../real-time-reporting/real-time-reporting.html) can use the same Kafka cluster.** To reduce potential cost and installation impact, consider re-using the Kafka cluster that you configure here when you deploy RTR.
+> **Case notifications and [real-time reporting (RTR)](real-time-reporting/real-time-reporting.html) can use the same Kafka cluster.** To reduce potential cost and installation impact, consider re-using the Kafka cluster that you configure here when you deploy RTR.
 {: .important }
 
 ## Considerations

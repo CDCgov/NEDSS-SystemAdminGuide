@@ -2,7 +2,7 @@
 title: Deploy NND Sync
 layout: page
 parent: NND Service (Data Sync)
-nav_order: 2
+nav_order: 3
 redirect_from:
   - /docs/6_microservices_deployment/8b_nnd_stlt_on_prem_configuration_nnd_sync.html
   - /docs/6_microservices_deployment/8b_nnd_stlt_on_prem_configuration_nnd_sync/
@@ -10,7 +10,7 @@ redirect_from:
 
 # Deploy NND Sync
 
-Use these instructions to deploy the on-premises Data Sync service that extracts data from the Modernized NBS cloud implementation and supports ongoing Notifiable Disease message transmission to CDC.
+Use these instructions to deploy the on-premises Data Sync service that extracts data from the Modernized NBS cloud implementation and supports ongoing Notifiable Disease message transmission to CDC. Complete [Validate API endpoints](./validating-api-endpoints.html) before starting this page.
 
 > This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }
@@ -27,6 +27,7 @@ Use these instructions to deploy the on-premises Data Sync service that extracts
 
 To sync data for NNDSS through the NBS 7 Data Sync service, you need the following:
 
+- Complete [Validate API endpoints](./validating-api-endpoints.html).
 - **Keycloak client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, go to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
 - **Data service URL** - Retrieve this from your NBS environment.
 - **Release materials/package** - CDC provides this as a .zip file with each release.
@@ -114,12 +115,6 @@ Ensure the database is accessible from Rhapsody.
 ## Repo reference
 
 - GitHub: [NEDSS-NNDSS repository](https://github.com/CDCgov/NEDSS-NNDSS)
-
----
-
-## Final note
-
-Make sure you validate the provided **API endpoints** before you run the Data Sync services.
 
 [nedss-nndss-release-page]: <https://github.com/CDCgov/NEDSS-NNDSS/releases/tag/{{ site.version_latest_tag }}>
 [nedss-nndss-readme]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service#readme>

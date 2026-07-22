@@ -2,7 +2,7 @@
 title: Validate API endpoints
 layout: page
 parent: NND Service (Data Sync)
-nav_order: 1
+nav_order: 2
 redirect_from:
   - /docs/6_microservices_deployment/8a_nnd_api_tesing.html
   - /docs/6_microservices_deployment/8a_nnd_api_tesing/
@@ -10,7 +10,7 @@ redirect_from:
 
 # Validate API endpoints
 
-Use this check to confirm that your environment can reach the Data Sync API before you sync data. In production, the Data Sync service calls these endpoints. System administrators still need to validate connectivity and credentials during setup.
+Use this check to confirm that your environment can reach the Data Sync API before you sync data. In production, the Data Sync service calls these endpoints. System administrators still need to validate connectivity and credentials during setup. Complete [Deploy Data Sync service API (cloud)](./deploy-data-sync-service-api-cloud.html) before starting this page. After you finish validating, proceed to [Deploy NND Sync](./on-prem-nnd-sync.html) or [Deploy Data Availability (on-premises)](./on-prem-data-sync.html).
 
 > This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }
@@ -23,9 +23,9 @@ Use this check to confirm that your environment can reach the Data Sync API befo
 
 ## Prerequisites
 
-This procedure uses Postman to send API requests. Download and install Postman from the [Postman installation page](https://learning.postman.com/docs/getting-started/installation/installation-and-updates).
+Complete the [Deploy Data Sync service API](./deploy-data-sync-service-api-cloud.html) deployment before you begin. This procedure uses Postman to send API requests. Download and install Postman from the [Postman installation page](https://learning.postman.com/docs/getting-started/installation/installation-and-updates).
 
-You need a Keycloak client ID and client secret for the Data Sync service. Retrieve these from your Keycloak instance. See [Access the Keycloak admin interface](../../../deploy-nbs7/keycloak/keycloak-installation.html#access-the-keycloak-admin-interface) for port forwarding instructions and steps to access the Keycloak UI. In the **NBS** realm, go to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
+You need a Keycloak client ID and client secret for the Data Sync service, `nnd-keycloak-client`. Retrieve these from your Keycloak instance. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) on the **Deploy and configure Keycloak** page.
 
 ## Validate token generation in Postman
 

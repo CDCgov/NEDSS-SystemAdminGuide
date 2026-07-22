@@ -6,7 +6,7 @@ This guide is the authoritative reference for formatting, front matter, and acce
 
 ---
 
-## 1. Front Matter
+## Front Matter
 
 ### Quick-reference table
 
@@ -16,10 +16,11 @@ This guide is the authoritative reference for formatting, front matter, and acce
 | `layout` | **Required** — always `page` | **Required** — always `page` | Specifies the JTD page template. Use `page` for all content pages. `home` is used only on the site root `index.md` — do not use it elsewhere. |
 | `nav_order` | **Required** | **Omit** | Controls display order among sibling pages in the nav. Must be an integer. See [How nav_order works](#how-nav_order-works). |
 | `has_children` | **Required** when this page has child pages | **Omit** | Tells JTD to render an expand arrow in the nav. Without it, child pages exist but the parent page shows no arrow and may not nest visibly. |
+| `has_toc` | **Set `false`** on parent pages that provide a manual "In this section" list | **Omit** | JTD auto-renders a table of contents of child pages at the bottom of every `has_children` page. Set `has_toc: false` to suppress it when the page provides its own richer child list. See [Parent landing pages](#parent-landing-pages). |
 | `parent` | **Required** for child pages | **Omit** | Sets the parent page. The value must exactly match the `title:` of the intended parent. Case-sensitive. |
 | `grand_parent` | **Required** for grandchild pages | **Omit** | Sets the grandparent page. Required when a page's `parent` is itself a child page. Must exactly match the grandparent's `title:`. |
 | `description` | **Optional, recommended** | **Optional** | 1–2 sentences describing the page's purpose. JTD uses this for search result snippets and the HTML `<meta name="description">` tag. See [Writing descriptions](#writing-descriptions). |
-| `redirect_from` | Optional — plugin feature | **Omit** | From the `jekyll-redirect-from` gem. Redirects one or more old URLs to this page. Use only when a page has been moved or renamed to preserve existing links. See [Redirects](#42-redirects). |
+| `redirect_from` | Optional — plugin feature | **Omit** | From the `jekyll-redirect-from` gem. Redirects one or more old URLs to this page. Use only when a page has been moved or renamed to preserve existing links. See [Redirects](#redirects). |
 | `nav_enabled` | **Omit** — remove on sight | **Omit** — remove on sight | **Non-standard. Has no effect.** Not a JTD front matter key. See [Note on nav_enabled](#note-on-nav_enabled). |
 
 ### Annotated examples
@@ -35,6 +36,7 @@ title: TITLE          # Required. Becomes the H1 heading and left-nav label.
 layout: page          # Required. Always "page" — do not change.
 nav_order: NAV_ORDER  # Required. Integer. Controls position among top-level nav items.
 has_children: true    # Required. Enables the expand arrow; without it children won't nest.
+has_toc: false        # Set false when the page provides a manual "In this section" list.
 description: DESCRIPTION  # Optional. 1–2 sentences, under 160 characters. Describe purpose, not the title.
 ---
 ```
@@ -114,7 +116,7 @@ The field is legacy noise carried over before front matter standards were establ
 
 ---
 
-## 2. Page Layout
+## Page Layout
 
 Use this structure for content pages:
 
@@ -164,6 +166,29 @@ This is an overview paragraph.
 
 Every page needs an H1. JTD shows `title:` in navigation and breadcrumbs, but only your H1 creates the visible page heading in content. Keep `title:` concise for navigation, and use the H1 to provide full page context.
 
+### Parent landing pages
+
+Pages with `has_children: true` that serve as section landing pages follow an additional pattern:
+
+1. Set `has_toc: false` in front matter. JTD otherwise auto-renders a bare table of contents of child pages at the bottom of the page, which duplicates the manual list below.
+1. Provide a manual **In this section** list: each child page as a bold link followed by a one-line description of what the reader does or finds there.
+1. Match the list type to the relationship between the children:
+   - **Ordered list** (`1.`) when the children are sequential. Use a lead-in that states the sequence, ending with a colon: "Complete the pages in this section in order:"
+   - **Bulleted list** when the children are alternatives or independent topics.
+
+Ordered-list semantics announce sequence to assistive technology, so the list type is an accessibility signal, not just a visual one.
+
+**Example (sequential children):**
+
+```markdown
+## In this section
+
+Complete the pages in this section in order:
+
+1. **[Cloud prerequisites](provision-cloud-infrastructure/cloud-prerequisites.html)**: Verify your AWS or Azure account, hardware, software, network, and security requirements before provisioning begins.
+1. **[Provision cloud environment](provision-cloud-infrastructure/provision-cloud-environment.html)**: Use Terraform to create the virtual network, Kubernetes cluster, and supporting services for NBS 7.
+```
+
 ### Navigation titles (sidebar)
 
 Use the front matter `title:` as the navigation label, and keep it short enough to scan easily in the sidebar.
@@ -181,7 +206,7 @@ Examples:
 
 ---
 
-## 3. Heading Hierarchy
+## Heading Hierarchy
 
 | Level | Tag | When to use |
 |-------|-----|-------------|
@@ -198,7 +223,7 @@ Examples:
 
 ---
 
-## 4. Callouts (Admonitions)
+## Callouts (Admonitions)
 
 Callouts are styled block quotes. JTD applies the callout style based on a CSS class applied to the paragraph after the block quote.
 
@@ -301,7 +326,7 @@ Before treating any callout as non-compliant, verify in a built-site browser usi
 
 ---
 
-## 5. Code Formatting
+## Code Formatting
 
 ### Inline code
 
@@ -344,7 +369,43 @@ helm upgrade --install nbs-gateway ./charts/nbs-gateway \
 
 ---
 
-## 6. Links
+## Terminology and Naming
+
+### Acronym first use
+
+Spell out an acronym at its first use on each page, with the acronym in parentheses: "Data Ingestion API (DI API)". Use the bare acronym on subsequent mentions on that page.
+
+**First use means first RENDERED use.** Front matter fields (`description:`, `parent:`) do not render in the page body, so an expansion that appears only in front matter does not count. A reader must encounter the spelled-out form in visible prose before the bare acronym appears.
+
+Every acronym used in the guide should also have an entry in `_data/glossary.yml`.
+
+### Service names are namespace-specific
+
+The same NBS service can be spelled differently in different technical namespaces, and each spelling is correct for its namespace. **Never normalize a service-name spelling across namespaces.** Verify against the namespace being referenced before "correcting" any service name.
+
+Example — the data ingestion service:
+
+| Namespace | Canonical string |
+|-----------|-----------------|
+| NEDSS-Helm chart directory | `dataingestion-service` |
+| quay.io container image path | `data-ingestion-service` |
+| NEDSS-DataIngestion source repo module | `data-ingestion-service` |
+
+A values file that references the container image must use the image path spelling; a `helm install` command must use the chart spelling. Changing either to match the other breaks the reference.
+
+### Data ingestion naming standard
+
+Three forms are sanctioned; use the one that matches what the sentence names:
+
+1. **"Data Ingestion API (DI API)"** at first rendered use on a page when naming the API; **"DI API"** on subsequent mentions on that page.
+2. **"data ingestion service"** (lowercase) when referring descriptively to the service, capitalized only as normal sentence rules require.
+3. **`dataingestion-service`** (code format) only inside commands, code samples, and values-file references, where it is a technical string rather than a prose name.
+
+There is no Title Case "Data Ingestion Service" form.
+
+---
+
+## Links
 
 **Use descriptive link text.** Link text must tell the reader where they are going or what the target document covers. Screen reader users navigate by link text alone — "click here" and "here" provide no context and fail WCAG 2.1 SC 2.4.4 (Link Purpose).
 
@@ -356,9 +417,13 @@ See [here](../path.md) for installation steps.
 See [Keycloak installation](../path.md) for installation steps.
 ```
 
-### 6.1 Internal cross-links (within this doc set)
+### Internal cross-links (within this doc set)
 
 For links to other pages in this guide, use a relative HTML path from the current file to the target page.
+
+**Internal links must be relative — never root-absolute (no leading `/`).** A root-absolute path such as `/docs/page.html` resolves against the domain root and bypasses the GitHub Pages project baseurl (`/NEDSS-SystemAdminGuide`). The result works under a default local serve (which serves at the domain root) but returns 404 on the published site.
+
+To catch this class of bug locally, run `bundle exec jekyll serve` without a baseurl override and browse the site under `http://localhost:4000/NEDSS-SystemAdminGuide/`. With the baseurl respected, root-absolute links break locally the same way they break in production.
 
 Do not link to `.md` files for internal navigation links.
 
@@ -387,7 +452,7 @@ Anchor-only links (`#section-name`) are valid and excluded from the automated li
 
 External links do not need special treatment in JTD — they render as standard links and open in the same tab by default.
 
-### 6.2 Redirects
+### Redirects
 
 Use redirects when a page has moved and you need old URLs to continue working.
 
@@ -422,7 +487,7 @@ After changing `redirect_from` or `_config.yml`:
 1. Confirm that Jekyll generated a redirect file for the old URL under `_site/docs`.
 1. Test the old URL in browser.
 
-### 6.3 Reference-style links for templated GitHub URLs
+### Reference-style links for templated GitHub URLs
 
 GitHub URLs that contain Liquid template values (e.g., `{{ site.version_latest_tag }}`) must use **reference-style links** rather than inline links. Inline links with Liquid values trigger markdownlint rule MD034 (bare URL in text), which is a blocking CI check.
 
@@ -472,7 +537,7 @@ Use lowercase hyphenated labels that identify the repo and target clearly. Keep 
 
 ---
 
-## 7. Images
+## Images
 
 **Always include alt text.** Every image must have descriptive alt text. Empty `alt=""` is only appropriate for purely decorative images with no informational content.
 
@@ -520,7 +585,7 @@ docs/
 
 ---
 
-## 8. Tables
+## Tables
 
 Use tables for **reference data and comparisons** where the reader will scan across rows to find a specific value.
 
@@ -549,7 +614,7 @@ Use tables for **reference data and comparisons** where the reader will scan acr
 
 ---
 
-## 9. Numbered Lists
+## Numbered Lists
 
 **Use `1.` for every item.** Markdown renderers increment the numbers automatically, so writing `1.` throughout makes it easy to insert or reorder steps without renumbering.
 
@@ -604,7 +669,7 @@ some command
 
 ---
 
-## 10. Accessibility Compliance Record
+## Accessibility Compliance Record
 
 The NEDSS System Administration Guide is a federally published resource and must meet **Section 508** and **WCAG 2.1 Level AA** requirements. The site is built with Jekyll and the Just the Docs (JTD) theme; most structural accessibility (landmark regions, skip-navigation, focus management) is provided by the theme. Authoring-time obligations — alt text, heading hierarchy, link text, color contrast, and table markup — are documented throughout this guide.
 

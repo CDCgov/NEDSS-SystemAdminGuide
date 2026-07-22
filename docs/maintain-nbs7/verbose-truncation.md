@@ -2,6 +2,7 @@
 title: Enable verbose truncation warnings
 layout: page
 parent: Maintain NBS 7
+description: Enable SQL Server Trace Flag 460 for NBS 7 to surface detailed error messages for diagnosing data truncation errors.
 redirect_from:
   - /docs/maintain-nbs7/sql-server-configuration.html
   - /docs/maintain-nbs7/sql-server-configuration/

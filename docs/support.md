@@ -1,7 +1,7 @@
 ---
-title: Get support
+title: Get support for NBS 7
 layout: page
-nav_order: 5
+nav_order: 6
 description: Explains when to contact CDC for NBS 7 planning, deployment, and maintenance support and what information to include in a support request.
 
 ---

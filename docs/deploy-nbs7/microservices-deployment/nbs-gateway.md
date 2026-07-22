@@ -12,44 +12,37 @@ redirect_from:
 
 # Deploy NBS Gateway for NBS 7
 
-This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. Complete [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html) before starting this page. After you finish, proceed to [Data processing](./data-processing.html).
+This page walks through deploying the NBS Gateway using the `nbs-gateway` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. NBS Gateway routes requests between NBS 7 microservices and the legacy NBS 6 application.
 
-## On this page
-{: .no_toc .text-delta }
+## Prerequisites
 
-1. TOC
-{:toc}
+This page assumes you've completed [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
+
+Have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Import service clients and retrieve secrets](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help determining any values.
 
 ## Deploy NBS Gateway using Helm
 
-Use the ['nbs-gateway' Helm chart][nedss-helm-nbs-gateway-chart] to deploy NBS Gateway into your Kubernetes cluster. NBS Gateway routes requests between NBS 7 microservices and the legacy NBS 6 application. Before you begin, have your domain values and Keycloak client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) if you need help determining any values.
+Complete the following steps to deploy the ['nbs-gateway' Helm chart][nedss-helm-nbs-gateway-chart] from the `charts/nbs-gateway/` directory of your cloned NEDSS-Helm repository:
 
-1. Use Git to clone your own local copy of the public [NEDSS-Helm repository][nedss-helm]. The following steps use the files in `charts/nbs-gateway/` from that repository.
-1. In `values.yaml`, replace `app.EXAMPLE_DOMAIN` with the URL of your NBS 7 application and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 application. Use the values from the [DNS records table](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#create-dns-records).
-1. Set the image repository and tag:
+1. Search `values.yaml` for `EXAMPLE` and fill in your environment-specific values:
+   - For the NBS 7 and NBS 6 application domain values, use the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records).
+   - For the OIDC client secret used for Keycloak login authentication, see [Import service clients and retrieve secrets](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets).
+1. Confirm the following feature flags in `values.yaml`:
+   - Page Builder is disabled:
 
-   ```yaml
-   image:
-     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nbs-gateway"
-     tag: <release-version-tag> # for example, v1.0.1
-   ```
+     ```yaml
+     pageBuilder:
+       enabled: "false"
+     ```
 
-1. Verify that Page Builder is disabled:
+   - OIDC is enabled:
 
-   ```yaml
-   pageBuilder:
-     enabled: "false"
-   ```
-
-1. Enable OIDC and set the client secret for Keycloak login authentication. See [Retrieve the nbs-modernization client secret](../../deploy-nbs7/keycloak/keycloak-installation.html#retrieve-the-nbs-modernization-client-secret) for instructions on retrieving the client secret.
-
-   ```yaml
-   oidc:
-     enabled: "true"
-     client:
-       id: "nbs-modernization"
-       secret: "EXAMPLE_OIDC_SECRET"
-   ```
+     ```yaml
+     oidc:
+       enabled: "true"
+       client:
+         id: "nbs-modernization"
+     ```
 
 1. Install NBS Gateway:
 

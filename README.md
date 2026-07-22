@@ -108,19 +108,24 @@ For a full rendered view of the site with navigation and theme intact, push to t
 
 Use this if you are modifying `_config.yml`, `_sass/`, or anything that affects site structure or appearance rather than content.
 
-**Install Ruby** (required):
+**Install Ruby:** (first-time setup)
 - Mac: `brew install ruby` (requires [Homebrew](https://brew.sh))
 - Windows: use [RubyInstaller](https://rubyinstaller.org/)
 
-**Install Bundler:**
+**Install Bundler:** (first-time setup)
 ```bash
 gem install bundler
 ```
 
-**Run the local server:**
+**Run the local server:** (first-time setup)
 ```bash
 bundle install
 bundle exec jekyll serve --livereload
+```
+
+**Rebuild the local site:** (any time)
+```bash
+bundle exec jekyll build
 ```
 
 Preview at `http://localhost:4000`. The browser reloads automatically when you save a file. The built site is stored in `_site/`.

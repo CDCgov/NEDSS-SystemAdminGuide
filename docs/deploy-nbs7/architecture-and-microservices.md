@@ -75,13 +75,7 @@ Real-Time Reporting (RTR) provides rapid transformation and delivery of data fro
 
 The following services comprise RTR:
 
-- **Liquibase job**: Database version control management that deploys stored procedures, tables and views required for RTR pipeline
-- **Person service**: Processes Patient and Provider change events
-- **Observation services**: Processes Observation change events
-- **Organization service**: Processes Organization change events
-- **LDF service**: Processes LDF or State-defined field data change events
-- **Investigation service**: Processes Public_health_case change events and provides information for page builder investigation, notifications, confirmation method, and updates the `PublicHealthCaseFact_Modern` datamart
-- **Post-processing service**: Calls the post-processing stored procedures to hydrate dimensions, fact tables, and datamarts
+- **Reporting Pipeline service**: Consumes ODSE/SRTE change events from Kafka, transforms them via stored procedures, and hydrates the reporting database's dimensions, facts, and datamarts in near real time.
 - **Debezium service**: Monitors and streams the selected list of `NBS_ODSE` and `NBS_SRTE` tables to Kafka topics
 - **Kafka sink service**: Persists the data from the Kafka topics to the `RDB_Modern` database tables
 

@@ -31,29 +31,9 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
 
 1. Locate the Kafka connector Helm chart in the [NEDSS-Helm repository][nedss-helm-kafka-connect-sink-chart].
 
-1. Configure `values.yaml`. Replace all placeholder values before installation.
+1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference][deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices] for help determining values.
 
    To retrieve your Kafka bootstrap server endpoints, see [Get bootstrap brokers](https://docs.aws.amazon.com/msk/latest/developerguide/msk-get-bootstrap-brokers.html) in the AWS MSK documentation.
-
-   ```yaml
-   image:
-     # Kafka Connect image
-     repository: confluentinc/cp-kafka-connect
-     # Replace with the target release version tag, e.g. v1.0.1
-     tag: <release-version-tag>
-
-   sqlServerConnector:
-     config:
-       # [SME REVIEW: confirm databaseName should be rdb_modern, not rdb]
-       connection.url: "jdbc:sqlserver://nbs-db.EXAMPLE_FIXME.nbspreview.com:1433;databaseName=rdb;encrypt=true;trustServerCertificate=true"
-       # SQL Server username for reporting database
-       connection.user: "EXAMPLE_FIXME"
-       connection.password: "EXAMPLE_FIXME"
-
-   kafka:
-     # Kafka bootstrap server endpoint from AWS MSK
-     bootstrapServers: "EXAMPLE_FIXME"
-   ```
 
 1. Install the pod:
 
@@ -64,13 +44,8 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
 1. Verify the pod is running:
 
    ```bash
-   kubectl get pods
+   kubectl get deployment kafka-connect-sink-cp-kafka-connect
    ```
-
-1. Validate the service.
-
-   > The Kafka connector is an internal service with no ingress. Validate it as part of [RTR pipeline validation](../../deploy-nbs7/real-time-reporting/pipeline-validation.html).
-   {: .note }
 
 After Debezium deploys successfully, continue to [Deploy Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html).
 

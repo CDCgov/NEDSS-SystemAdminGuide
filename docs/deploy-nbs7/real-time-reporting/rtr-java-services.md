@@ -1,20 +1,19 @@
 ---
-title: Java services
+title: Java service
 layout: page
 parent: Deploy real-time reporting
 nav_order: 4
-description: Covers deployment of RTR Java services that transform Kafka events and load reporting datamarts.
+description: Covers deployment of the RTR Java service that transforms Kafka events and loads reporting datamarts.
 redirect_from:
   - /docs/7_feature_preview/4_rtr_java_reporting_services.html
   - /docs/7_feature_preview/4_rtr_java_reporting_services/
 ---
 
-# Deploy real-time reporting (RTR) Java services
-
-> The Java reporting services are being consolidated in an upcoming release. The service validation URLs reflect the NBS 7.12 configuration.
-{: .warning }
+# Deploy real-time reporting (RTR) Java service
 
 This page covers deploying the RTR Java services that process streamed events from Kafka and load domain-specific reporting data. Before proceeding, schedule a maintenance window and notify users that NBS will be unavailable. Database changes made while RTR services are being deployed might not propagate to your reporting database.
+
+Deploying the Java service is a two-phase process. The first deployment seeds the `nrt_*` caching tables that RTR depends on. Once seeding is complete, you reinstall the chart with post-processing enabled.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -25,112 +24,77 @@ This page covers deploying the RTR Java services that process streamed events fr
 > These steps require a Unix-compatible shell. On Windows, use Git Bash, WSL, or an equivalent terminal emulator.
 {: .note }
 
-## Installing RTR Java services
-
-Follow these steps to configure and deploy the RTR Java services Helm chart.
-
 > Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
 {: .important }
 
-1. Locate the Helm chart for all RTR Java services in the [NEDSS-Helm repository][nedss-helm-rtr-chart].
+## Configure values.yaml
 
-1. Validate the Kubernetes secret for database credentials:
+1. Locate the Helm chart for the RTR Java service in the [NEDSS-Helm repository][nedss-helm-rtr-chart].
 
-   ```bash
-   kubectl get secret/database-access -o yaml
-   ```
+1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference][deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices] for help determining values.
 
-   > Verify that the secret contains the correct database username and password, Kafka cluster, and other required configuration values. If the secret does not exist, create it by applying the provided YAML file. Replace all placeholder values before running:
-   >
-   > Script location: [NEDSS-Helm/nbs-secrets.yaml][nedss-helm-k8-secrets-manifest]
-   >
-   > ```bash
-   > kubectl apply -f k8-manifests/nbs-secrets.yaml
-   > ```
-   >
-   {: .note }
+## Initial deployment
 
-1. Validate the image repository: <!-- [SME REVIEW: confirm data-reporting-service is the correct consolidated image name] -->
+Install the Helm chart with post-processing disabled:
 
-   ```yaml
-   global.image.repository: "quay.io/us-cdcgov/cdc-nbs-modernization/data-reporting-service"
-   ```
+```bash
+helm install -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
+```
 
-1. Update feature flags for each service. Verify that `PHCMartETL.bat` is turned off before enabling updates to the PublicHealthCaseFact datamart via RTR:
+Verify the pods are running:
+
+```bash
+kubectl get deployment reporting-pipeline-service
+```
+
+Expected output:
+
+```text
+NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+reporting-pipeline-service   1/1     1            1           16m
+```
+
+## Monitor seeding progress
+
+The `/actuator/lag` endpoint reports how far behind the service is in consuming its Kafka topics. Use it to determine when initial seeding is complete.
+
+Retrieve information on reporting-pipeline-service lag in your browser. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
+
+```text
+   https://data.<exampledomain>/reporting-pipeline-svc/actuator/lag
+```
+
+When all "messagesQueued" values are `0`, seeding is complete.
+
+## Final deployment
+
+Reinstall the chart with post-processing enabled:
+
+1. Update `values.yaml` to enable post-processing:
 
    ```yaml
    featureFlag:
-     investigation-reporting:
-       phcDatamartEnable: '''true'''
+     postProcessingEnable: "true"
    ```
 
-1. Install the Helm chart for all RTR Java services:
+1. Upgrade the release:
 
    ```bash
-   helm install rtr . -f values.yaml
+   helm upgrade -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
    ```
 
-1. Verify the pods are running:
+
+1. Verify the pods restarted cleanly:
 
    ```bash
-   kubectl get pods
+   kubectl rollout status deployment/reporting-pipeline-service
+   kubectl get deployment reporting-pipeline-service
    ```
 
-   Expected output:
+1. Confirm the service is healthy. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
 
    ```text
-   NAME                                                READY   STATUS    RESTARTS   AGE
-   rtr-java-services-investigation-reporting-<hash>    1/1     Running   0          2m6s
-   rtr-java-services-ldfdata-reporting-<hash>          1/1     Running   0          2m6s
-   rtr-java-services-observation-reporting-<hash>      1/1     Running   0          2m6s
-   rtr-java-services-organization-reporting-<hash>     1/1     Running   0          2m6s
-   rtr-java-services-person-reporting-<hash>           1/1     Running   0          2m6s
-   rtr-java-services-post-processing-reporting-<hash>  1/1     Running   0          2m6s
-   ```
-
-1. Validate the services. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
-
-   **investigation-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/investigation-svc/status
-   Expected: Investigation Service Status OK
-   ```
-
-   **person-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/person-svc/status
-   Expected: Person Service Status OK
-   ```
-
-   **observation-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/observation-svc/status
-   Expected: Observation Service Status OK
-   ```
-
-   **organization-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/organization-svc/status
-   Expected: Organization Service Status OK
-   ```
-
-   **ldfdata-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/ldfdata-svc/status
-   Expected: LDFData Service Status OK
-   ```
-
-   **post-processing-svc**
-
-   ```text
-   https://data.<exampledomain>/reporting/post-processing-svc/status
-   Expected: Post Processing Service Status OK
+   https://data.<exampledomain>/reporting-pipeline-svc/actuator/health
    ```
 
 [nedss-helm-rtr-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/rtr>
-[nedss-helm-k8-secrets-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/nbs-secrets.yaml>

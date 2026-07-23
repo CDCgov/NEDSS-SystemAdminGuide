@@ -31,65 +31,9 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 
 1. Locate the Debezium Helm chart in the [NEDSS-Helm repository][nedss-helm-debezium-chart].
 
-1. Configure `values.yaml`. Replace all placeholder values before installation.
+1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference][deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices] for help determining values.
 
    To retrieve your Kafka bootstrap server endpoints, see [Get bootstrap brokers](https://docs.aws.amazon.com/msk/latest/developerguide/msk-get-bootstrap-brokers.html) in the AWS MSK documentation.
-
-   ```yaml
-   image:
-     # Debezium connector image
-     repository: quay.io/debezium/connect
-     # Replace with the target release version tag, e.g. v1.0.1
-     tag: <release-version-tag>
-
-   properties:
-     # Kafka bootstrap server endpoint from AWS MSK
-     bootstrap_server: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-
-   # Connector for NBS_ODSE transactional data
-   sqlserverconnector_odse:
-     config:
-       database.hostname: "nbs-db.private-EXAMPLE_DOMAIN"
-       database.port: "1433"
-       database.user: "EXAMPLE_ODSE_DB_USER"
-       database.password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
-       database.dbname: "nbs_odse"
-       database.names: "nbs_odse"
-       database.server.name: "odse"
-       database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-
-   # Connector for NBS_ODSE metadata
-   sqlserverconnector_odse_meta:
-     config:
-       database.hostname: "nbs-db.private-EXAMPLE_DOMAIN"
-       database.port: "1433"
-       database.user: "EXAMPLE_ODSE_DB_USER"
-       database.password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
-       database.dbname: "nbs_odse"
-       database.names: "nbs_odse"
-       database.server.name: "odse-meta"
-       database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-
-   # Connector for NBS_SRTE reference and terminology data
-   sqlserverconnector_srte:
-     config:
-       database.hostname: "nbs-db.private-EXAMPLE_DOMAIN"
-       database.port: "1433"
-       database.user: "EXAMPLE_SRTE_DB_USER"
-       database.password: "EXAMPLE_SRTE_DB_USER_PASSWORD"
-       database.dbname: "nbs_srte"
-       database.names: "nbs_srte"
-       database.server.name: "srte"
-       database.history.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-       schema.history.internal.kafka.bootstrap.servers: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-
-   env:
-     # Kafka bootstrap server endpoint from AWS MSK
-     - name: BOOTSTRAP_SERVERS
-       value: "EXAMPLE_MSK_KAFKA_ENDPOINT"
-   ```
 
 1. Install the pod:
 
@@ -100,13 +44,8 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 1. Verify the pod is running:
 
    ```bash
-   kubectl get pods
+   kubectl get deployment debezium-debezium-rtr-connect
    ```
-
-1. Validate the service.
-
-   > Debezium is an internal service with no ingress. Validate it as part of [RTR pipeline validation](../../deploy-nbs7/real-time-reporting/pipeline-validation.html).
-   {: .note }
 
 After Debezium deploys successfully, continue to [Deploy Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html).
 
@@ -119,7 +58,7 @@ If issues persist after initial troubleshooting, contact support at <mailto:nbs@
 If the service has trouble connecting to the database, run the following command to reset the ConfigMap:
 
 ```bash
-kubectl delete configmap cp-kafka-connect-sqlserver-connect
+kubectl delete configmap debezium-rtr-connect
 ```
 
 [nedss-helm-debezium-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium>

@@ -1,7 +1,7 @@
 ---
 title: Deployment phases
 layout: page
-parent: Before you deploy
+parent: Before you deploy NBS 7
 nav_order: 5
 has_children: true
 description: Describes the three NBS 7 deployment phases (the )core deployment, Real-Time Reporting (RTR), and Data Ingestion (DI) API) and when to deploy each.

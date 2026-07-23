@@ -1,8 +1,7 @@
 ---
-title: "Data Ingestion (DI) API"
+title: Data Ingestion (DI API)
 layout: page
 parent: Component reference
-grand_parent: Before you deploy
 nav_order: 3
 description: Details the Data Ingestion (DI) API component, which provides a REST API layer for routing incoming data into NBS through middleware.
 ---

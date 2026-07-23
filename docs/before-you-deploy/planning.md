@@ -1,7 +1,7 @@
 ---
 title: Deployment planning guide
 layout: page
-parent: Before you deploy
+parent: Before you deploy NBS 7
 nav_order: 3
 description: An overview of the five stages involved in an NBS 7 deployment, from planning through steady state operations.
 ---

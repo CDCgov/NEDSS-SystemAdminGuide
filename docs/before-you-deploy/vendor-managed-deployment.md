@@ -1,7 +1,7 @@
 ---
 title: Working with a vendor
 layout: page
-parent: Before you deploy
+parent: Before you deploy NBS 7
 nav_order: 4
 description: Guidance for jurisdictions using a vendor to host or maintain NBS 7, including what to evaluate in a vendor and how to coordinate with CDC.
 ---

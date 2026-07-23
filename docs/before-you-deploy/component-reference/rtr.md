@@ -1,8 +1,7 @@
 ---
-title: "Real-Time Reporting (RTR)"
+title: Real-Time Reporting (RTR)
 layout: page
 parent: Component reference
-grand_parent: Before you deploy
 nav_order: 2
 description: "Details the four components added by Real-Time Reporting (RTR): Debezium, Kafka, RTR domain services, and RDB_Modern."
 nav_enabled: true

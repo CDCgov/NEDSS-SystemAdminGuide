@@ -42,15 +42,12 @@ Apache Kafka is an open-source event-streaming platform. Kafka Connect is the fr
 
 ## RTR domain services
 
-In NBS 7.12, five entity-specific Spring Boot services (investigation-service, person-service, observation-service, organization-service, and ldfdata-service) that each transform streaming data from Kafka into reportable public health records. Starting in NBS 7.13, these are consolidated into a single reporting pipeline service.
+Starting in NBS 7.13, the five entity-specific Spring Boot services previously used for reporting (`investigation-service`, `person-service`, `observation-service`, `organization-service`, and `ldfdata-service`) have been consolidated into a single reporting pipeline service that transforms streaming data from Kafka into reportable public health records. Jurisdictions planning to deploy RTR will need to upgrade to NBS 7.13 or later. Check with your CDC NBS point of contact for the current deployment state.
 
 | Attribute | Description |
 |:---|:---|
 | What it does in NBS 7 | Consumes Kafka messages for each entity type (investigations, patients, organizations, observations, and LDF data), runs stored procedures to retrieve and format the data, and produces processed records for downstream storage in RDB\_Modern. A post-processing service then populates analytical datamarts and fact tables from the staging data. |
 | Dependencies | Requires Kafka (message source) and NBS\_ODSE (operational data store). Populates RDB\_Modern staging tables, which are then consumed by the post-processing service. |
-
-> Starting with NBS version 7.13, the five entity-specific RTR services (investigation-service, person-service, observation-service, organization-service, ldfdata-service) are being consolidated into a single `reporting-pipeline-service`. Check with your CDC NBS point of contact for the current deployment state.
-{: .note }
 
 <!--
 ## RDB\_Modern

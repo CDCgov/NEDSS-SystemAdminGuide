@@ -134,7 +134,7 @@
 
 - term: Azure Key Vault
   definition: |-
-    An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets, also known as **AKV**. The [AWS](#aws) equivalent to Key Vault is [AWS KMS](#kms).
+    An [Azure](#microsoft-azure) service for creating and managing encryption keys, certificates, and application and database secrets. The [AWS](#aws) equivalent to Key Vault is [AWS KMS](#kms).
 
 - term: Azure Kubernetes Service
   definition: |-
@@ -142,7 +142,7 @@
 
 - term: Azure Monitor
   definition: |-
-    An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. The [AWS](#aws) equivalents are [Amazon Managed Service for Prometheus](#amp) for metrics collection and [Amazon Managed Grafana](#amg) for visualization.
+    An [Azure](#microsoft-azure) service for monitoring infrastructure health and performance. The [AWS](#aws) equivalents are [Amazon Managed Service for Prometheus](#amp) and [Amazon Managed Grafana](#amg) for metrics collection and dashboard visualization.
 
 - term: Azure RBAC
   definition: |-
@@ -162,15 +162,11 @@
 
 - term: case investigation
   definition: |-
-    Records one instance of a disease or [condition](#condition) for a specific person, including clinical, epidemiological, and administrative data. Investigations might use the generic form or a condition-specific [PAM](#pam).
+    A case investigation records one instance of a disease or [condition](#condition) for a specific person, including clinical, epidemiological, and administrative data. Investigations might use the generic form or a condition-specific [PAM](#pam).
 
 - term: case notification
   definition: |-
     A message sent from a [STLT](#stlt) to [CDC](#cdc) reporting a confirmed or probable case of a nationally [notifiable disease](#notifiable-disease).
-
-- term: case surveillance
-  definition: |-
-    The collection, analysis, and reporting of data on individual disease cases. [NBS](#nbs) is a case surveillance system. Case surveillance differs from syndromic surveillance, which uses aggregate or pre-diagnostic data.
 
 - term: CDA
   definition: |-
@@ -186,7 +182,7 @@
 
 - term: change data capture
   definition: |-
-    A technique for tracking row-level changes in a database and streaming them to downstream systems in near real time.
+    A technique for tracking row-level changes in a database and streaming them to downstream systems in near real time. Abbreviated as `cdc` in code.
 
 - term: CIDR
   definition: |-
@@ -223,6 +219,7 @@
 - term: data ingestion pipeline
   definition: |-
     The [NBS 7](#nbs-7) services responsible for receiving, validating, and routing incoming public health data into NBS though the [DI API](#di-api) entry point. Accepts data in [eICR](#eicr), [PHDC](#phdc), and [C-CDA](#c-cda) formats.
+
 - term: Debezium
   definition: |-
     An open-source [change data capture](#change-data-capture) tool.
@@ -261,7 +258,7 @@
 
 - term: Elasticsearch
   definition: |-
-    An open-source search and analytics engine. See the [Elasticsearch](https://www.elastic.co/elasticsearch/) website.
+    An open-source search and analytics engine.
 
 - term: ELR
   definition: |-
@@ -391,6 +388,10 @@
   definition: |-
     An [Azure](#microsoft-azure) identity and access management service, formerly known as Azure Active Directory. The [AWS](#aws) equivalent to Entra ID is [AWS IAM](#aws-iam).
 
+- term: Microsoft SQL Server
+  definition: |-
+    The relational database used by [NBS](#nbs). Also referred to as **SQL Server** or **MSSQL**.
+
 - term: MMG
   definition: |-
     **Message Mapping Guide.** A [CDC](#cdc)-published guide that defines the [HL7](#hl7) message structure for reporting a specific notifiable [condition](#condition) to CDC.
@@ -410,10 +411,6 @@
 - term: MPR
   definition: |-
     **Master Patient Record.** The authoritative patient record in [NBS](#nbs), derived from all patient revisions (point-in-time demographics). 
-
-- term: MS SQL
-  definition: |-
-    **Microsoft SQL Server.** The relational database used by [NBS](#nbs).
 
 - term: MSGOUT / MSGOUTE
   definition: |-
@@ -441,7 +438,7 @@
 
 - term: NBS 7
   definition: |-
-    The modernized version of [NBS](#nbs) and subject of this guide.
+    The modernized version of [NBS](#nbs), and the subject of this guide.
 
 - term: NBS Central
   definition: |-
@@ -591,10 +588,6 @@
   definition: |-
     A disease or condition that providers are required to report to the local or state health department under jurisdiction law. Distinct from [notifiable disease](#notifiable-disease), which refers to federal reporting requirements to [CDC](#cdc).
 
-- term: role (NBS)
-  definition: |-
-    In [NBS](#nbs), the combination of a [permission set](#permission-set), [program area](#program-area) or areas, [jurisdiction](#jurisdiction) or jurisdictions, and access level assigned to a user. A user may have multiple roles.
-
 - term: RR
   definition: |-
     See [Reportability Response](#reportability-response).
@@ -602,10 +595,6 @@
 - term: RTR
   definition: |-
     **Real-Time Reporting.** An [NBS 7](#nbs-7[) reporting pipeline that replaces the batch ETL approach with event-driven data movement using [Kafka](#kafka).
-
-- term: RxNorm
-  definition: |-
-    A standard code system for medications.
 
 - term: Amazon S3
   definition: |-
@@ -651,10 +640,6 @@
   definition: |-
     **State, Territorial, Local, and Tribal.** A group term for public health jurisdictions.
 
-- term: strangler fig pattern
-  definition: |-
-    A software migration strategy in which new functionality is built alongside a legacy system and gradually replaces it, rather than rewriting everything at once.
-
 - term: subnet
   definition: |-
     A subdivision of a [VPC's](#amazon-vpc) IP address range. Subnets are used to isolate internet-facing components from internal services.
@@ -689,7 +674,7 @@
 
 - term: WDS
   definition: |-
-    **Workflow Decision Support.** An [NBS](#nbs) application feature that automates processing of incoming [ELR](#elr) and [eCR](#ecr) data.
+    **Workflow Decision Support.** An [NBS](#nbs) application feature that automates processing of incoming [ELR](#elr) and [eCR](#ecr) data. Configured by system administrators.
 
 - term: WildFly
   definition: |-

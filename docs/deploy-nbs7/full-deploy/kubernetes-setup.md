@@ -1,17 +1,17 @@
 ---
-title: Set up Kubernetes
+title: Deploy cluster services
 layout: page
 parent: NBS 7 full deployment
 nav_order: 3
 has_children: true
 has_toc: false
-description: Configure your Kubernetes cluster and deploy the core services and Keycloak that the NBS 7 microservices depend on.
+description: Enable Linkerd, deploy the core Kubernetes services, and deploy and configure Keycloak before you install the NBS 7 microservices.
 redirect_from:
   - /docs/deploy-nbs7/cluster-infrastructure.html
   - /docs/deploy-nbs7/cluster-infrastructure/
 ---
 
-# Set up Kubernetes for NBS 7
+# Deploy cluster services for NBS 7
 
 This phase performs the deployments and configuration in your Kubernetes cluster that the NBS 7 microservices depend on. You first enable Linkerd for the namespace that the microservices deploy into, then deploy the core Kubernetes services, and then deploy and configure Keycloak.
 
@@ -52,5 +52,9 @@ Linkerd provides mutual TLS (mTLS) between the NBS 7 microservices, all of which
 
 Complete the pages in this section in order:
 
-1. **[Deploy core services](kubernetes-setup/deploy-core-services.html)**: Get the NEDSS-Helm charts and install the core Kubernetes services that NBS 7 depends on, including the Traefik ingress controller and cert-manager.
-1. **[Deploy and configure Keycloak](kubernetes-setup/deploy-keycloak.html)**: Install Keycloak, configure the NBS realms and service clients, and complete the final validation of Traefik and Keycloak.
+{% assign children = site.pages | where: "parent", page.title | sort: "nav_order" %}
+<ol>
+{% for child in children %}
+  <li><a href="{{ child.url | relative_url }}"><strong>{{ child.title }}</strong></a>{% if child.description %}: {{ child.description }}{% endif %}</li>
+{% endfor %}
+</ol>

@@ -3,7 +3,7 @@ title: NBS 7 prerequisites
 layout: page
 parent: NBS 7 full deployment
 nav_order: 1
-description: Cloud-agnostic prerequisites for NBS 7 deployment, including NBS 6 readiness, network access, DNS, security, and local management machine setup.
+description: Prerequisites for NBS 7 deployment, including NBS 6 readiness, network access, DNS, security, and local management machine setup.
 redirect_from:
   - /docs/deploy-nbs7/prerequisites.html
   - /docs/deploy-nbs7/prerequisites/
@@ -58,8 +58,8 @@ The following table lists the minimum supported versions of the required softwar
 | Kubernetes CLI      | kubectl 1.25                    |
 | Helm CLI            | 3.0                             |
 | Terraform CLI       | 1.15.6                          |
-| GitHub CLI          | latest                          |
-| Cloud provider CLI  | latest AWS or Azure CLI version |
+| GitHub CLI          | Latest                          |
+| Cloud provider CLI  | Latest AWS or Azure CLI version |
 | Docker              | 20.x                            |
 
 For installation instructions specific to your cloud provider, see [Cloud prerequisites](provision-cloud-infrastructure/cloud-prerequisites.html).

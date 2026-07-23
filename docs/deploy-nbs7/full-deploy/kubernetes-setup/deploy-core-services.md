@@ -1,10 +1,11 @@
 ---
 title: Deploy core services
 layout: page
-parent: Set up Kubernetes
+parent: Deploy cluster services
 nav_order: 1
 has_children: false
 nav_enabled: true
+description: Get the NEDSS-Helm charts, then install the core Kubernetes services that NBS 7 depends on, including the Traefik ingress controller, cert-manager, and the Cluster Autoscaler.
 redirect_from:
   - /docs/4_initial_kubernetes_deployment/0_kubernetes_bootstrapping.html
   - /docs/4_initial_kubernetes_deployment/0_kubernetes_bootstrapping/

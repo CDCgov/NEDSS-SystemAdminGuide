@@ -219,7 +219,7 @@ Your `nbs7-<STLT>-<environment>` directory contains the `terraform.tfvars` and `
 
 ## Next steps
 
-Continue to [Set up Kubernetes](../kubernetes-setup.html) to deploy the core services and Keycloak.
+Continue to [Deploy cluster services](../kubernetes-setup.html) to deploy the core services and Keycloak.
 
 [nedss-infra-release-page]: <https://github.com/CDCgov/NEDSS-Infrastructure/releases/tag/{{ site.version_latest_tag }}>
 [nedss-infra-readme]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/README.md>

@@ -37,8 +37,6 @@ Complete the following steps before you deploy the first microservice:
 
 The following table lists common Helm values used across NBS 7 microservices. Have these values available before you begin deployment.
 
-<!-- markdownlint-disable MD055 MD056 -->
-
 | Placeholder in values.yaml | Name of value | Description |
 |---|---|---|
 | `app-classic.EXAMPLE_DOMAIN` | `nbsExternalName` | The domain name for your existing NBS 6 application. This is the DNS name you already use for classic NBS today, not a new record you create as part of the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records). |

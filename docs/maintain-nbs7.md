@@ -18,6 +18,7 @@ This section covers the operational tasks that keep your NBS 7 environment healt
 
 The maintenance section of this guide contains procedures for recurring maintenance work such as upgrades, infrastructure version changes, and operational configuration updates.
 
+<!-- markdownlint-disable MD055 MD056 -->
 {% assign children = site.pages | where: "parent", page.title | sort: "nav_order" %}
 <ul>
 {% for child in children %}

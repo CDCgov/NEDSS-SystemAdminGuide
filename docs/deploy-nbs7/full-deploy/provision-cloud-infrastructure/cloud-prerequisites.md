@@ -41,17 +41,17 @@ Your cloud environment must meet the following requirements:
 
 Your existing NBS 6 environment provides the database server that NBS 7 reuses. Confirm that your existing server meets the following requirements. The compute, storage, and container resources for NBS 7 do not exist yet. Terraform creates them in [Provision cloud environment](provision-cloud-environment.html).
 
-| Software | Version |
+| Software | Supported versions |
 |----------|---------|
 | NBS Classic | See [Supported NBS versions](../../../supported-versions.html) |
-| Microsoft Windows Server | Windows Server 2022 - *preferred*, Windows Server 2025 |
-| Microsoft SQL Server | SQL Server 2022 (16.x) - *preferred*, SQL Server 2025 (17.x) |
+| Microsoft Windows Server | **Windows Server 2022** - *preferred* <br>Windows Server 2025 |
+| Microsoft SQL Server | **SQL Server 2022 (16.x)** - *preferred* <br>SQL Server 2025 (17.x) |
 
 ## Management workstation setup
 
 To configure, deploy, and maintain NBS 7, you need a local workstation or a cloud-hosted shell such as AWS CloudShell or Azure Cloud Shell. Install the following tools on that workstation. Each item links to download and installation instructions.
 
-For information about supported software versions, see [NBS 7 prerequisites](../prerequisites.html#required-tools-and-software).
+For information about supported software versions for these tools, see [NBS 7 prerequisites](../prerequisites.html#required-tools-and-software).
 {: .important }
 
 - **Cloud provider CLI:**

@@ -1,7 +1,7 @@
 ---
 title: Deploy and configure Keycloak
 layout: page
-parent: Set up Kubernetes
+parent: Deploy cluster services
 nav_order: 2
 has_children: false
 nav_enabled: true

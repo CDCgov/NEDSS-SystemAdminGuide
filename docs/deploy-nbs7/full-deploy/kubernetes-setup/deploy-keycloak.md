@@ -81,7 +81,7 @@ The following screenshot shows the keycloak database created under **Databases**
 
 ## Configure the Helm chart
 
-1. In [values.yml][nedss-helm-keycloak-values], update the following parameters:
+In [values.yml][nedss-helm-keycloak-values], update the following parameters:
 
    <!-- markdownlint-disable MD055 MD056 -->
 
@@ -98,7 +98,7 @@ The following screenshot shows the keycloak database created under **Databases**
 
 ## Deploy Keycloak
 
-Install the Keycloak Helm chart and verify the pod is running before you continue.
+Use the following steps to install the Keycloak Helm chart and verify the pod is running.
 
 1. From the `charts` directory, install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available. See the [README in `charts/keycloak`][nedss-helm-keycloak-chart] for details.
 

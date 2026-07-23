@@ -30,13 +30,6 @@ This page assumes you've completed [Before you begin](../deploy-nbs7-microservic
 Complete the following steps to deploy the ['case-notification-service' Helm chart][nedss-helm-case-notification-service-chart] from the `charts/case-notification-service/` directory of your cloned NEDSS-Helm repository:
 
 1. In the `case-notification-service/values.yaml` file, search for `EXAMPLE` and fill in your environment-specific values for the ingress host, JDBC connection, and Kafka cluster endpoint. The `dbserver` value is the database server endpoint only; do not include the port number. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use. For a full list of environment variables, see the [NEDSS-NNDSS-Case-Notifications README][nndss-case-notifications-readme] and the [case-notification-service deployment template][nedss-helm-case-notification-deployment].
-1. <!-- [SME REVIEW] This value isn't in the Helm values reference table yet. Confirm whether to add it there or keep it documented here before removing this walkthrough. -->
-   Set the Keycloak auth URI:
-
-   ```yaml
-   authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
-   ```
-
 1. Install the Case Notification service:
 
    ```bash

@@ -161,7 +161,7 @@ Create A records in your Domain Name System (DNS) service, such as Amazon Route 
 
    To create the records in your cloud provider:
    - **AWS:** In the AWS Management Console, go to **Route 53** > **Hosted Zones** and select your hosted zone. Make note of your **Hosted zone ID**, because the verification step uses it. Create or edit each A record from the table so that its **Route traffic to** target is the hostname of your Traefik load balancer.
-   - **Azure:** In the Azure Portal, go to **DNS Zones** and select your DNS zone. Create or edit each A record from the table so that it points to the IP address of your Traefik load balancer. <!-- [SME REVIEW] DEV-265 comment 40 (Josh to Mike Ward, unresolved): in an STLT Azure environment, does this record need the public IP address of the Application Gateway instead of the IP address of the internal load balancer? -->
+   - **Azure:** In the Azure Portal, go to **DNS Zones** and select your DNS zone. Create or edit each A record from the table so that it points to the IP address of your Application Gateway.
 1. **Verify the records:** For each record you created, run the following `nslookup` command and verify that it does not print an error such as `server can't find`. Records typically propagate within 60 seconds. If you encounter an error, rerun the command periodically for up to 5 minutes until it prints no error:
 
    ```bash

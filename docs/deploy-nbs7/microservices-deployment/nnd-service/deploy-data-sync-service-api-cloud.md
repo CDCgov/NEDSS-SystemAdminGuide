@@ -41,13 +41,6 @@ Complete the following steps to deploy the ['nnd-service' Helm chart][nedss-helm
 
    ![Amazon EFS console showing the File systems list with the file system ID highlighted in the File system ID column](../images/nnd-efsid.png)
 
-1. <!-- [SME REVIEW] This value isn't in the Helm values reference table yet. Confirm whether to add it there or keep it documented here before removing this walkthrough. -->
-   Set the Keycloak auth URI. In the default configuration, this value does not change unless the name or namespace of the Keycloak pod is modified:
-
-   ```yaml
-   authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
-   ```
-
 1. Install the `nnd-service` chart:
 
    ```bash

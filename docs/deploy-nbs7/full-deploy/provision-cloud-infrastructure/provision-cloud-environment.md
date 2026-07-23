@@ -42,7 +42,9 @@ If your database is in Azure, in the same VNet as your NBS 7 environment, Azure 
 
 Alternatively, an inbound security rule on that network security group is sufficient if it allows port 1433, with the destination set to the VNet of your database and the source set to the IP addresses of your AKS cluster.
 
-<!-- [SME REVIEW] Josh comment 30 open question: add guidance for databases that are not in Amazon RDS and not in Azure (for example, self-managed SQL Server on EC2 or on premises). Confirm the validation path with Josh or Mike Ward. -->
+### Self-managed SQL Server
+
+If your database is not in Amazon RDS and not in Azure, for example a self-managed SQL Server instance on Amazon EC2 or on premises, confirm that Windows Firewall on the database server allows inbound traffic on TCP port 1433. Security group and network security group rules in your cloud environment do not open the host firewall.
 
 ## Authenticate to your cloud provider
 
@@ -113,16 +115,7 @@ Complete these steps to download the infrastructure code and prepare your enviro
 
 1. In each Terraform layer directory, update the `terraform.tfvars` and `terraform.tf` files with your environment-specific values. The commentary in those files provides detailed instructions. Do not edit files in the individual Terraform modules.
 
-   If you plan to deploy the Data Compare tool on AWS, also add the following variables to your `terraform.tfvars` before you apply. If you deploy to a non-default namespace, adjust the `datacompare_namespace_and_service` value accordingly. <!-- [SME REVIEW] Confirm which Terraform layer's tfvars file receives the Data Compare variables in the layered structure (`1-nbs7` or `2-applications`). This block predates the layered design. -->
-
-   ```hcl
-   create_datacompare_irsa              = true
-   datacompare_s3_bucket_name           = "<your-s3-bucket-name>"
-   datacompare_s3_bucket_keyname_prefix = "<your-key-prefix>"
-   datacompare_namespace_and_service = ["default:data-compare-api-service", "default:data-compare-processor-service"]
-   ```
-
-   This creates the AWS Identity and Access Management (IAM) role (`<eks-cluster-name>-datacompare-role`) and S3 access policy that the Data Compare pods require. The role ARN is referenced during [Data Compare deployment](../../microservices-deployment/real-time-reporting/data-compare-tool.html).
+   If you plan to deploy the Data Compare tool on AWS, enable the Data Compare resources in the `1-nbs7` layer before you apply. The commentary in that layer's `terraform.tfvars` describes the setting and any values it requires. Terraform then creates the AWS Identity and Access Management (IAM) role (`<eks-cluster-name>-datacompare-role`) and S3 access policy that the Data Compare pods require. The role ARN is referenced during [Data Compare deployment](../../microservices-deployment/real-time-reporting/data-compare-tool.html).
 
 ## Run Terraform provisioning
 
@@ -155,7 +148,7 @@ For each Terraform layer directory, this section initializes the directory, gene
    Plan: 142 to add, 0 to change, 0 to destroy.
    ```
 
-   > Carefully review the full plan output and verify that the changes exactly match your intention before you continue. If you change your Terraform code, if resources in your account or subscription change by other means, or if significant time passes during your review, rerun `terraform plan -out=tfplan` and review it again. Never run `terraform apply -auto-approve`, because it applies changes without review and can be highly destructive.
+   > Carefully review the full plan output and verify that the changes exactly match your intention before you continue. If you change your Terraform code, if resources in your account or subscription change by other means, or if significant time passes during your review, rerun `terraform plan -out=tfplan` and review it again. Use caution if you run `terraform apply -auto-approve`, because it applies changes without review.
    {: .important }
 
 1. Apply the changes from the plan:

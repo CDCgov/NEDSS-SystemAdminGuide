@@ -41,7 +41,7 @@ Before deploying the Data Compare tool, verify the following:
 
 - Access to a cloud storage bucket for data exchange between the API and Processor services. These steps currently use Amazon S3. If you are not using Amazon S3, consult your cloud administrator for equivalent storage configuration.
 
-  For AWS deployments, an IAM role granting the Data Compare pods access to S3 must be provisioned before deployment. This role is created by Terraform in NEDSS-Infrastructure when `create_datacompare_irsa = true` is set in your `terraform.tfvars`. The role is named `<eks-cluster-name>-datacompare-role`. See [Provision the AWS environment](../../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) for details.
+  For AWS deployments, an IAM role granting the Data Compare pods access to S3 must be provisioned before deployment. Terraform in NEDSS-Infrastructure creates this role when you enable the Data Compare resources in the `1-nbs7` layer. The role is named `<eks-cluster-name>-datacompare-role`. See [Prepare Terraform files and configuration](../../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html#prepare-terraform-files-and-configuration) for details.
 
 - Keycloak configured with the Data Compare API profile: [NEDSS-Helm/charts/keycloak/extra][nedss-helm-keycloak-extra]
 

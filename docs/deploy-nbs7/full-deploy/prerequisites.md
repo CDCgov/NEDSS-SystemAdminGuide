@@ -82,7 +82,4 @@ Your organization must have or be prepared to establish the following security c
 
 ## Next steps
 
-After completing these prerequisites:
-
-1. If you are deploying on AWS, complete [Prerequisites for AWS](provision-cloud-infrastructure/cloud-prerequisites.html).
-1. If you are deploying on Azure, complete [Prerequisites for Azure](provision-cloud-infrastructure/cloud-prerequisites.html).
+After completing these prerequisites, [Provision your cloud infrastructure](provision-cloud-infrastructure.html).

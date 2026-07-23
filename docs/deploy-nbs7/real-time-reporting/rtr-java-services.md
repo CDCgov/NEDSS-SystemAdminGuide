@@ -31,7 +31,7 @@ Deploying the Java service is a two-phase process. The first deployment seeds th
 
 1. Locate the Helm chart for the RTR Java service in the [NEDSS-Helm repository][nedss-helm-rtr-chart].
 
-1. Edit the "EXAMPLE*" placeholder values in `values.yaml` and replace with the correct values for your environment — database connection, Kafka cluster, and any environment-specific overrides.
+1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference][deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices] for help determining values.
 
 ## Initial deployment
 

@@ -28,6 +28,10 @@ env:
   WEB2WORD_REF: main
   # Match the preview environment so links resolve exactly as on the staging site.
   BASEURL: /CDCgov-NEDSS-SystemAdminGuide-preview
+  # The site is built/served on localhost during the run; out-of-scope links are
+  # rewritten from the localhost origin to this public preview origin so they
+  # work when a reviewer clicks them.
+  PREVIEW_PUBLIC_HOST: https://jburgh.github.io
 
 jobs:
   build:
@@ -90,7 +94,8 @@ jobs:
           echo "Converting $url"
           python -m web2word "$url" \
             -o "${name}-review.docx" \
-            --style-reference .web2word/styles.docx -v
+            --style-reference .web2word/styles.docx \
+            --public-host "$PREVIEW_PUBLIC_HOST" -v
           python .web2word/scripts/verify.py "${name}-review.docx"
 
       - name: Upload the review document

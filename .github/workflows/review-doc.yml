@@ -1,0 +1,98 @@
+name: Create eclearance Word doc
+
+# On-demand only. Run it from the Actions tab when you need an eclearance review
+# document for a chapter: click "Create eclearance Word doc" -> "Run workflow",
+# type the chapter path, and click the green button. It builds the site from the
+# chosen branch (preview by default), converts that chapter (with working
+# internal/external links) via the web2word tool, and attaches the .docx to the
+# run as a downloadable artifact. Nothing runs automatically on push or PR.
+
+on:
+  workflow_dispatch:
+    inputs:
+      chapter:
+        description: 'Chapter path under docs/ without .html (e.g. "before-you-deploy" or "deploy-nbs7/microservices-deployment/data-processing")'
+        required: true
+        type: string
+      ref:
+        description: "Branch to build from"
+        required: false
+        default: preview
+        type: string
+
+permissions:
+  contents: read
+
+env:
+  WEB2WORD_REPO: https://github.com/jburgh/web-to-word.git
+  WEB2WORD_REF: main
+  # Match the preview environment so links resolve exactly as on the staging site.
+  BASEURL: /CDCgov-NEDSS-SystemAdminGuide-preview
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the selected branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.inputs.ref }}
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: "3.3"   # matches jekyll-preview.yml
+          bundler-cache: true
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install Pandoc (pinned — distro apt ships an older reference.docx
+              that breaks the styling; must match the validated version)
+        run: |
+          curl -fsSL -o /tmp/pandoc.deb \
+            https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-1-amd64.deb
+          sudo dpkg -i /tmp/pandoc.deb
+          pandoc --version | head -1
+
+      - name: Get the web2word converter
+        run: |
+          git clone --depth 1 --branch "$WEB2WORD_REF" "$WEB2WORD_REPO" .web2word
+          pip install -r .web2word/requirements.txt
+          python .web2word/scripts/make_reference.py .web2word/styles.docx
+
+      - name: Build and serve the site locally
+        env:
+          JEKYLL_ENV: production
+        run: |
+          bundle exec jekyll build --baseurl "$BASEURL"
+          bundle exec jekyll serve --detach --skip-initial-build \
+            --baseurl "$BASEURL" --host 127.0.0.1 --port 4000
+          for i in $(seq 1 30); do
+            curl -sf -o /dev/null "http://127.0.0.1:4000$BASEURL/" && break
+            sleep 1
+          done
+
+      - name: Convert the chapter to Word
+        env:
+          CHAPTER: ${{ github.event.inputs.chapter }}
+        run: |
+          set -euo pipefail
+          # Normalize: strip a leading slash, a leading "docs/", and a trailing ".html".
+          path="${CHAPTER#/}"; path="${path#docs/}"; path="${path%.html}"
+          url="http://127.0.0.1:4000$BASEURL/docs/${path}.html"
+          name="$(basename "$path")"
+          echo "Converting $url"
+          python -m web2word "$url" \
+            -o "${name}-review.docx" \
+            --style-reference .web2word/styles.docx -v
+          python .web2word/scripts/verify.py "${name}-review.docx"
+
+      - name: Upload the review document
+        uses: actions/upload-artifact@v4
+        with:
+          name: eclearance-review-doc
+          path: "*-review.docx"
+          if-no-files-found: error

@@ -78,6 +78,9 @@ jobs:
       - name: Convert the chapter to Word
         env:
           CHAPTER: ${{ github.event.inputs.chapter }}
+          # The converter is cloned into .web2word/ but not pip-installed as a
+          # package, so put its parent on the path for `python -m web2word`.
+          PYTHONPATH: .web2word
         run: |
           set -euo pipefail
           # Normalize: strip a leading slash, a leading "docs/", and a trailing ".html".

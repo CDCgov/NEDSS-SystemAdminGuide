@@ -7,8 +7,6 @@ description: Diagnostics and troubleshooting guide for Data Ingestion API (DI AP
 redirect_from:
   - /docs/6_microservices_deployment/6d_di_data_ingestion_API_testing.html
   - /docs/6_microservices_deployment/6d_di_data_ingestion_API_testing/
-  - /docs/deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html
-  - /docs/deploy-nbs7/microservices-deployment/data-ingestion/api-testing/
   - /docs/deploy-nbs7/data-ingestion/api-testing.html
   - /docs/deploy-nbs7/data-ingestion/api-testing/
 ---

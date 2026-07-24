@@ -148,7 +148,7 @@ For each Terraform layer directory, this section initializes the directory, gene
    Plan: 142 to add, 0 to change, 0 to destroy.
    ```
 
-   > Carefully review the full plan output and verify that the changes exactly match your intention before you continue. If you change your Terraform code, if resources in your account or subscription change by other means, or if significant time passes during your review, rerun `terraform plan -out=tfplan` and review it again. Use caution if you run `terraform apply -auto-approve`, because it applies changes without review.
+   > Carefully review the full plan output and verify that the changes exactly match your intention before you continue. If you change your Terraform code, if resources in your account or subscription change by other means, or if significant time passes during your review, rerun `terraform plan -out=tfplan` and review it again. Use caution if you choose to run `terraform apply -auto-approve`, because it applies changes without review.
    {: .important }
 
 1. Apply the changes from the plan:

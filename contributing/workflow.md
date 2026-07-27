@@ -99,6 +99,26 @@ https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/
 
 Share that URL with stakeholders and collect feedback.
 
+#### Generate an eclearance review document
+
+CDC eclearance reviewers require content as a Word document with working links.
+Once your content is on the `preview` branch, generate one on demand — no local
+setup needed:
+
+1. Go to **Actions → Create eclearance Word doc → Run workflow**.
+2. Enter the chapter path under `docs/`, without `.html` — for example
+   `before-you-deploy`, or a deeper page such as
+   `deploy-nbs7/full-deploy/provision-cloud-infrastructure/provision-cloud-environment`.
+   Leave the branch as `preview`.
+3. When the run finishes (~1 minute), **refresh the run page** — the
+   **Artifacts** panel only appears after a reload. Download the `.docx` under
+   **eclearance-review-doc**.
+4. Open the file in Word and set the required **sensitivity/privacy label**.
+   Links do not activate until the label is applied.
+
+Within the document, links between pages in the same review set become
+in-document bookmarks; links to pages outside the set point to the preview site.
+
 ### 4. Iterate
 
 For each round of revisions, update your source branch and force-push it to `preview` again:

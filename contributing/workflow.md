@@ -63,7 +63,7 @@ git config --global push.autoSetupRemote true
 ```bash
 git checkout main
 git pull
-git checkout -b your-initials/short-description
+git checkout -b branch-name
 ```
 
 ### 2. Make your changes and commit
@@ -76,7 +76,7 @@ git commit -m "Describe what you changed"
 Repeat as needed. Push your feature branch to keep it backed up on remote:
 
 ```bash
-git push -u origin your-initials/short-description
+git push -u origin branch-name
 ```
 
 Or if you set up automatic remote tracking, just `git push`.
@@ -88,8 +88,8 @@ For commit message conventions, see [CONTRIBUTING.md](../CONTRIBUTING.md).
 From your source branch, push it directly to the remote `preview` branch:
 
 ```bash
-git checkout your-initials/short-description
-git push origin your-initials/short-description:preview --force
+git checkout branch-name
+git push origin branch-name:preview --force
 ```
 
 This replaces `preview` with the exact state of your source branch and triggers the preview site deploy.
@@ -99,16 +99,36 @@ https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/
 
 Share that URL with stakeholders and collect feedback.
 
+#### Generate an eclearance review document
+
+CDC eclearance reviewers require content as a Word document with working links.
+Once your content is on the `preview` branch, generate one on demand — no local
+setup needed:
+
+1. Go to **Actions → Create eclearance Word doc → Run workflow**.
+2. Enter the chapter path under `docs/`, without `.html` — for example
+   `before-you-deploy`, or a deeper page such as
+   `deploy-nbs7/full-deploy/provision-cloud-infrastructure/provision-cloud-environment`.
+   Leave the branch as `preview`.
+3. When the run finishes (~1 minute), **refresh the run page** — the
+   **Artifacts** panel only appears after a reload. Download the `.docx` under
+   **eclearance-review-doc**.
+4. Open the file in Word and set the required **sensitivity/privacy label**.
+   Links do not activate until the label is applied.
+
+Within the document, links between pages in the same review set become
+in-document bookmarks; links to pages outside the set point to the preview site.
+
 ### 4. Iterate
 
 For each round of revisions, update your source branch and force-push it to `preview` again:
 
 ```bash
-git checkout your-initials/short-description
+git checkout branch-name
 # make edits
 git add <changed files>
 git commit -m "Updates from review"
-git push origin your-initials/short-description:preview --force
+git push origin branch-name:preview --force
 ```
 
 ### 5. Merge to `main` when approved
@@ -127,8 +147,8 @@ https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 ```bash
 git checkout main
 git pull
-git branch -d your-initials/short-description
-git push origin --delete your-initials/short-description
+git branch -d branch-name
+git push origin --delete branch-name
 ```
 
 

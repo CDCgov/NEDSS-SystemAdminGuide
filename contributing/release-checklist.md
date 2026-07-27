@@ -124,3 +124,6 @@ The following pages require manual content review beyond link verification:
 - [ ] Confirm the live guide title shows the new version.
 - [ ] Confirm the site builds and deploys successfully on GitHub Pages.
 - [ ] Peer review completed.
+- [ ] For content requiring CDC eclearance, generate the review document(s) for
+  the changed chapters and submit them. See [Generate an eclearance review
+  document](workflow.md#generate-an-eclearance-review-document).

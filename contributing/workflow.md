@@ -63,7 +63,7 @@ git config --global push.autoSetupRemote true
 ```bash
 git checkout main
 git pull
-git checkout -b your-initials/short-description
+git checkout -b branch-name
 ```
 
 ### 2. Make your changes and commit
@@ -76,7 +76,7 @@ git commit -m "Describe what you changed"
 Repeat as needed. Push your feature branch to keep it backed up on remote:
 
 ```bash
-git push -u origin your-initials/short-description
+git push -u origin branch-name
 ```
 
 Or if you set up automatic remote tracking, just `git push`.
@@ -88,8 +88,8 @@ For commit message conventions, see [CONTRIBUTING.md](../CONTRIBUTING.md).
 From your source branch, push it directly to the remote `preview` branch:
 
 ```bash
-git checkout your-initials/short-description
-git push origin your-initials/short-description:preview --force
+git checkout branch-name
+git push origin branch-name:preview --force
 ```
 
 This replaces `preview` with the exact state of your source branch and triggers the preview site deploy.
@@ -124,11 +124,11 @@ in-document bookmarks; links to pages outside the set point to the preview site.
 For each round of revisions, update your source branch and force-push it to `preview` again:
 
 ```bash
-git checkout your-initials/short-description
+git checkout branch-name
 # make edits
 git add <changed files>
 git commit -m "Updates from review"
-git push origin your-initials/short-description:preview --force
+git push origin branch-name:preview --force
 ```
 
 ### 5. Merge to `main` when approved
@@ -147,8 +147,8 @@ https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 ```bash
 git checkout main
 git pull
-git branch -d your-initials/short-description
-git push origin --delete your-initials/short-description
+git branch -d branch-name
+git push origin --delete branch-name
 ```
 
 

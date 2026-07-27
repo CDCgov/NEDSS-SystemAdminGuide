@@ -7,8 +7,6 @@ description: Configure Rhapsody or SFTP service integrations for data ingestion.
 redirect_from:
   - /docs/6_microservices_deployment/6c_di_service_integrations.html
   - /docs/6_microservices_deployment/6c_di_service_integrations/
-  - /docs/deploy-nbs7/microservices-deployment/data-ingestion/service-integrations.html
-  - /docs/deploy-nbs7/microservices-deployment/data-ingestion/service-integrations/
   - /docs/deploy-nbs7/data-ingestion/service-integrations.html
   - /docs/deploy-nbs7/data-ingestion/service-integrations/
 ---

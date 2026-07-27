@@ -9,8 +9,6 @@ redirect_from:
   - /docs/6_microservices_deployment/6a_di_wildfly_Server_config/
   - /docs/3_base_application/wildfly-server-config-di.html
   - /docs/3_base_application/wildfly-server-config-di/
-  - /docs/deploy-nbs7/microservices-deployment/data-ingestion/wildfly-server-config.html
-  - /docs/deploy-nbs7/microservices-deployment/data-ingestion/wildfly-server-config/
   - /docs/deploy-nbs7/data-ingestion/wildfly-server-config.html
   - /docs/deploy-nbs7/data-ingestion/wildfly-server-config/
 ---

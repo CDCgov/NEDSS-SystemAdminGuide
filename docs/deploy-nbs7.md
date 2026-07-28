@@ -13,9 +13,7 @@ This section covers the full NBS 7 deployment process, from prerequisites and in
 > The procedures in this section reflect NBS {{ site.version_latest }}. For earlier releases, see **Previous Versions** in the sidebar.
 {: .note }
 
-<!--
-Before you begin, confirm that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](before-you-deploy/compatibility.html).
--->
+Before you begin, confirm that your NBS 6 version is compatible with your target NBS 7 version on the [Supported NBS versions](./supported-versions.html) page.
 
 NBS 7 deployment comprises the following main phases that you should complete in order:
 

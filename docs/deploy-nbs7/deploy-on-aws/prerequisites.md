@@ -27,7 +27,7 @@ Before you deploy NBS 7, confirm that your Amazon Web Services (AWS) environment
 
 Your AWS environment must meet the following requirements:
 
-- An existing AWS account with an instance of NBS 6 listed in the NBS 6 and NBS 7 compatibility matrix and related third-party products
+- An existing AWS account with an instance of NBS 6 listed on the [Supported NBS versions](./../../supported-versions.html) page and related third-party products
 - A configured DNS routing infrastructure
 - Permissions to create security groups and AWS IAM roles
 - Access to NBS 6 databases hosted on a SQL Server instance. Two common hosting options with AWS include Amazon RDS and self-managed Amazon EC2. See [AWS services reference](../deploy-on-aws.html#aws-services-reference) for details.

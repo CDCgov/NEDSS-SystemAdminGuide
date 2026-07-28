@@ -14,9 +14,7 @@ redirect_from:
 
 This section covers provisioning the Amazon Web Services (AWS) cloud environment for NBS 7. The steps use the Terraform modules provided in the NEDSS-Infrastructure repository, though jurisdictions can provision the required resources using whatever approach works best for their environment. Review this page before moving on to [Deploy cluster infrastructure](../deploy-nbs7/cluster-infrastructure.html).
 
-<!--
-Before provisioning infrastructure, verify that your NBS 6 version is compatible with your target NBS 7 version in the [NBS 6 and NBS 7 compatibility matrix](../before-you-deploy/compatibility.html).
--->
+Before provisioning infrastructure, verify that your NBS 6 version is compatible with your target NBS 7 version on the [Supported NBS versions](./../supported-versions.html) page.
 
 ## On this page
 {: .no_toc .text-delta }

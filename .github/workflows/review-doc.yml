@@ -2,10 +2,15 @@ name: Create eclearance Word doc
 
 # On-demand only. Run it from the Actions tab when you need an eclearance review
 # document for a chapter: click "Create eclearance Word doc" -> "Run workflow",
-# type the chapter path, and click the green button. It builds the site from the
-# chosen branch (preview by default), converts that chapter (with working
-# internal/external links) via the web2word tool, and attaches the .docx to the
-# run as a downloadable artifact. Nothing runs automatically on push or PR.
+# type the chapter path, and click the green button. It always builds from the
+# `preview` branch, converts that chapter (with working internal/external links)
+# via the web2word tool, and attaches the .docx as a downloadable artifact.
+# Nothing runs automatically on push or PR.
+#
+# Always `preview` on purpose: the document's out-of-scope links point at the
+# preview site, which only reflects the `preview` branch. Building from any other
+# branch would make the content and its links come from different versions. To
+# review a feature branch, push it to `preview` first (see contributing/workflow.md).
 
 on:
   workflow_dispatch:
@@ -13,11 +18,6 @@ on:
       chapter:
         description: 'Chapter path under docs/ without .html (e.g. "before-you-deploy" or "deploy-nbs7/microservices-deployment/data-processing")'
         required: true
-        type: string
-      ref:
-        description: "Branch to build from"
-        required: false
-        default: preview
         type: string
 
 permissions:
@@ -37,10 +37,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the selected branch
+      - name: Checkout the preview branch
         uses: actions/checkout@v7
         with:
-          ref: ${{ github.event.inputs.ref }}
+          ref: preview
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1

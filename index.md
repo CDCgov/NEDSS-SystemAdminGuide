@@ -1,7 +1,9 @@
 ---
-title: Introduction
+title: NBS 7 Introduction
 layout: home
 nav_order: 1
+has_children: true
+has_toc: false
 description: Overview of the NBS system administration guide, including preparation, deployment, validation, and maintenance content for NBS 7.
 ---
 
@@ -10,8 +12,8 @@ description: Overview of the NBS system administration guide, including preparat
 The National Electronic Disease Surveillance System (NEDSS) Base System (NBS) is a CDC-developed disease surveillance system that health departments use to manage reportable disease data. NBS 7 is the modernized version of the platform, designed for deployment and operation on cloud-based infrastructure. This documentation supports the administration lifecycle for NBS 7, including planning, deployment, validation, and maintenance.
 {: .fw-300}
 
-> The content in this guide reflects NBS {{ site.version_latest }}. For procedures from earlier releases, see **Previous Versions** in the sidebar.
-{: .note }
+> The content in this guide reflects NBS {{ site.version_latest }}. For procedures from earlier releases, see **Previous Versions** in the sidebar. Each NBS 7 release supports specific NBS 6 versions. Before you begin any deployment or upgrade, verify that your NBS 6 version is supported for your target NBS 7 version on the [Supported NBS versions](docs/supported-versions.html) page.
+{: .important }
 
 ---
 
@@ -21,13 +23,15 @@ The NBS 7 System Administration guide helps you prepare for NBS 7, deploy the pl
 
 The content is centered on system administration. It covers readiness and planning work before deployment, phased deployment guidance for NBS 7 infrastructure and services, and maintenance topics for operating environments after go-live.
 
-<!--
 ## In this guide
 
-- [Before you deploy](docs/before-you-deploy.html) covers readiness checks, configuration decisions, compatibility guidance, and pre-deployment planning.
-- [Deploy NBS 7](docs/deploy-nbs7.html) covers infrastructure, microservices, optional add-ons, and deployment validation steps.
-- [Maintain NBS 7](docs/maintain-nbs7.html) covers post-deployment administration and maintenance tasks.
--->
+This guide covers the full NBS 7 administration lifecycle in three main parts:
+
+- **[Before you deploy NBS 7](docs/before-you-deploy.html)** covers readiness checks, configuration decisions, compatibility guidance, and pre-deployment planning.
+- **[Deploy NBS 7](docs/deploy-nbs7.html)** covers infrastructure, cluster services, microservices, and deployment validation.
+- **[Maintain NBS 7](docs/maintain-nbs7.html)** covers post-deployment administration and maintenance tasks.
+
+The guide also includes supplementary reference materials, such as the [glossary](docs/glossary.html) and [support](docs/support.html) resources.
 
 ## Runtime environment support
 
@@ -42,4 +46,4 @@ The primary audience is system administrators at state, tribal, local, and terri
 For more information on NBS, see the official CDC [National Electronic Disease Surveillance System Base System (NBS)](https://www.cdc.gov/nbs/php/index.html) website and [NBS Central](https://nbscentral.cdc.gov/), the community hub for NBS users where you can download software, access technical resources, and participate in user group calls.
 
 Access to **NBS Central** requires a login. To register for an NBS Central account, choose **Register** at the top of the [login screen](https://nbscentral.cdc.gov/login).
-{: .note }
+{: .important }

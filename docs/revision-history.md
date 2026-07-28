@@ -11,6 +11,7 @@ This table records significant updates to the NBS 7 System Administrator Guide. 
 
 | Date | Description | Author |
 |:-----|:------------|:-------|
+| July 28, 2026 | New content: [Before you deploy](/NEDSS-SystemAdminGuide/docs/before-you-deploy.html) | Jill Shaheen (Skylight Digital) |
 | July 27, 2026 | New content: [Glossary](/NEDSS-SystemAdminGuide/docs/glossary.html) and [Back up and restore on Amazon RDS](/NEDSS-SystemAdminGuide/docs/maintain-nbs7/rds-backup-restore.html) | Jill Shaheen (Skylight Digital) |
 | June 1, 2026 | New content: [Get support](/NEDSS-SystemAdminGuide/docs/support.html) | Jill Shaheen (Skylight Digital) |
 | June 1, 2026 | New content: [Upgrade the Amazon EKS control plane](/NEDSS-SystemAdminGuide/docs/maintain-nbs7/eks-upgrade.html) | Jill Shaheen (Skylight Digital) |

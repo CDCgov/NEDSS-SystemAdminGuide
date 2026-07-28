@@ -80,38 +80,16 @@ Provides necessary foundational pieces to track and route ELR data flowing into 
 ## Real-Time Reporting (RTR) microservices
 Real-Time Reporting (RTR) provides rapid transformation and delivery of data from the transactional database (NBS_ODSE) to the reporting database (RDB). For detailed RTR deployment instructions, see [Deploy real-time reporting](../deploy-nbs7/microservices-deployment/real-time-reporting/real-time-reporting.html).
 
-There are 9 RTR services:
+The following services comprise RTR:
 
-- **Liquibase job**: Database version control management that deploys stored procedures, tables and views required for RTR pipeline.
-- **Person service**: Processes Patient and Provider change events.
-- **Observation services**: Processes Observation change events.
-- **Organization service**: Processes Organization change events.
-- **LDF service**: Processes LDF or State-defined field data change events.
-- **Investigation service**: Processes Public_health_case change events. This service also provides information for page builder investigation, notifications, confirmation method and updates the `PublicHealthCaseFact_Modern` datamart.
-- **Post-processing service**: Calls the post-processing stored procedures to hydrate dimensions, fact tables, and datamarts.
+- **Reporting Pipeline service**: Consumes ODSE/SRTE change events from Kafka, uses stored procedures to transform them, and hydrates the dimensions, facts, and datamarts of the reporting database in near real time.
 - **Debezium service**: Monitors and streams the selected list of `NBS_ODSE` and `NBS_SRTE` tables to Kafka topics.
 - **Kafka sink service**: Persists the data from the Kafka topics to the `RDB_Modern` database tables.
 
 ## Data processing service
-Provides a seamless way to process ELR in near real-time instead of depending on the system-bounded ELR batch job. This eliminates the need for the STLT to set up a batch job on their system.
 
-## NND service
-
-Data Sync is deprecated.
-{: .important }
-
-The Data Sync service provides a secure API to connect to the databases in the NBS cloud, with an API endpoint service and without interrupting any operations On-Prem at Jurisdictions.
+The NBS 7 data processing service provides a way to process electronic lab reports (ELRs) in near real-time instead of depending on the system-bounded ELR batch job.
 
 ## Keycloak
 
-- At our core, we rely on Keycloak as our primary Identity Provider (IdP) and Data Ingestion APIs.
-- We also leverage Keycloak for token management and SSO integration, for example, OAuth, SAML integration with Okta, etc.
-
-## AWS Managed Services
-
-- **[Amazon Elastic Kubernetes Service (Amazon EKS)](https://docs.aws.amazon.com/eks/)**: Terraform scripts will set up the Amazon EKS cluster that NBS 7 uses. This managed service handles all lifecycle events for the Kubernetes runtime (for example, keeping the underlying nodes patched and up to date).
-- **[Amazon Elastic File System (Amazon EFS)](https://docs.aws.amazon.com/efs/)**: The NBS 7 system uses a network filesystem for persistent data storage.
-- **[Amazon Managed Service for Prometheus](https://docs.aws.amazon.com/prometheus/)**: NBS will harness Amazon Managed Service for Prometheus to capture metrics from Kubernetes ingress and various microservices.
-- **[Amazon Managed Grafana](https://docs.aws.amazon.com/grafana/)**: NBS will leverage Amazon Managed Grafana to visualize metrics from AMP and host operational dashboards. The initial set includes three dashboards, encompassing error rates, total request volume, and latency.
-- **[AWS Key Management Service (AWS KMS)](https://docs.aws.amazon.com/kms/)**: AWS infrastructure storage services like Amazon EKS, EFS, and RDS utilize a managed key management store for persistence and encryption, ensuring a robust layer of security.
-- **[Amazon Relational Database Service (Amazon RDS)](https://docs.aws.amazon.com/rds/)**: Optionally, the database underlying the NBS 6 and 7 system may be configured to run as a fully managed Microsoft SQL Server database instance.
+Keycloak is an open-source identity and access management tool. NBS 7 uses Keycloak as the primary Identity Provider (IdP) for authentication, token management, and SSO integration with external identity providers such as Okta using OAuth or SAML.

@@ -115,8 +115,6 @@ Complete these steps to download the infrastructure code and prepare your enviro
 
 1. In each Terraform layer directory, update the `terraform.tfvars` and `terraform.tf` files with your environment-specific values. The commentary in those files provides detailed instructions. Do not edit files in the individual Terraform modules.
 
-   If you plan to deploy the Data Compare tool on AWS, enable the Data Compare resources in the `1-nbs7` layer before you apply. The commentary in that layer's `terraform.tfvars` describes the setting and any values it requires. Terraform then creates the AWS Identity and Access Management (IAM) role (`<eks-cluster-name>-datacompare-role`) and S3 access policy that the Data Compare pods require. The role ARN is referenced during [Data Compare deployment](../../microservices-deployment/real-time-reporting/data-compare-tool.html).
-
 ## Run Terraform provisioning
 
 For each Terraform layer directory, this section initializes the directory, generates an execution plan, and applies the changes. Repeat the following steps for each layer in your environment directory, in the numeric order of the directory names.

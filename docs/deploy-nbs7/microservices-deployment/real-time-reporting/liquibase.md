@@ -106,7 +106,7 @@ Follow these steps to configure and deploy the Liquibase Helm chart for RTR.
 
 If validation fails or returns unexpected results, see [Troubleshooting Liquibase installation](#troubleshooting-liquibase-installation).
 
-> If you arrived here from [Create service users and database objects](../real-time-reporting/#create-service-users-and-database-objects), return there to continue after Liquibase completes successfully.
+> If you arrived here from [Create service users and database objects](../real-time-reporting/real-time-reporting.html#create-service-users-and-database-objects), return there to continue after Liquibase completes successfully.
 {: .note }
 
 ## Troubleshooting Liquibase installation

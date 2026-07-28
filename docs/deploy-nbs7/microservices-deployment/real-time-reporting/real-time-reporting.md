@@ -72,9 +72,10 @@ To reduce risk, consider setting up RTR in a testing environment before moving t
 
 1. **Name**: Any name works, but we recommend using a name descriptive to the role, such as `rtr-service-user`.
 1. **Databases Permissions**:
-  - `NBS_ODSE`: `db_datareader`
-  - `NBS_SRTE`: `db_datareader`
-  - `RDB` / `RDB_MODERN`: `db_owner`
+
+   - `NBS_ODSE`: `db_datareader`
+   - `NBS_SRTE`: `db_datareader`
+   - `RDB` / `RDB_MODERN`: `db_owner`
 
 ## Enable Change Data Capture
 

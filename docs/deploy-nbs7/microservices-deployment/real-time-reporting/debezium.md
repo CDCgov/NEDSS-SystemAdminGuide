@@ -33,7 +33,7 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 
 1. Locate the Debezium Helm chart in the [NEDSS-Helm repository][nedss-helm-debezium-chart].
 
-1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference][deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices] for help determining values.
+1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference](../../microservices-deployment/deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
 
    To retrieve your Kafka bootstrap server endpoints, see [Get bootstrap brokers](https://docs.aws.amazon.com/msk/latest/developerguide/msk-get-bootstrap-brokers.html) in the AWS MSK documentation.
 
@@ -49,7 +49,7 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
    kubectl get deployment debezium-debezium-rtr-connect
    ```
 
-After Debezium deploys successfully, continue to [Deploy Kafka connector](../../deploy-nbs7/real-time-reporting/kafka-connector.html).
+After Debezium deploys successfully, continue to [Deploy Kafka connector](kafka-connector.html).
 
 ## Troubleshooting
 

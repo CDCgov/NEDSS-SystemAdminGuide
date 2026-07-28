@@ -33,7 +33,7 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
 
 1. Locate the Kafka connector Helm chart in the [NEDSS-Helm repository][nedss-helm-kafka-connect-sink-chart].
 
-1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference][deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices] for help determining values.
+1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference](../../microservices-deployment/deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
 
    To retrieve your Kafka bootstrap server endpoints, see [Get bootstrap brokers](https://docs.aws.amazon.com/msk/latest/developerguide/msk-get-bootstrap-brokers.html) in the AWS MSK documentation.
 
@@ -49,7 +49,7 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
    kubectl get deployment kafka-connect-sink-cp-kafka-connect
    ```
 
-After Debezium deploys successfully, continue to [Deploy Java services](../../deploy-nbs7/real-time-reporting/rtr-java-services.html).
+After Debezium deploys successfully, continue to [Deploy Java services](rtr-java-services.html).
 
 ## Troubleshooting
 

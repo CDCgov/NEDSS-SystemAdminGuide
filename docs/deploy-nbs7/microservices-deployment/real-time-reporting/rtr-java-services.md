@@ -23,17 +23,18 @@ Deploying the Java service is a two-phase process. The first deployment seeds th
 1. TOC
 {:toc}
 
-> These steps require a Unix-compatible shell. On Windows, use Git Bash, WSL, or an equivalent terminal emulator.
-{: .note }
+## Prerequisites
 
-> Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
-{: .important }
+Confirm the following before you continue:
+
+- You have a Unix-compatible shell. On Windows, use Git Bash, WSL, or an equivalent terminal emulator.
+- You are connected to the correct Kubernetes cluster. Run `kubectl config current-context` to confirm.
 
 ## Configure values.yaml
 
 1. Locate the Helm chart for the RTR Java service in the [NEDSS-Helm repository][nedss-helm-rtr-chart].
 
-1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference][deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices] for help determining values.
+1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference](../../microservices-deployment/deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
 
 ## Initial deployment
 
@@ -60,7 +61,7 @@ reporting-pipeline-service   1/1     1            1           16m
 
 The `/actuator/lag` endpoint reports how far behind the service is in consuming its Kafka topics. Use it to determine when initial seeding is complete.
 
-Retrieve information on reporting-pipeline-service lag in your browser. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
+Retrieve information on reporting-pipeline-service lag in your browser. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
 
 ```text
    https://data.<exampledomain>/reporting-pipeline-svc/actuator/lag
@@ -85,7 +86,6 @@ Reinstall the chart with post-processing enabled:
    helm upgrade -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
    ```
 
-
 1. Verify the pods restarted cleanly:
 
    ```bash
@@ -93,7 +93,7 @@ Reinstall the chart with post-processing enabled:
    kubectl get deployment reporting-pipeline-service
    ```
 
-1. Confirm the service is healthy. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller)):
+1. Confirm the service is healthy. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
 
    ```text
    https://data.<exampledomain>/reporting-pipeline-svc/actuator/health

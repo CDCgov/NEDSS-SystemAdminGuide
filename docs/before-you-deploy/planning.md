@@ -82,7 +82,6 @@ The Test stage validates that your NBS 7 environment is ready for production use
 |:---|:---|:---|
 | Test database restore process | Review and test the database restore process in each environment. | Use your own database refresh procedure |
 | Validate ingestion and egress | Integrate and validate data ingestion and notification pathways to confirm pipelines are working. | [API testing for data ingestion](../deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html) |
-| Validate real-time reporting (RTR) | Confirm that RTR streaming updates move into datamart tables. | [Validate the RTR pipeline](../deploy-nbs7/microservices-deployment/real-time-reporting/pipeline-validation.html) |
 | Test ELR and eCR ingestion | Test ingestion for individual ELRs and eCRs and at scale. | [Data ingestion smoke test](../deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html) |
 | Validate notifications | Validate Case Notifications | Confirm conditions are received successfully |
 | Run regression testing | Run test scripts across environments to validate readiness for UAT. | [Validate the deployment](../deploy-nbs7/validate-the-deployment.html) |

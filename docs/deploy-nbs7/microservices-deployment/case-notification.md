@@ -39,6 +39,6 @@ Your jurisdiction can use either the NBS 7 case notification service or route ca
 
 To deploy the notification service, complete the steps in the following order:
 
-1. [Deploy the Debezium Kafka source connector](../../deploy-nbs7/microservices-deployment/case-notification/debezium.html)
-1. [Deploy the case notification service](../../deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html)
-1. [Test and integrate case notification APIs](../../deploy-nbs7/microservices-deployment/case-notification/api-testing.html)
+1. [Deploy the Debezium Kafka source connector](case-notification/debezium.html)
+1. [Deploy the case notification service](case-notification/case-notification-service.html)
+1. [Test and integrate case notification APIs](case-notification/api-testing.html)

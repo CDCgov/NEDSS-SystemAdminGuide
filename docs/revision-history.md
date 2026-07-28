@@ -12,7 +12,7 @@ This table records significant updates to the NBS 7 System Administrator Guide. 
 | Date | Description | Author |
 |:-----|:------------|:-------|
 | July 28, 2026 | New content: [Before you deploy](/NEDSS-SystemAdminGuide/docs/before-you-deploy.html) | Jill Shaheen (Skylight Digital) |
-| July 27, 2026 | New content: [Glossary](/NEDSS-SystemAdminGuide/docs/glossary.html) and [Back up and restore on Amazon RDS](/NEDSS-SystemAdminGuide/docs/maintain-nbs7/rds-backup-restore.html) | Jill Shaheen (Skylight Digital) |
+| July 27, 2026 | New content: [Supported NBS versions](/NEDSS-SystemAdminGuide/docs/supported-versions.html), [Glossary](/NEDSS-SystemAdminGuide/docs/glossary.html) and [Back up and restore on Amazon RDS](/NEDSS-SystemAdminGuide/docs/maintain-nbs7/rds-backup-restore.html) | Jill Shaheen (Skylight Digital) |
 | June 1, 2026 | New content: [Get support](/NEDSS-SystemAdminGuide/docs/support.html) | Jill Shaheen (Skylight Digital) |
 | June 1, 2026 | New content: [Upgrade the Amazon EKS control plane](/NEDSS-SystemAdminGuide/docs/maintain-nbs7/eks-upgrade.html) | Jill Shaheen (Skylight Digital) |
 | April 28, 2026 | Replace NGINX with [Traefik instructions](/NEDSS-SystemAdminGuide/docs/deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) | Kate Saul, Jill Shaheen (Skylight Digital) |

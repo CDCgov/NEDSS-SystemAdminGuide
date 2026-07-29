@@ -105,7 +105,10 @@ CDC eclearance reviewers require content as a Word document with working links.
 Once your content is on the `preview` branch, generate one on demand — no local
 setup needed:
 
-1. Go to **Actions → Create eclearance Word doc → Run workflow**.
+1. Go to **Actions → Create eclearance Word doc → Run workflow**. Leave the
+   **Use workflow from** branch dropdown on its default (`main`) — the document
+   always builds from `preview` regardless, so you'd only change that dropdown if
+   you were testing a change to the workflow file itself.
 2. Enter the chapter path under `docs/`, without `.html` — for example
    `before-you-deploy`, or a deeper page such as
    `deploy-nbs7/full-deploy/provision-cloud-infrastructure/provision-cloud-environment`.

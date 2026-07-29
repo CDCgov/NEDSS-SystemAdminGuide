@@ -2,7 +2,7 @@
 title: Debezium
 layout: page
 parent: Deploy real-time reporting
-nav_order: 2
+nav_order: 1
 description: Describes deploying Debezium to capture SQL Server changes and publish RTR events to Kafka.
 redirect_from:
   - /docs/7_feature_preview/2_debezium-rtr.html
@@ -13,7 +13,7 @@ redirect_from:
 
 # Deploy Debezium for real-time reporting (RTR)
 
-This page covers steps to deploy the Debezium connector that captures change data from source tables and publishes events to Kafka topics for RTR processing.
+This page walks through deploying the Debezium connector using the [Debezium Helm chart][nedss-helm-debezium-chart] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The connector captures change data from source tables and publishes events to Kafka topics for RTR processing.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -21,23 +21,19 @@ This page covers steps to deploy the Debezium connector that captures change dat
 1. TOC
 {:toc}
 
-> These steps require a Unix-compatible shell. On Windows, use Git Bash, WSL, or an equivalent terminal emulator.
-{: .note }
+## Prerequisites
 
-## Installing Debezium
+This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and the database setup on [Deploy real-time reporting](real-time-reporting.html), including enabling Change Data Capture.
 
-Follow these steps to configure and deploy the Debezium Helm chart for RTR.
+Have your database credentials and Kafka endpoint values available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
-> Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
-{: .important }
+## Deploy Debezium using Helm
 
-1. Locate the Debezium Helm chart in the [NEDSS-Helm repository][nedss-helm-debezium-chart].
+Complete the following steps to deploy the [Debezium Helm chart][nedss-helm-debezium-chart] from the `charts/debezium/` directory of your cloned NEDSS-Helm repository:
 
-1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference](../../microservices-deployment/deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
+1. Search `values.yaml` for `EXAMPLE` and fill in your environment-specific values. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
 
-   To retrieve your Kafka bootstrap server endpoints, see [Get bootstrap brokers](https://docs.aws.amazon.com/msk/latest/developerguide/msk-get-bootstrap-brokers.html) in the AWS MSK documentation.
-
-1. Install the pod:
+1. Install the Helm chart:
 
    ```bash
    helm install -f ./debezium/values.yaml debezium-connect ./debezium/
@@ -46,16 +42,12 @@ Follow these steps to configure and deploy the Debezium Helm chart for RTR.
 1. Verify the pod is running:
 
    ```bash
-   kubectl get deployment debezium-debezium-rtr-connect
+   kubectl get deployment debezium-connect-debezium-rtr-connect
    ```
 
-After Debezium deploys successfully, continue to [Deploy Kafka connector](kafka-connector.html).
+After Debezium deploys successfully, continue to [Kafka connector](kafka-connector.html).
 
-## Troubleshooting
-
-If issues persist after initial troubleshooting, contact support at <mailto:nbs@cdc.gov>.
-
-### Database connection errors
+## Troubleshoot Debezium
 
 If the service has trouble connecting to the database, run the following command to reset the ConfigMap:
 
@@ -63,4 +55,7 @@ If the service has trouble connecting to the database, run the following command
 kubectl delete configmap debezium-rtr-connect
 ```
 
+If issues persist, email [nbs@cdc.gov](mailto:nbs@cdc.gov).
+
+[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-debezium-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium>

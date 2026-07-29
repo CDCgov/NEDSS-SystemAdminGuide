@@ -2,7 +2,7 @@
 title: Java service
 layout: page
 parent: Deploy real-time reporting
-nav_order: 4
+nav_order: 3
 description: Covers deployment of the RTR Java service that transforms Kafka events and loads reporting datamarts.
 redirect_from:
   - /docs/7_feature_preview/4_rtr_java_reporting_services.html
@@ -32,7 +32,6 @@ This page assumes you've completed [Before you begin](../deploy-nbs7-microservic
 
 Confirm the following before you continue:
 
-- You have a Unix-compatible shell. On Microsoft Windows, use Git Bash, Windows Subsystem for Linux (WSL), or an equivalent terminal emulator.
 - You are connected to the correct Kubernetes cluster. Run `kubectl config current-context` to confirm.
 - You have your database credentials and domain values available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 

@@ -25,11 +25,14 @@ Use the Helm CLI to deploy NBS 7 microservices into your Kubernetes cluster. Ver
 
 ## Before you begin
 
+These steps require a Unix-compatible shell. On Microsoft Windows, use Git Bash, Windows Subsystem for Linux (WSL), or an equivalent terminal emulator.
+
 Complete the following steps before you deploy the first microservice:
 
 1. Verify that you are authenticated to your cloud provider and that your session targets the account for your NBS environment.
    - **AWS:** Run `aws sts get-caller-identity` and confirm the output shows your NBS account ID.
    - **Azure:** Run `az account show` and confirm the output shows your NBS subscription.
+1. Verify that `kubectl` targets the correct Kubernetes cluster. Run `kubectl config current-context` and confirm that the output names your NBS cluster.
 1. Use Git to clone your own local copy of the public [NEDSS-Helm][nedss-helm] repository.
 1. Navigate to the `charts` directory of your cloned NEDSS-Helm repository. Run all Helm install commands from this directory.
 
@@ -41,10 +44,10 @@ The following table lists common Helm values used across NBS 7 microservices. Ha
 |---|---|---|
 | `app-classic.EXAMPLE_DOMAIN` | `nbsExternalName` | The domain name for your existing NBS 6 application. This is the DNS name you already use for classic NBS today, not a new record you create as part of the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records). |
 | `EXAMPLE_DB_ENDPOINT` | Varies by chart, for example: `jdbc*` | The hostname or endpoint of your NBS database server. Find this in the console for your database hosting service or in the Terraform outputs from infrastructure provisioning. |
-| `EXAMPLE_DB_NAME` | Varies by chart | The name of the NBS ODSE database on your database server. The default is `NBS_ODSE`. Only charts that build a full JDBC connection string, such as NiFi and the Modernization API, expose this as a separate value. |
+| `EXAMPLE_DB_NAME` | Varies by chart | The name of the database that the chart's service connects to. For most services, such as NiFi and the Modernization API, this is the NBS ODSE database, `NBS_ODSE` by default. For the `reporting-pipeline-service` chart, use the reporting database that you chose in [RTR database setup](real-time-reporting/real-time-reporting.html): `RDB`, or `RDB_MODERN`. |
 | `EXAMPLE_ODSE_DB_USER` / `EXAMPLE_DB_USER` / `EXAMPLE_DB_USERNAME` | Varies by chart | The database login used by NBS microservices. The default is `nbs_ods`. |
 | `EXAMPLE_ODSE_DB_USER_PASSWORD` / `EXAMPLE_DB_USER_PASSWORD` / `EXAMPLE_DB_PASSWORD` | Varies by chart | The password for the database user. Retrieve this from your secrets manager or your infrastructure team. |
-| `EXAMPLE_KAFKA_ENDPOINT(S)` / `EXAMPLE_KAFKA_ENDPOINT_AND_PORT` / `EXAMPLE_KAFKA_ENDPOINT:EXAMPLE_PORT` / `EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS` | `kafka.cluster` (varies by chart) | A comma-separated list of the private plaintext broker endpoints (port 9092) for your Kafka cluster. **AWS:** find these in the Amazon MSK console under your cluster > **View client information** > **Bootstrap servers (plaintext)**. **Azure:** use the worker-node broker hostnames (`wn*...:9092`) of your HDInsight Kafka cluster, available from the cluster in the Azure portal or from the Terraform outputs from infrastructure provisioning. |
+| `EXAMPLE_KAFKA_ENDPOINT(S)` / `EXAMPLE_KAFKA_ENDPOINT_AND_PORT` / `EXAMPLE_KAFKA_MULTI_CLUSTER_ENDPOINTS` | `kafka.cluster` (varies by chart) | A comma-separated list of the private plaintext broker endpoints (port 9092) for your Kafka cluster. **AWS:** find these in the Amazon MSK console under your cluster > **View client information** > **Bootstrap servers (plaintext)**. **Azure:** use the worker-node broker hostnames (`wn*...:9092`) of your HDInsight Kafka cluster, available from the cluster in the Azure portal or from the Terraform outputs from infrastructure provisioning. |
 | `app.EXAMPLE_DOMAIN`, `data.EXAMPLE_DOMAIN`, or `nifi.EXAMPLE_DOMAIN` | Varies by chart, for example: `ingressHost` | The public hostname for the service. Charts reference it under keys such as `ingressHost` or `dataingestion.uri`. Use `app.` for the NBS application tier (NBS Gateway and Modernization API), `data.` for the data services tier (data ingestion, data processing, and Data Sync), and `nifi.` for the NiFi admin UI. Use the values that you configured in the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records). |
 | `EXAMPLE_EFS_ID` | `efsFileSystemId` | **AWS deployments:** The Amazon EFS file system ID for the persistent network file storage used by services that need it. Find it in the EFS console under **File systems** or in the Terraform outputs. |
 | `EXAMPLE_STORAGE_ACCOUNT_NAME` and `EXAMPLE_RESOURCE_GROUP_NAME` | `azure.files.storageAccountName` and `azure.files.resourceGroupName` | **Azure deployments:** The Azure Files storage account name and its resource group, which provide the persistent network file storage. The NEDSS-Infrastructure `terraform/azure/modules/2-nbs7/storage-account` module creates these. |

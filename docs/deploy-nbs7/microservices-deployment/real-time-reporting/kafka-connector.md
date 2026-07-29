@@ -2,7 +2,7 @@
 title: Kafka connector
 layout: page
 parent: Deploy real-time reporting
-nav_order: 3
+nav_order: 2
 description: Shows how to deploy the Kafka sink connector that writes RTR topics into reporting tables.
 redirect_from:
   - /docs/7_feature_preview/3_kafka_connector.html
@@ -13,7 +13,7 @@ redirect_from:
 
 # Deploy the Kafka connector for real-time reporting (RTR)
 
-This page covers steps to deploy the Kafka sink connector that consumes RTR topics and writes transformed data into reporting tables.
+This page walks through deploying the Kafka sink connector using the [Kafka connector Helm chart][nedss-helm-kafka-connect-sink-chart] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The connector consumes RTR topics and writes transformed data into reporting tables.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -21,23 +21,19 @@ This page covers steps to deploy the Kafka sink connector that consumes RTR topi
 1. TOC
 {:toc}
 
-> These steps require a Unix-compatible shell. On Windows, use Git Bash, WSL, or an equivalent terminal emulator.
-{: .note }
+## Prerequisites
 
-## Installing the Kafka connector
+This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each RTR deployment page before this one, in order. The page immediately before this one is [Debezium](debezium.html).
 
-Follow these steps to configure and deploy the Kafka connector Helm chart for RTR.
+Have your database credentials and Kafka endpoint values available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
-> Verify that you are connected to the correct Kubernetes cluster before proceeding. To confirm, run `kubectl config current-context`.
-{: .important }
+## Deploy the Kafka connector using Helm
 
-1. Locate the Kafka connector Helm chart in the [NEDSS-Helm repository][nedss-helm-kafka-connect-sink-chart].
+Complete the following steps to deploy the [Kafka connector Helm chart][nedss-helm-kafka-connect-sink-chart] from the `charts/kafka-connect-sink/` directory of your cloned NEDSS-Helm repository:
 
-1. Search `values.yaml` for EXAMPLE and fill in your environment-specific values. See the [Helm values reference](../../microservices-deployment/deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
+1. Search `values.yaml` for `EXAMPLE` and fill in your environment-specific values. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
 
-   To retrieve your Kafka bootstrap server endpoints, see [Get bootstrap brokers](https://docs.aws.amazon.com/msk/latest/developerguide/msk-get-bootstrap-brokers.html) in the AWS MSK documentation.
-
-1. Install the pod:
+1. Install the Helm chart:
 
    ```bash
    helm install -f ./kafka-connect-sink/values.yaml cp-kafka-connect-server ./kafka-connect-sink/
@@ -46,16 +42,12 @@ Follow these steps to configure and deploy the Kafka connector Helm chart for RT
 1. Verify the pod is running:
 
    ```bash
-   kubectl get deployment kafka-connect-sink-cp-kafka-connect
+   kubectl get deployment cp-kafka-connect-server
    ```
 
-After Debezium deploys successfully, continue to [Deploy Java services](rtr-java-services.html).
+After the Kafka connector deploys successfully, continue to [Java service](rtr-java-services.html).
 
-## Troubleshooting
-
-If issues persist after initial troubleshooting, contact support at <mailto:nbs@cdc.gov>.
-
-### Database connection errors
+## Troubleshoot the Kafka connector
 
 If the service has trouble connecting to the database, run the following command to reset the ConfigMap:
 
@@ -63,4 +55,7 @@ If the service has trouble connecting to the database, run the following command
 kubectl delete configmap cp-kafka-connect-sqlserver-connect
 ```
 
+If issues persist, email [nbs@cdc.gov](mailto:nbs@cdc.gov).
+
+[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-kafka-connect-sink-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/kafka-connect-sink>

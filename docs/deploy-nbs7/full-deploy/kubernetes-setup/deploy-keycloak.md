@@ -3,18 +3,17 @@ title: Deploy and configure Keycloak
 layout: page
 parent: Deploy cluster services
 nav_order: 2
-has_children: false
 nav_enabled: true
 description: Install Keycloak, create the NBS service and user realms, configure service clients, retrieve client secrets, and complete the final validation of Traefik and Keycloak.
 redirect_from:
-  - /docs/5_keycloak/1_keycloak_installation.html
-  - /docs/5_keycloak/1_keycloak_installation/
-  - /docs/5_keycloak/2_enable_keycloak_auth.html
-  - /docs/5_keycloak/2_enable_keycloak_auth/
-  - /docs/deploy-nbs7/keycloak/enable-keycloak-auth.html
-  - /docs/deploy-nbs7/keycloak/enable-keycloak-auth/
-  - /docs/deploy-nbs7/keycloak/keycloak-installation.html
-  - /docs/deploy-nbs7/keycloak/keycloak-installation/
+- /docs/5_keycloak/1_keycloak_installation.html
+- /docs/5_keycloak/1_keycloak_installation/
+- /docs/5_keycloak/2_enable_keycloak_auth.html
+- /docs/5_keycloak/2_enable_keycloak_auth/
+- /docs/deploy-nbs7/keycloak/enable-keycloak-auth.html
+- /docs/deploy-nbs7/keycloak/enable-keycloak-auth/
+- /docs/deploy-nbs7/keycloak/keycloak-installation.html
+- /docs/deploy-nbs7/keycloak/keycloak-installation/
 ---
 
 # Deploy and configure Keycloak for NBS 7
@@ -32,14 +31,12 @@ In addition to the services you deployed in [Deploy core Kubernetes services](de
 
 ## Overview
 
-Keycloak provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`. It uses two separate realms:
+Before you begin, locate the Keycloak Helm chart in the [NEDSS-Helm][nedss-helm].
+
+Keycloak provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`. It uses two separate realms that are created in [Create the NBS and nbs-users realms](#create-the-nbs-and-nbs-users-realms):
 
 - **NBS realm:** Contains service clients for data ingestion, NND, and SRTE data access.
 - **nbs-users realm:** Contains the user-facing authentication client used by the NBS gateway and the NBS application.
-
-Both realms are created in [Create the NBS and nbs-users realms](#create-the-nbs-and-nbs-users-realms).
-
-Locate the Keycloak Helm chart in the [NEDSS-Helm repository][nedss-helm-keycloak-chart] before you begin.
 
 ## Create the Keycloak database
 
@@ -51,12 +48,12 @@ Create the Keycloak database and database user before you deploy the Helm chart.
 1. Using your SQL client, authenticate into your database server:
 
    | Field | Value |
-   |---|---|
+   |----|----|
    | DB Endpoint | Your database endpoint |
    | Username | `admin` |
    | Password | Your database admin password |
 
-1. Run the following script (also available as [nbs_keycloak.sql][nedss-helm-keycloak-sql] in the NEDSS-Helm repository) to create the Keycloak database and database user. Replace `'EXAMPLE_KCDB_PASS8675309'` with a complex password that meets your organization's standards. Store this password securely. You will need it in `values.yml` in [Configure the Helm chart](#configure-the-helm-chart).
+1. Run the following script (also available as [nbs_keycloak.sql][keycloak-sql-script] in the NEDSS-Helm repository) to create the Keycloak database and database user. Replace `'EXAMPLE_KCDB_PASS8675309'` with a complex password that meets your organization's standards. Store this password securely. You will need it in `values.yml` in [Configure the Helm chart](#configure-the-helm-chart).
 
    ```sql
    use master
@@ -81,26 +78,26 @@ The following screenshot shows the keycloak database created under **Databases**
 
 ## Configure the Helm chart
 
-In [values.yml][nedss-helm-keycloak-values], update the following parameters:
+In [values.yml][keycloak-values], update the following parameters:
 
-   <!-- markdownlint-disable MD055 MD056 -->
+<!-- markdownlint-disable MD055 MD056 -->
 
-   | Parameter | Template value | Description |
-   |---|---|---|
-   | `adminUser` | `admin` | Keycloak admin account for the web UI. Keep the template value or change it to match your organization's naming conventions. |
-   | `adminPassword` | `EXAMPLE_KC_PASS8675309` | Password for the Keycloak admin user. Use a complex password that meets your organization's standards. |
-   | `KC_DB` | `mssql` | Database type. Keep the template value. |
-   | `KC_DB_URL` | `jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;` | Replace `EXAMPLE_DB_ENDPOINT` with your database endpoint. |
-   | `KC_DB_USERNAME` | `NBS_keycloak` | Keycloak database account. Keep the template value or change it to match your organization's naming conventions. |
-   | `KC_DB_PASSWORD` | `EXAMPLE_KCDB_PASS8675309` | Must match the password you set in [Create the Keycloak database](#create-the-keycloak-database). |
-   | `efsFileSystemId` | `EXAMPLE_EFS_ID` | **In AWS deployments:** The Amazon EFS file system ID from the AWS console or CLI. Provides persistent storage for themes. **In Azure deployments:** Azure Files requires different configuration. <!-- [SME REVIEW] The previous link here pointed to the deleted Deploy on Azure page, and Azure Files configuration for Keycloak themes is not yet documented anywhere in the guide. Confirm with Josh where this configuration lives and restore a link. --> |
-   {: .three-column-values-table }
+| Parameter | Template value | Description |
+|----|----|----|
+| `adminUser` | `admin` | Keycloak admin account for the web UI. Keep the template value or change it to match your organization's naming conventions. |
+| `adminPassword` | `EXAMPLE_KC_PASS8675309` | Password for the Keycloak admin user. Use a complex password that meets your organization's standards. |
+| `KC_DB` | `mssql` | Database type. Keep the template value. |
+| `KC_DB_URL` | `jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;` | Replace `EXAMPLE_DB_ENDPOINT` with your database endpoint. |
+| `KC_DB_USERNAME` | `NBS_keycloak` | Keycloak database account. Keep the template value or change it to match your organization's naming conventions. |
+| `KC_DB_PASSWORD` | `EXAMPLE_KCDB_PASS8675309` | Must match the password you set in [Create the Keycloak database](#create-the-keycloak-database). |
+| `efsFileSystemId` | `EXAMPLE_EFS_ID` | **In AWS deployments:** The Amazon EFS file system ID from the AWS console or CLI. Provides persistent storage for themes. **In Azure deployments:** Azure Files requires different configuration. <!-- [SME REVIEW] The previous link here pointed to the deleted Deploy on Azure page, and Azure Files configuration for Keycloak themes is not yet documented anywhere in the guide. Confirm with Josh where this configuration lives and restore a link. --> |
+{: .three-column-values-table }
 
 ## Deploy Keycloak
 
 Use the following steps to install the Keycloak Helm chart and verify the pod is running.
 
-1. From the `charts` directory, install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available. See the [README in `charts/keycloak`][nedss-helm-keycloak-chart] for details.
+1. From the `charts` directory, install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available. See the [README in `charts/keycloak`][keycloak-chart-readme] for details.
 
    ```bash
    helm install keycloak --namespace default -f keycloak/values.yml keycloak
@@ -127,9 +124,7 @@ Use port forwarding to access the Keycloak web UI from your local machine.
 1. Set up port forwarding:
 
    ```bash
-   export POD_NAME=$(kubectl get pods --namespace default -o name);
-   echo "Visit http://127.0.0.1:8080/auth to use your application";
-   kubectl --namespace default port-forward "$POD_NAME" 8080;
+   kubectl port-forward deploy/keycloak-deployment 8080
    ```
 
 1. In a browser, go to `http://127.0.0.1:8080/auth` and select **Administration Console**.
@@ -150,9 +145,9 @@ After you sign in, the admin console opens to the **master** realm welcome page.
 Keycloak uses two realms for NBS 7: the **NBS** realm for service clients, and the **nbs-users** realm for user-facing authentication. Create both using the same procedure, with a different import file for each.
 
 | Realm | Import file | Purpose |
-|---|---|---|
-| NBS | [`01-NBS-realm-with-DI-client.json`][nedss-helm-keycloak-di-client] | Contains service clients for data ingestion, NND, and SRTE data access. Seeds the `di-keycloak-client` service client in the same step. |
-| nbs-users | [`02-nbs-users-realm.json`][nedss-helm-keycloak-nbs-users-realm] | Provides user-facing authentication for the NBS application and NBS gateway. Contains the client used by `modernization-api` and `nbs-gateway` for OpenID Connect (OIDC) login. |
+|----|----|----|
+| NBS | `01-NBS-realm-with-DI-client.json` | Contains service clients for data ingestion, NND, and SRTE data access. Seeds the `di-keycloak-client` service client in the same step. |
+| nbs-users | `02-nbs-users-realm.json` | Provides user-facing authentication for the NBS application and NBS gateway. Contains the client used by `modernization-api` and `nbs-gateway` for OpenID Connect (OIDC) login. |
 
 > OIDC must be enabled when you deploy `modernization-api` and `nbs-gateway`. You configure OIDC during microservices deployment, not on this page. See [Deploy NBS 7 microservices](../../microservices-deployment/deploy-nbs7-microservices.html) for OIDC configuration steps.
 {: .note }
@@ -171,13 +166,13 @@ Keycloak uses two realms for NBS 7: the **NBS** realm for service clients, and t
 
 ## Import base users and clients
 
-Import the base NBS users and development clients into the **nbs-users** realm.
+Import the base NBS users and development clients into the **nbs-users** realm:
 
 1. Select the **nbs-users** realm, then go to **Realm settings** > **Action** > **Partial Import**.
 
    ![Keycloak Realm settings page for the nbs-users realm, showing the General tab with realm configuration options](images/nbs-users-base-users.png)
 
-1. Upload [`03-nbs-users-base-users.json`][nedss-helm-keycloak-extra], select the three users, and select **Import**.
+1. Upload `03-nbs-users-base-users.json`, select the three users, and select **Import**.
 
    The Partial import dialog shows the file uploaded with the three users selected for import.
 
@@ -187,7 +182,7 @@ Import the base NBS users and development clients into the **nbs-users** realm.
 
    ![Keycloak Partial import confirmation listing three added users: msa, nbs-users-admin, and superuser](images/nbs-users-base-users-3.png)
 
-1. Upload [`04-nbs-users-development-clients.json`][nedss-helm-keycloak-extra], select the one client, and select **Import**.
+1. Upload `04-nbs-users-development-clients.json`, select the one client, and select **Import**.
 
    The Partial import dialog shows the development client file uploaded and selected for import.
 
@@ -212,16 +207,16 @@ This validation depends on the DNS records from [Deploy core Kubernetes services
 
 1. Go to `https://app.<DOMAIN_NAME.TLD>` and verify that the NBS 7 Welcome page is shown. The following screenshot shows the Welcome page from the NBS demo environment. Your Welcome page will differ.
 
-   <!-- RELEASE CHECKLIST: UI screenshot; reverify against each NBS 7 release. -->
    ![NBS 7 demo site Welcome page with a Login panel and a Login to NBS demo site button](images/nbs7-welcome-page.png)
 
 1. Select **Login** and verify that the Keycloak login page is shown.
 
-   <!-- RELEASE CHECKLIST: UI screenshot; reverify against each NBS 7 release. -->
    ![Keycloak login page for the NBS application with username and password fields and a Sign In button](images/keycloak-user-login.png)
 
 1. Open your browser's developer tools. For example, in Chrome, select **View** > **Developer** > **Developer Tools**.
+
 1. Sign in and verify that authentication works and that the NBS 7 Home page is shown.
+
 1. In developer tools, select **Network** and select a `.js` file. Under **Headers** > **Response headers**, verify the following values:
 
    ```text
@@ -236,15 +231,13 @@ This validation depends on the DNS records from [Deploy core Kubernetes services
 
 The imported configuration seeds a random client secret for most service clients. You can regenerate these secrets or use them as generated. Retrieve and store each secret before you proceed to microservices deployment.
 
-<!-- [SME REVIEW] The three NBS-realm client import files (05-nbs-users-nnd-client.json, 06-nbs-users-srte-data-client.json, 09-nbs-users-case-notification-service.json) all carry an "nbs-users" prefix despite importing into the NBS realm, not the nbs-users realm. Confirm whether this is just a repo-wide file-naming convention unrelated to which realm consumes the file, or whether the filenames are wrong and should be renamed to avoid confusion. -->
-
 | Client | Realm | Import needed | Import file | Used by |
-|---|---|---|---|---|
-| `case-notification-service` | NBS | <span class="text-green">✓ Yes</span> | [09-nbs-users-case-notification-service.json][nedss-helm-keycloak-case-notification-client] | [Case notification service](../../microservices-deployment/case-notification/case-notification-service.html) |
+|----|----|----|----|----|
+| `case-notification-service` | NBS | ✓ Yes | [08-nbs-users-case-notification-service.json][keycloak-case-notification-client] | [Case notification service](../../microservices-deployment/case-notification/case-notification-service.html) |
 | `di-keycloak-client` | NBS | No | Not needed | [Data ingestion service](../../microservices-deployment/data-ingestion/data-ingestion.html) |
 | `nbs-modernization` | nbs-users | No | Not needed | OIDC login for [Modernization API](../../microservices-deployment/modernization-api.html) and [NBS Gateway](../../microservices-deployment/nbs-gateway.html) |
-| `nnd-keycloak-client` | NBS | <span class="text-green">✓ Yes</span> | [05-nbs-users-nnd-client.json][nedss-helm-keycloak-nnd-client] | [NND service](../../microservices-deployment/nnd-service/deploy-data-sync-service-api-cloud.html) |
-| `srte-data-keycloak-client` | NBS | <span class="text-green">✓ Yes</span> | [06-nbs-users-srte-data-client.json][nedss-helm-keycloak-srte-client] | SRTE data access |
+| `nnd-keycloak-client` | NBS | ✓ Yes | [05-nbs-users-nnd-client.json][keycloak-nnd-client] | [NND service](../../microservices-deployment/nnd-service/deploy-data-sync-service-api-cloud.html) |
+| `srte-data-keycloak-client` | NBS | ✓ Yes | [06-nbs-users-srte-data.json][keycloak-srte-client] | SRTE data access |
 
 ### Import the additional clients
 
@@ -264,9 +257,11 @@ Use the following steps to retrieve the secret for any service client in the [cl
 1. Select the eye icon to reveal the secret and copy it.
 1. Store the secret securely in your organization's secrets manager, such as AWS Secrets Manager or Azure Key Vault.
 
-The following screenshots show this procedure for `di-keycloak-client`. The **Credentials** tab looks the same for the other clients, with the client-specific secret shown in the same field.
+The following screenshots show this procedure for `di-keycloak-client`.
 
 ![Keycloak Clients list in the NBS realm with di-keycloak-client highlighted in the Client ID column](images/di-client-id.png)
+
+The **Credentials** tab looks the same for the other clients, with the client-specific secret shown in the same field.
 
 ![Keycloak Credentials tab for di-keycloak-client showing the masked client secret field with eye and copy icons and a Regenerate button](images/di-client-secret.png)
 
@@ -274,12 +269,10 @@ The following screenshots show this procedure for `di-keycloak-client`. The **Cr
 
 Continue to [Deploy NBS 7 microservices](../../microservices-deployment/deploy-nbs7-microservices.html).
 
-[nedss-helm-keycloak-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak>
-[nedss-helm-keycloak-sql]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/nbs_keycloak.sql>
-[nedss-helm-keycloak-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/values.yml>
-[nedss-helm-keycloak-di-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/01-NBS-realm-with-DI-client.json>
-[nedss-helm-keycloak-nnd-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/05-nbs-users-nnd-client.json>
-[nedss-helm-keycloak-srte-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/06-nbs-users-srte-data-client.json>
-[nedss-helm-keycloak-nbs-users-realm]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/02-nbs-users-realm.json>
-[nedss-helm-keycloak-extra]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak/extra/>
-[nedss-helm-keycloak-case-notification-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/09-nbs-users-case-notification-service.json>
+[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
+[keycloak-sql-script]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/nbs_keycloak.sql>
+[keycloak-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/values.yml>
+[keycloak-chart-readme]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak>
+[keycloak-case-notification-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/08-nbs-users-case-notification-service.json>
+[keycloak-nnd-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/05-nbs-users-nnd-client.json>
+[keycloak-srte-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/06-nbs-users-srte-data.json>

@@ -1,7 +1,7 @@
 ---
 title: Azure quick deploy
 layout: page
-parent: Quick deployment
+parent: NBS 7 quick deployment
 nav_order: 2
 description: Streamlined path for experienced administrators to deploy NBS 7 infrastructure and microservices in a Microsoft Azure environment.
 ---

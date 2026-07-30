@@ -4,6 +4,7 @@ layout: page
 parent: NBS 7 full deployment
 nav_order: 2
 has_children: true
+has_toc: false
 description: Provision cloud infrastructure for NBS 7 on AWS or Azure before installing Kubernetes services.
 redirect_from:
   - /docs/3_base_application/0_base_application.html

@@ -21,25 +21,23 @@ The National Electronic Disease Surveillance System (NEDSS) Base System (NBS) is
 
 The NBS 7 System Administration guide helps you prepare for NBS 7, deploy the platform, validate that it is working correctly, and maintain it over time. It brings together operational guidance for system administration tasks across the NBS 7 lifecycle.
 
-The content is centered on system administration. It covers readiness and planning work before deployment, phased deployment guidance for NBS 7 infrastructure and services, and maintenance topics for operating environments after go-live.
-
 ## In this guide
 
 This guide covers the full NBS 7 administration lifecycle in three main parts:
 
-- **[Before you deploy NBS 7](docs/before-you-deploy.html)** covers readiness checks, configuration decisions, compatibility guidance, and pre-deployment planning.
-- **[Deploy NBS 7](docs/deploy-nbs7.html)** covers infrastructure, microservices, optional add-ons, and deployment validation steps.
+- **[Before you deploy NBS 7](docs/before-you-deploy.html)** covers readiness checks and pre-deployment planning.
+- **[Deploy NBS 7](docs/deploy-nbs7.html)** covers infrastructure, microservices, and deployment validation steps.
 - **[Maintain NBS 7](docs/maintain-nbs7.html)** covers post-deployment administration and maintenance tasks.
 
 The guide also includes supplementary reference materials, such as the glossary and support resources.
 
-## Runtime environment support
-
-NBS 7 supports AWS and Microsoft Azure as runtime options. The platform uses a cloud-agnostic approach, and the deployment content includes guidance for both supported providers. NBS 7 runs on Kubernetes and relies on tools such as Terraform, and Helm to provision and manage infrastructure and services.
-
 ## Intended audience
 
-The primary audience is system administrators at state, tribal, local, and territorial health departments who install, operate, and maintain NBS 7. The content assumes familiarity with your cloud platform, Kubernetes, Terraform, Helm, and related administration tasks. You need administrator-level access to your runtime environment and a local system with required prerequisites installed.
+The primary audience is system administrators at state, tribal, local, and territorial health departments who install, operate, and maintain NBS 7. The content assumes familiarity with your cloud platform, Kubernetes, Terraform, Helm, and related administration tasks.
+
+## Runtime environment support
+
+NBS 7 supports AWS and Microsoft Azure as runtime options. The platform uses a cloud-agnostic approach, and the deployment content includes guidance for both supported providers. NBS 7 runs on Kubernetes and relies on tools such as Terraform, and Helm to provision and manage infrastructure and services. You need administrator-level access to your runtime environment and a local system with required prerequisites installed.
 
 ## Additional resources
 

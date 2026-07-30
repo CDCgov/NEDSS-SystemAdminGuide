@@ -128,6 +128,8 @@ bundle exec jekyll serve --livereload
 bundle exec jekyll build
 ```
 
+**Note:** If you get an alert that the gems or json can't be found, do another `bundle install` and then try the build command again.
+
 Preview at `http://localhost:4000`. The browser reloads automatically when you save a file. The built site is stored in `_site/`.
 
 ### Option 3 — Docker (no Ruby required)

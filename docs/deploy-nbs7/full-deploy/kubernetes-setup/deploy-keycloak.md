@@ -53,7 +53,7 @@ Create the Keycloak database and database user before you deploy the Helm chart.
    | Username | `admin` |
    | Password | Your database admin password |
 
-1. Run the following script (also available as [nbs_keycloak.sql][keycloak-sql-script] in the NEDSS-Helm repository) to create the Keycloak database and database user. Replace `'EXAMPLE_KCDB_PASS8675309'` with a complex password that meets your organization's standards. Store this password securely. You will need it in `values.yml` in [Configure the Helm chart](#configure-the-helm-chart).
+1. Run the following script to create the Keycloak database and database user. Replace `'EXAMPLE_KCDB_PASS8675309'` with a complex password that meets your organization's standards. Store this password securely. You will need it in `values.yaml` in [Configure the Helm chart](#configure-the-helm-chart).
 
    ```sql
    use master
@@ -78,19 +78,18 @@ The following screenshot shows the keycloak database created under **Databases**
 
 ## Configure the Helm chart
 
-In [values.yml][keycloak-values], update the following parameters:
+In [values.yaml][keycloak-values], update the following parameters:
 
 <!-- markdownlint-disable MD055 MD056 -->
 
-| Parameter | Template value | Description |
+| Template value | Parameter | Description |
 |----|----|----|
-| `adminUser` | `admin` | Keycloak admin account for the web UI. Keep the template value or change it to match your organization's naming conventions. |
-| `adminPassword` | `EXAMPLE_KC_PASS8675309` | Password for the Keycloak admin user. Use a complex password that meets your organization's standards. |
-| `KC_DB` | `mssql` | Database type. Keep the template value. |
-| `KC_DB_URL` | `jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;` | Replace `EXAMPLE_DB_ENDPOINT` with your database endpoint. |
-| `KC_DB_USERNAME` | `NBS_keycloak` | Keycloak database account. Keep the template value or change it to match your organization's naming conventions. |
-| `KC_DB_PASSWORD` | `EXAMPLE_KCDB_PASS8675309` | Must match the password you set in [Create the Keycloak database](#create-the-keycloak-database). |
-| `efsFileSystemId` | `EXAMPLE_EFS_ID` | **In AWS deployments:** The Amazon EFS file system ID from the AWS console or CLI. Provides persistent storage for themes. **In Azure deployments:** Azure Files requires different configuration. <!-- [SME REVIEW] The previous link here pointed to the deleted Deploy on Azure page, and Azure Files configuration for Keycloak themes is not yet documented anywhere in the guide. Confirm with Josh where this configuration lives and restore a link. --> |
+| `<<EXAMPLE_KEYCLOAK_ADMIN_PASSWORD>>` | `deployment.keycloak.env.keycloakAdminPassword` | Password for the Keycloak admin user. Use a complex password that meets your organization's standards. The admin username, `keycloakAdmin`, defaults to `admin`. |
+| `<<EXAMPLE_KC_DB_USER_PASSWORD>>` | `deployment.keycloak.env.kcDbPassword` | Password for the Keycloak database account. Must match the password you set in [Create the Keycloak database](#create-the-keycloak-database). |
+| `jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;` | `deployment.keycloak.env.kcDbUrl` | Connection string for the Keycloak database. Replace `EXAMPLE_DB_ENDPOINT` with your database endpoint. |
+| `EXAMPLE_EFS_ID` | `efsFileSystemId` | **AWS only.** The Amazon EFS file system ID from the AWS console or CLI. Provides persistent storage for Keycloak themes. |
+| `EXAMPLE_STORAGE_ACCOUNT_NAME` | `azure.files.storageAccountName` | **Azure only.** The name of the Azure storage account that provides persistent storage for Keycloak themes. |
+| `EXAMPLE_RESOURCE_GROUP_NAME` | `azure.files.resourceGroupName` | **Azure only.** The resource group that contains the Azure storage account. |
 {: .three-column-values-table }
 
 ## Deploy Keycloak
@@ -100,7 +99,7 @@ Use the following steps to install the Keycloak Helm chart and verify the pod is
 1. From the `charts` directory, install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available. See the [README in `charts/keycloak`][keycloak-chart-readme] for details.
 
    ```bash
-   helm install keycloak --namespace default -f keycloak/values.yml keycloak
+   helm install keycloak --namespace default -f keycloak/values.yaml keycloak
    ```
 
    After installation completes, the Keycloak database populates with its application tables, as shown in the following screenshot.
@@ -271,7 +270,7 @@ Continue to [Deploy NBS 7 microservices](../../microservices-deployment/deploy-n
 
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [keycloak-sql-script]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/nbs_keycloak.sql>
-[keycloak-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/values.yml>
+[keycloak-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/values.yaml>
 [keycloak-chart-readme]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak>
 [keycloak-case-notification-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/08-nbs-users-case-notification-service.json>
 [keycloak-nnd-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/05-nbs-users-nnd-client.json>

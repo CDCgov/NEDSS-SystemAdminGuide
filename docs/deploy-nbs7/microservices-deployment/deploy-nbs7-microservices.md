@@ -62,6 +62,7 @@ The following table lists common Helm values used across NBS 7 microservices. Ha
 | `EXAMPLE_SRTE_CLIENT_SECRET` | `keycloak.srte.clientSecret` | The client secret for SRTE data access. After you import the client, retrieve the secret from the **Credentials** tab. See [Import service clients and retrieve secrets](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets). |
 | `EXAMPLE_SFTP_HOST` `EXAMPLE_SFTP_USER` `EXAMPLE_SFTP_PASS` `EXAMPLE_SFTP_FILE_EXTNS` `EXAMPLE_SFTP_FILE_PATHS` | `sftp.*` | Connection details for the external SFTP server used by the data ingestion service, including host, username, password, file extensions, and file paths. The SFTP server is managed by your jurisdiction and is not provisioned as part of NBS infrastructure. These values are required only if you configure SFTP polling for manual ELR file drop-off. |
 | `EXAMPLE_DB_PORT` | `jdbc.connection_url` (port) | The port of your NBS database server, set as a separate value within the JDBC connection string. The default for SQL Server is `1433`. |
+{: .three-column-values-table }
 
 After you gather these values, continue to the deployment pages. The table of contents on this page lists the deployment pages in order, starting with the first service to deploy. Complete each page in sequence.
 

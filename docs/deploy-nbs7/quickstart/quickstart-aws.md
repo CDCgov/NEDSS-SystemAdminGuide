@@ -229,7 +229,7 @@ Create A records in Amazon Route 53 that point to the address of the Traefik loa
 Keycloak is the authentication service that allows users to sign in to the NBS 7 web UI.
 
 1. Create the Keycloak database and database user. Run the [nbs_keycloak.sql][keycloak-sql-script] script from the NEDSS-Helm repository on your NBS 6 database. Replace `EXAMPLE_KCDB_PASS8675309` with a complex password and store it securely. You need it in the Helm values file.
-1. In `keycloak/values.yaml`, set the admin credentials, the database connection values, and the `KC_DB_PASSWORD` to match the password you set in the script. <!-- [SME REVIEW] The full-deploy Keycloak page (docs/deploy-nbs7/full-deploy/kubernetes-setup/deploy-keycloak.md) references this file as values.yml, but the NEDSS-Helm keycloak chart ships values.yaml. This page uses the actual chart filename. Confirm and correct the full-deploy page to values.yaml. -->
+1. In `keycloak/values.yaml`, set the admin credentials, the database connection values, and the `KC_DB_PASSWORD` to match the password you set in the script.
 1. Install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available:
 
    ```bash

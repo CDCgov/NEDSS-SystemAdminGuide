@@ -25,8 +25,7 @@ Complete the following before you begin this page:
 
 Complete the following steps to deploy the ['elasticsearch' Helm chart][nedss-helm-elasticsearch-chart] from the `charts/elasticsearch/` directory of your cloned NEDSS-Helm repository:
 
-1. <!-- [SME REVIEW] The Azure azure.files.storageAccountName and azure.files.resourceGroupName values aren't in the Helm values reference table yet. We need to add them there. -->
-   In the `elasticsearch/values.yaml` file, search for `EXAMPLE` and fill in your environment-specific values for AWS or Azure as appropriate. The [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
+1. In the `elasticsearch/values.yaml` file, search for `EXAMPLE` and fill in your environment-specific values for AWS or Azure as appropriate. The [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
 1. Install Elasticsearch:
 
    ```bash

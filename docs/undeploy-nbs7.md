@@ -29,21 +29,24 @@ Remove the DNS records for this environment from your DNS provider:
 
 - `app.<site_name>.<domain>.com`
 - `data.<site_name>.<domain>.com`
+- `nifi.<site_name>.<domain>.com` (if you created a NiFi record during deployment)
 
 ## Remove Helm ingress resources
 
-List the current Helm releases in the `ingress-nginx` namespace and verify the release name before uninstalling:
+List the current Helm releases in the `traefik` namespace and verify the release name before uninstalling:
 
 ```bash
-helm list --namespace ingress-nginx
-helm uninstall --namespace ingress-nginx ingress-nginx
+helm list --namespace traefik
+helm uninstall --namespace traefik traefik
 ```
 
-## Empty the OTEL collector S3 bucket
+## Empty the OTEL collector storage bucket (AWS only)
 
-<!-- [SME REVIEW] Confirm with Josh whether Azure deployments run splunk-otel-collector or use Azure Monitor natively; the Azure observability Terraform module provisions Azure Monitor resources only. -->
+<!-- [SME REVIEW] Does Azure use Azure Monitor natively (no OTEL collector bucket to empty), making this step AWS-only as documented here? The Azure observability Terraform module provisions Azure Monitor resources only. -->
 
-Empty the S3 bucket used by the OpenTelemetry (OTEL) collector (`splunk-otel-collector`) for log storage before running `terraform destroy`. Terraform cannot delete a non-empty S3 bucket and the destroy will fail if this step is skipped. Complete this step manually in the AWS Console or using the AWS CLI.
+On AWS, empty the S3 bucket that the OpenTelemetry (OTEL) collector uses for log storage before you run `terraform destroy`. Terraform cannot delete a non-empty S3 bucket, so the destroy fails if you skip this step. Complete this step manually in the AWS console or with the AWS CLI.
+
+On Azure, observability uses Azure Monitor, which Terraform removes as part of `terraform destroy`. No manual storage cleanup is required.
 
 ## Destroy Terraform-managed infrastructure
 

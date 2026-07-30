@@ -254,38 +254,62 @@ cert-manager is a core service that Terraform deploys when you provision your cl
    <!-- RELEASE CHECKLIST: UI screenshot; reverify each release. -->
    ![Terminal output of the kubectl get clusterissuer command showing letsencrypt-production with a READY status of True](images/2_lets-encrypt.png)
 
-## Deploy Cluster Autoscaler (AWS only)
+<!-- July 30, 2026 [JS-Skylight] COMMENTING OUT PER STLT-542. AUTOSCALER NOT READY FOR 7.13. //////
 
-The Cluster Autoscaler is a Helm chart that horizontally scales cluster nodes as needed.
+## Deploy the Cluster Autoscaler (AWS only)
 
-> AKS clusters usually include a built-in cluster autoscaler, so this section applies to AWS only.
+The Cluster Autoscaler is a Helm chart that automatically scales the number of EKS cluster nodes as demand changes.
+
+> This section applies to AWS only. On Azure, the Terraform infrastructure deployment in [Provision cloud infrastructure](../provision-cloud-infrastructure.html) sets `auto_scaling_enabled` to `true` by default, which enables node pool autoscaling for the AKS cluster.
 {: .note }
 
-1. Update the following values in `charts/cluster-autoscaler/values.yaml` with values from the AWS console:
+> This section requires that you set `create_cluster_autoscaler_irsa` to `true` in your `2-nbs7` Terraform variables during [Provision cloud infrastructure](../provision-cloud-infrastructure.html). The default value is `false`.
+{: .important }
+
+1. If your EKS cluster has [public endpoint access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster#endpoint_public_access-1) disabled, create a VPC interface endpoint for `com.amazonaws.<YOUR_REGION>.eks` so that the Cluster Autoscaler can call the EKS `DescribeNodegroup` API. For details, see [Access Amazon EKS using AWS PrivateLink](https://docs.aws.amazon.com/eks/latest/userguide/vpc-interface-endpoints.html).
+1. In a terminal, change into the `charts` directory as described in [Get the NEDSS-Helm charts](#get-the-nedss-helm-charts).
+1. Update the following values in `cluster-autoscaler/values.yaml` with values from the AWS console. To retrieve the role ARN, run `terraform output -json main | jq '.nbs7.cluster_autoscaler_irsa_role_arn'` in your `2-nbs7` Terraform layer:
 
    ```yaml
-   clusterName: <EXAMPLE_EKS_CLUSTER_NAME>
-   autoscalingGroups:
-     - name: <EXAMPLE_AWS_AUTOSCALING_GROUP_NAME>
-       maxSize: 5
-       minSize: 3
-   awsRegion: <YOUR_AWS_REGION>
+   autoDiscovery:
+     clusterName: <YOUR_EKS_CLUSTER_NAME>
+   awsRegion: <YOUR_REGION>
+   rbac:
+     serviceAccount:
+       annotations:
+         eks.amazonaws.com/role-arn: <YOUR_CLUSTER_AUTOSCALER_ROLE_ARN>
    ```
 
-1. Install the chart:
+1. Add the Helm repository and install the chart:
 
    ```bash
    helm repo add autoscaler https://kubernetes.github.io/autoscaler
-   helm upgrade --install cluster-autoscaler autoscaler/cluster-autoscaler \
-     -f ./cluster-autoscaler/values.yaml \
-     --namespace kube-system
+   helm repo update
+   helm upgrade --install cluster-autoscaler autoscaler/cluster-autoscaler -n kube-system -f ./cluster-autoscaler/values.yaml
    ```
 
-1. Verify that the Cluster Autoscaler pod is running:
+1. Verify the pod is running:
 
    ```bash
-   kubectl --namespace=kube-system get pods | grep cluster-autoscaler
+   kubectl -n kube-system get pods -l "app.kubernetes.io/name=aws-cluster-autoscaler,app.kubernetes.io/instance=cluster-autoscaler"
    ```
+
+1. Verify that the `eks.amazonaws.com/role-arn` annotation is on the `ServiceAccount` object and that its value is the ARN you set for `<YOUR_CLUSTER_AUTOSCALER_ROLE_ARN>`:
+
+   ```bash
+   kubectl get serviceaccounts cluster-autoscaler-aws-cluster-autoscaler -n kube-system -o jsonpath='{.metadata.annotations}' | jq
+   ```
+
+   The output should resemble the following:
+
+   ```json
+   {
+     "eks.amazonaws.com/role-arn": "arn:aws:iam::[your_aws_account_id]:role/nbs7-[your_environment_name]-eks-cluster-autoscaler-[random_characters]",
+     "meta.helm.sh/release-name": "cluster-autoscaler",
+     "meta.helm.sh/release-namespace": "kube-system"
+   }
+   ```
+-->
 
 ## Next steps
 

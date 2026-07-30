@@ -3,11 +3,12 @@ title: Azure quick deploy
 layout: page
 parent: Quick deployment
 nav_order: 2
+description: Streamlined path for experienced administrators to deploy NBS 7 infrastructure and microservices in a Microsoft Azure environment.
 ---
 
 # Quick deployment of NBS {{ site.version_latest }} in a Microsoft Azure environment
 
-This page provides a streamlined path to deploy NBS 7 infrastructure and core microservices in a Microsoft Azure hosting environment. It is intended for experienced administrators familiar with AWS, Kubernetes, Helm, and Terraform.
+This page provides a streamlined path to deploy NBS 7 infrastructure and microservices in a Microsoft Azure hosting environment. It is a condensed form of the [NBS 7 full deployment](../full-deploy.html), intended for experienced administrators who are familiar with Azure, Kubernetes, Helm, and Terraform. For a detailed walkthrough with an explanation at each step, use the full deployment instead. Both paths create the same infrastructure and services.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -17,342 +18,302 @@ This page provides a streamlined path to deploy NBS 7 infrastructure and core mi
 
 ## Scope and limitations
 
-This guide is not intended for production deployment. For full production steps and guidance, see [Deploy NBS 7](../deploy-nbs7.html).
+Before you begin, verify that your NBS 6 version is supported for your target NBS 7 version. See the [Supported NBS versions](../../supported-versions.html) page.
+
+> This quick deployment condenses the full procedure and omits most of the validation steps. Use the [NBS 7 full deployment](../full-deploy.html) for production deployments and for first-time deployments.
 {: .important }
-
-Before starting this quick start, confirm that your NBS 6 version is supported for your target NBS 7 version. See the [Supported NBS versions](../supported-versions.html) page.
-
-This quick start installs and configures the following resources.
-
-### Terraform-managed resources
-
-- Modern VPC, subnets, and route tables
-- Amazon EKS cluster and nodes
-- Network Load Balancer (NLB)
-- Amazon MSK
-- Amazon Managed Service for Prometheus
-- Amazon Managed Grafana
-- Amazon EFS
-- AWS KMS
-- Amazon S3 bucket
-
-### Manual configuration
-
-- **Route53 updates**: create DNS entries in Route53 to point app and data URLs to the Network Load Balancer.
-
-### NBS 7 core services
-
-- **Elasticsearch**: Search indexing and query support.
-- **Modernization API**: Modern NBS capabilities, including patient and event search.
-- **NiFi**: Elasticsearch index population from the NBS database.
-- **NBS Gateway**: Routing between modern and legacy NBS.
-- **Data ingestion**: HL7 ingestion from labs and other sources.
-- **Keycloak**: Primary identity provider (IdP), token management, and SSO integration.
 
 ## Prerequisites
 
-### Install these tools
+Confirm the general [Prerequisites](../full-deploy/prerequisites.html) and the [Cloud prerequisites](../full-deploy/provision-cloud-infrastructure/cloud-prerequisites.html) before you begin. On your management workstation or in Azure Cloud Shell, install the following tools:
 
-- [AWS CLI](https://aws.amazon.com/cli/) (v2.15+)
-- [Terraform](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) (v1.5.5)
-- [Helm](https://helm.sh/docs/intro/install/) (v3.12+)
-- [kubectl](https://docs.aws.amazon.com/eks/latest/userguide/install-kubectl.html) (v1.27+)
-- [eksctl](https://eksctl.io/installation/) (optional but recommended)
+- [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) (the `az` command)
+- [kubelogin](https://github.com/Azure/kubelogin), which `kubectl` requires for Azure authentication
+- [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) (the `terraform` command)
+- [Helm CLI](https://helm.sh/docs/intro/install/) (the `helm` command)
+- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) (the Kubernetes CLI)
 
-### Environment requirements
+You also need an authenticated Azure session and network access to your existing NBS 6 SQL Server database. For version requirements and full details, see the [Cloud prerequisites](../full-deploy/provision-cloud-infrastructure/cloud-prerequisites.html) page.
 
-- AWS Account with NBS 6.0.16 access (or newer)
-- DNS routing infrastructure: domain information for modernized NBS application URLs (for example, `app.site_name.domain.com`)
-- IAM roles for Terraform and Kubernetes
-- Access to NBS 6 (SQL Server) databases to run scripts
-- S3 bucket for Terraform state
+## Provision cloud infrastructure
 
-## Set up AWS infrastructure (Terraform)
+Use Terraform to provision the virtual network, the Azure Kubernetes Service (AKS) cluster, and the supporting Azure services for NBS 7.
 
-![NBS 7 infrastructure diagram for quick-start deployment on AWS](../quick_install_nbs7_architecture.png)
+1. Authenticate to your Azure subscription and confirm the session:
 
-### Prepare the directory
+   ```text
+   az login
+   az account show
+   ```
 
-```bash
-mkdir -p ~/nbs-setup/terraform/aws/nbs7-mySTLT-test
-cd ~/nbs-setup/terraform/aws/nbs7-mySTLT-test
-```
+1. Go to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file, then unzip it.
+1. Create an environment directory and copy the sample layers into it:
 
-### Download Terraform configuration
+   ```bash
+   cd nbs-infrastructure-{{ site.version_latest_tag }}/terraform/azure
+   mkdir nbs7-mySTLT-test
+   cp -pr samples/* ./nbs7-mySTLT-test
+   cd nbs7-mySTLT-test
+   ```
 
-Clone the infrastructure repo:
+   The samples contain a numbered directory for each Terraform layer: `0-landing-zone`, `1-nbs7`, and `2-applications`. Apply the layers in that numeric order. The [README in the NEDSS-Infrastructure repository][nedss-infra-readme] explains the layered design.
 
-```bash
-git clone https://github.com/CDCgov/NEDSS-Infrastructure.git
-```
+1. In each layer directory, update the `terraform.tfvars` and `terraform.tf` files with your environment-specific values. Then apply each layer in numeric order:
 
-Copy standard template:
+   ```bash
+   terraform init
+   terraform plan -out=tfplan
+   terraform apply tfplan
+   ```
 
-```bash
-cp -pr terraform/aws/samples/NBS7_standard terraform/aws/nbs7-mySTLT-test
-```
+   > Review the full plan output and confirm that the changes match your intention before you apply. Use caution with `terraform apply -auto-approve`, because it applies changes without review.
+   {: .important }
 
-### Customize variables
+1. Configure `kubectl` to connect to the provisioned cluster:
 
-- Update the `terraform.tfvars` and `terraform.tf` with your environment-specific values by following the [NEDSS infrastructure sample configuration instructions][nedss-infra-aws-samples-readme].
+   ```bash
+   az aks get-credentials --resource-group <RESOURCE_GROUP_NAME> --name <MANAGED_CLUSTER_NAME>
+   ```
 
-> Review inbound rules on the security groups attached to your database instance. Ensure the CIDR you intend to use with your NBS 7 VPC (`modern-cidr`) is allowed to access the database.
-{: .note }
+1. Confirm the cluster is ready. Each core pod should have a `STATUS` of `Running`, and each node should have a `STATUS` of `Ready`:
 
-### Initialize and apply Terraform
+   ```bash
+   kubectl get pods --namespace=kube-system
+   kubectl get nodes
+   ```
 
-```bash
-terraform init
-terraform plan
-terraform apply
-```
+Save your `nbs7-mySTLT-test` directory. You need it for future maintenance of the infrastructure you provisioned.
 
-### Validate infrastructure
+## Enable Linkerd for the default namespace
 
-- Confirm VPC, Amazon EKS cluster, subnets, and node groups are created.
-- Verify Amazon EKS cluster authentication and running pods and nodes:
-
-```bash
-aws eks --region us-east-1 update-kubeconfig --name <clustername> e.g. cdc-nbs-sandbox
-kubectl get pods --namespace=cert-manager
-kubectl get nodes
-```
-
-## Deploy core Kubernetes services (Helm)
-
-### Install NGINX Ingress
-
-```bash
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install ingress-nginx ingress-nginx/ingress-nginx
-kubectl --namespace ingress-nginx get services -o wide -w ingress-nginx-controller
-kubectl get pods -n=ingress-nginx
-```
-
-### Create DNS entries in Route53
-
-- Point the modernized NBS application URL to the new Network Load Balancer in front of your Kubernetes cluster.
-
-```bash
-app.<site_name>.<domain>.com
-```
-
-- Point the data services URL to the new Network Load Balancer in front of your Kubernetes cluster.
-
-```bash
-data.<site_name>.<domain>.com
-```
-
-### Install Cert Manager (optional)
-
-```bash
-helm repo add jetstack https://charts.jetstack.io
-helm install cert-manager jetstack/cert-manager --namespace cert-manager --create-namespace --set installCRDs=true
-```
-
-### Install and verify Linkerd (optional)
+Linkerd provides mutual Transport Layer Security (mTLS) between the NBS 7 microservices, which deploy into the default Kubernetes namespace. Terraform deploys the Linkerd service during provisioning. Annotate the default namespace so that Linkerd injects a sidecar into each microservice pod:
 
 ```bash
 kubectl annotate namespace default "linkerd.io/inject=enabled"
+```
+
+Verify that the annotation is in place. The output should include `"linkerd.io/inject":"enabled"`:
+
+```bash
 kubectl get namespace default -o=jsonpath='{.metadata.annotations}'
 ```
 
-### Install Cluster Autoscaler (optional)
+## Deploy core services
 
-```bash
-helm repo add autoscaler https://kubernetes.github.io/autoscaler
-helm install cluster-autoscaler autoscaler/cluster-autoscaler -n kube-system
-```
+Download the Helm charts, then deploy the Traefik ingress controller and cert-manager.
 
-### Verify services are running
+1. Go to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the `nbs-helm-{{ site.version_latest_tag }}.zip` file, then unzip it.
+1. Change into the `charts` directory from the unzipped file. Run all `helm` commands from this directory:
 
-```bash
-kubectl get pods -A
-```
+   ```bash
+   cd <HELM_DIR>/nbs-helm-{{ site.version_latest_tag }}/charts
+   ```
 
-## Install Keycloak
+### Deploy the Traefik ingress controller
 
-Create the Keycloak database. Make sure to update the database password.
+The Traefik controller creates an internal load balancer in Azure and routes traffic to the NBS 7 services.
 
-```sql
-use master
-    IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'keycloak')
-    BEGIN
-        CREATE DATABASE keycloak
-    END
-GO
-    USE keycloak
-GO
+1. Add the Traefik Helm chart repository and update it:
 
-BEGIN
-    CREATE LOGIN NBS_keycloak WITH PASSWORD = 'EXAMPLE_KCDB_PASS8675309';
-    CREATE USER NBS_keycloak FOR LOGIN NBS_keycloak;
-    EXEC sp_addrolemember N'db_owner', N'NBS_keycloak'
-END
-```
+   ```bash
+   helm repo add traefik https://traefik.github.io/charts
+   helm repo update
+   ```
 
-### Install Keycloak container
+1. Deploy the Traefik controller with the Azure values file:
 
-Edit the following parameters in `<helm extract directory>/charts/keycloak/values.yml`:
+   ```bash
+   helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml
+   ```
 
-- `kcDbPassword`
-- `kcDbUrl`
-- `keycloakAdminPassword`
-- `efsFileSystemId`
+   > If your AKS cluster has Windows node pools, for example for NBS 6, append the following option so that Traefik is scheduled on a Linux node: `--set nodeSelector."kubernetes\.io/os"=linux`
+   {: .note }
 
-```bash
-helm install keycloak --namespace default --create-namespace -f keycloak/values.yaml
-```
+1. Confirm that the Traefik pod has a `STATUS` of `Running` and that the two numbers in the `READY` column match:
 
-### Port forward to access Keycloak admin interface
+   ```bash
+   kubectl get pods -n traefik
+   ```
 
-```bash
-kubectl --namespace default port-forward "$POD_NAME" 8080;
-http://127.0.0.1:8080/auth
-```
+### Deploy NBS ingress resources
 
-### Configure realms, users, and clients
+The `nbs-ingress` chart manages ingress routing between the NBS 7 applications.
 
-- Log in as the Keycloak admin user.
-- Upload `<helm extract directory>/charts/keycloak/extra/01-NBS-realm-with-DI-client.json`.
-- Upload `<helm extract directory>/charts/keycloak/extra/05-nbs-users-nnd-client.json`.
-- Upload `<helm extract directory>/charts/keycloak/extra/02-nbs-users-realm.json`.
-- Run partial import from the `nbs-users` realm for `<helm extract directory>/charts/keycloak/extra/03-nbs-users-base-users.json`.
-- Run partial import from the `nbs-users` realm for `<helm extract directory>/charts/keycloak/extra/04-nbs-users-development-clients.json`.
+1. In `nbs-ingress/values.yaml`, search for `EXAMPLE` and fill in your environment-specific values. The [Helm values reference for NBS 7 microservices][helm-values-table] lists the values to use.
+1. Deploy the ingress resources:
 
-## Deploy NBS 7 microservices (Helm)
+   ```bash
+   helm install nbs-ingress ./nbs-ingress -n default -f ./nbs-ingress/values.yaml
+   ```
 
-Deploy the Helm charts in the following order.
+### Configure cert-manager (optional)
 
-1. `elasticsearch`
-2. `modernization-api`
-3. `nifi`
-4. `nbs-gateway`
-5. `dataingestion-service`
+Terraform deploys cert-manager during provisioning. It creates and renews Transport Layer Security (TLS) certificates for the NiFi and modernization-api services. Skip this section if you use manual certificates stored in Kubernetes secrets.
 
-> Run the following commands from the `<helm extract directory>/charts` directory.
+1. In the NEDSS-Helm repository, open [`k8-manifests/cluster-issuer-prod.yaml`][nedss-helm-cluster-issuer-manifest] and update the email address to a valid operations address.
+1. Apply the manifest:
+
+   ```bash
+   cd <HELM_DIR>/k8-manifests
+   kubectl apply -f cluster-issuer-prod.yaml
+   ```
+
+1. Verify that the cluster issuer is ready. The `letsencrypt-production` issuer should have a `READY` status of `True`:
+
+   ```bash
+   kubectl get clusterissuer
+   ```
+
+> AKS clusters usually include a built-in cluster autoscaler, so no separate Cluster Autoscaler deployment is required for Azure.
 {: .note }
 
-### Deploy Elasticsearch
+## Create DNS records
 
-Update the required parameters in `values.yaml` by following the [Elasticsearch EFS chart values table][nedss-helm-elasticsearch-readme]
+Create A records in Azure DNS that point to the IP address of your Application Gateway.
 
-```bash
-helm install elasticsearch -f ./elasticsearch/values.yaml elasticsearch
-```
+1. Retrieve the load balancer address from the `EXTERNAL-IP` column:
 
-### Deploy Modernization API
+   ```bash
+   kubectl get svc -n traefik
+   ```
 
-Update the required parameters in `values.yaml` by following the [Modernization API chart values table][nedss-helm-modernization-api-readme]
+1. In the Azure Portal, go to **DNS Zones** and select your DNS zone. Create an A record for each hostname in the following table so that it points to the IP address of your Application Gateway. Replace `<DOMAIN_NAME.TLD>` with your site and domain names from the [Helm values reference for NBS 7 microservices][helm-values-table]:
 
-```bash
-helm install modernization-api -f ./modernization-api/values.yaml modernization-api
-```
+   | Subdomain description | Hostname | Example |
+   |-----------------------|----------|---------|
+   | NBS application | `app.<DOMAIN_NAME.TLD>` | `app.nbsdemo.com` |
+   | Data services | `data.<DOMAIN_NAME.TLD>` | `data.nbsdemo.com` |
+   | NiFi (use with caution) | `nifi.<DOMAIN_NAME.TLD>` | `nifi.nbsdemo.com` |
 
-### Deploy NiFi
+   > NiFi has known security vulnerabilities. Add a NiFi DNS record only if you need to administer NiFi directly. Otherwise, omit it.
+   {: .important }
 
-Update the required parameters in `values.yaml` by following the [NiFi EFS chart values table][nedss-helm-nifi-readme]
+1. Verify that each record resolves to the IP address of your Application Gateway without an error such as `server can't find`. Records typically propagate within 60 seconds:
 
-```bash
-helm install nifi -f ./nifi/values.yaml nifi
-```
+   ```bash
+   nslookup app.<DOMAIN_NAME.TLD>
+   ```
 
-### Deploy NBS Gateway
+## Install and configure Keycloak
 
-Update the required parameters in `values.yaml` by following the [NBS Gateway chart values table][nedss-helm-nbs-gateway-readme]
+Keycloak is the authentication service that allows users to sign in to the NBS 7 web UI.
 
-```bash
-helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gateway
-```
+1. Create the Keycloak database and database user. Run the [nbs_keycloak.sql][keycloak-sql-script] script from the NEDSS-Helm repository on your NBS 6 database. Replace `EXAMPLE_KCDB_PASS8675309` with a complex password and store it securely. You need it in the Helm values file.
+1. In `keycloak/values.yaml`, set the admin credentials, the database connection values, and the `KC_DB_PASSWORD` to match the password you set in the script. <!-- [SME REVIEW] The full-deploy Keycloak page (docs/deploy-nbs7/full-deploy/kubernetes-setup/deploy-keycloak.md) references this file as values.yml, but the NEDSS-Helm keycloak chart ships values.yaml. This page uses the actual chart filename. Confirm and correct the full-deploy page to values.yaml. -->
+1. Install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available:
 
-## Deploy the data ingestion service
+   ```bash
+   helm install keycloak ./keycloak -n default -f keycloak/values.yaml
+   ```
 
-Create the Data Ingest database and set user permissions before deploying data ingestion:
+1. Verify that the Keycloak pod is running:
 
-```sql
-IF NOT EXISTS(SELECT * FROM sys.databases WHERE name = 'NBS_DataIngest')
-BEGIN
-    CREATE DATABASE NBS_DataIngest
-END
-GO
-USE NBS_DataIngest
-GO
-```
+   ```bash
+   kubectl get pods -n default
+   ```
 
-```sql
-use [NBS_ODSE];
-GO
-USE [NBS_DataIngest]
-GO
-CREATE USER [nbs_ods] FOR LOGIN [nbs_ods]
-GO
-USE [NBS_DataIngest]
-GO
-ALTER USER [nbs_ods] WITH DEFAULT_SCHEMA=[dbo]
-GO
-USE [NBS_DataIngest]
-GO
-ALTER ROLE [db_owner] ADD MEMBER [nbs_ods]
-GO
-```
+1. Set up port forwarding, then go to `http://127.0.0.1:8080/auth` in a browser and select **Administration Console**. Sign in with the admin credentials from the values file:
 
-Update the required parameters in `values.yaml` by following the [data ingestion service chart values table][nedss-helm-dataingestion-service-readme]
+   ```bash
+   kubectl port-forward deploy/keycloak-deployment 8080
+   ```
 
-```bash
-helm install dataingestion-service -f ./dataingestion-service/values.yaml dataingestion-service
-```
+   > Port forwarding is not supported by Azure Cloud Shell by default. Run this command from a system that has both network access to your cluster endpoint and a browser.
+   {: .note }
 
-### Verify services
+1. Create the two NBS 7 realms. For each file, select **Create realm**, upload the file, and select **Create**:
 
-- Confirm all pods are running before moving on.
+   | Realm | Import file |
+   |-------|-------------|
+   | NBS | `01-NBS-realm-with-DI-client.json` |
+   | nbs-users | `02-nbs-users-realm.json` |
 
-```bash
-kubectl get pods -A
-```
+   All import files are in the `keycloak/extra/` directory of the NEDSS-Helm charts.
 
-## Validate installation
+   > A `02-nbs-users-realm_with_mfa_option.json` file is available as an alternative to `02-nbs-users-realm.json` if you want to enable multifactor authentication (MFA) for the nbs-users realm.
+   {: .note }
 
-### Manual tests
+1. Import the base users and development clients into the **nbs-users** realm. Select the realm, go to **Realm settings** > **Action** > **Partial Import**, and import each file:
+   - `03-nbs-users-base-users.json` (select the three users)
+   - `04-nbs-users-development-clients.json` (select the one client)
 
-- Log in to the NBS UI (for example, [https://app.example.com/nbs/login](https://app.example.com/nbs/login)).
-- Confirm basic patient search functionality.
+1. Import the additional service clients and retrieve their secrets. The NBS realm seeds `di-keycloak-client` with the realm import, so it needs no separate import. For each client in the following table that requires an import, select the listed realm, go to **Realm settings** > **Action** > **Partial Import**, and import the file. Then go to **Clients**, select the client, open the **Credentials** tab, and store the secret in your organization's secrets manager, such as Azure Key Vault:
 
-### Automated tests
+   | Client | Realm | Import needed | Import file |
+   |--------|-------|---------------|-------------|
+   | `di-keycloak-client` | NBS | No | Seeded with the NBS realm |
+   | `nnd-keycloak-client` | NBS | Yes | `05-nbs-users-nnd-client.json` |
+   | `srte-data-keycloak-client` | NBS | Yes | `06-nbs-users-srte-data.json` |
+   | `case-notification-service` | NBS | Yes | `08-nbs-users-case-notification-service.json` |
 
-- Use `nbs-test-api.sh` and `nbs-test-webui.sh` for basic API and UI smoke tests.
+1. Verify Traefik and Keycloak together. In a browser, go to `https://app.<DOMAIN_NAME.TLD>`, confirm that the NBS 7 Welcome page is shown, select **Login**, and confirm that the Keycloak login page is shown.
 
-## Cleanup
+## Deploy NBS 7 microservices
 
-Follow these steps to clean up the environment.
+Run each command from the `charts` directory, in the order shown. Before each command, search the service's values file for `EXAMPLE` and fill in your environment-specific values from the [Helm values reference for NBS 7 microservices][helm-values-table]. Verify that each service starts before you deploy the next one.
 
-> These cleanup steps remove ingress resources and can immediately interrupt access to NBS 7 endpoints in this environment.
-{: .warning }
+1. Elasticsearch:
 
-1. Remove DNS entries:
-    - `app.<site_name>.<domain>.com`
-    - `data.<site_name>.<domain>.com`
+   ```bash
+   helm install elasticsearch -f ./elasticsearch/values.yaml elasticsearch
+   ```
 
-> Running `terraform destroy` permanently deletes infrastructure managed by this Terraform workspace.
-{: .warning }
+1. Modernization API:
 
-```bash
-# Remove nlb and ingress routing
-helm list --namespace ingress-nginx
-helm uninstall --namespace ingress-nginx ingress-nginx
+   ```bash
+   helm install "modernization-api" ./modernization-api -f ./modernization-api/values.yaml
+   ```
 
-# Empty the OTEL collector (splunk-otel-collector) s3 bucket manually
+1. NiFi:
 
-terraform destroy
-```
+   ```bash
+   helm install "nifi" ./nifi -f ./nifi/values.yaml
+   ```
+
+1. NBS Gateway:
+
+   ```bash
+   helm install "nbs-gateway" ./nbs-gateway -f ./nbs-gateway/values.yaml
+   ```
+
+1. Data processing service:
+
+   ```bash
+   helm install "data-processing-service" ./data-processing-service -f ./data-processing-service/values.yaml
+   ```
+
+1. Case notification service. Deploy the Debezium connector first with the Azure values file, then the service:
+
+   ```bash
+   helm install "debezium-case-notification-service-connect" ./debezium-case-notifications -f ./debezium-case-notifications/values-azure.yaml
+   helm install "case-notification-service" ./case-notification-service -f ./case-notification-service/values.yaml
+   ```
+
+1. Data Ingestion API (DI API):
+
+   ```bash
+   helm install dataingestion-service -f ./dataingestion-service/values.yaml dataingestion-service
+   ```
+
+1. Real-time reporting (RTR). Complete the database setup and change data capture (CDC) bootstrap steps on the [Deploy real-time reporting](../microservices-deployment/real-time-reporting/real-time-reporting.html) page first, then deploy the RTR services in order:
+
+   ```bash
+   helm install -f ./debezium/values-azure.yaml debezium-connect ./debezium/
+   helm install -f ./kafka-connect-sink/values-azure.yaml cp-kafka-connect-server ./kafka-connect-sink/
+   helm install -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
+   ```
+
+## Clean up
+
+To decommission this environment, follow [Undeploy NBS 7](../../undeploy-nbs7.html). That page covers removing DNS entries, removing the Helm ingress resources, emptying the OpenTelemetry (OTEL) collector storage, and destroying the Terraform-managed infrastructure.
 
 ## Support
 
-- For support, contact <mailto:NBSSupport@cdc.gov>.
-- For ongoing updates, check the GitHub repo for new releases.
+For support, email [nbs@cdc.gov](mailto:nbs@cdc.gov).
 
-[nedss-infra-aws-samples-readme]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/samples/README.md>
-[nedss-helm-elasticsearch-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/elasticsearch/README.md>
-[nedss-helm-modernization-api-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/modernization-api/README.md>
-[nedss-helm-nifi-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/nifi/README.md>
-[nedss-helm-nbs-gateway-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/nbs-gateway/README.md>
-[nedss-helm-dataingestion-service-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/dataingestion-service/README.md>
+[nedss-infra-release-page]: <https://github.com/CDCgov/NEDSS-Infrastructure/releases/tag/{{ site.version_latest_tag }}>
+[nedss-infra-readme]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/README.md>
+[nedss-helm-release-page]: <https://github.com/CDCgov/NEDSS-Helm/releases/tag/{{ site.version_latest_tag }}>
+[nedss-helm-cluster-issuer-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/cluster-issuer-prod.yaml>
+[keycloak-sql-script]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/nbs_keycloak.sql>
+[helm-values-table]: <../microservices-deployment/deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices>

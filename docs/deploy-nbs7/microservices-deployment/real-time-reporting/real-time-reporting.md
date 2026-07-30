@@ -4,6 +4,7 @@ layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 10
 has_children: true
+has_toc: false
 description: Guides deployment of RTR components that stream ODSE and SRTE changes to RDB through Kafka.
 redirect_from:
   - /docs/7_feature_preview/(DEPRECATED)4_observation_reporting_service/
@@ -80,15 +81,14 @@ Create a database service user that the RTR services use to read source data and
 
 ## Enable Change Data Capture
 
-[Change Data Capture](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver17) (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Enabling CDC requires `sysadmin` permissions, so run the bootstrap scripts with a `sysadmin` account.
-
-> In the following scripts, the terms `cdc` and `CDC` appear as part of SQL Server column and parameter names and refer to Change Data Capture, not the Centers for Disease Control and Prevention.
+> In this section, the terms `cdc` and `CDC` appear as part of SQL Server column and parameter names and refer to Change Data Capture, not the Centers for Disease Control and Prevention.
 {: .note }
 
-To enable CDC, apply the bootstrap scripts in order:
+[Change Data Capture](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver17) (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database.
 
-1. [Bootstrap script 101][nedss-datareporting-bootstrap-101] to enable CDC on `NBS_ODSE`
-1. [Bootstrap script 102][nedss-datareporting-bootstrap-102] to enable CDC on `NBS_SRTE`
+To enable CDC on `NBS_ODSE` and `NBS_SRTE`:
+
+1. Using a `sysadmin` account, apply [Bootstrap script 101][nedss-datareporting-bootstrap-101]. CDC requires `sysadmin` permissions.
 
 ## Deploy RTR services
 
@@ -98,5 +98,4 @@ Now that you have completed database setup and onboarding, deploy the RTR servic
 1. [Kafka connector](kafka-connector.html)
 1. [Java service](rtr-java-services.html)
 
-[nedss-datareporting-bootstrap-101]: <https://github.com/CDCgov/NEDSS-DataReporting/blob/{{ site.version_latest_tag }}/bootstrap/101-enable_cdc_on_odse_database-001.sql>
-[nedss-datareporting-bootstrap-102]: <https://github.com/CDCgov/NEDSS-DataReporting/blob/{{ site.version_latest_tag }}/bootstrap/102-enable_cdc_on_srte_database-001.sql>
+[nedss-datareporting-bootstrap-101]: <https://github.com/CDCgov/NEDSS-DataReporting/blob/{{ site.version_latest_tag }}/bootstrap/101-enable_cdc_on_odse_srte_databases-001.sql>

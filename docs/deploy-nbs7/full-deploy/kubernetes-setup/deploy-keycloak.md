@@ -230,6 +230,7 @@ This validation depends on the DNS records from [Deploy core Kubernetes services
 
 The imported configuration seeds a random client secret for most service clients. You can regenerate these secrets or use them as generated. Retrieve and store each secret before you proceed to microservices deployment.
 
+<!-- markdownlint-disable MD055 MD056 -->
 | Client | Realm | Import needed | Import file | Used by |
 |----|----|----|----|----|
 | `case-notification-service` | NBS | ✓ Yes | [08-nbs-users-case-notification-service.json][keycloak-case-notification-client] | [Case notification service](../../microservices-deployment/case-notification/case-notification-service.html) |
@@ -269,7 +270,6 @@ The **Credentials** tab looks the same for the other clients, with the client-sp
 Continue to [Deploy NBS 7 microservices](../../microservices-deployment/deploy-nbs7-microservices.html).
 
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
-[keycloak-sql-script]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/nbs_keycloak.sql>
 [keycloak-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/values.yaml>
 [keycloak-chart-readme]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak>
 [keycloak-case-notification-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/08-nbs-users-case-notification-service.json>

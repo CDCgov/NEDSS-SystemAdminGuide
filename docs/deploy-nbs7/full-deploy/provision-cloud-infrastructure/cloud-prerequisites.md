@@ -49,17 +49,15 @@ Your existing NBS 6 environment provides the database server that NBS 7 reuses. 
 
 ## Management workstation setup
 
-To configure, deploy, and maintain NBS 7, you need a local workstation or a cloud-hosted shell such as AWS CloudShell or Azure Cloud Shell. Install the following tools on that workstation. Each item links to download and installation instructions.
+To configure, deploy, and maintain NBS 7, you need a local workstation or a cloud-hosted shell such as AWS CloudShell or Azure Cloud Shell. Install the following tools on that workstation. The table lists the minimum supported version and the install instructions for each tool:
 
-For information about supported software versions for these tools, see [NBS 7 prerequisites](../prerequisites.html#required-tools-and-software).
-{: .important }
-
-- **Cloud provider CLI:**
-  - **AWS:** [AWS CLI](https://aws.amazon.com/cli/) (the `aws` command). To set up credentials, see the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html).
-  - **Azure:** [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli) (the `az` command). Also install [kubelogin](https://github.com/Azure/kubelogin), which `kubectl` requires for Azure authentication.
-- [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) (the `terraform` command).
-- [Helm CLI](https://helm.sh/docs/intro/install/) (the `helm` command).
-- [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) (the Kubernetes CLI).
+| Tool | Minimum version | Install |
+|----|----|----|
+| Cloud provider CLI | Latest AWS CLI or Azure CLI | **AWS:** [AWS CLI](https://aws.amazon.com/cli/); set up credentials with the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html). **Azure:** [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli), plus [kubelogin](https://github.com/Azure/kubelogin), which `kubectl` requires for Azure authentication. |
+| Terraform CLI | 1.15.6 | [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) |
+| Helm CLI | 3.0 | [Helm CLI](https://helm.sh/docs/intro/install/) |
+| kubectl | 1.25  | [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) |
+| Docker | Latest | [Docker](https://docs.docker.com/get-started/get-docker/) |
 
 ## Network access requirements
 

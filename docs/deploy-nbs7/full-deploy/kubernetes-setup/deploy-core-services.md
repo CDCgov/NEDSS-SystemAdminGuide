@@ -263,12 +263,12 @@ The Cluster Autoscaler is a Helm chart that automatically scales the number of E
 > This section applies to AWS only. On Azure, the Terraform infrastructure deployment in [Provision cloud infrastructure](../provision-cloud-infrastructure.html) sets `auto_scaling_enabled` to `true` by default, which enables node pool autoscaling for the AKS cluster.
 {: .note }
 
-> This section requires that you set `create_cluster_autoscaler_irsa` to `true` in your `2-nbs7` Terraform variables during [Provision cloud infrastructure](../provision-cloud-infrastructure.html). The default value is `false`.
+> This section requires that you set `create_cluster_autoscaler_irsa` to `true` in your `1-nbs7` Terraform variables during [Provision cloud infrastructure](../provision-cloud-infrastructure.html). The default value is `false`.
 {: .important }
 
 1. If your EKS cluster has [public endpoint access](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/eks_cluster#endpoint_public_access-1) disabled, create a VPC interface endpoint for `com.amazonaws.<YOUR_REGION>.eks` so that the Cluster Autoscaler can call the EKS `DescribeNodegroup` API. For details, see [Access Amazon EKS using AWS PrivateLink](https://docs.aws.amazon.com/eks/latest/userguide/vpc-interface-endpoints.html).
 1. In a terminal, change into the `charts` directory as described in [Get the NEDSS-Helm charts](#get-the-nedss-helm-charts).
-1. Update the following values in `cluster-autoscaler/values.yaml` with values from the AWS console. To retrieve the role ARN, run `terraform output -json main | jq '.nbs7.cluster_autoscaler_irsa_role_arn'` in your `2-nbs7` Terraform layer:
+1. Update the following values in `cluster-autoscaler/values.yaml` with values from the AWS console. To retrieve the role ARN, run `terraform output -json main | jq '.nbs7.cluster_autoscaler_irsa_role_arn'` in your `1-nbs7` Terraform layer:
 
    ```yaml
    autoDiscovery:

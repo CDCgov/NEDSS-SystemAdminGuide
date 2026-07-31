@@ -59,19 +59,9 @@ A routing service (built on Spring Cloud Gateway) that manages traffic between t
 | When you need it | Always. NBS Gateway is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires Legacy NBS 6, the NBS Modernization API, and the NBS Web UI. Sits behind the infrastructure layer ingress controller. |
 
-<!-- COMMENTING OUT PER EMMA/MAGGIE UNTIL 7.13
 ## Report Execution API
 
-A Python FastAPI service intended to replace SAS-based report execution in NBS 7. SAS 9.4 is currently required for report execution and must be carried forward into NBS 7 deployments until this component is production-ready. Jurisdictions with sigNiFicant SAS infrastructure or licensing costs should monitor this component as NBS 7 matures.
-
-> This component is not yet confirmed for production. Check with your CDC NBS point of contact to find out whether it affects your deployment plan.
-{: .note }
-
-| Attribute | Description |
-|:---|:---|
-| What it does in NBS 7 | \[Pending SME verification\] |
-| Dependencies | \[Pending SME verification\] |
--->
+A Python FastAPI service that replaces SAS-based report execution starting in NBS 7.13. [SAS 9.4](https://support.sas.com/software/94/) is currently required for report execution and must be carried forward into NBS 7 deployments. Jurisdictions with significant SAS infrastructure or licensing costs should monitor this component as NBS 7 matures.
 
 ## Elasticsearch
 

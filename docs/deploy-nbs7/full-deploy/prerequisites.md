@@ -49,20 +49,9 @@ For provider-specific network setup, see [Prerequisites for AWS](provision-cloud
 
 ## Required tools and software
 
-You will need a local or cloud-hosted workstation (for example, AWS CloudShell, Azure Cloud Shell, or a local laptop) with specific tools installed to support deployment and ongoing maintenance.
+You will need a local or cloud-hosted workstation, such as AWS CloudShell, Azure Cloud Shell, or a local laptop, with specific tools installed to support deployment and ongoing maintenance. These include the cloud provider CLI, Terraform, Helm, kubectl, and Docker.
 
-The following table lists the minimum supported versions of the required software. The [Cloud prerequisites](provision-cloud-infrastructure/cloud-prerequisites.html) page lists additional tools and the specific versions used in testing.
-
-| **Software**        | **Minimum version**             |
-|:---|:---|
-| Kubernetes CLI      | kubectl 1.25                    |
-| Helm CLI            | 3.0                             |
-| Terraform CLI       | 1.15.6                          |
-| GitHub CLI          | Latest                          |
-| Cloud provider CLI  | Latest AWS or Azure CLI version |
-| Docker              | 20.x                            |
-
-For installation instructions specific to your cloud provider, see [Cloud prerequisites](provision-cloud-infrastructure/cloud-prerequisites.html).
+For the supported versions and cloud-specific install instructions, see [Management workstation setup](provision-cloud-infrastructure/cloud-prerequisites.html#management-workstation-setup) in Cloud prerequisites.
 
 ## DNS and SSL/TLS certificates
 

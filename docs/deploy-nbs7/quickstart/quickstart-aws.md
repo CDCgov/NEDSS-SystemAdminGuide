@@ -167,10 +167,10 @@ Terraform deploys cert-manager during provisioning. It creates and renews Transp
 > AWS only. On Azure, Terraform enables AKS node pool autoscaling by default.
 {: .note }
 
-This step requires that you set `create_cluster_autoscaler_irsa` to `true` in your `2-nbs7` Terraform variables during infrastructure provisioning.
+This step requires that you set `create_cluster_autoscaler_irsa` to `true` in your `1-nbs7` Terraform variables during infrastructure provisioning.
 
 1. If your EKS cluster has public endpoint access disabled, create a VPC interface endpoint for `com.amazonaws.<YOUR_REGION>.eks` so the autoscaler can call the EKS API. See [Access Amazon EKS using AWS PrivateLink](https://docs.aws.amazon.com/eks/latest/userguide/vpc-interface-endpoints.html). 
-1. From the `charts` directory, set these values in `cluster-autoscaler/values.yaml`. Retrieve the role ARN with `terraform output -json main | jq '.nbs7.cluster_autoscaler_irsa_role_arn'` in your `2-nbs7` layer:
+1. From the `charts` directory, set these values in `cluster-autoscaler/values.yaml`. Retrieve the role ARN with `terraform output -json main | jq '.nbs7.cluster_autoscaler_irsa_role_arn'` in your `1-nbs7` layer:
 
    ```yaml
    autoDiscovery:

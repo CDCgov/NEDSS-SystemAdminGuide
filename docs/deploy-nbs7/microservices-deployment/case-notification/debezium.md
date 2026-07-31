@@ -66,7 +66,10 @@ Enable Change Data Capture on `NBS_ODSE` before deploying the connector. Sysadmi
 
 Complete the following steps to deploy the ['debezium-case-notifications' Helm chart][nedss-helm-debezium-case-notifications-chart] from the `charts/debezium-case-notifications/` directory of your cloned NEDSS-Helm repository:
 
-1. In the `debezium-case-notifications/values.yaml` file, search for `EXAMPLE` and fill in your environment-specific values for the `NBS_ODSE` hostname, database credentials, and Kafka bootstrap server endpoints. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use. The connector's SQL Server config is preconfigured for the `NBS_ODSE` database and doesn't need to change:
+1. In the `debezium-case-notifications` chart directory, open the values file for your cloud provider:
+   - **AWS:** `debezium-case-notifications/values.yaml`
+   - **Azure:** `debezium-case-notifications/values-azure.yaml`
+1. In the values file, search for `EXAMPLE` and fill in your environment-specific values. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use. The connector's SQL Server config is preconfigured for the `NBS_ODSE` database and doesn't need to change:
 
    ```yaml
    sqlserverconnector:

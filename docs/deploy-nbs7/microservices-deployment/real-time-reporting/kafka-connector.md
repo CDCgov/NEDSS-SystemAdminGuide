@@ -31,7 +31,10 @@ Have your database credentials and Kafka endpoint values available. See the [Hel
 
 Complete the following steps to deploy the [Kafka connector Helm chart][nedss-helm-kafka-connect-sink-chart] from the `charts/kafka-connect-sink/` directory of your cloned NEDSS-Helm repository:
 
-1. Search `values.yaml` for `EXAMPLE` and fill in your environment-specific values. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
+1. In the `kafka-connect-sink` chart directory, open the values file for your cloud provider:
+   - **AWS:** `kafka-connect-sink/values.yaml`
+   - **Azure:** `kafka-connect-sink/values-azure.yaml`
+1. Search the values file for `EXAMPLE` and fill in your environment-specific values. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
 
 1. Install the Helm chart:
 

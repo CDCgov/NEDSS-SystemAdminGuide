@@ -1,11 +1,11 @@
 name: Create eclearance Word doc
 
 # On-demand only. Run it from the Actions tab when you need an eclearance review
-# document for a chapter: click "Create eclearance Word doc" -> "Run workflow",
-# type the chapter path, and click the green button. It always builds from the
-# `preview` branch, converts that chapter (with working internal/external links)
-# via the web2word tool, and attaches the .docx as a downloadable artifact.
-# Nothing runs automatically on push or PR.
+# document: click "Create eclearance Word doc" -> "Run workflow", type a chapter
+# path (or leave it blank to export the whole guide), and click the green button.
+# It always builds from the `preview` branch, converts the content (with working
+# internal/external links) via the web2word tool, and attaches the .docx as a
+# downloadable artifact. Nothing runs automatically on push or PR.
 #
 # Always `preview` on purpose: the document's out-of-scope links point at the
 # preview site, which only reflects the `preview` branch. Building from any other
@@ -16,8 +16,8 @@ on:
   workflow_dispatch:
     inputs:
       chapter:
-        description: 'Chapter path under docs/ without .html (e.g. "before-you-deploy" or "deploy-nbs7/microservices-deployment/data-processing")'
-        required: true
+        description: 'Chapter path under docs/ without .html (e.g. "before-you-deploy"). LEAVE BLANK to export the entire guide.'
+        required: false
         type: string
 
 permissions:
@@ -87,15 +87,23 @@ jobs:
           PYTHONPATH: .web2word
         run: |
           set -euo pipefail
-          # Normalize: strip a leading slash, a leading "docs/", and a trailing ".html".
-          path="${CHAPTER#/}"; path="${path#docs/}"; path="${path%.html}"
-          url="http://127.0.0.1:4000$BASEURL/docs/${path}.html"
-          name="$(basename "$path")"
+          if [ -z "$CHAPTER" ]; then
+            # Whole guide: point at any page that renders the nav (the site home).
+            url="http://127.0.0.1:4000$BASEURL/"
+            name="full-guide"
+            extra="--whole-guide"
+          else
+            # Normalize: strip a leading slash, a leading "docs/", and a trailing ".html".
+            path="${CHAPTER#/}"; path="${path#docs/}"; path="${path%.html}"
+            url="http://127.0.0.1:4000$BASEURL/docs/${path}.html"
+            name="$(basename "$path")"
+            extra=""
+          fi
           echo "Converting $url"
           python -m web2word "$url" \
             -o "${name}-review.docx" \
             --style-reference .web2word/styles.docx \
-            --public-host "$PREVIEW_PUBLIC_HOST" -v
+            --public-host "$PREVIEW_PUBLIC_HOST" $extra -v
           python .web2word/scripts/verify.py "${name}-review.docx"
 
       - name: Upload the review document

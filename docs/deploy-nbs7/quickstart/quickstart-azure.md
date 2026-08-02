@@ -234,8 +234,8 @@ Keycloak is the authentication service that allows users to sign in to the NBS 7
    {: .note }
 
 1. Import the base users and development clients into the **nbs-users** realm. Select the realm, go to **Realm settings** > **Action** > **Partial Import**, and import each file:
-   - `03-nbs-users-base-users.json` (select the three users)
-   - `04-nbs-users-development-clients.json` (select the one client)
+   - `03-nbs-users-base-users.json` (select the three users: `msa`, `nbs-users-admin`, `superuser`)
+   - `04-nbs-users-development-clients.json` (select the `nbs-development` client)
 
 1. Import the additional service clients and retrieve their secrets. The NBS realm seeds `di-keycloak-client` with the realm import, so it needs no separate import. For each client in the following table that requires an import, select the listed realm, go to **Realm settings** > **Action** > **Partial Import**, and import the file. Then go to **Clients**, select the client, open the **Credentials** tab, and store the secret in your organization's secrets manager, such as Azure Key Vault:
 
@@ -243,7 +243,7 @@ Keycloak is the authentication service that allows users to sign in to the NBS 7
    |--------|-------|---------------|-------------|
    | `di-keycloak-client` | NBS | No | Seeded with the NBS realm |
    | `nnd-keycloak-client` | NBS | Yes | `05-nbs-users-nnd-client.json` |
-   | `srte-data-keycloak-client` | NBS | Yes | `06-nbs-users-srte-data.json` |
+   | `srte-data-keycloak-client` | NBS | Yes | `06-nbs-users-srte-data-client.json` |
    | `case-notification-service` | NBS | Yes | `08-nbs-users-case-notification-service.json` |
 
 1. Verify Traefik and Keycloak together. In a browser, go to `https://app.<DOMAIN_NAME.TLD>`, confirm that the NBS 7 Welcome page is shown, select **Login**, and confirm that the Keycloak login page is shown.

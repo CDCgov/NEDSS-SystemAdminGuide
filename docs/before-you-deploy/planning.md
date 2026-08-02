@@ -83,7 +83,7 @@ The Test stage validates that your NBS 7 environment is ready for production use
 | Test database restore process | Review and test the database restore process in each environment. | Use your own database refresh procedure |
 | Validate ingestion and egress | Integrate and validate data ingestion and notification pathways to confirm pipelines are working. | [API testing for data ingestion](../deploy-nbs7/microservices-deployment/data-ingestion/api-testing.html) |
 | Test ELR and eCR ingestion | Test ingestion for individual ELRs and eCRs and at scale. | [Data ingestion smoke test](../deploy-nbs7/microservices-deployment/data-ingestion/smoke-test.html) |
-| Validate notifications | Validate Case Notifications | Confirm conditions are received successfully |
+| Validate notifications | Validate case notifications | Confirm conditions are received successfully |
 | Run regression testing | Run test scripts across environments to validate readiness for UAT. | [Validate the deployment](../deploy-nbs7/validate-the-deployment.html) |
 | Conduct user acceptance testing (UAT) | Conduct UAT across all environments. | Your UAT test plan |
 | Review cutover and rollback plans | Review and approve cutover and rollback plans. | Create a cutover and rollback plan |

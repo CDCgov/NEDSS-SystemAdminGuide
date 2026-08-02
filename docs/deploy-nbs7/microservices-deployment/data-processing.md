@@ -82,7 +82,7 @@ Complete the following steps to deploy the ['data-processing-service' Helm chart
          "artifact": "data-processing-service",
          "name": "data-processing-service",
          "time": "2026-03-24T15:47:15.920Z",
-         "version": "7.11.1-SNAPSHOT",
+         "version": "{{ site.version_latest }}-SNAPSHOT",
          "group": "gov.cdc.dataprocessing"
       },
       "java": {

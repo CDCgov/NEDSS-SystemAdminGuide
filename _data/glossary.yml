@@ -460,9 +460,13 @@
   definition: |-
     **National Institute of Standards and Technology Special Publication 800-53 (Rev. 5).** A risk-based framework providing a catalog of security and privacy controls for federal information systems.
 
+- term: Network Load Balancer
+  definition: |-
+    An [AWS](#aws) load balancing service that operates at the network layer, often used for high-throughput or low-latency workloads. The [Azure](#microsoft-azure) equivalent to NLB is [Azure Application Gateway](#azure-application-gateway).
+
 - term: NLB
   definition: |-
-    **Network Load Balancer.** An [AWS](#aws) load balancing service that operates at the network layer, often used for high-throughput or low-latency workloads. The [Azure](#microsoft-azure) equivalent to NLB is [Azure Application Gateway](#azure-application-gateway).
+    See [Network Load Balancer](#network-load-balancer).
 
 - term: NND
   definition: |-

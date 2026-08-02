@@ -112,6 +112,7 @@ setup needed:
 2. Enter the chapter path under `docs/`, without `.html` — for example
    `before-you-deploy`, or a deeper page such as
    `deploy-nbs7/full-deploy/provision-cloud-infrastructure/provision-cloud-environment`.
+   To export the **entire guide** in one document, leave this field blank.
    The workflow builds from the `preview` branch, so make sure your content is on
    `preview` first (step 3 above).
 3. When the run finishes (~1 minute), **refresh the run page** — the

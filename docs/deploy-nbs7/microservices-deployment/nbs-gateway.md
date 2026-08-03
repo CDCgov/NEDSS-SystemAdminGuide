@@ -44,6 +44,13 @@ Complete the following steps to deploy the ['nbs-gateway' Helm chart][nedss-helm
          id: "nbs-modernization"
      ```
 
+   - Report execution is enabled. For report execution to work, this flag must also be `"true"` in the [Modernization API](modernization-api.html) deployment:
+
+      ```yaml
+      reportExecution:
+        enabled: "true"
+      ```
+
 1. Install NBS Gateway:
 
    ```bash

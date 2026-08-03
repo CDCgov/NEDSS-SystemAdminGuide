@@ -33,7 +33,7 @@ In addition to the services you deployed in [Deploy core Kubernetes services](de
 
 Before you begin, locate the `keycloak` Helm chart in the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
 
-Keycloak provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`. It uses two separate realms that are created in [Create the NBS and nbs-users realms](#create-the-nbs-and-nbs-users-realms):
+Keycloak provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`. It uses two separate realms that are created in the [Create the NBS and nbs-users realms](#create-the-nbs-and-nbs-users-realms) section:
 
 - **NBS realm:** Contains service clients for data ingestion, NND, and SRTE data access.
 - **nbs-users realm:** Contains the user-facing authentication client used by the NBS gateway and the NBS application.
@@ -173,7 +173,7 @@ Import the base NBS users and development clients into the **nbs-users** realm:
 
 1. Upload `03-nbs-users-base-users.json`, select the three users, and select **Import**.
 
-   The Partial import dialog shows the file uploaded with the three users selected for import.
+   The **Partial import** dialog shows the file uploaded with the three users selected for import.
 
    ![Keycloak Partial import dialog with 03-nbs-users-base-users.json uploaded and a 3 Users checkbox selected for import](images/nbs-users-base-users-2.png)
 
@@ -183,7 +183,7 @@ Import the base NBS users and development clients into the **nbs-users** realm:
 
 1. Upload `04-nbs-users-development-clients.json`, select the one client, and select **Import**.
 
-   The Partial import dialog shows the development client file uploaded and selected for import.
+   The **Partial import** dialog shows the development client file uploaded and selected for import.
 
    ![Keycloak Partial import dialog with 04-nbs-users-development-clients.json uploaded and a 1 Clients checkbox selected for import](images/nbs-users-development.png)
 
@@ -231,6 +231,7 @@ This validation depends on the DNS records from [Deploy core Kubernetes services
 The imported configuration seeds a random client secret for most service clients. You can regenerate these secrets or use them as generated. Retrieve and store each secret before you proceed to microservices deployment.
 
 <!-- markdownlint-disable MD055 MD056 -->
+
 | Client | Realm | Import needed | Import file | Used by |
 |----|----|----|----|----|
 | `case-notification-service` | NBS | ✓ Yes | [08-nbs-users-case-notification-service.json][keycloak-case-notification-client] | [Case notification service](../../microservices-deployment/case-notification/case-notification-service.html) |

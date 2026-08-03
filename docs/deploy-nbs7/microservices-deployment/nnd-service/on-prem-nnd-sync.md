@@ -88,13 +88,13 @@ Ensure the database is accessible from Rhapsody.
 
 **Steps:**
 
-1. Log in to the Rhapsody console
-2. Open **Variables Manager** and confirm the route has the correct hostname and new database name
-3. Open all database components in the route and verify they refer to the right database variable
+1. Log in to the Rhapsody console.
+2. Open **Variables Manager** and confirm the route has the correct hostname and new database name.
+3. Open all database components in the route and verify they refer to the correct database variable:
 
-![Rhapsody route view showing database component variables](../images/data-sync-on-prem-rhapsody-1.png)
+   ![Rhapsody route view showing database component variables](../images/data-sync-on-prem-rhapsody-1.png)
 
-**List of database components to update in the Rhapsody route** (highlighted in red boxes in provided documentation).
+**List of database components to update in the Rhapsody route** (highlighted in red boxes):
 
 ![Rhapsody route with database components highlighted in red](../images/data-sync-on-prem-rhapsody-2.png)
 
@@ -109,12 +109,6 @@ Ensure the database is accessible from Rhapsody.
 #### SAMS
 
 - Verify that the file drop-off location in NETSS service parameters matches the location that SAMS reads.
-
----
-
-## Repo reference
-
-- GitHub: [NEDSS-NNDSS repository](https://github.com/CDCgov/NEDSS-NNDSS)
 
 ## Next steps
 

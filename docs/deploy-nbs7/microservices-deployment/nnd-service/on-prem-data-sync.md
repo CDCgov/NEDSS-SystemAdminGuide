@@ -10,7 +10,7 @@ redirect_from:
 
 # Deploy Data Availability
 
-This section provides instructions for on-premises deployment of the **Data Availability service**, which extracts data from the modernized NBS cloud implementation so STLTs can keep copies of selected tables from **RDB, ODSE, and SRTE**. Complete [Validate API endpoints](./validating-api-endpoints.html) before starting this page.
+This section provides instructions for on-premises deployment of the Data Availability service, which extracts data from the modernized NBS cloud implementation so you can keep copies of selected tables from `RDB`, `ODSE`, and `SRTE`. Complete [Validate API endpoints](./validating-api-endpoints.html) before starting this page.
 
 > This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }
@@ -24,14 +24,8 @@ This section provides instructions for on-premises deployment of the **Data Avai
 ## Prerequisites
 
 - Complete [Validate API endpoints](./validating-api-endpoints.html).
-- **Keycloak client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, navigate to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
-- **Data service URL** - Retrieve this from your NBS environment.
-- **Release materials/package** - CDC provides this as a .zip file with each release.
-- **Microsoft SQL Server database**
-- **Java 21 or higher**
-- **Amazon S3** (Optional)
-
----
+- Keycloak client ID and client secret: Retrieve these from your Keycloak instance. In the **NBS** realm, navigate to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
+- Data service URL: Retrieve this from your NBS environment.
 
 ## Components for Data Availability service
 
@@ -47,37 +41,30 @@ The service supports multiple options to download the data:
 - Drop incremental `.JSON` files into an **AWS S3 bucket**
 - Drop incremental `.JSON` files into a **local directory**
 
----
-
 ## Set up the Data Availability service
 
 Download the Data Availability service files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page]. Under **Assets**, download the `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
 Save the files to a secure directory with executable permissions to run the services.
 
-Before you proceed, **choose where to send the data**:
+Before you proceed, choose where to send the data:
 
 - SQL database
 - Amazon S3 bucket
 - Local directory
 
-The SQL database option uses a different setup (see **Appendix**).
-For AWS S3 bucket and local directory options, pass the appropriate arguments in the `.cmd` file based on the selected option. Templates are provided in the release documents and **#readme**.
-
----
+The SQL database option uses a different setup (see [Appendix](#appendix-data-sync-service)).
+For AWS S3 bucket and local directory options, pass the appropriate arguments in the `.cmd` file based on the selected option. Templates are provided in the release documents and [README.md][nedss-nndss-readme].
 
 ### Step 0: Choose the option for Data Availability service
 
 Use one of these three download options:
 
-1. **Direct insert into the database**
+1. Direct insert into the database:
    - *Default setup*: Syncs all tables into **one database**
    - *Custom setup*: Syncs tables into **separate databases** as preferred (e.g., target databases match source databases)
 
-2. **Drop JSON files in S3 bucket**
-
-3. **Drop JSON files in a local file system**
-
----
+1. Drop JSON files in S3 bucket
+1. Drop JSON files in a local file system
 
 ### Step 1: Create the data config table
 
@@ -85,9 +72,9 @@ This step is important because this config table ensures that tables sync correc
 
 #### Default setup for Data Availability
 
-- Use this if downloading data into **S3 bucket** or **File location**, or if having all tables in **one database** is acceptable.
+- Use this if downloading data into S3 bucket or file location, or if having all tables in one database is acceptable.
 - Use the `.sql` file (`create_data_config.sql`) provided in the release package to create a new database (optional) and the required config table.
-- STLTs can name their local database as preferred.
+- You can name your local database as preferred.
 - Ensure the `poll_data_sync_config` table is created.
 - Run the script `poll_config_insert.sql` to insert the static/lookup data into the config table.
 
@@ -101,14 +88,12 @@ This step is important because this config table ensures that tables sync correc
 **Example:**
 By default, Data Availability syncs all tables in the RDB database, without considering their original source.
 
-If a user wants to direct **SRTE table data** into a separate SRTE database:
+To direct SRTE table data into a separate SRTE database:
 
 1. Create the SRTE database in the on-premises environment.
 2. Create the `poll_data_sync_config` table in that database.
 3. Insert only **SRTE-specific configurations** into the table.
    - These can be identified by the `source_db` field (e.g., `source_db = SRTE`).
-
----
 
 ### Config table scripts
 
@@ -118,23 +103,12 @@ If a user wants to direct **SRTE table data** into a separate SRTE database:
 - **Insert config records** (pick only the tables you want to download into that database, for example, only SRTE tables)
   [poll_config_insert.sql][nedss-nndss-poll-config-insert]
 
----
-
 ### Step 2: Configure the `.cmd` files
 
 - Find the configurable `.cmd` script file in the release materials.
 - Replace the argument values with your own.
-- **Important:** No spaces between argument name and value.
-  - Example: `arg_name=arg_value`
-- For customizations, refer to **#readme**.
-
----
-
-## Repo reference
-
-GitHub: [NEDSS-NNDSS repository](https://github.com/CDCgov/NEDSS-NNDSS)
-
----
+  - **Important:** Do not include spaces between argument name and value. The proper format is: `arg_name=arg_value`.
+- For customizations, refer to the [README.md][nedss-nndss-readme] file.
 
 ## Appendix: Data Sync service
 
@@ -155,3 +129,4 @@ Continue to [Case notifications](../case-notification.html).
 [nedss-nndss-create-data-config]: <https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/create_data_config.sql>
 [nedss-nndss-poll-config-insert]: <https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/poll_config_insert.sql>
 [nedss-nndss-create-test-db]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/create_test_db>
+[nedss-nndss-readme]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/README.md>

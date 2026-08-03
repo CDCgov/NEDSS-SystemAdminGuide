@@ -27,14 +27,14 @@ redirect_from:
 The data ingestion service is integrated with the Keycloak server to authenticate its public Data Ingestion API (DI API) endpoints.
 As the **Client Credentials Grant type flow** is used for authentication in the data ingestion service, we require the **Client Id** and **Client Secret** values to create the JWT token and make API calls.
 
-## Prerequisite
+## Prerequisites
 
-1. Keycloak server and the necessary configurations are setup.
-2. Installation of Postman application to test the end to end flow.
-   - If you already have postman application in your system, skip this step.
-   - Visit the official Postman website at [www.postman.com](https://www.postman.com) and navigate to the **Downloads** section
-     [Download Postman](https://www.postman.com/downloads/)
-   - Click on the link to download the version appropriate for your OS. Once the download is complete open and install it accordingly.
+1. Keycloak server and the necessary configurations are set up.
+2. Installation of Postman application to test the end-to-end flow.
+   - If you already have Postman application in your system, skip this step.
+   - Visit the official Postman website at [www.postman.com](https://www.postman.com) and navigate to the **Downloads** section:
+     [Download Postman](https://www.postman.com/downloads/).
+   - Download the version that is appropriate for your operating system. Once the download is complete, open and install it accordingly.
 
 ## Scope
 
@@ -46,7 +46,13 @@ As the **Client Credentials Grant type flow** is used for authentication in the 
 
 ## Run Data Ingestion Smoke Test
 
-Open Postman application and select import option. A pop up window shows up and then select `New-Data-Ingestion.postman_collection.json` file included in the release package and select open to load the Data Ingestion collection that has all API's related to the data ingestion service.
+To load the Data Ingestion API collection in Postman, complete the following steps:
+
+1. Open Postman and select **Import**.
+1. In the import window, select `New-Data-Ingestion.postman_collection.json` from the release package.
+1. Select **Open**.
+
+The collection loads with all requests for the Data Ingestion service.
 
 ### Step 1: Token Generation API
 
@@ -59,31 +65,30 @@ Update the **clientid** and **clientsecret** values, then select **Send** to gen
 
 ### Step 2: Ingesting Data API
 
-Click on Ingesting Data API in New-Data-Ingestionpostman collection and then click on Authorization tab and select 'Bearer Token' as Type. Paste the token that was generated via Token Generation API in previous step into the token text box.
+Select Ingesting Data API in New-Data-Ingestionpostman collection and then select Authorization tab and select **Bearer Token** as the type. Paste the token that was generated via Token Generation API in previous step into the token text box.
 
-Click on the Headers section and enter the values within the clientid and clientsecret headers.
+Select the **Headers** section and enter the values within the **clientid** and **clientsecret** headers.
 
-A sample HL7 message has already been added to the request body section. Click on Send button. UUID is displayed as a response. Please save this UUID which is useful to determine the status of the HL7 message.
+A sample HL7 message has already been added to the request body section. Select Send button. UUID is displayed as a response. Please save this UUID which is useful to determine the status of the HL7 message.
 
 ![data-ingestion-data-api](images/data-ingestion-data-api.jpg)
 
 ![data-ingestion-data-api-2](images/data-ingestion-data-api-2.jpg)
 
-> **Note:** Give 10-20 seconds before checking the status of Ingested Data API in Classic NBS as it takes few seconds to generate an XML record into the NBS_Interface table after we post the HL7 message.
+> Wait 10-20 seconds before checking the status of Ingested Data API in Classic NBS. It takes a moment to generate an XML record into the `NBS_Interface` table after posting the HL7 message.
+{: .note }
 
-### Step 3: Checking detailed status of Ingested Data API in Classic NBS
+### Step 3: Check detailed status of Ingested Data API in Classic NBS
 
-Click on the Checking Status of Ingested Data API in New-Data-Ingestion postman collection and then click on Authorization tab. Paste the token that was generated via Token Generation API into the token text box.
+Select the **Checking Status of Ingested Data API** in the **New-Data-Ingestion** Postman collection and then select the **Authorization** tab. Paste the token that was generated via Token Generation API into the token text box.
 
-Click on the Headers section and enter the values within the clientid and clientsecret headers. Within the API URL, append the UUID generated as part of the response from the Ingesting Data API. Click on Send button. By Default, all the status goes to QUEUED status.
+Select the Headers section and enter the values within the **clientid** and **clientsecret** headers. Within the API URL, append the UUID generated as part of the response from the Ingesting Data API. Select **Send** button. By Default, all the status goes to `QUEUED` status.
 
-The Classic Wildfly scheduler runs the batch job and processes this record. Currently, the scheduler is set to pick up and process the records every 2 minutes. So please wait for roughly 2 minutes and then click on Send button again. This time, the status should be changed to Success.
+The Classic Wildfly scheduler runs the batch job and processes this record. The scheduler is set to pick up and process the records every two minutes. Wait for two minutes and then select the **Send** button again. This time, the status should be **Success**.
 
-The below API provides the ELR Ingestion status:
+The following API provides the ELR Ingestion status:
 
 ![data-ingestion-status-nbs6](images/data-ingestion-status-nbs6.jpg)
-
-**This concludes the smoke test where the user posted the HL7 message via data ingestion service which validated the incoming data.**
 
 ## Next steps
 

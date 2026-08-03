@@ -13,7 +13,7 @@ redirect_from:
 
 # NBS 7 architecture
 
-This page explains how the NBS 7 components fit together and how data flows between them. Understanding this architecture helps you plan your deployment and interpret the steps in the deployment guide. For cloud-provider and tooling details, see [NBS 7 Introduction](../).
+This page explains how the NBS 7 components fit together and how data flows between them. Understanding this architecture helps you plan your deployment and interpret the steps in the deployment guide. For cloud-provider and tooling details, see [Cloud prerequisites for AWS and Azure](../deploy-nbs7/full-deploy/provision-cloud-infrastructure/cloud-prerequisites.html).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -23,7 +23,7 @@ This page explains how the NBS 7 components fit together and how data flows betw
 
 ## How NBS 7 relates to NBS 6
 
-NBS 7 does not replace NBS 6 all at once. It runs alongside your existing NBS 6 system and takes over functionality incrementally, an approach known as the [strangler fig pattern](https://martinfowler.com/bliki/StranglerFigApplication.html). Users move between modern NBS 7 features and classic NBS 6 features without a hard cutover.
+NBS 7 does not replace NBS 6 all at once. It runs alongside your existing NBS 6 system and takes over functionality incrementally, an approach known as the [strangler fig pattern](https://martinfowler.com/bliki/StranglerFigApplication.html). Users move between modern NBS 7 features and classic NBS 6 features during the transition. As the modern system gains functionality, they rely on it for more of their work.
 
 NBS 7 runs in its own virtual network, separate from NBS 6. The two networks are peered so that NBS 7 can reach the NBS 6 application and database. NBS 7 reuses your existing NBS 6 database rather than migrating the data to a new store.
 

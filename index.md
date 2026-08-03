@@ -33,7 +33,7 @@ The guide also includes supplementary reference materials, such as the glossary 
 
 ## Intended audience
 
-The primary audience is system administrators at state, tribal, local, and territorial health departments who install, operate, and maintain NBS 7. The content assumes familiarity with your cloud platform, Kubernetes, Terraform, Helm, and related administration tasks.
+The primary audience is system administrators at state, tribal, local, and territorial (STLT) health departments who install, operate, and maintain NBS 7. The content assumes familiarity with your cloud platform, Kubernetes, Terraform, Helm, and related administration tasks.
 
 ## Runtime environment support
 

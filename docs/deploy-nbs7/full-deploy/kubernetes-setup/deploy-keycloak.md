@@ -31,7 +31,7 @@ In addition to the services you deployed in [Deploy core Kubernetes services](de
 
 ## Overview
 
-Before you begin, locate the Keycloak Helm chart in the [NEDSS-Helm][nedss-helm].
+Before you begin, locate the `keycloak` Helm chart in the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
 
 Keycloak provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`. It uses two separate realms that are created in [Create the NBS and nbs-users realms](#create-the-nbs-and-nbs-users-realms):
 

@@ -161,7 +161,7 @@ For each Terraform layer directory, this section initializes the directory, gene
    Apply complete! Resources: 142 added, 0 changed, 0 destroyed.
    ```
 
-1. If the apply command prints errors, review and resolve the errors, then rerun the plan and apply steps.
+1. If the `apply` command prints errors, review and resolve the errors, then rerun the `plan` and `apply` steps.
 
 ## Connect to Kubernetes cluster
 

@@ -113,7 +113,7 @@ For a standard NBS 7 environment using the [NEDSS-Infrastructure](https://github
    module.eks_nbs.module.eks.module.eks_managed_node_group["main"].aws_eks_node_group.this[0]
    ```
 
-   Use the `aws_eks_cluster` address as the target for [Step 2](#step-2-upgrade-the-control-plane) and the `aws_eks_node_group` address as the target for [Step 3](#step-3-upgrade-nodes).
+   Use the `aws_eks_cluster` address as the target for the upcoming [Step 2](#step-2-upgrade-the-control-plane) section, and the `aws_eks_node_group` address as the target for [Step 3](#step-3-upgrade-nodes).
 
 - **Azure:**
 
@@ -255,7 +255,7 @@ After a node version upgrade, Linkerd might stop working if mTLS connections bet
    The `--resolve-conflicts OVERWRITE` flag allows the update to proceed even if you customized the add-on configuration away from the AWS default. If your environment includes custom add-on configuration that you need to preserve, use `--resolve-conflicts PRESERVE` instead. With `PRESERVE`, the update fails rather than overwrite your changes, and you resolve conflicts manually. Check with your infrastructure team if you are not sure which flag applies to your environment.
    {: .important }
 
-   In the `kubernetes_addons` variable in `terraform.tfvars` in your `1-nbs7` folder, update `addon_version` for this add-on to the version you just applied. This keeps the add-on version you just set from being reverted by [Step 5](#step-5-address-remaining-terraform-changes).
+   In the `kubernetes_addons` variable in `terraform.tfvars` in your `1-nbs7` folder, update `addon_version` for this add-on to the version you just applied. This keeps the add-on version you just set from being reverted by [Step 5: Address remaining Terraform changes](#step-5-address-remaining-terraform-changes).
 
 1. Repeat the previous three items for each add-on in your cluster.
 

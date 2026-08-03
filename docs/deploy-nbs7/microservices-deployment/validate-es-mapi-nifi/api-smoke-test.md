@@ -34,6 +34,6 @@ Run the `nbs-test-api.sh` script from the [NEDSS-Infrastructure repository][neds
 
 ## Next steps
 
-After performing a successful smoke test, continue to the [Web UI smoke test for NBS interface and search](./web-ui-smoke-test.html).
+After performing a successful smoke test, continue to [Web UI smoke test for NBS interface and search](./web-ui-smoke-test.html).
 
 [nedss-infra-nbs-test-api]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-api>

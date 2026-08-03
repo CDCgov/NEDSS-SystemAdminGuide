@@ -34,6 +34,6 @@ Run the `nbs-test-webui.sh` script from the [NEDSS-Infrastructure repository][ne
 
 ## Next steps
 
-After successfully completing the validation steps, continue to deploy the [NBS Gateway service](../nbs-gateway.html).
+After successfully completing the validation steps, continue to [Deploy NBS Gateway](../nbs-gateway.html).
 
 [nedss-infra-nbs-test-webui]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-webui>

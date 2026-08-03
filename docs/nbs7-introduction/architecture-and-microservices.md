@@ -25,7 +25,7 @@ This page explains how the NBS 7 components fit together and how data flows betw
 
 NBS 7 does not replace NBS 6 all at once. It runs alongside your existing NBS 6 system and takes over functionality incrementally, an approach known as the [strangler fig pattern](https://martinfowler.com/bliki/StranglerFigApplication.html). Users move between modern NBS 7 features and classic NBS 6 features during the transition. As the modern system gains functionality, they rely on it for more of their work.
 
-NBS 7 runs in its own virtual network, separate from NBS 6. The two networks are peered so that NBS 7 can reach the NBS 6 application and database. NBS 7 reuses your existing NBS 6 database rather than migrating the data to a new store.
+NBS 7 reuses the NBS 6 database rather than migrating the data to a new store. As a result, NBS 7 requires network access to the NBS 6 application and database. In a typical deployment, NBS 7 runs in its own virtual network, peered with the network that hosts NBS 6 to provide this access. Establishing this connectivity is part of your chosen network configuration.
 
 ## Architecture diagram
 

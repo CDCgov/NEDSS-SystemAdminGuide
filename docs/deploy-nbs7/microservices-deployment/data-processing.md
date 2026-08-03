@@ -176,6 +176,8 @@ Complete the following steps to deploy the ['data-processing-service' Helm chart
       }
       ```
 
+## Next steps
+
 To validate Real Time Ingestion (RTI) by sending ELR data through the data ingestion endpoint, proceed to [Test RTI API integration for Data Processing](./data-processing/api-testing.html).
 
 [nedss-helm-data-processing-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-processing-service>

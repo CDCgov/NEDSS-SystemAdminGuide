@@ -147,6 +147,10 @@ GitHub: [NEDSS-NNDSS repository](https://github.com/CDCgov/NEDSS-NNDSS)
 - **Database creation scripts** (includes RDB, SRTE, and RDB Modern)
   [create_test_db SQL scripts][nedss-nndss-create-test-db]
 
+## Next steps
+
+Continue to [Case notifications](../case-notification.html).
+
 [nedss-nndss-release-page]: <https://github.com/CDCgov/NEDSS-NNDSS/releases/tag/{{ site.version_latest_tag }}>
 [nedss-nndss-create-data-config]: <https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/create_data_config.sql>
 [nedss-nndss-poll-config-insert]: <https://github.com/CDCgov/NEDSS-NNDSS/blob/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql/config_table/poll_config_insert.sql>

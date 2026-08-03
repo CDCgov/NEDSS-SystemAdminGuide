@@ -84,3 +84,7 @@ The below API provides the ELR Ingestion status:
 ![data-ingestion-status-nbs6](images/data-ingestion-status-nbs6.jpg)
 
 **This concludes the smoke test where the user posted the HL7 message via data ingestion service which validated the incoming data.**
+
+## Next steps
+
+Continue to [Service integrations](./service-integrations.html).

@@ -56,7 +56,11 @@ Complete the following steps to deploy the ['nbs-gateway' Helm chart][nedss-helm
    kubectl get pods
    ```
 
-If the pod is not in a running state, wait and troubleshoot before continuing to deploy [Data processing](./data-processing.html).
+If the pod is not in a running state, wait and troubleshoot before continuing.
+
+## Next steps
+
+Continue to [Data processing](./data-processing.html).
 
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-nbs-gateway-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nbs-gateway>

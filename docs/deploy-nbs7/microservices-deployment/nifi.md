@@ -47,6 +47,10 @@ Complete the following steps to deploy the ['nifi' Helm chart][nedss-helm-nifi-c
    kubectl get pods
    ```
 
-If the pod is not in a running state, wait and troubleshoot before continuing to [validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
+If the pod is not in a running state, wait and troubleshoot before continuing.
+
+## Next steps
+
+Continue to [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
 
 [nedss-helm-nifi-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nifi>

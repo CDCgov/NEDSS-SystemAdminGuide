@@ -56,3 +56,7 @@ Use `NONE` as the authorization type.
 After token generation succeeds, validate the service endpoints in Swagger:
 
 `https://<host>/data-sync/swagger-ui/index.html`
+
+## Next steps
+
+Continue to [Deploy NND Sync](./on-prem-nnd-sync.html).

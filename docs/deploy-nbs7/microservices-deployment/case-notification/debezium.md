@@ -110,4 +110,8 @@ If the service has trouble connecting to the database, delete the ConfigMap and 
    helm upgrade "debezium-case-notification-service-connect" ./debezium-case-notifications -f ./debezium-case-notifications/values.yaml
    ```
 
+## Next steps
+
+Continue to [Notification service](./case-notification-service.html).
+
 [nedss-helm-debezium-case-notifications-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium-case-notifications>

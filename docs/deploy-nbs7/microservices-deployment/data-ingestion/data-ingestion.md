@@ -167,5 +167,9 @@ Run the following SQL scripts before deploying the data ingestion service.
     https://<data.EXAMPLE_DOMAIN>/ingestion/swagger-ui/index.html#/
     ```
 
+## Next steps
+
+Continue to [Wildfly server](./wildfly-server-config.html).
+
 [nedss-dataingestion-db]: <https://github.com/CDCgov/NEDSS-DataIngestion/tree/{{ site.version_latest_tag }}/data-ingestion-service/src/main/resources/db>
 [nedss-helm-dataingestion-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/dataingestion-service>

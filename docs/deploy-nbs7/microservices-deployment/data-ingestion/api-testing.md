@@ -14,3 +14,7 @@ redirect_from:
 # API testing for data ingestion
 
 For data ingestion-related diagnostics and troubleshooting, see the [Data Ingestion API Testing](../images/NM-NBS%207.11%20Data%20Ingestion%20API%20Testing.pdf) (PDF) guide.
+
+## Next steps
+
+Continue to [Deploy real-time reporting](../real-time-reporting/real-time-reporting.html).

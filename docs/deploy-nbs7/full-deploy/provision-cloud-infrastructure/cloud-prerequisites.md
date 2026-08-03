@@ -75,7 +75,7 @@ This approach is similar to NBS 6, which does not authenticate users. Instead, N
 
 NBS 7 requires a working NBS 6 instance, so it assumes that a user authentication mechanism is already in place. NBS 7 works alongside the existing authentication mechanism. No additional steps are needed to authenticate users for NBS 7.
 
-## What to do now
+## Next steps
 
 1. Complete the general [Prerequisites](../prerequisites.html) if you have not already.
 1. Continue with [Provision cloud environment](provision-cloud-environment.html).

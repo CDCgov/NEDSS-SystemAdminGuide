@@ -60,5 +60,9 @@ kubectl delete configmap debezium-rtr-connect
 
 If issues persist, email [nbs@cdc.gov](mailto:nbs@cdc.gov).
 
+## Next steps
+
+Continue to [Kafka connector](./kafka-connector.html).
+
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-debezium-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium>

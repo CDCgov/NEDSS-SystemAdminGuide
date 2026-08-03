@@ -38,6 +38,10 @@ Complete the following steps to deploy the ['elasticsearch' Helm chart][nedss-he
    kubectl get pods
    ```
 
-If the pod is not in a running state, wait and troubleshoot before continuing to deploy the [Modernization API](./modernization-api.html) microservice.
+If the pod is not in a running state, wait and troubleshoot before continuing.
+
+## Next steps
+
+Continue to [Modernization API](./modernization-api.html).
 
 [nedss-helm-elasticsearch-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/elasticsearch>

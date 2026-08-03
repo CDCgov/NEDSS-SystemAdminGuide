@@ -32,6 +32,8 @@ To run the smoke test, you need:
 
 Run the `nbs-test-webui.sh` script from the [NEDSS-Infrastructure repository][nedss-infra-nbs-test-webui]. See the `README` in that folder for usage instructions and current script status.
 
+## Next steps
+
 After successfully completing the validation steps, continue to deploy the [NBS Gateway service](../nbs-gateway.html).
 
 [nedss-infra-nbs-test-webui]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-webui>

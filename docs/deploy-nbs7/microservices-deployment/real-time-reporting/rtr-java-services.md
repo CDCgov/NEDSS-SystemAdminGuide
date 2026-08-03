@@ -111,5 +111,9 @@ After seeding is complete, upgrade the release with post-processing enabled:
    https://data.<exampledomain>/reporting-pipeline-svc/actuator/health
    ```
 
+## Next steps
+
+Continue to [Post-deploy cleanup](../../full-deploy/post-deploy-cleanup.html).
+
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-reporting-pipeline-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/reporting-pipeline-service>

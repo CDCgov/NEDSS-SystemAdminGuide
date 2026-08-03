@@ -116,5 +116,9 @@ Ensure the database is accessible from Rhapsody.
 
 - GitHub: [NEDSS-NNDSS repository](https://github.com/CDCgov/NEDSS-NNDSS)
 
+## Next steps
+
+Continue to [Deploy Data Availability](./on-prem-data-sync.html).
+
 [nedss-nndss-release-page]: <https://github.com/CDCgov/NEDSS-NNDSS/releases/tag/{{ site.version_latest_tag }}>
 [nedss-nndss-readme]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service#readme>

@@ -60,5 +60,9 @@ kubectl delete configmap cp-kafka-connect-sqlserver-connect
 
 If issues persist, email [nbs@cdc.gov](mailto:nbs@cdc.gov).
 
+## Next steps
+
+Continue to [Java service](./rtr-java-services.html).
+
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-kafka-connect-sink-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/kafka-connect-sink>

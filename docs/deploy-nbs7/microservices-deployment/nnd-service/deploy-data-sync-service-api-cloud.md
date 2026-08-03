@@ -75,5 +75,9 @@ To enable Swagger for testing, specify or overwrite `springBootProfile` with `'d
 https://<data.EXAMPLE_DOMAIN>/extraction/swagger-ui/index.html#/
 ```
 
+## Next steps
+
+Continue to [Validate API endpoints](./validating-api-endpoints.html).
+
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-nnd-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nnd-service>

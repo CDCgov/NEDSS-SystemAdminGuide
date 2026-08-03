@@ -10,7 +10,7 @@ redirect_from:
 
 # Test and integrate case notification APIs
 
-Use this page to validate PHIMNS property configuration and supporting dependencies for case notification services. Deploy the [Notification service](./case-notification-service.html) before starting this page.
+Use this page to validate PHIMNS property configuration and supporting dependencies for Case Notification services. Deploy the [Notification service](./case-notification-service.html) before starting this page.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -20,7 +20,7 @@ Use this page to validate PHIMNS property configuration and supporting dependenc
 
 ## Configure PHIMNS properties
 
-The case notification service requires PHINMS (Public Health Information Network Messaging System) properties to route case notifications correctly. Complete the following steps to configure them.
+The Case Notification service requires PHINMS (Public Health Information Network Messaging System) properties to route case notifications correctly. Complete the following steps to configure them.
 
 1. Retrieve the following values from your integration engine configuration:
    - **Required** property:
@@ -59,14 +59,14 @@ The case notification service requires PHINMS (Public Health Information Network
 
 ## Verify Kafka configuration
 
-The case notification service uses Kafka to receive events from the Debezium source connector. Correct Kafka configuration ensures that new records inserted into `NBS_ODSE.CN_transportq_out` are detected and routed through the pipeline.
+The Case Notification service uses Kafka to receive events from the Debezium source connector. Correct Kafka configuration ensures that new records inserted into `NBS_ODSE.CN_transportq_out` are detected and routed through the pipeline.
 
 - **Configure Kafka broker:** Use one of the available Kafka broker endpoints (`Private endpoints - Plaintext`) in the values file located in the [NEDSS-Helm/charts/debezium-case-notifications][nedss-helm-debezium-case-notifications] directory. The number of brokers varies by environment.
 - **Confirm Debezium connector:** Confirm that the Debezium source connector deployed in [Deploy the Debezium Kafka source connector](./debezium.html) is running on the `NBS_ODSE.CN_transportq_out` table before proceeding.
 
 ## Verify deployment and database changes
 
-The case notification service includes a built-in Liquibase integration that automatically applies database changes during deployment. Use the following checks to confirm the service deployed successfully and data is routing correctly.
+The Case Notification service includes a built-in Liquibase integration that automatically applies database changes during deployment. Use the following checks to confirm the service deployed successfully and data is routing correctly.
 
 - **Confirm pod status:** Confirm that the `case-notification-service` pod is stable and running. The pod will not start if Liquibase fails.
 - **If Liquibase fails:** Check the pod logs for errors. Database change details can be reviewed in the [NEDSS-NNDSS-Case-Notifications repository][nndss-case-notifications-db].

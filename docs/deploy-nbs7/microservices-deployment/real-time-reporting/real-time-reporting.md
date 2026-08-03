@@ -84,7 +84,7 @@ Create a database service user that the RTR services use to read source data and
 > In this section, the terms `cdc` and `CDC` appear as part of SQL Server column and parameter names and refer to Change Data Capture, not the Centers for Disease Control and Prevention.
 {: .note }
 
-[Change Data Capture](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver17) (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database.
+[Change Data Capture](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver17) (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Change Data Capture was already enabled on `NBS_ODSE` in the Case Notification service deployment. Running the bootstrap script again on `NBS_ODSE` has no additional effect. The script also enables CDC on `NBS_SRTE`, which is required for real-time reporting.
 
 To enable CDC on `NBS_ODSE` and `NBS_SRTE`:
 

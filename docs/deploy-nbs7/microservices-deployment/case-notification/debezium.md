@@ -10,7 +10,7 @@ redirect_from:
 
 # Deploy the Debezium Kafka source connector for NBS 7 case notifications
 
-This page walks through enabling Change Data Capture (CDC) and deploying the Debezium source connector used by case notification services. Complete [Case notifications](../case-notification.html) before starting this page. After you finish the connector deployment, proceed to deploying the [case notification service](./case-notification-service.html).
+This page walks through enabling Change Data Capture (CDC) and deploying the Debezium source connector used by Case Notification services. Complete [Case notifications](../case-notification.html) before starting this page. After you finish the connector deployment, proceed to deploying the [Case Notification service](./case-notification-service.html).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -26,6 +26,9 @@ This page assumes you've completed [Before you begin](../deploy-nbs7-microservic
 - Confirm that the `case-notification-service` Keycloak client has been imported. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help.
 
 ## Enable Change Data Capture
+
+> In this section, the terms `cdc` and `CDC` appear as part of SQL Server column and parameter names and refer to Change Data Capture, not the Centers for Disease Control and Prevention.
+{: .note }
 
 Enable Change Data Capture on `NBS_ODSE` before deploying the connector. Sysadmin permissions are required.
 
@@ -69,22 +72,10 @@ Complete the following steps to deploy the ['debezium-case-notifications' Helm c
 1. In the `debezium-case-notifications` chart directory, open the values file for your cloud provider:
    - **AWS:** `debezium-case-notifications/values.yaml`
    - **Azure:** `debezium-case-notifications/values-azure.yaml`
-1. In the values file, search for `EXAMPLE` and fill in your environment-specific values. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use. The connector's SQL Server config is preconfigured for the `NBS_ODSE` database and doesn't need to change:
-
-   ```yaml
-   sqlserverconnector:
-     config:
-       database.port: 1433
-       database.dbname: nbs_odse
-       database.names: nbs_odse
-       database.server.name: odse
-   ```
-
+1. In the values file, search for `EXAMPLE` and fill in your environment-specific values. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use. The connector's SQL Server config is preconfigured for the `NBS_ODSE` database and doesn't need to change.
 1. Install the connector:
-
-   ```bash
-   helm install "debezium-case-notification-service-connect" ./debezium-case-notifications -f ./debezium-case-notifications/values.yaml
-   ```
+   - **AWS:** `helm install debezium-case-notification-service-connect ./debezium-case-notifications -f ./debezium-case-notifications/values.yaml`
+   - **Azure:** `helm install debezium-case-notification-service-connect ./debezium-case-notifications -f ./debezium-case-notifications/values-azure.yaml`
 
 1. Confirm the pod is running:
 
@@ -92,7 +83,7 @@ Complete the following steps to deploy the ['debezium-case-notifications' Helm c
    kubectl get pods
    ```
 
-If the pod is not in a running state, wait and troubleshoot before continuing to [deploy the case notification service](./case-notification-service.html).
+If the pod is not in a running state, wait and troubleshoot before continuing to [deploy the Case Notification service](./case-notification-service.html).
 
 ## Troubleshooting
 
@@ -105,10 +96,8 @@ If the service has trouble connecting to the database, delete the ConfigMap and 
    ```
 
 1. Reinstall the chart:
-
-   ```bash
-   helm upgrade "debezium-case-notification-service-connect" ./debezium-case-notifications -f ./debezium-case-notifications/values.yaml
-   ```
+   - **AWS:** `helm upgrade debezium-case-notification-service-connect ./debezium-case-notifications -f ./debezium-case-notifications/values.yaml`
+   - **Azure:** `helm upgrade debezium-case-notification-service-connect ./debezium-case-notifications -f ./debezium-case-notifications/values-azure.yaml`
 
 ## Next steps
 

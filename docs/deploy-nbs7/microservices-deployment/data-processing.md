@@ -9,7 +9,7 @@ redirect_from:
   - /docs/6_microservices_deployment/7_data_processing/
 ---
 
-# Deploy the Data Processing service for NBS 7
+# Deploy Real Time Ingestion (RTI) data processing for NBS 7
 
 This page walks through deploying the Real Time Ingestion (RTI) data processing service using the `data-processing-service` Helm chart from the [NEDSS-Helm][nedss-helm-data-processing-service-chart] repository for NBS version {{ site.version_latest }}.
 

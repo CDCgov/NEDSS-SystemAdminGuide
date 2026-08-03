@@ -113,7 +113,7 @@ After seeding is complete, upgrade the release with post-processing enabled:
 
 ## Next steps
 
-Continue to [Post-deploy cleanup](../../full-deploy/post-deploy-cleanup.html).
+Continue to [Validate the deployment](../../full-deploy/validate-the-deployment.html).
 
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-reporting-pipeline-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/reporting-pipeline-service>

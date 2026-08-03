@@ -1,9 +1,8 @@
 ---
 title: Validate deployment
 layout: page
-parent: Deploy NBS 7
+parent: NBS 7 full deployment
 nav_order: 5
-has_toc: false
 description: Confirm that every deployed NBS 7 component was validated, then run system-level checks across the full deployment before go-live.
 ---
 
@@ -36,14 +35,14 @@ Confirm that each component you deployed passed its validation:
 
 | Component | What its validation confirms | Validation steps |
 |:---|:---|:---|
-| Elasticsearch, Modernization API, and NiFi | Name resolution works, routing between NBS 6 and NBS 7 is correct, database connectivity from NBS 7 components works, and search indices are created and populated | [Manual validation](microservices-deployment/validate-es-mapi-nifi/manual-validation.html) |
-| Modernization API | API endpoints respond and return expected results | [API smoke test](microservices-deployment/validate-es-mapi-nifi/api-smoke-test.html) |
-| NBS UI and patient search | The NBS interface is accessible and patient search returns results | [Web UI smoke test](microservices-deployment/validate-es-mapi-nifi/web-ui-smoke-test.html) |
-| Data ingestion | Individual ELR and eCR messages are accepted and routed correctly | [Smoke test](microservices-deployment/data-ingestion/smoke-test.html) |
-| Data ingestion API | Data ingestion API endpoints are reachable and functioning | [API testing](microservices-deployment/data-ingestion/api-testing.html) |
-| Data processing | Data processing handles ELR data correctly and returns expected status codes | [API testing and integration](microservices-deployment/data-processing/api-testing.html) |
-| Case notifications | The Case Notification service processes and routes notifications correctly | [API testing](microservices-deployment/case-notification/api-testing.html) |
-| NND service (Data Sync) | Data Sync API endpoints are reachable and credentials are valid | [Validate API endpoints](microservices-deployment/nnd-service/validating-api-endpoints.html) |
+| Elasticsearch, Modernization API, and NiFi | Name resolution works, routing between NBS 6 and NBS 7 is correct, database connectivity from NBS 7 components works, and search indices are created and populated | [Manual validation](../microservices-deployment/validate-es-mapi-nifi/manual-validation.html) |
+| Modernization API | API endpoints respond and return expected results | [API smoke test](../microservices-deployment/validate-es-mapi-nifi/api-smoke-test.html) |
+| NBS UI and patient search | The NBS interface is accessible and patient search returns results | [Web UI smoke test](../microservices-deployment/validate-es-mapi-nifi/web-ui-smoke-test.html) |
+| Data ingestion | Individual ELR and eCR messages are accepted and routed correctly | [Smoke test](../microservices-deployment/data-ingestion/smoke-test.html) |
+| Data ingestion API | Data ingestion API endpoints are reachable and functioning | [API testing](../microservices-deployment/data-ingestion/api-testing.html) |
+| Data processing | Data processing handles ELR data correctly and returns expected status codes | [API testing and integration](../microservices-deployment/data-processing/api-testing.html) |
+| Case notifications | The Case Notification service processes and routes notifications correctly | [API testing](../microservices-deployment/case-notification/api-testing.html) |
+| NND service (Data Sync) | Data Sync API endpoints are reachable and credentials are valid | [Validate API endpoints](../microservices-deployment/nnd-service/validating-api-endpoints.html) |
 
 <!-- [SME REVIEW] Add rows for any component whose validation is not yet represented (eg, RTR). -->
 
@@ -62,4 +61,4 @@ The following system-level checks confirm that the services work together and th
 
 ## Confirm monitoring and go-live readiness
 
-When all component validation and system-level checks pass, your deployment is ready for go-live. To remove temporary deployment artifacts and tighten access, continue to [Post-deploy cleanup](full-deploy/post-deploy-cleanup.html).
+When all component validation and system-level checks pass, your deployment is ready for go-live. To remove temporary deployment artifacts and tighten access, continue to [Post-deploy cleanup](../../deploy-nbs7/post-deploy-cleanup.html).

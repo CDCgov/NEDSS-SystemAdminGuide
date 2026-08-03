@@ -105,7 +105,7 @@ CDC eclearance reviewers require content as a Word document with working links.
 Once your content is on the `preview` branch, generate one on demand — no local
 setup needed:
 
-1. Go to **Actions → Create eclearance Word doc → Run workflow**.
+1. Navigate to **Actions → Create eclearance Word doc → Run workflow**.
 2. Enter the chapter path under `docs/`, without `.html` — for example
    `before-you-deploy`, or a deeper page such as
    `deploy-nbs7/full-deploy/provision-cloud-infrastructure/provision-cloud-environment`.
@@ -137,7 +137,7 @@ Open a PR on GitHub from your **feature branch** to `main` — not from `preview
 
 Before merging, add or update an entry in `docs/revision-history.md` for any new or updated content that will be merged to `main`.
 
-Go to https://github.com/CDCgov/NEDSS-SystemAdminGuide — GitHub will show a prompt to open a PR for your recently pushed branch.
+Navigate to https://github.com/CDCgov/NEDSS-SystemAdminGuide — GitHub will show a prompt to open a PR for your recently pushed branch.
 
 After the PR is approved and merged, the production site updates automatically:
 https://cdcgov.github.io/NEDSS-SystemAdminGuide/

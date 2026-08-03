@@ -126,7 +126,7 @@ Use port forwarding to access the Keycloak web UI from your local machine.
    kubectl port-forward deploy/keycloak-deployment 8080
    ```
 
-1. In a browser, go to `http://127.0.0.1:8080/auth` and select **Administration Console**.
+1. In a browser, navigate to `http://127.0.0.1:8080/auth` and select **Administration Console**.
 
    <!-- The filename kyecloak-login.png contains a typo. Do not rename this file without also updating this reference. -->
    ![Keycloak welcome page at the /auth path with the Administration Console, Documentation, Keycloak Project, Mailing List, and Report an issue links](images/kyecloak-login.png)
@@ -167,7 +167,7 @@ Keycloak uses two realms for NBS 7: the **NBS** realm for service clients, and t
 
 Import the base NBS users and development clients into the **nbs-users** realm:
 
-1. Select the **nbs-users** realm, then go to **Realm settings** > **Action** > **Partial Import**.
+1. Select the **nbs-users** realm, then navigate to **Realm settings** > **Action** > **Partial Import**.
 
    ![Keycloak Realm settings page for the nbs-users realm, showing the General tab with realm configuration options](images/nbs-users-base-users.png)
 
@@ -196,7 +196,7 @@ Import the base NBS users and development clients into the **nbs-users** realm:
 You can use the pre-populated NBS login theme, keep the default Keycloak theme, or create a custom theme. The Keycloak Helm chart loads a sample NBS theme in a persistent volume mounted at `/opt/keycloak/themes/nbs`.
 
 1. Select the **nbs-users** realm.
-1. Go to **Realm settings** > **Themes** > **Login** and select your preferred theme.
+1. Navigate to **Realm settings** > **Themes** > **Login** and select your preferred theme.
 
    ![Keycloak Themes tab in Realm settings for the nbs-users realm, with the Login theme drop-down open showing base and keycloak options](images/nbs-login-theme.png)
 
@@ -204,7 +204,7 @@ You can use the pre-populated NBS login theme, keep the default Keycloak theme, 
 
 This validation depends on the DNS records from [Deploy core Kubernetes services](deploy-core-services.html#create-dns-records) and the Keycloak configuration on this page. Use a browser to verify the following:
 
-1. Go to `https://app.<DOMAIN_NAME.TLD>` and verify that the NBS 7 Welcome page is shown. The following screenshot shows the Welcome page from the NBS demo environment. Your Welcome page will differ.
+1. Navigate to `https://app.<DOMAIN_NAME.TLD>` and verify that the NBS 7 Welcome page is shown. The following screenshot shows the Welcome page from the NBS demo environment. Your Welcome page will differ.
 
    ![NBS 7 demo site Welcome page with a Login panel and a Login to NBS demo site button](images/nbs7-welcome-page.png)
 
@@ -243,7 +243,7 @@ The imported configuration seeds a random client secret for most service clients
 
 For each service client that has **Yes** in the **Import needed** column of the [clients table](#import-service-clients-and-retrieve-secrets), complete the following steps:
 
-1. In the realm listed for that client, go to **Realm settings**, select the **Action** dropdown, and select **Partial Import**.
+1. In the realm listed for that client, navigate to **Realm settings**, select the **Action** dropdown, and select **Partial Import**.
 1. Upload the import file listed for that client and select **Import**.
 
 After each import completes, follow [Retrieve a client secret](#retrieve-a-client-secret) to get the secret for that client.
@@ -252,7 +252,7 @@ After each import completes, follow [Retrieve a client secret](#retrieve-a-clien
 
 Use the following steps to retrieve the secret for any service client in the [clients table](#import-service-clients-and-retrieve-secrets):
 
-1. In the realm listed for that client, go to **Clients** and select the client.
+1. In the realm listed for that client, navigate to **Clients** and select the client.
 1. Open the **Credentials** tab.
 1. Select the eye icon to reveal the secret and copy it.
 1. Store the secret securely in your organization's secrets manager, such as AWS Secrets Manager or Azure Key Vault.

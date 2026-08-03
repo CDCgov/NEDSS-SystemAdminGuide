@@ -37,7 +37,7 @@ To enable Trace Flag 460 permanently across SQL Server restarts:
 1. Open **SQL Server Configuration Manager**
 2. Navigate to **SQL Server Services**
 3. Right-click on your **SQL Server instance** and select **Properties**
-4. Go to the **Startup Parameters** tab
+4. Navigate to the **Startup Parameters** tab
 5. Add the parameter: `-T460`
 6. Click **Add** then **Apply**
 7. **Restart the SQL Server service** for the change to take effect

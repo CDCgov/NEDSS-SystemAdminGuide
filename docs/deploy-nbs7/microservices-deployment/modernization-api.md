@@ -61,7 +61,7 @@ If the pod is not in a running state, wait and troubleshoot before continuing.
 
 ## Next steps
 
-Continue to [NiFi](./nifi.html).
+Continue to [deploy Apache NiFi](./nifi.html).
 
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-modernization-api-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/modernization-api>

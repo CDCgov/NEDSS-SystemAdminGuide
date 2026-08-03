@@ -38,7 +38,7 @@ This page covers how to deploy the core services that must be running in your Ku
 
 Complete these steps to download the Helm charts that deploy the core services and the NBS 7 microservices:
 
-1. Go to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the `nbs-helm-{{ site.version_latest_tag }}.zip` file.
+1. Navigate to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the `nbs-helm-{{ site.version_latest_tag }}.zip` file.
 1. Unzip the downloaded file.
 1. In a terminal, change into the `charts` directory from the unzipped file:
 
@@ -160,8 +160,8 @@ Create A records in your Domain Name System (DNS) service, such as Amazon Route 
    {: .important }
 
    To create the records in your cloud provider:
-   - **AWS:** In the AWS Management Console, go to **Route 53** > **Hosted Zones** and select your hosted zone. Make note of your **Hosted zone ID**, because the verification step uses it. Create or edit each A record from the table so that its **Route traffic to** target is the hostname of your Traefik load balancer.
-   - **Azure:** In the Azure Portal, go to **DNS Zones** and select your DNS zone. Create or edit each A record from the table so that it points to the IP address of your Application Gateway.
+   - **AWS:** In the AWS Management Console, navigate to **Route 53** > **Hosted Zones** and select your hosted zone. Make note of your **Hosted zone ID**, because the verification step uses it. Create or edit each A record from the table so that its **Route traffic to** target is the hostname of your Traefik load balancer.
+   - **Azure:** In the Azure Portal, navigate to **DNS Zones** and select your DNS zone. Create or edit each A record from the table so that it points to the IP address of your Application Gateway.
 1. **Verify the records:** For each record you created, run the following `nslookup` command and verify that it does not print an error such as `server can't find`. Records typically propagate within 60 seconds. If you encounter an error, rerun the command periodically for up to 5 minutes until it prints no error:
 
    ```bash
@@ -198,7 +198,7 @@ The Traefik dashboard lets you inspect routers, services, and middleware:
    Forwarding from [::1]:9000 -> 9000
    ```
 
-1. Go to `http://localhost:9000/dashboard/` in your browser to access the Traefik dashboard. The following screenshot shows the dashboard:
+1. Navigate to `http://localhost:9000/dashboard/` in your browser to access the Traefik dashboard. The following screenshot shows the dashboard:
 
    <!-- RELEASE CHECKLIST: UI screenshot; reverify against the Traefik version shipped with each release. -->
    ![Traefik dashboard with entrypoints panels for ports 80, 443, and 9000, and status panels showing all HTTP routers, services, and middleware in a success state](images/traefik-dashboard.png)

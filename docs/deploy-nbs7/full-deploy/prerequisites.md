@@ -11,7 +11,7 @@ redirect_from:
 
 # Prerequisites for NBS 7 deployment
 
-Before you begin deployment on any cloud provider, confirm that your jurisdiction meets the prerequisites in each of the following areas. Some prerequisites are cloud-agnostic; others are specific to AWS or Azure. Refer to the provider-specific pages for additional requirements.
+Before you begin deployment, confirm that your jurisdiction meets the prerequisites in each of the following areas. Additional prerequisites such as database, server, and workstation details are covered at the point of cloud provisioning in the [Cloud prerequisites for AWS and Azure](./provision-cloud-infrastructure/cloud-prerequisites.html) section.
 
 ## On this page
 {: .no_toc .text-delta }

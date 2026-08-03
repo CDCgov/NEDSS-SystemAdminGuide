@@ -10,7 +10,7 @@ redirect_from:
   - /docs/3_base_application/nifi/
 ---
 
-# Deploy NiFi for NBS 7
+# Deploy Apache NiFi for NBS 7
 
 This page walks through deploying NiFi using the `nifi` Helm chart from the [NEDSS-Helm][nedss-helm-nifi-chart] repository for NBS version {{ site.version_latest }}.
 
@@ -20,7 +20,7 @@ This page assumes you've completed [Before you begin](./deploy-nbs7-microservice
 
 Have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
-## Deploy NiFi using Helm
+## Deploy Apache NiFi using Helm
 
 Complete the following steps to deploy the ['nifi' Helm chart][nedss-helm-nifi-chart] from the `charts/nifi/` directory of your cloned NEDSS-Helm repository:
 
@@ -35,7 +35,7 @@ Complete the following steps to deploy the ['nifi' Helm chart][nedss-helm-nifi-c
      enabled: true
    ```
 
-1. Install NiFi:
+1. Install Apache NiFi:
 
    ```bash
    helm install "nifi" ./nifi -f ./nifi/values.yaml

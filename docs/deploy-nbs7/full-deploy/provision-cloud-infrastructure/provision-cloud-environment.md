@@ -36,7 +36,7 @@ If your database is in Amazon RDS, review the inbound rules on the security grou
 
 ### Azure
 
-If your database is in Azure, in the same VNet as your NBS 7 environment, Azure allows all internal traffic within a VNet by default. To confirm, in the Azure Portal, go to the network security group attached to your database and confirm that the default inbound rules are present:
+If your database is in Azure, in the same VNet as your NBS 7 environment, Azure allows all internal traffic within a VNet by default. To confirm, in the Azure Portal, navigate to the network security group attached to your database and confirm that the default inbound rules are present:
 
 ![Azure Portal inbound security rules for a network security group, showing the default rules AllowVnetInBound and AllowAzureLoadBalancerInBound with the Allow action and DenyAllInBound with the Deny action, listed with their priorities, ports, protocols, sources, and destinations](images/azure-nsg-default-inbound-rules.png)
 
@@ -77,7 +77,7 @@ Terraform, kubectl, and Helm commands require an authenticated session with your
 
 Complete these steps to download the infrastructure code and prepare your environment-specific Terraform files:
 
-1. Go to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file.
+1. Navigate to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file.
 1. Unzip the downloaded file.
 1. Open a terminal and change into the top-level directory from the unzipped file:
 

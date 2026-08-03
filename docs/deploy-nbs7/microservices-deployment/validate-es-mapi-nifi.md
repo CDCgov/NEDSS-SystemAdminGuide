@@ -9,7 +9,7 @@ redirect_from:
   - /docs/6_microservices_deployment/5_validate_es_mapi_nifi/
 ---
 
-# Validate Elasticsearch, Modernization API, and NiFi
+# Validate Elasticsearch, Modernization API, and Apache NiFi
 
 After deploying Elasticsearch, Modernization API, and NiFi, validate all three services before continuing with the remaining microservices. After you finish the validation section, proceed to [Deploy NBS Gateway](./nbs-gateway.html).
 

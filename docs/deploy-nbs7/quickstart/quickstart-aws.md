@@ -45,7 +45,7 @@ Use Terraform to provision the virtual network, the Amazon Elastic Kubernetes Se
    aws sts get-caller-identity
    ```
 
-1. Go to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file, then unzip it.
+1. Navigate to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file, then unzip it.
 1. Create an environment directory and copy the sample layers into it:
 
    ```bash
@@ -101,7 +101,7 @@ kubectl get namespace default -o=jsonpath='{.metadata.annotations}'
 
 Download the Helm charts, then deploy the Traefik ingress controller, cert-manager, and the Cluster Autoscaler.
 
-1. Go to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the `nbs-helm-{{ site.version_latest_tag }}.zip` file, then unzip it.
+1. Navigate to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the `nbs-helm-{{ site.version_latest_tag }}.zip` file, then unzip it.
 1. Change into the `charts` directory from the unzipped file. Run all `helm` commands from this directory:
 
    ```bash
@@ -144,7 +144,7 @@ The `nbs-ingress` chart manages ingress routing between the NBS 7 applications.
 
 ### Configure cert-manager (optional)
 
-Terraform deploys cert-manager during provisioning. It creates and renews Transport Layer Security (TLS) certificates for the NiFi and modernization-api services. Skip this section if you use manual certificates stored in Kubernetes secrets.
+Terraform deploys cert-manager during provisioning. It creates and renews Transport Layer Security (TLS) certificates for the Apache NiFi and modernization-api services. Skip this section if you use manual certificates stored in Kubernetes secrets.
 
 1. In the NEDSS-Helm repository, open [`k8-manifests/cluster-issuer-prod.yaml`][nedss-helm-cluster-issuer-manifest] and update the email address to a valid operations address.
 1. Apply the manifest:
@@ -207,7 +207,7 @@ Create A records in Amazon Route 53 that point to the address of the Traefik loa
    kubectl get svc -n traefik
    ```
 
-1. In the AWS Management Console, go to **Route 53** > **Hosted Zones** and select your hosted zone. Create an A record for each hostname in the following table, with **Route traffic to** set to the hostname of your Traefik load balancer. Replace `<DOMAIN_NAME.TLD>` with your site and domain names from the [Helm values reference for NBS 7 microservices][helm-values-table]:
+1. In the AWS Management Console, navigate to **Route 53** > **Hosted Zones** and select your hosted zone. Create an A record for each hostname in the following table, with **Route traffic to** set to the hostname of your Traefik load balancer. Replace `<DOMAIN_NAME.TLD>` with your site and domain names from the [Helm values reference for NBS 7 microservices][helm-values-table]:
 
    | Subdomain description | Hostname | Example |
    |-----------------------|----------|---------|
@@ -215,7 +215,7 @@ Create A records in Amazon Route 53 that point to the address of the Traefik loa
    | Data services | `data.<DOMAIN_NAME.TLD>` | `data.nbsdemo.com` |
    | NiFi (use with caution) | `nifi.<DOMAIN_NAME.TLD>` | `nifi.nbsdemo.com` |
 
-   > NiFi has known security vulnerabilities. Add a NiFi DNS record only if you need to administer NiFi directly. Otherwise, omit it.
+   > Apache NiFi has known security vulnerabilities. Add a NiFi DNS record only if you need to administer NiFi directly. Otherwise, omit it.
    {: .important }
 
 1. Verify that each record resolves without an error such as `server can't find`. Records typically propagate within 60 seconds:
@@ -242,7 +242,7 @@ Keycloak is the authentication service that allows users to sign in to the NBS 7
    kubectl get pods -n default
    ```
 
-1. Set up port forwarding, then go to `http://127.0.0.1:8080/auth` in a browser and select **Administration Console**. Sign in with the admin credentials from the values file:
+1. Set up port forwarding, then navigate to `http://127.0.0.1:8080/auth` in a browser and select **Administration Console**. Sign in with the admin credentials from the values file:
 
    ```bash
    kubectl port-forward deploy/keycloak-deployment 8080
@@ -260,11 +260,11 @@ Keycloak is the authentication service that allows users to sign in to the NBS 7
 
    All import files are in the `keycloak/extra/` directory of the NEDSS-Helm charts.
 
-1. Import the base users and development clients into the **nbs-users** realm. Select the realm, go to **Realm settings** > **Action** > **Partial Import**, and import each file:
+1. Import the base users and development clients into the **nbs-users** realm. Select the realm, navigate to **Realm settings** > **Action** > **Partial Import**, and import each file:
    - `03-nbs-users-base-users.json` (select the three users: `msa`, `nbs-users-admin`, `superuser`)
    - `04-nbs-users-development-clients.json` (select the `nbs-development` client)
 
-1. Import the additional service clients and retrieve their secrets. The NBS realm seeds `di-keycloak-client` with the realm import, so it needs no separate import. For each client in the following table that requires an import, select the listed realm, go to **Realm settings** > **Action** > **Partial Import**, and import the file. Then go to **Clients**, select the client, open the **Credentials** tab, and store the secret in your organization's secrets manager, such as AWS Secrets Manager:
+1. Import the additional service clients and retrieve their secrets. The NBS realm seeds `di-keycloak-client` with the realm import, so it needs no separate import. For each client in the following table that requires an import, select the listed realm, navigate to **Realm settings** > **Action** > **Partial Import**, and import the file. Then navigate to **Clients**, select the client, open the **Credentials** tab, and store the secret in your organization's secrets manager, such as AWS Secrets Manager:
 
    | Client | Realm | Import needed | Import file |
    |--------|-------|---------------|-------------|
@@ -273,7 +273,7 @@ Keycloak is the authentication service that allows users to sign in to the NBS 7
    | `srte-data-keycloak-client` | NBS | Yes | `06-nbs-users-srte-data-client.json` |
    | `case-notification-service` | NBS | Yes | `08-nbs-users-case-notification-service.json` |
 
-1. Verify Traefik and Keycloak together. In a browser, go to `https://app.<DOMAIN_NAME.TLD>`, confirm that the NBS 7 Welcome page is shown, select **Login**, and confirm that the Keycloak login page is shown.
+1. Verify Traefik and Keycloak together. In a browser, navigate to `https://app.<DOMAIN_NAME.TLD>`, confirm that the NBS 7 Welcome page is shown, select **Login**, and confirm that the Keycloak login page is shown.
 
 ## Deploy NBS 7 microservices
 
@@ -291,7 +291,7 @@ Run each command from the `charts` directory, in the order shown. Before each co
    helm install "modernization-api" ./modernization-api -f ./modernization-api/values.yaml
    ```
 
-1. NiFi:
+1. Apache NiFi:
 
    ```bash
    helm install "nifi" ./nifi -f ./nifi/values.yaml

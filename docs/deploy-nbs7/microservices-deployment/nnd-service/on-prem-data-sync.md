@@ -24,7 +24,7 @@ This section provides instructions for on-premises deployment of the **Data Avai
 ## Prerequisites
 
 - Complete [Validate API endpoints](./validating-api-endpoints.html).
-- **Keycloak client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, go to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
+- **Keycloak client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, navigate to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
 - **Data service URL** - Retrieve this from your NBS environment.
 - **Release materials/package** - CDC provides this as a .zip file with each release.
 - **Microsoft SQL Server database**

@@ -207,7 +207,7 @@ Create A records in Amazon Route 53 that point to the address of the Traefik loa
    kubectl get svc -n traefik
    ```
 
-1. In the AWS Management Console, navigate to **Route 53** > **Hosted Zones** and select your hosted zone. Create an A record for each hostname in the following table, with **Route traffic to** set to the hostname of your Traefik load balancer. Replace `<DOMAIN_NAME.TLD>` with your site and domain names from the [Helm values reference for NBS 7 microservices][helm-values-table]:
+1. In the AWS Management Console, navigate to **Route 53** > **Hosted Zones** and select your hosted zone. Create an A record as an ALIAS for each hostname in the following table, with **Route traffic to** set to the hostname of your Traefik load balancer. Replace `<DOMAIN_NAME.TLD>` with your site and domain names from the [Helm values reference for NBS 7 microservices][helm-values-table]:
 
    | Subdomain description | Hostname | Example |
    |-----------------------|----------|---------|

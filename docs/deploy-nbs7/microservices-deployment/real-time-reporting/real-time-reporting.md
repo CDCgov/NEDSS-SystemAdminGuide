@@ -61,9 +61,8 @@ Before you begin, verify that your environment meets the following requirements 
    > Back up the `RDB` database before you proceed. This step cannot be undone.
    {: .warning }
 
-   - **Use your existing RDB database:** RTR takes over writing to `RDB`. Turn off the classic ETL batch jobs and proceed to the next step. MasterETL remains available for manual recovery runs if needed.
-
    - **Create a new reporting database (suggested):** Duplicate your existing `RDB`. This lets you run RTR alongside MasterETL to compare results before fully committing. You can use any name for this reporting database, but for the remainder of this guide, we refer to it as `RDB_MODERN`. The exact steps for database duplication depend on your SQL Server version and hosting environment. If your database is on Amazon RDS, see [Back up and restore on Amazon RDS](../../../maintain-nbs7/rds-backup-restore.html). For other environments, see [Microsoft's documentation on backup and restore operations](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases?view=sql-server-ver17).
+      - **Use your existing RDB database:** RTR takes over writing to `RDB`. Turn off the `MasterETL.bat` and `covid19ETL.bat` jobs and proceed to the next step. MasterETL remains available for manual recovery runs if needed.
 
    > If you use a new reporting database, you must use the new reporting execution server to run reports.
    {: .note }

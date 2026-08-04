@@ -37,10 +37,17 @@ Complete the following steps to deploy the [Debezium Helm chart][nedss-helm-debe
 1. Search the values file for `EXAMPLE` and fill in your environment-specific values. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
 
 1. Install the Helm chart:
+   - **AWS:** `debezium/values.yaml`
 
-   ```bash
-   helm install -f ./debezium/values.yaml debezium-connect ./debezium/
-   ```
+      ```bash
+      helm install -f ./debezium/values.yaml debezium-connect ./debezium/
+      ```
+
+   - **Azure:** `debezium/values-azure.yaml`
+
+      ```bash
+      helm install -f ./debezium/values-azure.yaml debezium-connect ./debezium/
+      ```
 
 1. Verify the pod is running:
 

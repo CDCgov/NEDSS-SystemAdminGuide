@@ -43,8 +43,7 @@ Confirm that each component you deployed passed its validation:
 | Data processing | Data processing handles ELR data correctly and returns expected status codes | [API testing and integration](../microservices-deployment/data-processing/api-testing.html) |
 | Case notifications | The Case Notification service processes and routes notifications correctly | [API testing](../microservices-deployment/case-notification/api-testing.html) |
 | NND service (Data Sync) | Data Sync API endpoints are reachable and credentials are valid | [Validate API endpoints](../microservices-deployment/nnd-service/validating-api-endpoints.html) |
-
-<!-- [SME REVIEW] Add rows for any component whose validation is not yet represented (eg, RTR). -->
+| Real-time reporting (RTR) | RTR services started, database migrated, and connectors registered | [Validate RTR installation](../microservices-deployment/real-time-reporting/rtr-validation.html) |
 
 ## Run system-level checks
 
@@ -56,8 +55,6 @@ The following system-level checks confirm that the services work together and th
 1. Confirm that ELR data ingested during testing is visible in the UI and correctly attributed. This confirms the full ingestion path, from the Data Ingestion API through to display.
 1. Review application logs across services for unexpected errors or warnings.
 1. Confirm that monitoring and alerting are configured and capturing baseline metrics across the deployment.
-
-<!-- [SME REVIEW] End-to-end data-flow tracing is the highest-value go-live check but is drafted here at a high level. Confirm with engineering the specific path a test ELR should follow and what a healthy result looks like at each stage, and whether an equivalent end-to-end check exists for the case notification and reporting paths. -->
 
 ## Confirm monitoring and go-live readiness
 

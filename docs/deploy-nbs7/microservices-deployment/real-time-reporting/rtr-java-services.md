@@ -113,7 +113,7 @@ After seeding is complete, upgrade the release with post-processing enabled:
 
 ## Next steps
 
-Continue to [Validate the NBS 7 deployment](../../full-deploy/validate-the-deployment.html).
+Continue to [Validate RTR installation](rtr-validation.html).
 
 [nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-reporting-pipeline-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/reporting-pipeline-service>

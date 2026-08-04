@@ -13,7 +13,7 @@ redirect_from:
 
 # Deploy the Kafka connector for real-time reporting (RTR)
 
-This page walks through deploying the Kafka sink connector using the [Kafka connector Helm chart][nedss-helm-kafka-connect-sink-chart] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The connector consumes RTR topics and writes transformed data into reporting tables.
+This page walks through deploying the Kafka sink connector using the ['kafka-connect-sink' Helm chart][nedss-helm-kafka-connect-sink-chart] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The connector consumes RTR topics and writes transformed data into reporting tables.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -37,10 +37,17 @@ Complete the following steps to deploy the [Kafka connector Helm chart][nedss-he
 1. Search the values file for `EXAMPLE` and fill in your environment-specific values. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
 
 1. Install the Helm chart:
+   - **AWS:**
 
-   ```bash
-   helm install -f ./kafka-connect-sink/values.yaml cp-kafka-connect-server ./kafka-connect-sink/
-   ```
+      ```bash
+      helm install -f ./kafka-connect-sink/values.yaml cp-kafka-connect-server ./kafka-connect-sink/
+      ```
+
+   - **Azure:**
+
+      ```bash
+      helm install -f ./kafka-connect-sink/values-azure.yaml cp-kafka-connect-server ./kafka-connect-sink/
+      ```
 
 1. Verify the pod is running:
 

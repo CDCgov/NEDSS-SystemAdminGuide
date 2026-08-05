@@ -1,19 +1,16 @@
 ---
-title: Integrate NBS 7 with an existing Keycloak
+title: Use an existing Keycloak
 layout: page
 parent: Deploy cluster services
 nav_order: 3
-nav_enabled: true
 description: Configure an existing Keycloak realm to authenticate NBS 7 users, including the OIDC client, the preferred_username claim mapping, NBS 6 user alignment, and the issuer and client secret that the microservices require.
 ---
 
 # Integrate NBS 7 with an existing Keycloak
 
-Use this path if your organization already runs Keycloak and you want NBS 7 to authenticate users against an existing realm, instead of deploying the NBS-provided Keycloak described in [Deploy and configure Keycloak](deploy-keycloak.html).
+Use this path if your organization already runs Keycloak and you want NBS 7 to authenticate users against an existing realm, instead of deploying the NBS-provided Keycloak described in [Deploy and configure Keycloak](deploy-keycloak.html). On this path, you configure your existing realm with the client, claim mapping, and users that NBS 7 requires, and then supply the realm issuer and client secret to the NBS 7 microservices.
 
-On this path, you do not create the Keycloak database, install the Keycloak Helm chart, or import the NBS realm files. Instead, you configure your existing realm with the client, claim mapping, and users that NBS 7 requires, and then supply the realm issuer and client secret to the NBS 7 microservices.
-
-> **Scope.** This page covers user authentication (browser login) against your existing realm. The NBS 7 backend service clients for data ingestion, NND, SRTE, and case notification are configured separately. See [Import service clients and retrieve secrets](deploy-keycloak.html#import-service-clients-and-retrieve-secrets).
+This page covers user authentication (browser login) against your existing realm. The NBS 7 backend service clients for data ingestion, NND, SRTE, and case notification are configured separately. See [Import service clients and retrieve secrets](deploy-keycloak.html#import-service-clients-and-retrieve-secrets).
 {: .note }
 
 ## On this page
@@ -22,9 +19,9 @@ On this path, you do not create the Keycloak database, install the Keycloak Helm
 1. TOC
 {:toc}
 
-## Before you begin
+## Prerequisites
 
-Confirm that you have the following:
+Before you begin the procedures on this page, confirm that you have the following:
 
 - Administrator access to your existing Keycloak admin console.
 - The target realm for NBS 7 users. Use an existing realm or create one before you begin.
@@ -96,6 +93,7 @@ If the user does not exist, create it:
 1. Select **Create**.
 1. Open the new user, go to **Credentials**, and set a password. Set **Temporary** to Off so the user is not forced to reset the password on first login.
 1. Select **Set password** and confirm.
+1. Sign out of any active Keycloak session, then test that the new user can sign in.
 
 Confirm the matching NBS 6 account exists and is active, as described in [NBS 6 user requirement](deploy-keycloak.html#nbs-6-user-requirement). For example, when `superuser` signs in to NBS 7, NBS 6 receives `UserName=superuser`, which must resolve to one ACTIVE row for that user.
 
@@ -104,7 +102,7 @@ Confirm the matching NBS 6 account exists and is active, as described in [NBS 6 
 The NBS gateway and Modernization API authenticate users through your realm. When you deploy those services in [Deploy NBS 7 microservices](../../microservices-deployment/deploy-nbs7-microservices.html), set the client secret, and set the issuer URI only if your Keycloak is served at a different host than the NBS 7 application.
 
 - **Client secret (required):** In **Clients** > **nbs-modernization** > **Credentials**, copy the client secret and store it in your secrets manager. Set it as the OIDC client secret (`oidc.client.secret`) for both `nbs-gateway` and `modernization-api`. This is the value described as `EXAMPLE_OIDC_SECRET` in the [Helm values reference](../../microservices-deployment/deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices); use your existing realm's client secret in place of the NBS realm value.
-- **Issuer URI (usually blank):** Leave the OIDC issuer URI blank when your Keycloak is reached at the same application host, which is defined by the `ingressHost` parameter. NBS 7 derives the issuer from that host. Set the issuer URI explicitly only when your Keycloak is served at a different URL than the NBS 7 application. In that case, copy the `issuer` value from **Realm settings** > **OpenID Endpoint Configuration** (in the form `https://<keycloak-host>/realms/<realm-name>`, exactly as Keycloak returns it) and set it for both services.
+- **Issuer URI (`oidc.uri`, usually blank):** Leave the issuer URI (`oidc.uri`) blank when your Keycloak is reached at the same application host, which is defined by the `ingressHost` parameter. NBS 7 derives the issuer from that host. Set `oidc.uri` explicitly only when your Keycloak is served at a different URL than the NBS 7 application. In that case, copy the `issuer` value from **Realm settings** > **OpenID Endpoint Configuration** (in the form `https://<keycloak-host>/realms/<realm-name>`, exactly as Keycloak returns it) and set it for both `nbs-gateway` and `modernization-api`.
 
 After you set these values and run the Helm upgrade for those services, the `nbs-gateway` and `modernization-api` pods usually roll automatically because the pod specification changed. If they do not restart, trigger a rollout restart for both workloads.
 

@@ -13,7 +13,7 @@ redirect_from:
 
 # Deploy cluster services for NBS 7
 
-This phase performs the deployments and configuration in your Kubernetes cluster that the NBS 7 microservices depend on. You first enable Linkerd for the namespace that the microservices deploy into, then deploy the core Kubernetes services, and then deploy and configure Keycloak.
+This phase performs the deployments and configuration in your Kubernetes cluster that the NBS 7 microservices depend on. You first enable Linkerd for the namespace that the microservices deploy into, then deploy the core Kubernetes services, and then set up Keycloak for authentication.
 
 > The `kubectl` commands in this phase require the cluster connection you configured in [Connect to Kubernetes cluster](provision-cloud-infrastructure/provision-cloud-environment.html#connect-to-kubernetes-cluster).
 {: .note }
@@ -48,13 +48,11 @@ Linkerd provides mutual TLS (mTLS) between the NBS 7 microservices, all of which
 
 <!-- The "Create Kubernetes secrets" section was deleted per Josh Olson's confirmation (2026-07-06): nbs-secrets.yaml was removed from NEDSS-Helm, and the reporting-pipeline-service chart takes configuration through its values file. Credential configuration for that service is tracked under STLT-538 with Eric Buckley and the Dragon team. -->
 
-## In this section
+## Next steps
 
-Complete the pages in this section in order:
+Complete the core services page next, then set up Keycloak using the page that matches your environment:
 
-{% assign children = site.pages | where: "parent", page.title | sort: "nav_order" %}
-<ol>
-{% for child in children %}
-  <li><a href="{{ child.url | relative_url }}"><strong>{{ child.title }}</strong></a>{% if child.description %}: {{ child.description }}{% endif %}</li>
-{% endfor %}
-</ol>
+1. **[Deploy core services](deploy-core-services.html)**: Get the NEDSS-Helm charts, then install the core Kubernetes services that NBS 7 depends on, including the Traefik ingress controller, cert-manager, and the Cluster Autoscaler.
+1. Set up Keycloak for authentication using one of the following:
+   - **[Deploy and configure Keycloak](deploy-keycloak.html)**: Install the NBS-provided Keycloak, create the NBS service and user realms, configure service clients, and retrieve client secrets. Use this page if you do not already run Keycloak.
+   - **[Use an existing Keycloak](existing-keycloak.html)**: Configure a Keycloak your organization already runs to authenticate NBS 7 users, including the OIDC client, claim mapping, and NBS 6 user alignment. Use this page if you already operate Keycloak.

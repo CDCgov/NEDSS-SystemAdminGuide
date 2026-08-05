@@ -18,7 +18,7 @@ redirect_from:
 
 # Deploy and configure Keycloak for NBS 7
 
-In addition to the services you deployed in [Deploy core Kubernetes services](deploy-core-services.html), Keycloak is also a core service. Keycloak is the authentication service that allows users to sign in to the NBS 7 web UI. This page covers how to install Keycloak and configure the authentication setup that the NBS 7 microservices require, then validate Traefik and Keycloak together. Complete these steps before you deploy the NBS 7 microservices.
+Keycloak is the authentication service that lets users sign in to the NBS 7 web UI. It provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`, and, like the services in [Deploy core Kubernetes services](deploy-core-services.html), it is a core service. This page covers how to install Keycloak, configure the authentication setup that the NBS 7 microservices require, and validate Traefik and Keycloak together. Complete these steps before you deploy the NBS 7 microservices.
 
 **Already running Keycloak?** If your jurisdiction operates its own Keycloak and you want NBS 7 to authenticate against an existing realm, follow [Integrate NBS 7 with an existing Keycloak](existing-keycloak.html) instead of this page. This page installs the NBS-provided Keycloak and imports the NBS realms.
 {: .important }
@@ -29,14 +29,9 @@ In addition to the services you deployed in [Deploy core Kubernetes services](de
 1. TOC
 {:toc}
 
-## Overview
+## Prerequisites
 
-Before you begin, locate the `keycloak` Helm chart in the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
-
-Keycloak provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`. It uses two separate realms that are created in the [Create the NBS and nbs-users realms](#create-the-nbs-and-nbs-users-realms) section:
-
-- **NBS realm:** Contains service clients for data ingestion, NND, and SRTE data access.
-- **nbs-users realm:** Contains the user-facing authentication client used by the NBS gateway and the NBS application.
+Before you begin the procedures on this page, locate the `keycloak` Helm chart in the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
 
 ## Create the Keycloak database
 
@@ -94,7 +89,7 @@ In [values.yaml][keycloak-values], update the following parameters:
 
 ## Deploy Keycloak
 
-Use the following steps to install the Keycloak Helm chart and verify the pod is running. The `kubectl` commands in this and the next section require the cluster connection you configured in [Connect to Kubernetes cluster](../provision-cloud-infrastructure/provision-cloud-environment.html#connect-to-kubernetes-cluster).
+Use the following steps to install the Keycloak Helm chart and verify the pod is running. The `kubectl` commands on this page require the cluster connection you configured in [Connect to Kubernetes cluster](../provision-cloud-infrastructure/provision-cloud-environment.html#connect-to-kubernetes-cluster).
 
 1. From the `charts` directory, install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available. See the [README in `charts/keycloak`][keycloak-chart-readme] for details.
 
@@ -202,7 +197,7 @@ You can use the pre-populated NBS login theme, keep the default Keycloak theme, 
 
 ## NBS 6 user requirement
 
-NBS 7 authenticates each user in Keycloak and then hands the username off to NBS 6. Every user who signs in to NBS 7 must exist as an active  `user_id` in the NBS 6 `Auth_user` table. If the user is missing or not `ACTIVE`, Keycloak login succeeds but NBS 6 page access fails.
+NBS 7 authenticates each user in Keycloak and then hands the username off to NBS 6. Every user who signs in to NBS 7 must exist as an active `user_id` in the NBS 6 `Auth_user` table. If the user is missing or not `ACTIVE`, Keycloak login succeeds but NBS 6 page access fails.
 
 To confirm that a user's NBS 6 account exists and is active, run the following query. The `user_id` must match the Keycloak username, and `record_status_cd` must be `ACTIVE`:
 

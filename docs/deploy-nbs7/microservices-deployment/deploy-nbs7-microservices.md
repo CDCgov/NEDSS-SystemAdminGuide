@@ -36,6 +36,9 @@ Complete the following steps before you deploy the first microservice:
 1. Use Git to clone your own local copy of the public [NEDSS-Helm][nedss-helm] repository.
 1. Navigate to the `charts` directory of your cloned NEDSS-Helm repository. Run all Helm install commands from this directory.
 
+Each user who signs in to NBS 7 must exist as an ACTIVE `user_id` in the NBS 6 `Auth_user` table. If that account is missing or not ACTIVE, Keycloak login still succeeds, but a user who could use NBS 6 before can no longer open NBS 6 pages. For more information, see [NBS 6 user requirement](../full-deploy/kubernetes-setup/deploy-keycloak.html#nbs-6-user-requirement).
+{: .note }
+
 ## Helm values reference for NBS 7 microservices
 
 The following table lists common Helm values used across NBS 7 microservices. Have these values available before you begin deployment.

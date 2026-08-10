@@ -1,7 +1,7 @@
 ---
 title: Manual validation
 layout: page
-parent: Validate Elasticsearch, Modernization API, NiFi
+parent: Midpoint validation
 nav_order: 1
 redirect_from:
   - /docs/6_microservices_deployment/5a_manual_validation_es_mapi_nifi.html

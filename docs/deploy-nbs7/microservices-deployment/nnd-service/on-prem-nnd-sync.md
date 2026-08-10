@@ -1,7 +1,7 @@
 ---
-title: Deploy NND Sync
+title: NND Sync
 layout: page
-parent: NND Service (Data Sync)
+parent: NND Data Sync
 nav_order: 3
 redirect_from:
   - /docs/6_microservices_deployment/8b_nnd_stlt_on_prem_configuration_nnd_sync.html

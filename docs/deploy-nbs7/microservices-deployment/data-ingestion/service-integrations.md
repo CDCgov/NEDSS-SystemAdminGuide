@@ -1,7 +1,7 @@
 ---
 title: Service integrations
 layout: page
-parent: Deploy data ingestion service (DI API)
+parent: Data ingestion
 nav_order: 3
 description: Configure Rhapsody or SFTP service integrations for data ingestion.
 redirect_from:

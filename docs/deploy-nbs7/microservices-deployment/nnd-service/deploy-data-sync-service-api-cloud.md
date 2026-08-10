@@ -1,7 +1,7 @@
 ---
-title: Deploy Data Sync service API
+title: Data Sync API
 layout: page
-parent: NND Service (Data Sync)
+parent: NND Data Sync
 nav_order: 1
 redirect_from:
    - /docs/6_microservices_deployment/8_nnd.html

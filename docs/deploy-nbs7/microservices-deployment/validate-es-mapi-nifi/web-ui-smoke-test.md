@@ -1,7 +1,7 @@
 ---
 title: Web UI smoke test
 layout: page
-parent: Validate Elasticsearch, Modernization API, NiFi
+parent: Midpoint validation
 nav_order: 3
 redirect_from:
   - /docs/6_microservices_deployment/5c_web_ui_smoke_test.html

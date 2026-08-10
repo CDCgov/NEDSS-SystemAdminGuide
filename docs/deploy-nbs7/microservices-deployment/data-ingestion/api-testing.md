@@ -1,7 +1,7 @@
 ---
 title: API testing
 layout: page
-parent: Deploy data ingestion service (DI API)
+parent: Data ingestion
 nav_order: 4
 description: Diagnostics and troubleshooting guide for Data Ingestion API (DI API) endpoints and operations.
 redirect_from:

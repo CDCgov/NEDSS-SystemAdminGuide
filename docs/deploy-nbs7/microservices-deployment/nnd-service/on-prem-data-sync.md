@@ -1,7 +1,7 @@
 ---
-title: Deploy Data Availability
+title: Data Availability
 layout: page
-parent: NND Service (Data Sync)
+parent: NND Data Sync
 nav_order: 4
 redirect_from:
   - /docs/6_microservices_deployment/8c_nnd_stlt_on_prem_configuration_data_sync.html

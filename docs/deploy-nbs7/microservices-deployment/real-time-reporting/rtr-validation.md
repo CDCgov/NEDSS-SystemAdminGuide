@@ -1,7 +1,7 @@
 ---
 title: Validate RTR installation
 layout: page
-parent: Deploy real-time reporting
+parent: Real-time reporting
 nav_order: 4
 description: Lightweight checks to confirm that RTR services started, database migration is accounted for, and connectors registered before full pipeline validation.
 ---

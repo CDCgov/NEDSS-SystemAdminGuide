@@ -1,7 +1,7 @@
 ---
 title: Debezium
 layout: page
-parent: Deploy real-time reporting
+parent: Real-time reporting
 nav_order: 1
 description: Describes deploying Debezium to capture SQL Server changes and publish RTR events to Kafka.
 redirect_from:

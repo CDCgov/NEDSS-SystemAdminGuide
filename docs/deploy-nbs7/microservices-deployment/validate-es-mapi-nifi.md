@@ -1,5 +1,5 @@
 ---
-title: Validate Elasticsearch, Modernization API, NiFi
+title: Midpoint validation
 layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 4

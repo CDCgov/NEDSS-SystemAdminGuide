@@ -1,5 +1,5 @@
 ---
-title: Deploy data ingestion service (DI API)
+title: Data ingestion
 layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 9

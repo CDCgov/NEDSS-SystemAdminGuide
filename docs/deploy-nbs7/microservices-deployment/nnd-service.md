@@ -1,5 +1,5 @@
 ---
-title: NND Service (Data Sync)
+title: NND Data Sync
 layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 7
@@ -7,7 +7,7 @@ has_children: true
 has_toc: false
 ---
 
-# NND Service (Data Sync)
+# Deploy the NND Service (Data Sync) for NBS 7
 
 This section covers Data Sync capabilities for National Notifiable Disease (NND) workflows, including cloud service deployment, endpoint validation, and on-premises setup patterns. After you finish this deployment, proceed to [Case notifications](./case-notification.html).
 

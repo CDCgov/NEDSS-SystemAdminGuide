@@ -1,5 +1,5 @@
 ---
-title: Deploy real-time reporting
+title: Real-time reporting
 layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 10

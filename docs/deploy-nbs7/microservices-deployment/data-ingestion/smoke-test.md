@@ -1,7 +1,7 @@
 ---
 title: Smoke test
 layout: page
-parent: Deploy data ingestion service (DI API)
+parent: Data ingestion
 nav_order: 2
 description: Test Data Ingestion API (DI API) endpoints using Postman to verify token generation, data ingestion, and status tracking.
 redirect_from:

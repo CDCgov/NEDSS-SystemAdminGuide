@@ -50,9 +50,9 @@ Linkerd provides mutual TLS (mTLS) between the NBS 7 microservices, all of which
 
 ## Next steps
 
-Complete the core services page next, then set up Keycloak using the page that matches your environment:
+Complete the core services page next, then set up Keycloak using the page that matches your environment.
 
-1. **[Deploy core services](deploy-core-services.html)**: Get the NEDSS-Helm charts, then install the core Kubernetes services that NBS 7 depends on, including the Traefik ingress controller, cert-manager, and the Cluster Autoscaler.
-1. Set up Keycloak for authentication using one of the following:
-   - **[Deploy and configure Keycloak](deploy-keycloak.html)**: Install the NBS-provided Keycloak, create the NBS service and user realms, configure service clients, and retrieve client secrets. Use this page if you do not already run Keycloak.
-   - **[Use an existing Keycloak](existing-keycloak.html)**: Configure a Keycloak your organization already runs to authenticate NBS 7 users, including the OIDC client, claim mapping, and NBS 6 user alignment. Use this page if you already operate Keycloak.
+1. **[Deploy core Kubernetes services](./kubernetes-setup/deploy-core-services.html):** Get the NEDSS-Helm charts, then install the core Kubernetes services that NBS 7 depends on.
+1. Set up Keycloak for authentication using one of the following methods:
+   - **[Deploy and configure Keycloak](./kubernetes-setup/deploy-keycloak.html):** Install and configure a new Keycloak. Use this page if you do not already run Keycloak.
+   - **[Use an existing Keycloak](./kubernetes-setup/existing-keycloak.html):** Configure a Keycloak your jurisdiction already runs. Use this page if you already operate Keycloak.

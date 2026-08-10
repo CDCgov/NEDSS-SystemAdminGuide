@@ -1,5 +1,5 @@
 ---
-title: NiFi
+title: Apache NiFi
 layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 3

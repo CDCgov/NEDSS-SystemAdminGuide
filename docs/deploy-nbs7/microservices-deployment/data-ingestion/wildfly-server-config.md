@@ -1,7 +1,7 @@
 ---
 title: Wildfly server
 layout: page
-parent: Deploy data ingestion service (DI API)
+parent: Data ingestion
 nav_order: 1
 description: Configure the Windows Task Scheduler on NBS WildFly server to run the ELR Importer batch process.
 redirect_from:

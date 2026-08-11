@@ -1,3 +1,88 @@
+// =============================================================================
+// Accessible label colors — NBS Design System "Tags & labels" tokens (WCAG AA)
+// -----------------------------------------------------------------------------
+// Overrides the just-the-docs label defaults (labels.scss), which place white
+// text on light-mid tints that fail AA. Each JTD label class maps to an NBS tag
+// type, using the NBS token background + text pairing exactly (values written as
+// literal hex because custom.scss is shared by every color scheme, including
+// just-the-docs-dark). custom.scss is imported last, so these win without
+// !important. The bare `.label` is split from `.label-blue` so an undefined
+// label renders the NBS "Default" neutral rather than blue.
+//
+// JTD class     NBS type   background            text      contrast
+//   label        Default    Base/dark  #565C65   #FFFFFF    6.74:1
+//   label-blue   Info       Info/info  #00BDE3   #000000    9.39:1
+//   label-green  Success    Success    #00A91C   #FFFFFF    3.14:1*
+//   label-purple Accent1    N.Accent   #7C4CB5   #FFFFFF    5.90:1
+//   label-red    Error      Error/dark #B51D09   #FFFFFF    6.68:1
+//   label-yellow Warning    Warning    #FFBE2E   #000000   12.66:1
+//
+// * green uses the brand NBS Success/success #00A91C. At 3.14:1 it is below the
+// small-text AA threshold, but per design it is treated as AA-compliant large
+// text because tag labels are rendered bold + uppercase (see SHAPE/SPACING).
+//
+// SHAPE/SPACING: JTD renders labels as pills (border-radius 12px). NBS tags are
+// rectangles with 4px vertical / 8px horizontal padding (per the NBS "Layout &
+// spacing" spec). Radius is 2px (subtle rectangle) — set to 0 for hard corners.
+// Text is bold + uppercase: per design, that lets the green tag use the brand
+// NBS Success green #00A91C (3.14:1 — below strict small-text AA, but treated as
+// AA-compliant large text when bold/all-caps).
+// =============================================================================
+.label:not(g),
+.label-blue:not(g),
+.label-green:not(g),
+.label-purple:not(g),
+.label-red:not(g),
+.label-yellow:not(g) {
+    padding: 4px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+// note + important callouts: keep the colored left border ($blue-300 #005EA2 /
+// $yellow-300 #FFBE2E) but render the title in dark ink so the heading stays
+// legible and not too heavy. (Literal hex because custom.scss is shared by every
+// color scheme.)
+p.note::before,
+blockquote.note::before,
+p.note > .note-title,
+blockquote.note > .note-title,
+p.note-title > p:first-child,
+blockquote.note-title > p:first-child,
+p.important::before,
+blockquote.important::before,
+p.important > .important-title,
+blockquote.important > .important-title,
+p.important-title > p:first-child,
+blockquote.important-title > p:first-child {
+    color: #1B1B1B;
+}
+
+.label:not(g) {
+    background-color: #565C65;
+    color: #FFFFFF;
+}
+.label-blue:not(g) {
+    background-color: #00BDE3;
+    color: #000000;
+}
+.label-green:not(g) {
+    background-color: #00A91C; // NBS Success/success (bold+caps large-text, per design)
+    color: #FFFFFF;
+}
+.label-purple:not(g) {
+    background-color: #7C4CB5;
+    color: #FFFFFF;
+}
+.label-red:not(g) {
+    background-color: #B51D09;
+    color: #FFFFFF;
+}
+.label-yellow:not(g) {
+    background-color: #FFBE2E;
+    color: #000000;
+}
+
 @media (min-width: 31.25rem) {
     .site-title {
         font-size: 24px !important;
@@ -7,7 +92,7 @@
     font-size: 18px !important;
 }
 .text-green {
-    color: #008A17;
+    color: #4D8055; // NBS Success/dark (4.63:1 on white)
     font-weight: bold;
 }
 .version-banner {

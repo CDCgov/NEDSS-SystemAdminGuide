@@ -20,7 +20,7 @@ The tables on this page omit some patch releases, including 7.4.1-7.4.3, 7.6.1, 
 Latest supported version
 {: .label .label-green }
 
-NBS 7.13, released in July 2026, added the following enhancements and fixes:
+NBS 7.13, released in August 2026, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
@@ -35,7 +35,7 @@ NBS 7.13, released in July 2026, added the following enhancements and fixes:
 ## 7.12: Infrastructure currency
 
 Supported version
-{: .label .label-yellow }
+{: .label .label-green }
 
 NBS 7.12, released in May 2026, added the following enhancements and fixes:
 

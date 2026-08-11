@@ -13,7 +13,9 @@ This table records significant updates to the NBS 7 System Administrator Guide. 
 
 | Date | Author | Description |
 |:-----|:-------|:------------|
-| August 14, 2026 | Jill Shaheen (Skylight Digital) | New content: Revised and restructured [deployment instructions for 7.13.0](/NEDSS-SystemAdminGuide/docs/deploy-nbs7.html) including Azure and AWS guidance |
+| August 14, 2026 | Jill Shaheen (Skylight Digital) | New release: Revised and restructured [deployment instructions for 7.13.0](/NEDSS-SystemAdminGuide/docs/deploy-nbs7.html) including Azure and AWS guidance |
+| August 14, 2026 | Jill Shaheen (Skylight Digital) | New content: [History of changes in NBS 7 releases](/NEDSS-SystemAdminGuide/docs/nbs7-introduction/release-history.html) |
+| August 14, 2026 | Jill Shaheen (Skylight Digital) | Updated [NBS 7 architecture](/NEDSS-SystemAdminGuide/docs/nbs7-introduction/architecture-and-microservices.html) to accurately reflect 7.13 state |
 | August 14, 2026 | Jill Shaheen (Skylight Digital) | Archived [7.12.0 Admin Guide](/NEDSS-SystemAdminGuide/previous_versions/release-7.12.0/index.html) |
 | August 14, 2026 | Jill Shaheen (Skylight Digital) | Updated [Update the Kubernetes control plane](/NEDSS-SystemAdminGuide/docs/maintain-nbs7/kubernetes-upgrade.html) to include Azure guidance |
 | July 28, 2026 | Jill Shaheen (Skylight Digital) | New content: [Before you deploy](/NEDSS-SystemAdminGuide/docs/before-you-deploy.html) |

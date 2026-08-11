@@ -2,7 +2,7 @@
 title: Supported NBS versions
 layout: page
 parent: NBS 7 Introduction
-nav_order: 3
+nav_order: 2
 description: Verify that your NBS 6 version is supported and compatible with your target NBS 7 version.
 ---
 
@@ -12,7 +12,7 @@ description: Verify that your NBS 6 version is supported and compatible with you
 
 NBS 7 integrates with and is tested against specific versions of NBS 6. Use this page to verify that your NBS 6 version is supported and compatible with your target NBS 7 version before you begin deployment.
 
-For the supported Microsoft Windows Server and SQL Server versions for your database server, and the workstation tool versions needed to deploy, see [Cloud prerequisites](deploy-nbs7/full-deploy/provision-cloud-infrastructure/cloud-prerequisites.html).
+For the supported Microsoft Windows Server and SQL Server versions for your database server, and the workstation tool versions needed to deploy, see [Cloud prerequisites](./deploy-nbs7/full-deploy/provision-cloud-infrastructure/cloud-prerequisites.html).
 
 Migrating from the latest supported NBS 6 version to the latest NBS 7 version provides the smoothest path to NBS 7.
 {: .important }
@@ -23,6 +23,8 @@ The following NBS 7 versions are supported:
 
 - 7.13.0
 - 7.12.0
+
+To see what changed in each of these releases, see the [History of changes in NBS 7 releases](./nbs7-introduction/release-history.html).
 
 ## Supported NBS 6 versions
 

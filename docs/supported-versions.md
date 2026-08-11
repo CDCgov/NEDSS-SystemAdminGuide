@@ -1,7 +1,8 @@
 ---
 title: Supported NBS versions
 layout: page
-nav_order: 2
+parent: NBS 7 Introduction
+nav_order: 3
 description: Verify that your NBS 6 version is supported and compatible with your target NBS 7 version.
 ---
 

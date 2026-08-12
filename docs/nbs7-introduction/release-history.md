@@ -13,7 +13,7 @@ description: A summary of new features and notable fixes introduced in each NBS 
 This page summarizes the new features and notable fixes introduced in each NBS 7 release, starting with the most recent release. Use this page to see what capabilities NBS 7 has gained over time and which release introduced them.
 
 The tables on this page omit some patch releases, including 7.4.1-7.4.3, 7.6.1, 7.9.1, and 7.10.3. These releases focused on UI refinements and minor fixes. For information on NBS version support, see the [Supported NBS versions](../supported-versions.html) page.
-{: .important }
+{: .note }
 
 ## 7.13: Azure support, RTR launch, SAS removed from reporting
 

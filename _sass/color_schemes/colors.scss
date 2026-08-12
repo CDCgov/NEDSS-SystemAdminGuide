@@ -10,23 +10,22 @@
 // JTD generates callout styles (see the theme's callouts.scss.liquid) from two
 // tint levels per named color scale:
 //   $color-000  lightest tint  → callout background
-//   $color-300  darkest accent → callout left-border + title text
+//   $color-300  → callout left-border ("chip") + (by default) title text
 // ($color-100 / $color-200 are only used by the optional colored .btn-* styles.)
 //
-// Each callout type declared in _config.yml maps to one of these named scales:
-//   highlight  → purple   (title-less inline emphasis)  → NBS Neutral Accent
-//   important  → yellow                                 → NBS Warning
-//   new        → green                                  → NBS Success
-//   note       → blue                                   → NBS Primary
-//   warning    → red                                    → NBS Secondary
+// Each callout uses its NBS group's mid "chip" color for the left bar; the
+// title is rendered in dark ink (#1B1B1B) by custom.scss, so a bright bar never
+// hurts heading legibility. Mapping (_config.yml color name → NBS group/token):
+//   highlight  → purple  → NBS Neutral Accent / accent   #7C4CB5
+//   important  → yellow  → NBS Warning        / warning   #FFBE2E
+//   new        → green   → NBS Success        / success   #00A91C
+//   note       → blue    → NBS Info           / info      #00BDE3
+//   warning    → red     → NBS Error          / error     #D54309
 //
-// WCAG AA CONTRAST — every interactive/text pairing is >= 4.5:1
-//   link/brand  Primary/primary #005EA2 on white ........ 6.72:1
-//   note   title #1B1B1B on #CFE7FF (ink) ............... 13.6:1
-//   import title #1B1B1B on #FAF3D1 (ink) ............... 15.4:1
-//   new    title #446443 on #ECF3EC ..................... 5.90:1
-//   warn   title #8B1303 on #F8DFE2 ..................... 7.59:1
-//   hilite title #54278F on #E7E3FA ..................... 8.12:1
+// WCAG AA CONTRAST
+//   link/brand    Primary/primary #005EA2 on white .......... 6.72:1
+//   callout titles are #1B1B1B ink on their light tint bg ... >= 13:1
+//   callout body is the default dark text on the light bg ... passes
 // =============================================================================
 
 // -----------------------------------------------------------------------------
@@ -120,42 +119,38 @@ $nbs-neutral-darker:  #54278F;
 // JTD callout / button scales
 // (-000 = callout bg, -300 = callout accent; -100/-200 feed .btn-* variants)
 // -----------------------------------------------------------------------------
-// note → NBS Primary
-// Like the important callout, the note title uses dark ink (the dark-navy accent
-// read as too heavy); the left border carries the brand blue. custom.scss
-// overrides the note TITLE to #1B1B1B.
-$blue-000: $nbs-primary-glow;     // #CFE7FF  callout bg
-$blue-100: $nbs-primary-light;    // #73B3E7
-$blue-200: $nbs-primary-dark;     // #1A4480  .btn-blue (white text, 9.62:1)
-$blue-300: $nbs-primary-primary;  // #005EA2  callout left border (title → ink)
+// Each scale below feeds one callout: -000 = light background tint,
+// -300 = the NBS "chip" color for the left bar. Titles are inked in custom.scss.
+
+// note → NBS Info
+$blue-000: $nbs-info-lighter;  // #E7F6F8  callout bg
+$blue-100: $nbs-info-light;    // #99DEEA
+$blue-200: $nbs-info-dark;     // #009EC1
+$blue-300: $nbs-info-info;     // #00BDE3  callout left bar (chip)
 
 // important → NBS Warning
-// A yellow dark enough to pass AA as *text* reads as brown, so the callout
-// uses the USWDS pattern: $yellow-300 is the bright NBS Warning yellow for the
-// left border, and custom.scss overrides the important callout TITLE to dark
-// ink (#1B1B1B, 15.4:1) so the heading stays legible.
 $yellow-000: $nbs-warning-lighter; // #FAF3D1  callout bg
 $yellow-100: $nbs-warning-light;   // #FEE685
 $yellow-200: $nbs-warning-dark;    // #E5A000
-$yellow-300: $nbs-warning-warning; // #FFBE2E  callout left border (title → ink)
+$yellow-300: $nbs-warning-warning; // #FFBE2E  callout left bar (chip)
 
 // highlight → NBS Neutral Accent
 $purple-000: $nbs-neutral-lighter; // #E7E3FA  callout bg
 $purple-100: $nbs-neutral-accent;  // #7C4CB5  .btn-purple (white text, 5.90:1)
 $purple-200: $nbs-neutral-darker;  // #54278F
-$purple-300: $nbs-neutral-darker;  // #54278F  callout accent
+$purple-300: $nbs-neutral-accent;  // #7C4CB5  callout left bar (chip)
 
 // new → NBS Success
 $green-000: $nbs-success-lighter;  // #ECF3EC  callout bg
 $green-100: $nbs-success-light;    // #70E17B
-$green-200: $nbs-success-success;  // #00A91C
-$green-300: $nbs-success-darker;   // #446443  callout accent + .btn-green (6.67:1)
+$green-200: $nbs-success-dark;     // #4D8055
+$green-300: $nbs-success-success;  // #00A91C  callout left bar (chip)
 
-// warning → NBS Secondary
-$red-000: $nbs-secondary-lighter;  // #F8DFE2  callout bg
-$red-100: $nbs-secondary-light;    // #F2938C
-$red-200: $nbs-secondary-secondary;// #D83933
-$red-300: $nbs-secondary-darker;   // #8B1303  callout accent
+// warning → NBS Error
+$red-000: $nbs-error-lighter;  // #F4E3DB  callout bg
+$red-100: $nbs-error-light;    // #F39268
+$red-200: $nbs-error-dark;     // #B51D09
+$red-300: $nbs-error-error;    // #D54309  callout left bar (chip)
 
 // =============================================================================
 // JTD UI overrides

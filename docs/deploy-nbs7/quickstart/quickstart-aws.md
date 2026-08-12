@@ -216,7 +216,7 @@ Create A records in Amazon Route 53 that point to the address of the Traefik loa
    | NiFi (use with caution) | `nifi.<DOMAIN_NAME.TLD>` | `nifi.nbsdemo.com` |
 
    > Apache NiFi has known security vulnerabilities. Add a NiFi DNS record only if you need to administer NiFi directly. Otherwise, omit it.
-   {: .important }
+   {: .warning }
 
 1. Verify that each record resolves without an error such as `server can't find`. Records typically propagate within 60 seconds:
 

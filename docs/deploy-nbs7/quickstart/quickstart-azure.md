@@ -186,7 +186,7 @@ Create A records in Azure DNS that point to the IP address of your Application G
    | NiFi (use with caution) | `nifi.<DOMAIN_NAME.TLD>` | `nifi.nbsdemo.com` |
 
    > Apache NiFi has known security vulnerabilities. Add a NiFi DNS record only if you need to administer NiFi directly. Otherwise, omit it.
-   {: .important }
+   {: .warning }
 
 1. Verify that each record resolves to the IP address of your Application Gateway without an error such as `server can't find`. Records typically propagate within 60 seconds:
 

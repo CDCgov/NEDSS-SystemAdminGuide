@@ -25,7 +25,7 @@ Have your database credentials and domain values available. See the [Helm values
 Complete the following steps to deploy the ['nifi' Helm chart][nedss-helm-nifi-chart] from the `charts/nifi/` directory of your cloned NEDSS-Helm repository:
 
 > `nifi.EXAMPLE_DOMAIN` only needs to be set if you enable the NiFi ingress. The NiFi ingress is disabled by default due to known security vulnerabilities. If you need access to the NiFi admin UI, use a private domain name.
-{: .important }
+{: .warning }
 
 1. Search `values.yaml` for `EXAMPLE` and fill in the EFS file system ID, JDBC connection string, and NiFi sensitive properties key. The [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
 1. If you enable the NiFi ingress, replace `nifi.EXAMPLE_DOMAIN` in `values.yaml` with your domain name from the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records), then enable the ingress:

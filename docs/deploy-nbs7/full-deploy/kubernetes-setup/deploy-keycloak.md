@@ -21,7 +21,7 @@ redirect_from:
 Keycloak is the authentication service that lets users sign in to the NBS 7 web UI. It provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`, and, like the services in [Deploy core Kubernetes services](deploy-core-services.html), it is a core service. This page covers how to install Keycloak, configure the authentication setup that the NBS 7 microservices require, and validate Traefik and Keycloak together. Complete these steps before you deploy the NBS 7 microservices.
 
 **Already running Keycloak?** If your jurisdiction operates its own Keycloak and you want NBS 7 to authenticate against an existing realm, follow [Integrate NBS 7 with an existing Keycloak](existing-keycloak.html) instead of this page. This page installs the NBS-provided Keycloak and imports the NBS realms.
-{: .important }
+{: .note }
 
 ## On this page
 {: .no_toc .text-delta }

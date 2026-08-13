@@ -144,7 +144,7 @@ NBS 7.5.0 and 7.5.3, released in August 2024, added the following enhancements a
 | 7.5.0 | New feature | New login and home page with installation guides, feature overviews, and CDC links. Updated to support NBS 6.0.16. | Easier onboarding for new NBS 7 users and admins. |
 | 7.5.3 | New feature | Completed foundational infrastructure and testing for RTR in the cloud, ahead of the first Hepatitis Datamart release in 7.6.0. | First concrete step toward replacing overnight batch reporting. |
 
-## 7.4: Page Builder completed, high-volume ingestion fixes
+## 7.4: High-volume ingestion fixes
 
 Unsupported version
 {: .label }
@@ -153,13 +153,12 @@ NBS 7.4.0 through 7.4.4, released between April and July 2024, added the followi
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
-| 7.4.0 | New feature | Completed Page Builder delivery: preview pages before publishing, manage sections, tabs, and questions, and reorder and group elements. | Investigation page configuration becomes fully self-service. |
 | 7.4.0 | New feature | Data Ingestion API now accepts HL7 ELR text files through SFTP. | Additional intake path for jurisdictions using file-based transfer. |
 | 7.4.0 | Notable fix | Resolved an out-of-memory error that limited how many ELRs could be posted during high-volume ingestion, and corrected mandatory-field validation timing. | Reliability during surge periods, such as outbreak reporting volume. |
 | 7.4.0 | Notable fix | Upgraded to the latest Spring Boot version to close known security vulnerabilities. | Security patching with no user-facing change. |
 | 7.4.4 | Notable fix | Fixed the timestamp for patient address changes not being recorded. | Data audit accuracy. |
 
-## 7.3: Page Builder 2.0
+## 7.3: Data governance and integrity
 
 Unsupported version
 {: .label }
@@ -168,7 +167,6 @@ NBS 7.3.0 through 7.3.3, released between February and April 2024, added the fol
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
-| 7.3.0 | New feature | Page Builder 2.0: create condition-specific investigation pages, manage conditions and value sets, import templates, and browse, search, and export the page library. | First step toward configurable investigation pages instead of hardcoded classic NBS forms. |
 | 7.3.2 | New feature | Edited or deleted demographic data now writes to patient history tables, matching NBS 6 audit behavior. | Preserves a change history for patient records, supporting data governance. |
 | 7.3.0 | Notable fix | Improved screen reader heading structure and keyboard navigation on Patient Search and Patient Profile. | Accessibility, Section 508 improvement. |
 | 7.3.1 | Notable fix | Corrected event search results for notification status, and added autocomplete for ordering and reporting facility and provider search. | Search accuracy for event investigators. |

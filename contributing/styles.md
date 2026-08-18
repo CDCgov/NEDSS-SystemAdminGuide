@@ -18,7 +18,6 @@ This guide is the authoritative reference for formatting, front matter, and acce
 | `has_children` | **Required** when this page has child pages | **Omit** | Tells JTD to render an expand arrow in the nav. Without it, child pages exist but the parent page shows no arrow and may not nest visibly. |
 | `has_toc` | **Set `false`** on parent pages that provide a manual "In this section" list | **Omit** | JTD auto-renders a table of contents of child pages at the bottom of every `has_children` page. Set `has_toc: false` to suppress it when the page provides its own richer child list. See [Parent landing pages](#parent-landing-pages). |
 | `parent` | **Required** for child pages | **Omit** | Sets the parent page. The value must exactly match the `title:` of the intended parent. Case-sensitive. |
-| `grand_parent` | **Required** for grandchild pages | **Omit** | Sets the grandparent page. Required when a page's `parent` is itself a child page. Must exactly match the grandparent's `title:`. |
 | `description` | **Optional, recommended** | **Optional** | 1–2 sentences describing the page's purpose. JTD uses this for search result snippets and the HTML `<meta name="description">` tag. See [Writing descriptions](#writing-descriptions). |
 | `redirect_from` | Optional — plugin feature | **Omit** | From the `jekyll-redirect-from` gem. Redirects one or more old URLs to this page. Use only when a page has been moved or renamed to preserve existing links. See [Redirects](#redirects). |
 | `nav_enabled` | **Omit** — remove on sight | **Omit** — remove on sight | **Non-standard. Has no effect.** Not a JTD front matter key. See [Note on nav_enabled](#note-on-nav_enabled). |
@@ -53,19 +52,6 @@ description: DESCRIPTION  # Optional.
 ---
 ```
 
-#### Grandchild page (has a parent and a grandparent)
-
-```yaml
----
-title: TITLE                        # Required.
-layout: page                        # Required.
-parent: PARENT_TITLE                # Required. Must exactly match the direct parent's title:.
-grand_parent: GRANDPARENT_TITLE     # Required for grandchild pages. Must exactly match the grandparent's title:.
-nav_order: NAV_ORDER                # Required. Controls position among siblings under the same parent.
-description: DESCRIPTION            # Optional.
----
-```
-
 #### Guide preview page (_guide_preview/ directory)
 
 ```yaml
@@ -76,7 +62,7 @@ description: DESCRIPTION  # Optional.
 ---
 ```
 
-Nav keys (`nav_order`, `parent`, `has_children`, `grand_parent`) are **intentionally omitted** from guide preview pages. The `just_the_docs.collections` setting in `_config.yml` already excludes these pages from the left nav and search index. Nav keys on these pages have no effect and create misleading front matter.
+Nav keys (`nav_order`, `parent`, and `has_children`) are **intentionally omitted** from guide preview pages. The `just_the_docs.collections` setting in `_config.yml` already excludes these pages from the left nav and search index. Nav keys on these pages have no effect and create misleading front matter.
 
 ### How nav_order works
 
@@ -310,19 +296,9 @@ The `-title` variants follow the same usage rules as their base types — the va
 | `new` | Documenting a feature added in the current or recent release |
 | `highlight` | Short tip or emphasis without a formal label; use sparingly |
 
-### Callout color contrast
+### Callout accessibility
 
-JTD callouts use a `-000` background tint and `-300` foreground accent. The ratios below apply to the accent-on-tint combination (left border stripe and any title text). Body text inside callouts inherits the standard dark body color at 17.40:1 — these ratios do not affect paragraph readability.
-
-| Callout type | Foreground (`-300`) | Background (`-000`) | Ratio | AA normal | Notes |
-|---|---|---|---|---|---|
-| Note (blue) | #2474B6 | #E6EFF7 | 4.25 : 1 | ⚠️ Borderline | 0.25 below 4.5:1 AA threshold; body text unaffected. |
-| Important (yellow) | #ECB046 | #FBEDD6 | 1.67 : 1 | Fail | Accent color only; body text passes at 17.40:1. |
-| Warning (red) | #CB3E6E | #F8E4EB | 3.88 : 1 | Fail | Passes 3.0:1 large-text threshold; body text passes. |
-| New (green) | #9ACC54 | #EAF5DC | 1.67 : 1 | Fail | Accent color only; body text passes at 17.40:1. |
-| Highlight (purple) | #A1518B | #F1E9EE | 4.14 : 1 | Fail | 0.36 below 4.5:1; body text passes. |
-
-Before treating any callout as non-compliant, verify in a built-site browser using DevTools color picker to confirm which elements actually render in the accent color. These are known theme-level constraints — see [Known accessibility limitations](#known-accessibility-limitations).
+Callout contrast ratios and their WCAG AA status are recorded in the [Accessibility Compliance Record](#callout-color-contrast), alongside the brand, body, and tag pairings. For the `highlight` callout's title-less limitation, see the [Available types](#highlight--purple-no-label) note above.
 
 ---
 
@@ -683,24 +659,50 @@ WCAG 2.1 AA contrast thresholds:
 
 ### Brand and body color contrast
 
-The following pairings are used across the site and have been verified against WCAG 2.1 AA.
+The site uses the NBS Design System palette (defined as `$nbs-*` tokens in `_sass/color_schemes/colors.scss`). The following pairings are used across the site and have been verified against WCAG 2.1 AA.
 
 | Foreground | Background | Ratio | AA normal | AA large |
 |------------|-----------|-------|-----------|----------|
-| `$cdc-blue` #005DAA | White #FFFFFF | 6.68 : 1 | Pass | Pass |
-| `$body-heading-color` #1A1A1A | White #FFFFFF | 17.40 : 1 | Pass | Pass |
-| `$cdc-blue` #005DAA | JTD sidebar #F5F6FA | 6.20 : 1 | Pass | Pass |
+| Link / brand — NBS Primary/primary #005EA2 | White #FFFFFF | 6.72 : 1 | Pass | Pass |
+| Body heading — NBS Base/darkest #1B1B1B | White #FFFFFF | 17.22 : 1 | Pass | Pass |
+| Link / active nav — #005EA2 | JTD sidebar #F5F6FA | 6.23 : 1 | Pass | Pass |
+| `.text-green` inline emphasis — NBS Success/dark #4D8055 (bold) | White #FFFFFF | 4.63 : 1 | Pass | Pass |
+
+### Callout color contrast
+
+Each callout maps to an NBS color group: a light tint (`-000`) fills the background and the group's mid "chip" color (`-300`) forms the left bar. The callout **title is rendered in dark ink (`#1B1B1B`)**, not the accent color, so it clears WCAG AA normal-text contrast on every tint. Because the type label is conveyed by ink text, the colored bar is decorative reinforcement — color is never the sole indicator, satisfying WCAG 2.1 SC 1.4.1 (Use of Color).
+
+| Callout | Config color | Left-bar chip (`-300`) | Background (`-000`) | Ink title on bg | AA normal |
+|---|---|---|---|---|---|
+| Note | blue | Info/info #00BDE3 | #E7F6F8 | 15.5 : 1 | Pass |
+| Important | yellow | Warning/warning #FFBE2E | #FAF3D1 | 15.4 : 1 | Pass |
+| New | green | Success/success #00A91C | #ECF3EC | 15.3 : 1 | Pass |
+| Warning | red | Error/error #D54309 | #F4E3DB | 13.8 : 1 | Pass |
+| Highlight | purple | Neutral Accent/accent #7C4CB5 | #E7E3FA | n/a — title-less | see note |
+
+Body text inside callouts inherits the standard dark body color and passes comfortably on every tint. The left-bar chip colors are intentionally low-contrast against their own tint (they are decorative and meaning is carried by the ink title), so they are not held to the 3:1 graphical-object threshold. The one exception is `highlight`, which has no title text — see [Known accessibility limitations](#known-accessibility-limitations).
+
+### Tag and label color contrast
+
+Documentation tags (`.label` variants, defined in `_sass/custom/custom.scss`) use NBS tag tokens and render **bold and uppercase**. All pass WCAG AA normal-text contrast except Success — see [Known accessibility limitations](#known-accessibility-limitations).
+
+| Tag | NBS token | Text | Ratio | AA normal | AA large |
+|---|---|---|---|---|---|
+| Default | Base/dark #565C65 | White | 6.74 : 1 | Pass | Pass |
+| Info (blue) | Info/info #00BDE3 | Black | 9.39 : 1 | Pass | Pass |
+| Success (green) | Success/success #00A91C | White | 3.14 : 1 | ⚠️ Fail | Pass |
+| Accent (purple) | Neutral Accent/accent #7C4CB5 | White | 5.90 : 1 | Pass | Pass |
+| Error (red) | Error/dark #B51D09 | White | 6.68 : 1 | Pass | Pass |
+| Warning (yellow) | Warning/warning #FFBE2E | Black | 12.66 : 1 | Pass | Pass |
 
 ### Known accessibility limitations
 
-The following issues are documented and tracked. They represent theme or infrastructure constraints, not authoring errors.
+The following issues are documented and tracked. They represent deliberate design decisions or theme constraints, not authoring errors.
 
 | Area | Issue | Status |
 |------|-------|--------|
-| Callout accent colors | Yellow-on-yellow-tint (1.67:1) and green-on-green-tint (1.67:1) fail WCAG AA for accent elements. Body text contrast is unaffected. | Known; body text passes. Accent-only failure pending upstream theme resolution. |
-| Red callout | Red-300 on red-000 (3.88:1) fails AA normal text threshold for accent elements. | Known; body text passes. |
-| Blue callout | Blue-300 on blue-000 (4.25:1) is borderline — 0.25 below the 4.5:1 AA normal threshold for accent elements. | Known; body text passes. Verify in built site. |
-| Highlight callout | No `title:` text label; color can become the sole type indicator if used incorrectly. | Unused in `docs/`; use sparingly and pair with clear wording. |
+| Success tag (green) | NBS Success/success #00A91C with white text is 3.14:1 — below the 4.5:1 normal-text AA threshold. Tags render bold + uppercase, which qualifies as large text (3:1 threshold). | Accepted by design; compliant under the large-text threshold only. Do not reuse this green for small or normal-weight text. |
+| Highlight callout | No `title:` text label; the purple bar can become the sole type indicator if used without supporting wording. | Unused in `docs/`; use sparingly and pair with clear wording. |
 
 ### Tooltip usage syntax
 

@@ -63,16 +63,13 @@
 #     extend the inline scoping sentence rather than changing the
 #     pattern.
 #
-#   GLOSSARY LINKING IN GUIDE
-#   - Link the first occurrence of a glossary term on each page.
-#   - Skip the link if the term is already defined inline in the
-#     same sentence.
-#   - Skip the link if the first occurrence is in a heading.
-#     Link the next occurrence in prose instead.
-#   - Skip the link if the first occurrence is in a code block.
-#     Consider adding a linked mention of the term in the prose
-#     immediately before the code block so it is defined before
-#     it is used, then treat that mention as the linked occurrence.
+#   SURFACING TERMS AS TOOLTIPS IN THE GUIDE
+#   - This file governs only how glossary ENTRIES are authored (definitions,
+#     cross-links, scoping). How those terms are surfaced as in-page tooltips
+#     -- which terms to tag, first-use spelling, placement, and element IDs --
+#     is documented separately in the content style guide.
+#   - See the "Glossary tooltips" section in contributing/styles.md before
+#     adding tooltips to a page.
 #
 #   /////////////////////////////////////////////////////////////////////////
 
@@ -226,7 +223,7 @@
 
 - term: DI API
   definition: |-
-    **Data Integration API.** An NBS 7 service that provides an [API](#api) for external systems to push data into [NBS](#nbs).
+    **Data Ingestion API.** An NBS 7 service that provides an [API](#api) for external systems to push data into [NBS](#nbs).
 
 - term: DIBBs
   definition: |-
@@ -242,7 +239,7 @@
 
 - term: Amazon EFS
   definition: |-
-    **Amazon Elastic File System.** AWS-managed file storage. The [Azure](#microsoft-azuremicrosoft-azure) equivalent to EFS is [Azure Files](#azure-files).
+    **Amazon Elastic File System.** AWS-managed file storage. The [Azure](#microsoft-azure) equivalent to EFS is [Azure Files](#azure-files).
 
 - term: EHR
   definition: |-
@@ -386,7 +383,7 @@
 
 - term: Microsoft Entra ID
   definition: |-
-    An [Azure](#microsoft-azure) identity and access management service, formerly known as Azure Active Directory. The [AWS](#aws) equivalent to Entra ID is [AWS IAM](#aws-iam).
+    An [Azure](#microsoft-azure) identity and access management service, formerly known as Azure Active Directory. The [AWS](#aws) equivalent to Entra ID is [AWS IAM](#iam).
 
 - term: Microsoft SQL Server
   definition: |-
@@ -526,7 +523,7 @@
 
 - term: permission set
   definition: |-
-    In [NBS](#nbs), a collection of objects and operations a user is authorized to access. A permission set is combined with [program area](#program-area), [jurisdiction](#jurisdiction), and access level to define a user's [role](#role-nbs).
+    In [NBS](#nbs), a collection of objects and operations a user is authorized to access. A permission set is combined with [program area](#program-area), [jurisdiction](#jurisdiction), and access level to define a user's role.
 
 - term: PHCR
   definition: |-
@@ -566,7 +563,7 @@
 
 - term: program area
   definition: |-
-    At [CDC](#cdc), a category that groups related diseases or [conditions](#condition) for administrative and security purposes (for example, STD/HIV or Hepatitis). Users are assigned to program areas as part of their [role](#role-nbs).
+    At [CDC](#cdc), a category that groups related diseases or [conditions](#condition) for administrative and security purposes (for example, STD/HIV or Hepatitis). Users are assigned to program areas as part of their role.
 
 - term: RBAC
   definition: |-
@@ -598,7 +595,7 @@
 
 - term: RTR
   definition: |-
-    **Real-Time Reporting.** An [NBS 7](#nbs-7[) reporting pipeline that replaces the batch ETL approach with event-driven data movement using [Kafka](#kafka).
+    **Real-Time Reporting.** An [NBS 7](#nbs-7) reporting pipeline that replaces the batch ETL approach with event-driven data movement using [Kafka](#kafka).
 
 - term: Amazon S3
   definition: |-
@@ -634,7 +631,7 @@
 
 - term: SRT / SRTE
   definition: |-
-    **System Reference Tables (Enterprise).** The [NBS](#nbs) database that stores standard code sets including [LOINC](#loinc), [SNOMED CT](#snomed-ct), [RxNorm](#rxnorm), and [FIPS](#fips) codes.
+    **System Reference Tables (Enterprise).** The [NBS](#nbs) database that stores standard code sets including [LOINC](#loinc), [SNOMED CT](#snomed-ct), RxNorm, and FIPS codes.
 
 - term: SSO
   definition: |-
@@ -674,7 +671,7 @@
 
 - term: Amazon VPC
   definition: |-
-    **Amazon Virtual Private Cloud.** An isolated cloud network in [AWS](#amazon-web-services). The [Azure](#microsoft-azure) equivalent to Amazon VPC is [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
+    **Amazon Virtual Private Cloud.** An isolated cloud network in [AWS](#aws). The [Azure](#microsoft-azure) equivalent to Amazon VPC is [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
 
 - term: WDS
   definition: |-
@@ -686,4 +683,4 @@
 
 - term: worker node
   definition: |-
-    A physical or virtual machine in a [Kubernetes](#kubernetes) cluster that runs containerized workloads ([pods](#pod)). In [Amazon EKS](#amazon-eks), worker nodes run as [EC2](#ec2) instances; in [AKS](#azure-kubernetes-service), they are provisioned as [node pools](#node-pool).
+    A physical or virtual machine in a [Kubernetes](#kubernetes) cluster that runs containerized workloads ([pods](#pod)). In [Amazon EKS](#amazon-eks), worker nodes run as EC2 instances; in [AKS](#azure-kubernetes-service), they are provisioned as [node pools](#node-pool).

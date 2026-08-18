@@ -353,7 +353,7 @@ Spell out an acronym at its first use on each page, with the acronym in parenthe
 
 **First use means first RENDERED use.** Front matter fields (`description:`, `parent:`) do not render in the page body, so an expansion that appears only in front matter does not count. A reader must encounter the spelled-out form in visible prose before the bare acronym appears.
 
-Every acronym used in the guide should also have an entry in `_data/glossary.yml`.
+Every acronym used in the guide should also have an entry in `_data/glossary.yml`. To surface that entry as an inline hover definition, see [Glossary tooltips](#glossary-tooltips).
 
 ### Service names are namespace-specific
 
@@ -704,50 +704,81 @@ The following issues are documented and tracked. They represent deliberate desig
 | Success tag (green) | NBS Success/success #00A91C with white text is 3.14:1 — below the 4.5:1 normal-text AA threshold. Tags render bold + uppercase, which qualifies as large text (3:1 threshold). | Accepted by design; compliant under the large-text threshold only. Do not reuse this green for small or normal-weight text. |
 | Highlight callout | No `title:` text label; the purple bar can become the sole type indicator if used without supporting wording. | Unused in `docs/`; use sparingly and pair with clear wording. |
 
-### Tooltip usage syntax
+## Glossary tooltips
 
-Use the `term-tooltip` include for glossary-style terms that need an inline definition.
+Glossary terms can be surfaced as inline tooltips that reveal a definition on hover or keyboard focus, using the `term-tooltip.html` include. This section covers how to **apply** tooltips in content. For how to **author** the term definitions themselves — definition style, cross-links, and provider scoping — see the contributor guidance at the top of [`_data/glossary.yml`](../_data/glossary.yml).
 
-1. Add or update the term definition in `_data/glossary.yml`.
-1. Reference the term inline using the include.
-1. Use a page-unique `id` value for each tooltip instance.
-1. If a page already defines the term in plain language on first mention, keep that first mention as-is and use the include on later mentions.
-1. If the first mention is the only place the term appears or the usage is ambiguous, leave a note for review instead of forcing a tooltip.
+### How the include works
 
-**Data-driven definition (preferred):**
+The include renders a term as an accessible button; hovering or focusing it reveals the matching glossary definition. `key` is the **slugified glossary term** (lowercase, spaces to hyphens, punctuation dropped): `managed node group` becomes `managed-node-group`.
+
+**Data-driven (preferred) — looks up the definition in `_data/glossary.yml`:**
 
 ```liquid
-{% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-runtime" %}
+{% include term-tooltip.html key="kubernetes" term="Kubernetes" id="arch-kubernetes" %}
 ```
 
-- `key`: lookup key in `_data/glossary.yml`
-- `term`: visible text in the paragraph
-- `id`: unique suffix used to build the tooltip element ID
+- `key`: slug of the glossary term to look up
+- `term`: the visible text shown in the paragraph
+- `id`: a page-unique suffix used to build the tooltip element ID (see [Tooltip IDs](#tooltip-ids))
 
-**Inline definition (one-off):**
+**Inline one-off — supplies the definition directly, no glossary entry:**
 
 ```liquid
 {% include term-tooltip.html term="Helm" id="helm-runtime" definition="A package manager for Kubernetes." %}
 ```
 
-**In-paragraph example:**
+### Which terms to tag
 
-```markdown
-NBS 7 runs on {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-home" %} and relies on Terraform.
-```
+Tag the first eligible mention of:
 
-When a page introduces a term plainly first, follow-on uses can use the include:
+- **Acronyms** that have a glossary entry (AWS, EKS, STLT, DI API, and so on).
+- **Key technical proper nouns** (Kubernetes, Terraform, Helm, Keycloak, Traefik, and so on).
 
-```markdown
-The content assumes familiarity with your cloud platform, {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="kubernetes-audience" %}, Terraform, Helm, and related administration tasks.
-```
+Do **not** tag common-English-word glossary terms (`condition`, `node`, `pod`, `container`, `observation`, `jurisdiction`, and similar) unless the word is clearly used as the defined technical concept at that spot. Over-tagging makes pages noisy and undercuts the signal.
 
-### Tooltip accessibility verification checklist
+### Placement rules
 
-When adding or modifying tooltip terms, verify all of the following before merge:
+- Tag the **first eligible prose mention** on a page. Add **at most one** tooltip per term per page.
+- **Skip** mentions in headings, code blocks and spans, image alt text, and bold definition labels — tag the next prose mention instead. Front matter never counts as a mention.
+- A given mention is **either an external link or a tooltip, never both.** Prefer the tooltip on the first mention; if an external documentation link is valuable, keep it on a later mention.
+
+### Tooltip in place — the standard treatment
+
+Keep the first-use spell-out **and** add the tooltip. The glossary definition carries more than the acronym expansion, so showing both is not redundant.
+
+- **Acronyms with an expansion:** spell out fully in prose followed by `(ACR)` on first use — **add the spell-out if it is missing** (see [Acronym first use](#acronym-first-use)) — and wrap the **acronym** inside the parentheses in the tooltip. Later mentions stay bare, with no tooltip.
+
+  Before:
+
+  ```markdown
+  ...via Amazon Elastic Kubernetes Service (Amazon EKS) and Terraform workflows.
+  ```
+
+  After:
+
+  ```markdown
+  ...via Amazon Elastic Kubernetes Service ({% include term-tooltip.html key="amazon-eks" term="Amazon EKS" id="arch-amazon-eks" %}) and Terraform workflows.
+  ```
+
+- **Proper nouns or concepts with no acronym:** wrap the term itself on its first mention.
+- **Alias entries** (a term whose definition is only "See *X*"): point `key` at the **target** entry so the hover shows a real definition — for example `term="NBS 6" key="classic-nbs"`.
+- **Inflected forms:** set `term` to the word as written and `key` to the canonical slug — for example `term="peered" key="peering"`.
+
+### Removing redundant prose
+
+After tagging, remove prose that merely restates the **generic** definition the tooltip now carries. **Keep** NBS-specific context, cross-cloud equivalents, and anything the glossary omits by design — the glossary holds general definitions, while the guide holds NBS-specific usage.
+
+### Tooltip IDs
+
+Build each `id` as `<page-slug>-<term-slug>` so it is unique within its page — for example `arch-di-api` or `k8s-upgrade-node-group`. If a term is tagged in two different spelled forms on one page (rare), suffix the second to keep it unique.
+
+### Accessibility verification checklist
+
+When adding or modifying tooltips, verify all of the following before merge:
 
 1. **Keyboard open/close:** `Tab` to the term opens the tooltip; `Escape` closes it.
-1. **Hover/focus persistence:** Tooltip remains visible while hovered or while trigger has focus.
+1. **Hover/focus persistence:** Tooltip remains visible while hovered or while the trigger has focus.
 1. **Dismiss without moving pointer:** `Escape` closes any open tooltip even when opened by mouse hover.
 1. **Screen reader announcement:** Trigger has `aria-describedby` that points to a unique tooltip `id`, and the tooltip uses `role="tooltip"`.
 1. **State sync:** Tooltip visibility and ARIA state remain synchronized (`hidden` with `aria-hidden`).

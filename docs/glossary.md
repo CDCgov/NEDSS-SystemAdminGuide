@@ -19,7 +19,7 @@ Contributor note:
 
 -->
 
-{% assign glossary_entries = site.data.glossary | sort: 'term' -%}
+{% assign glossary_entries = site.data.glossary | sort_glossary -%}
 {% assign letters = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z' | split: ',' -%}
 {% assign glossary_href_prefix = site.baseurl | append: '/docs/glossary.html#' -%}
 

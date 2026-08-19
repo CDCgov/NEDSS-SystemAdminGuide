@@ -25,22 +25,24 @@
 #     placing NBS-domain context in the relevant guide page instead.
 #
 #   ADDING NEW ENTRIES
-#   - Add each term as a ### heading under the correct letter section.
+#   - Add each term as a "- term:" / "definition:" YAML entry, following the
+#     format of the existing entries. Do NOT add Markdown headings or letter-
+#     section dividers.
+#   - The generated glossary page (docs/glossary.md) automatically sorts entries 
+#     alphabetically and groups them into letter sections.
+#   - Keeping entries in alphabetical order is still good practice for readability.
 #   - Keep definitions present-tense and active voice.
 #   - Define acronyms in bold at the start of the definition:
 #     **Full Name.** Definition text here.
 #   - Cross-link related terms using [term](#anchor) syntax.
-#     Anchors are auto-generated from heading text: lowercase,
+#     Anchors on the generated page are derived from the term text: lowercase,
 #     spaces become hyphens, punctuation dropped.
-#     Examples: ### HIE / HIN -> #hie--hin , ### namespace (Kubernetes) -> #namespace-kubernetes
+#     Examples: HIE / HIN -> #hie--hin , namespace (Kubernetes) -> #namespace-kubernetes
 #   - Use official AWS service names on first mention in a definition.
 #     Source of truth: https://docs.aws.amazon.com/glossary/latest/reference/glos-chap.html
-#     Examples: Amazon EKS, Amazon EFS, Amazon MSK, Amazon S3,
-#     Amazon RDS, AWS KMS, AWS IAM, Amazon Managed Service for Prometheus,
-#     Amazon Managed Grafana.
 #
 #   REDIRECT ENTRIES
-#   - Add a redirect entry (### ACRONYM / See [Full Term](#anchor)).
+#   - Add a redirect entry: "- ACRONYM:" / "See [Full Term](#anchor)."
 #     for any initialism that is commonly spoken or used in prose
 #     rather than spelled out. Example: RR -> Reportability Response.
 #
@@ -98,12 +100,20 @@
 
 - term: AMG
   definition: |-
-    **Amazon Managed Grafana.** An AWS-managed version of Grafana, an open-source dashboarding platform.
+    See [Amazon Managed Service for Grafana](#amazon-managed-service-for-grafana).
 
 - term: AMP
   definition: |-
-    **Amazon Managed Service for Prometheus.** An AWS-managed version of Prometheus, an open-source monitoring and alerting toolkit.
+    See [Amazon Managed Service for Prometheus](#amazon-managed-service-for-prometheus).
 
+- term: Amazon Managed Service for Grafana
+  definition: |-
+    An AWS-managed version of Grafana, an open-source dashboarding platform.
+
+- term: Amazon Managed Service for Prometheus
+  definition: |-
+    An AWS-managed version of Prometheus, an open-source monitoring and alerting toolkit.
+    
 - term: API
   definition: |-
     **Application Programming Interface.** A defined interface that allows software systems to communicate.
@@ -663,6 +673,10 @@
 - term: Amazon S3
   definition: |-
     **Amazon Simple Storage Service.** [AWS](#aws) object storage. The [Azure](#microsoft-azure) equivalent to Amazon S3 is [Azure Blob Storage](#azure-blob-storage).
+
+- term: S3
+  definition: |-
+    See [Amazon S3](#amazon-s3).
 
 - term: SAML
   definition: |-

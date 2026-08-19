@@ -732,16 +732,20 @@ The include renders a term as an accessible button; hovering or focusing it reve
 
 Tag the first eligible mention of:
 
-- **Acronyms** that have a glossary entry (AWS, EKS, STLT, DI API, and so on).
+- **Acronyms** that have a glossary entry (AWS, EKS, STLT, DI API, and so on). This is the primary driver — the guide must spell out acronyms even when the audience likely knows them, and the tooltip satisfies that requirement inline.
 - **Key technical proper nouns** (Kubernetes, Terraform, Helm, Keycloak, Traefik, and so on).
+- **Product and version names** where the distinction carries meaning — `NBS`, `NBS 6`, and `NBS 7` are in scope, because telling the versions apart is important to the reader.
 
 Do **not** tag common-English-word glossary terms (`condition`, `node`, `pod`, `container`, `observation`, `jurisdiction`, and similar) unless the word is clearly used as the defined technical concept at that spot. Over-tagging makes pages noisy and undercuts the signal.
 
 ### Placement rules
 
-- Tag the **first eligible prose mention** on a page. Add **at most one** tooltip per term per page.
-- **Skip** mentions in headings, code blocks and spans, image alt text, and bold definition labels — tag the next prose mention instead. Front matter never counts as a mention.
-- A given mention is **either an external link or a tooltip, never both.** Prefer the tooltip on the first mention; if an external documentation link is valuable, keep it on a later mention.
+- Tag the **first eligible mention** on a page. Add **at most one** tooltip per term per page.
+- **Table cells count as eligible text.** Reference tables and changelog/release-history tables are in scope — tag the first mention of a term even when it falls inside a table.
+- **Skip** mentions in headings, code blocks and spans, and image alt text — tag the next eligible mention instead. Front matter never counts. **Bold definition labels are taggable** — for example a component name at the start of a list item (`**Keycloak:** ...`) may carry the tooltip.
+- **External links — either a link or a tooltip on a given mention, not both:**
+  - If the link only points somewhere **informational that the tooltip already conveys** — an encyclopedia definition, or a tool's top-level project homepage — **replace the link with the tooltip.** Do not link tools to their homepages merely to link them; it clutters prose without adding anything the tooltip lacks.
+  - Keep the link only when it points to something the tooltip **cannot** provide — a **specific** page such as installation steps, an API reference, or targeted official documentation — and put the tooltip on a **different** mention (or leave the term untagged there if it has no other mention).
 
 ### Tooltip in place — the standard treatment
 

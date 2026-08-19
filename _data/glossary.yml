@@ -4,7 +4,7 @@
 #
 #   FILE BASICS
 #   - This file is the single source of truth for glossary terms and tooltip definitions.
-#   - Add, edit, or remove terms here; do not edit generated glossary page content directly.
+#   - Add, edit, or remove terms here; do not edit docs/glossary.md content directly.
 #   - Use Markdown in definitions when you need emphasis or cross-links.
 #   - Glossary cross-links should target glossary-page anchors; the generated page rewrites them to the current site.baseurl.
 #
@@ -63,7 +63,10 @@
 #     extend the inline scoping sentence rather than changing the
 #     pattern.
 #
+#   /////////////////////////////////////////////////////////////////////////
+#
 #   SURFACING TERMS AS TOOLTIPS IN THE GUIDE
+#
 #   - This file governs only how glossary ENTRIES are authored (definitions,
 #     cross-links, scoping). How those terms are surfaced as in-page tooltips
 #     -- which terms to tag, first-use spelling, placement, and element IDs --
@@ -72,6 +75,10 @@
 #     adding tooltips to a page.
 #
 #   /////////////////////////////////////////////////////////////////////////
+
+- term: ADFS
+  definition: |-
+    **Active Directory Federation Services.** A Microsoft service that provides federated identity and single sign-on ([SSO](#sso)) access to applications.
 
 - term: AGW
   definition: |-
@@ -104,6 +111,14 @@
 - term: ArgoCD
   definition: |-
     An open-source [GitOps](#gitops) tool for deploying and managing [Kubernetes](#kubernetes) applications.
+
+- term: ARIA
+  definition: |-
+    **Accessible Rich Internet Applications.** A set of HTML attributes that make web content and applications more accessible to people using assistive technologies.
+
+- term: ARN
+  definition: |-
+    **Amazon Resource Name.** A unique identifier for a resource in [AWS](#aws).
 
 - term: AVR
   definition: |-
@@ -233,9 +248,21 @@
   definition: |-
     **Domain Name System.** The system that translates domain names (such as `app.example.com`) to IP addresses.
 
+- term: EC2
+  definition: |-
+    See [Amazon EC2](#amazon-ec2).
+
 - term: eCR
   definition: |-
     **Electronic Case Reporting.** Automated reporting of disease cases from healthcare electronic health records ([EHRs](#ehr)) to public health agencies.
+
+- term: EKS
+  definition: |-
+    See [Amazon EKS](#amazon-eks).
+
+- term: Amazon EC2
+  definition: |-
+    **Amazon Elastic Compute Cloud.** An [AWS](#aws) service that provides resizable virtual machine instances. In [Amazon EKS](#amazon-eks), [worker nodes](#worker-node) run as [EC2](#amazon-ec2) instances. The [Azure](#microsoft-azure) equivalent to Amazon EC2 is Azure Virtual Machines.
 
 - term: Amazon EFS
   definition: |-
@@ -277,6 +304,10 @@
   definition: |-
     A practice of using Git repositories as the source of truth for infrastructure and application configuration.
 
+- term: HCL
+  definition: |-
+    **HashiCorp Configuration Language.** The configuration language used to write [Terraform](#terraform) infrastructure definitions.
+
 - term: HDInsight
   definition: |-
     An [Azure](#microsoft-azure)-managed [Kafka](#kafka) service. Used for event streaming in Azure deployments. The [AWS](#aws) equivalent to HDInsight is [Amazon MSK](#amazon-msk).
@@ -317,9 +348,17 @@
   definition: |-
     **Investigate and Respond Division.** The [CDC](#cdc) division within [OPHDST](#ophdst) where [NBS](#nbs) is housed, within the [PHIT](#phit) branch.
 
+- term: JDBC
+  definition: |-
+    **Java Database Connectivity.** A Java [API](#api) for connecting to and running queries against relational databases.
+
 - term: jurisdiction
   definition: |-
     The geographic or programmatic scope of authority for a health department unit.
+
+- term: JWT
+  definition: |-
+    **JSON Web Token.** A compact, digitally signed token format used to carry authentication and authorization claims between systems.
 
 - term: Kafka
   definition: |-
@@ -373,6 +412,10 @@
   definition: |-
     The [Classic NBS](#classic-nbs) batch process that extracts, transforms, and loads data from the NBS operational database ([ODSE](#ods--odse)) into the reporting database ([RDB](#rdb)).
 
+- term: MFA
+  definition: |-
+    **Multi-Factor Authentication.** An authentication method that requires two or more independent verification factors to grant access.
+
 - term: microservice
   definition: |-
     A software architecture pattern in which an application is built as a collection of small, independently deployable services.
@@ -416,6 +459,10 @@
 - term: Amazon MSK
   definition: |-
     **Amazon Managed Streaming for Apache Kafka.** An [AWS](#aws)-managed version of [Kafka](#kafka), an open-source event streaming platform. The [Azure](#microsoft-azure) equivalent to MSK is [HDInsight](#hdinsight).
+
+- term: MSSQL
+  definition: |-
+    See [Microsoft SQL Server](#microsoft-sql-server).
 
 - term: mTLS
   definition: |-
@@ -489,6 +536,10 @@
   definition: |-
     **Network Security Group.** An [Azure](#microsoft-azure) resource that controls inbound and outbound network traffic for other Azure resources. The [AWS](#aws) equivalent to an NSG is a security group.
 
+- term: OAuth
+  definition: |-
+    **Open Authorization.** An open standard for token-based delegated authorization, allowing an application to access resources on a user's behalf without handling their credentials. [OIDC](#oidc) is an authentication layer built on OAuth 2.0.
+
 - term: observation
   definition: |-
     In [NBS](#nbs), a report received by a health department from an external source (such as a lab or provider). Observations include [lab reports](#lab-report) and [morbidity reports](#morbidity-report).
@@ -508,6 +559,10 @@
 - term: OPHDST
   definition: |-
     **Office of Public Health Data, Surveillance, and Technology.** The [CDC](#cdc) office that houses the [IRD](#ird) division, which encompasses [NBS](#nbs).
+
+- term: OTEL
+  definition: |-
+    **OpenTelemetry.** An open-source observability framework for collecting logs, metrics, and traces from applications and infrastructure.
 
 - term: Page Builder
   definition: |-
@@ -589,9 +644,17 @@
   definition: |-
     A disease or condition that providers are required to report to the local or state health department under jurisdiction law. Distinct from [notifiable disease](#notifiable-disease), which refers to federal reporting requirements to [CDC](#cdc).
 
+- term: REST
+  definition: |-
+    **Representational State Transfer.** An architectural style for web [APIs](#api) that uses standard HTTP methods to operate on resources.
+
 - term: RR
   definition: |-
     See [Reportability Response](#reportability-response).
+
+- term: RTI
+  definition: |-
+    **Real Time Ingestion.** An [NBS 7](#nbs-7) microservice that picks up [ELR](#elr) data after ingestion for real-time processing.
 
 - term: RTR
   definition: |-
@@ -617,6 +680,10 @@
   definition: |-
     An infrastructure layer that manages service-to-service communication within a distributed application, providing encryption, observability, and traffic management.
 
+- term: SFTP
+  definition: |-
+    **SSH File Transfer Protocol.** A network protocol for securely transferring files over an encrypted secure shell (SSH) connection.
+
 - term: SLA
   definition: |-
     **Service Level Agreement.** A contract that defines service performance expectations. A STLT might be required to establish an SLA with a new service provider (for example, a cloud service provider).
@@ -633,6 +700,14 @@
   definition: |-
     **System Reference Tables (Enterprise).** The [NBS](#nbs) database that stores standard code sets including [LOINC](#loinc), [SNOMED CT](#snomed-ct), RxNorm, and FIPS codes.
 
+- term: SSL
+  definition: |-
+    **Secure Sockets Layer.** A legacy cryptographic protocol for securing data in transit, superseded by [TLS](#tls). The name is still widely used to refer to TLS.
+
+- term: SSMS
+  definition: |-
+    **SQL Server Management Studio.** A Microsoft desktop tool for managing and querying [Microsoft SQL Server](#microsoft-sql-server) databases.
+
 - term: SSO
   definition: |-
     **Single Sign-On.** An authentication method that allows users to log in once to access multiple systems.
@@ -644,6 +719,10 @@
 - term: subnet
   definition: |-
     A subdivision of a [VPC's](#amazon-vpc) IP address range. Subnets are used to isolate internet-facing components from internal services.
+
+- term: TCP
+  definition: |-
+    **Transmission Control Protocol.** A core internet protocol that provides reliable, ordered delivery of data between systems.
 
 - term: Terraform
   definition: |-
@@ -661,6 +740,22 @@
   definition: |-
     The act of reassigning an [observation](#observation) or [case investigation](#case-investigation) from one [jurisdiction](#jurisdiction) or [program area](#program-area) to another.
 
+- term: UAT
+  definition: |-
+    **User Acceptance Testing.** Testing performed by end users to confirm a system meets business and functional requirements.
+
+- term: URI
+  definition: |-
+    **Uniform Resource Identifier.** A string that identifies a resource, such as a file path, name, or web address.
+
+- term: URL
+  definition: |-
+    **Uniform Resource Locator.** A [URI](#uri) that gives the location of a web resource and the protocol used to retrieve it.
+
+- term: UUID
+  definition: |-
+    **Universally Unique Identifier.** A 128-bit identifier used to label information uniquely.
+
 - term: values file (Helm)
   definition: |-
     A YAML configuration file that supplies environment-specific settings to a [Helm chart](#helm-chart) during deployment.
@@ -673,6 +768,10 @@
   definition: |-
     **Amazon Virtual Private Cloud.** An isolated cloud network in [AWS](#aws). The [Azure](#microsoft-azure) equivalent to Amazon VPC is [VNet](#azure-vnet). See also [peering](#peering) and [subnet](#subnet).
 
+- term: VPN
+  definition: |-
+    **Virtual Private Network.** An encrypted connection that extends a private network across a public network such as the internet.
+
 - term: WDS
   definition: |-
     **Workflow Decision Support.** An [NBS](#nbs) application feature that automates processing of incoming [ELR](#elr) and [eCR](#ecr) data. Configured by system administrators.
@@ -683,4 +782,8 @@
 
 - term: worker node
   definition: |-
-    A physical or virtual machine in a [Kubernetes](#kubernetes) cluster that runs containerized workloads ([pods](#pod)). In [Amazon EKS](#amazon-eks), worker nodes run as EC2 instances; in [AKS](#azure-kubernetes-service), they are provisioned as [node pools](#node-pool).
+    A physical or virtual machine in a [Kubernetes](#kubernetes) cluster that runs containerized workloads ([pods](#pod)). In [Amazon EKS](#amazon-eks), worker nodes run as [EC2](#amazon-ec2) instances; in [AKS](#azure-kubernetes-service), they are provisioned as [node pools](#node-pool).
+
+- term: WSL
+  definition: |-
+    **Windows Subsystem for Linux.** A Windows feature that runs a Linux environment natively on Windows, without a separate virtual machine.

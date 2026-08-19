@@ -10,7 +10,7 @@ redirect_from:
 
 # Test and integrate case notification APIs
 
-Use this page to validate Public Health Information Network Messaging System (PHIMNS) property configuration and supporting dependencies for Case Notification services. Deploy the [Notification service](./case-notification-service.html) before starting this page.
+Use this page to validate Public Health Information Network Messaging System (PHINMS) property configuration and supporting dependencies for Case Notification services. Deploy the [Notification service](./case-notification-service.html) before starting this page.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -18,7 +18,7 @@ Use this page to validate Public Health Information Network Messaging System (PH
 1. TOC
 {:toc}
 
-## Configure PHIMNS properties
+## Configure PHINMS properties
 
 The Case Notification service requires PHINMS properties to route case notifications correctly. Complete the following steps to configure them.
 

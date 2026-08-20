@@ -100,13 +100,13 @@
 
 - term: AMG
   definition: |-
-    See [Amazon Managed Service for Grafana](#amazon-managed-service-for-grafana).
+    See [Amazon Managed Grafana](#amazon-managed-grafana).
 
 - term: AMP
   definition: |-
     See [Amazon Managed Service for Prometheus](#amazon-managed-service-for-prometheus).
 
-- term: Amazon Managed Service for Grafana
+- term: Amazon Managed Grafana
   definition: |-
     An AWS-managed version of Grafana, an open-source dashboarding platform.
 

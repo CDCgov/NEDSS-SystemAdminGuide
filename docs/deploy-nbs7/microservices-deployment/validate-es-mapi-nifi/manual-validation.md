@@ -12,7 +12,7 @@ redirect_from:
 
 # Manual validation for Elasticsearch, Modernization API, and NiFi
 
-Use these steps to validate end-to-end behavior in the NBS UI after deploying Elasticsearch, Modernization API, and NiFi.
+Use these steps to validate end-to-end behavior in the NBS UI after deploying [[elasticsearch]], Modernization API, and [[apache-nifi|NiFi]].
 
 1. Log in to NBS using your configured URL, for example: `https://app.<your-site>.<your-domain>.com/nbs/login`.
 1. Select **Advanced Search**:

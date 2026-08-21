@@ -24,8 +24,8 @@ redirect_from:
 
 ## Overview
 
-The data ingestion service is integrated with the Keycloak server to authenticate its public Data Ingestion API (DI API) endpoints.
-As the **Client Credentials Grant type flow** is used for authentication in the data ingestion service, we require the **Client Id** and **Client Secret** values to create the JWT token and make API calls.
+The data ingestion service is integrated with the [[keycloak]] server to authenticate its public Data Ingestion API ([[di-api|DI API]]) endpoints.
+As the **Client Credentials Grant type flow** is used for authentication in the data ingestion service, we require the **Client Id** and **Client Secret** values to create the [[jwt]] token and make API calls.
 
 ## Prerequisites
 
@@ -38,7 +38,7 @@ As the **Client Credentials Grant type flow** is used for authentication in the 
 
 ## Scope
 
-1. Only ELR Data that are HL7 messages with ORU RO1 Data type are in scope.
+1. Only [[elr]] Data that are [[hl7]] messages with ORU RO1 Data type are in scope.
 2. Only HL7 messages with versions 2.3.1 and 2.5.1 are in scope.
 3. The data ingestion service supports the transmit of HL7 messages with FHS header segments.
 
@@ -69,13 +69,13 @@ Select Ingesting Data API in New-Data-Ingestionpostman collection and then selec
 
 Select the **Headers** section and enter the values within the **clientid** and **clientsecret** headers.
 
-A sample HL7 message has already been added to the request body section. Select Send button. UUID is displayed as a response. Please save this UUID which is useful to determine the status of the HL7 message.
+A sample HL7 message has already been added to the request body section. Select Send button. [[uuid]] is displayed as a response. Please save this UUID which is useful to determine the status of the HL7 message.
 
 ![data-ingestion-data-api](images/data-ingestion-data-api.jpg)
 
 ![data-ingestion-data-api-2](images/data-ingestion-data-api-2.jpg)
 
-> Wait 10-20 seconds before checking the status of Ingested Data API in Classic NBS. It takes a moment to generate an XML record into the `NBS_Interface` table after posting the HL7 message.
+> Wait 10-20 seconds before checking the status of Ingested Data API in [[classic-nbs|Classic NBS]]. It takes a moment to generate an XML record into the `NBS_Interface` table after posting the HL7 message.
 {: .note }
 
 ### Step 3: Check detailed status of Ingested Data API in Classic NBS
@@ -84,7 +84,7 @@ Select the **Checking Status of Ingested Data API** in the **New-Data-Ingestion*
 
 Select the Headers section and enter the values within the **clientid** and **clientsecret** headers. Within the API URL, append the UUID generated as part of the response from the Ingesting Data API. Select **Send** button. By Default, all the status goes to `QUEUED` status.
 
-The Classic Wildfly scheduler runs the batch job and processes this record. The scheduler is set to pick up and process the records every two minutes. Wait for two minutes and then select the **Send** button again. This time, the status should be **Success**.
+The Classic [[wildfly|Wildfly]] scheduler runs the batch job and processes this record. The scheduler is set to pick up and process the records every two minutes. Wait for two minutes and then select the **Send** button again. This time, the status should be **Success**.
 
 The following API provides the ELR Ingestion status:
 

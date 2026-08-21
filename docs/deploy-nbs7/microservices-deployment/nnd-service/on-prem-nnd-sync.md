@@ -10,7 +10,7 @@ redirect_from:
 
 # Deploy NND Sync
 
-Use these instructions to deploy the on-premises Data Sync service that extracts data from the Modernized NBS cloud implementation and supports ongoing Notifiable Disease message transmission to CDC. Complete [Validate API endpoints](./validating-api-endpoints.html) before starting this page.
+Use these instructions to deploy the [[on-premises]] Data Sync service that extracts data from the Modernized NBS cloud implementation and supports ongoing [[notifiable-disease|Notifiable Disease]] message transmission to [[cdc]]. Complete [Validate API endpoints](./validating-api-endpoints.html) before starting this page.
 
 > This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }
@@ -25,14 +25,14 @@ Use these instructions to deploy the on-premises Data Sync service that extracts
 
 ## Prerequisites
 
-To sync data for NNDSS through the NBS 7 Data Sync service, you need the following:
+To sync data for [[nndss]] through the [[nbs-7]] Data Sync service, you need the following:
 
 - Complete [Validate API endpoints](./validating-api-endpoints.html).
-- **Keycloak client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, navigate to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
+- **[[keycloak]] client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, navigate to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
 - **Data service URL** - Retrieve this from your NBS environment.
 - **Release materials/package** - CDC provides this as a .zip file with each release.
 - Install the **Rhapsody engine and IDE**.
-- Install a **Microsoft SQL Server database** on a different machine, or repurpose an existing SQL Server database (Rhapsody should have access to it).
+- Install a **[[microsoft-sql-server|Microsoft SQL Server]] database** on a different machine, or repurpose an existing SQL Server database (Rhapsody should have access to it).
 - **Java 21 or higher**
 
 ---
@@ -104,11 +104,11 @@ Ensure the database is accessible from Rhapsody.
 
 #### PHINMS
 
-- Verify and update database connections for the existing PHINMS setup.
+- Verify and update database connections for the existing [[phinms]] setup.
 
 #### SAMS
 
-- Verify that the file drop-off location in NETSS service parameters matches the location that SAMS reads.
+- Verify that the file drop-off location in [[netss]] service parameters matches the location that SAMS reads.
 
 ## Next steps
 

@@ -13,7 +13,7 @@ redirect_from:
 
 # Deploy the RTR Java service for NBS 7
 
-This page walks through deploying the real-time reporting (RTR) Java service using the `reporting-pipeline-service` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The service processes streamed events from Kafka and loads domain-specific reporting data.
+This page walks through deploying the real-time reporting ([[rtr]]) Java service using the `reporting-pipeline-service` [[helm-chart|Helm chart]] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The service processes streamed events from [[kafka]] and loads domain-specific reporting data.
 
 Deploying the Java service is a two-phase process. The first deployment seeds the `nrt_*` caching tables that RTR depends on. Once seeding is complete, you upgrade the release with post-processing enabled.
 
@@ -32,7 +32,7 @@ This page assumes you've completed [Before you begin](../deploy-nbs7-microservic
 
 Confirm the following before you continue:
 
-- You are connected to the correct Kubernetes cluster. Run `kubectl config current-context` to confirm.
+- You are connected to the correct [[kubernetes]] cluster. Run `kubectl config current-context` to confirm.
 - You have your database credentials and domain values available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
 > Deploying the Java service takes significant time and database space. Before you deploy, verify that the Kafka cluster you created in [Provision cloud environment](../../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) is scaled for your database size. An undersized Kafka cluster can cause the deployment to fail.

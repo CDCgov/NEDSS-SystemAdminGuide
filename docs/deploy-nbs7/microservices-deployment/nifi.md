@@ -12,7 +12,7 @@ redirect_from:
 
 # Deploy Apache NiFi for NBS 7
 
-This page walks through deploying NiFi using the `nifi` Helm chart from the [NEDSS-Helm][nedss-helm-nifi-chart] repository for NBS version {{ site.version_latest }}.
+This page walks through deploying [[apache-nifi|NiFi]] using the `nifi` [[helm-chart|Helm chart]] from the [NEDSS-Helm][nedss-helm-nifi-chart] repository for NBS version {{ site.version_latest }}.
 
 ## Prerequisites
 
@@ -27,7 +27,7 @@ Complete the following steps to deploy the ['nifi' Helm chart][nedss-helm-nifi-c
 > `nifi.EXAMPLE_DOMAIN` only needs to be set if you enable the NiFi ingress. The NiFi ingress is disabled by default due to known security vulnerabilities. If you need access to the NiFi admin UI, use a private domain name.
 {: .warning }
 
-1. Search `values.yaml` for `EXAMPLE` and fill in the EFS file system ID, JDBC connection string, and NiFi sensitive properties key. The [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
+1. Search `values.yaml` for `EXAMPLE` and fill in the [[amazon-efs|EFS]] file system ID, [[jdbc]] connection string, and NiFi sensitive properties key. The [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
 1. If you enable the NiFi ingress, replace `nifi.EXAMPLE_DOMAIN` in `values.yaml` with your domain name from the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records), then enable the ingress:
 
    ```yaml

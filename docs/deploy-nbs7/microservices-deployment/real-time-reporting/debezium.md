@@ -13,7 +13,7 @@ redirect_from:
 
 # Deploy Debezium for real-time reporting (RTR)
 
-This page walks through deploying the Debezium connector using the [Debezium Helm chart][nedss-helm-debezium-chart] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The connector captures change data from source tables and publishes events to Kafka topics for RTR processing.
+This page walks through deploying the [[debezium|Debezium]] connector using the [Debezium Helm chart][nedss-helm-debezium-chart] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The connector captures change data from source tables and publishes events to [[kafka]] topics for [[rtr]] processing.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -23,7 +23,7 @@ This page walks through deploying the Debezium connector using the [Debezium Hel
 
 ## Prerequisites
 
-This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and the database setup on [Deploy real-time reporting](real-time-reporting.html), including enabling Change Data Capture.
+This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and the database setup on [Deploy real-time reporting](real-time-reporting.html), including enabling [[change-data-capture|Change Data Capture]].
 
 Have your database credentials and Kafka endpoint values available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 

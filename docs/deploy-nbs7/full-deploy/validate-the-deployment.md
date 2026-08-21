@@ -41,7 +41,7 @@ Confirm that each component you deployed passed its validation:
 | Data ingestion | Individual [[elr]] and [[ecr]] messages are accepted and routed correctly | [Smoke test](../microservices-deployment/data-ingestion/smoke-test.html) |
 | Data ingestion API | Data ingestion API endpoints are reachable and functioning | [API testing](../microservices-deployment/data-ingestion/api-testing.html) |
 | Data processing | Data processing handles ELR data correctly and returns expected status codes | [API testing and integration](../microservices-deployment/data-processing/api-testing.html) |
-| [[case-notification|Case notifications]] | The Case Notification service processes and routes notifications correctly | [API testing](../microservices-deployment/case-notification/api-testing.html) |
+| [[case-notification\|Case notifications]] | The Case Notification service processes and routes notifications correctly | [API testing](../microservices-deployment/case-notification/api-testing.html) |
 | NND service (Data Sync) | Data Sync API endpoints are reachable and credentials are valid | [Validate API endpoints](../microservices-deployment/nnd-service/validating-api-endpoints.html) |
 | Real-time reporting ([[rtr]]) | RTR services started, database migrated, and connectors registered | [Validate RTR installation](../microservices-deployment/real-time-reporting/rtr-validation.html) |
 

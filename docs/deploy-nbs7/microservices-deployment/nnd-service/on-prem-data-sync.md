@@ -10,7 +10,7 @@ redirect_from:
 
 # Deploy Data Availability
 
-This section provides instructions for on-premises deployment of the Data Availability service, which extracts data from the modernized NBS cloud implementation so you can keep copies of selected tables from `RDB`, `ODSE`, and `SRTE`. Complete [Validate API endpoints](./validating-api-endpoints.html) before starting this page.
+This section provides instructions for [[on-premises]] deployment of the Data Availability service, which extracts data from the modernized NBS cloud implementation so you can keep copies of selected tables from `RDB`, `ODSE`, and `SRTE`. Complete [Validate API endpoints](./validating-api-endpoints.html) before starting this page.
 
 > This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }
@@ -24,7 +24,7 @@ This section provides instructions for on-premises deployment of the Data Availa
 ## Prerequisites
 
 - Complete [Validate API endpoints](./validating-api-endpoints.html).
-- Keycloak client ID and client secret: Retrieve these from your Keycloak instance. In the **NBS** realm, navigate to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
+- [[keycloak]] client ID and client secret: Retrieve these from your Keycloak instance. In the **NBS** realm, navigate to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
 - Data service URL: Retrieve this from your NBS environment.
 
 ## Components for Data Availability service
@@ -38,7 +38,7 @@ The Data Availability service includes:
 The service supports multiple options to download the data:
 
 - Direct database sync
-- Drop incremental `.JSON` files into an **AWS S3 bucket**
+- Drop incremental `.JSON` files into an **[[amazon-s3|AWS S3]] bucket**
 - Drop incremental `.JSON` files into a **local directory**
 
 ## Set up the Data Availability service
@@ -118,7 +118,7 @@ To direct SRTE table data into a separate SRTE database:
 - Ensure relevant tables exist in the designated database **before sync**.
 - Execute the following `.sql` scripts to create necessary tables required to download the data.
 
-- **Database creation scripts** (includes RDB, SRTE, and RDB Modern)
+- **Database creation scripts** (includes RDB, SRTE, and [[rdb-modern|RDB Modern]])
   [create_test_db SQL scripts][nedss-nndss-create-test-db]
 
 ## Next steps

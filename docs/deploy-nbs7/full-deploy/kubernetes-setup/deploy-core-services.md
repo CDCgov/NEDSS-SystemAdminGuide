@@ -154,7 +154,7 @@ Create A records in your Domain Name System ([[dns]]) service, such as [[amazon-
    |-----------------------|----------|---------|
    | NBS application | `app.<DOMAIN_NAME.TLD>` | `app.nbsdemo.com` |
    | Data services | `data.<DOMAIN_NAME.TLD>` | `data.nbsdemo.com` |
-   | [[apache-nifi|NiFi]] (use with caution) | `nifi.<DOMAIN_NAME.TLD>` | `nifi.nbsdemo.com` |
+   | [[apache-nifi\|NiFi]] (use with caution) | `nifi.<DOMAIN_NAME.TLD>` | `nifi.nbsdemo.com` |
 
    > NiFi has known security vulnerabilities. Add a NiFi DNS record only if you need to administer NiFi directly. Otherwise, omit it.
    {: .important }

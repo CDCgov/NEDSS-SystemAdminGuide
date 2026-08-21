@@ -13,7 +13,7 @@ redirect_from:
 
 # Deploy the Kafka connector for real-time reporting (RTR)
 
-This page walks through deploying the Kafka sink connector using the ['kafka-connect-sink' Helm chart][nedss-helm-kafka-connect-sink-chart] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The connector consumes RTR topics and writes transformed data into reporting tables.
+This page walks through deploying the [[kafka]] sink connector using the ['kafka-connect-sink' Helm chart][nedss-helm-kafka-connect-sink-chart] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The connector consumes [[rtr]] topics and writes transformed data into reporting tables.
 
 ## On this page
 {: .no_toc .text-delta }

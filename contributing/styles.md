@@ -714,6 +714,7 @@ Runs on [[kubernetes]] via [[amazon-eks|Amazon EKS]].
 
 - `[[key]]` shows the glossary term's text. `[[nlb]]` renders "NLB".
 - `[[key|label]]` sets custom visible text. Use it for plurals, inflected forms, or an acronym whose entry lives under another name: `[[case-investigation|investigations]]`, `[[classic-nbs|NBS 6]]`, `[[amazon-eks|EKS]]`.
+- **Inside a table cell, escape the pipe** so it is not read as a column break: `[[classic-nbs\|NBS 6]]`.
 
 An unknown key is left as literal `[[key]]` and logged as a build warning, so typos are easy to catch.
 

@@ -46,7 +46,7 @@ Starting in NBS 7.13, the five entity-specific Spring Boot services previously u
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Consumes Kafka messages for each entity type ([[case-investigation|investigations]], patients, organizations, [[observation|observations]], and [[ldf]] data), runs stored procedures to retrieve and format the data, and produces processed records for downstream storage in RDB\_Modern. A post-processing service then populates analytical datamarts and fact tables from the staging data. |
+| What it does in NBS 7 | Consumes Kafka messages for each entity type ([[case-investigation\|investigations]], patients, organizations, [[observation\|observations]], and [[ldf]] data), runs stored procedures to retrieve and format the data, and produces processed records for downstream storage in RDB\_Modern. A post-processing service then populates analytical datamarts and fact tables from the staging data. |
 | Dependencies | Requires Kafka (message source) and NBS\_ODSE (operational data store). Populates RDB\_Modern staging tables, which are then consumed by the post-processing service. |
 
 <!--

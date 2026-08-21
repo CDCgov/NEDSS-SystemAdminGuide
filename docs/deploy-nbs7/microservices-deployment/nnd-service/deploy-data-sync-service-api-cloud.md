@@ -10,7 +10,7 @@ redirect_from:
 
 # Deploy Data Sync service API
 
-This page walks through deploying the NBS 7 Data Sync service API using the `nnd-service` Helm chart from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. After you finish this page, proceed to [Validate API endpoints](./validating-api-endpoints.html).
+This page walks through deploying the [[nbs-7]] Data Sync service API using the `nnd-service` [[helm-chart|Helm chart]] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. After you finish this page, proceed to [Validate API endpoints](./validating-api-endpoints.html).
 
 > This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }
@@ -29,11 +29,11 @@ This page assumes you've completed [Before you begin](../deploy-nbs7-microservic
 
 Complete the following steps to deploy the ['nnd-service' Helm chart][nedss-helm-nnd-service-chart] from the `charts/nnd-service/` directory of your cloned NEDSS-Helm repository:
 
-1. Confirm that the following DNS entry was created and points to the Network Load Balancer (NLB) in front of your Kubernetes cluster. Use the active NLB provisioned during base install. Do this in your authoritative DNS service, such as Route 53. Replace `example.com` with the appropriate domain name in `values.yaml`:
+1. Confirm that the following [[dns]] entry was created and points to the Network Load Balancer ([[nlb]]) in front of your [[kubernetes]] cluster. Use the active NLB provisioned during base install. Do this in your authoritative DNS service, such as [[amazon-route-53|Route 53]]. Replace `example.com` with the appropriate domain name in `values.yaml`:
    - NND service application, for example: `data.example.com`
-1. Search `values.yaml` for `EXAMPLE` and fill in the JDBC connection values and EFS file system ID. The `dbserver` value is the database server endpoint only; do not include the port number. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
+1. Search `values.yaml` for `EXAMPLE` and fill in the [[jdbc]] connection values and [[amazon-efs|EFS]] file system ID. The `dbserver` value is the database server endpoint only; do not include the port number. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
 
-   The following screenshot shows the database endpoint in the Amazon RDS console:
+   The following screenshot shows the database endpoint in the [[amazon-rds|Amazon RDS]] console:
 
    ![Amazon RDS console showing the Connectivity and security tab with the database endpoint highlighted in the Endpoint and port section](../images/nnd-dbendpoint.png)
 

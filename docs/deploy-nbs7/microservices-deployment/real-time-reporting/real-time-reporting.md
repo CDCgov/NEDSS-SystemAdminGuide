@@ -25,7 +25,7 @@ redirect_from:
 
 # Deploy real-time reporting (RTR)
 
-Real-time reporting (RTR) is an NBS 7 capability that reduces reporting latency from as long as 24 hours to between 5 minutes and 1 hour. RTR uses [Change Data Capture](#enable-change-data-capture) to detect row-level changes in source tables, publishes those changes to Kafka topics, and loads the data into the reporting database. This section covers steps to install RTR with Helm charts.
+Real-time reporting ([[rtr]]) is an [[nbs-7]] capability that reduces reporting latency from as long as 24 hours to between 5 minutes and 1 hour. RTR uses [Change Data Capture](#enable-change-data-capture) to detect row-level changes in source tables, publishes those changes to [[kafka]] topics, and loads the data into the reporting database. This section covers steps to install RTR with Helm charts.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -40,10 +40,10 @@ Real-time reporting (RTR) is an NBS 7 capability that reduces reporting latency 
 
 Before you begin, verify that your environment meets the following requirements and choose a database installation method. The method you choose applies throughout this guide.
 
-> To reduce risk, consider setting up RTR in a testing environment before moving to production. This lets you run RTR alongside MasterETL and compare results, then turn off MasterETL only after you are satisfied with those results.
+> To reduce risk, consider setting up RTR in a testing environment before moving to production. This lets you run RTR alongside [[masteretl|MasterETL]] and compare results, then turn off MasterETL only after you are satisfied with those results.
 {: .important }
 
-1. RTR installation requires a supported NBS 6 version. See the [Supported NBS versions](../../../supported-versions.html) page. To verify your NBS release version, run the following query:
+1. RTR installation requires a supported [[classic-nbs|NBS 6]] version. See the [Supported NBS versions](../../../supported-versions.html) page. To verify your NBS release version, run the following query:
 
    ```sql
    USE NBS_ODSE;
@@ -61,7 +61,7 @@ Before you begin, verify that your environment meets the following requirements 
    > Back up the `RDB` database before you proceed. This step cannot be undone.
    {: .warning }
 
-   - **Create a new reporting database (suggested):** Duplicate your existing `RDB`. This lets you run RTR alongside MasterETL to compare results before fully committing. You can use any name for this reporting database, but for the remainder of this guide, we refer to it as `RDB_MODERN`. The exact steps for database duplication depend on your SQL Server version and hosting environment. If your database is on Amazon RDS, see [Back up and restore on Amazon RDS](../../../maintain-nbs7/rds-backup-restore.html). For other environments, see [Microsoft's documentation on backup and restore operations](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases?view=sql-server-ver17).
+   - **Create a new reporting database (suggested):** Duplicate your existing `RDB`. This lets you run RTR alongside MasterETL to compare results before fully committing. You can use any name for this reporting database, but for the remainder of this guide, we refer to it as `RDB_MODERN`. The exact steps for database duplication depend on your [[microsoft-sql-server|SQL Server]] version and hosting environment. If your database is on [[amazon-rds|Amazon RDS]], see [Back up and restore on Amazon RDS](../../../maintain-nbs7/rds-backup-restore.html). For other environments, see [Microsoft's documentation on backup and restore operations](https://learn.microsoft.com/en-us/sql/relational-databases/backup-restore/back-up-and-restore-of-sql-server-databases?view=sql-server-ver17).
       - **Use your existing RDB database:** RTR takes over writing to `RDB`. Turn off the `MasterETL.bat` and `covid19ETL.bat` jobs and proceed to the next step. MasterETL remains available for manual recovery runs if needed.
 
    > If you use a new reporting database, you must use the new reporting execution server to run reports.
@@ -83,7 +83,7 @@ Create a database service user that the RTR services use to read source data and
 > In this section, the terms `cdc` and `CDC` appear as part of SQL Server column and parameter names and refer to Change Data Capture, not the Centers for Disease Control and Prevention.
 {: .note }
 
-[Change Data Capture](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver17) (CDC) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Change Data Capture was already enabled on `NBS_ODSE` in the Case Notification service deployment. Running the bootstrap script again on `NBS_ODSE` has no additional effect. The script also enables CDC on `NBS_SRTE`, which is required for real-time reporting.
+[Change Data Capture](https://learn.microsoft.com/en-us/sql/relational-databases/track-changes/about-change-data-capture-sql-server?view=sql-server-ver17) ([[change-data-capture|CDC]]) streams row-level changes from `NBS_ODSE` and `NBS_SRTE` to Kafka, where RTR services load them into the reporting database. Change Data Capture was already enabled on `NBS_ODSE` in the Case Notification service deployment. Running the bootstrap script again on `NBS_ODSE` has no additional effect. The script also enables CDC on `NBS_SRTE`, which is required for real-time reporting.
 
 To enable CDC on `NBS_ODSE` and `NBS_SRTE`:
 

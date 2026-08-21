@@ -13,7 +13,8 @@
 # Authoring guidance lives in contributing/styles.md ("Glossary tooltips").
 
 module TooltipShorthand
-  TOKEN  = /\[\[([a-z0-9][a-z0-9-]*)(?:\|([^\]\n]+))?\]\]/
+  # The label pipe may be written escaped (\|) so it is valid inside a Markdown table cell.
+  TOKEN  = /\[\[([a-z0-9][a-z0-9-]*)(?:\\?\|([^\]\n]+))?\]\]/
   FENCED = /(?m)^([ \t]*)(`{3,}|~{3,})[^\n]*\n.*?\n\1\2[ \t]*$/
   INLINE = /(`+)(?:(?!\1).)+?\1/
   MARK   = "@@TTSTASH"           # placeholder prefix; @@TTSTASH<idx>@@ can't occur in prose

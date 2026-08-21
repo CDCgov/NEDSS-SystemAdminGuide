@@ -18,7 +18,7 @@ redirect_from:
 
 # Deploy data ingestion service (DI API) for NBS 7
 
-This page walks through deploying the DI API, including database setup and Helm chart installation.
+This page walks through deploying the [[di-api|DI API]], including database setup and [[helm-chart|Helm chart]] installation.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -28,7 +28,7 @@ This page walks through deploying the DI API, including database setup and Helm 
 
 ## Before you begin
 
-The DI API utilizes three databases: `NBS_Msgoute`, `NBS_ODSE` and `NBS_DataIngest`. `NBS_DataIngest` is a new database essential for ingesting, validating Electronic Lab Reports (ELR), converting them into XML payloads, and integrating the XML into the `NBS_MSGOUT` database. It must be created before deploying the app on the Kubernetes cluster.
+The DI API utilizes three databases: `NBS_Msgoute`, `NBS_ODSE` and `NBS_DataIngest`. `NBS_DataIngest` is a new database essential for ingesting, validating Electronic Lab Reports ([[elr]]), converting them into XML payloads, and integrating the XML into the `NBS_MSGOUT` database. It must be created before deploying the app on the [[kubernetes]] cluster.
 
 ### Create the NBS_DataIngest database
 
@@ -76,20 +76,22 @@ Run the following SQL scripts before deploying the data ingestion service.
 
 ## Deploy the data ingestion service using Helm
 
-1. Locate the data ingestion service Helm chart (`dataingestion-service`) in the [NEDSS-Helm repository][nedss-helm-dataingestion-service-chart]. Set the **ECR repository**, **ECR image tag**, **database server endpoints**, **MSK (Kafka) bootstrap server**, and **ingress host** values in `values.yaml`.
+Complete the following steps to deploy the ['dataingestion-service' Helm chart][nedss-helm-dataingestion-service-chart] from the `charts/dataingestion-service/` directory of your cloned NEDSS-Helm repository:
 
-1. Confirm that DNS entries for the following host were created and point to the Network Load Balancer (NLB) in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned in the base install steps). Make this change in your authoritative DNS service (for example, Route 53).
+1. In `values.yaml`, search for `EXAMPLE` and fill in your environment-specific values for AWS or Azure as appropriate. The [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
+
+1. Confirm that [[dns]] entries for the following host were created and point to the Network Load Balancer ([[nlb]]) in front of your Kubernetes cluster (this must be the **ACTIVE NLB** provisioned in the base install steps). Make this change in your authoritative DNS service (for example, [[amazon-route-53|Route 53]]).
    Replace `EXAMPLE_DOMAIN` with your domain name in `values.yaml`. See the [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller) for reference.
    data ingestion service application: `data.site_name.example_domain.com`
 
-1. To enable RTR ingress, set `reportingService.enabled` to `"true"`:
+1. To enable [[rtr]] ingress, set `reportingService.enabled` to `"true"`:
 
     ```yaml
     reportingService:
       enabled: "true"
     ```
 
-1. Set the JDBC connection values. `NBS_DataIngest` is the newly created database for the data ingestion service. `NBS_MSGOUTE` and `NBS_ODSE` are existing NBS databases. The `dbserver` value is the database server endpoint only; do not include the port number.
+1. Set the [[jdbc]] connection values. `NBS_DataIngest` is the newly created database for the data ingestion service. `NBS_MSGOUTE` and `NBS_ODSE` are existing NBS databases. The `dbserver` value is the database server endpoint only; do not include the port number.
    ![data-ingestion-dbendpoint](images/data-ingestion-dbendpoint.png)
 
    ```yaml
@@ -99,7 +101,7 @@ Run the following SQL scripts before deploying the data ingestion service.
       password: "EXAMPLE_ODSE_DB_USER_PASSWORD"
    ```
 
-1. Set the Kafka broker endpoint. Use either of the two private (plaintext) endpoints:
+1. Set the [[kafka]] broker endpoint. Use either of the two private (plaintext) endpoints:
    ![data-ingestion-kafka-endpoint](images/data-ingestion-kafka-endpoint.png)
 
    ```yaml
@@ -107,20 +109,20 @@ Run the following SQL scripts before deploying the data ingestion service.
       cluster: "EXAMPLE_KAFKA_ENDPOINT"
    ```
 
-1. Set `efsFileSystemId` to the EFS file system ID from the AWS console:
+1. Set `efsFileSystemId` to the [[amazon-efs|EFS]] file system ID from the AWS console:
    ![data-ingestion-efs](images/data-ingestion-efs.png)
 
    ```yaml
    efsFileSystemId: "EXAMPLE_EFS_ID"
    ```
 
-1. Set the Keycloak auth URI. In the default configuration this value should not need to change unless the name or namespace of the Keycloak pod is modified:
+1. Set the [[keycloak]] auth URI. In the default configuration this value should not need to change unless the name or namespace of the Keycloak pod is modified:
 
    ```yaml
    authUri: "http://keycloak.default.svc.cluster.local/auth/realms/NBS"
    ```
 
-1. **Optional:** Configure SFTP for manual ELR file drop-off. The data ingestion service can poll ELRs from an external SFTP server. To enable this, set `sftp.enabled` to `"enabled"` and provide the appropriate host, username, and password. If the SFTP server is unavailable or not needed, set `sftp.enabled` to `"disabled"` or leave it empty:
+1. **Optional:** Configure [[sftp]] for manual ELR file drop-off. The data ingestion service can poll ELRs from an external SFTP server. To enable this, set `sftp.enabled` to `"enabled"` and provide the appropriate host, username, and password. If the SFTP server is unavailable or not needed, set `sftp.enabled` to `"disabled"` or leave it empty:
 
    ```yaml
    sftp:

@@ -10,7 +10,7 @@ redirect_from:
 
 # Deploy the Debezium Kafka source connector for NBS 7 case notifications
 
-This page walks through enabling Change Data Capture (CDC) and deploying the Debezium source connector used by Case Notification services. Complete [Case notifications](../case-notification.html) before starting this page. After you finish the connector deployment, proceed to deploying the [Case Notification service](./case-notification-service.html).
+This page walks through enabling Change Data Capture ([[change-data-capture|CDC]]) and deploying the [[debezium|Debezium]] source connector used by Case Notification services. Complete [Case notifications](../case-notification.html) before starting this page. After you finish the connector deployment, proceed to deploying the [Case Notification service](./case-notification-service.html).
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,12 +22,12 @@ This page walks through enabling Change Data Capture (CDC) and deploying the Deb
 
 This page assumes you've completed [Before you begin](../deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and [Data Processing](../data-processing.html) deployment. If your deployment plan includes [NND Service (Data Sync)](../nnd-service.html), complete it before this page.
 
-- Have your database credentials, domain values, and Kafka endpoint available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining any values.
-- Confirm that the `case-notification-service` Keycloak client has been imported. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help.
+- Have your database credentials, domain values, and [[kafka]] endpoint available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining any values.
+- Confirm that the `case-notification-service` [[keycloak]] client has been imported. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help.
 
 ## Enable Change Data Capture
 
-> In this section, the terms `cdc` and `CDC` appear as part of SQL Server column and parameter names and refer to Change Data Capture, not the Centers for Disease Control and Prevention.
+> In this section, the terms `cdc` and `CDC` appear as part of [[microsoft-sql-server|SQL Server]] column and parameter names and refer to Change Data Capture, not the Centers for Disease Control and Prevention.
 {: .note }
 
 Enable Change Data Capture on `NBS_ODSE` before deploying the connector. Sysadmin permissions are required.

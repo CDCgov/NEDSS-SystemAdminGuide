@@ -8,7 +8,7 @@ description: Lightweight checks to confirm that RTR services started, database m
 
 # Validate the RTR installation
 
-Use this page for lightweight checks that confirm real-time reporting (RTR) is running before you run full end-to-end pipeline validation. These checks confirm that the RTR services started successfully, that database migration configuration is accounted for, and that the reporting-pipeline-service registered the Debezium and Kafka Connect connectors.
+Use this page for lightweight checks that confirm real-time reporting ([[rtr]]) is running before you run full end-to-end pipeline validation. These checks confirm that the RTR services started successfully, that database migration configuration is accounted for, and that the reporting-pipeline-service registered the [[debezium|Debezium]] and [[kafka|Kafka]] Connect connectors.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -20,7 +20,7 @@ Use this page for lightweight checks that confirm real-time reporting (RTR) is r
 
 These checks validate the RTR deployment, application startup, database migration configuration, and connector registration. They do not replace full data-flow validation.
 
-Validate external dependencies separately, according to your organization's infrastructure and change-management process. These include the managed Kafka cluster, SQL Server connectivity, Change Data Capture enablement, and database change-approval procedures.
+Validate external dependencies separately, according to your organization's infrastructure and change-management process. These include the managed Kafka cluster, [[microsoft-sql-server|SQL Server]] connectivity, [[change-data-capture|Change Data Capture]] enablement, and database change-approval procedures.
 
 ## Check service status
 
@@ -40,7 +40,7 @@ All RTR pods should be in the `Running` state, and the `READY` column should sho
 
 ## Check reporting-pipeline-service health
 
-Confirm that the reporting-pipeline-service pod is healthy and that its Kubernetes readiness and liveness probes are passing:
+Confirm that the reporting-pipeline-service pod is healthy and that its [[kubernetes]] readiness and liveness probes are passing:
 
 ```bash
 kubectl describe pod -l app=reporting-pipeline-service -n <namespace>

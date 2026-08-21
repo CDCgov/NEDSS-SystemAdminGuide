@@ -13,7 +13,7 @@ redirect_from:
 
 # Service integrations for data ingestion
 
-To install Rhapsody or SFTP service integrations, see the following documents:
+To install Rhapsody or [[sftp]] service integrations, see the following documents:
 
 - [Data Ingestion Rhapsody Route Integration.pdf](../images/NM-NBS%207.11%20Data%20Ingestion%20Rhapsody%20Route%20Integration.pdf)
 - [Data Ingestion SFTP Manual File Drop Off.pdf](../images/NM-NBS%207.11%20Data%20Ingestion%20SFTP%20Manual%20File%20Drop%20Off.pdf)

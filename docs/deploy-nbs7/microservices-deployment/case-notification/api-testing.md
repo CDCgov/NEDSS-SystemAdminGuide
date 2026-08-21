@@ -10,7 +10,7 @@ redirect_from:
 
 # Test and integrate case notification APIs
 
-Use this page to validate Public Health Information Network Messaging System (PHINMS) property configuration and supporting dependencies for Case Notification services. Deploy the [Notification service](./case-notification-service.html) before starting this page.
+Use this page to validate Public Health Information Network Messaging System ([[phinms]]) property configuration and supporting dependencies for Case Notification services. Deploy the [Notification service](./case-notification-service.html) before starting this page.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -35,7 +35,7 @@ The Case Notification service requires PHINMS properties to route case notificat
       - `phin_recipient`
       - `phin_priority`
 
-1. Share the values with your CDC partners. CDC will update the `NBS_Case_Notification_Config` table in `NBS_MSGOUTE` using the following script:
+1. Share the values with your [[cdc]] partners. CDC will update the `NBS_Case_Notification_Config` table in `NBS_MSGOUTE` using the following script:
 
    ```sql
    USE NBS_MSGOUTE;
@@ -54,12 +54,12 @@ The Case Notification service requires PHINMS properties to route case notificat
    WHERE config_name = 'NON_STD_CASE_NOTIFICATION'
    ```
 
-> If you host NBS on-premises without CDC support, you have full database access and can run this script yourself.
+> If you host NBS [[on-premises]] without CDC support, you have full database access and can run this script yourself.
 {: .note }
 
 ## Verify Kafka configuration
 
-The Case Notification service uses Kafka to receive events from the Debezium source connector. Correct Kafka configuration ensures that new records inserted into `NBS_ODSE.CN_transportq_out` are detected and routed through the pipeline.
+The Case Notification service uses [[kafka]] to receive events from the [[debezium|Debezium]] source connector. Correct Kafka configuration ensures that new records inserted into `NBS_ODSE.CN_transportq_out` are detected and routed through the pipeline.
 
 - **Configure Kafka broker:** Use one of the available Kafka broker endpoints (`Private endpoints - Plaintext`) in the values file located in the [NEDSS-Helm/charts/debezium-case-notifications][nedss-helm-debezium-case-notifications] directory. The number of brokers varies by environment.
 - **Confirm Debezium connector:** Confirm that the Debezium source connector deployed in [Deploy the Debezium Kafka source connector](./debezium.html) is running on the `NBS_ODSE.CN_transportq_out` table before proceeding.

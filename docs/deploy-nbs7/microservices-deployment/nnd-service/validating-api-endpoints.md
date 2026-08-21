@@ -25,11 +25,11 @@ Use this check to confirm that your environment can reach the Data Sync API befo
 
 Complete the [Deploy Data Sync service API](./deploy-data-sync-service-api-cloud.html) deployment before you begin. This procedure uses Postman to send API requests. Download and install Postman from the [Postman installation page](https://learning.postman.com/docs/getting-started/installation/installation-and-updates).
 
-You need a Keycloak client ID and client secret for the Data Sync service, `nnd-keycloak-client`. Retrieve these from your Keycloak instance. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) on the **Deploy and configure Keycloak** page.
+You need a [[keycloak]] client ID and client secret for the Data Sync service, `nnd-keycloak-client`. Retrieve these from your Keycloak instance. See [Import service clients and retrieve secrets](../../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) on the **Deploy and configure Keycloak** page.
 
 ## Validate token generation in Postman
 
-The token endpoint returns a JWT token that clients use to access secured Data Sync endpoints. Send a `POST` request to the following endpoint:
+The token endpoint returns a [[jwt]] token that clients use to access secured Data Sync endpoints. Send a `POST` request to the following endpoint:
 
 `https://data.<your-site>.<your-domain>.com/data-sync/api/auth/token`
 

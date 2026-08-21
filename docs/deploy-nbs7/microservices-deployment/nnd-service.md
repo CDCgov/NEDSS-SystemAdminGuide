@@ -9,9 +9,9 @@ has_toc: false
 
 # Deploy the NND Service (Data Sync) for NBS 7
 
-This section covers Data Sync capabilities for National Notifiable Disease (NND) workflows, including cloud service deployment, endpoint validation, and on-premises setup patterns. After you finish this deployment, proceed to [Case notifications](./case-notification.html).
+This section covers Data Sync capabilities for National Notifiable Disease ([[nnd]]) workflows, including cloud service deployment, endpoint validation, and [[on-premises]] setup patterns. After you finish this deployment, proceed to [Case notifications](./case-notification.html).
 
-> The NND Service (Data Sync) deployment is optional. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
+> The NND Service (Data Sync) deployment is optional. [[cdc]] is evaluating long-term support for this service. If your [[stlt]] has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 {: .important }
 
 **If you are not deploying the NND Service, proceed to deploying the [Case notification service](./case-notification.html).**
@@ -20,9 +20,9 @@ This section covers Data Sync capabilities for National Notifiable Disease (NND)
 
 This deployment section uses three related but distinct terms:
 
-- **NND Sync**: The on-premises NNDSS (National Notifiable Diseases Surveillance System) integration workflow that uses Data Sync service outputs to support ongoing message transmission.
-- **Data Availability**: A Data Sync service use case that copies selected data to SQL Server, a cloud storage service, or a local directory.
-- **Data Sync service**: The NBS 7 service and API that extract data from the NBS cloud environment.
+- **NND Sync**: The on-premises [[nndss]] (National Notifiable Diseases Surveillance System) integration workflow that uses Data Sync service outputs to support ongoing message transmission.
+- **Data Availability**: A Data Sync service use case that copies selected data to [[microsoft-sql-server|SQL Server]], a cloud storage service, or a local directory.
+- **Data Sync service**: The [[nbs-7]] service and API that extract data from the NBS cloud environment.
 
 ## In this section
 

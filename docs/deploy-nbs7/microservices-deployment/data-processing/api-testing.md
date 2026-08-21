@@ -10,7 +10,7 @@ redirect_from:
 
 # Test RTI API integration for Data Processing
 
-Use this page to validate Real Time Ingestion (RTI) by sending ELR data through the data ingestion endpoint and verifying RTI processing outcomes.
+Use this page to validate Real Time Ingestion ([[rti]]) by sending [[elr]] data through the data ingestion endpoint and verifying RTI processing outcomes.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -44,8 +44,8 @@ Use the DI API status endpoint (`/api/elrs/status-details`) to verify processing
 
 RTI processing can complete in three status steps:
 
-- `RTI_SUCCESS_STEP_1`: Data passed through core processing and should be available in the ODSE database.
-- `RTI_SUCCESS_STEP_2`: Applies when a WDS algorithm is configured; the service runs WDS comparison.
+- `RTI_SUCCESS_STEP_1`: Data passed through core processing and should be available in the [[ods-odse|ODSE]] database.
+- `RTI_SUCCESS_STEP_2`: Applies when a [[wds]] algorithm is configured; the service runs WDS comparison.
 - `RTI_SUCCESS_STEP_3`: Triggered after WDS completes; the service assigns the appropriate action for the ingested payload.
 
 The following screenshot shows an example response from the status endpoint with an `RTI_SUCCESS_STEP_1` result:

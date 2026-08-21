@@ -122,4 +122,4 @@ Full configuration guidance is in the [Deploy NBS 7](../../deploy-nbs7.html) sec
 | Cert Manager | Automates provisioning and renewal of {% include term-tooltip.html key="tls" term="TLS" id="core-tls" %}/{% include term-tooltip.html key="ssl" term="SSL" id="core-ssl" %} certificates for encrypted traffic within and into the NBS 7 environment. |
 | FluentBit | Lightweight log forwarding agent that collects and routes logs from NBS 7 services for monitoring and troubleshooting. |
 | Linkerd | Service mesh (provisioned via Terraform) that manages encrypted communication between NBS 7 services inside the Kubernetes cluster. |
-| DNS (Route 53 or equivalent) | Routes user traffic to your NBS 7 environment. On AWS, Route 53 is the standard option; Azure and on-premises DNS services are also supported. |
+| DNS ({% include term-tooltip.html key="amazon-route-53" term="Route 53" id="core-route53" %} or equivalent) | Routes user traffic to your NBS 7 environment. On AWS, Route 53 is the standard option; Azure and on-premises DNS services are also supported. |

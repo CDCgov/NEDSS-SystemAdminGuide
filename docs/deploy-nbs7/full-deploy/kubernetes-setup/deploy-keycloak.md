@@ -18,7 +18,7 @@ redirect_from:
 
 # Deploy and configure Keycloak for NBS 7
 
-Keycloak is the authentication service that lets users sign in to the NBS 7 web UI. It provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`, and, like the services in [Deploy core Kubernetes services](deploy-core-services.html), it is a core service. This page covers how to install Keycloak, configure the authentication setup that the NBS 7 microservices require, and validate Traefik and Keycloak together. Complete these steps before you deploy the NBS 7 microservices.
+{% include term-tooltip.html key="keycloak" term="Keycloak" id="deploykc-keycloak" %} is the authentication service that lets users sign in to the {% include term-tooltip.html key="nbs-7" term="NBS 7" id="deploykc-nbs-7" %} web UI. It provides authentication for `modernization-api`, `nbs-gateway`, `dataingestion-service`, and `nnd-service`, and, like the services in [Deploy core Kubernetes services](deploy-core-services.html), it is a core service. This page covers how to install Keycloak, configure the authentication setup that the NBS 7 microservices require, and validate {% include term-tooltip.html key="traefik" term="Traefik" id="deploykc-traefik" %} and Keycloak together. Complete these steps before you deploy the NBS 7 microservices.
 
 **Already running Keycloak?** If your jurisdiction operates its own Keycloak and you want NBS 7 to authenticate against an existing realm, follow [Integrate NBS 7 with an existing Keycloak](existing-keycloak.html) instead of this page. This page installs the NBS-provided Keycloak and imports the NBS realms.
 {: .note }
@@ -31,13 +31,13 @@ Keycloak is the authentication service that lets users sign in to the NBS 7 web 
 
 ## Prerequisites
 
-Before you begin the procedures on this page, locate the `keycloak` Helm chart in the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
+Before you begin the procedures on this page, locate the `keycloak` {% include term-tooltip.html key="helm-chart" term="Helm chart" id="deploykc-helm-chart" %} in the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}.
 
 ## Create the Keycloak database
 
 Create the Keycloak database and database user before you deploy the Helm chart.
 
-> Any compatible SQL client works for this step, including SQL Server Management Studio (SSMS).
+> Any compatible SQL client works for this step, including SQL Server Management Studio ({% include term-tooltip.html key="ssms" term="SSMS" id="deploykc-ssms" %}).
 {: .note }
 
 1. Using your SQL client, authenticate into your database server:
@@ -82,7 +82,7 @@ In [values.yaml][keycloak-values], update the following parameters:
 | `<<EXAMPLE_KEYCLOAK_ADMIN_PASSWORD>>` | `deployment.keycloak.env.keycloakAdminPassword` | Password for the Keycloak admin user. Use a complex password that meets your organization's standards. The admin username, `keycloakAdmin`, defaults to `admin`. |
 | `<<EXAMPLE_KC_DB_USER_PASSWORD>>` | `deployment.keycloak.env.kcDbPassword` | Password for the Keycloak database account. Must match the password you set in [Create the Keycloak database](#create-the-keycloak-database). |
 | `jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=keycloak;encrypt=true;trustServerCertificate=true;` | `deployment.keycloak.env.kcDbUrl` | Connection string for the Keycloak database. Replace `EXAMPLE_DB_ENDPOINT` with your database endpoint. |
-| `EXAMPLE_EFS_ID` | `efsFileSystemId` | **AWS only.** The Amazon EFS file system ID from the AWS console or CLI. Provides persistent storage for Keycloak themes. |
+| `EXAMPLE_EFS_ID` | `efsFileSystemId` | **AWS only.** The {% include term-tooltip.html key="amazon-efs" term="Amazon EFS" id="deploykc-efs" %} file system ID from the AWS console or CLI. Provides persistent storage for Keycloak themes. |
 | `EXAMPLE_STORAGE_ACCOUNT_NAME` | `azure.files.storageAccountName` | **Azure only.** The name of the Azure storage account that provides persistent storage for Keycloak themes. |
 | `EXAMPLE_RESOURCE_GROUP_NAME` | `azure.files.resourceGroupName` | **Azure only.** The resource group that contains the Azure storage account. |
 {: .three-column-values-table }
@@ -141,7 +141,7 @@ Keycloak uses two realms for NBS 7: the **NBS** realm for service clients, and t
 | Realm | Import file | Purpose |
 |----|----|----|
 | NBS | `01-NBS-realm-with-DI-client.json` | Contains service clients for data ingestion, NND, and SRTE data access. Seeds the `di-keycloak-client` service client in the same step. |
-| nbs-users | `02-nbs-users-realm.json` | Provides user-facing authentication for the NBS application and NBS gateway. Contains the client used by `modernization-api` and `nbs-gateway` for OpenID Connect (OIDC) login. |
+| nbs-users | `02-nbs-users-realm.json` | Provides user-facing authentication for the NBS application and NBS gateway. Contains the client used by `modernization-api` and `nbs-gateway` for OpenID Connect ({% include term-tooltip.html key="oidc" term="OIDC" id="deploykc-oidc" %}) login. |
 
 > OIDC must be enabled when you deploy `modernization-api` and `nbs-gateway`. You configure OIDC during microservices deployment, not on this page. See [Deploy NBS 7 microservices](../../microservices-deployment/deploy-nbs7-microservices.html) for OIDC configuration steps.
 {: .note }
@@ -197,7 +197,7 @@ You can use the pre-populated NBS login theme, keep the default Keycloak theme, 
 
 ## NBS 6 user requirement
 
-NBS 7 authenticates each user in Keycloak and then hands the username off to NBS 6. Every user who signs in to NBS 7 must exist as an active `user_id` in the NBS 6 `Auth_user` table. If the user is missing or not `ACTIVE`, Keycloak login succeeds but NBS 6 page access fails.
+NBS 7 authenticates each user in Keycloak and then hands the username off to {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="deploykc-nbs-6" %}. Every user who signs in to NBS 7 must exist as an active `user_id` in the NBS 6 `Auth_user` table. If the user is missing or not `ACTIVE`, Keycloak login succeeds but NBS 6 page access fails.
 
 To confirm that a user's NBS 6 account exists and is active, run the following query. The `user_id` must match the Keycloak username, and `record_status_cd` must be `ACTIVE`:
 
@@ -263,7 +263,7 @@ Use the following steps to retrieve the secret for any service client in the [cl
 1. In the realm listed for that client, navigate to **Clients** and select the client.
 1. Open the **Credentials** tab.
 1. Select the eye icon to reveal the secret and copy it.
-1. Store the secret securely in your organization's secrets manager, such as AWS Secrets Manager or Azure Key Vault.
+1. Store the secret securely in your organization's secrets manager, such as {% include term-tooltip.html key="aws-secrets-manager" term="AWS Secrets Manager" id="deploykc-secrets-manager" %} or {% include term-tooltip.html key="azure-key-vault" term="Azure Key Vault" id="deploykc-key-vault" %}.
 
 The following screenshots show this procedure for `di-keycloak-client`.
 

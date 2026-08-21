@@ -13,14 +13,14 @@ redirect_from:
 
 # Deploy cluster services for NBS 7
 
-This phase performs the deployments and configuration in your Kubernetes cluster that the NBS 7 microservices depend on. You first enable Linkerd for the namespace that the microservices deploy into, then deploy the core Kubernetes services, and then set up Keycloak for authentication.
+This phase performs the deployments and configuration in your {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="k8ssetup-kubernetes" %} cluster that the {% include term-tooltip.html key="nbs-7" term="NBS 7" id="k8ssetup-nbs-7" %} microservices depend on. You first enable {% include term-tooltip.html key="linkerd" term="Linkerd" id="k8ssetup-linkerd" %} for the namespace that the microservices deploy into, then deploy the core Kubernetes services, and then set up {% include term-tooltip.html key="keycloak" term="Keycloak" id="k8ssetup-keycloak" %} for authentication.
 
 > The `kubectl` commands in this phase require the cluster connection you configured in [Connect to Kubernetes cluster](provision-cloud-infrastructure/provision-cloud-environment.html#connect-to-kubernetes-cluster).
 {: .note }
 
 ## Enable Linkerd for the default namespace
 
-Linkerd provides mutual TLS (mTLS) between the NBS 7 microservices, all of which are deployed to the default Kubernetes namespace. Complete these steps to enable Linkerd for that namespace:
+Linkerd provides mutual TLS ({% include term-tooltip.html key="mtls" term="mTLS" id="k8ssetup-mtls" %}) between the NBS 7 microservices, all of which are deployed to the default Kubernetes namespace. Complete these steps to enable Linkerd for that namespace:
 
 1. Annotate the default namespace:
 

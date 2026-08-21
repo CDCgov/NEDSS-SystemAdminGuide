@@ -138,6 +138,10 @@
   definition: |-
     **Amazon Web Services.** A public cloud platform. See also [Microsoft Azure](#microsoft-azure).
 
+- term: AWS Secrets Manager
+  definition: |-
+    An [AWS](#aws) service for storing and managing secrets such as database credentials and [OIDC](#oidc) client secrets. The [Azure](#microsoft-azure) equivalent to AWS Secrets Manager is [Azure Key Vault](#azure-key-vault).
+
 - term: Azure
   definition: |-
     See [Microsoft Azure](#microsoft-azure).
@@ -149,6 +153,10 @@
 - term: Azure Blob Storage
   definition: |-
     An [Azure](#microsoft-azure) service for object storage. The [AWS](#aws) equivalent to Azure Blob Storage is [Amazon S3](#amazon-s3).
+
+- term: Azure DNS
+  definition: |-
+    An [Azure](#microsoft-azure) service for [DNS](#dns) management and domain routing. The [AWS](#aws) equivalent to Azure DNS is [Amazon Route 53](#amazon-route-53).
 
 - term: Azure Files
   definition: |-
@@ -202,6 +210,10 @@
   definition: |-
     **Commonly Defined Fields** (also: Collaboratively Defined Fields). Custom fields in NBS that are collaboratively defined across [jurisdictions](#jurisdiction), as distinct from [locally defined fields (LDFs)](#ldf). CDFs support import versioning.
 
+- term: cert-manager
+  definition: |-
+    An add-on for [Kubernetes](#kubernetes) that automatically provisions and renews [TLS](#tls) certificates for workloads in the cluster.
+
 - term: change data capture
   definition: |-
     A technique for tracking row-level changes in a database and streaming them to downstream systems in near real time. Abbreviated as `cdc` in code.
@@ -217,6 +229,10 @@
 - term: CLI
   definition: |-
     **Command-Line Interface.** A text-based interface for running commands. System admins might use several CLI tools, such as the [AWS](#aws) CLI, [kubectl](#kubectl), and the [Terraform](#terraform) CLI.
+
+- term: Cluster Autoscaler
+  definition: |-
+    A [Kubernetes](#kubernetes) component that automatically adjusts the number of cluster nodes to match workload demand. On [AWS](#aws), it runs as a [Helm chart](#helm-chart) that scales [Amazon EKS](#amazon-eks) nodes. On [Azure](#microsoft-azure), the equivalent node pool autoscaling for the [AKS](#aks) cluster is enabled through the [Terraform](#terraform) infrastructure deployment.
 
 - term: condition
   definition: |-
@@ -673,6 +689,10 @@
 - term: RTR
   definition: |-
     **Real-Time Reporting.** An [NBS 7](#nbs-7) reporting pipeline that replaces the batch ETL approach with event-driven data movement using [Kafka](#kafka).
+
+- term: Amazon Route 53
+  definition: |-
+    An [AWS](#aws) service for [DNS](#dns) management and domain routing. The [Azure](#microsoft-azure) equivalent to Amazon Route 53 is [Azure DNS](#azure-dns).
 
 - term: Amazon S3
   definition: |-

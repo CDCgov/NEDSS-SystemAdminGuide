@@ -151,15 +151,22 @@ blockquote.warning-title > p:first-child {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     color: $body-text-color;
     font-size: 0.85rem;
-    left: 50%;
+    // Reset weight/style so the tooltip box does not inherit bold or italics
+    // when the trigger sits inside a bold label or emphasized text. The
+    // definition's own markdown emphasis still renders normally.
+    font-style: normal;
+    font-weight: 400;
+    left: 0;
     line-height: 1.4;
-    max-width: min(24rem, 85vw);
+    max-width: min(24rem, 90vw);
     min-width: 14rem;
     padding: 0.6rem 0.75rem;
-    position: absolute;
-    top: calc(100% + 0.45rem);
-    transform: translateX(-50%);
-    z-index: 100;
+    // Fixed positioning lets the tooltip fly over tables and other overflow
+    // containers instead of being clipped inside them. tooltips.js sets the
+    // top/left against the trigger; these are just the initial values.
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
 
 .glossary-term__tooltip p {
@@ -188,24 +195,22 @@ blockquote.warning-title > p:first-child {
     border-top: 1px solid $border-color;
     content: "";
     height: 0.6rem;
-    left: 50%;
+    left: var(--tooltip-arrow-left, 50%);
     position: absolute;
     top: -0.32rem;
     transform: translateX(-50%) rotate(45deg);
     width: 0.6rem;
 }
 
-@media (max-width: 50rem) {
-    .glossary-term__tooltip {
-        left: 0;
-        max-width: min(24rem, 90vw);
-        transform: none;
-    }
-
-    .glossary-term__tooltip::before {
-        left: 1rem;
-        transform: rotate(45deg);
-    }
+// When the tooltip flips above the trigger (near the bottom of the viewport),
+// the arrow moves to the bottom edge and points down instead of up.
+.glossary-term__tooltip.is-above::before {
+    border-bottom: 1px solid $border-color;
+    border-left: 0;
+    border-right: 1px solid $border-color;
+    border-top: 0;
+    bottom: -0.32rem;
+    top: auto;
 }
 
 .main-content .three-column-values-table {

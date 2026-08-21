@@ -72,7 +72,7 @@ These services support the NBS 7 microservices:
 
 - **cert-manager:** Automates Transport Layer Security ({% include term-tooltip.html key="tls" term="TLS" id="arch-tls" %}) certificate management, using Let's Encrypt as the default certificate authority.
 - **{% include term-tooltip.html key="elasticsearch" term="Elasticsearch" id="arch-elasticsearch" %}:** Provides fast search across NBS data.
-- **{% include term-tooltip.html key="nifi" term="Apache NiFi" id="arch-nifi" %}:** Populates Elasticsearch indices from the NBS database.
+- **{% include term-tooltip.html key="apache-nifi" term="Apache NiFi" id="arch-nifi" %}:** Populates Elasticsearch indices from the NBS database.
 - **{% include term-tooltip.html key="otel" term="OTEL" id="arch-otel" %} collector:** Collects logs and metrics from the microservices and Kubernetes components.
 - **{% include term-tooltip.html key="keycloak" term="Keycloak" id="arch-keycloak" %}:** Provides authentication, token management, and single sign-on ({% include term-tooltip.html key="sso" term="SSO" id="arch-sso" %}) integration with external identity providers such as Okta, using OpenID Connect ({% include term-tooltip.html key="oidc" term="OIDC" id="arch-oidc" %}).
 

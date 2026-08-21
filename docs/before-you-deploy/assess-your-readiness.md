@@ -45,7 +45,7 @@ NBS 7 requires a cloud-based environment for deployment; {% include term-tooltip
 
 ### Microsoft Azure
 
-- **Strategic fit:** Preferred by jurisdictions with significant Microsoft ecosystem investments, such as those using {% include term-tooltip.html key="microsoft-entra-id" term="Microsoft Entra ID" id="readiness-entra" %} (formerly Azure Active Directory) or existing Enterprise Agreements.
+- **Strategic fit:** Preferred by jurisdictions with significant Microsoft ecosystem investments, such as those using {% include term-tooltip.html key="microsoft-entra-id" term="Microsoft Entra ID" id="readiness-entra" %} or existing Enterprise Agreements.
 - **Technical readiness:** Provides a streamlined experience for organizations running Windows-based workloads or requiring integration with Microsoft 365 and Power Platform tools.
 
 See also: [Provision cloud infrastructure](../deploy-nbs7/full-deploy/provision-cloud-infrastructure.html) and the [Supported NBS versions](../supported-versions.html).

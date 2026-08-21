@@ -508,7 +508,11 @@
 
 - term: NiFi
   definition: |-
-    **Apache NiFi.** An open-source data flow automation tool.
+    See [Apache NiFi](#apache-nifi).
+
+- term: Apache NiFi
+  definition: |-
+    An open-source data flow automation tool.
 
 - term: NIST 800-53
   definition: |-

@@ -8,7 +8,7 @@ description: Explains when to contact CDC for NBS 7 planning, deployment, and ma
 
 # Get support for NBS 7
 
-Use this page to understand when to contact {% include term-tooltip.html key="cdc" term="CDC" id="support-cdc" %} for help with {% include term-tooltip.html key="nbs-7" term="NBS 7" id="support-nbs-7" %} planning, deployment, validation, and ongoing maintenance. Start with the guidance in this admin guide when it covers your issue, then contact CDC if you need clarification, encounter a blocker, or cannot find the procedure you need.
+Use this page to understand when to contact [[cdc]] for help with [[nbs-7]] planning, deployment, validation, and ongoing maintenance. Start with the guidance in this admin guide when it covers your issue, then contact CDC if you need clarification, encounter a blocker, or cannot find the procedure you need.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -40,10 +40,10 @@ If the guide does not answer your question, contact [nbs@cdc.gov](mailto:nbs@cdc
 
 ## Before you contact CDC
 
-Before submitting an email or {% include term-tooltip.html key="nbs-central" term="NBS Central" id="support-nbs-central" %} ticket, include enough context for the support team to understand where you are in the process and what has already been tried. When possible, include:
+Before submitting an email or [[nbs-central]] ticket, include enough context for the support team to understand where you are in the process and what has already been tried. When possible, include:
 
 - Your jurisdiction name
-- Your {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="support-nbs-6" %} version and target NBS 7 version
+- Your [[classic-nbs|NBS 6]] version and target NBS 7 version
 - Your cloud provider and deployment configuration
 - The deployment phase you are in, such as planning, installation, testing, or steady state
 - The page or procedure you were following when the issue occurred

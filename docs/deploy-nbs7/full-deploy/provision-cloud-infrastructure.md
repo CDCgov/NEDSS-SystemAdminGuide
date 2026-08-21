@@ -19,13 +19,13 @@ redirect_from:
 
 # Provision cloud infrastructure for NBS 7
 
-This section covers how to provision the underlying cloud infrastructure for {% include term-tooltip.html key="nbs-7" term="NBS 7" id="provcloud-nbs-7" %}: the virtual network, the container runtime, and the storage services that your {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="provcloud-kubernetes" %} cluster needs before you can deploy containerized applications to it.
+This section covers how to provision the underlying cloud infrastructure for [[nbs-7]]: the virtual network, the container runtime, and the storage services that your [[kubernetes]] cluster needs before you can deploy containerized applications to it.
 
-NBS 7 is fully supported on both {% include term-tooltip.html key="aws" term="AWS" id="provcloud-aws" %} and {% include term-tooltip.html key="microsoft-azure" term="Azure" id="provcloud-azure" %}. Both providers host the same NBS 7 Kubernetes workloads. After the infrastructure is provisioned, the core services and NBS 7 microservices deployment steps are the same. The differences are mainly in how the underlying cloud environment is provisioned.
+NBS 7 is fully supported on both [[aws]] and [[microsoft-azure|Azure]]. Both providers host the same NBS 7 Kubernetes workloads. After the infrastructure is provisioned, the core services and NBS 7 microservices deployment steps are the same. The differences are mainly in how the underlying cloud environment is provisioned.
 
 The pages in this section walk you through verifying and provisioning your cloud environment:
 
-- **AWS:** Verify that your AWS account, hardware, software, and network requirements are in place, then use {% include term-tooltip.html key="terraform" term="Terraform" id="provcloud-terraform" %} to provision the VPC, Amazon EKS cluster, and supporting AWS services.
+- **AWS:** Verify that your AWS account, hardware, software, and network requirements are in place, then use [[terraform]] to provision the VPC, Amazon EKS cluster, and supporting AWS services.
 - **Azure:** Verify that your Azure subscription, hardware, software, and network requirements are in place, then use Terraform to provision the VNet, AKS cluster, and supporting Azure services.
 
 ## What gets provisioned
@@ -44,7 +44,7 @@ This section uses Terraform to create the following resources in these managed c
 | Metrics collection | Amazon Managed Service for Prometheus ([AMP](https://docs.aws.amazon.com/prometheus/)) | [Azure Monitor managed service for Prometheus](https://learn.microsoft.com/en-us/azure/azure-monitor/metrics/prometheus-metrics-overview) | Collects infrastructure and application metrics from NBS 7 components. |
 | Metrics visualization | Amazon Managed Grafana ([AMG](https://docs.aws.amazon.com/grafana/)) | [Azure Managed Grafana](https://learn.microsoft.com/en-us/azure/managed-grafana/) | Visualizes metrics from AMP. The default NBS 7 deployment includes dashboards for error rates, request volume, and latency. |
 
-> The {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="provcloud-nbs-6" %} {% include term-tooltip.html key="microsoft-sql-server" term="SQL Server" id="provcloud-mssql" %} database is not provisioned here. NBS 7 reuses the database from your existing NBS 6 deployment. You configure network access between the new VPC or VNet and the existing database in the [Network access requirements](provision-cloud-infrastructure/cloud-prerequisites.html#network-access-requirements) section of Cloud prerequisites.
+> The [[classic-nbs|NBS 6]] [[microsoft-sql-server|SQL Server]] database is not provisioned here. NBS 7 reuses the database from your existing NBS 6 deployment. You configure network access between the new VPC or VNet and the existing database in the [Network access requirements](provision-cloud-infrastructure/cloud-prerequisites.html#network-access-requirements) section of Cloud prerequisites.
 {: .note }
 
 ## In this section

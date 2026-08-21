@@ -15,7 +15,7 @@ redirect_from:
 
 # Cloud prerequisites for AWS and Azure
 
-Before you provision cloud infrastructure for {% include term-tooltip.html key="nbs-7" term="NBS 7" id="cloudprereq-nbs-7" %}, verify that your cloud environment, workstation tools, and network access meet the requirements on this page. These requirements apply to both {% include term-tooltip.html key="aws" term="AWS" id="cloudprereq-aws" %} and {% include term-tooltip.html key="microsoft-azure" term="Azure" id="cloudprereq-azure" %} deployments. Where the two providers differ, each requirement lists the AWS and Azure equivalents.
+Before you provision cloud infrastructure for [[nbs-7]], verify that your cloud environment, workstation tools, and network access meet the requirements on this page. These requirements apply to both [[aws]] and [[microsoft-azure|Azure]] deployments. Where the two providers differ, each requirement lists the AWS and Azure equivalents.
 
 > Start with the [Prerequisites for NBS 7 deployment](../prerequisites.html), then verify the cloud requirements on this page.
 {: .important }
@@ -30,12 +30,12 @@ Before you provision cloud infrastructure for {% include term-tooltip.html key="
 
 Your cloud environment must meet the following requirements:
 
-- An existing AWS account or Azure subscription that contains your {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="cloudprereq-nbs-6" %} instance.
-- A configured Domain Name System ({% include term-tooltip.html key="dns" term="DNS" id="cloudprereq-dns" %}) routing infrastructure.
+- An existing AWS account or Azure subscription that contains your [[classic-nbs|NBS 6]] instance.
+- A configured Domain Name System ([[dns]]) routing infrastructure.
 - Permissions to create the following resources:
-  - **AWS:** security groups and AWS Identity and Access Management ({% include term-tooltip.html key="iam" term="IAM" id="cloudprereq-iam" %}) roles
-  - **Azure:** Network Security Groups ({% include term-tooltip.html key="nsg" term="NSGs" id="cloudprereq-nsg" %}) and Azure Role-Based Access Control ({% include term-tooltip.html key="azure-rbac" term="RBAC" id="cloudprereq-azure-rbac" %}) role assignments
-- Access to store {% include term-tooltip.html key="terraform" term="Terraform" id="cloudprereq-terraform" %} state files in an {% include term-tooltip.html key="amazon-s3" term="S3" id="cloudprereq-s3" %} bucket (AWS) or a storage account (Azure).
+  - **AWS:** security groups and AWS Identity and Access Management ([[iam]]) roles
+  - **Azure:** Network Security Groups ([[nsg|NSGs]]) and Azure Role-Based Access Control ([[azure-rbac|RBAC]]) role assignments
+- Access to store [[terraform]] state files in an [[amazon-s3|S3]] bucket (AWS) or a storage account (Azure).
 
 ## Database and Windows Server requirements
 
@@ -45,7 +45,7 @@ Your existing NBS 6 environment provides the database server that NBS 7 reuses. 
 |----------|---------|
 | NBS Classic | See [Supported NBS versions](../../../supported-versions.html) |
 | Microsoft Windows Server | **Windows Server 2022** - *preferred* <br>Windows Server 2025 |
-| {% include term-tooltip.html key="microsoft-sql-server" term="Microsoft SQL Server" id="cloudprereq-mssql" %} | **SQL Server 2022 (16.x)** - *preferred* <br>SQL Server 2025 (17.x) |
+| [[microsoft-sql-server]] | **SQL Server 2022 (16.x)** - *preferred* <br>SQL Server 2025 (17.x) |
 
 ## Management workstation setup
 
@@ -53,7 +53,7 @@ To configure, deploy, and maintain NBS 7, you need a local workstation or a clou
 
 | Tool | Minimum version | Install |
 |----|----|----|
-| Cloud provider {% include term-tooltip.html key="cli" term="CLI" id="cloudprereq-cli" %} | Latest AWS CLI or Azure CLI | **AWS:** [AWS CLI](https://aws.amazon.com/cli/); set up credentials with the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html). **Azure:** [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli), plus [kubelogin](https://github.com/Azure/kubelogin), which `kubectl` requires for Azure authentication. |
+| Cloud provider [[cli]] | Latest AWS CLI or Azure CLI | **AWS:** [AWS CLI](https://aws.amazon.com/cli/); set up credentials with the [AWS CLI credential configuration guide](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-files.html). **Azure:** [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli), plus [kubelogin](https://github.com/Azure/kubelogin), which `kubectl` requires for Azure authentication. |
 | Terraform CLI | 1.15.6 | [Terraform CLI](https://developer.hashicorp.com/terraform/tutorials/aws-get-started/install-cli) |
 | Helm CLI | 3.0 | [Helm CLI](https://helm.sh/docs/intro/install/) |
 | kubectl | 1.25  | [kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl) |
@@ -61,7 +61,7 @@ To configure, deploy, and maintain NBS 7, you need a local workstation or a clou
 
 ## Network access requirements
 
-NBS 7 infrastructure and microservices are deployed into a new {% include term-tooltip.html key="amazon-vpc" term="VPC" id="cloudprereq-vpc" %} (AWS) or {% include term-tooltip.html key="azure-vnet" term="VNet" id="cloudprereq-vnet" %} (Azure). The Terraform code in [Provision cloud environment](provision-cloud-environment.html) creates this network.
+NBS 7 infrastructure and microservices are deployed into a new [[amazon-vpc|VPC]] (AWS) or [[azure-vnet|VNet]] (Azure). The Terraform code in [Provision cloud environment](provision-cloud-environment.html) creates this network.
 
 Confirm that network access is available from the NBS 7 components to the classic NBS 6 components, including the database server. The NBS 6 database must allow access from the NBS 7 VPC or VNet address space. Use a private route for this network access rather than a publicly accessible connection.
 
@@ -69,9 +69,9 @@ Confirm that network access is available from the NBS 7 components to the classi
 
 ### End-user authentication
 
-NBS 7 supports end-user authentication by integrating with a standards-based Single Sign-On ({% include term-tooltip.html key="sso" term="SSO" id="cloudprereq-sso" %}) system. It is designed to be deployed as a protected endpoint within your existing SSO ecosystem, and it can be configured to work with standards-compliant {% include term-tooltip.html key="idp" term="identity providers" id="cloudprereq-idp" %} such as Okta and Active Directory.
+NBS 7 supports end-user authentication by integrating with a standards-based Single Sign-On ([[sso]]) system. It is designed to be deployed as a protected endpoint within your existing SSO ecosystem, and it can be configured to work with standards-compliant [[idp|identity providers]] such as Okta and Active Directory.
 
-This approach is similar to NBS 6, which does not authenticate users. Instead, NBS 6 delegates authentication to a security proxy that each {% include term-tooltip.html key="stlt" term="STLT" id="cloudprereq-stlt" %} provides.
+This approach is similar to NBS 6, which does not authenticate users. Instead, NBS 6 delegates authentication to a security proxy that each [[stlt]] provides.
 
 NBS 7 requires a working NBS 6 instance, so it assumes that a user authentication mechanism is already in place. NBS 7 works alongside the existing authentication mechanism. No additional steps are needed to authenticate users for NBS 7.
 

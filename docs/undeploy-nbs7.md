@@ -12,7 +12,7 @@ redirect_from:
 
 # Remove an NBS 7 environment
 
-Use this procedure to decommission an {% include term-tooltip.html key="nbs-7" term="NBS 7" id="undeploy-nbs-7" %} environment that was deployed using {% include term-tooltip.html key="terraform" term="Terraform" id="undeploy-terraform" %} and {% include term-tooltip.html key="helm" term="Helm" id="undeploy-helm" %}. This applies to development, staging, and production environments. Complete the steps in the order shown. Helm resources must be removed before you run `terraform destroy`.
+Use this procedure to decommission an [[nbs-7]] environment that was deployed using [[terraform]] and [[helm]]. This applies to development, staging, and production environments. Complete the steps in the order shown. Helm resources must be removed before you run `terraform destroy`.
 
 > These steps are irreversible. Removing ingress resources immediately interrupts access to NBS 7 endpoints in this environment. Running `terraform destroy` permanently deletes all infrastructure managed by this Terraform workspace.
 {: .warning }
@@ -25,11 +25,11 @@ Use this procedure to decommission an {% include term-tooltip.html key="nbs-7" t
 
 ## Remove DNS entries
 
-Remove the {% include term-tooltip.html key="dns" term="DNS" id="undeploy-dns" %} records for this environment from your DNS provider:
+Remove the [[dns]] records for this environment from your DNS provider:
 
 - `app.<site_name>.<domain>.com`
 - `data.<site_name>.<domain>.com`
-- `nifi.<site_name>.<domain>.com` (if you created a {% include term-tooltip.html key="apache-nifi" term="NiFi" id="undeploy-apache-nifi" %} record during deployment)
+- `nifi.<site_name>.<domain>.com` (if you created a [[apache-nifi|NiFi]] record during deployment)
 
 ## Remove Helm ingress resources
 
@@ -44,9 +44,9 @@ helm uninstall --namespace traefik traefik
 
 <!-- [SME REVIEW] Does Azure use Azure Monitor natively (no OTEL collector bucket to empty), making this step AWS-only as documented here? The Azure observability Terraform module provisions Azure Monitor resources only. -->
 
-On {% include term-tooltip.html key="aws" term="AWS" id="undeploy-aws" %}, empty the {% include term-tooltip.html key="amazon-s3" term="S3" id="undeploy-s3" %} bucket that the OpenTelemetry ({% include term-tooltip.html key="otel" term="OTEL" id="undeploy-otel" %}) collector uses for log storage before you run `terraform destroy`. Terraform cannot delete a non-empty S3 bucket, so the destroy fails if you skip this step. Complete this step manually in the AWS console or with the AWS {% include term-tooltip.html key="cli" term="CLI" id="undeploy-cli" %}.
+On [[aws]], empty the [[amazon-s3|S3]] bucket that the OpenTelemetry ([[otel]]) collector uses for log storage before you run `terraform destroy`. Terraform cannot delete a non-empty S3 bucket, so the destroy fails if you skip this step. Complete this step manually in the AWS console or with the AWS [[cli]].
 
-On {% include term-tooltip.html key="microsoft-azure" term="Azure" id="undeploy-azure" %}, observability uses {% include term-tooltip.html key="azure-monitor" term="Azure Monitor" id="undeploy-azure-monitor" %}, which Terraform removes as part of `terraform destroy`. No manual storage cleanup is required.
+On [[microsoft-azure|Azure]], observability uses [[azure-monitor]], which Terraform removes as part of `terraform destroy`. No manual storage cleanup is required.
 
 ## Destroy Terraform-managed infrastructure
 

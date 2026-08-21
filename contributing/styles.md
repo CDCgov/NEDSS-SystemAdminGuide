@@ -13,14 +13,14 @@ This guide is the authoritative reference for formatting, front matter, and acce
 | Field | docs/ pages | _guide_preview/ pages | What it does |
 |-------|------------|----------------------|--------------|
 | `title` | **Required** | **Required** | Sets the page title. JTD renders this as the page's H1 heading and uses it as the left-nav label and browser tab title. |
-| `layout` | **Required** — always `page` | **Required** — always `page` | Specifies the JTD page template. Use `page` for all content pages. `home` is used only on the site root `index.md` — do not use it elsewhere. |
+| `layout` | **Required** - always `page` | **Required** - always `page` | Specifies the JTD page template. Use `page` for all content pages. `home` is used only on the site root `index.md` - do not use it elsewhere. |
 | `nav_order` | **Required** | **Omit** | Controls display order among sibling pages in the nav. Must be an integer. See [How nav_order works](#how-nav_order-works). |
 | `has_children` | **Required** when this page has child pages | **Omit** | Tells JTD to render an expand arrow in the nav. Without it, child pages exist but the parent page shows no arrow and may not nest visibly. |
 | `has_toc` | **Set `false`** on parent pages that provide a manual "In this section" list | **Omit** | JTD auto-renders a table of contents of child pages at the bottom of every `has_children` page. Set `has_toc: false` to suppress it when the page provides its own richer child list. See [Parent landing pages](#parent-landing-pages). |
 | `parent` | **Required** for child pages | **Omit** | Sets the parent page. The value must exactly match the `title:` of the intended parent. Case-sensitive. |
 | `description` | **Optional, recommended** | **Optional** | 1–2 sentences describing the page's purpose. JTD uses this for search result snippets and the HTML `<meta name="description">` tag. See [Writing descriptions](#writing-descriptions). |
-| `redirect_from` | Optional — plugin feature | **Omit** | From the `jekyll-redirect-from` gem. Redirects one or more old URLs to this page. Use only when a page has been moved or renamed to preserve existing links. See [Redirects](#redirects). |
-| `nav_enabled` | **Omit** — remove on sight | **Omit** — remove on sight | **Non-standard. Has no effect.** Not a JTD front matter key. See [Note on nav_enabled](#note-on-nav_enabled). |
+| `redirect_from` | Optional - plugin feature | **Omit** | From the `jekyll-redirect-from` gem. Redirects one or more old URLs to this page. Use only when a page has been moved or renamed to preserve existing links. See [Redirects](#redirects). |
+| `nav_enabled` | **Omit** - remove on sight | **Omit** - remove on sight | **Non-standard. Has no effect.** Not a JTD front matter key. See [Note on nav_enabled](#note-on-nav_enabled). |
 
 ### Annotated examples
 
@@ -32,7 +32,7 @@ Use placeholder values as shown. Replace all-caps placeholders before committing
 ---
 title: TITLE          # Required. Becomes the H1 heading and left-nav label.
                       # Child pages must use this exact string as their parent: value.
-layout: page          # Required. Always "page" — do not change.
+layout: page          # Required. Always "page" - do not change.
 nav_order: NAV_ORDER  # Required. Integer. Controls position among top-level nav items.
 has_children: true    # Required. Enables the expand arrow; without it children won't nest.
 has_toc: false        # Set false when the page provides a manual "In this section" list.
@@ -70,7 +70,7 @@ JTD sorts sibling pages in ascending order by `nav_order`. Siblings are pages th
 
 - Pages without a `nav_order` value fall to the bottom of their sibling group and sort alphabetically among themselves.
 - `nav_order` values only need to be unique within a sibling group. The same value can appear independently in different sections.
-- Values do not need to be sequential. Leaving gaps — using 10, 20, 30 rather than 1, 2, 3 — makes it easy to insert a page later without renumbering every sibling.
+- Values do not need to be sequential. Leaving gaps - using 10, 20, 30 rather than 1, 2, 3 - makes it easy to insert a page later without renumbering every sibling.
 - The value must be an integer, not a string.
 
 **Example:** Three top-level pages with `nav_order: 10`, `nav_order: 20`, and no `nav_order` will appear in the nav as: page-at-10, page-at-20, then the unnumbered page at the bottom.
@@ -79,26 +79,26 @@ JTD sorts sibling pages in ascending order by `nav_order`. Siblings are pages th
 
 JTD uses `description:` in two places:
 
-1. **Search result snippet** — shown below the page title in the site's built-in search overlay
-2. **HTML meta description** — read by search engines and accessibility tools
+1. **Search result snippet** - shown below the page title in the site's built-in search overlay
+2. **HTML meta description** - read by search engines and accessibility tools
 
 **Guidelines:**
 
 - Write 1–2 sentences, under 160 characters total
-- Describe what the reader will find or be able to do — the page's *purpose*
+- Describe what the reader will find or be able to do - the page's *purpose*
 - Do not restate the title word-for-word; add information the title doesn't already convey
 - Write in third person (describing the page), not second person ("you will learn...")
 
 | | Example |
 |-|---------|
-| **Weak** | "This page covers prerequisites." — restates the title, tells the reader nothing new |
-| **Strong** | "Lists the AWS environment, tooling, and access requirements you must satisfy before beginning the NBS 7 installation." — specific, describes what the reader gets |
+| **Weak** | "This page covers prerequisites." - restates the title, tells the reader nothing new |
+| **Strong** | "Lists the AWS environment, tooling, and access requirements you must satisfy before beginning the NBS 7 installation." - specific, describes what the reader gets |
 
 ### Note on nav_enabled
 
 `nav_enabled: true` appears in the front matter of most current pages in this repo. **It is not a JTD front matter key and has no functional effect.** JTD does not recognize this key. The correct key to hide a page from navigation is `nav_exclude: true`.
 
-The field is legacy noise carried over before front matter standards were established for this project. It does not need an immediate cleanup pass — remove it opportunistically when editing a page for other reasons. Do not add it to new pages.
+The field is legacy noise carried over before front matter standards were established for this project. It does not need an immediate cleanup pass - remove it opportunistically when editing a page for other reasons. Do not add it to new pages.
 
 ---
 
@@ -198,14 +198,14 @@ Examples:
 |-------|-----|-------------|
 | H1 | `# Heading` | **Write this as the first line of body content.** JTD does not inject the title automatically, so omitting it leaves the page with no visible page heading. Keep one H1 per page. |
 | H2 | `## Heading` | Major sections. These appear in the in-page table of contents. |
-| H3 | `### Heading` | Subsections within an H2. These do **not** appear in the TOC (configured in `_config.yml` — `toc.max_level: 2`). |
-| H4+ | `#### Heading` | Use sparingly. If you need H4, the section is probably too deep — consider restructuring. |
+| H3 | `### Heading` | Subsections within an H2. These do **not** appear in the TOC (configured in `_config.yml` - `toc.max_level: 2`). |
+| H4+ | `#### Heading` | Use sparingly. If you need H4, the section is probably too deep - consider restructuring. |
 
-**Do not skip heading levels.** Skipping (for example, jumping from H2 to H4) fails WCAG 2.1 SC 1.3.1 (Info and Relationships) and breaks assistive technology navigation. Screen reader users navigate by heading list — they cannot rely on surrounding visual context.
+**Do not skip heading levels.** Skipping (for example, jumping from H2 to H4) fails WCAG 2.1 SC 1.3.1 (Info and Relationships) and breaks assistive technology navigation. Screen reader users navigate by heading list - they cannot rely on surrounding visual context.
 
 **Do not use bold text as a structural substitute for a heading.** Bold text is not exposed to screen readers as a landmark.
 
-**Heading text must be unique and descriptive within the page.** Avoid generic headings like "Details" or "More information" — screen reader users navigate by heading list and cannot rely on surrounding context.
+**Heading text must be unique and descriptive within the page.** Avoid generic headings like "Details" or "More information" - screen reader users navigate by heading list and cannot rely on surrounding context.
 
 ---
 
@@ -222,7 +222,7 @@ Callouts are styled block quotes. JTD applies the callout style based on a CSS c
 
 ### Available types
 
-#### `note` — Blue
+#### `note` - Blue
 
 Use for helpful context, clarifications, or background information that readers may find useful but can skip without consequences.
 
@@ -231,7 +231,7 @@ Use for helpful context, clarifications, or background information that readers 
 {: .note }
 ```
 
-#### `important` — Yellow
+#### `important` - Yellow
 
 Use for requirements, prerequisites, or steps that must be completed before proceeding. The reader cannot skip this.
 
@@ -240,7 +240,7 @@ Use for requirements, prerequisites, or steps that must be completed before proc
 {: .important }
 ```
 
-#### `warning` — Red
+#### `warning` - Red
 
 Use when an action is irreversible, could cause data loss, or could break a running system.
 
@@ -249,7 +249,7 @@ Use when an action is irreversible, could cause data loss, or could break a runn
 {: .warning }
 ```
 
-#### `new` — Green
+#### `new` - Green
 
 Use to flag content that documents a recently added feature or a significant change in the current release.
 
@@ -258,7 +258,7 @@ Use to flag content that documents a recently added feature or a significant cha
 {: .new }
 ```
 
-#### `highlight` — Purple (no label)
+#### `highlight` - Purple (no label)
 
 Use for inline callouts where you want visual emphasis without a title label. Useful for tips or one-liners that don't need a formal label.
 
@@ -267,7 +267,7 @@ Use for inline callouts where you want visual emphasis without a title label. Us
 {: .highlight }
 ```
 
-**Accessibility note:** The `highlight` callout has no `title:` label configured in `_config.yml`. In JTD's callout implementation, the title field provides a text label (e.g., "Note", "Warning") that supplements the color indicator. Without it, color becomes the sole differentiator — which fails WCAG 2.1 SC 1.4.1 (Use of Color) if the callout type itself conveys meaning. Keep `highlight` usage rare, and ensure the surrounding copy communicates the intent without relying on the purple color alone.
+**Accessibility note:** The `highlight` callout has no `title:` label configured in `_config.yml`. In JTD's callout implementation, the title field provides a text label (e.g., "Note", "Warning") that supplements the color indicator. Without it, color becomes the sole differentiator - which fails WCAG 2.1 SC 1.4.1 (Use of Color) if the callout type itself conveys meaning. Keep `highlight` usage rare, and ensure the surrounding copy communicates the intent without relying on the purple color alone.
 
 ### Custom titles (`-title` variants)
 
@@ -282,7 +282,7 @@ Each type except `highlight` supports a `-title` variant that lets you replace t
 {: .note-title }
 ```
 
-The `-title` variants follow the same usage rules as their base types — the variant only changes the label, not when to use the callout.
+The `-title` variants follow the same usage rules as their base types - the variant only changes the label, not when to use the callout.
 
 `highlight` has no default label and does not have a `-title` variant.
 
@@ -291,7 +291,7 @@ The `-title` variants follow the same usage rules as their base types — the va
 | Type | Use when... |
 |------|-------------|
 | `note` | Readers benefit from knowing, but skipping won't break anything |
-| `important` | Must-read before continuing — a required step or dependency |
+| `important` | Must-read before continuing - a required step or dependency |
 | `warning` | Irreversible action, data loss risk, or system breakage risk |
 | `new` | Documenting a feature added in the current or recent release |
 | `highlight` | Short tip or emphasis without a formal label; use sparingly |
@@ -321,7 +321,7 @@ Set `nav_exclude: true` to hide a page from the left nav.
 
 ### Fenced code blocks
 
-Always use fenced code blocks (triple backticks) for multi-line content. **Always include a language tag** — this enables syntax highlighting and signals to readers what they're reading.
+Always use fenced code blocks (triple backticks) for multi-line content. **Always include a language tag** - this enables syntax highlighting and signals to readers what they're reading.
 
 ````markdown
 ```bash
@@ -359,7 +359,7 @@ Every acronym used in the guide should also have an entry in `_data/glossary.yml
 
 The same NBS service can be spelled differently in different technical namespaces, and each spelling is correct for its namespace. **Never normalize a service-name spelling across namespaces.** Verify against the namespace being referenced before "correcting" any service name.
 
-Example — the data ingestion service:
+Example - the data ingestion service:
 
 | Namespace | Canonical string |
 |-----------|-----------------|
@@ -383,7 +383,7 @@ There is no Title Case "Data Ingestion Service" form.
 
 ## Links
 
-**Use descriptive link text.** Link text must tell the reader where they are going or what the target document covers. Screen reader users navigate by link text alone — "click here" and "here" provide no context and fail WCAG 2.1 SC 2.4.4 (Link Purpose).
+**Use descriptive link text.** Link text must tell the reader where they are going or what the target document covers. Screen reader users navigate by link text alone - "click here" and "here" provide no context and fail WCAG 2.1 SC 2.4.4 (Link Purpose).
 
 ```markdown
 <!-- BAD -->
@@ -397,7 +397,7 @@ See [Keycloak installation](../path.md) for installation steps.
 
 For links to other pages in this guide, use a relative HTML path from the current file to the target page.
 
-**Internal links must be relative — never root-absolute (no leading `/`).** A root-absolute path such as `/docs/page.html` resolves against the domain root and bypasses the GitHub Pages project baseurl (`/NEDSS-SystemAdminGuide`). The result works under a default local serve (which serves at the domain root) but returns 404 on the published site.
+**Internal links must be relative - never root-absolute (no leading `/`).** A root-absolute path such as `/docs/page.html` resolves against the domain root and bypasses the GitHub Pages project baseurl (`/NEDSS-SystemAdminGuide`). The result works under a default local serve (which serves at the domain root) but returns 404 on the published site.
 
 To catch this class of bug locally, run `bundle exec jekyll serve` without a baseurl override and browse the site under `http://localhost:4000/NEDSS-SystemAdminGuide/`. With the baseurl respected, root-absolute links break locally the same way they break in production.
 
@@ -426,7 +426,7 @@ See [NBS 7 core components](component-reference/nbs-core-components.html#nbs-mod
 
 Anchor-only links (`#section-name`) are valid and excluded from the automated link checker by default. Verify that the target heading exists in the destination file.
 
-External links do not need special treatment in JTD — they render as standard links and open in the same tab by default.
+External links do not need special treatment in JTD - they render as standard links and open in the same tab by default.
 
 ### Redirects
 
@@ -467,7 +467,7 @@ After changing `redirect_from` or `_config.yml`:
 
 GitHub URLs that contain Liquid template values (e.g., `{{ site.version_latest_tag }}`) must use **reference-style links** rather than inline links. Inline links with Liquid values trigger markdownlint rule MD034 (bare URL in text), which is a blocking CI check.
 
-**Use inline links for** static URLs and internal cross-links — those are fine and easier to read when the URL is short.
+**Use inline links for** static URLs and internal cross-links - those are fine and easier to read when the URL is short.
 
 **Use reference-style links for** any GitHub URL that contains `{{ site.version_latest_tag }}` or another Liquid variable.
 
@@ -481,7 +481,7 @@ Locate the chart in the [NEDSS-Helm repository][nedss-helm-traefik-chart].
 
 **Naming convention for reference labels:**
 
-Use lowercase hyphenated labels that identify the repo and target clearly. Keep them stable — a label used in the page body must match its definition exactly.
+Use lowercase hyphenated labels that identify the repo and target clearly. Keep them stable - a label used in the page body must match its definition exactly.
 
 | Pattern | Example label |
 |---------|--------------|
@@ -492,7 +492,7 @@ Use lowercase hyphenated labels that identify the repo and target clearly. Keep 
 | NEDSS-NNDSS release page | `nedss-nndss-release-page` |
 | NEDSS-NNDSS specific file | `nedss-nndss-<description>` |
 
-**Placement rule:** Put all link definitions at the very end of the file, after all content. Never place a definition block in the middle of a page — it interrupts prose flow and makes definitions hard to find.
+**Placement rule:** Put all link definitions at the very end of the file, after all content. Never place a definition block in the middle of a page - it interrupts prose flow and makes definitions hard to find.
 
 **Full pattern for a page with templated links:**
 
@@ -517,13 +517,13 @@ Use lowercase hyphenated labels that identify the repo and target clearly. Keep 
 
 **Always include alt text.** Every image must have descriptive alt text. Empty `alt=""` is only appropriate for purely decorative images with no informational content.
 
-**Standard:** Describe what the image shows AND what the reader should take away from it. Do not use the file name as alt text — it is not a description.
+**Standard:** Describe what the image shows AND what the reader should take away from it. Do not use the file name as alt text - it is not a description.
 
 ```markdown
-<!-- BAD — file name is not a description -->
+<!-- BAD - file name is not a description -->
 ![screenshot](images/output.png)
 
-<!-- GOOD — describes content and meaning -->
+<!-- GOOD - describes content and meaning -->
 ![Terminal output showing all three pods in Running status
  with READY 1/1 after running kubectl get pods -n nbs
 ](images/pod-status.png)
@@ -575,10 +575,10 @@ Use tables for **reference data and comparisons** where the reader will scan acr
 
 **Do not use tables for:**
 
-- Sequential steps — use a numbered list instead
+- Sequential steps - use a numbered list instead
 - Prose that reads naturally as paragraphs or bullets
 - Content with cells that require lengthy explanation (the table becomes unreadable)
-- Layout — tables are for data, not positioning content
+- Layout - tables are for data, not positioning content
 
 **Accessibility requirements:**
 
@@ -602,23 +602,23 @@ Use tables for **reference data and comparisons** where the reader will scan acr
 
 ### Numbered lists with code blocks
 
-Kramdown ends a numbered list whenever it encounters an unindented block — a code block, callout, image, or paragraph sitting at the left margin. The list then restarts at 1.
+Kramdown ends a numbered list whenever it encounters an unindented block - a code block, callout, image, or paragraph sitting at the left margin. The list then restarts at 1.
 
 **To keep a numbered list unbroken**, indent all continuation content 3 spaces so kramdown treats it as part of the current list item:
 
 ````markdown
-1. First step — intro text.
+1. First step - intro text.
 
    ```bash
    some command
    ```
 
-1. Second step — the list continues correctly.
+1. Second step - the list continues correctly.
 ````
 
 This applies to everything that belongs inside a list item: code blocks, callouts, images, and paragraphs.
 
-**Do not do this** — the unindented code block ends the list, and step 2 restarts at 1:
+**Do not do this** - the unindented code block ends the list, and step 2 restarts at 1:
 
 ````markdown
 1. First step.
@@ -630,7 +630,7 @@ some command
 1. Second step.
 ````
 
-**Callouts and notes inside list items** follow the same rule — indent 3 spaces:
+**Callouts and notes inside list items** follow the same rule - indent 3 spaces:
 
 ```markdown
 1. First step.
@@ -647,7 +647,7 @@ some command
 
 ## Accessibility Compliance Record
 
-The NEDSS System Administration Guide is a federally published resource and must meet **Section 508** and **WCAG 2.1 Level AA** requirements. The site is built with Jekyll and the Just the Docs (JTD) theme; most structural accessibility (landmark regions, skip-navigation, focus management) is provided by the theme. Authoring-time obligations — alt text, heading hierarchy, link text, color contrast, and table markup — are documented throughout this guide.
+The NEDSS System Administration Guide is a federally published resource and must meet **Section 508** and **WCAG 2.1 Level AA** requirements. The site is built with Jekyll and the Just the Docs (JTD) theme; most structural accessibility (landmark regions, skip-navigation, focus management) is provided by the theme. Authoring-time obligations - alt text, heading hierarchy, link text, color contrast, and table markup - are documented throughout this guide.
 
 WCAG 2.1 AA contrast thresholds:
 
@@ -663,14 +663,14 @@ The site uses the NBS Design System palette (defined as `$nbs-*` tokens in `_sas
 
 | Foreground | Background | Ratio | AA normal | AA large |
 |------------|-----------|-------|-----------|----------|
-| Link / brand — NBS Primary/primary #005EA2 | White #FFFFFF | 6.72 : 1 | Pass | Pass |
-| Body heading — NBS Base/darkest #1B1B1B | White #FFFFFF | 17.22 : 1 | Pass | Pass |
-| Link / active nav — #005EA2 | JTD sidebar #F5F6FA | 6.23 : 1 | Pass | Pass |
-| `.text-green` inline emphasis — NBS Success/dark #4D8055 (bold) | White #FFFFFF | 4.63 : 1 | Pass | Pass |
+| Link / brand - NBS Primary/primary #005EA2 | White #FFFFFF | 6.72 : 1 | Pass | Pass |
+| Body heading - NBS Base/darkest #1B1B1B | White #FFFFFF | 17.22 : 1 | Pass | Pass |
+| Link / active nav - #005EA2 | JTD sidebar #F5F6FA | 6.23 : 1 | Pass | Pass |
+| `.text-green` inline emphasis - NBS Success/dark #4D8055 (bold) | White #FFFFFF | 4.63 : 1 | Pass | Pass |
 
 ### Callout color contrast
 
-Each callout maps to an NBS color group: a light tint (`-000`) fills the background and the group's mid "chip" color (`-300`) forms the left bar. The callout **title is rendered in dark ink (`#1B1B1B`)**, not the accent color, so it clears WCAG AA normal-text contrast on every tint. Because the type label is conveyed by ink text, the colored bar is decorative reinforcement — color is never the sole indicator, satisfying WCAG 2.1 SC 1.4.1 (Use of Color).
+Each callout maps to an NBS color group: a light tint (`-000`) fills the background and the group's mid "chip" color (`-300`) forms the left bar. The callout **title is rendered in dark ink (`#1B1B1B`)**, not the accent color, so it clears WCAG AA normal-text contrast on every tint. Because the type label is conveyed by ink text, the colored bar is decorative reinforcement - color is never the sole indicator, satisfying WCAG 2.1 SC 1.4.1 (Use of Color).
 
 | Callout | Config color | Left-bar chip (`-300`) | Background (`-000`) | Ink title on bg | AA normal |
 |---|---|---|---|---|---|
@@ -678,13 +678,13 @@ Each callout maps to an NBS color group: a light tint (`-000`) fills the backgro
 | Important | yellow | Warning/warning #FFBE2E | #FAF3D1 | 15.4 : 1 | Pass |
 | New | green | Success/success #00A91C | #ECF3EC | 15.3 : 1 | Pass |
 | Warning | red | Error/error #D54309 | #F4E3DB | 13.8 : 1 | Pass |
-| Highlight | purple | Neutral Accent/accent #7C4CB5 | #E7E3FA | n/a — title-less | see note |
+| Highlight | purple | Neutral Accent/accent #7C4CB5 | #E7E3FA | n/a - title-less | see note |
 
-Body text inside callouts inherits the standard dark body color and passes comfortably on every tint. The left-bar chip colors are intentionally low-contrast against their own tint (they are decorative and meaning is carried by the ink title), so they are not held to the 3:1 graphical-object threshold. The one exception is `highlight`, which has no title text — see [Known accessibility limitations](#known-accessibility-limitations).
+Body text inside callouts inherits the standard dark body color and passes comfortably on every tint. The left-bar chip colors are intentionally low-contrast against their own tint (they are decorative and meaning is carried by the ink title), so they are not held to the 3:1 graphical-object threshold. The one exception is `highlight`, which has no title text. See [Known accessibility limitations](#known-accessibility-limitations).
 
 ### Tag and label color contrast
 
-Documentation tags (`.label` variants, defined in `_sass/custom/custom.scss`) use NBS tag tokens and render **bold and uppercase**. All pass WCAG AA normal-text contrast except Success — see [Known accessibility limitations](#known-accessibility-limitations).
+Documentation tags (`.label` variants, defined in `_sass/custom/custom.scss`) use NBS tag tokens and render **bold and uppercase**. All pass WCAG AA normal-text contrast except Success. See [Known accessibility limitations](#known-accessibility-limitations).
 
 | Tag | NBS token | Text | Ratio | AA normal | AA large |
 |---|---|---|---|---|---|
@@ -701,103 +701,38 @@ The following issues are documented and tracked. They represent deliberate desig
 
 | Area | Issue | Status |
 |------|-------|--------|
-| Success tag (green) | NBS Success/success #00A91C with white text is 3.14:1 — below the 4.5:1 normal-text AA threshold. Tags render bold + uppercase, which qualifies as large text (3:1 threshold). | Accepted by design; compliant under the large-text threshold only. Do not reuse this green for small or normal-weight text. |
+| Success tag (green) | NBS Success/success #00A91C with white text is 3.14:1 - below the 4.5:1 normal-text AA threshold. Tags render bold + uppercase, which qualifies as large text (3:1 threshold). | Accepted by design; compliant under the large-text threshold only. Do not reuse this green for small or normal-weight text. |
 | Highlight callout | No `title:` text label; the purple bar can become the sole type indicator if used without supporting wording. | Unused in `docs/`; use sparingly and pair with clear wording. |
 
 ## Glossary tooltips
 
-Glossary terms can be surfaced as inline tooltips that reveal a definition on hover or keyboard focus, using the `term-tooltip.html` include. This section covers how to **apply** tooltips in content. For how to **author** the term definitions themselves — definition style, cross-links, and provider scoping — see the contributor guidance at the top of [`_data/glossary.yml`](../_data/glossary.yml).
+Wrap a glossary term in `[[ ]]` to show its definition on hover or keyboard focus. The `key` is the slugified glossary term (lowercase, spaces to hyphens: `managed node group` becomes `[[managed-node-group]]`). To author tooltip definitions, see [`_data/glossary.yml`](../_data/glossary.yml).
 
-### How the include works
-
-The include renders a term as an accessible button; hovering or focusing it reveals the matching glossary definition. `key` is the **slugified glossary term** (lowercase, spaces to hyphens, punctuation dropped): `managed node group` becomes `managed-node-group`.
-
-**Data-driven (preferred) — looks up the definition in `_data/glossary.yml`:**
-
-```liquid
-{% include term-tooltip.html key="kubernetes" term="Kubernetes" id="arch-kubernetes" %}
+```markdown
+Runs on [[kubernetes]] via [[amazon-eks|Amazon EKS]].
 ```
 
-- `key`: slug of the glossary term to look up
-- `term`: the visible text shown in the paragraph
-- `id`: a page-unique suffix used to build the tooltip element ID (see [Tooltip IDs](#tooltip-ids))
+- `[[key]]` shows the glossary term's text. `[[nlb]]` renders "NLB".
+- `[[key|label]]` sets custom visible text. Use it for plurals, inflected forms, or an acronym whose entry lives under another name: `[[case-investigation|investigations]]`, `[[classic-nbs|NBS 6]]`, `[[amazon-eks|EKS]]`.
 
-**Inline one-off — supplies the definition directly, no glossary entry:**
-
-```liquid
-{% include term-tooltip.html term="Helm" id="helm-runtime" definition="A package manager for Kubernetes." %}
-```
+An unknown key is left as literal `[[key]]` and logged as a build warning, so typos are easy to catch.
 
 ### Which terms to tag
 
-Tag the first eligible mention of:
+Tag the **first meaningful mention** on a page of any term that has a glossary entry:
 
-- **Acronyms** that have a glossary entry (AWS, EKS, STLT, DI API, ETL, and so on). This is the primary driver — the guide must spell out acronyms even when the audience likely knows them, and the tooltip satisfies that requirement inline.
-- **Key technical proper nouns** (Kubernetes, Terraform, Helm, Keycloak, Traefik, and so on).
-- **NBS-domain terms, even when they are lowercase** — `observation`, `case investigation`, `case notification`, `lab report`, `morbidity report`, `notifiable disease`, `reportable disease`, `condition`, `program area`, `permission set`, `transfer of ownership`, `jurisdiction`, and similar. Defining these for the reader is the whole point of the glossary, so tag them at their first technical use. **Match plural and inflected forms too** — `observations` → observation, `investigations` → case investigation, `lab reports` → lab report (set `term` to the word as written, `key` to the canonical slug).
-- **Version names** — `NBS 6` and `NBS 7` (telling the versions apart matters).
+- Acronyms (AWS, EKS, STLT): the tooltip satisfies the spell-out requirement.
+- Technical proper nouns like Kubernetes, Terraform, Keycloak.
+- NBS-domain terms like observation, case investigation, lab report, jurisdiction.
+- Version names: tag `NBS 6` and `NBS 7`, not bare `NBS`.
 
-**Every glossary term is a candidate — there is no permanent skip list.** The glossary was built specifically to drive these tooltips, so if a term has an entry, it can be tagged. The decision is contextual: tag a term at its first *meaningful* use, and use judgment about density.
+Tag generously on introductory and concept pages. On deep procedure pages, skip repeats of terms the reader has already met. **Quick-start pages get no tooltips.** They spell acronyms out inline instead.
 
-- **Introductory and high-level pages** (architecture, concept, planning) are still establishing vocabulary — tag generously, including infrastructure concepts such as `load balancer`, `peering`, `subnet`, `control plane`, and `ingress controller` where they name a real component or idea the reader is meeting for the first time.
-- **Deep, sequential procedure pages** repeat established vocabulary as the steps proceed — skip incidental repeats there. A reader partway through a deployment has already met the term, so tagging every recurrence is noise.
-- **Quick-start pages** (`docs/deploy-nbs7/quickstart/`) get **no tooltips at all.** They target experienced administrators, are condensed and command-heavy, and already spell out acronyms inline on first use (`Amazon Elastic Kubernetes Service (Amazon EKS)`), which satisfies the acronym requirement without tooltips; the same terms carry tooltips on the concept, reference, and full-deploy pages. Instead of tagging, keep the inline first-use spell-outs **complete** — a bare acronym here is an [acronym-first-use](#acronym-first-use) gap to fix in prose, not with a tooltip. (Acronyms embedded in established product or proper names — `AWS CLI`, `SQL Server`, `Modernization API`, `NEDSS-Infrastructure` — do not need expanding.)
+### Placement
 
-A few pragmatic skips still hold regardless of page:
-
-- **Bare `NBS`** — the guide's constant subject; tag `NBS 6` / `NBS 7` for the version distinction instead.
-- **Bare `API`** — usually part of a compound name (`DI API`, `REST API`); tag the compound, not the fragment.
-- **Truly generic background words** in passing (`node`, `pod`, `container`) — tag only where the page is specifically about that concept.
-
-The goal is to define a term a reader might not know at the moment they meet it — not to decorate every word, and not to withhold a definition the glossary was written to provide.
-
-### Placement rules
-
-- Tag the **first eligible mention** on a page. Add **at most one** tooltip per term per page.
-- **Do not tag a term on the page that defines it.** On a component or reference page, a term with its own section (header plus description) is already defined in place — a tooltip there just echoes the text beside it. Tag only terms defined *elsewhere*. (This is why `component-reference/rtr.md` tooltips MasterETL and RDB_Modern but not Debezium or Kafka, whose sections define them.)
-- **Table cells count as eligible text.** Reference tables and changelog/release-history tables are in scope — tag the first mention of a term even when it falls inside a table.
-- **Skip** mentions in headings, code blocks and spans, and image alt text — tag the next eligible mention instead. Front matter never counts. **Bold definition labels are taggable** — for example a component name at the start of a list item (`**Keycloak:** ...`) may carry the tooltip.
-- **External links — either a link or a tooltip on a given mention, not both:**
-  - If the link only points somewhere **informational that the tooltip already conveys** — an encyclopedia definition, or a tool's top-level project homepage — **replace the link with the tooltip.** Do not link tools to their homepages merely to link them; it clutters prose without adding anything the tooltip lacks.
-  - Keep the link only when it points to something the tooltip **cannot** provide — a **specific** page such as installation steps, an API reference, or targeted official documentation — and put the tooltip on a **different** mention (or leave the term untagged there if it has no other mention).
-
-### Tooltip in place — the standard treatment
-
-Keep the first-use spell-out **and** add the tooltip. The glossary definition carries more than the acronym expansion, so showing both is not redundant.
-
-- **Acronyms with an expansion:** spell out fully in prose followed by `(ACR)` on first use — **add the spell-out if it is missing** (see [Acronym first use](#acronym-first-use)) — and wrap the **acronym** inside the parentheses in the tooltip. Later mentions stay bare, with no tooltip.
-
-  Before:
-
-  ```markdown
-  ...via Amazon Elastic Kubernetes Service (Amazon EKS) and Terraform workflows.
-  ```
-
-  After:
-
-  ```markdown
-  ...via Amazon Elastic Kubernetes Service ({% include term-tooltip.html key="amazon-eks" term="Amazon EKS" id="arch-amazon-eks" %}) and Terraform workflows.
-  ```
-
-- **Proper nouns or concepts with no acronym:** wrap the term itself on its first mention.
-- **Alias entries** (a term whose definition is only "See *X*"): point `key` at the **target** entry so the hover shows a real definition — for example `term="NBS 6" key="classic-nbs"`.
-- **Inflected forms:** set `term` to the word as written and `key` to the canonical slug — for example `term="peered" key="peering"`.
-
-### Removing redundant prose
-
-After tagging, remove prose that merely restates the **generic** definition the tooltip now carries. **Keep** NBS-specific context, cross-cloud equivalents, and anything the glossary omits by design — the glossary holds general definitions, while the guide holds NBS-specific usage.
-
-### Tooltip IDs
-
-Build each `id` as `<page-slug>-<term-slug>` so it is unique within its page — for example `arch-di-api` or `k8s-upgrade-node-group`. If a term is tagged in two different spelled forms on one page (rare), suffix the second to keep it unique.
-
-### Accessibility verification checklist
-
-When adding or modifying tooltips, verify all of the following before merge:
-
-1. **Keyboard open/close:** `Tab` to the term opens the tooltip; `Escape` closes it.
-1. **Hover/focus persistence:** Tooltip remains visible while hovered or while the trigger has focus.
-1. **Dismiss without moving pointer:** `Escape` closes any open tooltip even when opened by mouse hover.
-1. **Screen reader announcement:** Trigger has `aria-describedby` that points to a unique tooltip `id`, and the tooltip uses `role="tooltip"`.
-1. **State sync:** Tooltip visibility and ARIA state remain synchronized (`hidden` with `aria-hidden`).
-1. **Touch behavior:** Tapping the term toggles the tooltip and tapping outside dismisses it.
+- One tooltip per term per page, on the first mention.
+- Keep the acronym spell-out and tag the acronym: `Amazon Elastic Kubernetes Service ([[amazon-eks|Amazon EKS]])`.
+- Never place tooltips in headings, code, image alt text, or front matter. Tag the next eligible mention instead.
+- Don't tag a term on the page that defines it. A component with its own section is already defined in place.
+- Tables support taggable text.
+- A term can be either a hyperlink or a tooltip, but not both. Use a tooltip instead of a hyperlink if the link just goes to a general home page. Hyperlinks are best used to point to specific docs (install steps, API references).

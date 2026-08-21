@@ -23,7 +23,7 @@ redirect_from:
 
 # Deploy core Kubernetes services
 
-This page covers how to deploy the core services that must be running in your {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="coresvc-kubernetes" %} cluster before you deploy the {% include term-tooltip.html key="nbs-7" term="NBS 7" id="coresvc-nbs-7" %} microservices. Complete the sections on this page in order, then continue to [Deploy and configure Keycloak](deploy-keycloak.html), which is also a core service.
+This page covers how to deploy the core services that must be running in your [[kubernetes]] cluster before you deploy the [[nbs-7]] microservices. Complete the sections on this page in order, then continue to [Deploy and configure Keycloak](deploy-keycloak.html), which is also a core service.
 
 > The `kubectl` commands on this page require the cluster connection you configured in [Connect to Kubernetes cluster](../provision-cloud-infrastructure/provision-cloud-environment.html#connect-to-kubernetes-cluster).
 {: .note }
@@ -36,7 +36,7 @@ This page covers how to deploy the core services that must be running in your {%
 
 ## Get the NEDSS-Helm charts
 
-Complete these steps to download the {% include term-tooltip.html key="helm-chart" term="Helm charts" id="coresvc-helm-chart" %} that deploy the core services and the NBS 7 microservices:
+Complete these steps to download the [[helm-chart|Helm charts]] that deploy the core services and the NBS 7 microservices:
 
 1. Navigate to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the `nbs-helm-{{ site.version_latest_tag }}.zip` file.
 1. Unzip the downloaded file.
@@ -52,7 +52,7 @@ Run all `helm` commands on this page from this `charts` directory.
 
 ## Deploy Traefik ingress controller
 
-The {% include term-tooltip.html key="traefik" term="Traefik" id="coresvc-traefik" %} Helm chart in the [NEDSS-Helm repository][nedss-helm-repo] sets up Prometheus metrics, configures {% include term-tooltip.html key="linkerd" term="Linkerd" id="coresvc-linkerd" %} sidecar injection for the `traefik` Kubernetes deployment, sets timeouts, and instructs the Traefik controller to create a Network Load Balancer ({% include term-tooltip.html key="nlb" term="NLB" id="coresvc-nlb" %}) in {% include term-tooltip.html key="aws" term="AWS" id="coresvc-aws" %} or an internal load balancer in {% include term-tooltip.html key="microsoft-azure" term="Azure" id="coresvc-azure" %}. This section covers how to deploy the Traefik controller, deploy the NBS ingress resources, and create the DNS records that route traffic to them.
+The [[traefik]] Helm chart in the [NEDSS-Helm repository][nedss-helm-repo] sets up Prometheus metrics, configures [[linkerd]] sidecar injection for the `traefik` Kubernetes deployment, sets timeouts, and instructs the Traefik controller to create a Network Load Balancer ([[nlb]]) in [[aws]] or an internal load balancer in [[microsoft-azure|Azure]]. This section covers how to deploy the Traefik controller, deploy the NBS ingress resources, and create the DNS records that route traffic to them.
 
 ### Deploy the Traefik controller
 
@@ -94,7 +94,7 @@ The {% include term-tooltip.html key="traefik" term="Traefik" id="coresvc-traefi
      helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml
      ```
 
-   > If your {% include term-tooltip.html key="aks" term="AKS" id="coresvc-aks" %} cluster has Windows node pools, for example for {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="coresvc-nbs-6" %}, append the following option to the Azure command so that Traefik is scheduled on a Linux node: `--set nodeSelector."kubernetes\.io/os"=linux`
+   > If your [[aks]] cluster has Windows node pools, for example for [[classic-nbs|NBS 6]], append the following option to the Azure command so that Traefik is scheduled on a Linux node: `--set nodeSelector."kubernetes\.io/os"=linux`
    {: .note }
 
 1. **Wait for the deployment to complete:** Run the following command and verify that it prints that the deployment was successfully rolled out:
@@ -145,7 +145,7 @@ The `nbs-ingress` Helm chart manages all ingress routing between the NBS 7 appli
 
 ### Create DNS records
 
-Create A records in your Domain Name System ({% include term-tooltip.html key="dns" term="DNS" id="coresvc-dns" %}) service, such as {% include term-tooltip.html key="amazon-route-53" term="Amazon Route 53" id="coresvc-route53" %} or {% include term-tooltip.html key="azure-dns" term="Azure DNS" id="coresvc-azure-dns" %}, that point to the address of the Traefik load balancer:
+Create A records in your Domain Name System ([[dns]]) service, such as [[amazon-route-53]] or [[azure-dns]], that point to the address of the Traefik load balancer:
 
 1. **Retrieve the load balancer address:** The `kubectl get svc -n traefik` command in [Deploy the Traefik controller](#deploy-the-traefik-controller) printed the address of the Traefik load balancer under the `EXTERNAL-IP` column. Rerun that command if you need to retrieve the address again.
 1. **Create the records:** Create an A record for each hostname in the following table. Replace `<DOMAIN_NAME.TLD>` with your site and domain names from the [Helm values reference for NBS 7 microservices][helm-values-table]:
@@ -154,7 +154,7 @@ Create A records in your Domain Name System ({% include term-tooltip.html key="d
    |-----------------------|----------|---------|
    | NBS application | `app.<DOMAIN_NAME.TLD>` | `app.nbsdemo.com` |
    | Data services | `data.<DOMAIN_NAME.TLD>` | `data.nbsdemo.com` |
-   | {% include term-tooltip.html key="apache-nifi" term="NiFi" id="coresvc-nifi" %} (use with caution) | `nifi.<DOMAIN_NAME.TLD>` | `nifi.nbsdemo.com` |
+   | [[apache-nifi|NiFi]] (use with caution) | `nifi.<DOMAIN_NAME.TLD>` | `nifi.nbsdemo.com` |
 
    > NiFi has known security vulnerabilities. Add a NiFi DNS record only if you need to administer NiFi directly. Otherwise, omit it.
    {: .important }
@@ -229,7 +229,7 @@ If issues persist after you complete the troubleshooting steps, email [nbs@cdc.g
 
 ## Configure cert-manager (optional)
 
-{% include term-tooltip.html key="cert-manager" term="cert-manager" id="coresvc-cert-manager" %} is a core service that {% include term-tooltip.html key="terraform" term="Terraform" id="coresvc-terraform" %} deploys when you provision your cloud environment. It creates Transport Layer Security ({% include term-tooltip.html key="tls" term="TLS" id="coresvc-tls" %}) certificates for workloads in your cluster and renews the certificates before they expire. By default, cert-manager uses [Let's Encrypt](https://letsencrypt.org/) as the certificate authority for the NiFi and modernization-api services.
+[[cert-manager]] is a core service that [[terraform]] deploys when you provision your cloud environment. It creates Transport Layer Security ([[tls]]) certificates for workloads in your cluster and renews the certificates before they expire. By default, cert-manager uses [Let's Encrypt](https://letsencrypt.org/) as the certificate authority for the NiFi and modernization-api services.
 
 > If you have manual certificates, skip steps 1 - 4 and store your certificates in Kubernetes secrets instead. For more information, see the [Kubernetes Secrets documentation](https://kubernetes.io/docs/concepts/configuration/secret/).
 {: .note }

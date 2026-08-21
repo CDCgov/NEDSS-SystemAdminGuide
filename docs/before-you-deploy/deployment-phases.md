@@ -9,7 +9,7 @@ description: Describes the three NBS 7 deployment phases (the )core deployment, 
 
 # NBS 7 technical deployment phases
 
-This page describes the three {% include term-tooltip.html key="nbs-7" term="NBS 7" id="phases-nbs-7" %} deployment phases and covers what each phase includes and when to deploy it. The first phase is the [core deployment](#phase-1-nbs-7), which gives your {% include term-tooltip.html key="jurisdiction" term="jurisdiction" id="phases-jurisdiction" %} feature parity with {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="phases-nbs-6" %} on modern cloud infrastructure. [Real-Time Reporting (RTR)](#phase-2-real-time-reporting-rtr) and the [Data Ingestion (DI) API](#phase-3-data-ingestion-di-api) follow as subsequent phases. Separating the phases reduces initial deployment risk and gives your team time to learn the system before taking on additional complexity.
+This page describes the three [[nbs-7]] deployment phases and covers what each phase includes and when to deploy it. The first phase is the [core deployment](#phase-1-nbs-7), which gives your [[jurisdiction]] feature parity with [[classic-nbs|NBS 6]] on modern cloud infrastructure. [Real-Time Reporting (RTR)](#phase-2-real-time-reporting-rtr) and the [Data Ingestion (DI) API](#phase-3-data-ingestion-di-api) follow as subsequent phases. Separating the phases reduces initial deployment risk and gives your team time to learn the system before taking on additional complexity.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -29,7 +29,7 @@ The first phase is the base deployment. NBS 7 gives your jurisdiction NBS 6 feat
 
 >When to deploy
 >
->Deploy Phase 1 first. All subsequent phases depend on it. Plan your {% include term-tooltip.html key="rtr" term="RTR" id="phases-rtr" %} and {% include term-tooltip.html key="di-api" term="DI API" id="phases-di-api" %} timelines before you begin so your team can sequence the phases without gaps.
+>Deploy Phase 1 first. All subsequent phases depend on it. Plan your [[rtr]] and [[di-api]] timelines before you begin so your team can sequence the phases without gaps.
 {: .note-title }
 
 NBS 7 core components are organized into three layers: [networking](#networking-layer), [infrastructure](#infrastructure-layer), and [application](#application-layer). For details on what each core component does and when you need it, see [NBS 7 core components](../before-you-deploy/component-reference/nbs-core-components.html) in the Component Reference.
@@ -38,19 +38,19 @@ NBS 7 core components are organized into three layers: [networking](#networking-
 
 The networking layer manages traffic routing and secure communication between your NBS 6 and NBS 7 environments.
 
-- {% include term-tooltip.html key="dns" term="DNS" id="phases-dns" %} infrastructure (Route 53 or equivalent)
-- Virtual Private Cloud ({% include term-tooltip.html key="amazon-vpc" term="VPC" id="phases-vpc" %}) and routing groups
-- {% include term-tooltip.html key="vpn" term="VPN" id="phases-vpn" %} connectivity between NBS 6 and NBS 7 instances
+- [[dns]] infrastructure (Route 53 or equivalent)
+- Virtual Private Cloud ([[amazon-vpc|VPC]]) and routing groups
+- [[vpn]] connectivity between NBS 6 and NBS 7 instances
 
 ### Infrastructure layer
 
 The infrastructure layer provides the container orchestration platform and cloud services that host and run NBS 7 components.
 
-- {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="phases-kubernetes" %} cluster ({% include term-tooltip.html key="amazon-eks" term="EKS" id="phases-eks" %} on {% include term-tooltip.html key="aws" term="AWS" id="phases-aws" %}, {% include term-tooltip.html key="azure-kubernetes-service" term="AKS" id="phases-aks" %} on {% include term-tooltip.html key="microsoft-azure" term="Azure" id="phases-azure" %})
-- {% include term-tooltip.html key="traefik" term="Traefik" id="phases-traefik" %} Ingress Controller (as of NBS 7.12; formerly NGINX)
+- [[kubernetes]] cluster ([[amazon-eks|EKS]] on [[aws]], [[azure-kubernetes-service|AKS]] on [[microsoft-azure|Azure]])
+- [[traefik]] Ingress Controller (as of NBS 7.12; formerly NGINX)
 - AWS or Azure managed services
-- {% include term-tooltip.html key="terraform" term="Terraform" id="phases-terraform" %} infrastructure automation modules
-- {% include term-tooltip.html key="load-balancer" term="Load balancer" id="phases-load-balancer" %}
+- [[terraform]] infrastructure automation modules
+- [[load-balancer|Load balancer]]
 
 ### Application layer
 
@@ -70,7 +70,7 @@ The application layer contains the NBS 7 services and legacy NBS 6 components th
 
 ## Phase 2: Real-Time Reporting (RTR)
 
-RTR is the second deployment phase. It introduces an event-driven reporting pipeline that runs alongside the legacy {% include term-tooltip.html key="masteretl" term="MasterETL" id="phases-masteretl" %} batch process during the transition, with the goal of eventually decommissioning the batch process.
+RTR is the second deployment phase. It introduces an event-driven reporting pipeline that runs alongside the legacy [[masteretl]] batch process during the transition, with the goal of eventually decommissioning the batch process.
 
 >When to deploy
 >
@@ -87,7 +87,7 @@ RTR adds the following components to your NBS 7 deployment. For details, see [Ad
 
 ## Phase 3: Data Ingestion (DI) API
 
-The DI API is the third deployment phase. It provides a built-in data transit layer and a {% include term-tooltip.html key="rest" term="REST" id="phases-rest" %} API interface for writing data to NBS. DI API serves as a secure intermediary between your middleware and the database.
+The DI API is the third deployment phase. It provides a built-in data transit layer and a [[rest]] API interface for writing data to NBS. DI API serves as a secure intermediary between your middleware and the database.
 
 >When to deploy
 >
@@ -98,7 +98,7 @@ The DI API supports two integration methods. The right choice depends on your ju
 
 | Integration method | Rationale |
 | :--- | :--- |
-| **Direct {% include term-tooltip.html key="sql" term="SQL" id="phases-sql" %} Write** | Standard for jurisdictions where middleware such as Rhapsody can access the database directly. |
+| **Direct [[sql]] Write** | Standard for jurisdictions where middleware such as Rhapsody can access the database directly. |
 | **DI API** | Used when security policies prohibit direct database access from third-party tools or when middleware cannot be co-located with NBS. |
 
 {: .important }

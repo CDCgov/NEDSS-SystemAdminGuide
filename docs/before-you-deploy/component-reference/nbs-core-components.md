@@ -11,7 +11,7 @@ description: Details each component in NBS 7 - the application, infrastructure, 
 For information on migration planning, staffing, and budget, see [Operational considerations](../../before-you-deploy/operational-considerations.html).
 {: .note }
 
-{% include term-tooltip.html key="nbs-7" term="NBS 7" id="core-nbs-7" %} core components are organized into three layers: the application layer, the infrastructure layer, and the networking layer. The application layer components are documented individually on this page. [Infrastructure and networking layer components](#infrastructure-and-networking-layer-components) are summarized as a group.
+[[nbs-7]] core components are organized into three layers: the application layer, the infrastructure layer, and the networking layer. The application layer components are documented individually on this page. [Infrastructure and networking layer components](#infrastructure-and-networking-layer-components) are summarized as a group.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -21,7 +21,7 @@ For information on migration planning, staffing, and budget, see [Operational co
 
 ## Classic NBS 6
 
-The existing {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="core-nbs-6" %} application. A {% include term-tooltip.html key="wildfly" term="WildFly" id="core-wildfly" %}-based UI and backend that most {% include term-tooltip.html key="stlt" term="STLTs" id="core-stlt" %} currently run.
+The existing [[classic-nbs|NBS 6]] application. A [[wildfly]]-based UI and backend that most [[stlt|STLTs]] currently run.
 
 | Attribute | Description |
 |:---|:---|
@@ -35,7 +35,7 @@ The modern backend API layer for NBS 7, built to replace NBS 6 functionality inc
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Provides modernized versions of core NBS features including patient search, event search, patient profile, and {% include term-tooltip.html key="case-investigation" term="investigation" id="core-case-investigation" %} management. As NBS 7 development progresses, additional NBS 6 features will migrate into this API layer. |
+| What it does in NBS 7 | Provides modernized versions of core NBS features including patient search, event search, patient profile, and [[case-investigation|investigation]] management. As NBS 7 development progresses, additional NBS 6 features will migrate into this API layer. |
 | When you need it | Always. The Modernization API is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires classic NBS 6 and NBS Gateway. Exposes functionality to the NBS Web UI. |
 
@@ -61,7 +61,7 @@ A routing service built on Spring Cloud Gateway that manages traffic between the
 
 ## Report Execution API
 
-A Python FastAPI service that replaces {% include term-tooltip.html key="sas" term="SAS" id="core-sas" %}-based report execution starting in NBS 7.13. [SAS 9.4](https://support.sas.com/software/94/) is currently required for report execution and must be carried forward into NBS 7 deployments. Jurisdictions with significant SAS infrastructure or licensing costs should monitor this component as NBS 7 matures.
+A Python FastAPI service that replaces [[sas]]-based report execution starting in NBS 7.13. [SAS 9.4](https://support.sas.com/software/94/) is currently required for report execution and must be carried forward into NBS 7 deployments. Jurisdictions with significant SAS infrastructure or licensing costs should monitor this component as NBS 7 matures.
 
 ## Elasticsearch
 
@@ -89,7 +89,7 @@ An open-source identity and access management platform.
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Handles authentication for NBS 7, including token management and single sign-on ({% include term-tooltip.html key="sso" term="SSO" id="core-sso" %}) integration. Keycloak supports {% include term-tooltip.html key="oauth" term="OAuth" id="core-oauth" %} and {% include term-tooltip.html key="saml" term="SAML" id="core-saml" %}, which means your {% include term-tooltip.html key="jurisdiction" term="jurisdiction" id="core-jurisdiction" %} can integrate NBS 7 with an existing {% include term-tooltip.html key="idp" term="identity provider" id="core-idp" %} such as Okta or Active Directory Federation Services ({% include term-tooltip.html key="adfs" term="ADFS" id="core-adfs" %}) rather than managing a separate set of NBS credentials. |
+| What it does in NBS 7 | Handles authentication for NBS 7, including token management and single sign-on ([[sso]]) integration. Keycloak supports [[oauth]] and [[saml]], which means your [[jurisdiction]] can integrate NBS 7 with an existing [[idp|identity provider]] such as Okta or Active Directory Federation Services ([[adfs]]) rather than managing a separate set of NBS credentials. |
 | When you need it | Always. Keycloak is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires network access to your identity provider if you are integrating with an existing SSO system. All NBS 7 services that require authentication depend on Keycloak. |
 
@@ -100,13 +100,13 @@ An open-source identity and access management platform.
 
 ## Database (NBS\_ODSE, NBS\_SRTE)
 
-The core {% include term-tooltip.html key="microsoft-sql-server" term="SQL Server" id="core-mssql" %} databases that store operational and reference data for NBS.
+The core [[microsoft-sql-server|SQL Server]] databases that store operational and reference data for NBS.
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | NBS\_ODSE (Operational Data Store) is the primary transactional database where case, patient, investigation, and event records are stored. NBS\_SRTE (System Reference Tables) stores reference and metadata used across NBS, including {% include term-tooltip.html key="loinc" term="LOINC" id="core-loinc" %}, {% include term-tooltip.html key="snomed-ct" term="SNOMED CT" id="core-snomed-ct" %}, and other code sets used for data validation and mapping. |
+| What it does in NBS 7 | NBS\_ODSE (Operational Data Store) is the primary transactional database where case, patient, investigation, and event records are stored. NBS\_SRTE (System Reference Tables) stores reference and metadata used across NBS, including [[loinc]], [[snomed-ct]], and other code sets used for data validation and mapping. |
 | When you need it | Always. Both databases are required for all NBS 7 configurations. |
-| Dependencies | Required by classic NBS 6, the Modernization API, NiFi, {% include term-tooltip.html key="debezium" term="Debezium" id="core-debezium" %} (for {% include term-tooltip.html key="rtr" term="RTR" id="core-rtr" %}), and the {% include term-tooltip.html key="di-api" term="DI API" id="core-di-api" %}. |
+| Dependencies | Required by classic NBS 6, the Modernization API, NiFi, [[debezium]] (for [[rtr]]), and the [[di-api]]. |
 
 ## Infrastructure and networking layer components
 
@@ -116,10 +116,10 @@ Full configuration guidance is in the [Deploy NBS 7](../../deploy-nbs7.html) sec
 
 | Component | What it does in NBS 7 |
 |:---|:---|
-| Kubernetes (EKS/AKS) | Container orchestration platform that hosts and manages all NBS 7 services. {% include term-tooltip.html key="amazon-eks" term="EKS" id="core-eks" %} is used on {% include term-tooltip.html key="aws" term="AWS" id="core-aws" %}; {% include term-tooltip.html key="azure-kubernetes-service" term="AKS" id="core-aks" %} is used on {% include term-tooltip.html key="microsoft-azure" term="Azure" id="core-azure" %}. |
+| Kubernetes (EKS/AKS) | Container orchestration platform that hosts and manages all NBS 7 services. [[amazon-eks|EKS]] is used on [[aws]]; [[azure-kubernetes-service|AKS]] is used on [[microsoft-azure|Azure]]. |
 | Traefik Ingress Controller | Manages inbound traffic routing into the Kubernetes cluster. Traefik replaced NGINX as of the NBS 7.12 release. |
-| Terraform modules | {% include term-tooltip.html key="iac" term="Infrastructure-as-code" id="core-iac" %} tooling that provisions your cloud environment, including {% include term-tooltip.html key="amazon-vpc" term="VPC" id="core-vpc" %}, Kubernetes cluster, storage, and managed services. |
-| Cert Manager | Automates provisioning and renewal of {% include term-tooltip.html key="tls" term="TLS" id="core-tls" %}/{% include term-tooltip.html key="ssl" term="SSL" id="core-ssl" %} certificates for encrypted traffic within and into the NBS 7 environment. |
+| Terraform modules | [[iac|Infrastructure-as-code]] tooling that provisions your cloud environment, including [[amazon-vpc|VPC]], Kubernetes cluster, storage, and managed services. |
+| Cert Manager | Automates provisioning and renewal of [[tls]]/[[ssl]] certificates for encrypted traffic within and into the NBS 7 environment. |
 | FluentBit | Lightweight log forwarding agent that collects and routes logs from NBS 7 services for monitoring and troubleshooting. |
 | Linkerd | Service mesh (provisioned via Terraform) that manages encrypted communication between NBS 7 services inside the Kubernetes cluster. |
-| DNS ({% include term-tooltip.html key="amazon-route-53" term="Route 53" id="core-route53" %} or equivalent) | Routes user traffic to your NBS 7 environment. On AWS, Route 53 is the standard option; Azure and on-premises DNS services are also supported. |
+| DNS ([[amazon-route-53|Route 53]] or equivalent) | Routes user traffic to your NBS 7 environment. On AWS, Route 53 is the standard option; Azure and on-premises DNS services are also supported. |

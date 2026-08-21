@@ -11,6 +11,11 @@
 {%- endif -%}
 {%- assign glossary_href_prefix = site.baseurl | append: '/docs/glossary.html#' -%}
 {%- assign glossary_link_prefix = '](' | append: glossary_href_prefix -%}
-{%- assign tooltip_id_base = include.id | default: tooltip_term | slugify -%}
+{%- if include.id -%}
+{%- assign tooltip_id_base = include.id | slugify -%}
+{%- else -%}
+{%- capture tooltip_seq -%}{% increment tooltip_uid_seq %}{%- endcapture -%}
+{%- assign tooltip_id_base = tooltip_term | slugify | append: '-' | append: tooltip_seq -%}
+{%- endif -%}
 {%- assign tooltip_id = 'tooltip-' | append: tooltip_id_base -%}
 {%- if tooltip_definition and tooltip_term -%}<span class="glossary-term" data-tooltip-root data-tooltip-html="{{ tooltip_definition | replace: '](#', glossary_link_prefix | replace: '/NEDSS-SystemAdminGuide/docs/glossary.html#', glossary_href_prefix | markdownify | strip_newlines | escape }}"><button type="button" class="glossary-term__trigger" aria-describedby="{{ tooltip_id }}" aria-controls="{{ tooltip_id }}" aria-expanded="false" data-tooltip-trigger>{{ tooltip_term }}</button><span class="glossary-term__tooltip" id="{{ tooltip_id }}" role="tooltip" aria-hidden="true" hidden data-tooltip-content></span></span>{%- else -%}{{ tooltip_term }}{%- endif -%}

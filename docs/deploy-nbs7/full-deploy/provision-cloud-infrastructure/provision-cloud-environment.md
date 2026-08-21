@@ -13,7 +13,7 @@ redirect_from:
 
 # Provision the cloud environment with Terraform
 
-This page covers how to use {% include term-tooltip.html key="terraform" term="Terraform" id="provenv-terraform" %} to provision the {% include term-tooltip.html key="nbs-7" term="NBS 7" id="provenv-nbs-7" %} cloud environment in {% include term-tooltip.html key="aws" term="AWS" id="provenv-aws" %} or {% include term-tooltip.html key="microsoft-azure" term="Azure" id="provenv-azure" %}. The Terraform code creates the network, the {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="provenv-kubernetes" %} cluster, and the supporting services that the rest of this guide builds on. When you complete the steps on this page, substitute `<cloud-provider>` with `aws` or `azure`. The person who provisions this infrastructure should have operational knowledge of [Terraform](https://developer.hashicorp.com/terraform/docs).
+This page covers how to use [[terraform]] to provision the [[nbs-7]] cloud environment in [[aws]] or [[microsoft-azure|Azure]]. The Terraform code creates the network, the [[kubernetes]] cluster, and the supporting services that the rest of this guide builds on. When you complete the steps on this page, substitute `<cloud-provider>` with `aws` or `azure`. The person who provisions this infrastructure should have operational knowledge of [Terraform](https://developer.hashicorp.com/terraform/docs).
 
 > Before you begin, complete the general [Prerequisites](../prerequisites.html) and the [Cloud prerequisites](cloud-prerequisites.html).
 {: .important }
@@ -26,29 +26,29 @@ This page covers how to use {% include term-tooltip.html key="terraform" term="T
 
 ## Validate database access
 
-Your NBS 7 environment requires access to your {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="provenv-nbs-6" %} {% include term-tooltip.html key="microsoft-sql-server" term="SQL Server" id="provenv-mssql" %} database. Confirm this access before you run Terraform provisioning.
+Your NBS 7 environment requires access to your [[classic-nbs|NBS 6]] [[microsoft-sql-server|SQL Server]] database. Confirm this access before you run Terraform provisioning.
 
 ### AWS
 
-If your database is in {% include term-tooltip.html key="amazon-rds" term="Amazon RDS" id="provenv-rds" %}, review the inbound rules on the security groups attached to your database instance. Confirm that the Classless Inter-Domain Routing ({% include term-tooltip.html key="cidr" term="CIDR" id="provenv-cidr" %}) block you intend to use for your NBS 7 {% include term-tooltip.html key="amazon-vpc" term="VPC" id="provenv-vpc" %} (`modern-cidr`) is allowed to access the database. For example, if the `modern-cidr` is `10.20.0.0/16`, at least one rule in a security group associated with your database must allow MSSQL inbound access from that block:
+If your database is in [[amazon-rds]], review the inbound rules on the security groups attached to your database instance. Confirm that the Classless Inter-Domain Routing ([[cidr]]) block you intend to use for your NBS 7 [[amazon-vpc|VPC]] (`modern-cidr`) is allowed to access the database. For example, if the `modern-cidr` is `10.20.0.0/16`, at least one rule in a security group associated with your database must allow MSSQL inbound access from that block:
 
 ![AWS security group inbound rules table with a rule of type MSSQL that allows TCP port 1433 access from the modern-cidr source block 10.20.0.0/16](images/myssql-inbound-from-modern-cidr.png)
 
 ### Azure
 
-If your database is in Azure, in the same {% include term-tooltip.html key="azure-vnet" term="VNet" id="provenv-vnet" %} as your NBS 7 environment, Azure allows all internal traffic within a VNet by default. To confirm, in the Azure Portal, navigate to the {% include term-tooltip.html key="nsg" term="network security group" id="provenv-nsg" %} attached to your database and confirm that the default inbound rules are present:
+If your database is in Azure, in the same [[azure-vnet|VNet]] as your NBS 7 environment, Azure allows all internal traffic within a VNet by default. To confirm, in the Azure Portal, navigate to the [[nsg|network security group]] attached to your database and confirm that the default inbound rules are present:
 
 ![Azure Portal inbound security rules for a network security group, showing the default rules AllowVnetInBound and AllowAzureLoadBalancerInBound with the Allow action and DenyAllInBound with the Deny action, listed with their priorities, ports, protocols, sources, and destinations](images/azure-nsg-default-inbound-rules.png)
 
-Alternatively, an inbound security rule on that network security group is sufficient if it allows port 1433, with the destination set to the VNet of your database and the source set to the IP addresses of your {% include term-tooltip.html key="aks" term="AKS" id="provenv-aks" %} cluster.
+Alternatively, an inbound security rule on that network security group is sufficient if it allows port 1433, with the destination set to the VNet of your database and the source set to the IP addresses of your [[aks]] cluster.
 
 ### Self-managed SQL Server
 
-If your database is not in Amazon RDS and not in Azure, for example a self-managed SQL Server instance on {% include term-tooltip.html key="amazon-ec2" term="Amazon EC2" id="provenv-ec2" %} or {% include term-tooltip.html key="on-premises" term="on premises" id="provenv-onprem" %}, confirm that Windows Firewall on the database server allows inbound traffic on TCP port 1433. Security group and network security group rules in your cloud environment do not open the host firewall.
+If your database is not in Amazon RDS and not in Azure, for example a self-managed SQL Server instance on [[amazon-ec2]] or [[on-premises|on premises]], confirm that Windows Firewall on the database server allows inbound traffic on TCP port 1433. Security group and network security group rules in your cloud environment do not open the host firewall.
 
 ## Authenticate to your cloud provider
 
-Terraform, {% include term-tooltip.html key="kubectl" term="kubectl" id="provenv-kubectl" %}, and {% include term-tooltip.html key="helm" term="Helm" id="provenv-helm" %} commands require an authenticated session with your cloud provider. This section requires the tools from [Management workstation setup](cloud-prerequisites.html#management-workstation-setup).
+Terraform, [[kubectl]], and [[helm]] commands require an authenticated session with your cloud provider. This section requires the tools from [Management workstation setup](cloud-prerequisites.html#management-workstation-setup).
 
 ### AWS
 
@@ -186,7 +186,7 @@ If the command returns an error, verify that:
 
 - Your cloud provider CLI installation works.
 - Your authenticated session is still active.
-- You used the correct cluster name, as shown in the {% include term-tooltip.html key="amazon-eks" term="Amazon EKS" id="provenv-eks" %} console or the Azure Portal.
+- You used the correct cluster name, as shown in the [[amazon-eks]] console or the Azure Portal.
 
 ## Validate Kubernetes cluster readiness
 

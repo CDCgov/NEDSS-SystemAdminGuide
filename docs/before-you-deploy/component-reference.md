@@ -9,7 +9,7 @@ description: Describes each NBS 7 component — what it does, when it is needed,
 
 # NBS 7 component reference
 
-The pages in this section describe each component in {% include term-tooltip.html key="nbs-7" term="NBS 7" id="compref-nbs-7" %}. Use it to understand what each component does, why it is included in your deployment, and how it relates to other components.
+The pages in this section describe each component in [[nbs-7]]. Use it to understand what each component does, why it is included in your deployment, and how it relates to other components.
 
 NBS 7 is deployed in phases. Components in this reference are organized by deployment phase:
 
@@ -17,13 +17,13 @@ NBS 7 is deployed in phases. Components in this reference are organized by deplo
 - [Real-Time Reporting (RTR) deployment](../before-you-deploy/component-reference/rtr.html)
 - [Data Ingestion (DI) API deployment](../before-you-deploy/component-reference/di-api.html)
 
-For deployment configuration details including configuration parameters, {% include term-tooltip.html key="helm-chart" term="Helm chart" id="compref-helm-chart" %} values, and step-by-step setup instructions, see the [Deploy NBS 7](../deploy-nbs7.html) section of this guide.
+For deployment configuration details including configuration parameters, [[helm-chart]] values, and step-by-step setup instructions, see the [Deploy NBS 7](../deploy-nbs7.html) section of this guide.
 
 ---
 
 ## Quick reference
 
-The following table shows which components are included in NBS 7. {% include term-tooltip.html key="rtr" term="RTR" id="compref-rtr" %} and {% include term-tooltip.html key="di-api" term="DI API" id="compref-di-api" %} are deployed separately from the core NBS 7 components.
+The following table shows which components are included in NBS 7. [[rtr]] and [[di-api]] are deployed separately from the core NBS 7 components.
 
 | Component | NBS 7 | RTR | DI API |
 |:---|:---:|:---:|:---:|

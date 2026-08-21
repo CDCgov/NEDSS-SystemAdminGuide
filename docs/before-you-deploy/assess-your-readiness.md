@@ -8,7 +8,7 @@ description: Covers the technical prerequisites an STLT should meet before begin
 
 # Assess your technical readiness for NBS 7
 
-This page covers the technical conditions your {% include term-tooltip.html key="jurisdiction" term="jurisdiction" id="readiness-jurisdiction" %} should review before committing to an {% include term-tooltip.html key="nbs-7" term="NBS 7" id="readiness-nbs-7" %} migration, including cloud infrastructure, staffing, network readiness, and {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="readiness-nbs-6" %} compatibility.
+This page covers the technical conditions your [[jurisdiction]] should review before committing to an [[nbs-7]] migration, including cloud infrastructure, staffing, network readiness, and [[classic-nbs|NBS 6]] compatibility.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -18,7 +18,7 @@ This page covers the technical conditions your {% include term-tooltip.html key=
 
 If you work through this page and find that your jurisdiction does not meet one or more prerequisites, you might still be able to move forward. You can address some gaps with planning and lead time, but other gaps might indicate that NBS 7 is not the right fit for your jurisdiction right now.
 
-For more information on migration planning, staffing, and budget, see [Operational considerations](../before-you-deploy/operational-considerations.html) in this guide, and the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) and [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) on {% include term-tooltip.html key="nbs-central" term="NBS Central" id="readiness-nbs-central" %}.
+For more information on migration planning, staffing, and budget, see [Operational considerations](../before-you-deploy/operational-considerations.html) in this guide, and the [NBS 7 Migration Info Sheet](https://nbscentral.cdc.gov/documents/731) and [NBS 7 Resource Estimator](https://nbscentral.cdc.gov/documents/872) on [[nbs-central]].
 {: .note }
 
 ## Not sure where to start?
@@ -27,7 +27,7 @@ If you are new to NBS 7 deployment, the [Deployment planning guide](../before-yo
 
 ## IT security approval
 
-Has your jurisdiction obtained IT security approval for cloud hosting and the software technologies that NBS 7 requires, including {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="readiness-kubernetes" %}, {% include term-tooltip.html key="terraform" term="Terraform" id="readiness-terraform" %}, and Docker?
+Has your jurisdiction obtained IT security approval for cloud hosting and the software technologies that NBS 7 requires, including [[kubernetes]], [[terraform]], and Docker?
 
 - **Yes, or approval is not required**: Continue with the rest of this section.
 - **No, or unknown**: Approval timelines vary and can significantly affect your migration schedule. We recommend working with your IT office while you continue to plan.
@@ -36,16 +36,16 @@ See also: [Operational considerations](../before-you-deploy/operational-consider
 
 ## Cloud infrastructure
 
-NBS 7 requires a cloud-based environment for deployment; {% include term-tooltip.html key="cdc" term="CDC" id="readiness-cdc" %} does not support {% include term-tooltip.html key="on-premises" term="on-premises" id="readiness-on-premises" %} installations. To deploy with CDC support, you need an active account with one of the following supported cloud providers:
+NBS 7 requires a cloud-based environment for deployment; [[cdc]] does not support [[on-premises]] installations. To deploy with CDC support, you need an active account with one of the following supported cloud providers:
 
 ### Amazon Web Services (AWS)
 
-- **Strategic fit:** Preferred by jurisdictions with established {% include term-tooltip.html key="aws" term="AWS" id="readiness-aws" %} environments or those with existing AWS contract vehicles or organizational policies that standardize on AWS.
-- **Technical readiness:** Aligns with teams experienced in managing container-native architectures via Amazon Elastic Kubernetes Service ({% include term-tooltip.html key="amazon-eks" term="Amazon EKS" id="readiness-amazon-eks" %}) and mature Terraform workflows.
+- **Strategic fit:** Preferred by jurisdictions with established [[aws]] environments or those with existing AWS contract vehicles or organizational policies that standardize on AWS.
+- **Technical readiness:** Aligns with teams experienced in managing container-native architectures via Amazon Elastic Kubernetes Service ([[amazon-eks]]) and mature Terraform workflows.
 
 ### Microsoft Azure
 
-- **Strategic fit:** Preferred by jurisdictions with significant Microsoft ecosystem investments, such as those using {% include term-tooltip.html key="microsoft-entra-id" term="Microsoft Entra ID" id="readiness-entra" %} or existing Enterprise Agreements.
+- **Strategic fit:** Preferred by jurisdictions with significant Microsoft ecosystem investments, such as those using [[microsoft-entra-id]] or existing Enterprise Agreements.
 - **Technical readiness:** Provides a streamlined experience for organizations running Windows-based workloads or requiring integration with Microsoft 365 and Power Platform tools.
 
 See also: [Provision cloud infrastructure](../deploy-nbs7/full-deploy/provision-cloud-infrastructure.html) and the [Supported NBS versions](../supported-versions.html).
@@ -72,7 +72,7 @@ Before deployment, your network must meet the following requirements:
 
 - **Encryption**: Encryption is required for all virtual network traffic between NBS 6 and NBS 7 components.
 - **Outbound access**: Your cloud environment needs outbound internet access to reach CDC systems.
-- **{% include term-tooltip.html key="tls" term="TLS" id="readiness-tls" %}/{% include term-tooltip.html key="ssl" term="SSL" id="readiness-ssl" %} certificate management**: You need a process to provision and renew TLS/SSL certificates for encrypted traffic.
+- **[[tls]]/[[ssl]] certificate management**: You need a process to provision and renew TLS/SSL certificates for encrypted traffic.
 
 Your specific network configuration will depend on your cloud provider and the existing infrastructure for your jurisdiction.
 

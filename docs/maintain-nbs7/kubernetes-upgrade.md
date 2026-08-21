@@ -24,7 +24,7 @@ This page describes how to use Terraform to upgrade the Kubernetes version of yo
 This page applies to Amazon Elastic Kubernetes Service (Amazon EKS) on Amazon Web Services (AWS). It also applies to Azure Kubernetes Service (AKS) on Microsoft Azure (Azure).
 
 - The [Provision the cloud environment with Terraform](../deploy-nbs7/full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) page describes the NBS 7 Terraform layers. The Kubernetes cluster is part of layer 2, the `1-nbs7` folder.
-- Amazon EKS groups worker nodes into {% include term-tooltip.html key="managed-node-group" term="**managed node groups**" id="k8s-upgrade-node-group" %}. AKS groups them into {% include term-tooltip.html key="node-pool" term="**node pools**" id="k8s-upgrade-node-pool" %}. This page uses the respective term for each cloud.
+- Amazon EKS groups worker nodes into [[managed-node-group|**managed node groups**]]. AKS groups them into [[node-pool|**node pools**]]. This page uses the respective term for each cloud.
 
 ## Kubernetes version compatibility
 
@@ -166,7 +166,7 @@ Repeat this step for each minor version between your current version and your ta
 
 ## Step 3: Upgrade nodes
 
-After the control plane reaches your target version, upgrade the {% include term-tooltip.html key="managed-node-group" term="node group" id="k8s-upgrade-step3-node-group" %} or {% include term-tooltip.html key="node-pool" term="node pool" id="k8s-upgrade-step3-node-pool" %}:
+After the control plane reaches your target version, upgrade the [[managed-node-group|node group]] or [[node-pool]]:
 
 1. Update `terraform.tfvars` in your `1-nbs7` folder:
 

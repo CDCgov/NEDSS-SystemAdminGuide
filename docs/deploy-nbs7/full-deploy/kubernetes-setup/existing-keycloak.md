@@ -8,7 +8,7 @@ description: Configure an existing Keycloak realm to authenticate NBS 7 users, i
 
 # Integrate NBS 7 with an existing Keycloak
 
-Use this path if your organization already runs {% include term-tooltip.html key="keycloak" term="Keycloak" id="existkc-keycloak" %} and you want {% include term-tooltip.html key="nbs-7" term="NBS 7" id="existkc-nbs-7" %} to authenticate users against an existing realm, instead of deploying the NBS-provided Keycloak described in [Deploy and configure Keycloak](deploy-keycloak.html). On this path, you configure your existing realm with the client, claim mapping, and users that NBS 7 requires, and then supply the realm issuer and client secret to the NBS 7 microservices.
+Use this path if your organization already runs [[keycloak]] and you want [[nbs-7]] to authenticate users against an existing realm, instead of deploying the NBS-provided Keycloak described in [Deploy and configure Keycloak](deploy-keycloak.html). On this path, you configure your existing realm with the client, claim mapping, and users that NBS 7 requires, and then supply the realm issuer and client secret to the NBS 7 microservices.
 
 This page covers user authentication (browser login) against your existing realm. The NBS 7 backend service clients for data ingestion, NND, SRTE, and case notification are configured separately. See [Import service clients and retrieve secrets](deploy-keycloak.html#import-service-clients-and-retrieve-secrets).
 {: .note }
@@ -26,12 +26,12 @@ Before you begin the procedures on this page, confirm that you have the followin
 - Administrator access to your existing Keycloak admin console.
 - The target realm for NBS 7 users. Use an existing realm or create one before you begin.
 - The public hostname or hostnames for your NBS 7 application, in the form `app.<DOMAIN_NAME.TLD>`. You need one entry for each deployed application host.
-- Access to the {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="existkc-nbs-6" %} database, to confirm that users exist in the `Auth_user` table.
-- A secrets manager, such as {% include term-tooltip.html key="aws-secrets-manager" term="AWS Secrets Manager" id="existkc-secrets-manager" %} or {% include term-tooltip.html key="azure-key-vault" term="Azure Key Vault" id="existkc-key-vault" %}, to store the client secret.
+- Access to the [[classic-nbs|NBS 6]] database, to confirm that users exist in the `Auth_user` table.
+- A secrets manager, such as [[aws-secrets-manager]] or [[azure-key-vault]], to store the client secret.
 
 ## Create or verify the NBS 7 client
 
-NBS 7 uses an OpenID Connect ({% include term-tooltip.html key="oidc" term="OIDC" id="existkc-oidc" %}) client for browser login. Create this client in the realm that authenticates NBS 7 users, or verify its configuration if it already exists.
+NBS 7 uses an OpenID Connect ([[oidc]]) client for browser login. Create this client in the realm that authenticates NBS 7 users, or verify its configuration if it already exists.
 
 1. Open the Keycloak admin console and select the target realm for NBS 7 users.
 1. Navigate to **Clients** and create or open the client `nbs-modernization`.

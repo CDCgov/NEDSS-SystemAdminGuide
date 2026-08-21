@@ -9,9 +9,9 @@ nav_enabled: true
 
 # Component reference: Real-Time Reporting (RTR)
 
-RTR provides an event-driven reporting pipeline for near-real-time reporting. RTR eventually replaces the classic {% include term-tooltip.html key="masteretl" term="MasterETL" id="rtrcomp-masteretl" %} batch process. During migration, both run in parallel until full feature equivalence is met.
+RTR provides an event-driven reporting pipeline for near-real-time reporting. RTR eventually replaces the classic [[masteretl]] batch process. During migration, both run in parallel until full feature equivalence is met.
 
-The following components are added to your {% include term-tooltip.html key="nbs-7" term="NBS 7" id="rtrcomp-nbs-7" %} deployment when you deploy RTR.
+The following components are added to your [[nbs-7]] deployment when you deploy RTR.
 
 For information on benefits and impact on operating costs, see [Operational considerations](../../before-you-deploy/operational-considerations.html).
 {: .note }
@@ -24,7 +24,7 @@ For information on benefits and impact on operating costs, see [Operational cons
 
 ## Debezium
 
-An open-source {% include term-tooltip.html key="change-data-capture" term="change data capture" id="rtrcomp-change-data-capture" %} platform.
+An open-source [[change-data-capture]] platform.
 
 | Attribute | Description |
 |:---|:---|
@@ -37,16 +37,16 @@ Apache Kafka is an open-source event-streaming platform. Kafka Connect is the fr
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Acts as the message bus for the RTR pipeline. Kafka receives change events from Debezium and delivers them to the RTR domain services. Kafka Connect writes the processed output to {% include term-tooltip.html key="rdb-modern" term="RDB_Modern" id="rtrcomp-rdb-modern" %} staging tables for post-processing and reporting. |
+| What it does in NBS 7 | Acts as the message bus for the RTR pipeline. Kafka receives change events from Debezium and delivers them to the RTR domain services. Kafka Connect writes the processed output to [[rdb-modern]] staging tables for post-processing and reporting. |
 | Dependencies | Receives events from Debezium. Delivers messages to RTR domain services. Kafka Connect writes processed data to RDB\_Modern. Requires sufficient cluster resources; Kafka is one of the more operationally demanding components in the RTR stack. |
 
 ## RTR domain services
 
-Starting in NBS 7.13, the five entity-specific Spring Boot services previously used for reporting (`investigation-service`, `person-service`, `observation-service`, `organization-service`, and `ldfdata-service`) have been consolidated into a single reporting pipeline service that transforms streaming data from Kafka into reportable public health records. Jurisdictions planning to deploy RTR will need to upgrade to NBS 7.13 or later. Check with your {% include term-tooltip.html key="cdc" term="CDC" id="rtrcomp-cdc" %} NBS point of contact for the current deployment state.
+Starting in NBS 7.13, the five entity-specific Spring Boot services previously used for reporting (`investigation-service`, `person-service`, `observation-service`, `organization-service`, and `ldfdata-service`) have been consolidated into a single reporting pipeline service that transforms streaming data from Kafka into reportable public health records. Jurisdictions planning to deploy RTR will need to upgrade to NBS 7.13 or later. Check with your [[cdc]] NBS point of contact for the current deployment state.
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Consumes Kafka messages for each entity type ({% include term-tooltip.html key="case-investigation" term="investigations" id="rtrcomp-case-investigation" %}, patients, organizations, {% include term-tooltip.html key="observation" term="observations" id="rtrcomp-observation" %}, and {% include term-tooltip.html key="ldf" term="LDF" id="rtrcomp-ldf" %} data), runs stored procedures to retrieve and format the data, and produces processed records for downstream storage in RDB\_Modern. A post-processing service then populates analytical datamarts and fact tables from the staging data. |
+| What it does in NBS 7 | Consumes Kafka messages for each entity type ([[case-investigation|investigations]], patients, organizations, [[observation|observations]], and [[ldf]] data), runs stored procedures to retrieve and format the data, and produces processed records for downstream storage in RDB\_Modern. A post-processing service then populates analytical datamarts and fact tables from the staging data. |
 | Dependencies | Requires Kafka (message source) and NBS\_ODSE (operational data store). Populates RDB\_Modern staging tables, which are then consumed by the post-processing service. |
 
 <!--

@@ -8,7 +8,7 @@ description: Explains when to contact CDC for NBS 7 planning, deployment, and ma
 
 # Get support for NBS 7
 
-Use this page to understand when to contact CDC for help with NBS 7 planning, deployment, validation, and ongoing maintenance. Start with the guidance in this admin guide when it covers your issue, then contact CDC if you need clarification, encounter a blocker, or cannot find the procedure you need.
+Use this page to understand when to contact {% include term-tooltip.html key="cdc" term="CDC" id="support-cdc" %} for help with {% include term-tooltip.html key="nbs-7" term="NBS 7" id="support-nbs-7" %} planning, deployment, validation, and ongoing maintenance. Start with the guidance in this admin guide when it covers your issue, then contact CDC if you need clarification, encounter a blocker, or cannot find the procedure you need.
 
 ## On this page
 {: .no_toc .text-delta }
@@ -30,22 +30,20 @@ CDC provides deployment support to public health jurisdictions interested in or 
 
 Use the resource that best matches where you are in the process.
 
-<!-- TO DO - add this row when BYD content is published:
- | Readiness, staffing, cloud prerequisites, or go or no-go planning | [Before you deploy NBS 7](../docs/before-you-deploy.html) | -->
-
 | If you need help with… | Start here |
 |:---|:---|:---|
+| Readiness, staffing, cloud prerequisites, or go or no-go planning | [Before you deploy NBS 7](../docs/before-you-deploy.html) |
 | Deployment steps for infrastructure, microservices, identity, or validation | [Deploy NBS 7](../docs/deploy-nbs7.html) |
 | Post-go-live operations, upgrades, or runtime configuration | [Maintain NBS 7](../docs/maintain-nbs7.html) |
 
-If you need help with readiness, staffing, cloud prerequisites, or go/no-go planning, or if the guide does not answer your question, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
+If the guide does not answer your question, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
 
 ## Before you contact CDC
 
-Before submitting an email or NBS Central ticket, include enough context for the support team to understand where you are in the process and what has already been tried. When possible, include:
+Before submitting an email or {% include term-tooltip.html key="nbs-central" term="NBS Central" id="support-nbs-central" %} ticket, include enough context for the support team to understand where you are in the process and what has already been tried. When possible, include:
 
 - Your jurisdiction name
-- Your NBS 6 version and target NBS 7 version
+- Your {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="support-nbs-6" %} version and target NBS 7 version
 - Your cloud provider and deployment configuration
 - The deployment phase you are in, such as planning, installation, testing, or steady state
 - The page or procedure you were following when the issue occurred

@@ -9,7 +9,7 @@ description: Operational guidance for maintaining your NBS 7 deployment after go
 
 # Maintain your NBS {{ site.version_latest }} environment
 
-This section covers the operational tasks that keep your NBS 7 environment healthy after go-live. It is intended for system administrators who maintain the infrastructure, platform components, and supporting configuration for a running NBS 7 deployment.
+This section covers the operational tasks that keep your {% include term-tooltip.html key="nbs-7" term="NBS 7" id="maintain-nbs-7" %} environment healthy after go-live. It is intended for system administrators who maintain the infrastructure, platform components, and supporting configuration for a running NBS 7 deployment.
 
 > The procedures in this section reflect NBS {{ site.version_latest }}. For earlier releases, see **Previous Versions** in the sidebar.
 {: .note }

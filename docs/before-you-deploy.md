@@ -8,7 +8,7 @@ description: Evaluation and planning content to help you assess NBS 7 readiness 
 
 # Before deploying NBS 7
 
-This section is for STLT IT administrators and technical decision-makers who are evaluating and preparing for migration to NBS 7. It brings together the readiness, compatibility, configuration, and planning information you need before deployment begins. Use it to understand what NBS 7 includes, what decisions your jurisdiction needs to make, and what conditions should be in place before you move into deployment work. It is intended to support an informed decision about how to proceed with NBS 7 deployment planning.
+This section is for {% include term-tooltip.html key="stlt" term="STLT" id="bydeploy-stlt" %} IT administrators and technical decision-makers who are evaluating and preparing for migration to {% include term-tooltip.html key="nbs-7" term="NBS 7" id="bydeploy-nbs-7" %}. It brings together the readiness, compatibility, configuration, and planning information you need before deployment begins. Use it to understand what NBS 7 includes, what decisions your {% include term-tooltip.html key="jurisdiction" term="jurisdiction" id="bydeploy-jurisdiction" %} needs to make, and what conditions should be in place before you move into deployment work. It is intended to support an informed decision about how to proceed with NBS 7 deployment planning.
 
 ## Purpose
 
@@ -24,7 +24,7 @@ Use this section to:
 
 ## How this content fits into the NBS 7 process
 
-Three main resources support the NBS 6 to NBS 7 transition. Each serves a different purpose:
+Three main resources support the {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="bydeploy-nbs-6" %} to NBS 7 transition. Each serves a different purpose:
 
 | Resource | Purpose | When to use |
 |:---|:---|:---|

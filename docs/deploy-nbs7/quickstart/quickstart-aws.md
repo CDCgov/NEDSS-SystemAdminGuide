@@ -199,7 +199,7 @@ This step requires that you set `create_cluster_autoscaler_irsa` to `true` in yo
 
 ## Create DNS records
 
-Create A records in Amazon Route 53 that point to the address of the Traefik load balancer.
+Create the Domain Name System (DNS) A records in Amazon Route 53 that point to the address of the Traefik load balancer.
 
 1. Retrieve the load balancer address from the `EXTERNAL-IP` column:
 
@@ -332,7 +332,7 @@ Run each command from the `charts` directory, in the order shown. Before each co
 
 ## Clean up
 
-To decommission this environment, follow [Undeploy NBS 7](../../undeploy-nbs7.html). That page covers removing DNS entries, removing the Helm ingress resources, emptying the OpenTelemetry (OTEL) collector S3 bucket, and destroying the Terraform-managed infrastructure.
+To decommission this environment, follow [Undeploy NBS 7](../../undeploy-nbs7.html). That page covers removing DNS entries, removing the Helm ingress resources, emptying the OpenTelemetry (OTEL) collector Amazon S3 bucket, and destroying the Terraform-managed infrastructure.
 
 ## Support
 

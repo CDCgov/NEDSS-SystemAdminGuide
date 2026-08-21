@@ -741,6 +741,7 @@ Tag the first eligible mention of:
 
 - **Introductory and high-level pages** (architecture, concept, planning) are still establishing vocabulary — tag generously, including infrastructure concepts such as `load balancer`, `peering`, `subnet`, `control plane`, and `ingress controller` where they name a real component or idea the reader is meeting for the first time.
 - **Deep, sequential procedure pages** repeat established vocabulary as the steps proceed — skip incidental repeats there. A reader partway through a deployment has already met the term, so tagging every recurrence is noise.
+- **Quick-start pages** (`docs/deploy-nbs7/quickstart/`) get **no tooltips at all.** They target experienced administrators, are condensed and command-heavy, and already spell out acronyms inline on first use (`Amazon Elastic Kubernetes Service (Amazon EKS)`), which satisfies the acronym requirement without tooltips; the same terms carry tooltips on the concept, reference, and full-deploy pages. Instead of tagging, keep the inline first-use spell-outs **complete** — a bare acronym here is an [acronym-first-use](#acronym-first-use) gap to fix in prose, not with a tooltip. (Acronyms embedded in established product or proper names — `AWS CLI`, `SQL Server`, `Modernization API`, `NEDSS-Infrastructure` — do not need expanding.)
 
 A few pragmatic skips still hold regardless of page:
 

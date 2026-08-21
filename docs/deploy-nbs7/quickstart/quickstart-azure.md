@@ -169,7 +169,7 @@ Terraform deploys cert-manager during provisioning. It creates and renews Transp
 
 ## Create DNS records
 
-Create A records in Azure DNS that point to the IP address of your Application Gateway.
+Create the Domain Name System (DNS) A records in Azure DNS that point to the IP address of your Application Gateway.
 
 1. Retrieve the load balancer address from the `EXTERNAL-IP` column:
 

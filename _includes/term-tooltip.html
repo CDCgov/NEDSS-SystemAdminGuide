@@ -1,6 +1,6 @@
 {%- assign tooltip_term = include.term | default: include.key -%}
-{%- assign tooltip_definition = include.definition -%}
-{%- if tooltip_definition == nil and include.key -%}
+{%- assign tooltip_definition = nil -%}
+{%- if include.key -%}
   {%- for glossary_entry in site.data.glossary -%}
     {%- assign glossary_slug = glossary_entry.term | slugify -%}
     {%- if glossary_slug == include.key -%}

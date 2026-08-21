@@ -25,11 +25,11 @@ This page explains how the {% include term-tooltip.html key="nbs-7" term="NBS 7"
 
 NBS 7 does not replace NBS 6 all at once. It runs alongside your existing {% include term-tooltip.html key="classic-nbs" term="NBS 6" id="arch-nbs-6" %} system and takes over functionality incrementally, an approach known as the [strangler fig pattern](https://martinfowler.com/bliki/StranglerFigApplication.html). Users move between modern NBS 7 features and classic NBS 6 features during the transition. As the modern system gains functionality, they rely on it for more of their work.
 
-NBS 7 uses the same underlying NBS 6 databases rather than migrating the data to a new store. As a result, NBS 7 requires network access to the NBS 6 application and database server. In a typical deployment, NBS 7 runs in its own virtual network, peered with the network that hosts NBS 6 to provide this access. Establishing this connectivity is part of your chosen network configuration.
+NBS 7 uses the same underlying NBS 6 databases rather than migrating the data to a new store. As a result, NBS 7 requires network access to the NBS 6 application and database server. In a typical deployment, NBS 7 runs in its own virtual network, {% include term-tooltip.html key="peering" term="peered" id="arch-peering" %} with the network that hosts NBS 6 to provide this access. Establishing this connectivity is part of your chosen network configuration.
 
 ## Architecture diagram
 
-The following diagram shows the NBS 7 components, the request path that serves users, and the reporting path that streams data changes to the reporting database. Cloud-specific service names, such as the load balancer and managed services, are described generically here. See [Provision cloud infrastructure](../deploy-nbs7/full-deploy/provision-cloud-infrastructure.html) for the AWS and Azure implementation of each.
+The following diagram shows the NBS 7 components, the request path that serves users, and the reporting path that streams data changes to the reporting database. Cloud-specific service names, such as the {% include term-tooltip.html key="load-balancer" term="load balancer" id="arch-load-balancer" %} and managed services, are described generically here. See [Provision cloud infrastructure](../deploy-nbs7/full-deploy/provision-cloud-infrastructure.html) for the {% include term-tooltip.html key="aws" term="AWS" id="arch-aws" %} and {% include term-tooltip.html key="microsoft-azure" term="Azure" id="arch-microsoft-azure" %} implementation of each.
 
 ![Architecture diagram of NBS 7. On the left, external actors: a container registry and source control supply images and Helm charts, an admin user deploys charts and has cloud admin access, and a jurisdiction user reaches the system through a DNS service. In the center, the Modern NBS environment contains a load balancer feeding a Kubernetes cluster. Inside the cluster, a Traefik ingress routes to the NBS microservice containers (Modernization API, Data Ingestion API, additional NBS 7 services, and the NBS Gateway), a shared services and tools tier (cert-manager, Elasticsearch, Apache NiFi, OTEL collector, and Keycloak), and a real-time reporting tier (Debezium, Kafka connector, and reporting pipeline service). A message streaming service using Kafka sits outside the cluster and exchanges events with the reporting tier. Cloud-managed services for metrics and dashboards sit outside the cluster. On the right, the Classic NBS environment contains NBS 6, SAS, and the NBS 6 database, peered with the modern environment. The NBS 6 database change log flows to Debezium, which publishes to Kafka, and the reporting pipeline service writes to a separate reporting database.](./images/713-architecture.png)
 
@@ -39,7 +39,7 @@ When a user opens NBS 7, their request follows this path:
 
 1. The user's browser resolves the NBS 7 address through your Domain Name System ({% include term-tooltip.html key="dns" term="DNS" id="arch-dns" %}) service.
 1. DNS directs the request to the load balancer, the entry point into the virtual network.
-1. The load balancer forwards the request to the {% include term-tooltip.html key="traefik" term="Traefik" id="arch-traefik" %} ingress controller inside the {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="arch-kubernetes" %} cluster.
+1. The load balancer forwards the request to the {% include term-tooltip.html key="traefik" term="Traefik" id="arch-traefik" %} {% include term-tooltip.html key="ingress-controller" term="ingress controller" id="arch-ingress-controller" %} inside the {% include term-tooltip.html key="kubernetes" term="Kubernetes" id="arch-kubernetes" %} cluster.
 1. Traefik routes the request to the correct service based on the address. The NBS Gateway applies the strangler routing rules that decide whether a request is served by NBS 7 or passed through to NBS 6.
 
 ## The reporting path
@@ -61,8 +61,8 @@ NBS 7 groups its components into tiers by role. The following sections describe 
 
 These services provide the modernized NBS 7 features:
 
-- **Modernization API:** Provides core NBS 7 features such as patient search, event search, patient profiles, and investigations.
-- **Data Ingestion API ({% include term-tooltip.html key="di-api" term="DI API" id="arch-di-api" %}):** Accepts electronic lab reports and other electronic data, validates it, and routes it into NBS.
+- **Modernization API:** Provides core NBS 7 features such as patient search, event search, patient profiles, and {% include term-tooltip.html key="case-investigation" term="investigations" id="arch-case-investigation" %}.
+- **Data Ingestion API ({% include term-tooltip.html key="di-api" term="DI API" id="arch-di-api" %}):** Accepts electronic {% include term-tooltip.html key="lab-report" term="lab reports" id="arch-lab-report" %} and other electronic data, validates it, and routes it into NBS.
 - **NBS Gateway:** Applies the strangler routing rules between NBS 7 and NBS 6, using Spring Cloud Gateway.
 - **Additional NBS 7 services:** Supporting services deployed as the modernized system grows.
 

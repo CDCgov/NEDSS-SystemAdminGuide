@@ -732,15 +732,28 @@ The include renders a term as an accessible button; hovering or focusing it reve
 
 Tag the first eligible mention of:
 
-- **Acronyms** that have a glossary entry (AWS, EKS, STLT, DI API, and so on). This is the primary driver — the guide must spell out acronyms even when the audience likely knows them, and the tooltip satisfies that requirement inline.
+- **Acronyms** that have a glossary entry (AWS, EKS, STLT, DI API, ETL, and so on). This is the primary driver — the guide must spell out acronyms even when the audience likely knows them, and the tooltip satisfies that requirement inline.
 - **Key technical proper nouns** (Kubernetes, Terraform, Helm, Keycloak, Traefik, and so on).
-- **Product and version names** where the distinction carries meaning — `NBS`, `NBS 6`, and `NBS 7` are in scope, because telling the versions apart is important to the reader.
+- **NBS-domain terms, even when they are lowercase** — `observation`, `case investigation`, `case notification`, `lab report`, `morbidity report`, `notifiable disease`, `reportable disease`, `condition`, `program area`, `permission set`, `transfer of ownership`, `jurisdiction`, and similar. Defining these for the reader is the whole point of the glossary, so tag them at their first technical use. **Match plural and inflected forms too** — `observations` → observation, `investigations` → case investigation, `lab reports` → lab report (set `term` to the word as written, `key` to the canonical slug).
+- **Version names** — `NBS 6` and `NBS 7` (telling the versions apart matters).
 
-Do **not** tag common-English-word glossary terms (`condition`, `node`, `pod`, `container`, `observation`, `jurisdiction`, and similar) unless the word is clearly used as the defined technical concept at that spot. Over-tagging makes pages noisy and undercuts the signal.
+**Every glossary term is a candidate — there is no permanent skip list.** The glossary was built specifically to drive these tooltips, so if a term has an entry, it can be tagged. The decision is contextual: tag a term at its first *meaningful* use, and use judgment about density.
+
+- **Introductory and high-level pages** (architecture, concept, planning) are still establishing vocabulary — tag generously, including infrastructure concepts such as `load balancer`, `peering`, `subnet`, `control plane`, and `ingress controller` where they name a real component or idea the reader is meeting for the first time.
+- **Deep, sequential procedure pages** repeat established vocabulary as the steps proceed — skip incidental repeats there. A reader partway through a deployment has already met the term, so tagging every recurrence is noise.
+
+A few pragmatic skips still hold regardless of page:
+
+- **Bare `NBS`** — the guide's constant subject; tag `NBS 6` / `NBS 7` for the version distinction instead.
+- **Bare `API`** — usually part of a compound name (`DI API`, `REST API`); tag the compound, not the fragment.
+- **Truly generic background words** in passing (`node`, `pod`, `container`) — tag only where the page is specifically about that concept.
+
+The goal is to define a term a reader might not know at the moment they meet it — not to decorate every word, and not to withhold a definition the glossary was written to provide.
 
 ### Placement rules
 
 - Tag the **first eligible mention** on a page. Add **at most one** tooltip per term per page.
+- **Do not tag a term on the page that defines it.** On a component or reference page, a term with its own section (header plus description) is already defined in place — a tooltip there just echoes the text beside it. Tag only terms defined *elsewhere*. (This is why `component-reference/rtr.md` tooltips MasterETL and RDB_Modern but not Debezium or Kafka, whose sections define them.)
 - **Table cells count as eligible text.** Reference tables and changelog/release-history tables are in scope — tag the first mention of a term even when it falls inside a table.
 - **Skip** mentions in headings, code blocks and spans, and image alt text — tag the next eligible mention instead. Front matter never counts. **Bold definition labels are taggable** — for example a component name at the start of a list item (`**Keycloak:** ...`) may carry the tooltip.
 - **External links — either a link or a tooltip on a given mention, not both:**

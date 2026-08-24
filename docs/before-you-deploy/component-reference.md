@@ -27,7 +27,7 @@ The following table shows which components are included in NBS 7. [[rtr]] and [[
 
 | Component | NBS 7 | RTR | DI API |
 |:---|:---:|:---:|:---:|
-| [Legacy NBS 6](../before-you-deploy/component-reference/nbs-core-components.html#legacy-nbs-6) | ✓ |  |  |
+| [Classic NBS 6](../before-you-deploy/component-reference/nbs-core-components.html#classic-nbs-6) | ✓ |  |  |
 | [NBS Modernization API](../before-you-deploy/component-reference/nbs-core-components.html#nbs-modernization-api) | ✓ |  |  |
 | [NBS Web UI](../before-you-deploy/component-reference/nbs-core-components.html#nbs-web-ui) | ✓ |  |  |
 | [NBS Gateway](../before-you-deploy/component-reference/nbs-core-components.html#nbs-gateway) | ✓ |  |  |

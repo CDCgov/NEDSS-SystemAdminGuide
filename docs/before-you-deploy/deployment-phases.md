@@ -54,9 +54,9 @@ The infrastructure layer provides the container orchestration platform and cloud
 
 ### Application layer
 
-The application layer contains the NBS 7 services and legacy NBS 6 components that users and administrators directly interact with.
+The application layer contains the NBS 7 services and Classic NBS 6 components that users and administrators directly interact with.
 
-- [Legacy NBS 6](../before-you-deploy/component-reference/nbs-core-components.html#legacy-nbs-6)
+- [Classic NBS 6](../before-you-deploy/component-reference/nbs-core-components.html#classic-nbs-6)
 - [NBS Modernization API](../before-you-deploy/component-reference/nbs-core-components.html#nbs-modernization-api)
 - [NBS Web UI](../before-you-deploy/component-reference/nbs-core-components.html#nbs-web-ui)
 - [NBS Gateway](../before-you-deploy/component-reference/nbs-core-components.html#nbs-gateway)

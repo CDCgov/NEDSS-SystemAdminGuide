@@ -38,6 +38,18 @@ Confirm the following before you continue:
 > Deploying the Java service takes significant time and database space. Before you deploy, verify that the Kafka cluster you created in [Provision cloud environment](../../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) is scaled for your database size. An undersized Kafka cluster can cause the deployment to fail.
 {: .important }
 
+> If you are reinstalling RTR and need to reseed the reporting database because a backup and restore process reset the `nrt_*` tables, delete the following Kafka topics before reinstalling. This ensures Debezium fully reruns the seeding process:
+>
+> - `odse-main.history`
+> - `odse-main-schema-history`
+> - `odse-act-rel.history`
+> - `odse-act-rel-schema-history`
+> - `history.odse_meta`
+> - `odse-meta-schema-history`
+> - `history.srte`
+> - `srte-schema-history`
+{: .important }
+
 ## Deploy the RTR Java service using Helm
 
 Complete the following steps to deploy the [`reporting-pipeline-service` Helm chart][nedss-helm-reporting-pipeline-service-chart] from the `charts/reporting-pipeline-service/` directory of your cloned NEDSS-Helm repository:

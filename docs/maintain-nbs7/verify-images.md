@@ -36,7 +36,7 @@ To verify the authenticity of an NBS container image:
    ```bash
    docker buildx imagetools inspect \
      quay.io/us-cdcgov/cdc-nbs-modernization/<image-name>:<version-tag> \
-     --format "{{ json .Provenance }}"
+     --format "{% raw %}{{ json .Provenance }}{% endraw %}"
    ```
 
    Docker outputs a JSON object describing how the image was built. If the command returns `{}` or an error, see [Determine whether to trust the image](#determine-whether-to-trust-the-image).

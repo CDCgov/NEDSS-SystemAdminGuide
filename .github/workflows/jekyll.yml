@@ -126,13 +126,20 @@ jobs:
             find "$folder" -name '*.md' ! -name 'index.md' | while read file; do
               title=$(basename "$file" .md)
 
-              # If no parent exists, update title with version
-              if ! grep -q '^parent:' "$file"; then
-                sed -i -E "s/^(title:.*)/\1 (${name#release-})/" "$file"
-              fi
-
-              # Append - release <version> to title line
+              # Suffix the version onto title, parent, and grand_parent so the
+              # archived pages form a self-consistent nav tree, separate from the
+              # current release's pages.
+              #
+              # All three must be suffixed together. Suffixing only parent (and
+              # only titles of parentless pages) leaves a page titled
+              # "Deploy NBS 7 microservices" whose children point at
+              # "Deploy NBS 7 microservices (7.12.0)". Just the Docs matches
+              # children by parent == title, so those children resolve nowhere
+              # and silently drop out of the nav below level two, even though
+              # their pages still build and are reachable by direct URL.
+              sed -i -E "s/^(title:.*)/\1 (${name#release-})/" "$file"
               sed -i -E "s/^(parent:.*)/\1 (${name#release-})/" "$file"
+              sed -i -E "s/^(grand_parent:.*)/\1 (${name#release-})/" "$file"
 
               # Check if front matter exists
               if grep -q '^---' "$file"; then

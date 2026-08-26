@@ -57,4 +57,4 @@ The XML HL7 parser, data extraction, and notification services require Keycloak.
 > The Notification service also requires the Keycloak client ID and secret for the XML HL7 Parser service. These are configured with the `api.clientId` and `api.secret` fields in its `values.yaml`. See [Notification service](../../deploy-nbs7/microservices-deployment/case-notification/case-notification-service.html) for more information.
 {: .note }
 
-[nedss-helm-keycloak-extra]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak/extra>
+[nedss-helm-keycloak-extra]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/keycloak/extra>

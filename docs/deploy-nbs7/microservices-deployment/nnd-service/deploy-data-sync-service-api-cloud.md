@@ -85,4 +85,4 @@ Use these steps to install the NBS 7 Data Sync service API in your cloud environ
    https://<data.EXAMPLE_DOMAIN>/extraction/swagger-ui/index.html#/
    ```
 
-[nedss-helm-nnd-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nnd-service>
+[nedss-helm-nnd-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/nnd-service>

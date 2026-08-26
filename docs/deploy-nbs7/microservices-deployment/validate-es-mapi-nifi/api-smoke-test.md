@@ -45,4 +45,4 @@ nbs-test-api.sh -B https://app.<your-site>.<your-domain>.com -U <apiuser> -c 10
 
 This command verifies API functionality and populates the observability dashboards with initial traffic.
 
-[nedss-infra-nbs-test-api]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-api>
+[nedss-infra-nbs-test-api]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/v7.12.0/scripts/observability/nbs-test-api>

@@ -58,4 +58,4 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
 
    If the pod is still creating or in any other state, wait and troubleshoot before continuing.
 
-[nedss-helm-nifi-efs-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nifi-efs>
+[nedss-helm-nifi-efs-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/nifi-efs>

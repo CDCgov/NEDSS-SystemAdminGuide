@@ -48,7 +48,7 @@ NNDSS Data Sync service includes:
 
 ## Set up the Data Sync service for NNDSS
 
-Download the above files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page]. Under **Assets**, download the `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
+Download the above files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS v7.12.0 release page][nedss-nndss-release-page]. Under **Assets**, download the `v7.12.0.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
 Save the files to a secure directory with executable permissions to run the services.
 
 ---
@@ -120,5 +120,5 @@ Ensure the database is accessible from Rhapsody.
 
 Make sure you validate the provided **API endpoints** before you run the Data Sync services.
 
-[nedss-nndss-release-page]: <https://github.com/CDCgov/NEDSS-NNDSS/releases/tag/{{ site.version_latest_tag }}>
-[nedss-nndss-readme]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service#readme>
+[nedss-nndss-release-page]: <https://github.com/CDCgov/NEDSS-NNDSS/releases/tag/v7.12.0>
+[nedss-nndss-readme]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/v7.12.0/nnd-data-poll-service#readme>

@@ -27,7 +27,7 @@ Before you begin, complete the general [Prerequisites](../../deploy-nbs7/prerequ
 
 Complete these steps to download the infrastructure package and prepare your environment-specific Terraform files.
 
-1. Go to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file.
+1. Go to the [NEDSS-Infrastructure v7.12.0 release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-v7.12.0.zip` file.
 1. Open a terminal (bash, macOS Terminal, CloudShell, or PowerShell) and unzip the downloaded file.
 1. To hold your environment-specific configuration files, create a new directory in `/terraform/aws/`. Give the new directory an easily identifiable name such as `nbs7-mySTLT-config`.
 1. Copy `terraform/aws/samples/archive/NBS7_standard` to the new directory and change into the new directory.
@@ -142,4 +142,4 @@ Use these steps to connect to the cluster and verify that core Kubernetes resour
 
 You have now installed your core infrastructure and Kubernetes cluster. Continue to [Initial Kubernetes Deployment](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html) to configure your cluster.
 
-[nedss-infra-release-page]: <https://github.com/CDCgov/NEDSS-Infrastructure/releases/tag/{{ site.version_latest_tag }}>
+[nedss-infra-release-page]: <https://github.com/CDCgov/NEDSS-Infrastructure/releases/tag/v7.12.0>

@@ -6,11 +6,11 @@ has_children: true
 description: Step-by-step instructions for deploying NBS 7.
 ---
 
-# Deploy NBS {{ site.version_latest }}
+# Deploy NBS 7.12
 
 This section covers the full NBS 7 deployment process, from prerequisites and infrastructure setup through microservices deployment and go-live.
 
-> The procedures in this section reflect NBS {{ site.version_latest }}. For earlier releases, see **Previous Versions** in the sidebar.
+> The procedures in this section reflect NBS 7.12. For earlier releases, see **Previous Versions** in the sidebar.
 {: .note }
 
 Before you begin, confirm that your NBS 6 version is compatible with your target NBS 7 version on the [Supported NBS versions](./supported-versions.html) page.

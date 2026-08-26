@@ -206,6 +206,6 @@ API → Pull data from SQL table → Upload to S3 → Kafka → Processor → Pu
 > This data flow uses Amazon S3 as the storage provider. If you are not using Amazon S3, the upload and retrieval steps differ based on your cloud provider.
 {: .note }
 
-[nedss-helm-keycloak-extra]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak/extra>
-[nedss-helm-data-compare-api-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-compare-api-service>
-[nedss-helm-data-compare-processor-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-compare-processor-service>
+[nedss-helm-keycloak-extra]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/keycloak/extra>
+[nedss-helm-data-compare-api-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/data-compare-api-service>
+[nedss-helm-data-compare-processor-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/data-compare-processor-service>

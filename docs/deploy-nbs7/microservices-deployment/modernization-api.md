@@ -83,4 +83,4 @@ This page walks through deploying the Modernization API using the `modernization
 
    If the pod is still creating or in any other state, wait and troubleshoot before continuing.
 
-[nedss-helm-modernization-api-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/modernization-api>
+[nedss-helm-modernization-api-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/modernization-api>

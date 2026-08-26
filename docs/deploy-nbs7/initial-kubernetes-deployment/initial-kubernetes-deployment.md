@@ -31,7 +31,7 @@ This page explains how to deploy the core Kubernetes infrastructure services tha
 
 ## Bootstrap Kubernetes
 
-1. Download the Helm configuration package from the [CDCgov/NEDSS-Helm][nedss-helm-repo] repo on Github. Be sure to go through the [{{ site.version_latest_tag }} release page][nedss-helm-release-page] to see what's included.
+1. Download the Helm configuration package from the [CDCgov/NEDSS-Helm][nedss-helm-repo] repo on Github. Be sure to go through the [v7.12.0 release page][nedss-helm-release-page] to see what's included.
 1. Open a terminal (bash, macOS Terminal, CloudShell, or PowerShell) and unzip the downloaded file.
 1. **All helm commands should be executed from the charts directory.** Change directory to where you unzipped the helm **charts** folder `<Helm_Dir>/charts`.
 
@@ -299,7 +299,7 @@ kubectl --namespace=kube-system get pods \
   -l "app.kubernetes.io/name=aws-cluster-autoscaler,app.kubernetes.io/instance=cluster-autoscaler"
 ```
 
-[nedss-helm-repo]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
-[nedss-helm-release-page]: <https://github.com/CDCgov/NEDSS-Helm/releases/tag/{{ site.version_latest_tag }}>
-[nedss-helm-traefik-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/traefik>
-[nedss-helm-cluster-issuer-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/cluster-issuer-prod.yaml>
+[nedss-helm-repo]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0>
+[nedss-helm-release-page]: <https://github.com/CDCgov/NEDSS-Helm/releases/tag/v7.12.0>
+[nedss-helm-traefik-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/traefik>
+[nedss-helm-cluster-issuer-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/k8-manifests/cluster-issuer-prod.yaml>

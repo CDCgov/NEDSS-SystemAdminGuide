@@ -63,4 +63,4 @@ The NBS Gateway service routes requests between NBS 7 microservices and the lega
 
    If the pod is still creating or in any other non-running state, wait before continuing.
 
-[nedss-helm-nbs-gateway-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nbs-gateway>
+[nedss-helm-nbs-gateway-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/nbs-gateway>

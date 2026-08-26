@@ -132,5 +132,5 @@ Follow these steps to configure and deploy the RTR Java services Helm chart.
    Expected: Post Processing Service Status OK
    ```
 
-[nedss-helm-rtr-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/rtr>
-[nedss-helm-k8-secrets-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/nbs-secrets.yaml>
+[nedss-helm-rtr-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/rtr>
+[nedss-helm-k8-secrets-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/k8-manifests/nbs-secrets.yaml>

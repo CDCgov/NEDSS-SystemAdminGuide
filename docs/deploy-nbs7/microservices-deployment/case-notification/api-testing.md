@@ -72,12 +72,12 @@ Use this page to validate ingress, PHIMNS property configuration, and supporting
 ### Case notification environment variables
 
 - **Case-Notification-Service**
-  - [NEDSS-NNDSS-Case-Notifications/README.md at {{ site.version_latest_tag }} · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
-  - [NEDSS-Helm/charts/case-notification-service/templates/deployment.yaml at {{ site.version_latest_tag }} · CDCgov/NEDSS-Helm][nedss-helm-case-notification-deployment]
+  - [NEDSS-NNDSS-Case-Notifications/README.md at v7.12.0 · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
+  - [NEDSS-Helm/charts/case-notification-service/templates/deployment.yaml at v7.12.0 · CDCgov/NEDSS-Helm][nedss-helm-case-notification-deployment]
 
 - **Data-Extraction-Service**
-  - [NEDSS-NNDSS-Case-Notifications/README.md at {{ site.version_latest_tag }} · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
-  - [NEDSS-Helm/charts/data-extraction-service/templates/deployment.yaml at {{ site.version_latest_tag }} · CDCgov/NEDSS-Helm][nedss-helm-data-extraction-deployment]
+  - [NEDSS-NNDSS-Case-Notifications/README.md at v7.12.0 · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
+  - [NEDSS-Helm/charts/data-extraction-service/templates/deployment.yaml at v7.12.0 · CDCgov/NEDSS-Helm][nedss-helm-data-extraction-deployment]
 
 - **Xml-Hl7-Parser-Service**
   - [NEDSS-NNDSS-Case-Notifications/README.md at main · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-readme]
@@ -87,7 +87,7 @@ Use this page to validate ingress, PHIMNS property configuration, and supporting
 
 - Case Notification includes a built-in Liquibase integration that automatically applies database changes during deployment.
 - DB changes detail can be reviewed here:
-  - [NEDSS-NNDSS-Case-Notifications/case-notification-service/src/main/resources/db at {{ site.version_latest_tag }} · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-db]
+  - [NEDSS-NNDSS-Case-Notifications/case-notification-service/src/main/resources/db at v7.12.0 · CDCgov/NEDSS-NNDSS-Case-Notifications][nndss-case-notifications-db]
   - See Deploy Data Ingestion using Helm for Data Ingestion deployment guidance.
 
 ### Liquibase DB change verification
@@ -101,14 +101,14 @@ Use this page to validate ingress, PHIMNS property configuration, and supporting
 
 1. Deploy the required Debezium Source Connector on `NBS_ODSE..CN_TranportQ_Out` before deploying the services.
 
-  Details: [NEDSS-Helm/charts/debezium/values.yaml at {{ site.version_latest_tag }} · CDCgov/NEDSS-Helm][nedss-helm-debezium-values]
+  Details: [NEDSS-Helm/charts/debezium/values.yaml at v7.12.0 · CDCgov/NEDSS-Helm][nedss-helm-debezium-values]
 
 ### Additional case notification technical documentation
 
 [Technical Document](../images/Technical%20Document.pdf)
 
-[nndss-case-notifications-readme]: <https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/{{ site.version_latest_tag }}/README.md>
-[nedss-helm-case-notification-deployment]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/case-notification-service/templates/deployment.yaml>
-[nedss-helm-data-extraction-deployment]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/data-extraction-service/templates/deployment.yaml>
-[nndss-case-notifications-db]: <https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/tree/{{ site.version_latest_tag }}/case-notification-service/src/main/resources/db>
-[nedss-helm-debezium-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/debezium/values.yaml>
+[nndss-case-notifications-readme]: <https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/blob/v7.12.0/README.md>
+[nedss-helm-case-notification-deployment]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/case-notification-service/templates/deployment.yaml>
+[nedss-helm-data-extraction-deployment]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/data-extraction-service/templates/deployment.yaml>
+[nndss-case-notifications-db]: <https://github.com/CDCgov/NEDSS-NNDSS-Case-Notifications/tree/v7.12.0/case-notification-service/src/main/resources/db>
+[nedss-helm-debezium-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/debezium/values.yaml>

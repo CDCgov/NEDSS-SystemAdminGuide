@@ -65,4 +65,4 @@ This page walks through deploying the Case Notification Service for case notific
    https://<data.EXAMPLE_DOMAIN>/case-notification/actuator/health
    ```
 
-[nedss-helm-case-notification-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/case-notification-service>
+[nedss-helm-case-notification-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/case-notification-service>

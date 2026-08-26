@@ -92,4 +92,4 @@ This page walks through enabling Change Data Capture (CDC) and deploying the Deb
     kubectl delete configmap case-notification-connectb
     ```
 
-[nedss-helm-debezium-case-notifications-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium-case-notifications>
+[nedss-helm-debezium-case-notifications-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/debezium-case-notifications>

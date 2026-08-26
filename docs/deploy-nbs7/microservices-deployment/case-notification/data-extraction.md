@@ -57,4 +57,4 @@ This page walks through deploying the Data Extraction Service for case notificat
    https://<data.EXAMPLE_DOMAIN>/data-extraction/actuator/info
    ```
 
-[nedss-helm-data-extraction-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-extraction-service>
+[nedss-helm-data-extraction-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/data-extraction-service>

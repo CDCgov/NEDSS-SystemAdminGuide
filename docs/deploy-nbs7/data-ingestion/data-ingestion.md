@@ -64,7 +64,7 @@ Run the following SQL scripts before deploying the Data Ingestion service.
 ### Liquibase
 
 - Data Ingestion includes a built-in Liquibase integration that automatically applies database schema changes on deployment.
-- DB changes detail can be reviewed here: [NEDSS-DataIngestion/data-ingestion-service/src/main/resources/db at {{ site.version_latest_tag }} · CDCgov/NEDSS-DataIngestion][nedss-dataingestion-db]
+- DB changes detail can be reviewed here: [NEDSS-DataIngestion/data-ingestion-service/src/main/resources/db at v7.12.0 · CDCgov/NEDSS-DataIngestion][nedss-dataingestion-db]
 - See [Deploy Data Ingestion using Helm](#deploy-data-ingestion-using-helm) for deployment steps.
 
 ### Liquibase DB change verification
@@ -165,5 +165,5 @@ For more information about SFTP support, please see: [data-ingestion-sftp-suppor
     https://<data.EXAMPLE_DOMAIN>/ingestion/swagger-ui/index.html#/
     ```
 
-[nedss-dataingestion-db]: <https://github.com/CDCgov/NEDSS-DataIngestion/tree/{{ site.version_latest_tag }}/data-ingestion-service/src/main/resources/db>
-[nedss-helm-dataingestion-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/dataingestion-service>
+[nedss-dataingestion-db]: <https://github.com/CDCgov/NEDSS-DataIngestion/tree/v7.12.0/data-ingestion-service/src/main/resources/db>
+[nedss-helm-dataingestion-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/dataingestion-service>

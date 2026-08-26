@@ -55,4 +55,4 @@ For example:
 | `-U`     | user in the database with access to create and delete patients |
 | `-c`     | count number of iterations, default is 1 |
 
-[nedss-infra-nbs-test-webui]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/scripts/observability/nbs-test-webui>
+[nedss-infra-nbs-test-webui]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/v7.12.0/scripts/observability/nbs-test-webui>

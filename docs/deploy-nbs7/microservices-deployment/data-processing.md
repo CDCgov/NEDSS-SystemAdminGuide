@@ -98,4 +98,4 @@ This section covers installing the NBS 7 RTI service.
    https://<data.EXAMPLE_DOMAIN>/rti/actuator/health
    ```
 
-[nedss-helm-data-processing-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/data-processing-service>
+[nedss-helm-data-processing-service-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/data-processing-service>

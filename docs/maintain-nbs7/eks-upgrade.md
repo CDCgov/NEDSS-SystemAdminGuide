@@ -18,7 +18,7 @@ This page describes how to use Terraform to upgrade the Amazon Elastic Kubernete
 
 ## Kubernetes version compatibility
 
-While NBS {{ site.version_latest }} was tested against Kubernetes 1.35, later Kubernetes versions are expected to be compatible. To minimize cost, we suggest running the latest version in AWS standard support at the time of your deployment. For current version end dates, see [Understand the Kubernetes version lifecycle on EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html) in the AWS documentation.
+While NBS 7.12 was tested against Kubernetes 1.35, later Kubernetes versions are expected to be compatible. To minimize cost, we suggest running the latest version in AWS standard support at the time of your deployment. For current version end dates, see [Understand the Kubernetes version lifecycle on EKS](https://docs.aws.amazon.com/eks/latest/userguide/kubernetes-versions.html) in the AWS documentation.
 
 Before you begin the upgrade, review the following:
 
@@ -232,6 +232,6 @@ During node group upgrades, Linkerd might unexpectedly stop. When this occurs, m
    kubectl rollout restart deployment -n default
    ```
 
-[nedss-infra-terraform-eks]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/{{ site.version_latest_tag }}/terraform/aws/app-infrastructure/eks-nbs>
-[nedss-infra-terraform-eks-main]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/app-infrastructure/eks-nbs/main.tf>
-[nedss-infra-terraform-eks-variables]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/app-infrastructure/eks-nbs/variables.tf>
+[nedss-infra-terraform-eks]: <https://github.com/CDCgov/NEDSS-Infrastructure/tree/v7.12.0/terraform/aws/app-infrastructure/eks-nbs>
+[nedss-infra-terraform-eks-main]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/v7.12.0/terraform/aws/app-infrastructure/eks-nbs/main.tf>
+[nedss-infra-terraform-eks-variables]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/v7.12.0/terraform/aws/app-infrastructure/eks-nbs/variables.tf>

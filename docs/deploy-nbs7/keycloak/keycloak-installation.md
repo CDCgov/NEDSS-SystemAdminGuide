@@ -31,7 +31,7 @@ The Keycloak Helm chart provides authentication for `modernization-api`, `nbs-ga
    - **Username** – `admin`
    - **Password** – `database_admin_password`
 
-1. Run the script below (from [nbs_keycloak.sql][nedss-helm-keycloak-sql] in the NEDSS-Helm repository) to create the Keycloak database and database user. Replace `'EXAMPLE_KCDB_PASS8675309'` with a complex password that meets your organization's standards. Store this password securely — you will need it in the `values.yaml` file in the next section.
+1. Run the script below to create the Keycloak database and database user. Replace `'EXAMPLE_KCDB_PASS8675309'` with a complex password that meets your organization's standards. Store this password securely — you will need it in the `values.yaml` file in the next section.
 
    ```bash
    use master
@@ -160,7 +160,7 @@ The imported configuration seeds a random client secret for each service client.
 ### SRTE client
 
 1. In the **NBS Realm**, open **Realm settings**, click the **Action** dropdown, and select **Partial Import**.
-1. Upload [06-nbs-users-srte-data-client.json][nedss-helm-keycloak-srte-client] and click **Create**.
+1. Upload [06-nbs-users-srte-data.json][nedss-helm-keycloak-srte-client] and click **Create**.
 1. Navigate to the **NBS Realm** in the left menu and click **Clients**.
 1. Select `srte-data-keycloak-client` and open the **Credentials** tab.
 1. Click the eye icon to reveal the secret and copy it.
@@ -175,10 +175,9 @@ The imported configuration seeds a random client secret for each service client.
 1. Click the eye icon to reveal the secret and copy it.
 1. Store the secret (for example, in AWS Secrets Manager at `keycloak/client/secret/xml-hl7-parser`).
 
-[nedss-helm-keycloak-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/keycloak>
-[nedss-helm-keycloak-sql]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/nbs_keycloak.sql>
-[nedss-helm-keycloak-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/values.yml>
-[nedss-helm-keycloak-di-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/01-NBS-realm-with-DI-client.json>
-[nedss-helm-keycloak-nnd-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/05-nbs-users-nnd-client.json>
-[nedss-helm-keycloak-srte-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/06-nbs-users-srte-data-client.json>
-[nedss-helm-keycloak-hl7-parser]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/extra/10-nbs-users-xml-hl7-parser-service.json>
+[nedss-helm-keycloak-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/keycloak>
+[nedss-helm-keycloak-values]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/keycloak/values.yaml>
+[nedss-helm-keycloak-di-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/keycloak/extra/01-NBS-realm-with-DI-client.json>
+[nedss-helm-keycloak-nnd-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/keycloak/extra/05-nbs-users-nnd-client.json>
+[nedss-helm-keycloak-srte-client]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/keycloak/extra/06-nbs-users-srte-data.json>
+[nedss-helm-keycloak-hl7-parser]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/keycloak/extra/10-nbs-users-xml-hl7-parser-service.json>

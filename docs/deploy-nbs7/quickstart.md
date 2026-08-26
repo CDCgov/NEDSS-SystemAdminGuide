@@ -353,9 +353,9 @@ terraform destroy
 - For support, contact <mailto:NBSSupport@cdc.gov>.
 - For ongoing updates, check the GitHub repo for new releases.
 
-[nedss-infra-aws-samples-readme]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/terraform/aws/samples/README.md>
-[nedss-helm-elasticsearch-efs-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/elasticsearch-efs/README.md>
-[nedss-helm-modernization-api-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/modernization-api/README.md>
-[nedss-helm-nifi-efs-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/nifi-efs/README.md>
-[nedss-helm-nbs-gateway-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/nbs-gateway/README.md>
-[nedss-helm-dataingestion-service-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/dataingestion-service/README.md>
+[nedss-infra-aws-samples-readme]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/v7.12.0/terraform/aws/samples/README.md>
+[nedss-helm-elasticsearch-efs-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/elasticsearch-efs/README.md>
+[nedss-helm-modernization-api-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/modernization-api/README.md>
+[nedss-helm-nifi-efs-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/nifi-efs/README.md>
+[nedss-helm-nbs-gateway-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/nbs-gateway/README.md>
+[nedss-helm-dataingestion-service-readme]: <https://github.com/CDCgov/NEDSS-Helm/blob/v7.12.0/charts/dataingestion-service/README.md>

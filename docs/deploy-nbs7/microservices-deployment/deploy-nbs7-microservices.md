@@ -17,7 +17,7 @@ description: Install and configure NBS 7 application services using Helm, includ
 
 This phase deploys the NBS 7 application services into your Kubernetes cluster using Helm. Deploy services in the order listed — each service has dependencies on the ones before it.
 
-> The pages in this section apply to NBS {{ site.version_latest }}. Github repo links are pinned to `{{ site.version_latest_tag }}`.
+> The pages in this section apply to NBS 7.12. Github repo links are pinned to `v7.12.0`.
 {: .note }
 
 After completing this phase, proceed to [Validate the deployment](../validate-the-deployment.html).

@@ -238,4 +238,4 @@ USE rdb_modern;
 DELETE FROM rdb_modern.dbo.DATABASECHANGELOG;
 ```
 
-[nedss-helm-liquibase-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/liquibase>
+[nedss-helm-liquibase-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/liquibase>

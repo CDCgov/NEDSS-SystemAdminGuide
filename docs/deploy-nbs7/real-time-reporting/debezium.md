@@ -122,4 +122,4 @@ If the service has trouble connecting to the database, run the following command
 kubectl delete configmap cp-kafka-connect-sqlserver-connect
 ```
 
-[nedss-helm-debezium-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/debezium>
+[nedss-helm-debezium-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/v7.12.0/charts/debezium>

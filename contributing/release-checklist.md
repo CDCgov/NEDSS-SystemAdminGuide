@@ -13,9 +13,12 @@ Identify the following values and complete the setup steps before starting the c
 | Value | Example | Notes |
 |---|---|---|
 | New version number | `7.13` | Used in `version_latest` |
-| New version tag | `v7.13.0` | Used in `version_latest_tag`; confirm tag exists in NEDSS-Infrastructure before starting |
+| New version tag | `v7.13.0` | Used in `version_latest_tag`; see the note below before choosing the tag |
 | Previous version number | `7.12` | Used in archiving steps |
 | Previous version tag | `v7.12.0` | Used in archiving steps |
+
+> Point `version_latest_tag` at the tag that has a GitHub **Release** attached, not just a matching git tag. A tag without a release still loads a page, but it has no release notes and none of the download assets the guide sends readers to. Confirm the release's asset filenames match what the guide references — they do not always follow the tag.
+{: .note }
 
 - [ ] Create a new Jira ticket in the STLT project under the **SysAdmin Guide: New release checklists** epic. Suggested title: `Admin Guide: Update guide for NBS X.XX release`. Copy the checklist items below as acceptance criteria and track completion there.
 
@@ -104,7 +107,6 @@ Steps 2–6 are performed on the next-version branch (e.g., `7.13`) — not on `
 - [ ] In `_config.yml`, update `version_latest` to the new version number (e.g., `7.13`).
 - [ ] In `_config.yml`, update `version_latest_tag` to the new version tag (e.g., `v7.13.0`).
 - [ ] Update the `title:` field in `_config.yml` to reflect the new version (e.g., `NBS 7.13 System Administrator Guide`).
-- [ ] Update the `title:` field in `docs/deploy-nbs7.md` to the new version (e.g., `Deploy NBS 7.13`).
 - [ ] Confirm the site builds without errors after the update.
 
 > Updating `version_latest` also updates the version banner (shown on every page), the version callouts on the Introduction, Deploy, and Maintain section landing pages, and all pinned GitHub links that use `version_latest_tag`. The `docs/deploy-nbs7.md` title must be updated manually because Jekyll does not process Liquid variables in front matter.
@@ -126,15 +128,14 @@ The following pages require manual content review beyond link verification:
 
 | Page | What to review |
 |------|----------------|
-| `docs/deploy-nbs7/microservices-deployment/real-time-reporting/rtr-java-services.md` | Review the consolidation warning callout for accuracy. |
 | `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-data-sync.md` | Confirm the NEDSS-NNDSS release at the new tag includes a `vX.Y.Z.NEDSS.NBS.Modernized.Documentation.zip` asset. If missing, coordinate with the dev team before publishing. |
 | `docs/deploy-nbs7/microservices-deployment/nnd-service/on-prem-nnd-sync.md` | Same documentation zip caveat as `on-prem-data-sync.md`. |
-| `docs/maintain-nbs7/eks-upgrade.md` | Update the Kubernetes versions table. Confirm the conditional add-ons step still reflects correct module version behavior. *(Page not yet created as of 7.12.)* |
-| `docs/deploy-nbs7/microservices-deployment/modernization-api.md` | Confirm the example release-version-tag on line 35 |
+| `docs/maintain-nbs7/kubernetes-upgrade.md` | Confirm `version_k8s` in `_config.yml` matches the Kubernetes version this release was tested against. Update the minor-version upgrade example, which is hardcoded. Confirm the conditional add-ons step still reflects correct module version behavior. |
 | `docs/supported-versions.md` | Update as needed. If this release is a patch (7.x.y), decide patch inheritance for the Supported NBS versions page. |
-| `docs/release-history.md` | Confirm the latest, supported, and unsupported NBS 7 version badges are accurate. |
+| `docs/nbs7-introduction/release-history.md` | Confirm the latest, supported, and unsupported NBS 7 version badges are accurate. |
+| `docs/deploy-nbs7/full-deploy/kubernetes-setup/deploy-core-services.md` | Reverify the UI screenshots against the versions shipped with this release. |
 
-> Add rows to this table as pages requiring manual review are identified.
+> Add rows to this table as pages requiring manual review are identified. Some pages also carry an in-page `<!-- RELEASE CHECKLIST: ... -->` comment describing what to check. Run `git grep 'RELEASE CHECKLIST' -- docs` each cycle to catch pages that carry a marker but are not yet listed here.
 
 ### 5. Quality checks
 

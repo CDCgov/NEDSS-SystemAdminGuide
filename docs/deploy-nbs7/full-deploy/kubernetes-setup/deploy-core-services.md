@@ -38,13 +38,9 @@ This page covers how to deploy the core services that must be running in your [[
 
 Complete these steps to download the [[helm-chart|Helm charts]] that deploy the core services and the NBS 7 microservices:
 
-1. Navigate to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the `nbs-helm-{{ site.version_latest_tag }}.zip` file.
+1. Navigate to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the **Source code (zip)** file.
 1. Unzip the downloaded file.
-1. In a terminal, change into the `charts` directory from the unzipped file:
-
-   ```bash
-   cd <HELM_DIR>/nbs-helm-{{ site.version_latest_tag }}/charts
-   ```
+1. In a terminal, change into the `charts` directory from the unzipped file.
 
 Run all `helm` commands on this page from this `charts` directory.
 
@@ -238,10 +234,9 @@ If issues persist after you complete the troubleshooting steps, email [nbs@cdc.g
 
 1. In `cluster-issuer-prod.yaml`, update the email address to a valid operations address. Let's Encrypt uses this address to notify you of upcoming certificate expirations if automatic renewal stops working.
 
-1. Apply the manifest:
+1. From the `k8-manifests` directory in the unzipped file, apply the manifest:
 
    ```bash
-   cd <HELM_DIR>/k8-manifests
    kubectl apply -f cluster-issuer-prod.yaml
    ```
 

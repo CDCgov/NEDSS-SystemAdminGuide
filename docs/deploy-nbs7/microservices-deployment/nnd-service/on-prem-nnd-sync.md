@@ -50,7 +50,11 @@ NNDSS Data Sync service includes:
 
 ## Set up the Data Sync service for NNDSS
 
-Download the Data Sync service files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page]. Under **Assets**, download the `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
+The Data Sync service files come from two places:
+
+- **Service `.jar` file.** On the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page], under **Assets**, download `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip`. The `.jar` file is in the `data-sync/NND_SERVICE/` directory.
+- **Command (`.cmd`) and SQL (`.sql`) scripts.** These are in the NEDSS-NNDSS repository, in [`nnd-data-poll-service/execute_script/`][nedss-nndss-execute-script] and [`nnd-data-poll-service/src/main/resources/sql/`][nedss-nndss-sql].
+
 Save the files to a secure directory with executable permissions to run the services.
 
 ---
@@ -115,4 +119,6 @@ Ensure the database is accessible from Rhapsody.
 Continue to [Deploy Data Availability](./on-prem-data-sync.html).
 
 [nedss-nndss-release-page]: <https://github.com/CDCgov/NEDSS-NNDSS/releases/tag/{{ site.version_latest_tag }}>
+[nedss-nndss-execute-script]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service/execute_script>
+[nedss-nndss-sql]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql>
 [nedss-nndss-readme]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service#readme>

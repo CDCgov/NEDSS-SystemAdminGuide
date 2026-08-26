@@ -79,11 +79,7 @@ Complete these steps to download the infrastructure code and prepare your enviro
 
 1. Navigate to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file.
 1. Unzip the downloaded file.
-1. Open a terminal and change into the top-level directory from the unzipped file:
-
-   ```bash
-   cd nbs-infrastructure-{{ site.version_latest_tag }}
-   ```
+1. Open a terminal and change into the directory where you unzipped the file.
 
 1. To hold your environment-specific configuration files, create a new directory in `terraform/<cloud-provider>/`. Give the directory an easily identifiable name in the format `nbs7-<STLT>-<environment>`:
 
@@ -122,10 +118,10 @@ For each Terraform layer directory, this section initializes the directory, gene
 > The following commands assume that you run Terraform authenticated to the same AWS account or Azure subscription that contains your existing NBS 6 application.
 {: .note }
 
-1. In a terminal, change to the Terraform layer directory that contains the `terraform.tfvars` and `terraform.tf` files you updated in [Prepare Terraform files and configuration](#prepare-terraform-files-and-configuration):
+1. From the directory where you unzipped the file, change to the Terraform layer directory that contains the `terraform.tfvars` and `terraform.tf` files you updated in [Prepare Terraform files and configuration](#prepare-terraform-files-and-configuration):
 
    ```bash
-   cd nbs-infrastructure-{{ site.version_latest_tag }}/terraform/<cloud-provider>/nbs7-<STLT>-<environment>/<number>-<layer-description>
+   cd terraform/<cloud-provider>/nbs7-<STLT>-<environment>/<number>-<layer-description>
    ```
 
 1. Initialize Terraform:

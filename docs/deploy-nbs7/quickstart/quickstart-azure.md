@@ -47,10 +47,10 @@ Use Terraform to provision the virtual network, the Azure Kubernetes Service (AK
    ```
 
 1. Navigate to the [NEDSS-Infrastructure {{ site.version_latest_tag }} release page][nedss-infra-release-page]. Under **Assets**, download the `nbs-infrastructure-{{ site.version_latest_tag }}.zip` file, then unzip it.
-1. Create an environment directory and copy the sample layers into it:
+1. From the directory where you unzipped the file, create an environment directory and copy the sample layers into it:
 
    ```bash
-   cd nbs-infrastructure-{{ site.version_latest_tag }}/terraform/azure
+   cd terraform/azure
    mkdir nbs7-mySTLT-test
    cp -pr samples/* ./nbs7-mySTLT-test
    cd nbs7-mySTLT-test
@@ -102,12 +102,8 @@ kubectl get namespace default -o=jsonpath='{.metadata.annotations}'
 
 Download the Helm charts, then deploy the Traefik ingress controller and cert-manager.
 
-1. Navigate to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the `nbs-helm-{{ site.version_latest_tag }}.zip` file, then unzip it.
-1. Change into the `charts` directory from the unzipped file. Run all `helm` commands from this directory:
-
-   ```bash
-   cd <HELM_DIR>/nbs-helm-{{ site.version_latest_tag }}/charts
-   ```
+1. Navigate to the [NEDSS-Helm {{ site.version_latest_tag }} release page][nedss-helm-release-page]. Under **Assets**, download the **Source code (zip)** file, then unzip it.
+1. Change into the `charts` directory from the unzipped file. Run all `helm` commands from this directory.
 
 ### Deploy the Traefik ingress controller
 
@@ -151,10 +147,9 @@ The `nbs-ingress` chart manages ingress routing between the NBS 7 applications.
 Terraform deploys cert-manager during provisioning. It creates and renews Transport Layer Security (TLS) certificates for the Apache NiFi and modernization-api services. Skip this section if you use manual certificates stored in Kubernetes secrets.
 
 1. In the NEDSS-Helm repository, open [`k8-manifests/cluster-issuer-prod.yaml`][nedss-helm-cluster-issuer-manifest] and update the email address to a valid operations address.
-1. Apply the manifest:
+1. From the `k8-manifests` directory in the unzipped file, apply the manifest:
 
    ```bash
-   cd <HELM_DIR>/k8-manifests
    kubectl apply -f cluster-issuer-prod.yaml
    ```
 
@@ -198,7 +193,7 @@ Create the Domain Name System (DNS) A records in Azure DNS that point to the IP 
 
 Keycloak is the authentication service that allows users to sign in to the NBS 7 web UI.
 
-1. Create the Keycloak database and database user. Run the [nbs_keycloak.sql][keycloak-sql-script] script from the NEDSS-Helm repository on your NBS 6 database. Replace `EXAMPLE_KCDB_PASS8675309` with a complex password and store it securely. You need it in the Helm values file.
+1. Create the Keycloak database and database user. Run the SQL script in [Create the Keycloak database][keycloak-db-setup] on your NBS 6 database. Replace `EXAMPLE_KCDB_PASS8675309` with a complex password and store it securely. You need it in the Helm values file.
 1. In `keycloak/values.yaml`, set the admin credentials, the database connection values, and the `KC_DB_PASSWORD` to match the password you set in the script.
 1. Install the Keycloak Helm chart. This step takes at least 5 minutes while the init container becomes available:
 
@@ -315,5 +310,5 @@ For support, email [nbs@cdc.gov](mailto:nbs@cdc.gov).
 [nedss-infra-readme]: <https://github.com/CDCgov/NEDSS-Infrastructure/blob/{{ site.version_latest_tag }}/README.md>
 [nedss-helm-release-page]: <https://github.com/CDCgov/NEDSS-Helm/releases/tag/{{ site.version_latest_tag }}>
 [nedss-helm-cluster-issuer-manifest]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/k8-manifests/cluster-issuer-prod.yaml>
-[keycloak-sql-script]: <https://github.com/CDCgov/NEDSS-Helm/blob/{{ site.version_latest_tag }}/charts/keycloak/nbs_keycloak.sql>
+[keycloak-db-setup]: <../full-deploy/kubernetes-setup/deploy-keycloak.html#create-the-keycloak-database>
 [helm-values-table]: <../microservices-deployment/deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices>

@@ -94,12 +94,18 @@ jobs:
         id: get-branches
         run: |
           echo "RELEASE_BRANCHES<<EOF" >> $GITHUB_ENV
-          git for-each-ref --format='%(refname:short)' refs/remotes/origin/ | grep '^origin/release-' >> $GITHUB_ENV
+          # List newest release first (sort -rV) so the Previous Versions nav
+          # shows the most recent archived release at the top.
+          git for-each-ref --format='%(refname:short)' refs/remotes/origin/ | grep '^origin/release-' | sort -rV >> $GITHUB_ENV
           echo "EOF" >> $GITHUB_ENV
 
       - name: Checkout and prepare release versions
         run: |
           mkdir -p _previous_versions
+          # nav_index assigns each archived release an increasing nav_order in
+          # the order branches are listed (newest first), so Just the Docs shows
+          # them newest-to-oldest instead of falling back to alphabetical order.
+          nav_index=1
           for branch in $RELEASE_BRANCHES; do
             name=$(basename "$branch")
             folder="_previous_versions/$name"
@@ -116,11 +122,12 @@ jobs:
           title: $name
           has_children: true
           layout: page
-          nav_order: 1
+          nav_order: $nav_index
           ---
           # $name
           Auto-generated index for this version
           EOF
+            nav_index=$((nav_index + 1))
 
             # Process all .md files
             find "$folder" -name '*.md' ! -name 'index.md' | while read file; do

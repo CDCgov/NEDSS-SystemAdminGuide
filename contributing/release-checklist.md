@@ -148,5 +148,6 @@ The following pages require manual content review beyond link verification:
 
 - [ ] Confirm the live guide title shows the new version.
 - [ ] Confirm the site builds and deploys successfully on GitHub Pages.
+- [ ] After deploy, hard-refresh a page (Cmd+Shift+R or Ctrl+Shift+R) before checking styling. GitHub Pages caches CSS for 10 minutes, so a returning browser might briefly show the previous release's stylesheet. This affects only your verification window; visitors get the new stylesheet automatically within 10 minutes.
 - [ ] Peer review completed.
 - [ ] For content requiring CDC eclearance, generate the review document(s) for the changed chapters and submit them. See [Generate an eclearance review document](workflow.md#generate-an-eclearance-review-document).

@@ -3,6 +3,7 @@ title: Verify container image authenticity
 layout: page
 nav_order: 1
 parent: Maintain NBS 7
+published: false
 description: Inspect the build provenance attestation for an NBS container image to confirm it was built by CDC and has not been altered.
 ---
 

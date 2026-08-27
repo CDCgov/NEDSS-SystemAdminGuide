@@ -103,10 +103,15 @@ blockquote.warning-title > p:first-child {
 // underline stays as a persistent "reveals a definition" cue, and the whole
 // badge lifts slightly on hover or keyboard focus so readers know it responds.
 // =============================================================================
+// Uppercase the badge display text for a tag-like look. This targets the
+// trigger, not the .label wrapper, so the uppercasing covers only the visible
+// badge text. The tooltip is a sibling of the trigger, not a descendant, and
+// also sets text-transform: none, so its definition text keeps normal casing.
 .label .glossary-term__trigger,
 .label-green .glossary-term__trigger {
     color: #FFFFFF;
     font-weight: 700;
+    text-transform: uppercase;
 }
 
 // The hover/focus lift uses box-shadow ONLY — never transform or filter. A

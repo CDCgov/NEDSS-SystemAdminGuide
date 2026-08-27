@@ -61,7 +61,7 @@ NBS 7 groups its components into tiers by role. The following sections describe 
 
 These services provide the modernized NBS 7 features:
 
-- **Modernization API:** Provides core NBS 7 features such as patient search, event search, patient profiles, and [[case-investigation|investigations]].
+- **Modernization API:** Provides modernized versions of core NBS features. As NBS 7 development progresses, additional NBS 6 features will migrate into this API layer.
 - **Data Ingestion API ([[di-api]]):** Accepts electronic [[lab-report|lab reports]] and other electronic data, validates it, and routes it into NBS.
 - **NBS Gateway:** Applies the strangler routing rules between NBS 7 and NBS 6, using Spring Cloud Gateway.
 - **Additional NBS 7 services:** Supporting services deployed as the modernized system grows.
@@ -93,7 +93,7 @@ NBS 7 uses managed services from your cloud provider for observability, provisio
 
 ## How NBS 7 is deployed
 
-NBS 7 uses an [[iac|infrastructure as code]] approach, so the environment is defined in version-controlled files rather than configured by hand:
+NBS 7 uses an [[infrastructure-as-code]] approach, so the environment is defined in version-controlled files rather than configured by hand:
 
 - Terraform provisions the cloud environment: the virtual network, the Kubernetes cluster, storage, the managed services, and the message-streaming service.
 - [[helm]] deploys and configures the workloads that run inside the Kubernetes cluster.

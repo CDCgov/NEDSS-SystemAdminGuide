@@ -42,7 +42,7 @@ Contributor note:
 <dl class="glossary-list">
 {% endunless -%}
 <dt id="{{ entry.term | slugify }}">{{ entry.term }}</dt>
-<dd>{{ entry.definition | replace: '/NEDSS-SystemAdminGuide/docs/glossary.html#', glossary_href_prefix | markdownify }}</dd>
+<dd>{{ entry.definition | replace: '/NEDSS-SystemAdminGuide/docs/glossary.html#', glossary_href_prefix | replace: '/NEDSS-SystemAdminGuide', site.baseurl | markdownify }}</dd>
 {% endif -%}
 {% endfor -%}
 {% if has_entries -%}

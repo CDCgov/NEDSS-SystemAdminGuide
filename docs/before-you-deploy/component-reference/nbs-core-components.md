@@ -35,7 +35,7 @@ The modern backend API layer for NBS 7, built to replace NBS 6 functionality inc
 
 | Attribute | Description |
 |:---|:---|
-| What it does in NBS 7 | Provides modernized versions of core NBS features including patient search, event search, patient profile, and [[case-investigation\|investigation]] management. As NBS 7 development progresses, additional NBS 6 features will migrate into this API layer. |
+| What it does in NBS 7 | Provides modernized versions of core NBS features. As NBS 7 development progresses, additional NBS 6 features will migrate into this API layer. |
 | When you need it | Always. The Modernization API is a core component of NBS 7 and is required for all configurations. |
 | Dependencies | Requires classic NBS 6 and NBS Gateway. Exposes functionality to the NBS Web UI. |
 

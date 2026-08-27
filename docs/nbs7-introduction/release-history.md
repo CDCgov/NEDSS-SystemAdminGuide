@@ -12,32 +12,33 @@ description: A summary of new features and notable fixes introduced in each NBS 
 
 This page summarizes the new features and notable fixes introduced in each [[nbs-7]] release, starting with the most recent release. Use this page to see what capabilities NBS 7 has gained over time and which release introduced them.
 
-The tables on this page omit some patch releases, including 7.4.1-7.4.3, 7.6.1, 7.9.1, and 7.10.3. These releases focused on interface refinements and minor fixes. For information on NBS version support, see the [Supported NBS versions](../supported-versions.html) page.
+The tables on this page omit some patch releases, including 7.4.1-7.4.3, 7.6.1, 7.9.1, and 7.10.3. These releases focused on interface refinements and minor fixes. **For information on NBS version support, see the [Supported NBS versions](../supported-versions.html) page.**
 {: .note }
 
 ## 7.13: Azure support, RTR launch, SAS removed from reporting
 
-Latest supported version
+[[supported-nbs-version|Latest supported version]]
 {: .label .label-green }
 
-NBS 7.13, released in August 2026, added the following enhancements and fixes:
+NBS 7.13, released in Summer 2026, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
 | 7.13 | New feature | Added [[microsoft-azure]] as a supported deployment platform, alongside [[aws]]. See [Provision cloud infrastructure](../deploy-nbs7/full-deploy/provision-cloud-infrastructure.html). | [[jurisdiction\|Jurisdictions]] can choose a cloud provider based on existing contracts rather than being locked to AWS. |
 | 7.13 | New feature | Introduced layered [[terraform]]: infrastructure split into independently deployable landing-zone, nbs7, and applications layers, each with its own state file. See [Provision the cloud environment with Terraform](../deploy-nbs7/full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html). | Infrastructure changes are isolated and lower-risk. A failure in one layer does not block the others. |
 | 7.13 | New feature | Real-Time Reporting ([[rtr]]) reaches data and UI parity with [[masteretl]], with a simplified 3-step installation, down from separate admin accounts, a Liquibase deployment, and manual data-load scripts. See [Deploy real-time-reporting](../deploy-nbs7/microservices-deployment/real-time-reporting/real-time-reporting.html). | Near-real-time reporting data becomes a viable option for [[stlt\|STLTs]]. |
-| 7.13 | New feature | Reporting module rebuilt on Python, removing the [[sas]] dependency for most reports. Includes a modernized, accessible UI with grouped filters and a guided advanced-filter query builder. | STLTs no longer need to maintain SAS licenses for standard reporting. |
+| 7.13 | New feature | Modernized reporting module. Includes a refreshed, accessible user interface with grouped filters and a guided advanced-filter query builder. See [7.13 Reports User Guide](https://nbscentral.cdc.gov/documents/908) on [[nbs-central]]. | STLTs no longer need to maintain SAS licenses for standard reporting. |
 | 7.13 | New feature | Consolidated six RTR microservices into one `reporting-pipeline-service`, retired the XML-HL7 parser service, and merged the data extraction service into the case notification service. | Fewer services to install, patch, and monitor lowers ongoing operating cost. |
 | 7.13 | Notable fix | Corrected [[rdb]] data quality issues found by comparing MasterETL and RTR output, documented in full in the release appendix, so jurisdictions running [[uat]] do not mistake intentional corrections for defects. | Smoother RTR adoption testing. |
-| 7.13 | Notable fix | Fixed a risk where back-button navigation could incorrectly auto-approve or auto-reject [[case-notification\|case notifications]]. Modernized Patient File is now disabled by default until a jurisdiction opts in. | Prevents an unreviewed case notification from being approved or rejected by mistake. |
+| 7.13 | Notable fix | Fixed a risk where back-button navigation could incorrectly auto-approve or auto-reject [[case-notification\|case notifications]]. | Prevents an unreviewed case notification from being approved or rejected by mistake. |
+| 7.13 | Change | Modernized Patient File is now disabled by default. STLTs who deploy on or upgrade to 7.13 or later must enable the feature flag to use Patient File, even if they had enabled it in an earlier release. | Provides flexibility for jurisdictions to decide when to enable Patient File. |
 
 ## 7.12: Infrastructure currency
 
-Supported version
+[[supported-nbs-version|Supported version]]
 {: .label .label-green }
 
-NBS 7.12, released in May 2026, added the following enhancements and fixes:
+NBS 7.12, released in Spring 2026, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
@@ -46,26 +47,26 @@ NBS 7.12, released in May 2026, added the following enhancements and fixes:
 | 7.12 | New feature | Upgraded the [[kubernetes]] control plane to 1.35. Kubernetes 1.32.5 was discontinued March 31, 2026. | Avoids extended-support licensing costs on [[amazon-eks\|EKS]] and [[azure-kubernetes-service\|AKS]]. |
 | 7.12 | Notable fix | Stabilized NND Sync at version 1.1.3 after testing found it more reliable than version 1.1.5. | Fewer sync-related issues for jurisdictions running NND Service. |
 
-## 7.11: RTR reporting in RDB, expanded Patient Profile
+## 7.11: RTR reporting in RDB, expanded Patient File
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.11.0 and 7.11.1, released in August 2025, added the following enhancements and fixes:
+NBS 7.11.0 and 7.11.1, released in 2025, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
 | 7.11.0 | New feature | RTR reporting enabled through SAS reports integrated with the RDB, with least-privilege service accounts and automatic retry for post-processing failures. | RTR data becomes usable in reports for the first time. |
-| 7.11.1 | New feature | Patient Profile expanded: editable demographics, superseded-record indicators, and clinical data access for vaccinations, [[morbidity-report\|morbidity reports]], [[case-investigation\|investigations]], documents, treatments, [[lab-report\|lab reports]], and birth records. | A single, more complete patient record view for case investigators. |
+| 7.11.1 | New feature | Patient File modernized and enabled by default. Note that 7.13 reverses the enabled-by-default behavior. STLTs who deploy on or upgrade to 7.13 or later must enable the feature flag to continue using Patient File. | A single, more complete patient record view for case investigators. |
 | 7.11.0 | Notable fix | Improved skip links, heading structure, landmark navigation, and [[aria]] labeling across Patient Search and New Patient. | Accessibility, Section 508 improvement. |
 | 7.11.1 | Notable fix | Corrected [[cda]] XML county and country mapping errors, and a missing pregnancy-status display issue, from [[ecr]] ingestion. | Data accuracy for ingested case report data. |
 
 ## 7.10: Data Availability API, RTR migration completed
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.10.0 through 7.10.3, released between June and July 2025, added the following enhancements and fixes:
+NBS 7.10.0 through 7.10.3, released in 2025, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
@@ -76,10 +77,10 @@ NBS 7.10.0 through 7.10.3, released between June and July 2025, added the follow
 
 ## 7.9: Session timeout warning, sortable search columns
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.9.0 through 7.9.3, released between March and May 2025, added the following enhancements and fixes:
+NBS 7.9.0 through 7.9.3, released in 2025, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
@@ -90,10 +91,10 @@ NBS 7.9.0 through 7.9.3, released between March and May 2025, added the followin
 
 ## 7.8: Flexible date search, more RTR datamarts
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.8.0 through 7.8.3, released between December 2024 and February 2025, added the following enhancements and fixes:
+NBS 7.8.0 through 7.8.3, released in 2024 through 2025, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
@@ -104,22 +105,22 @@ NBS 7.8.0 through 7.8.3, released between December 2024 and February 2025, added
 
 ## 7.7: On-premises Data Sync Service, full patient entry in one page
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.7.0 through 7.7.2, released between October and December 2024, added the following enhancements and fixes:
+NBS 7.7.0 through 7.7.2, released in 2024, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
 | 7.7.0 | New feature | New on-premises Data Sync Service synchronizes cloud NBS data to an [[amazon-s3\|S3]] bucket, local directory, or local database on a flexible schedule. | Gives STLTs a supported way to keep local systems current with cloud data. |
 | 7.7.0 | New feature | [[di-api]] can now ingest eCR XML in [[phdc]] format, with Rhapsody Route Integration documentation. | Adds electronic case reporting as a supported ingestion type. |
-| 7.7.0 | New feature | Users can enter a full patient record, including extended data, from a single new-patient page instead of visiting Patient Profile separately. | Faster case and patient intake workflow. |
+| 7.7.0 | New feature | Users can enter a full patient record, including extended data, from a single new-patient page. | Faster case and patient intake workflow. |
 | 7.7.1 | New feature | Data Ingestion [[elr]] pipeline gained an optional Near Real-Time Ingestion (NRTI) mode for event-based processing. | Faster lab report availability where NRTI is enabled. |
 | 7.7.2 | New feature | Added Lab100 and Lab101 datamarts to the RTR pipeline. | Continued RTR datamart coverage expansion. |
 
 ## 7.6: RTR launches, customizable search tables
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
 NBS 7.6.0 through 7.6.2, released between September and October 2024, added the following enhancements and fixes:
@@ -133,10 +134,10 @@ NBS 7.6.0 through 7.6.2, released between September and October 2024, added the 
 
 ## 7.5: Keycloak by default, RTR groundwork
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.5.0 and 7.5.3, released in August 2024, added the following enhancements and fixes:
+NBS 7.5.0 and 7.5.3, released in 2024, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
@@ -146,10 +147,10 @@ NBS 7.5.0 and 7.5.3, released in August 2024, added the following enhancements a
 
 ## 7.4: High-volume ingestion fixes
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.4.0 through 7.4.4, released between April and July 2024, added the following enhancements and fixes:
+NBS 7.4.0 through 7.4.4, released in 2024, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
@@ -160,38 +161,38 @@ NBS 7.4.0 through 7.4.4, released between April and July 2024, added the followi
 
 ## 7.3: Data governance and integrity
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.3.0 through 7.3.3, released between February and April 2024, added the following enhancements and fixes:
+NBS 7.3.0 through 7.3.3, released in 2024, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
 | 7.3.2 | New feature | Edited or deleted demographic data now writes to patient history tables, matching NBS 6 audit behavior. | Preserves a change history for patient records, supporting data governance. |
-| 7.3.0 | Notable fix | Improved screen reader heading structure and keyboard navigation on Patient Search and Patient Profile. | Accessibility, Section 508 improvement. |
+| 7.3.0 | Notable fix | Improved screen reader heading structure and keyboard navigation on Patient Search. | Accessibility, Section 508 improvement. |
 | 7.3.1 | Notable fix | Corrected event search results for notification status, and added autocomplete for ordering and reporting facility and provider search. | Search accuracy for event investigators. |
 | 7.3.3 | Notable fix | Fixed "Clear All" not resetting search filters, and corrected screen reader interaction issues on the new patient form. | Accessibility and search reliability. |
 
 ## 7.2: ReportStream integration, Keycloak identity provider
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.2.0 through 7.2.2, released between January and February 2024, added the following enhancements and fixes:
+NBS 7.2.0 through 7.2.2, released in 2024, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
 | 7.2.0 | New feature | Added ReportStream setup so HL7 ELR can be sent directly to NBS from ReportStream, plus [[cli]] onboarding commands for status checks and error review. | Expands lab report intake options beyond direct Rhapsody routes. |
 | 7.2.1 | New feature | Added secure service-to-service authentication to the [[data-ingestion-pipeline\|Data Ingestion Pipeline]] using Keycloak, and extended CLI support from Mac-only to Windows and Linux. | Secures data ingestion traffic and removes an operating system restriction on admin tooling. |
-| 7.2.0 | Notable fix | Lab reports were not appearing on Patient Profile. Replaced the Elasticsearch-based lookup with a direct database call. | Fixes a core clinical data visibility gap. |
+| 7.2.0 | Notable fix | Lab reports were not appearing on Patient File. Replaced the Elasticsearch-based lookup with a direct database call. | Fixes a core clinical data visibility gap. |
 | 7.2.2 | Notable fix | Fixed lab report dates defaulting to 01/01/1970, prevented duplicate race entries, and removed the ability to delete, rather than edit, administrative comments. | Data integrity on patient records. |
 
 ## 7.1: Data Ingestion Service launch
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.1.0 and 7.1.1, released between November and December 2023, added the following enhancements and fixes:
+NBS 7.1.0 and 7.1.1, released in 2023, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
@@ -201,12 +202,12 @@ NBS 7.1.0 and 7.1.1, released between November and December 2023, added the foll
 
 ## 7.0: Initial modernized release
 
-Unsupported version
+[[unsupported-nbs-version|Unsupported version]]
 {: .label }
 
-NBS 7.0.0 and 7.0.1, released between September and November 2023, added the following enhancements and fixes:
+NBS 7.0.0 and 7.0.1, released in 2023, added the following enhancements and fixes:
 
 | Patch | Type | Enhancement | STLT benefit |
 |---|---|---|---|
-| 7.0.0 | New feature | First modernized release: Patient Search, Patient Profile with Summary, Events, and Demographics tabs, Patient Data Entry, and Patient Delete, running alongside classic [[classic-nbs\|NBS 6]]. | Established the modernized UI foundation that all later releases build on. |
-| 7.0.1 | Notable fix | Corrected session logout routing, SSN, hyphenated-name, and phone number search failures, and patient profile fields not reflecting new names or multiple races. | Search and login reliability for early adopters. |
+| 7.0.0 | New feature | First modernized release: Patient Search, Patient File with Summary, Events, and Demographics tabs, Patient Data Entry, and Patient Delete, running alongside classic [[classic-nbs\|NBS 6]]. | Established the modernized UI foundation that all later releases build on. |
+| 7.0.1 | Notable fix | Corrected session logout routing, SSN, hyphenated-name, and phone number search failures, and Patient File fields not reflecting new names or multiple races. | Search and login reliability for early adopters. |

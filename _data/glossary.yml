@@ -356,7 +356,11 @@
 
 - term: IaC
   definition: |-
-    **Infrastructure as Code.** The practice of managing infrastructure through code (such as Terraform scripts) rather than manual configuration.
+    See [Infrastructure as Code](#infrastructure-as-code).
+
+- term: Infrastructure as Code
+  definition: |-
+    The practice of managing infrastructure through code (such as Terraform scripts) rather than manual configuration.
 
 - term: IAM
   definition: |-
@@ -758,6 +762,10 @@
   definition: |-
     A subdivision of a [VPC's](#amazon-vpc) IP address range. Subnets are used to isolate internet-facing components from internal services.
 
+- term: Supported NBS version
+  definition: |-
+    A version of NBS that continues to receive security patches, defect fixes, and compatibility updates, and is a recommended target for new deployments and upgrades. See the current [supported versions](/NEDSS-SystemAdminGuide/docs/supported-versions.html).
+
 - term: TCP
   definition: |-
     **Transmission Control Protocol.** A core internet protocol that provides reliable, ordered delivery of data between systems.
@@ -781,6 +789,10 @@
 - term: UAT
   definition: |-
     **User Acceptance Testing.** Testing performed by end users to confirm a system meets business and functional requirements.
+
+- term: Unsupported NBS version
+  definition: |-
+    A version of NBS that no longer receives updates. Every feature and fix it introduced remains present in later [supported versions](/NEDSS-SystemAdminGuide/docs/supported-versions.html), so upgrading loses no capability.
 
 - term: URI
   definition: |-

@@ -95,6 +95,45 @@ blockquote.warning-title > p:first-child {
     color: #000000;
 }
 
+// =============================================================================
+// Hoverable version badges (release-history.md)
+// A version label may wrap a glossary tooltip (Supported / Unsupported NBS
+// version). Keep the badge's white boldface text at full contrast so the tag
+// stays legible, and add an actionable affordance: the trigger's dotted
+// underline stays as a persistent "reveals a definition" cue, and the whole
+// badge lifts slightly on hover or keyboard focus so readers know it responds.
+// =============================================================================
+.label .glossary-term__trigger,
+.label-green .glossary-term__trigger {
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+// The hover/focus lift uses box-shadow ONLY — never transform or filter. A
+// transform on the badge would make it the containing block for the tooltip's
+// position: fixed and send its placement off-screen (tooltips.js positions
+// relative to the viewport). Box-shadow gives the same "raised, actionable"
+// feel without establishing a containing block.
+.label:has(.glossary-term__trigger),
+.label-green:has(.glossary-term__trigger) {
+    cursor: help;
+    transition: box-shadow 0.12s ease;
+}
+
+.label:has(.glossary-term__trigger):hover,
+.label:has(.glossary-term__trigger):focus-within,
+.label-green:has(.glossary-term__trigger):hover,
+.label-green:has(.glossary-term__trigger):focus-within {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .label:has(.glossary-term__trigger),
+    .label-green:has(.glossary-term__trigger) {
+        transition: none;
+    }
+}
+
 @media (min-width: 31.25rem) {
     .site-title {
         font-size: 24px !important;
@@ -151,11 +190,12 @@ blockquote.warning-title > p:first-child {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     color: $body-text-color;
     font-size: 0.85rem;
-    // Reset weight/style so the tooltip box does not inherit bold or italics
-    // when the trigger sits inside a bold label or emphasized text. The
-    // definition's own markdown emphasis still renders normally.
+    // Reset weight/style/case so the tooltip box does not inherit bold, italics,
+    // or uppercasing when the trigger sits inside a bold/uppercase label or
+    // emphasized text. The definition's own markdown emphasis still renders.
     font-style: normal;
     font-weight: 400;
+    text-transform: none;
     left: 0;
     line-height: 1.4;
     max-width: min(24rem, 90vw);

@@ -1,5 +1,5 @@
 ---
-title: NiFi
+title: Apache NiFi
 layout: page
 parent: Deploy NBS 7 microservices
 nav_order: 3
@@ -10,44 +10,35 @@ redirect_from:
   - /docs/3_base_application/nifi/
 ---
 
-# Deploy NiFi for NBS 7
+# Deploy Apache NiFi for NBS 7
 
-This page walks through deploying NiFi using the `nifi-efs` Helm chart.
+This page walks through deploying [[apache-nifi|NiFi]] using the `nifi` [[helm-chart|Helm chart]] from the [NEDSS-Helm][nedss-helm-nifi-chart] repository for NBS version {{ site.version_latest }}.
 
-## On this page
-{: .no_toc .text-delta }
+## Prerequisites
 
-1. TOC
-{:toc}
+This page assumes you've completed [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is the [Modernization API](./modernization-api.html) deployment.
 
-## Deploy NiFi using Helm
+Have your database credentials and domain values available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
 
-> The NiFi ingress is disabled by default. To access the NiFi admin UI, set `ingress.enabled: true` in `values.yaml` before running the install command. Use a private domain name rather than a public one — NiFi has known security vulnerabilities.
-{: .important }
+## Deploy Apache NiFi using Helm
 
-1. Locate the NiFi Helm chart in the [NEDSS-Helm repository][nedss-helm-nifi-efs-chart].
-1. In `values.yaml`, replace all occurrences of `nifi.EXAMPLE_DOMAIN` with your domain name. See the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller) for reference.
-1. Set the image repository and tag:
+Complete the following steps to deploy the ['nifi' Helm chart][nedss-helm-nifi-chart] from the `charts/nifi/` directory of your cloned NEDSS-Helm repository:
 
-   ```yaml
-   image:
-     repository: quay.io/us-cdcgov/cdc-nbs-modernization/nifi
-     tag: <release-version-tag> # for example, v1.0.1
-   ```
+> `nifi.EXAMPLE_DOMAIN` only needs to be set if you enable the NiFi ingress. The NiFi ingress is disabled by default due to known security vulnerabilities. If you need access to the NiFi admin UI, use a private domain name.
+{: .warning }
 
-1. Set `efsFileSystemId` to your [EFS file system ID](https://us-east-1.console.aws.amazon.com/efs/home?region=us-east-1#/file-systems).
-1. Set the JDBC connection string using the same database endpoint and credentials from [Deploy NBS 7 microservices](./deploy-nbs7-microservices.html):
+1. Search `values.yaml` for `EXAMPLE` and fill in the [[amazon-efs|EFS]] file system ID, [[jdbc]] connection string, and NiFi sensitive properties key. The [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) lists the values to use.
+1. If you enable the NiFi ingress, replace `nifi.EXAMPLE_DOMAIN` in `values.yaml` with your domain name from the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records), then enable the ingress:
 
    ```yaml
-   jdbcConnectionString: "jdbc:sqlserver://EXAMPLE_DB_ENDPOINT:1433;databaseName=EXAMPLE_DB_NAME;user=EXAMPLE_ODSE_DB_USER;password=EXAMPLE_ODSE_DB_USER_PASSWORD;encrypt=true;trustServerCertificate=true;"
+   ingress:
+     enabled: true
    ```
 
-1. Set `singleUserCredentialsUsername` to replace the default `admin` username.
-1. Set `singleUserCredentialsPassword` to your chosen password for the NiFi admin UI.
-1. Install NiFi:
+1. Install Apache NiFi:
 
    ```bash
-   helm install nifi -f ./nifi-efs/values.yaml nifi-efs
+   helm install "nifi" ./nifi -f ./nifi/values.yaml
    ```
 
 1. Confirm the pod is running before proceeding to the next deployment:
@@ -56,6 +47,10 @@ This page walks through deploying NiFi using the `nifi-efs` Helm chart.
    kubectl get pods
    ```
 
-   If the pod is still creating or in any other state, wait and troubleshoot before continuing.
+If the pod is not in a running state, wait and troubleshoot before continuing.
 
-[nedss-helm-nifi-efs-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nifi-efs>
+## Next steps
+
+Continue to [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
+
+[nedss-helm-nifi-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nifi>

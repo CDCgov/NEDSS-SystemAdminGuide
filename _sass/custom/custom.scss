@@ -1,3 +1,139 @@
+// =============================================================================
+// Accessible label colors — NBS Design System "Tags & labels" tokens (WCAG AA)
+// -----------------------------------------------------------------------------
+// Overrides the just-the-docs label defaults (labels.scss), which place white
+// text on light-mid tints that fail AA. Each JTD label class maps to an NBS tag
+// type, using the NBS token background + text pairing exactly (values written as
+// literal hex because custom.scss is shared by every color scheme, including
+// just-the-docs-dark). custom.scss is imported last, so these win without
+// !important. The bare `.label` is split from `.label-blue` so an undefined
+// label renders the NBS "Default" neutral rather than blue.
+//
+// JTD class     NBS type   background            text      contrast
+//   label        Default    Base/dark  #565C65   #FFFFFF    6.74:1
+//   label-blue   Info       Info/info  #00BDE3   #000000    9.39:1
+//   label-green  Success    Success    #00A91C   #FFFFFF    3.14:1*
+//   label-purple Accent1    N.Accent   #7C4CB5   #FFFFFF    5.90:1
+//   label-red    Error      Error/dark #B51D09   #FFFFFF    6.68:1
+//   label-yellow Warning    Warning    #FFBE2E   #000000   12.66:1
+//
+// * green uses the brand NBS Success/success #00A91C. At 3.14:1 it is below the
+// small-text AA threshold, but per design it is treated as AA-compliant large
+// text because tag labels are rendered bold + uppercase (see SHAPE/SPACING).
+//
+// SHAPE/SPACING: JTD renders labels as pills (border-radius 12px). NBS tags are
+// rectangles with 4px vertical / 8px horizontal padding (per the NBS "Layout &
+// spacing" spec). Radius is 2px (subtle rectangle) — set to 0 for hard corners.
+// Text is bold + uppercase: per design, that lets the green tag use the brand
+// NBS Success green #00A91C (3.14:1 — below strict small-text AA, but treated as
+// AA-compliant large text when bold/all-caps).
+// =============================================================================
+.label:not(g),
+.label-blue:not(g),
+.label-green:not(g),
+.label-purple:not(g),
+.label-red:not(g),
+.label-yellow:not(g) {
+    padding: 4px 8px;
+    border-radius: 2px;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+// Callout titles: each callout keeps its NBS "chip" color on the left bar
+// ($color-300), but the title is rendered in dark ink so a bright bar never
+// hurts heading legibility. Covers every titled callout (highlight is
+// title-less). Literal hex because custom.scss is shared by every color scheme.
+p.note::before,
+blockquote.note::before,
+p.note > .note-title,
+blockquote.note > .note-title,
+p.note-title > p:first-child,
+blockquote.note-title > p:first-child,
+p.important::before,
+blockquote.important::before,
+p.important > .important-title,
+blockquote.important > .important-title,
+p.important-title > p:first-child,
+blockquote.important-title > p:first-child,
+p.new::before,
+blockquote.new::before,
+p.new > .new-title,
+blockquote.new > .new-title,
+p.new-title > p:first-child,
+blockquote.new-title > p:first-child,
+p.warning::before,
+blockquote.warning::before,
+p.warning > .warning-title,
+blockquote.warning > .warning-title,
+p.warning-title > p:first-child,
+blockquote.warning-title > p:first-child {
+    color: #1B1B1B;
+}
+
+.label:not(g) {
+    background-color: #565C65;
+    color: #FFFFFF;
+}
+.label-blue:not(g) {
+    background-color: #00BDE3;
+    color: #000000;
+}
+.label-green:not(g) {
+    background-color: #00A91C; // NBS Success/success (bold+caps large-text, per design)
+    color: #FFFFFF;
+}
+.label-purple:not(g) {
+    background-color: #7C4CB5;
+    color: #FFFFFF;
+}
+.label-red:not(g) {
+    background-color: #B51D09;
+    color: #FFFFFF;
+}
+.label-yellow:not(g) {
+    background-color: #FFBE2E;
+    color: #000000;
+}
+
+// =============================================================================
+// Hoverable version badges (release-history.md)
+// A version label may wrap a glossary tooltip (Supported / Unsupported NBS
+// version). Keep the badge's white boldface text at full contrast so the tag
+// stays legible, and add an actionable affordance: the trigger's dotted
+// underline stays as a persistent "reveals a definition" cue, and the whole
+// badge lifts slightly on hover or keyboard focus so readers know it responds.
+// =============================================================================
+.label .glossary-term__trigger,
+.label-green .glossary-term__trigger {
+    color: #FFFFFF;
+    font-weight: 700;
+}
+
+// The hover/focus lift uses box-shadow ONLY — never transform or filter. A
+// transform on the badge would make it the containing block for the tooltip's
+// position: fixed and send its placement off-screen (tooltips.js positions
+// relative to the viewport). Box-shadow gives the same "raised, actionable"
+// feel without establishing a containing block.
+.label:has(.glossary-term__trigger),
+.label-green:has(.glossary-term__trigger) {
+    cursor: help;
+    transition: box-shadow 0.12s ease;
+}
+
+.label:has(.glossary-term__trigger):hover,
+.label:has(.glossary-term__trigger):focus-within,
+.label-green:has(.glossary-term__trigger):hover,
+.label-green:has(.glossary-term__trigger):focus-within {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .label:has(.glossary-term__trigger),
+    .label-green:has(.glossary-term__trigger) {
+        transition: none;
+    }
+}
+
 @media (min-width: 31.25rem) {
     .site-title {
         font-size: 24px !important;
@@ -7,7 +143,7 @@
     font-size: 18px !important;
 }
 .text-green {
-    color: #008A17;
+    color: #4D8055; // NBS Success/dark (4.63:1 on white)
     font-weight: bold;
 }
 .version-banner {
@@ -54,15 +190,23 @@
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
     color: $body-text-color;
     font-size: 0.85rem;
-    left: 50%;
+    // Reset weight/style/case so the tooltip box does not inherit bold, italics,
+    // or uppercasing when the trigger sits inside a bold/uppercase label or
+    // emphasized text. The definition's own markdown emphasis still renders.
+    font-style: normal;
+    font-weight: 400;
+    text-transform: none;
+    left: 0;
     line-height: 1.4;
-    max-width: min(24rem, 85vw);
+    max-width: min(24rem, 90vw);
     min-width: 14rem;
     padding: 0.6rem 0.75rem;
-    position: absolute;
-    top: calc(100% + 0.45rem);
-    transform: translateX(-50%);
-    z-index: 100;
+    // Fixed positioning lets the tooltip fly over tables and other overflow
+    // containers instead of being clipped inside them. tooltips.js sets the
+    // top/left against the trigger; these are just the initial values.
+    position: fixed;
+    top: 0;
+    z-index: 1000;
 }
 
 .glossary-term__tooltip p {
@@ -91,22 +235,50 @@
     border-top: 1px solid $border-color;
     content: "";
     height: 0.6rem;
-    left: 50%;
+    left: var(--tooltip-arrow-left, 50%);
     position: absolute;
     top: -0.32rem;
     transform: translateX(-50%) rotate(45deg);
     width: 0.6rem;
 }
 
-@media (max-width: 50rem) {
-    .glossary-term__tooltip {
-        left: 0;
-        max-width: min(24rem, 90vw);
-        transform: none;
-    }
+// When the tooltip flips above the trigger (near the bottom of the viewport),
+// the arrow moves to the bottom edge and points down instead of up.
+.glossary-term__tooltip.is-above::before {
+    border-bottom: 1px solid $border-color;
+    border-left: 0;
+    border-right: 1px solid $border-color;
+    border-top: 0;
+    bottom: -0.32rem;
+    top: auto;
+}
 
-    .glossary-term__tooltip::before {
-        left: 1rem;
-        transform: rotate(45deg);
-    }
+.main-content .three-column-values-table {
+    table-layout: fixed;
+    width: 100%;
+}
+
+.main-content .three-column-values-table th:nth-child(1),
+.main-content .three-column-values-table td:nth-child(1) {
+    width: 25%;
+}
+
+.main-content .three-column-values-table th:nth-child(2),
+.main-content .three-column-values-table td:nth-child(2) {
+    width: 33%;
+}
+
+.main-content .three-column-values-table th:nth-child(3),
+.main-content .three-column-values-table td:nth-child(3) {
+    width: 42%;
+}
+
+.main-content .three-column-values-table td:nth-child(2),
+.main-content .three-column-values-table td:nth-child(2) code {
+    overflow-wrap: anywhere;
+    word-break: break-word;
+}
+
+.main-content .three-column-values-table td:nth-child(2) code {
+    white-space: normal;
 }

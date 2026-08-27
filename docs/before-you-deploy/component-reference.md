@@ -4,12 +4,12 @@ layout: page
 parent: Before you deploy NBS 7
 nav_order: 6
 has_children: true
-description: Describes each NBS 7 component — what it does, when it is needed, and how it relates to other components — organized by NBS 7 core components and available add-ons.
+description: Describes what each NBS 7 component does, when it is needed, and how it relates to other components.
 ---
 
 # NBS 7 component reference
 
-The pages in this section describe each component in NBS 7. Use it to understand what each component does, why it is included in your deployment, and how it relates to other components.
+The pages in this section describe each component in [[nbs-7]]. Use it to understand what each component does, why it is included in your deployment, and how it relates to other components.
 
 NBS 7 is deployed in phases. Components in this reference are organized by deployment phase:
 
@@ -17,17 +17,17 @@ NBS 7 is deployed in phases. Components in this reference are organized by deplo
 - [Real-Time Reporting (RTR) deployment](../before-you-deploy/component-reference/rtr.html)
 - [Data Ingestion (DI) API deployment](../before-you-deploy/component-reference/di-api.html)
 
-For deployment configuration details including configuration parameters, Helm chart values, and step-by-step setup instructions, see the [Deploy NBS 7](../deploy-nbs7.html) section of this guide.
+For deployment configuration details including configuration parameters, [[helm-chart]] values, and step-by-step setup instructions, see the [Deploy NBS 7](../deploy-nbs7.html) section of this guide.
 
 ---
 
 ## Quick reference
 
-The following table shows which components are included in NBS 7. RTR and DI API are deployed separately from the core NBS 7 components.
+The following table shows which components are included in NBS 7. [[rtr]] and [[di-api]] are deployed separately from the core NBS 7 components.
 
 | Component | NBS 7 | RTR | DI API |
 |:---|:---:|:---:|:---:|
-| [Legacy NBS 6](../before-you-deploy/component-reference/nbs-core-components.html#legacy-nbs-6) | ✓ |  |  |
+| [Classic NBS 6](../before-you-deploy/component-reference/nbs-core-components.html#classic-nbs-6) | ✓ |  |  |
 | [NBS Modernization API](../before-you-deploy/component-reference/nbs-core-components.html#nbs-modernization-api) | ✓ |  |  |
 | [NBS Web UI](../before-you-deploy/component-reference/nbs-core-components.html#nbs-web-ui) | ✓ |  |  |
 | [NBS Gateway](../before-you-deploy/component-reference/nbs-core-components.html#nbs-gateway) | ✓ |  |  |

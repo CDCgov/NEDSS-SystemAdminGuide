@@ -1,32 +1,34 @@
 ---
-title: NND Service (Data Sync)
+title: NND Data Sync
 layout: page
 parent: Deploy NBS 7 microservices
-nav_order: 8
+nav_order: 7
 has_children: true
+has_toc: false
 ---
 
-# Deploy NND Service (Data Sync) for NBS 7
+# Deploy the NND Service (Data Sync) for NBS 7
 
-This section covers Data Sync capabilities for NND workflows, including cloud service deployment, endpoint validation, and on-premises setup patterns.
+This section covers Data Sync capabilities for National Notifiable Disease ([[nnd]]) workflows, including cloud service deployment, endpoint validation, and [[on-premises]] setup patterns. After you finish this deployment, proceed to [Case notifications](./case-notification.html).
 
-## On this page
-{: .no_toc .text-delta }
+> The NND Service (Data Sync) deployment is optional. [[cdc]] is evaluating long-term support for this service. If your [[stlt]] has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
+{: .important }
 
-1. TOC
-{:toc}
+**If you are not deploying the NND Service, proceed to deploying the [Case notification service](./case-notification.html).**
 
-## Understand service names in this section
+## Terminology
 
-Use the following terms consistently in this section:
+This deployment section uses three related but distinct terms:
 
-- **Data Sync service**: The NBS 7 service and API that extract data from the NBS cloud environment.
-- **NND Sync**: The on-premises NNDSS integration workflow that uses Data Sync service outputs to support ongoing message transmission.
-- **Data Availability**: A Data Sync service use case that copies selected data to SQL Server, Amazon S3, or a local directory.
+- **NND Sync**: The on-premises [[nndss]] (National Notifiable Diseases Surveillance System) integration workflow that uses Data Sync service outputs to support ongoing message transmission.
+- **Data Availability**: A Data Sync service use case that copies selected data to [[microsoft-sql-server|SQL Server]], a cloud storage service, or a local directory.
+- **Data Sync service**: The [[nbs-7]] service and API that extract data from the NBS cloud environment.
 
 ## In this section
 
-- [Validate API endpoints](../../deploy-nbs7/microservices-deployment/nnd-service/validating-api-endpoints.html): Verify API connectivity, credential setup, and baseline endpoint responses.
-- [Deploy NND Sync](../../deploy-nbs7/microservices-deployment/nnd-service/on-prem-nnd-sync.html): Configure the on-premises NNDSS integration workflow that uses Data Sync outputs.
-- [Deploy Data Availability (on-premises)](../../deploy-nbs7/microservices-deployment/nnd-service/on-prem-data-sync.html): Configure on-premises options for syncing selected data to SQL Server, S3, or local storage.
-- [Deploy Data Sync service API (cloud)](../../deploy-nbs7/microservices-deployment/nnd-service/deploy-data-sync-service-api-cloud.html): Install and configure the cloud Data Sync service API with Helm.
+Complete the pages in this section in order:
+
+1. **[Deploy Data Sync service API](./nnd-service/deploy-data-sync-service-api-cloud.html)**: Install and configure the cloud Data Sync service API with Helm.
+1. **[Validate API endpoints](./nnd-service/validating-api-endpoints.html)**: Verify API connectivity, credential setup, and baseline endpoint responses.
+1. **[Deploy NND Sync](./nnd-service/on-prem-nnd-sync.html)**: Configure the on-premises NNDSS integration workflow that uses Data Sync outputs.
+1. **[Deploy Data Availability](./nnd-service/on-prem-data-sync.html)**: Configure on-premises options for syncing selected data to SQL Server, Amazon S3, or local storage.

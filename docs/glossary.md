@@ -1,8 +1,9 @@
 ---
 title: Glossary
 layout: page
-nav_order: 6
+nav_order: 7
 description: Reference list of acronyms and technical terms used throughout the guide.
+published: true
 ---
 
 # Glossary
@@ -18,7 +19,7 @@ Contributor note:
 
 -->
 
-{% assign glossary_entries = site.data.glossary | sort: 'term' -%}
+{% assign glossary_entries = site.data.glossary | sort_glossary -%}
 {% assign letters = 'A,B,C,D,E,F,G,H,I,J,K,L,M,N,O,P,Q,R,S,T,U,V,W,X,Y,Z' | split: ',' -%}
 {% assign glossary_href_prefix = site.baseurl | append: '/docs/glossary.html#' -%}
 
@@ -41,7 +42,7 @@ Contributor note:
 <dl class="glossary-list">
 {% endunless -%}
 <dt id="{{ entry.term | slugify }}">{{ entry.term }}</dt>
-<dd>{{ entry.definition | replace: '/NEDSS-SystemAdminGuide/docs/glossary.html#', glossary_href_prefix | markdownify }}</dd>
+<dd>{{ entry.definition | replace: '/NEDSS-SystemAdminGuide/docs/glossary.html#', glossary_href_prefix | replace: '/NEDSS-SystemAdminGuide', site.baseurl | markdownify }}</dd>
 {% endif -%}
 {% endfor -%}
 {% if has_entries -%}

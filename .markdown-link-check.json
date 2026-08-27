@@ -39,6 +39,14 @@
     {
       "pattern": "^https://cdcnbscentral\\.com",
       "comment": "Skip legacy NBS Central domain — has moved to nbscentral.cdc.gov. Links to this domain are being updated in content; this pattern prevents false positives during the transition."
+    },
+    {
+      "pattern": "^\\{\\{\\s*child\\.url\\s*\\|\\s*relative_url\\s*\\}\\}$",
+      "comment": "Skip Jekyll Liquid URL template expressions that are rendered at build time."
+    },
+    {
+      "pattern": "^https://www\\.cdc\\.gov/nbs(?:/php/index\\.html)?/?$",
+      "comment": "Skip CDC NBS landing page URL — valid in browser but returns 403 to automated link check requests."
     }
   ],
   "timeout": "10s",

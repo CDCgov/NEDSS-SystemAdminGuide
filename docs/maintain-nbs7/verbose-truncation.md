@@ -1,7 +1,9 @@
 ---
 title: Enable verbose truncation warnings
 layout: page
+nav_order: 4
 parent: Maintain NBS 7
+description: Enable SQL Server Trace Flag 460 for NBS 7 to surface detailed error messages for diagnosing data truncation errors.
 redirect_from:
   - /docs/maintain-nbs7/sql-server-configuration.html
   - /docs/maintain-nbs7/sql-server-configuration/
@@ -36,7 +38,7 @@ To enable Trace Flag 460 permanently across SQL Server restarts:
 1. Open **SQL Server Configuration Manager**
 2. Navigate to **SQL Server Services**
 3. Right-click on your **SQL Server instance** and select **Properties**
-4. Go to the **Startup Parameters** tab
+4. Navigate to the **Startup Parameters** tab
 5. Add the parameter: `-T460`
 6. Click **Add** then **Apply**
 7. **Restart the SQL Server service** for the change to take effect

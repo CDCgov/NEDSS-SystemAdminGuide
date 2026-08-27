@@ -12,55 +12,62 @@ redirect_from:
 
 # Deploy NBS Gateway for NBS 7
 
-The NBS Gateway service routes requests between NBS 7 microservices and the legacy NBS 6 application. This page walks you through deploying NBS Gateway using Helm.
+This page walks through deploying the NBS Gateway using the `nbs-gateway` [[helm-chart|Helm chart]] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. NBS Gateway routes requests between [[nbs-7]] microservices and the legacy [[classic-nbs|NBS 6]] application.
 
-## On this page
-{: .no_toc .text-delta }
+## Prerequisites
 
-1. TOC
-{:toc}
+This page assumes you've completed [Before you begin](./deploy-nbs7-microservices.html#before-you-begin) for the microservices phase and each microservice deployment page before this one, in order. The page immediately before this one is [Validate Elasticsearch, Modernization API, and NiFi](./validate-es-mapi-nifi.html).
+
+Have your domain values and [[keycloak]] client secret available. See the [Helm values reference](./deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) and [Import service clients and retrieve secrets](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets) if you need help determining any values.
 
 ## Deploy NBS Gateway using Helm
 
-1. Locate the NBS Gateway Helm chart in the [NEDSS-Helm repository][nedss-helm-nbs-gateway-chart].
-1. In the `values.yaml`, replace all occurrences of `app.EXAMPLE_DOMAIN` with the URL of your modern app and `app-classic.EXAMPLE_DOMAIN` with the URL of your existing NBS 6 as shown in the [Deploy Traefik ingress controller](../../deploy-nbs7/initial-kubernetes-deployment/initial-kubernetes-deployment.html#deploy-traefik-ingress-controller).
-1. Set the image repository and tag:
+Complete the following steps to deploy the ['nbs-gateway' Helm chart][nedss-helm-nbs-gateway-chart] from the `charts/nbs-gateway/` directory of your cloned NEDSS-Helm repository:
 
-   ```yaml
-   image:
-     repository: "quay.io/us-cdcgov/cdc-nbs-modernization/nbs-gateway"
-     tag: <release-version-tag> # for example, v1.0.1
-   ```
+1. Search `values.yaml` for `EXAMPLE` and fill in your environment-specific values:
+   - For the NBS 7 and NBS 6 application domain values, use the [DNS records table](../full-deploy/kubernetes-setup/deploy-core-services.html#create-dns-records).
+   - For the [[oidc]] client secret used for Keycloak login authentication, see [Import service clients and retrieve secrets](../full-deploy/kubernetes-setup/deploy-keycloak.html#import-service-clients-and-retrieve-secrets).
+1. Confirm the following feature flags in `values.yaml`:
+   - [[page-builder|Page Builder]] is disabled:
 
-1. Verify page-builder is disabled:
+     ```yaml
+     pageBuilder:
+       enabled: "false"
+     ```
 
-   ```yaml
-   pageBuilder:
-     enabled: "false"
-   ```
+   - OIDC is enabled:
 
-1. Enable OIDC for Keycloak login authentication and set the client secret (see [Enable Keycloak Auth step h](../../deploy-nbs7/keycloak/enable-keycloak-auth.html#enable-keycloak-auth)):
+     ```yaml
+     oidc:
+       enabled: "true"
+       client:
+         id: "nbs-modernization"
+     ```
 
-   ```yaml
-   Oidc:
-     enabled: "true"
-     client:
-      id: "nbs-modernization"
-      secret: "EXAMPLE_OIDC_SECRET"
-   ```
+   - Report execution is enabled. For report execution to work, this flag must also be `"true"` in the [Modernization API](modernization-api.html) deployment:
+
+      ```yaml
+      reportExecution:
+        enabled: "true"
+      ```
 
 1. Install NBS Gateway:
 
    ```bash
-   helm install nbs-gateway -f ./nbs-gateway/values.yaml nbs-gateway
+   helm install "nbs-gateway" ./nbs-gateway -f ./nbs-gateway/values.yaml
    ```
 
-1. Verify the pod is running before proceeding to the next deployment:
+1. Confirm the pod is running before proceeding to the next deployment:
 
    ```bash
    kubectl get pods
    ```
 
-   If the pod is still creating or in any other non-running state, wait before continuing.
+If the pod is not in a running state, wait and troubleshoot before continuing.
 
+## Next steps
+
+Continue to [Data processing](./data-processing.html).
+
+[nedss-helm]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}>
 [nedss-helm-nbs-gateway-chart]: <https://github.com/CDCgov/NEDSS-Helm/tree/{{ site.version_latest_tag }}/charts/nbs-gateway>

@@ -3,7 +3,7 @@ title: Back up and restore on Amazon RDS
 layout: page
 nav_order: 2
 parent: Maintain NBS 7
-description: 
+description: Use the Amazon RDS stored procedures to back up and restore SQL Server databases, including restoring RDB under a new name for RTR.
 ---
 
 # Back up and restore a SQL Server database on Amazon RDS

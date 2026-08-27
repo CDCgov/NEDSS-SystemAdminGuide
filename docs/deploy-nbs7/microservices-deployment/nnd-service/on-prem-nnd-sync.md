@@ -1,8 +1,8 @@
 ---
-title: Deploy NND Sync
+title: NND Sync
 layout: page
-parent: NND Service (Data Sync)
-nav_order: 2
+parent: NND Data Sync
+nav_order: 3
 redirect_from:
   - /docs/6_microservices_deployment/8b_nnd_stlt_on_prem_configuration_nnd_sync.html
   - /docs/6_microservices_deployment/8b_nnd_stlt_on_prem_configuration_nnd_sync/
@@ -10,7 +10,10 @@ redirect_from:
 
 # Deploy NND Sync
 
-Use these instructions to deploy the on-premises Data Sync service that extracts data from the Modernized NBS cloud implementation and supports ongoing Notifiable Disease message transmission to CDC.
+Use these instructions to deploy the [[on-premises]] Data Sync service that extracts data from the Modernized NBS cloud implementation and supports ongoing [[notifiable-disease|Notifiable Disease]] message transmission to [[cdc]]. Complete [Validate API endpoints](./validating-api-endpoints.html) before starting this page.
+
+> This page is part of the optional [NND Service (Data Sync)](../nnd-service.html) section. CDC is evaluating long-term support for this service. If your STLT has a use case, contact [nbs@cdc.gov](mailto:nbs@cdc.gov).
+{: .important }
 
 ## On this page
 {: .no_toc .text-delta }
@@ -22,15 +25,14 @@ Use these instructions to deploy the on-premises Data Sync service that extracts
 
 ## Prerequisites
 
-To sync data for NNDSS through the NBS 7 Data Sync service, you need the following:
+To sync data for [[nndss]] through the [[nbs-7]] Data Sync service, you need the following:
 
-- **Keycloak client ID and client secret** - CDC provides these values
-- **Data service URL** - CDC provides this value
-- **Release materials/package for Data Sync service** - CDC provides this package
-- Install the **Rhapsody engine and IDE**
-- Install an **MS SQL Server database**
-  - Can be on a different machine, or
-  - Repurpose an already existing SQL Server database (Rhapsody should have access to it)
+- Complete [Validate API endpoints](./validating-api-endpoints.html).
+- **[[keycloak]] client ID and client secret** - Retrieve these from your Keycloak instance. In the **NBS** realm, navigate to **Clients** > `nnd-keycloak-client` > **Credentials** > **Client Secret**.
+- **Data service URL** - Retrieve this from your NBS environment.
+- **Release materials/package** - CDC provides this as a .zip file with each release.
+- Install the **Rhapsody engine and IDE**.
+- Install a **[[microsoft-sql-server|Microsoft SQL Server]] database** on a different machine, or repurpose an existing SQL Server database (Rhapsody should have access to it).
 - **Java 21 or higher**
 
 ---
@@ -48,7 +50,11 @@ NNDSS Data Sync service includes:
 
 ## Set up the Data Sync service for NNDSS
 
-Download the above files (`.jar`, `.cmd`, and `.sql`) from the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page]. Under **Assets**, download the `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip` file and locate the files in the `data-sync/NND_SERVICE/` directory.
+The Data Sync service files come from two places:
+
+- **Service `.jar` file.** On the [NEDSS-NNDSS {{ site.version_latest_tag }} release page][nedss-nndss-release-page], under **Assets**, download `{{ site.version_latest_tag }}.NEDSS.NBS.Modernized.Documentation.zip`. The `.jar` file is in the `data-sync/NND_SERVICE/` directory.
+- **Command (`.cmd`) and SQL (`.sql`) scripts.** These are in the NEDSS-NNDSS repository, in [`nnd-data-poll-service/execute_script/`][nedss-nndss-execute-script] and [`nnd-data-poll-service/src/main/resources/sql/`][nedss-nndss-sql].
+
 Save the files to a secure directory with executable permissions to run the services.
 
 ---
@@ -86,13 +92,13 @@ Ensure the database is accessible from Rhapsody.
 
 **Steps:**
 
-1. Log in to the Rhapsody console
-2. Open **Variables Manager** and confirm the route has the correct hostname and new database name
-3. Open all database components in the route and verify they refer to the right database variable
+1. Log in to the Rhapsody console.
+2. Open **Variables Manager** and confirm the route has the correct hostname and new database name.
+3. Open all database components in the route and verify they refer to the correct database variable:
 
-![Rhapsody route view showing database component variables](../images/data-sync-on-prem-rhapsody-1.png)
+   ![Rhapsody route view showing database component variables](../images/data-sync-on-prem-rhapsody-1.png)
 
-**List of database components to update in the Rhapsody route** (highlighted in red boxes in provided documentation).
+**List of database components to update in the Rhapsody route** (highlighted in red boxes):
 
 ![Rhapsody route with database components highlighted in red](../images/data-sync-on-prem-rhapsody-2.png)
 
@@ -102,23 +108,17 @@ Ensure the database is accessible from Rhapsody.
 
 #### PHINMS
 
-- Verify and update database connections for the existing PHINMS setup.
+- Verify and update database connections for the existing [[phinms]] setup.
 
 #### SAMS
 
-- Verify that the file drop-off location in NETSS service parameters matches the location that SAMS reads.
+- Verify that the file drop-off location in [[netss]] service parameters matches the location that SAMS reads.
 
----
+## Next steps
 
-## Repo reference
-
-- GitHub: [NEDSS-NNDSS repository](https://github.com/CDCgov/NEDSS-NNDSS)
-
----
-
-## Final note
-
-Make sure you validate the provided **API endpoints** before you run the Data Sync services.
+Continue to [Deploy Data Availability](./on-prem-data-sync.html).
 
 [nedss-nndss-release-page]: <https://github.com/CDCgov/NEDSS-NNDSS/releases/tag/{{ site.version_latest_tag }}>
+[nedss-nndss-execute-script]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service/execute_script>
+[nedss-nndss-sql]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service/src/main/resources/sql>
 [nedss-nndss-readme]: <https://github.com/CDCgov/NEDSS-NNDSS/tree/{{ site.version_latest_tag }}/nnd-data-poll-service#readme>

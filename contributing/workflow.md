@@ -105,16 +105,8 @@ CDC eclearance reviewers require content as a Word document with working links.
 Once your content is on the `preview` branch, generate one on demand — no local
 setup needed:
 
-1. Go to **Actions → Create eclearance Word doc → Run workflow**. Leave the
-   **Use workflow from** branch dropdown on its default (`main`) — the document
-   always builds from `preview` regardless, so you'd only change that dropdown if
-   you were testing a change to the workflow file itself.
-2. Enter the chapter path under `docs/`, without `.html` — for example
-   `before-you-deploy`, or a deeper page such as
-   `deploy-nbs7/full-deploy/provision-cloud-infrastructure/provision-cloud-environment`.
-   To export the **entire guide** in one document, leave this field blank.
-   The workflow builds from the `preview` branch, so make sure your content is on
-   `preview` first (step 3 above).
+1. Navigate to **Actions → Create eclearance Word doc → Run workflow**. Leave the **Use workflow from** branch dropdown on its default (`main`). The document always builds from `preview` regardless, so you would only change that dropdown if you were testing a change to the workflow file itself.
+2. Enter the chapter path under `docs/`, without `.html`. For example, use `before-you-deploy`, or a deeper page such as `deploy-nbs7/full-deploy/provision-cloud-infrastructure/provision-cloud-environment`. To export the entire guide in one document, leave this field blank. The workflow builds from the `preview` branch, so make sure your content is on `preview` first.
 3. When the run finishes (~1 minute), **refresh the run page** — the
    **Artifacts** panel only appears after a reload. Download the `.docx` under
    **eclearance-review-doc**.
@@ -142,7 +134,7 @@ Open a PR on GitHub from your **feature branch** to `main` — not from `preview
 
 Before merging, add or update an entry in `docs/revision-history.md` for any new or updated content that will be merged to `main`.
 
-Go to https://github.com/CDCgov/NEDSS-SystemAdminGuide — GitHub will show a prompt to open a PR for your recently pushed branch.
+Navigate to https://github.com/CDCgov/NEDSS-SystemAdminGuide — GitHub will show a prompt to open a PR for your recently pushed branch.
 
 After the PR is approved and merged, the production site updates automatically:
 https://cdcgov.github.io/NEDSS-SystemAdminGuide/

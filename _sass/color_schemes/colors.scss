@@ -1,81 +1,165 @@
 // =============================================================================
-// CDC Brand Color Palette
-// https://www.cdc.gov/brand/index.html
+// NBS Design System Color Palette
 // =============================================================================
+//
+// The full NBS palette is declared below as $nbs-<family>-<token> variables,
+// then mapped onto the variables just-the-docs consumes.
 //
 // HOW THE CALLOUT SCALE SYSTEM WORKS
 // ---------------------------------------------------------------------------
-// JTD generates callout styles from four tint levels per named color:
-//   $color-000  lightest background tint   (used for callout background)
-//   $color-100  light mid tint
-//   $color-200  dark mid tint
-//   $color-300  darkest accent             (used for callout border/icon)
+// JTD generates callout styles (see the theme's callouts.scss.liquid) from two
+// tint levels per named color scale:
+//   $color-000  lightest tint  → callout background
+//   $color-300  → callout left-border ("chip") + (by default) title text
+// ($color-100 / $color-200 are only used by the optional colored .btn-* styles.)
 //
-// Each callout type declared in _config.yml maps to one of these named scales:
-//   highlight  → purple   (title-less inline emphasis)
-//   important  → yellow
-//   new        → green
-//   note       → blue
-//   warning    → red
+// Each callout uses its NBS group's mid "chip" color for the left bar; the
+// title is rendered in dark ink (#1B1B1B) by custom.scss, so a bright bar never
+// hurts heading legibility. Mapping (_config.yml color name → NBS group/token):
+//   highlight  → purple  → NBS Neutral Accent / accent   #7C4CB5
+//   important  → yellow  → NBS Warning        / warning   #FFBE2E
+//   new        → green   → NBS Success        / success   #00A91C
+//   note       → blue    → NBS Info           / info      #00BDE3
+//   warning    → red     → NBS Error          / error     #D54309
 //
-// The purple scale is defined below but is not currently mapped to a callout.
-// To add a callout that uses purple, add an entry to the callouts: block in
-// _config.yml and set color: purple.
-//
-// WCAG AA CONTRAST — primary link/heading color
-// $cdc-blue (#005DAA) on white: relative luminance ≈ 0.107
-//   Contrast ratio = (1.0 + 0.05) / (0.107 + 0.05) ≈ 6.68:1
-//   Passes WCAG AA (requires 4.5:1 for normal text, 3:1 for large text).
-//   Does not reach WCAG AAA (7:1). Acceptable for this use case.
+// WCAG AA CONTRAST
+//   link/brand    Primary/primary #005EA2 on white .......... 6.72:1
+//   callout titles are #1B1B1B ink on their light tint bg ... >= 13:1
+//   callout body is the default dark text on the light bg ... passes
 // =============================================================================
 
-$cdc-blue:   #005DAA;  // Primary blue   — CMYK 100/66/0/2,  RGB 0/93/170
-$cdc-teal:   #004DC2;  // Teal           — CMYK 82/0/24/2,   RGB 0/77/194
-$cdc-yellow: #EAA731;  // Yellow         — CMYK 7/37/93/0,   RGB 234/167/49
-$cdc-purple: #8E3074;  // Purple         — CMYK 48/95/24/6,  RGB 142/48/116
-$cdc-green:  #8DC63F;  // Green          — CMYK 50/0/100/0,  RGB 141/198/63
-$cdc-red:    #C21E56;  // Crimson        — used for warning callouts
+// -----------------------------------------------------------------------------
+// NBS palette tokens
+// -----------------------------------------------------------------------------
+$nbs-base-white:      #FFFFFF;
+$nbs-base-lightest:   #F0F0F0;
+$nbs-base-lighter-p:  #E5E6E7;
+$nbs-base-lighter:    #DCDEE0;
+$nbs-base-light:      #A9AEB1;
+$nbs-base-base:       #71767A;
+$nbs-base-dark:       #565C65;
+$nbs-base-darker:     #3D4551;
+$nbs-base-darkest:    #1B1B1B;
+$nbs-base-black:      #000000;
 
-// =============================================================================
-// Callout color scales
-// JTD generates callout styles from $color-000 (lightest bg) → $color-300 (darkest accent).
-// Each callout type in _config.yml maps to one of these named scales.
-// =============================================================================
+$nbs-primary-lightest: #EFF6FB;
+$nbs-primary-lighter:  #D9E8F6;
+$nbs-primary-glow:     #CFE7FF;
+$nbs-primary-light:    #73B3E7;
+$nbs-primary-primary:  #005EA2;
+$nbs-primary-vivid:    #0050D8;
+$nbs-primary-dark:     #1A4480;
+$nbs-primary-darker:   #162E51;
 
-$blue-000: mix(white, $cdc-blue, 90%);
-$blue-100: mix(white, $cdc-blue, 68%);
-$blue-200: mix(white, $cdc-blue, 44%);
-$blue-300: mix(white, $cdc-blue, 14%);
+$nbs-secondary-lightest: #FFF0F2;
+$nbs-secondary-lighter:  #F8DFE2;
+$nbs-secondary-glow:     #FFD2CF;
+$nbs-secondary-light:    #F2938C;
+$nbs-secondary-secondary:#D83933;
+$nbs-secondary-vivid:    #E41D3D;
+$nbs-secondary-dark:     #B51D09;
+$nbs-secondary-darker:   #8B1303;
 
-$yellow-000: mix(white, $cdc-yellow, 80%);
-$yellow-100: mix(white, $cdc-yellow, 56%);
-$yellow-200: mix(white, $cdc-yellow, 34%);
-$yellow-300: mix(white, $cdc-yellow, 10%);
+$nbs-cool-lightest: #F0F9FB;
+$nbs-cool-lighter:  #E1F3F8;
+$nbs-cool-glow:     #D0F3FF;
+$nbs-cool-light:    #97D4EA;
+$nbs-cool-accent:   #00BDE3;
+$nbs-cool-bright:   #008EC1;
+$nbs-cool-dark:     #07648D;
+$nbs-cool-darker:   #162E51;
 
-$purple-000: mix(white, $cdc-purple, 88%);
-$purple-100: mix(white, $cdc-purple, 65%);
-$purple-200: mix(white, $cdc-purple, 42%);
-$purple-300: mix(white, $cdc-purple, 14%);
+$nbs-warm-lightest: #FEF7EE;
+$nbs-warm-lighter:  #F2E4D4;
+$nbs-warm-glow:     #FFF2C7;
+$nbs-warm-light:    #FFBC78;
+$nbs-warm-accent:   #FA9441;
+$nbs-warm-bright:   #E54D15;
+$nbs-warm-dark:     #C05600;
+$nbs-warm-darker:   #8B1303;
 
-$green-000: mix(white, $cdc-green, 82%);
-$green-100: mix(white, $cdc-green, 60%);
-$green-200: mix(white, $cdc-green, 37%);
-$green-300: mix(white, $cdc-green, 11%);
+$nbs-error-lighter: #F4E3DB;
+$nbs-error-glow:    #FFD2CF;
+$nbs-error-light:   #F39268;
+$nbs-error-error:   #D54309;
+$nbs-error-dark:    #B51D09;
+$nbs-error-darker:  #6F3331;
 
-$red-000: mix(white, $cdc-red, 88%);
-$red-100: mix(white, $cdc-red, 65%);
-$red-200: mix(white, $cdc-red, 42%);
-$red-300: mix(white, $cdc-red, 14%);
+$nbs-warning-lighter: #FAF3D1;
+$nbs-warning-glow:    #FFF2C7;
+$nbs-warning-light:   #FEE685;
+$nbs-warning-warning: #FFBE2E;
+$nbs-warning-dark:    #E5A000;
+$nbs-warning-darker:  #936F38;
+
+$nbs-success-lighter: #ECF3EC;
+$nbs-success-glow:    #F0FFE4;
+$nbs-success-light:   #70E17B;
+$nbs-success-success: #00A91C;
+$nbs-success-dark:    #4D8055;
+$nbs-success-darker:  #446443;
+
+$nbs-disabled-light:   #E6E6E6;
+$nbs-disabled-disabled:#C9C9C9;
+$nbs-disabled-dark:    #ADADAD;
+$nbs-disabled-darker:  #757575;
+$nbs-disabled-darkest: #454545;
+
+$nbs-info-lighter: #E7F6F8;
+$nbs-info-light:   #99DEEA;
+$nbs-info-info:    #00BDE3;
+$nbs-info-dark:    #009EC1;
+$nbs-info-darker:  #07648D;
+
+$nbs-neutral-lighter: #E7E3FA;
+$nbs-neutral-accent:  #7C4CB5;
+$nbs-neutral-darker:  #54278F;
+
+// -----------------------------------------------------------------------------
+// JTD callout / button scales
+// (-000 = callout bg, -300 = callout accent; -100/-200 feed .btn-* variants)
+// -----------------------------------------------------------------------------
+// Each scale below feeds one callout: -000 = light background tint,
+// -300 = the NBS "chip" color for the left bar. Titles are inked in custom.scss.
+
+// note → NBS Info
+$blue-000: $nbs-info-lighter;  // #E7F6F8  callout bg
+$blue-100: $nbs-info-light;    // #99DEEA
+$blue-200: $nbs-info-dark;     // #009EC1
+$blue-300: $nbs-info-info;     // #00BDE3  callout left bar (chip)
+
+// important → NBS Warning
+$yellow-000: $nbs-warning-lighter; // #FAF3D1  callout bg
+$yellow-100: $nbs-warning-light;   // #FEE685
+$yellow-200: $nbs-warning-dark;    // #E5A000
+$yellow-300: $nbs-warning-warning; // #FFBE2E  callout left bar (chip)
+
+// highlight → NBS Neutral Accent
+$purple-000: $nbs-neutral-lighter; // #E7E3FA  callout bg
+$purple-100: $nbs-neutral-accent;  // #7C4CB5  .btn-purple (white text, 5.90:1)
+$purple-200: $nbs-neutral-darker;  // #54278F
+$purple-300: $nbs-neutral-accent;  // #7C4CB5  callout left bar (chip)
+
+// new → NBS Success
+$green-000: $nbs-success-lighter;  // #ECF3EC  callout bg
+$green-100: $nbs-success-light;    // #70E17B
+$green-200: $nbs-success-dark;     // #4D8055
+$green-300: $nbs-success-success;  // #00A91C  callout left bar (chip)
+
+// warning → NBS Error
+$red-000: $nbs-error-lighter;  // #F4E3DB  callout bg
+$red-100: $nbs-error-light;    // #F39268
+$red-200: $nbs-error-dark;     // #B51D09
+$red-300: $nbs-error-error;    // #D54309  callout left bar (chip)
 
 // =============================================================================
 // JTD UI overrides
 // =============================================================================
-
-$link-color:                     $cdc-blue;
-$btn-primary-color:              $cdc-blue;
-$btn-primary-border-color:       $cdc-blue;
-$btn-primary-hover-color:        mix(black, $cdc-blue, 20%);
-$btn-primary-hover-border-color: mix(black, $cdc-blue, 20%);
-$body-heading-color:             #1a1a1a;
+$link-color:                     $nbs-primary-primary;  // #005EA2 (6.72:1 on white)
+$btn-primary-color:              $nbs-primary-primary;
+$btn-primary-border-color:       $nbs-primary-primary;
+$btn-primary-hover-color:        $nbs-primary-dark;     // #1A4480
+$btn-primary-hover-border-color: $nbs-primary-dark;
+$body-heading-color:             $nbs-base-darkest;     // #1B1B1B
 $nav-child-link-color:           $grey-dk-100;
-$nav-list-link-active-color:     $cdc-blue;
+$nav-list-link-active-color:     $nbs-primary-primary;

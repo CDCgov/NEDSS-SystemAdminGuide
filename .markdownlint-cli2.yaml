@@ -49,6 +49,9 @@ config:
   # The first line of body content is typically the TOC block or a paragraph.
   MD041: false
 
+markdownItPlugins:
+  - - ./scripts/markdownlint-kramdown-table-attr-filter.cjs
+
 # Glob patterns for files and directories to exclude from linting.
 # markdownlint-cli2 uses the same glob syntax as .gitignore.
 ignores:

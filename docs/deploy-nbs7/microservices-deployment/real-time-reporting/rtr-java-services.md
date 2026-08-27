@@ -15,7 +15,7 @@ redirect_from:
 
 This page walks through deploying the real-time reporting ([[rtr]]) Java service using the `reporting-pipeline-service` [[helm-chart|Helm chart]] from the [NEDSS-Helm][nedss-helm] repository for NBS version {{ site.version_latest }}. The service processes streamed events from [[kafka]] and loads domain-specific reporting data.
 
-Deploying the Java service is a two-phase process. The first deployment seeds the `nrt_*` caching tables that RTR depends on. Once seeding is complete, you upgrade the release with post-processing enabled. If you are reinstalling RTR after a backup and restore reset those tables, see [Delete Kafka topics before reinstalling RTR](#delete-kafka-topics-before-reinstalling-rtr) first.
+Deploying the Java service is a two-phase process. The first deployment seeds the `nrt_*` caching tables that RTR depends on. Once seeding is complete, you upgrade the release with post-processing enabled. If you are reinstalling RTR after a backup and restore and need to reseed those tables, see [Delete Kafka topics before reinstalling RTR](#delete-kafka-topics-before-reinstalling-rtr) first.
 
 > Schedule a maintenance window and notify users that NBS will be unavailable. Database changes made while the RTR service is being deployed might not propagate to your reporting database.
 {: .important }
@@ -40,7 +40,7 @@ Confirm the following before you continue:
 
 ### Delete Kafka topics before reinstalling RTR
 
-This section applies only if a backup and restore reset the `nrt_*` tables. Otherwise, skip to [Deploy the RTR Java service using Helm](#deploy-the-rtr-java-service-using-helm).
+This section applies only if after a backup and restore, you need to re-seed the `nrt_*` tables. Otherwise, skip to [Deploy the RTR Java service using Helm](#deploy-the-rtr-java-service-using-helm).
 
 Before you reinstall, delete the following Kafka topics. This ensures Debezium fully reruns the seeding process.
 

@@ -1,0 +1,104 @@
+name: web-to-word
+description: >-
+  Convert published guide pages into a single Word document with working
+  internal (bookmark) and external (web) links.
+
+# Composite rather than a JavaScript action: the converter is Python and its
+# only dependencies are three pip packages plus Pandoc, so it installs them at
+# run time. That avoids committing a built node bundle to a docs repo.
+#
+# Linux runners only. The Pandoc step installs a .deb.
+
+inputs:
+  url:
+    description: >-
+      Page URL to convert. With whole-guide enabled, any page that renders the
+      site nav, for example the site home.
+    required: true
+  output:
+    description: Path of the .docx file to write.
+    required: true
+  public-host:
+    description: >-
+      Public origin (for example https://example.github.io) that out-of-scope
+      links are rewritten to when crawling a local build on localhost.
+    required: false
+    default: ''
+  whole-guide:
+    description: >-
+      Set to "true" to export every page in the site nav instead of a single
+      chapter.
+    required: false
+    default: 'false'
+  python-version:
+    description: Python version used to run the converter.
+    required: false
+    default: '3.11'
+  pandoc-version:
+    description: >-
+      Pandoc release to install. Pinned because the distro apt package ships an
+      older reference.docx that breaks the styling.
+    required: false
+    default: '3.9.0.2'
+
+outputs:
+  document:
+    description: Path of the generated .docx file.
+    value: ${{ steps.convert.outputs.document }}
+
+runs:
+  using: composite
+  steps:
+    - name: Set up Python
+      uses: actions/setup-python@v7
+      with:
+        python-version: ${{ inputs.python-version }}
+
+    - name: Install Pandoc
+      shell: bash
+      run: |
+        set -euo pipefail
+        version='${{ inputs.pandoc-version }}'
+        curl -fsSL -o /tmp/pandoc.deb \
+          "https://github.com/jgm/pandoc/releases/download/${version}/pandoc-${version}-1-amd64.deb"
+        sudo dpkg -i /tmp/pandoc.deb
+        pandoc --version | head -1
+
+    - name: Install converter dependencies
+      shell: bash
+      run: pip install -r "${{ github.action_path }}/requirements.txt"
+
+    - name: Build the Word style reference
+      shell: bash
+      run: |
+        set -euo pipefail
+        python "${{ github.action_path }}/scripts/make_reference.py" \
+          "${{ github.action_path }}/styles.docx"
+
+    - name: Convert the pages to Word
+      id: convert
+      shell: bash
+      env:
+        # The converter ships as a package directory rather than an installed
+        # distribution, so its parent must be on the path for `python -m`.
+        PYTHONPATH: ${{ github.action_path }}
+        URL: ${{ inputs.url }}
+        OUTPUT: ${{ inputs.output }}
+        PUBLIC_HOST: ${{ inputs.public-host }}
+        WHOLE_GUIDE: ${{ inputs.whole-guide }}
+      run: |
+        set -euo pipefail
+        args=()
+        if [ -n "$PUBLIC_HOST" ]; then
+          args+=(--public-host "$PUBLIC_HOST")
+        fi
+        if [ "$WHOLE_GUIDE" = "true" ]; then
+          args+=(--whole-guide)
+        fi
+        echo "Converting $URL"
+        python -m web2word "$URL" \
+          -o "$OUTPUT" \
+          --style-reference "${{ github.action_path }}/styles.docx" \
+          ${args[@]+"${args[@]}"} -v
+        python "${{ github.action_path }}/scripts/verify.py" "$OUTPUT"
+        echo "document=$OUTPUT" >> "$GITHUB_OUTPUT"

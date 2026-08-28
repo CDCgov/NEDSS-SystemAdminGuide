@@ -3,14 +3,20 @@ name: Create eclearance Word doc
 # On-demand only. Run it from the Actions tab when you need an eclearance review
 # document: click "Create eclearance Word doc" -> "Run workflow", type a chapter
 # path (or leave it blank to export the whole guide), and click the green button.
-# It always builds from the `preview` branch, converts the content (with working
-# internal/external links) via the web2word tool, and attaches the .docx as a
-# downloadable artifact. Nothing runs automatically on push or PR.
+# It always builds the site from the `preview` branch, converts the content (with
+# working internal/external links) via the web-to-word action in this repo, and
+# attaches the .docx as a downloadable artifact. Nothing runs automatically on
+# push or PR.
 #
 # Always `preview` on purpose: the document's out-of-scope links point at the
 # preview site, which only reflects the `preview` branch. Building from any other
 # branch would make the content and its links come from different versions. To
 # review a feature branch, push it to `preview` first (see contributing/workflow.md).
+#
+# Two checkouts, on purpose. The converter is a local action, and a local action
+# is resolved from the workspace root, so the root checkout must be the branch
+# that holds it (the one picked in "Use workflow from"). The site content is a
+# different branch, so `preview` is checked out separately into site/.
 
 on:
   workflow_dispatch:
@@ -24,8 +30,6 @@ permissions:
   contents: read
 
 env:
-  WEB2WORD_REPO: https://github.com/jburgh/web-to-word.git
-  WEB2WORD_REF: main
   # Match the preview environment so links resolve exactly as on the staging site.
   BASEURL: /CDCgov-NEDSS-SystemAdminGuide-preview
   # The site is built/served on localhost during the run; out-of-scope links are
@@ -37,37 +41,24 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout the preview branch
+      - name: Checkout this repo (provides the web-to-word action)
+        uses: actions/checkout@v7
+
+      - name: Checkout the preview branch (provides the site content)
         uses: actions/checkout@v7
         with:
           ref: preview
+          path: site
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
           ruby-version: "3.3"   # matches jekyll-preview.yml
           bundler-cache: true
-
-      - name: Set up Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: "3.11"
-
-      - name: Install Pandoc (pinned — distro apt ships an older reference.docx
-              that breaks the styling; must match the validated version)
-        run: |
-          curl -fsSL -o /tmp/pandoc.deb \
-            https://github.com/jgm/pandoc/releases/download/3.9.0.2/pandoc-3.9.0.2-1-amd64.deb
-          sudo dpkg -i /tmp/pandoc.deb
-          pandoc --version | head -1
-
-      - name: Get the web2word converter
-        run: |
-          git clone --depth 1 --branch "$WEB2WORD_REF" "$WEB2WORD_REPO" .web2word
-          pip install -r .web2word/requirements.txt
-          python .web2word/scripts/make_reference.py .web2word/styles.docx
+          working-directory: site
 
       - name: Build and serve the site locally
+        working-directory: site
         env:
           JEKYLL_ENV: production
         run: |
@@ -79,32 +70,32 @@ jobs:
             sleep 1
           done
 
-      - name: Convert the chapter to Word
+      - name: Work out what to convert
+        id: target
         env:
           CHAPTER: ${{ github.event.inputs.chapter }}
-          # The converter is cloned into .web2word/ but not pip-installed as a
-          # package, so put its parent on the path for `python -m web2word`.
-          PYTHONPATH: .web2word
         run: |
           set -euo pipefail
           if [ -z "$CHAPTER" ]; then
             # Whole guide: point at any page that renders the nav (the site home).
-            url="http://127.0.0.1:4000$BASEURL/"
-            name="full-guide"
-            extra="--whole-guide"
+            echo "url=http://127.0.0.1:4000$BASEURL/" >> "$GITHUB_OUTPUT"
+            echo "name=full-guide" >> "$GITHUB_OUTPUT"
+            echo "whole_guide=true" >> "$GITHUB_OUTPUT"
           else
             # Normalize: strip a leading slash, a leading "docs/", and a trailing ".html".
             path="${CHAPTER#/}"; path="${path#docs/}"; path="${path%.html}"
-            url="http://127.0.0.1:4000$BASEURL/docs/${path}.html"
-            name="$(basename "$path")"
-            extra=""
+            echo "url=http://127.0.0.1:4000$BASEURL/docs/${path}.html" >> "$GITHUB_OUTPUT"
+            echo "name=$(basename "$path")" >> "$GITHUB_OUTPUT"
+            echo "whole_guide=false" >> "$GITHUB_OUTPUT"
           fi
-          echo "Converting $url"
-          python -m web2word "$url" \
-            -o "${name}-review.docx" \
-            --style-reference .web2word/styles.docx \
-            --public-host "$PREVIEW_PUBLIC_HOST" $extra -v
-          python .web2word/scripts/verify.py "${name}-review.docx"
+
+      - name: Convert the chapter to Word
+        uses: ./.github/actions/web-to-word
+        with:
+          url: ${{ steps.target.outputs.url }}
+          output: ${{ steps.target.outputs.name }}-review.docx
+          public-host: ${{ env.PREVIEW_PUBLIC_HOST }}
+          whole-guide: ${{ steps.target.outputs.whole_guide }}
 
       - name: Upload the review document
         uses: actions/upload-artifact@v7

@@ -1,0 +1,5 @@
+base_url: https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/deploy-nbs7/microservices-deployment/
+output: data-processing.docx
+style_reference: styles.docx
+pages:
+  - data-processing.html

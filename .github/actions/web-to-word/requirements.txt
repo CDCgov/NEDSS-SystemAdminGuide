@@ -1,0 +1,5 @@
+beautifulsoup4>=4.12
+lxml>=5.0
+# Optional: nicer YAML manifests. Without it, a tiny built-in parser handles
+# the simple key/value + pages-list manifest format.
+PyYAML>=6.0

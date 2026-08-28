@@ -1,0 +1,7 @@
+# Single-chapter review set. With only one page in scope, every cross-page
+# link (planning.html, deploy-nbs7.html, ../index.html ...) resolves to a live
+# web URL, and the same-page anchors (#purpose, #top) become Word bookmarks.
+base_url: https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/
+output: before-you-deploy.docx
+pages:
+  - before-you-deploy.html

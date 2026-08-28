@@ -22,7 +22,7 @@ on:
   workflow_dispatch:
     inputs:
       chapter:
-        description: 'Chapter path under docs/ without .html (e.g. "before-you-deploy"). LEAVE BLANK to export the entire guide.'
+        description: 'Chapter path under docs/ without .html (e.g. "before-you-deploy"). LEAVE BLANK to export the entire guide. After a successful run, refresh the page to see the Artifacts section with the download.'
         required: false
         type: string
 

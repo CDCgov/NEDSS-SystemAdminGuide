@@ -9,6 +9,8 @@ description: Overview of the NBS system administration guide, including preparat
 
 # Introduction
 
+This is a test. This is only a test! [[nbs-6]]
+
 The National Electronic Disease Surveillance System ([[nedss]]) Base System ([[nbs]]) is a disease surveillance system developed by the Centers for Disease Control and Prevention ([[cdc]]) that health departments use to manage [[reportable-disease]] data. [[nbs-7]] is the modernized version of the platform, designed for deployment and operation on cloud-based infrastructure. This documentation supports the administration lifecycle for NBS 7, including planning, deployment, validation, and maintenance.
 {: .fw-300}
 

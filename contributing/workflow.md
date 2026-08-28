@@ -92,9 +92,11 @@ git checkout branch-name
 git push origin branch-name:preview --force
 ```
 
-This replaces `preview` with the exact state of your source branch and triggers the preview site deploy.
+This replaces `preview` with the exact state of your source branch and triggers the **Deploy Jekyll site to Pages** workflow.
 
-Wait about 5 minutes for your changes to appear on the preview site:
+That workflow publishes the whole Pages site in one deployment: production from `main` at the root, archived releases under Previous Versions, and your `preview` branch at `/preview/`. A push to `preview` therefore republishes production as well. That is expected and safe, because production is always rebuilt from `main`, but it does mean a preview deploy takes as long as a full production build.
+
+Watch the run in the **Actions** tab and wait for it to finish, then find your changes on the preview site:
 https://cdcgov.github.io/NEDSS-SystemAdminGuide/preview/
 
 Share that URL with stakeholders and collect feedback.

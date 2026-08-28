@@ -1,0 +1,17 @@
+# Full "Before you deploy" chapter: landing page, its child pages, and the
+# deeper component-reference sub-pages. Everything listed here cross-links via
+# internal Word bookmarks; only links leaving this set resolve to live URLs.
+base_url: https://cdcgov.github.io/NEDSS-SystemAdminGuide/docs/
+output: before-you-deploy-chapter.docx
+style_reference: styles.docx
+pages:
+  - before-you-deploy.html
+  - before-you-deploy/assess-your-readiness.html
+  - before-you-deploy/operational-considerations.html
+  - before-you-deploy/planning.html
+  - before-you-deploy/vendor-managed-deployment.html
+  - before-you-deploy/deployment-phases.html
+  - before-you-deploy/component-reference.html
+  - before-you-deploy/component-reference/nbs-core-components.html
+  - before-you-deploy/component-reference/di-api.html
+  - before-you-deploy/component-reference/rtr.html

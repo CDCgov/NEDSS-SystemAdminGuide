@@ -143,6 +143,10 @@ just_the_docs:
 
 exclude:
   - templates/
+  # The preview branch is checked out here by jekyll.yml and built separately
+  # into _site/preview. Without this the production build would also ingest it
+  # as source content.
+  - preview-src/
 
 # -----------------------------------------------------------------------------
 # GitHub "Edit this page" link (currently disabled)

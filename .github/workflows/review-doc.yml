@@ -31,11 +31,11 @@ permissions:
 
 env:
   # Match the preview environment so links resolve exactly as on the staging site.
-  BASEURL: /CDCgov-NEDSS-SystemAdminGuide-preview
+  BASEURL: /NEDSS-SystemAdminGuide/preview
   # The site is built/served on localhost during the run; out-of-scope links are
   # rewritten from the localhost origin to this public preview origin so they
   # work when a reviewer clicks them.
-  PREVIEW_PUBLIC_HOST: https://jburgh.github.io
+  PREVIEW_PUBLIC_HOST: https://cdcgov.github.io
 
 jobs:
   build:
@@ -53,7 +53,7 @@ jobs:
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: "3.3"   # matches jekyll-preview.yml
+          ruby-version: "3.3"   # matches jekyll.yml
           bundler-cache: true
           working-directory: site
 

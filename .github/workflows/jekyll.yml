@@ -6,10 +6,16 @@
 # Sample workflow for building and deploying a Jekyll site to GitHub Pages
 name: Deploy Jekyll site to Pages
 
+# A repository publishes ONE Pages site, and each deployment replaces it whole.
+# So the stakeholder preview cannot be a second, independent deployment: it ships
+# inside this same artifact, at /preview/. That is why a push to `preview` runs
+# this workflow. Production content is always built from `main` regardless of
+# which branch triggered the run.
+
 on:
-  # Runs on pushes targeting the default branch
+  # Production content. Also rebuilds the preview subdirectory.
   push:
-    branches: ["main"]
+    branches: ["main", "preview"]
 
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
@@ -31,13 +37,20 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout main (production content)
         uses: actions/checkout@v7
         with:
-          fetch-depth: 0   # required to list all branches :contentReference[oaicite:1]{index=1}
+          ref: main
+          fetch-depth: 0   # required to list all branches
+
+      - name: Checkout preview (published at /preview/)
+        uses: actions/checkout@v7
+        with:
+          ref: preview
+          path: preview-src
 
       - name: Update last_modified_date in changed docs
-        if: github.actor != 'github-actions[bot]'
+        if: github.ref_name == 'main' && github.actor != 'github-actions[bot]'
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
@@ -188,6 +201,17 @@ jobs:
       - name: Build with Jekyll
         # Outputs to the './_site' directory by default
         run: bundle exec jekyll build --baseurl "${{ steps.pages.outputs.base_path }}"
+        env:
+          JEKYLL_ENV: production
+
+      - name: Build the preview branch into _site/preview
+        # Runs after the production build, which cleans _site first. Uses --source
+        # so the main checkout's bundle serves both builds; no second install.
+        run: |
+          bundle exec jekyll build \
+            --source preview-src \
+            --destination _site/preview \
+            --baseurl "${{ steps.pages.outputs.base_path }}/preview"
         env:
           JEKYLL_ENV: production
 

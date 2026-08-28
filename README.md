@@ -5,7 +5,7 @@
 ## Quick Guide
 
 Production site: https://cdcgov.github.io/NEDSS-SystemAdminGuide/ 
-Stakeholder preview site: https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/
+Stakeholder preview site: https://cdcgov.github.io/NEDSS-SystemAdminGuide/preview/
 
 | Action                       | Location                              |
 |----------------------------|---------------------------------------|
@@ -42,16 +42,13 @@ GitHub Pages hosts System Admin Guide site by serving static HTML, CSS, and JS d
 
 Just the Docs is a Jekyll-based theme optimized for documentation sites, fully-compatible with GitHub Pages—providing menus, search, collections, and theming out-of-the-box.
 
-Two GitHub Actions workflows handle builds and deploys:
+One GitHub Actions workflow (`jekyll.yml`) builds and deploys everything. It triggers on a push to `main` or to `preview`, and produces a single Pages deployment containing:
 
-**Production** (`jekyll.yml`) — triggers on push to `main`:
-- Builds `docs/` into `_site/`
-- Discovers and builds any `release-*` branches into `_previous_versions/<branch>/`
-- Deploys to GitHub Pages at https://cdcgov.github.io/NEDSS-SystemAdminGuide/
+- `docs/` built from `main`, served at https://cdcgov.github.io/NEDSS-SystemAdminGuide/
+- Any `release-*` branches built into `_previous_versions/<branch>/`
+- The `preview` branch built into `preview/`, served at https://cdcgov.github.io/NEDSS-SystemAdminGuide/preview/
 
-**Preview** (`jekyll-preview.yml`) — triggers on push to `preview`:
-- Builds the site with the preview baseurl
-- Deploys to the staging repo at https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/
+A repository publishes one Pages site and each deployment replaces it whole, so the preview cannot be a separate deployment. Production content is always built from `main`, whichever branch triggered the run.
 
 
 ## Stakeholder Review Workflow

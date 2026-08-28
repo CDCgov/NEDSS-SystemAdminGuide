@@ -113,7 +113,7 @@ Link-check implementation scripts live in `scripts/`:
 - **Release versioning:** Discovers all branches matching `release-*`, checks them out into `_previous_versions/`, and generates a nav-accessible index page for each. This is how the **Previous Versions** section of the site is populated automatically. See [release-checklist.md](contributing/release-checklist.md) for the full release process.
 - **Front matter date:** Updates `last_modified_date` in any changed `.md` file to match its commit date, then pushes those changes back to `main` with `[skip ci]`. You do not need to update `last_modified_date` manually — leave the field in the front matter and the workflow keeps it accurate. If you work on a file that was also updated by a previous merged PR, you may see a trivial one-line conflict on `last_modified_date` when your PR is opened; resolve it by accepting `main`'s value.
 
-**On push to `preview`:** `bundle exec jekyll build` runs via `jekyll-preview.yml` and deploys to the staging site.
+**On push to `preview`:** `jekyll.yml` runs and redeploys the Pages site, rebuilding `preview/` from the `preview` branch. Production content still comes from `main`.
 
 **On PRs to `main`:** The PR check pipeline runs (see [CI checks](#ci-checks) below).
 

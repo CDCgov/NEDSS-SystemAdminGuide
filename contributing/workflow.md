@@ -95,7 +95,7 @@ git push origin branch-name:preview --force
 This replaces `preview` with the exact state of your source branch and triggers the preview site deploy.
 
 Wait about 5 minutes for your changes to appear on the preview site:
-https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide-preview/
+https://cdcgov.github.io/NEDSS-SystemAdminGuide/preview/
 
 Share that URL with stakeholders and collect feedback.
 

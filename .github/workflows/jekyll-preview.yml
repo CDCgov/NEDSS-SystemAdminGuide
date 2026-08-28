@@ -35,23 +35,6 @@ jobs:
           bundler-cache: true
           cache-version: 0
 
-      - name: Cleanup _guide_preview
-        run: |
-          find _guide_preview -name '*.md' | while read file; do
-            awk '
-              BEGIN { in_front=0 }
-              {
-                if ($0 ~ /^---$/) {
-                  in_front = 1 - in_front
-                }
-                if (in_front && ($0 ~ /^(parent:|grand_parent:|nav_order:|has_children:)/)) {
-                  next
-                }
-                print
-              }
-            ' "$file" > "${file}.tmp" && mv "${file}.tmp" "$file"
-          done
-
       - name: Build with Jekyll
         run: bundle exec jekyll build --baseurl "/CDCgov-NEDSS-SystemAdminGuide-preview"
         env:

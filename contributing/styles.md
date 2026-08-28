@@ -10,17 +10,17 @@ This guide is the authoritative reference for formatting, front matter, and acce
 
 ### Quick-reference table
 
-| Field | docs/ pages | _guide_preview/ pages | What it does |
-|-------|------------|----------------------|--------------|
-| `title` | **Required** | **Required** | Sets the page title. JTD renders this as the page's H1 heading and uses it as the left-nav label and browser tab title. |
-| `layout` | **Required** - always `page` | **Required** - always `page` | Specifies the JTD page template. Use `page` for all content pages. `home` is used only on the site root `index.md` - do not use it elsewhere. |
-| `nav_order` | **Required** | **Omit** | Controls display order among sibling pages in the nav. Must be an integer. See [How nav_order works](#how-nav_order-works). |
-| `has_children` | **Required** when this page has child pages | **Omit** | Tells JTD to render an expand arrow in the nav. Without it, child pages exist but the parent page shows no arrow and may not nest visibly. |
-| `has_toc` | **Set `false`** on parent pages that provide a manual "In this section" list | **Omit** | JTD auto-renders a table of contents of child pages at the bottom of every `has_children` page. Set `has_toc: false` to suppress it when the page provides its own richer child list. See [Parent landing pages](#parent-landing-pages). |
-| `parent` | **Required** for child pages | **Omit** | Sets the parent page. The value must exactly match the `title:` of the intended parent. Case-sensitive. |
-| `description` | **Optional, recommended** | **Optional** | 1–2 sentences describing the page's purpose. JTD uses this for search result snippets and the HTML `<meta name="description">` tag. See [Writing descriptions](#writing-descriptions). |
-| `redirect_from` | Optional - plugin feature | **Omit** | From the `jekyll-redirect-from` gem. Redirects one or more old URLs to this page. Use only when a page has been moved or renamed to preserve existing links. See [Redirects](#redirects). |
-| `nav_enabled` | **Omit** - remove on sight | **Omit** - remove on sight | **Non-standard. Has no effect.** Not a JTD front matter key. See [Note on nav_enabled](#note-on-nav_enabled). |
+| Field | docs/ pages | What it does |
+|-------|------------|--------------|
+| `title` | **Required** | Sets the page title. JTD renders this as the page's H1 heading and uses it as the left-nav label and browser tab title. |
+| `layout` | **Required** - always `page` | Specifies the JTD page template. Use `page` for all content pages. `home` is used only on the site root `index.md` - do not use it elsewhere. |
+| `nav_order` | **Required** | Controls display order among sibling pages in the nav. Must be an integer. See [How nav_order works](#how-nav_order-works). |
+| `has_children` | **Required** when this page has child pages | Tells JTD to render an expand arrow in the nav. Without it, child pages exist but the parent page shows no arrow and may not nest visibly. |
+| `has_toc` | **Set `false`** on parent pages that provide a manual "In this section" list | JTD auto-renders a table of contents of child pages at the bottom of every `has_children` page. Set `has_toc: false` to suppress it when the page provides its own richer child list. See [Parent landing pages](#parent-landing-pages). |
+| `parent` | **Required** for child pages | Sets the parent page. The value must exactly match the `title:` of the intended parent. Case-sensitive. |
+| `description` | **Optional, recommended** | 1–2 sentences describing the page's purpose. JTD uses this for search result snippets and the HTML `<meta name="description">` tag. See [Writing descriptions](#writing-descriptions). |
+| `redirect_from` | Optional - plugin feature | From the `jekyll-redirect-from` gem. Redirects one or more old URLs to this page. Use only when a page has been moved or renamed to preserve existing links. See [Redirects](#redirects). |
+| `nav_enabled` | **Omit** - remove on sight | **Non-standard. Has no effect.** Not a JTD front matter key. See [Note on nav_enabled](#note-on-nav_enabled). |
 
 ### Annotated examples
 
@@ -51,18 +51,6 @@ nav_order: NAV_ORDER      # Required. Controls position among siblings under the
 description: DESCRIPTION  # Optional.
 ---
 ```
-
-#### Guide preview page (_guide_preview/ directory)
-
-```yaml
----
-title: TITLE              # Required.
-layout: page              # Required.
-description: DESCRIPTION  # Optional.
----
-```
-
-Nav keys (`nav_order`, `parent`, and `has_children`) are **intentionally omitted** from guide preview pages. The `just_the_docs.collections` setting in `_config.yml` already excludes these pages from the left nav and search index. Nav keys on these pages have no effect and create misleading front matter.
 
 ### How nav_order works
 

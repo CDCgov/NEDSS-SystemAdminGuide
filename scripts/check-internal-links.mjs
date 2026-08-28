@@ -16,7 +16,7 @@ const topLevelFiles = [
 
 function walkMarkdownFiles(dir, out = []) {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (['.git', 'node_modules', '_site', 'vendor', '_guide_preview'].includes(entry.name)) {
+    if (['.git', 'node_modules', '_site', 'vendor'].includes(entry.name)) {
       continue;
     }
 

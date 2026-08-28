@@ -12,7 +12,6 @@ Stakeholder preview site: https://jburgh.github.io/CDCgov-NEDSS-SystemAdminGuide
 | Stage content for stakeholder review | Push to `preview` branch — see [Stakeholder Review Workflow](#stakeholder-review-workflow) |
 | Previous release versions  | Any branch named `release-<version>` is automatically added under **PREVIOUS VERSIONS** |
 | Access versioned docs      | Located under **PREVIOUS VERSIONS** section |
-| Publish approved content without showing it in nav yet | `_guide_preview/*.md` — see [Hidden Draft Pages](#hidden-draft-pages) |
 
 ## Contributor File Map
 
@@ -46,7 +45,7 @@ Just the Docs is a Jekyll-based theme optimized for documentation sites, fully-c
 Two GitHub Actions workflows handle builds and deploys:
 
 **Production** (`jekyll.yml`) — triggers on push to `main`:
-- Builds `docs/` and `_guide_preview/` into `_site/`
+- Builds `docs/` into `_site/`
 - Discovers and builds any `release-*` branches into `_previous_versions/<branch>/`
 - Deploys to GitHub Pages at https://cdcgov.github.io/NEDSS-SystemAdminGuide/
 
@@ -71,15 +70,6 @@ For step-by-step git commands, see [workflow.md](contributing/workflow.md).
 
 ## Previous Versions
 Branches starting with `release-` are automatically built and deployed under `/previous_versions/<branch>/` via GitHub Actions. See [release-checklist.md](contributing/release-checklist.md).
-
-
-## Hidden Draft Pages
-
-> **Edge case — not the standard review workflow.** Use this only when content is already approved and merged to `main`, but you want to publish it without it appearing in navigation yet — for example, while finishing out the rest of a section. For pre-approval stakeholder review, use the [Stakeholder Review Workflow](#stakeholder-review-workflow) instead.
-
-Drop Markdown files into the `_guide_preview/` directory to serve content on the production site that is:
-- **Rendered and available**, but **hidden from navigation and search**
-- Accessible **only** via direct URL (e.g. `/guide_preview/my-file/`)
 
 
 ## Markdown & Configuration Sources

@@ -56,7 +56,6 @@ markdownItPlugins:
 # markdownlint-cli2 uses the same glob syntax as .gitignore.
 ignores:
   # Build output and dependencies — never lint generated or vendored files.
-  - "_guide_preview/**"
   - "_previous_versions/**"
   - "templates/**"
   - "vendor/**"

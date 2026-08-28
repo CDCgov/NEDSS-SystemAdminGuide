@@ -116,9 +116,6 @@ callouts:
 # -----------------------------------------------------------------------------
 
 collections:
-  guide_preview:
-    output: true
-    directory: _guide_preview    # Draft / preview content (hidden from nav and search)
   previous_versions:
     output: true
     directory: _previous_versions  # Archived release docs (visible in nav)
@@ -132,9 +129,6 @@ collections:
 
 just_the_docs:
   collections:
-    guide_preview:
-      nav_exclude: true      # Hide from left nav — draft content, not ready for readers
-      search_exclude: true   # Exclude from search — prevents confusing draft results
     previous_versions:
       name: "Previous Versions"
       nav_exclude: false     # Show in left nav under the "Previous Versions" label

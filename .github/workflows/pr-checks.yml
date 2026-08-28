@@ -18,7 +18,7 @@ on:
   pull_request:
     branches: ["main"]
 
-# Read-only — consistent with existing jekyll.yml and jekyll-preview.yml.
+# Read-only — consistent with existing jekyll.yml.
 permissions:
   contents: read
 
@@ -40,7 +40,7 @@ jobs:
       - name: Setup Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.3'   # Must match jekyll.yml and jekyll-preview.yml
+          ruby-version: '3.3'   # Must match jekyll.yml
           bundler-cache: true   # Runs bundle install and caches gems automatically
 
       - name: Build site

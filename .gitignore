@@ -18,3 +18,5 @@ node_modules/
 
 # IntelliJ
 .idea/
+# Created by jekyll.yml when it checks out the preview branch to build /preview/
+preview-src/

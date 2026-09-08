@@ -119,7 +119,7 @@ The Traefik controller creates an internal load balancer in Azure and routes tra
 1. Deploy the Traefik controller with the Azure values file:
 
    ```bash
-   helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml
+   helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml --version 41.01
    ```
 
    > If your AKS cluster has Windows node pools, for example for NBS 6, append the following option so that Traefik is scheduled on a Linux node: `--set nodeSelector."kubernetes\.io/os"=linux`

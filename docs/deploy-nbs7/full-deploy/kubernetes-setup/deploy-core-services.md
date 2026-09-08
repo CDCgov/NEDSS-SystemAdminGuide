@@ -81,13 +81,13 @@ The [[traefik]] Helm chart in the [NEDSS-Helm repository][nedss-helm-repo] sets 
    - **AWS:**
 
      ```bash
-     helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml
+     helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml --version 41.01
      ```
 
    - **Azure:**
 
      ```bash
-     helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml
+     helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values-azure.yaml --version 41.01
      ```
 
    > If your [[aks]] cluster has Windows node pools, for example for [[classic-nbs|NBS 6]], append the following option to the Azure command so that Traefik is scheduled on a Linux node: `--set nodeSelector."kubernetes\.io/os"=linux`

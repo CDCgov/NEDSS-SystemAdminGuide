@@ -310,16 +310,16 @@ services. Everything from [Step 2](#step-2-change-data-capture) onward is unaffe
 > In this section, the terms `cdc` and `CDC` appear as part of SQL Server column and parameter names and refer to Change Data Capture, not the Centers for Disease Control and Prevention.
 {: .note }
 
-> Never run `sp_cdc_disable_db` on `NBS_ODSE`. It drops every capture instance in the database,
-> including the one Case Notification depends on.
-{: .warning }
-
 As [Enable Change Data Capture](real-time-reporting.html#enable-change-data-capture) notes,
 [[change-data-capture|CDC]] was already enabled on `NBS_ODSE` by the Case Notification service
 deployment; the RTR bootstrap script adds `NBS_SRTE` and the RTR source tables. Case Notification
 consumes a Kafka topic produced by a Debezium connector on **`NBS_ODSE.dbo.CN_transportq_out`**, which
 appears in neither the RTR bootstrap script's table list nor any RTR connector — so the two table sets
 do not overlap, but the database-level setting is shared and must stay on.
+
+> Never run `sp_cdc_disable_db` on `NBS_ODSE`. It drops every capture instance in the database,
+> including the one Case Notification depends on.
+{: .warning }
 
 ### 2a. List the capture instances and their creation times
 

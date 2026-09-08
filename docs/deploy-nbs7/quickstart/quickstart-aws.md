@@ -118,7 +118,7 @@ The Traefik controller creates a Network Load Balancer (NLB) in AWS and routes t
 1. Deploy the Traefik controller:
 
    ```bash
-   helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml
+   helm install traefik traefik/traefik --namespace traefik --create-namespace -f ./traefik/values.yaml --version 41.01
    ```
 
 1. Confirm that the Traefik pod has a `STATUS` of `Running` and that the two numbers in the `READY` column match:

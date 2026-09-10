@@ -352,14 +352,19 @@ hand and see [If your release enables CDC on other tables](#if-your-release-enab
 ### 2d. Disable CDC on NBS_SRTE
 
 RTR is the only known CDC consumer on `NBS_SRTE`, but confirm that for your environment before disabling
-anything. Two different things can go wrong here, and this listing shows both:
+anything. This listing labels every capture instance on both axes that matter — whether the bootstrap
+script names its table, and whether RTR created it:
 
 ```sql
 USE NBS_SRTE;
 
+DECLARE @rtr_install_start DATETIME = '2026-01-01 00:00:00';  -- from step 2a
+
 SELECT t.name                                    AS source_table,
        ct.capture_instance,
        CONVERT(VARCHAR(23), ct.create_date, 121) AS create_date,
+       CASE WHEN ct.create_date >= @rtr_install_start
+            THEN 'yes' ELSE 'no' END             AS created_during_rtr_install,
        CASE WHEN t.name IN (
         'Anatomic_site_code','City_code_value','Cntycity_code_value','Code_value_clinical',
         'Code_value_general','Codeset','Codeset_Group_Metadata','Condition_code','Country_code',
@@ -369,18 +374,19 @@ SELECT t.name                                    AS source_table,
         'LDF_page_set','LOINC_code','Loinc_condition','Loinc_snomed_condition','NAICS_Industry_code',
         'Occupation_code','Participation_type','Program_area_code','Race_code','Snomed_code',
         'Specimen_source_code','Standard_XREF','State_code','State_county_code_value','State_model',
-        'TotalIDM','Treatment_code','Unit_code','Zip_code_value','Zipcnty_code_value') THEN 'yes' ELSE 'no' END        AS in_rtr_bootstrap_list
+        'TotalIDM','Treatment_code','Unit_code','Zip_code_value','Zipcnty_code_value'
+       ) THEN 'yes' ELSE 'no' END                AS in_rtr_bootstrap_list
   FROM cdc.change_tables ct
   JOIN sys.tables t ON t.object_id = ct.source_object_id
  ORDER BY ct.create_date;
 ```
 
-| Row | What it means | What to do |
-| :--- | :--- | :--- |
-| `no`, created **before** your RTR install | Another component enabled CDC on a table RTR never touches | Leave the instance |
-| `no`, created **during** your RTR install | Your release enables a table this page does not list | Treat it as RTR's, and see below |
-| `yes`, created **before** your RTR install | The table was already tracked, so the bootstrap script skipped it and RTR reused that instance | Leave the instance |
-| `yes`, created **during** your RTR install | RTR's own | Disable it below |
+| `in_rtr_bootstrap_list` | `created_during_rtr_install` | What it means | What to do |
+| :--- | :--- | :--- | :--- |
+| `no` | `no` | Another component enabled CDC on a table RTR never touches | Leave the instance |
+| `no` | `yes` | Your release enables a table this page does not list | Treat it as RTR's, and see below |
+| `yes` | `no` | The table was already tracked, so the bootstrap script skipped it and RTR reused that instance | Leave the instance |
+| `yes` | `yes` | RTR's own | Disable it below |
 
 > If any instance is left behind for either "leave the instance" reason, **do not run
 > `sp_cdc_disable_db` on `NBS_SRTE`**. Disable only RTR's own capture instances and leave database-level

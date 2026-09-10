@@ -9,14 +9,14 @@ description: Returns reporting to the classic MasterETL batch jobs after install
 # Revert from real-time reporting (RTR) to MasterETL
 
 > This feature is in Beta preview and not production ready.
-> {: .important }
+{: .important }
 
 A jurisdiction that installs [[rtr]] may decide to return to the classic [[masteretl|MasterETL]] batch
 jobs — during a pilot, after a failed seeding run, or later. This page covers both of the
 reporting-database options offered at [Prerequisites](real-time-reporting.html#prerequisites).
 
-Reverting does **not** require undeploying [[nbs-7]]. If you want to remove RTR and keep NBS 7 running,
-this page is the whole procedure.
+Reverting does **not** require [undeploying NBS 7](../../../undeploy-nbs7.html). If you want to remove
+RTR and keep [[nbs-7]] running, this page is the whole procedure.
 
 ## On this page
 
@@ -26,18 +26,11 @@ this page is the whole procedure.
    {:toc}
 
 > Verify that you are connected to the correct [[kubernetes]] cluster before proceeding. To confirm, run `kubectl config current-context`.
-> {: .note }
+{: .note }
 
 SQL on this page is written for a client such as SQL Server Management Studio or `sqlcmd`, connected as
 an account with `sysadmin` rights. Several steps **generate** SQL for you to review before running it;
 those are marked.
-
-> This page describes RTR 7.13, where the Java services are deployed from a single
-> `reporting-pipeline-service` [[helm-chart|Helm chart]]. Releases before 7.13 used an `rtr` umbrella
-> chart that produced six `rtr-java-services-*` deployments and installed the schema from a separate
-> Liquibase chart. If that is what you have, the Kubernetes resource names below will not match — see
-> [Installs from before 7.13](#installs-from-before-713).
-> {: .important }
 
 ---
 
@@ -53,7 +46,7 @@ those are marked.
 > `RDB` — does not work, and neither does removing them first. There is currently no supported way to
 > return `RDB` to a correct state without that backup. See
 > [Why the RDB path requires a restore](#why-the-rdb-path-requires-a-restore).
-> {: .warning }
+{: .warning }
 
 ---
 
@@ -99,7 +92,7 @@ reporting-pipeline-service              1/1     34m
 > A cluster where the sink was installed as `cp-kafka-connect-sqlserver` rather than
 > `cp-kafka-connect-server` names its Service and Deployment `cp-kafka-connect-sqlserver`, and every
 > command below that hardcodes the other name fails. Take the names from `kubectl get services`.
-> {: .warning }
+{: .warning }
 
 Set them once and use the variables for the rest of this step:
 
@@ -211,7 +204,7 @@ fall.
 
 > Do not continue until `messagesQueued` is 0 for both. The ingress URL for this endpoint requires
 > Traefik, so the port-forward above is the reliable route.
-> {: .important }
+{: .important }
 
 ### 1e. Delete the sink connector
 
@@ -222,37 +215,21 @@ sleep 5
 curl -s http://localhost:8084/connectors
 ```
 
-### 1f. Scale down, then uninstall
+### 1f. Uninstall the releases
 
-Scale to zero first — it is reversible, and it stops the services without discarding their
-configuration:
-
-```bash
-kubectl scale deployment $RPS  --replicas=0
-kubectl scale deployment $SINK --replicas=0
-kubectl scale deployment $DBZ  --replicas=0
-kubectl get deployments
-```
-
-All three should report `0/0`.
-
-> Scale `reporting-pipeline-service` down **first**. It reads its Connect URLs from the two ConfigMaps
-> the Debezium and [[kafka|Kafka]] Connect charts own (`debezium-rtr-connect` and
-> `cp-kafka-connect-sqlserver-connect`) through `configMapKeyRef`. Removing those charts while the
-> deployment still exists leaves its pods in `CreateContainerConfigError` rather than stopped cleanly.
-> {: .note }
-
-Give the pods a few seconds to finish terminating, then uninstall the releases:
+Uninstall in this order:
 
 ```bash
-kubectl get pods
 helm uninstall <your reporting-pipeline-service release>
 helm uninstall cp-kafka-connect-server
 helm uninstall debezium-connect
 ```
 
-Uninstalling while pods are still terminating leaves them orphaned in `Error` state — harmless, and
-Kubernetes collects them, but it makes the next check confusing.
+> Uninstall `reporting-pipeline-service` **first**. It reads its Connect URLs from the two ConfigMaps the
+> Debezium and [[kafka|Kafka]] Connect charts own (`debezium-rtr-connect` and
+> `cp-kafka-connect-sqlserver-connect`) through `configMapKeyRef`. Removing those charts while the
+> deployment still exists leaves its pods in `CreateContainerConfigError` rather than stopped cleanly.
+{: .note }
 
 ### 1g. Confirm nothing is left
 
@@ -266,73 +243,12 @@ kubectl get all,configmap
 `cp-kafka-connect-sqlserver-connect` or `debezium-rtr-connect` by hand, and their absence here is the
 check that the uninstall was complete.
 
-### Prevent the pipeline restarting itself
-
-> Starting `reporting-pipeline-service` does two things, and the second is the dangerous one.
->
-> 1. It **re-creates all five connectors**. `DEBEZIUM_AUTOCONFIG_ENABLE` and
->    `KAFKA_CONNECT_AUTOCONFIG_ENABLE` both default to `true`.
-> 2. It also **runs Liquibase and re-applies the entire RTR schema** to whatever database
->    `DB_CONNECTION_URL` points at. As
->    [Validate RTR installation](rtr-validation.html#check-database-migration-status) notes,
->    `LIQUIBASE_AUTOMIGRATION_ENABLE` is enabled unless it is explicitly set to `false`. From 7.13 the
->    service performs the migration itself on boot; there is no separate Liquibase chart.
->
-> So a pod brought up for any unrelated reason will restart the pipeline _and_ reinstall RTR's tables
-> into the reporting database. On the RDB path, after a restore, that means reinstalling RTR into the
-> database you just recovered.
-> {: .warning }
-
-Keep the deployment scaled to zero or uninstalled until the revert is finished. Do not scale it back up
-to check something, and make sure nothing else — a [[gitops|GitOps]] sync, a saved Helm release, a
-deployment pipeline — will reinstall the chart on its own.
-
-If your environment sets those variables, confirm they took effect from the service log rather than the
-REST API:
-
-```bash
-kubectl logs deployment/$RPS | grep -i "auto-configuration"
-kubectl logs deployment/$RPS | grep -c "Registered connector"
-```
-
-Expected:
-
-```text
-KafkaConnectConfig : Kafka Connect connector auto-configuration is disabled
-DebeziumConfig     : Debezium connector auto-configuration is disabled
-```
-
-and a count of `0`.
-
-> Check the log, not the Connect REST endpoints. During a revert those services are down, so a REST
-> query is refused whether the flags took effect or not — the refusal tells you nothing.
-> {: .important }
-
-### Installs from before 7.13
-
-Releases before 7.13 deployed the Java services from an `rtr` umbrella chart, typically installed as
-`helm install rtr . -f values.yaml`, producing six deployments:
-
-```text
-rtr-java-services-investigation-reporting
-rtr-java-services-ldfdata-reporting
-rtr-java-services-observation-reporting
-rtr-java-services-organization-reporting
-rtr-java-services-person-reporting
-rtr-java-services-post-processing-reporting
-```
-
-Those releases also installed the schema from a separate Liquibase chart rather than from the service.
-On such an install, substitute `helm uninstall rtr` for the release above, scale down all six
-deployments rather than one, and expect the health and drain endpoints to live on the individual
-services. Everything from [Step 2](#step-2-change-data-capture) onward is unaffected.
-
 ---
 
 ## Step 2. Change Data Capture
 
 > In this section, the terms `cdc` and `CDC` appear as part of SQL Server column and parameter names and refer to Change Data Capture, not the Centers for Disease Control and Prevention.
-> {: .note }
+{: .note }
 
 As [Enable Change Data Capture](real-time-reporting.html#enable-change-data-capture) notes,
 [[change-data-capture|CDC]] was already enabled on `NBS_ODSE` by the Case Notification service
@@ -343,7 +259,7 @@ do not overlap, but the database-level setting is shared and must stay on.
 
 > Never run `sp_cdc_disable_db` on `NBS_ODSE`. It drops every capture instance in the database,
 > including the one Case Notification depends on.
-> {: .warning }
+{: .warning }
 
 ### 2a. List the capture instances and their creation times
 
@@ -369,7 +285,7 @@ were created within a 13-second window.
 > — it skips tables that are already tracked. So where another component enabled CDC on one of those
 > tables first, RTR reused that instance rather than creating its own, and nothing in the instance
 > records which component asked for it. Creation time is the only available signal.
-> {: .warning }
+{: .warning }
 
 ### 2b. Confirm Case Notification's capture instance
 
@@ -418,8 +334,43 @@ install.
 
 ### 2d. Disable CDC on NBS_SRTE
 
-`NBS_SRTE` is reference data and RTR is its only known CDC consumer. Confirm that for your environment,
-then disable the capture instances and the database-level flag:
+`NBS_SRTE` is reference data and RTR is its only known CDC consumer. Confirm that for your environment
+before disabling anything.
+
+The RTR bootstrap script enables CDC on a fixed list of 43 `NBS_SRTE` tables. A capture instance on any
+other table means something else enabled CDC in this database, and disabling it at the database level
+would break that consumer:
+
+```sql
+USE NBS_SRTE;
+
+SELECT t.name                                    AS source_table,
+       ct.capture_instance,
+       CONVERT(VARCHAR(23), ct.create_date, 121) AS create_date
+  FROM cdc.change_tables ct
+  JOIN sys.tables t ON t.object_id = ct.source_object_id
+ WHERE t.name NOT IN (
+        'Anatomic_site_code','City_code_value','Cntycity_code_value','Code_value_clinical',
+        'Code_value_general','Codeset','Codeset_Group_Metadata','Condition_code','Country_code',
+        'Country_Code_ISO','Country_XREF','ELR_XREF','IMRDBMapping','Investigation_code',
+        'Jurisdiction_code','Jurisdiction_participation','Lab_coding_system','Lab_result',
+        'Lab_result_Snomed','Lab_test','Labtest_loinc','Labtest_Progarea_Mapping','Language_code',
+        'LDF_page_set','LOINC_code','Loinc_condition','Loinc_snomed_condition','NAICS_Industry_code',
+        'Occupation_code','Participation_type','Program_area_code','Race_code','Snomed_code',
+        'Specimen_source_code','Standard_XREF','State_code','State_county_code_value','State_model',
+        'TotalIDM','Treatment_code','Unit_code','Zip_code_value','Zipcnty_code_value')
+ ORDER BY t.name;
+```
+
+> Expect no rows. If any row comes back, do not run `sp_cdc_disable_db` on `NBS_SRTE` — disable only the
+> RTR capture instances and leave database-level CDC on, as [Step 2](#step-2-change-data-capture) does
+> for `NBS_ODSE`.
+{: .important }
+
+The table list above is the one in bootstrap script 101. If that script changes, this query needs the
+same change.
+
+Then disable the capture instances and the database-level flag:
 
 ```sql
 USE NBS_SRTE;
@@ -470,7 +421,7 @@ The last query will still list `cdc.NBS_ODSE_capture` and `cdc.NBS_ODSE_cleanup`
 
 > The two `NBS_ODSE` jobs are expected to remain, running against zero capture instances. Do not tidy
 > them up by disabling database-level CDC — that is the action this page warns against above.
-> {: .important }
+{: .important }
 
 ---
 
@@ -493,7 +444,7 @@ install, 140 of 141 topics were RTR-owned:
 > have produced anything — `cdc_odse_act_rel` never appears on a fresh install, because the schema-only
 > connector emits no data topic, and not every base topic has `_dlt` and `_retry` siblings. Rely on the
 > filter and on the leftover check below, not on a total.
-> {: .note }
+{: .note }
 
 Everything except the two worker-state groups is named by `reporting-pipeline-service` itself and is the
 same on every install. The six worker-state topics are named from Helm values.
@@ -516,7 +467,7 @@ The chart defaults are `rtr-debezium` and `rtr-kafka-connect-sink`, which produc
 > hyphen — and neither matches Kafka Connect's stock `connect-configs` / `connect-offsets` /
 > `connect-status`. A filter written against the stock names silently matches nothing, and the offset
 > topics are exactly the ones that must not be left behind.
-> {: .warning }
+{: .warning }
 
 These six topics are created by the Connect **workers**, not by the connectors, so they exist even when
 no connector is registered — including part-way through a revert.
@@ -571,7 +522,7 @@ kafka-topics --bootstrap-server $BOOTSTRAP --list
 > position that database has never reached. Every connector reports `RUNNING`, health reports `UP`, lag
 > reports `caughtUp`, no error appears in any log — and no data moves. The same trap catches anyone
 > restoring `NBS_ODSE` from backup with RTR still installed.
-> {: .warning }
+{: .warning }
 
 If you reach that state, the recovery is this same step: stop the pipeline, delete the RTR-owned topics,
 restart. The connectors then find no prior offsets and take fresh snapshots. Changes captured while the
@@ -614,7 +565,7 @@ everywhere.
 
 > If `owned_schemas` is greater than zero, transfer ownership before dropping the user, or `DROP USER`
 > will fail.
-> {: .note }
+{: .note }
 
 **Drop the database users first, then the login:**
 
@@ -700,14 +651,14 @@ installed. That row is where MasterETL will resume.
 > Do not restore `RDB` while `reporting-pipeline-service` can still start. That service runs Liquibase
 > on boot and will reinstall RTR's schema into the freshly restored database. Confirm Step 1 is complete
 > first.
-> {: .warning }
+{: .warning }
 
 ### 6b. Re-enable the batch jobs
 
 > "Running MasterETL" colloquially covers several jobs. Name them explicitly when re-enabling —
 > `MasterETL.bat`, `covid19ETL.bat`, `PHCMartETL.bat`, and any others your jurisdiction schedules —
 > rather than relying on the shorthand.
-> {: .note }
+{: .note }
 
 On the **RDB_MODERN path**, MasterETL was writing `RDB` throughout, so it resumes from its own last
 successful run and the data gap is small or zero. Confirm the jobs are still scheduled and completing;
@@ -756,7 +707,7 @@ already loaded does not create duplicate rows.
 > `batch_end_dttm` spans and scale by the length of the gap you are closing. Run time varies with
 > database size, available resources, and accumulated data, so no published figure will match your
 > environment.
-> {: .warning }
+{: .warning }
 
 ---
 
@@ -796,7 +747,7 @@ marked `complete`.
 
 > A revert that fails loudly gets investigated. A revert that reports success while silently omitting
 > records does not. Do not attempt an in-place revert on the RDB path.
-> {: .warning }
+{: .warning }
 
 The contamination is also wider than the errors suggest. In a reference test, keys RTR had allocated for
 **four patients, one investigation and one LDF record** appeared across **15 tables** — dimensions, link
@@ -852,7 +803,7 @@ SELECT name, state_desc FROM sys.databases WHERE database_id > 4 ORDER BY name;
 > the same scan with `RDB` substituted returns two objects in `NBS_ODSE` that reference it by name:
 > `dbo.sp_PublicHealthCaseFact_DATAMART` and `dbo.uvw_treatment_patient_keys`. Run that scan before
 > removing any reporting database.
-> {: .warning }
+{: .warning }
 
 ---
 
@@ -914,7 +865,7 @@ SELECT TOP (5) record_id, type_code, Status_Type,
 > MasterETL can exit 0, write `complete` to `job_batch_log`, and log `BATCH_COMPLETE` while a third of
 > its database connections are dead. In testing, two of three SAS ODBC librefs failed to connect and
 > every conventional success signal still reported success. The failure appeared only in the SAS log.
-> {: .warning }
+{: .warning }
 
 On the SAS host, from the report log directory (typically
 `.../nedssdomain/Nedss/report/log/`):

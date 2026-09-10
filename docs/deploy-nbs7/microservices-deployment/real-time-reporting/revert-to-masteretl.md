@@ -277,7 +277,12 @@ SELECT s.name                                        AS source_schema,
 ```
 
 The bootstrap script enables 20 tables in `NBS_ODSE` in a single pass — on a reference install all 20
-were created within a 13-second window.
+were created within a 13-second window. Note the timestamp at which that block begins; steps 2c and 2d
+use it.
+
+Read the whole listing, not just the tables step 2c names. Any instance created inside that window is
+RTR's, including one on a table this page does not list — see
+[If your release enables CDC on other tables](#if-your-release-enables-cdc-on-other-tables).
 
 > Any capture instance that pre-dates your RTR install belongs to something else. Leave it.
 >
@@ -309,8 +314,14 @@ using CDC here and the next step covers everything.
 
 This produces SQL for you to review. It does not disable anything.
 
+Set `@rtr_install_start` to a time just before your RTR bootstrap ran — step 2a shows where RTR's block
+begins. Filtering on it means the generator cannot emit a statement for an instance that already
+existed.
+
 ```sql
 USE NBS_ODSE;
+
+DECLARE @rtr_install_start DATETIME = '2026-01-01 00:00:00';  -- from step 2a
 
 SELECT 'EXEC sys.sp_cdc_disable_table @source_schema = N''' + s.name +
        ''', @source_name = N''' + t.name +
@@ -326,30 +337,71 @@ SELECT 'EXEC sys.sp_cdc_disable_table @source_schema = N''' + s.name +
                   'NBS_configuration','LOOKUP_QUESTION')
    AND t.name NOT LIKE '%transportq%'
    AND t.name NOT LIKE '%transport[_]q%'
+   AND ct.create_date >= @rtr_install_start
  ORDER BY t.name;
 ```
 
-Review the `create_date` on every row. Run only the statements whose instances were created by your RTR
-install.
+Expect one row per table RTR enabled. A table from that list which does **not** appear here already had
+CDC before RTR — the bootstrap script skipped it and RTR reused the existing instance. Leaving it alone
+is the correct outcome, not an omission.
+
+Compare this output against the full listing from step 2a. An instance created inside the RTR window but
+missing from these statements is a table your release enables and this page does not list; add it by
+hand and see [If your release enables CDC on other tables](#if-your-release-enables-cdc-on-other-tables).
 
 ### 2d. Disable CDC on NBS_SRTE
 
-`NBS_SRTE` is reference data and RTR is its only known CDC consumer. Confirm that for your environment
-before disabling anything.
-
-The RTR bootstrap script enables CDC on a fixed list of 43 `NBS_SRTE` tables. A capture instance on any
-other table means something else enabled CDC in this database, and disabling it at the database level
-would break that consumer:
+RTR is the only known CDC consumer on `NBS_SRTE`, but confirm that for your environment before disabling
+anything. Two different things can go wrong here, and this listing shows both:
 
 ```sql
 USE NBS_SRTE;
 
 SELECT t.name                                    AS source_table,
        ct.capture_instance,
-       CONVERT(VARCHAR(23), ct.create_date, 121) AS create_date
+       CONVERT(VARCHAR(23), ct.create_date, 121) AS create_date,
+       CASE WHEN t.name IN (
+        'Anatomic_site_code','City_code_value','Cntycity_code_value','Code_value_clinical',
+        'Code_value_general','Codeset','Codeset_Group_Metadata','Condition_code','Country_code',
+        'Country_Code_ISO','Country_XREF','ELR_XREF','IMRDBMapping','Investigation_code',
+        'Jurisdiction_code','Jurisdiction_participation','Lab_coding_system','Lab_result',
+        'Lab_result_Snomed','Lab_test','Labtest_loinc','Labtest_Progarea_Mapping','Language_code',
+        'LDF_page_set','LOINC_code','Loinc_condition','Loinc_snomed_condition','NAICS_Industry_code',
+        'Occupation_code','Participation_type','Program_area_code','Race_code','Snomed_code',
+        'Specimen_source_code','Standard_XREF','State_code','State_county_code_value','State_model',
+        'TotalIDM','Treatment_code','Unit_code','Zip_code_value','Zipcnty_code_value') THEN 'yes' ELSE 'no' END        AS in_rtr_bootstrap_list
   FROM cdc.change_tables ct
   JOIN sys.tables t ON t.object_id = ct.source_object_id
- WHERE t.name NOT IN (
+ ORDER BY ct.create_date;
+```
+
+| Row | What it means | What to do |
+| :--- | :--- | :--- |
+| `no`, created **before** your RTR install | Another component enabled CDC on a table RTR never touches | Leave the instance |
+| `no`, created **during** your RTR install | Your release enables a table this page does not list | Treat it as RTR's, and see below |
+| `yes`, created **before** your RTR install | The table was already tracked, so the bootstrap script skipped it and RTR reused that instance | Leave the instance |
+| `yes`, created **during** your RTR install | RTR's own | Disable it below |
+
+> If any instance is left behind for either "leave the instance" reason, **do not run
+> `sp_cdc_disable_db` on `NBS_SRTE`**. Disable only RTR's own capture instances and leave database-level
+> CDC on, exactly as this page does for `NBS_ODSE`.
+{: .important }
+
+Generate the disable statements, using the same `@rtr_install_start` as step 2c:
+
+```sql
+USE NBS_SRTE;
+
+DECLARE @rtr_install_start DATETIME = '2026-01-01 00:00:00';  -- from step 2a
+
+SELECT 'EXEC sys.sp_cdc_disable_table @source_schema = N''' + s.name +
+       ''', @source_name = N''' + t.name +
+       ''', @capture_instance = N''' + ct.capture_instance + ''';' AS statement_to_run,
+       CONVERT(VARCHAR(23), ct.create_date, 121) AS create_date
+  FROM cdc.change_tables ct
+  JOIN sys.tables  t ON t.object_id = ct.source_object_id
+  JOIN sys.schemas s ON s.schema_id = t.schema_id
+ WHERE t.name IN (
         'Anatomic_site_code','City_code_value','Cntycity_code_value','Code_value_clinical',
         'Code_value_general','Codeset','Codeset_Group_Metadata','Condition_code','Country_code',
         'Country_Code_ISO','Country_XREF','ELR_XREF','IMRDBMapping','Investigation_code',
@@ -359,38 +411,47 @@ SELECT t.name                                    AS source_table,
         'Occupation_code','Participation_type','Program_area_code','Race_code','Snomed_code',
         'Specimen_source_code','Standard_XREF','State_code','State_county_code_value','State_model',
         'TotalIDM','Treatment_code','Unit_code','Zip_code_value','Zipcnty_code_value')
+   AND ct.create_date >= @rtr_install_start
  ORDER BY t.name;
 ```
 
-> Expect no rows. If any row comes back, do not run `sp_cdc_disable_db` on `NBS_SRTE` — disable only the
-> RTR capture instances and leave database-level CDC on, as [Step 2](#step-2-change-data-capture) does
-> for `NBS_ODSE`.
-{: .important }
-
-The table list above is the one in bootstrap script 101. If that script changes, this query needs the
-same change.
-
-Then disable the capture instances and the database-level flag:
+After running the generated statements, check what is left:
 
 ```sql
 USE NBS_SRTE;
-
--- Generate the per-table statements
-SELECT 'EXEC sys.sp_cdc_disable_table @source_schema = N''' + s.name +
-       ''', @source_name = N''' + t.name +
-       ''', @capture_instance = N''' + ct.capture_instance + ''';' AS statement_to_run
-  FROM cdc.change_tables ct
-  JOIN sys.tables  t ON t.object_id = ct.source_object_id
-  JOIN sys.schemas s ON s.schema_id = t.schema_id
- ORDER BY t.name;
+SELECT COUNT(*) AS remaining_capture_instances FROM cdc.change_tables;
 ```
 
-After running the generated statements:
+If the count is zero, RTR was the only consumer and you can disable CDC at the database level:
 
 ```sql
 USE NBS_SRTE;
 EXEC sys.sp_cdc_disable_db;
 ```
+
+If the count is not zero, stop here. The remaining instances belong to something else, and
+`sp_cdc_disable_db` would drop them.
+
+### If your release enables CDC on other tables
+
+The table lists in steps 2c and 2d are a snapshot of [bootstrap script 101][nedss-datareporting-bootstrap-101]
+as it stood for the release this page documents. A later release can add tables to that script, and this
+page will not know about them.
+
+> Before running the generated statements, open [bootstrap script 101][nedss-datareporting-bootstrap-101]
+> for **your** release and compare its `@odseTablesToEnable` and `@srteTablesToEnable` lists against the
+> lists in steps 2c and 2d. Anything the script enables that this page does not name still needs
+> disabling, and you will have to add those statements by hand.
+{: .important }
+
+Creation time is the backstop if you skip that comparison. Every capture instance RTR created carries a
+`create_date` inside the install window, whether or not this page lists its table, so the listings in
+steps 2a and 2d show them even when the generators do not. What the generators cannot do is tell such an
+instance apart from another component's — that is why the comparison above is worth the two minutes.
+
+Leaving one behind is not destructive. It shows up as a non-zero
+`remaining_capture_instances`, which stops you from disabling database-level CDC — the safe outcome, but
+one that looks like a fault until you know why.
 
 ### 2e. Leave these alone
 
@@ -935,3 +996,5 @@ Two further readings that look like faults but are not:
 - **Migrating records that exist only in the RTR reporting database.** They do not need migrating —
   MasterETL re-derives from `NBS_ODSE`, the source of truth. Reprocessing time is the only cost.
 - **Reverting the RDB path without a pre-RTR backup.** There is currently no supported path.
+
+[nedss-datareporting-bootstrap-101]: <https://github.com/CDCgov/NEDSS-DataReporting/blob/{{ site.version_latest_tag }}/bootstrap/101-enable_cdc_on_odse_srte_databases-001.sql>

@@ -154,8 +154,6 @@ The expected Kafka Connect connector is:
 
 The connector lists should include the expected Debezium source connectors and the Kafka Connect SQL Server sink connector. If a list is empty, is missing connectors, or the command fails, check the reporting-pipeline-service logs first, because that service registers the connectors.
 
-<!-- [SME REVIEW] Confirm this connector name is stable across deployments rather than environment-specific. -->
-
 ## Next steps
 
 When all checks pass, run full end-to-end validation to confirm data movement across the pipeline. Then continue to [Validate the NBS 7 deployment](../../full-deploy/validate-the-deployment.html).

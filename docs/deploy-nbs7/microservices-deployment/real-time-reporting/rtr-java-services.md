@@ -5,10 +5,10 @@ parent: Real-time reporting
 nav_order: 3
 description: Covers deployment of the RTR Java service that transforms Kafka events and loads reporting datamarts.
 redirect_from:
-  - /docs/7_feature_preview/4_rtr_java_reporting_services.html
-  - /docs/7_feature_preview/4_rtr_java_reporting_services/
-  - /docs/deploy-nbs7/real-time-reporting/rtr-java-services.html
-  - /docs/deploy-nbs7/real-time-reporting/rtr-java-services/
+    - /docs/7_feature_preview/4_rtr_java_reporting_services.html
+    - /docs/7_feature_preview/4_rtr_java_reporting_services/
+    - /docs/deploy-nbs7/real-time-reporting/rtr-java-services.html
+    - /docs/deploy-nbs7/real-time-reporting/rtr-java-services/
 ---
 
 # Deploy the RTR Java service for NBS 7
@@ -18,13 +18,14 @@ This page walks through deploying the real-time reporting ([[rtr]]) Java service
 Deploying the Java service is a two-phase process. The first deployment seeds the `nrt_*` caching tables that RTR depends on. Once seeding is complete, you upgrade the release with post-processing enabled. If you are reinstalling RTR after a backup and restore and need to reseed those tables, see [Delete Kafka topics before reinstalling RTR](#delete-kafka-topics-before-reinstalling-rtr) first.
 
 > Schedule a maintenance window and notify users that NBS will be unavailable. Database changes made while the RTR service is being deployed might not propagate to your reporting database.
-{: .important }
+> {: .important }
 
 ## On this page
+
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+   {:toc}
 
 ## Prerequisites
 
@@ -34,9 +35,10 @@ Confirm the following before you continue:
 
 - You are connected to the correct [[kubernetes]] cluster. Run `kubectl config current-context` to confirm.
 - You have your database credentials and domain values available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
+- You know whether your deployment has [[traefik]] and the NBS 7 ingress (the `nbs-ingress` Helm chart). The `https://data.<exampledomain>/...` URLs on this page route through that ingress. If you are running RTR against a supported [[classic-nbs|NBS 6]] without the rest of NBS 7, or you have not deployed the ingress yet, use the `kubectl port-forward` commands instead. Both reach the same endpoints.
 
 > Deploying the Java service takes significant time and database space. Before you deploy, verify that the Kafka cluster you created in [Provision cloud environment](../../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) is scaled for your database size. An undersized Kafka cluster can cause the deployment to fail.
-{: .important }
+> {: .important }
 
 ### Delete Kafka topics before reinstalling RTR
 
@@ -54,7 +56,7 @@ Before you reinstall, delete the following Kafka topics. This ensures Debezium f
 - `srte-schema-history`
 
 > Deleting these topics is irreversible. Delete them only if you are reinstalling RTR.
-{: .warning }
+> {: .warning }
 
 After you delete these topics, continue to [Deploy the RTR Java service using Helm](#deploy-the-rtr-java-service-using-helm).
 
@@ -65,41 +67,49 @@ Complete the following steps to deploy the [`reporting-pipeline-service` Helm ch
 1. Search `values.yaml` for `EXAMPLE` and fill in your environment-specific values. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) for help determining values.
 1. Confirm that post-processing is disabled in `values.yaml` for the initial deployment:
 
-   ```yaml
-   featureFlag:
-     postProcessingEnable: "false"
-   ```
+    ```yaml
+    featureFlag:
+        postProcessingEnable: "false"
+    ```
 
 1. Install the Helm chart:
 
-   ```bash
-   helm install -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
-   ```
+    ```bash
+    helm install -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
+    ```
 
 1. Verify the pods are running:
 
-   ```bash
-   kubectl get deployment reporting-pipeline-service
-   ```
+    ```bash
+    kubectl get deployment reporting-pipeline-service
+    ```
 
-   Expected output:
+    Expected output:
 
-   ```text
-   NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
-   reporting-pipeline-service   1/1     1            1           16m
-   ```
+    ```text
+    NAME                         READY   UP-TO-DATE   AVAILABLE   AGE
+    reporting-pipeline-service   1/1     1            1           16m
+    ```
 
 ## Monitor seeding progress
 
-The `/actuator/lag` endpoint reports how far behind the service is in consuming its Kafka topics. Use it to determine when initial seeding is complete.
+The `/actuator/lag` endpoint reports how far behind the service is in consuming its Kafka topics. Use it to determine when initial seeding is complete. Use whichever method matches your deployment:
 
-Retrieve information on reporting-pipeline-service lag in your browser. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
+- **Port forward.** Works in any deployment, including RTR on [[classic-nbs|NBS 6]] without the NBS 7 ingress. Run the following, then open `http://localhost:8095/actuator/lag`:
+
+    ```bash
+    kubectl port-forward svc/reporting-pipeline-service 8095:8095
+    ```
+
+    Leave the command running while you check the endpoint. Press Ctrl+C to stop the tunnel.
+
+- **Ingress URL.** If you have deployed [[traefik]] and the NBS 7 ingress, open the endpoint in your browser. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
 
 ```text
 https://data.<exampledomain>/reporting-pipeline-svc/actuator/lag
 ```
 
-When all `messagesQueued` values are `0`, seeding is complete.
+Seeding can take a while, so expect to check more than once. When all `messagesQueued` values are `0`, seeding is complete.
 
 ## Enable post-processing
 
@@ -107,29 +117,29 @@ After seeding is complete, upgrade the release with post-processing enabled:
 
 1. Update `values.yaml` to enable post-processing:
 
-   ```yaml
-   featureFlag:
-     postProcessingEnable: "true"
-   ```
+    ```yaml
+    featureFlag:
+        postProcessingEnable: "true"
+    ```
 
 1. Upgrade the release:
 
-   ```bash
-   helm upgrade -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
-   ```
+    ```bash
+    helm upgrade -f reporting-pipeline-service/values.yaml reporting-pipeline-service ./reporting-pipeline-service/
+    ```
 
 1. Verify the pods restarted cleanly:
 
-   ```bash
-   kubectl rollout status deployment/reporting-pipeline-service
-   kubectl get deployment reporting-pipeline-service
-   ```
+    ```bash
+    kubectl rollout status deployment/reporting-pipeline-service
+    kubectl get deployment reporting-pipeline-service
+    ```
 
-1. Confirm the service is healthy. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
+1. Confirm the service is healthy, using the same method you used to check seeding progress:
+    - **Port forward:** run `kubectl port-forward svc/reporting-pipeline-service 8095:8095`, then open `http://localhost:8095/actuator/health`.
+    - **Ingress URL:** `https://data.<exampledomain>/reporting-pipeline-svc/actuator/health`
 
-   ```text
-   https://data.<exampledomain>/reporting-pipeline-svc/actuator/health
-   ```
+    A healthy service returns status `UP`.
 
 ## Next steps
 

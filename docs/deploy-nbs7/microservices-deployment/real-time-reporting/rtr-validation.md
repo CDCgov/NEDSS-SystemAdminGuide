@@ -11,11 +11,10 @@ description: Lightweight checks to confirm that RTR services started, database m
 Use this page for lightweight checks that confirm real-time reporting ([[rtr]]) is running before you run full end-to-end pipeline validation. These checks confirm that the RTR services started successfully, that database migration configuration is accounted for, and that the reporting-pipeline-service registered the [[debezium|Debezium]] and [[kafka|Kafka]] Connect connectors.
 
 ## On this page
-
 {: .no_toc .text-delta }
 
 1. TOC
-   {:toc}
+{:toc}
 
 ## Scope
 
@@ -31,11 +30,15 @@ List the RTR pods in your namespace. Replace `<namespace>` with your namespace, 
 kubectl get pods -n <namespace>
 ```
 
-The RTR services are:
+Each RTR chart creates one deployment, and each deployment creates pods named after the Helm release you installed it under. Using the release names from the deployment pages, the pod names begin with:
 
-- `debezium`
-- `kafka-connect-sink`
-- `reporting-pipeline-service`
+| Service | Helm release used in this guide | Pod names begin with |
+|---|---|---|
+| [[debezium\|Debezium]] | `debezium-connect` | `debezium-connect-debezium-rtr-connect-` |
+| [[kafka\|Kafka]] connector | `cp-kafka-connect-server` | `cp-kafka-connect-server-` |
+| RTR Java service | `reporting-pipeline-service` | `reporting-pipeline-service-` |
+
+Kubernetes adds a generated suffix to each pod name, for example `reporting-pipeline-service-7d9f8c6b4-x2k9q`. If you installed a chart under a different release name, your pod names differ. Run `helm list -n <namespace>` to see the releases in your namespace.
 
 All RTR pods should be in the `Running` state, and the `READY` column should show that all containers are ready, for example `1/1` or `2/2`. No pods should be in `Pending`, `CrashLoopBackOff`, `Error`, or another unexpected state.
 

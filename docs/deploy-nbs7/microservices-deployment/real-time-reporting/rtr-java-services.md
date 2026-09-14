@@ -34,6 +34,7 @@ Confirm the following before you continue:
 
 - You are connected to the correct [[kubernetes]] cluster. Run `kubectl config current-context` to confirm.
 - You have your database credentials and domain values available. See the [Helm values reference](../deploy-nbs7-microservices.html#helm-values-reference-for-nbs-7-microservices) if you need help determining any values.
+- You know whether your deployment has [[traefik]] and the NBS 7 ingress (the `nbs-ingress` Helm chart). The `https://data.<exampledomain>/...` URLs on this page route through that ingress. If you are running RTR against a supported [[classic-nbs|NBS 6]] without the rest of NBS 7, or you have not deployed the ingress yet, use the `kubectl port-forward` commands instead. Both reach the same endpoints.
 
 > Deploying the Java service takes significant time and database space. Before you deploy, verify that the Kafka cluster you created in [Provision cloud environment](../../full-deploy/provision-cloud-infrastructure/provision-cloud-environment.html) is scaled for your database size. An undersized Kafka cluster can cause the deployment to fail.
 {: .important }
@@ -91,15 +92,23 @@ Complete the following steps to deploy the [`reporting-pipeline-service` Helm ch
 
 ## Monitor seeding progress
 
-The `/actuator/lag` endpoint reports how far behind the service is in consuming its Kafka topics. Use it to determine when initial seeding is complete.
+The `/actuator/lag` endpoint reports how far behind the service is in consuming its Kafka topics. Use it to determine when initial seeding is complete. Use whichever method matches your deployment:
 
-Retrieve information on reporting-pipeline-service lag in your browser. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
+- **Port forward.** Works in any deployment, including RTR on [[classic-nbs|NBS 6]] without the NBS 7 ingress. Run the following, then open `http://localhost:8095/actuator/lag`:
 
-```text
-https://data.<exampledomain>/reporting-pipeline-svc/actuator/lag
-```
+  ```bash
+  kubectl port-forward svc/reporting-pipeline-service 8095:8095
+  ```
 
-When all `messagesQueued` values are `0`, seeding is complete.
+  Leave the command running while you check the endpoint. Press Ctrl+C to stop the tunnel.
+
+- **Ingress URL.** If you have deployed [[traefik]] and the NBS 7 ingress, open the endpoint in your browser. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
+
+  ```text
+  https://data.<exampledomain>/reporting-pipeline-svc/actuator/lag
+  ```
+
+Seeding can take a while, so expect to check more than once. When all `messagesQueued` values are `0`, seeding is complete.
 
 ## Enable post-processing
 
@@ -125,11 +134,12 @@ After seeding is complete, upgrade the release with post-processing enabled:
    kubectl get deployment reporting-pipeline-service
    ```
 
-1. Confirm the service is healthy. Replace `<exampledomain>` with your actual domain (see [Deploy Traefik ingress controller](../../full-deploy/kubernetes-setup/deploy-core-services.html#deploy-traefik-ingress-controller)):
+1. Confirm the service is healthy, using the same method you used to check seeding progress:
 
-   ```text
-   https://data.<exampledomain>/reporting-pipeline-svc/actuator/health
-   ```
+   - **Port forward:** run `kubectl port-forward svc/reporting-pipeline-service 8095:8095`, then open `http://localhost:8095/actuator/health`.
+   - **Ingress URL:** `https://data.<exampledomain>/reporting-pipeline-svc/actuator/health`
+
+   A healthy service returns status `UP`.
 
 ## Next steps
 

@@ -30,11 +30,15 @@ List the RTR pods in your namespace. Replace `<namespace>` with your namespace, 
 kubectl get pods -n <namespace>
 ```
 
-The RTR services are:
+Each RTR chart creates one deployment, and each deployment creates pods named after the Helm release you installed it under. Using the release names from the deployment pages, the pod names begin with:
 
-- `debezium`
-- `kafka-connect-sink`
-- `reporting-pipeline-service`
+| Service | Helm release used in this guide | Pod names begin with |
+|---|---|---|
+| [[debezium\|Debezium]] | `debezium-connect` | `debezium-connect-debezium-rtr-connect-` |
+| [[kafka\|Kafka]] connector | `cp-kafka-connect-server` | `cp-kafka-connect-server-` |
+| RTR Java service | `reporting-pipeline-service` | `reporting-pipeline-service-` |
+
+Kubernetes adds a generated suffix to each pod name, for example `reporting-pipeline-service-7d9f8c6b4-x2k9q`. If you installed a chart under a different release name, your pod names differ. Run `helm list -n <namespace>` to see the releases in your namespace.
 
 All RTR pods should be in the `Running` state, and the `READY` column should show that all containers are ready, for example `1/1` or `2/2`. No pods should be in `Pending`, `CrashLoopBackOff`, `Error`, or another unexpected state.
 
@@ -43,10 +47,8 @@ All RTR pods should be in the `Running` state, and the `READY` column should sho
 Confirm that the reporting-pipeline-service pod is healthy and that its [[kubernetes]] readiness and liveness probes are passing:
 
 ```bash
-kubectl describe pod -l app=reporting-pipeline-service -n <namespace>
+kubectl describe pod -l app.kubernetes.io/name=reporting-pipeline-service -n <namespace>
 ```
-
-<!-- [SME REVIEW] Confirm the pod label selector app=reporting-pipeline-service matches the deployed chart's labels. -->
 
 Then check the application health endpoint from inside the pod:
 
@@ -151,8 +153,6 @@ The expected Kafka Connect connector is:
 - `Kafka-Connect-SqlServer-Sink`
 
 The connector lists should include the expected Debezium source connectors and the Kafka Connect SQL Server sink connector. If a list is empty, is missing connectors, or the command fails, check the reporting-pipeline-service logs first, because that service registers the connectors.
-
-<!-- [SME REVIEW] Confirm this connector name is stable across deployments rather than environment-specific. -->
 
 ## Next steps
 

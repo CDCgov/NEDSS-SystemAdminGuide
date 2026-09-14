@@ -11,10 +11,11 @@ description: Lightweight checks to confirm that RTR services started, database m
 Use this page for lightweight checks that confirm real-time reporting ([[rtr]]) is running before you run full end-to-end pipeline validation. These checks confirm that the RTR services started successfully, that database migration configuration is accounted for, and that the reporting-pipeline-service registered the [[debezium|Debezium]] and [[kafka|Kafka]] Connect connectors.
 
 ## On this page
+
 {: .no_toc .text-delta }
 
 1. TOC
-{:toc}
+   {:toc}
 
 ## Scope
 
@@ -43,10 +44,8 @@ All RTR pods should be in the `Running` state, and the `READY` column should sho
 Confirm that the reporting-pipeline-service pod is healthy and that its [[kubernetes]] readiness and liveness probes are passing:
 
 ```bash
-kubectl describe pod -l app=reporting-pipeline-service -n <namespace>
+kubectl describe pod -l app.kubernetes.io/name=reporting-pipeline-service -n <namespace>
 ```
-
-<!-- [SME REVIEW] Confirm the pod label selector app=reporting-pipeline-service matches the deployed chart's labels. -->
 
 Then check the application health endpoint from inside the pod:
 
